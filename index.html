@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mumzworld Automation Test Coverage Report</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f172a;color:#e2e8f0;padding:20px}
+.header{text-align:center;padding:40px 20px;background:linear-gradient(135deg,#1e293b,#334155);border-radius:16px;margin-bottom:30px;border:1px solid #475569}
+.header h1{font-size:28px;background:linear-gradient(90deg,#38bdf8,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.header p{color:#94a3b8;font-size:14px}
+.toolbar{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.btn{padding:8px 20px;border-radius:8px;border:none;cursor:pointer;font-size:13px;font-weight:600;transition:all .2s}
+.btn-primary{background:#3b82f6;color:#fff}.btn-primary:hover{background:#2563eb}
+.btn-success{background:#22c55e;color:#fff}.btn-success:hover{background:#16a34a}
+.btn-danger{background:#ef4444;color:#fff}.btn-danger:hover{background:#dc2626}
+.btn-amber{background:#f59e0b;color:#000}.btn-amber:hover{background:#d97706}
+.btn-outline{background:transparent;border:1px solid #475569;color:#94a3b8}.btn-outline:hover{border-color:#818cf8;color:#818cf8}
+.btn-sm{padding:4px 10px;font-size:11px;border-radius:6px}
+.edit-only{display:none}
+body.edit-mode .edit-only{display:inline-block}
+body.edit-mode .read-only{display:none}
+.lock-banner{background:#1e293b;border:1px solid #334155;border-radius:10px;padding:12px 20px;text-align:center;margin-bottom:20px;color:#94a3b8;font-size:13px}
+.lock-banner .lock-icon{font-size:18px;margin-right:6px}
+body.edit-mode .lock-banner{background:#172554;border-color:#3b82f6;color:#93c5fd}
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-bottom:30px}
+.stat-card{background:#1e293b;border-radius:12px;padding:18px;text-align:center;border:1px solid #334155}
+.stat-card .number{font-size:32px;font-weight:700;margin-bottom:4px}
+.stat-card .label{color:#94a3b8;font-size:11px;text-transform:uppercase;letter-spacing:1px}
+.green{color:#4ade80}.blue{color:#38bdf8}.purple{color:#a78bfa}.amber{color:#fbbf24}.red{color:#f87171}.cyan{color:#22d3ee}
+.charts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:20px;margin-bottom:30px}
+.chart-card{background:#1e293b;border-radius:12px;padding:24px;border:1px solid #334155}
+.chart-card h3{margin-bottom:16px;font-size:15px;color:#cbd5e1}
+.section-title{font-size:20px;font-weight:600;margin:30px 0 16px;padding-left:12px;border-left:4px solid #818cf8}
+table{width:100%;border-collapse:collapse;margin-bottom:24px;background:#1e293b;border-radius:12px;overflow:hidden}
+th{background:#334155;padding:10px 10px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#94a3b8}
+td{padding:8px 10px;border-bottom:1px solid #0f172a;font-size:12px}
+tr:nth-child(even){background:#1e293b}tr:nth-child(odd){background:#172033}
+tr:hover{background:#1e3a5f}
+.badge{padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600;display:inline-block}
+.badge-active{background:#065f46;color:#6ee7b7}
+.badge-skip{background:#78350f;color:#fcd34d}
+.badge-critical{background:#7f1d1d;color:#fca5a5}
+.badge-normal{background:#1e3a5f;color:#7dd3fc}
+.badge-testmo{background:#312e81;color:#a5b4fc;font-size:11px;padding:3px 10px}
+.badge-unmapped{background:#78350f;color:#fcd34d;font-size:11px;padding:3px 10px}
+.footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:30px}
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:100;justify-content:center;align-items:center}
+.modal-overlay.show{display:flex}
+.modal{background:#1e293b;border-radius:16px;padding:30px;width:560px;max-width:95vw;border:1px solid #475569;max-height:90vh;overflow-y:auto}
+.modal h3{margin-bottom:20px;color:#e2e8f0}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;margin-bottom:4px;color:#94a3b8;font-size:12px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:8px 12px;border-radius:8px;border:1px solid #475569;background:#0f172a;color:#e2e8f0;font-size:13px}
+.form-group textarea{height:60px;resize:vertical}
+.form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+select option{background:#1e293b}
+.testmo-highlight{border-left:3px solid #818cf8;padding-left:6px}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>🧪 Mumzworld — Automation ↔ Testmo Traceability Report</h1>
+<p>Repository: mumzworld-tech/automation_web_2.0 &nbsp;|&nbsp; Framework: Python + Selenium + Appium + Pytest + Allure</p>
+<p style="color:#64748b;font-size:12px;margin-top:4px" id="lastUpdated"></p>
+<div class="toolbar">
+<button class="btn btn-outline read-only" onclick="promptPassword()">🔓 Unlock Edit Mode</button>
+<button class="btn btn-danger edit-only" onclick="lockEditing()">🔒 Lock & Save</button>
+<button class="btn btn-primary edit-only" onclick="openAddModal()">➕ Add Test</button>
+<button class="btn btn-amber edit-only" onclick="downloadJSON()">📥 Export JSON</button>
+<button class="btn btn-success edit-only" onclick="document.getElementById('importFile').click()">📤 Import JSON</button>
+<button class="btn btn-primary" onclick="downloadHTML()">💾 Download Report</button>
+<input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)">
+</div>
+</div>
+
+<div id="lockBanner" class="lock-banner"><span class="lock-icon">🔒</span> Read-only mode — Stakeholder view. Only authorized users can edit.</div>
+
+<div class="stats-row" id="statsRow"></div>
+<div class="charts-grid">
+<div class="chart-card"><h3>📊 Testmo Mapping Coverage</h3><canvas id="testmoChart"></canvas></div>
+<div class="chart-card"><h3>📊 Tests by Platform</h3><canvas id="platformChart"></canvas></div>
+<div class="chart-card"><h3>📊 Test Status Distribution</h3><canvas id="statusChart"></canvas></div>
+<div class="chart-card"><h3>📊 Tests by Feature Area</h3><canvas id="featureChart"></canvas></div>
+</div>
+<div id="tablesContainer"></div>
+
+<div class="modal-overlay" id="modalOverlay">
+<div class="modal" id="testModal"></div>
+</div>
+
+<div class="footer"><p>Mumzworld SDET Team — Automation ↔ Testmo Traceability Report</p></div>
+
+<script>
+const EDIT_PASSWORD = "Mumz@SDET2026";
+let editMode = false;
+const PLATFORMS=['Web UAE','Web KSA','App'],FEATURES=['Checkout','Cart','Coupon','User','Account','Home','Search'],SEVERITIES=['CRITICAL','NORMAL'],STATUSES=['Active','Skipped'],PAYMENTS=['CC','COD','Tabby','Tamara','Store Credit','Cashback','Gift Wrap'];
+
+let tests=[
+{id:1,platform:"Web UAE",file:"test_cart.py",feature:"Cart",name:"test_uae_cart_existing_user_orders_no_coupon_yalla",desc:"Verify Yalla free shipping on cart for existing user",severity:"NORMAL",tags:"Yalla",status:"Active",count:1,testmoId:""},
+{id:2,platform:"Web UAE",file:"test_cart.py",feature:"Cart",name:"test_uae_cart_guest_login_no_coupon_sc",desc:"Guest adds to cart, logs in, pays with Store Credit",severity:"CRITICAL",tags:"Guest, SC",status:"Active",count:1,testmoId:""},
+{id:3,platform:"Web UAE",file:"test_cart.py",feature:"Cart",name:"test_uae_cart_add_items_as_new_user_cashback_coupon",desc:"New user signup, add to cart, apply cashback coupon",severity:"CRITICAL",tags:"Cashback",status:"Active",count:1,testmoId:""},
+{id:4,platform:"Web UAE",file:"test_cart.py",feature:"Cart",name:"test_uae_checkout_with_cart_items_register_new_user_coupon",desc:"Guest checkout → register → apply coupon → place order",severity:"CRITICAL",tags:"Guest, Coupon",status:"Active",count:1,testmoId:""},
+{id:5,platform:"Web UAE",file:"test_cart.py",feature:"Cart",name:"test_uae_uf2_cart_gift_wrap_wishlist",desc:"Gift wrap, qty increase, signup, wishlist, CC order",severity:"NORMAL",tags:"Gift Wrap, Wishlist",status:"Active",count:1,testmoId:""},
+{id:6,platform:"Web UAE",file:"test_cart.py",feature:"Cart",name:"test_uae_cart_uf5_checkout_cod_no_coupon",desc:"Sign out/in flow, qty changes, COD checkout",severity:"CRITICAL",tags:"COD",status:"Active",count:1,testmoId:""},
+{id:7,platform:"Web UAE",file:"test_cart.py",feature:"Coupon",name:"test_uae_pct_discount_without_max_amount",desc:"Bundle product + coupon (no max) → CC order",severity:"CRITICAL",tags:"CC, Coupon",status:"Active",count:1,testmoId:""},
+{id:8,platform:"Web UAE",file:"test_cart.py",feature:"Coupon",name:"test_uae_pct_discount_with_max_amount",desc:"Simple product + coupon (max 50) → COD order",severity:"CRITICAL",tags:"COD, Coupon",status:"Active",count:1,testmoId:""},
+{id:9,platform:"Web UAE",file:"test_cart.py",feature:"Coupon",name:"test_uae_pct_variant_discount_with_max",desc:"Sales + non-sales product, coupon on checkout → COD",severity:"CRITICAL",tags:"COD, Coupon",status:"Active",count:1,testmoId:""},
+{id:10,platform:"Web UAE",file:"test_cart.py",feature:"Coupon",name:"test_uae_pct_variant_discount_without_max",desc:"Sales + non-sales product, coupon on cart → CC",severity:"CRITICAL",tags:"CC, Coupon",status:"Active",count:1,testmoId:""},
+{id:11,platform:"Web UAE",file:"test_cart.py",feature:"Coupon",name:"test_uae_bank_discount_pct_product_price_rule",desc:"Bank coupon, qty increase, CC order",severity:"CRITICAL",tags:"CC, Bank Coupon",status:"Active",count:1,testmoId:""},
+{id:12,platform:"Web UAE",file:"test_cart.py",feature:"Cart",name:"test_uae_cart_apply_gift_wrap_and_place_order",desc:"Add gift wrap on cart, checkout with CC",severity:"CRITICAL",tags:"Gift Wrap, CC",status:"Active",count:1,testmoId:""},
+{id:13,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_cc_no_coupon",desc:"CC checkout (simple/bundle/configurable/custom)",severity:"CRITICAL",tags:"CC",status:"Active",count:4,testmoId:""},
+{id:14,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_cod_no_coupon",desc:"COD checkout (simple/bundle/configurable/custom)",severity:"CRITICAL",tags:"COD",status:"Active",count:4,testmoId:""},
+{id:15,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_tabby_no_coupon",desc:"Tabby checkout (simple/bundle/configurable/custom)",severity:"CRITICAL",tags:"Tabby",status:"Active",count:4,testmoId:""},
+{id:16,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_tabby_cashback_coupon",desc:"Tabby + cashback coupon",severity:"CRITICAL",tags:"Tabby, Cashback",status:"Active",count:1,testmoId:""},
+{id:17,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_cc_normal_coupon",desc:"CC + normal discount coupon",severity:"CRITICAL",tags:"CC, Coupon",status:"Active",count:1,testmoId:""},
+{id:18,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_cod_normal_coupon",desc:"COD + normal discount coupon",severity:"CRITICAL",tags:"COD, Coupon",status:"Active",count:1,testmoId:""},
+{id:19,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_tabby_normal_coupon",desc:"Tabby + normal coupon",severity:"CRITICAL",tags:"Tabby, Coupon",status:"Active",count:1,testmoId:""},
+{id:20,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_full_sc_no_coupon",desc:"Full Store Credit payment",severity:"CRITICAL",tags:"Store Credit",status:"Active",count:1,testmoId:""},
+{id:21,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_cc_and_partial_sc",desc:"CC + partial Store Credit",severity:"CRITICAL",tags:"CC, Store Credit",status:"Active",count:1,testmoId:""},
+{id:22,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_tamara_no_coupon",desc:"Tamara checkout (simple/bundle/configurable/custom)",severity:"CRITICAL",tags:"Tamara",status:"Active",count:4,testmoId:""},
+{id:23,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_tamara_normal_coupon",desc:"Tamara + normal coupon",severity:"CRITICAL",tags:"Tamara, Coupon",status:"Skipped",count:1,testmoId:""},
+{id:24,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_tamara_cashback_coupon",desc:"Tamara + cashback coupon",severity:"CRITICAL",tags:"Tamara, Cashback",status:"Skipped",count:1,testmoId:""},
+{id:25,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_invalid_cc",desc:"Invalid CC → verify payment failed popup",severity:"CRITICAL",tags:"CC, Invalid CC",status:"Active",count:1,testmoId:""},
+{id:26,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_full_sc_and_normal_coupon",desc:"Full SC + normal coupon + wallet balance",severity:"CRITICAL",tags:"Store Credit, Coupon",status:"Active",count:1,testmoId:""},
+{id:27,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_cc_partial_sc_coupon",desc:"CC + partial SC + normal coupon",severity:"CRITICAL",tags:"CC, SC, Coupon",status:"Active",count:1,testmoId:""},
+{id:28,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_cc_wrong_otp",desc:"CC with wrong OTP → verify error",severity:"CRITICAL",tags:"CC, Wrong OTP",status:"Active",count:1,testmoId:""},
+{id:29,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_cc_coupon_modal_sheet",desc:"Apply coupon from modal sheet → CC order",severity:"CRITICAL",tags:"CC, Coupon Modal",status:"Active",count:1,testmoId:""},
+{id:30,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_full_sc_verify_balance",desc:"Full SC + verify wallet balance after purchase",severity:"CRITICAL",tags:"Store Credit",status:"Active",count:1,testmoId:""},
+{id:31,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_cc_verify_odp",desc:"CC order + verify Order Details Page",severity:"CRITICAL",tags:"CC, ODP",status:"Active",count:1,testmoId:""},
+{id:32,platform:"Web UAE",file:"test_user.py",feature:"User",name:"test_uae_user_register_from_account_page",desc:"Guest registers from account page",severity:"NORMAL",tags:"New User",status:"Active",count:1,testmoId:""},
+{id:33,platform:"Web UAE",file:"test_user.py",feature:"User",name:"test_uae_user_register_from_cart_page",desc:"Guest registers from cart/checkout flow",severity:"NORMAL",tags:"New User",status:"Active",count:1,testmoId:""},
+{id:34,platform:"Web UAE",file:"test_user.py",feature:"User",name:"test_uae_user_logs_in_from_account_page",desc:"Existing user login from account page + sign out",severity:"NORMAL",tags:"Existing User",status:"Active",count:1,testmoId:""},
+{id:35,platform:"Web UAE",file:"test_user.py",feature:"User",name:"test_uae_user_logs_in_from_cart_page",desc:"Existing user login from cart page + sign out",severity:"NORMAL",tags:"Existing User",status:"Active",count:1,testmoId:""},
+{id:36,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Cart",name:"test_ksa_cart_existing_user_yalla",desc:"Verify Yalla free shipping on cart for existing user",severity:"NORMAL",tags:"Yalla",status:"Active",count:1,testmoId:""},
+{id:37,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Cart",name:"test_ksa_cart_guest_login_sc",desc:"Guest adds to cart, logs in, pays with Store Credit",severity:"CRITICAL",tags:"Guest, SC",status:"Active",count:1,testmoId:""},
+{id:38,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Cart",name:"test_ksa_cart_new_user_cashback_coupon",desc:"New user signup, add to cart, apply cashback coupon",severity:"CRITICAL",tags:"Cashback",status:"Active",count:1,testmoId:""},
+{id:39,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Cart",name:"test_ksa_checkout_register_new_user_coupon",desc:"Guest checkout → register → apply coupon → place order",severity:"CRITICAL",tags:"Guest, Coupon",status:"Active",count:1,testmoId:""},
+{id:40,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Cart",name:"test_ksa_uf2_cart_gift_wrap_wishlist",desc:"Gift wrap, qty increase, signup, wishlist, CC order",severity:"NORMAL",tags:"Gift Wrap, Wishlist",status:"Active",count:1,testmoId:""},
+{id:41,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Cart",name:"test_ksa_cart_uf5_checkout_cod",desc:"Sign out/in flow, qty changes, COD checkout",severity:"CRITICAL",tags:"COD",status:"Active",count:1,testmoId:""},
+{id:42,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Coupon",name:"test_ksa_pct_discount_without_max",desc:"Bundle product + coupon (no max) → CC order",severity:"CRITICAL",tags:"CC, Coupon",status:"Active",count:1,testmoId:""},
+{id:43,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Coupon",name:"test_ksa_pct_discount_with_max",desc:"Simple product + coupon (max 50) → COD order",severity:"CRITICAL",tags:"COD, Coupon",status:"Active",count:1,testmoId:""},
+{id:44,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Coupon",name:"test_ksa_pct_variant_discount_with_max",desc:"Sales + non-sales, coupon on checkout → COD",severity:"CRITICAL",tags:"COD, Coupon",status:"Active",count:1,testmoId:""},
+{id:45,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Coupon",name:"test_ksa_pct_variant_discount_without_max",desc:"Sales + non-sales, coupon on cart → CC",severity:"CRITICAL",tags:"CC, Coupon",status:"Active",count:1,testmoId:""},
+{id:46,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Coupon",name:"test_ksa_bank_discount_pct_rule",desc:"Bank coupon, qty increase, CC order",severity:"CRITICAL",tags:"CC, Bank Coupon",status:"Active",count:1,testmoId:""},
+{id:47,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_cc_no_coupon",desc:"CC checkout (simple/bundle/configurable/custom)",severity:"CRITICAL",tags:"CC",status:"Active",count:4,testmoId:""},
+{id:48,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_cod_no_coupon",desc:"COD checkout, no coupon",severity:"CRITICAL",tags:"COD",status:"Active",count:1,testmoId:""},
+{id:49,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_tabby_no_coupon",desc:"Tabby checkout, no coupon",severity:"CRITICAL",tags:"Tabby",status:"Skipped",count:1,testmoId:""},
+{id:50,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_tabby_cashback_coupon",desc:"Tabby + cashback coupon",severity:"CRITICAL",tags:"Tabby, Cashback",status:"Skipped",count:1,testmoId:""},
+{id:51,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_cc_normal_coupon",desc:"CC + normal discount coupon",severity:"CRITICAL",tags:"CC, Coupon",status:"Active",count:1,testmoId:""},
+{id:52,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_cod_normal_coupon",desc:"COD + normal discount coupon",severity:"CRITICAL",tags:"COD, Coupon",status:"Active",count:1,testmoId:""},
+{id:53,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_tabby_normal_coupon",desc:"Tabby + normal coupon",severity:"CRITICAL",tags:"Tabby, Coupon",status:"Skipped",count:1,testmoId:""},
+{id:54,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_full_sc",desc:"Full Store Credit payment",severity:"CRITICAL",tags:"Store Credit",status:"Active",count:1,testmoId:""},
+{id:55,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_cc_partial_sc",desc:"CC + partial Store Credit",severity:"CRITICAL",tags:"CC, Store Credit",status:"Active",count:1,testmoId:""},
+{id:56,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_tamara_no_coupon",desc:"Tamara checkout, no coupon",severity:"CRITICAL",tags:"Tamara",status:"Skipped",count:1,testmoId:""},
+{id:57,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_tamara_normal_coupon",desc:"Tamara + normal coupon",severity:"CRITICAL",tags:"Tamara, Coupon",status:"Skipped",count:1,testmoId:""},
+{id:58,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_tamara_cashback_coupon",desc:"Tamara + cashback coupon",severity:"CRITICAL",tags:"Tamara, Cashback",status:"Skipped",count:1,testmoId:""},
+{id:59,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_invalid_cc",desc:"Invalid CC → verify payment failed popup",severity:"CRITICAL",tags:"CC, Invalid CC",status:"Active",count:1,testmoId:""},
+{id:60,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_full_sc_coupon",desc:"Full SC + normal coupon",severity:"CRITICAL",tags:"Store Credit, Coupon",status:"Active",count:1,testmoId:""},
+{id:61,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_cc_partial_sc_coupon",desc:"CC + partial SC + normal coupon",severity:"CRITICAL",tags:"CC, SC, Coupon",status:"Active",count:1,testmoId:""},
+{id:62,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_cc_wrong_otp",desc:"CC with wrong OTP → verify error",severity:"CRITICAL",tags:"CC, Wrong OTP",status:"Active",count:1,testmoId:""},
+{id:63,platform:"Web KSA",file:"test_user_ksa.py",feature:"User",name:"test_ksa_user_register_from_account_page",desc:"Guest registers from account page",severity:"NORMAL",tags:"New User",status:"Active",count:1,testmoId:""},
+{id:64,platform:"Web KSA",file:"test_user_ksa.py",feature:"User",name:"test_ksa_user_register_from_cart_page",desc:"Guest registers from cart/checkout flow",severity:"NORMAL",tags:"New User",status:"Active",count:1,testmoId:""},
+{id:65,platform:"Web KSA",file:"test_user_ksa.py",feature:"User",name:"test_ksa_user_logs_in_from_account_page",desc:"Existing user login from account page + sign out",severity:"NORMAL",tags:"Existing User",status:"Active",count:1,testmoId:""},
+{id:66,platform:"Web KSA",file:"test_user_ksa.py",feature:"User",name:"test_ksa_user_logs_in_from_cart_page",desc:"Existing user login from cart page + sign out",severity:"NORMAL",tags:"Existing User",status:"Active",count:1,testmoId:""},
+{id:67,platform:"App",file:"test_app_account.py",feature:"Account",name:"test_user_signup",desc:"Guest user creates new account from account page",severity:"CRITICAL",tags:"New Account",status:"Active",count:1,testmoId:""},
+{id:68,platform:"App",file:"test_app_account.py",feature:"Account",name:"test_existing_user_profile",desc:"Existing user accesses and verifies My Profile",severity:"CRITICAL",tags:"My Profile",status:"Active",count:1,testmoId:""},
+{id:69,platform:"App",file:"test_app_account.py",feature:"Account",name:"test_existing_user_delivery_address",desc:"Verify delivery addresses page details",severity:"CRITICAL",tags:"Delivery Address",status:"Active",count:1,testmoId:""},
+{id:70,platform:"App",file:"test_app_account.py",feature:"Account",name:"test_add_new_address_make_default_delete",desc:"Add address, set default, delete, verify count",severity:"CRITICAL",tags:"Delivery Address",status:"Active",count:1,testmoId:""},
+{id:71,platform:"App",file:"test_app_cart.py",feature:"Cart",name:"test_uae_cart_quantity_workflow",desc:"Increase/decrease cart item quantity",severity:"CRITICAL",tags:"Cart",status:"Active",count:1,testmoId:""},
+{id:72,platform:"App",file:"test_app_cart.py",feature:"Cart",name:"test_uae_cart_remove_item",desc:"Remove item from cart, verify empty",severity:"CRITICAL",tags:"Cart",status:"Active",count:1,testmoId:""},
+{id:73,platform:"App",file:"test_app_cart.py",feature:"Cart",name:"test_uae_cart_move_to_wishlist",desc:"Move cart item to wishlist, verify empty cart",severity:"NORMAL",tags:"Cart, Wishlist",status:"Active",count:1,testmoId:""},
+{id:74,platform:"App",file:"test_app_checkout.py",feature:"Checkout",name:"test_uae_checkout_cc_no_coupon (App)",desc:"Search → PDP → Cart → Checkout with CC",severity:"CRITICAL",tags:"CC",status:"Active",count:1,testmoId:""},
+{id:75,platform:"App",file:"test_app_checkout.py",feature:"Checkout",name:"test_uae_checkout_cc_partial_sc (App)",desc:"CC + partial Store Credit checkout",severity:"CRITICAL",tags:"CC, SC",status:"Active",count:1,testmoId:""},
+{id:76,platform:"App",file:"test_app_checkout.py",feature:"Checkout",name:"test_uae_checkout_cod_no_coupon (App)",desc:"COD checkout on app",severity:"CRITICAL",tags:"COD",status:"Active",count:1,testmoId:""},
+{id:77,platform:"App",file:"test_app_checkout.py",feature:"Checkout",name:"test_uae_checkout_gift_wrap_cc (App)",desc:"Gift wrap + CC checkout on app",severity:"CRITICAL",tags:"Gift Wrap, CC",status:"Active",count:1,testmoId:""},
+{id:78,platform:"App",file:"test_app_home.py",feature:"Search",name:"test_customer_can_search_brand",desc:"Search brand from suggestions, verify brand page",severity:"NORMAL",tags:"Brand Search",status:"Active",count:1,testmoId:""},
+{id:79,platform:"App",file:"test_app_home.py",feature:"Search",name:"test_customer_can_search_category",desc:"Search category suggestion, verify PLP filter",severity:"NORMAL",tags:"Category Search",status:"Active",count:1,testmoId:""},
+{id:80,platform:"App",file:"test_app_home.py",feature:"Home",name:"test_app_explore_screen_and_navigate",desc:"Verify explore screen elements, navigate to account",severity:"CRITICAL",tags:"Smoke, Navigation",status:"Active",count:1,testmoId:""},
+];
+let nextId=81;const chartInstances={};
+function save(){localStorage.setItem('mw_tests',JSON.stringify(tests));localStorage.setItem('mw_nextId',nextId)}
+function load(){const d=localStorage.getItem('mw_tests');if(d){tests=JSON.parse(d);nextId=parseInt(localStorage.getItem('mw_nextId'))||81}}
+</script>
+
+<script>
+function promptPassword(){
+  const pw=prompt('Enter edit password:');
+  if(pw===EDIT_PASSWORD){editMode=true;document.body.classList.add('edit-mode');document.getElementById('lockBanner').innerHTML='<span class="lock-icon">🔓</span> Edit mode active — You can add, edit, delete tests and map Testmo IDs.'}
+  else if(pw!==null) alert('❌ Incorrect password')
+}
+function lockEditing(){editMode=false;document.body.classList.remove('edit-mode');document.getElementById('lockBanner').innerHTML='<span class="lock-icon">🔒</span> Read-only mode — Stakeholder view. Only authorized users can edit.';save()}
+
+function totalExec(){return tests.reduce((s,t)=>s+t.count,0)}
+function countBy(k,v){return tests.filter(t=>t[k]===v).reduce((s,t)=>s+t.count,0)}
+function countByStatus(s){return tests.filter(t=>t.status===s).reduce((s2,t)=>s2+t.count,0)}
+
+function renderStats(){
+  const total=totalExec(),active=countByStatus('Active'),skip=countByStatus('Skipped'),pct=total?Math.round(active/total*100):0;
+  const mapped=tests.filter(t=>t.testmoId&&t.testmoId.trim()).length,unmapped=tests.length-mapped,mapPct=tests.length?Math.round(mapped/tests.length*100):0;
+  document.getElementById('statsRow').innerHTML=`
+    <div class="stat-card"><div class="number green">${tests.length}</div><div class="label">Test Functions</div></div>
+    <div class="stat-card"><div class="number blue">${total}</div><div class="label">Total Executions</div></div>
+    <div class="stat-card"><div class="number green">${pct}%</div><div class="label">Active Rate</div></div>
+    <div class="stat-card"><div class="number amber">${skip}</div><div class="label">Skipped</div></div>
+    <div class="stat-card"><div class="number purple">${mapped}</div><div class="label">Testmo Mapped</div></div>
+    <div class="stat-card"><div class="number red">${unmapped}</div><div class="label">Unmapped</div></div>
+    <div class="stat-card"><div class="number cyan">${mapPct}%</div><div class="label">Traceability</div></div>`;
+  document.getElementById('lastUpdated').textContent='Last updated: '+new Date().toLocaleString();
+}
+
+function renderCharts(){
+  const C=['#38bdf8','#a78bfa','#4ade80','#fbbf24','#f87171','#22d3ee','#fb923c','#e879f9'];
+  function mu(id,type,labels,data,bg){
+    if(chartInstances[id]){chartInstances[id].data.labels=labels;chartInstances[id].data.datasets[0].data=data;chartInstances[id].data.datasets[0].backgroundColor=bg;chartInstances[id].update();return}
+    const o={responsive:true,plugins:{legend:{labels:{color:'#94a3b8',font:{size:11}}}}};
+    if(type==='bar')Object.assign(o,{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#94a3b8'},grid:{color:'#1e293b'}},y:{ticks:{color:'#94a3b8',font:{size:11}},grid:{color:'#1e293b'}}}});
+    chartInstances[id]=new Chart(document.getElementById(id),{type,data:{labels,datasets:[{label:'Tests',data,backgroundColor:bg,borderWidth:0,borderRadius:type==='bar'?4:0}]},options:o});
+  }
+  const mapped=tests.filter(t=>t.testmoId&&t.testmoId.trim()).length,unmapped=tests.length-mapped;
+  mu('testmoChart','doughnut',[`Mapped (${mapped})`,`Unmapped (${unmapped})`],[mapped,unmapped],['#4ade80','#f87171']);
+  mu('platformChart','doughnut',PLATFORMS.map(p=>`${p} (${countBy('platform',p)})`),PLATFORMS.map(p=>countBy('platform',p)),C.slice(0,3));
+  const a=countByStatus('Active'),sk=countByStatus('Skipped');
+  mu('statusChart','doughnut',[`Active (${a})`,`Skipped (${sk})`],[a,sk],['#4ade80','#fbbf24']);
+  const fl=FEATURES.filter(f=>countBy('feature',f)>0);
+  mu('featureChart','bar',fl,fl.map(f=>countBy('feature',f)),C.slice(0,fl.length));
+}
+
+function renderTables(){
+  let html='';const grouped={};
+  tests.forEach(t=>{const k=t.platform+'|||'+t.file;if(!grouped[k])grouped[k]=[];grouped[k].push(t)});
+  let cp='';
+  Object.keys(grouped).sort().forEach(k=>{
+    const[plat,file]=k.split('|||'),items=grouped[k],ec=items.reduce((s,t)=>s+t.count,0);
+    if(plat!==cp){const ic=plat==='App'?'📱':'🌐';html+=`<h2 class="section-title">${ic} ${plat} Tests (${countBy('platform',plat)} executions)</h2>`;cp=plat}
+    html+=`<h3 style="color:#94a3b8;margin:12px 0 6px;font-size:14px">${file} (${ec} executions)</h3>`;
+    html+=`<table><tr><th>#</th><th>Testmo ID</th><th>Test Name</th><th>Description</th><th>Severity</th><th>Tags</th><th>Status</th><th>Runs</th><th class="edit-only">Actions</th></tr>`;
+    items.forEach((t,i)=>{
+      const sv=t.severity==='CRITICAL'?'badge-critical':'badge-normal';
+      const st=t.status==='Active'?'badge-active':'badge-skip';
+      const tm=t.testmoId&&t.testmoId.trim()?`<span class="badge badge-testmo">T-${t.testmoId}</span>`:`<span class="badge badge-unmapped">—</span>`;
+      html+=`<tr><td>${i+1}</td><td>${tm}</td><td style="max-width:200px;word-break:break-all">${t.name}</td><td>${t.desc}</td>
+        <td><span class="badge ${sv}">${t.severity}</span></td><td>${t.tags}</td>
+        <td><span class="badge ${st}">${t.status==='Active'?'✅ Active':'⏸ Skipped'}</span></td><td>${t.count>1?'×'+t.count:t.count}</td>
+        <td class="edit-only"><button class="btn btn-primary btn-sm" onclick="openEditModal(${t.id})">✏️</button> <button class="btn btn-danger btn-sm" onclick="deleteTest(${t.id})">🗑️</button></td></tr>`;
+    });
+    html+=`</table>`;
+  });
+  document.getElementById('tablesContainer').innerHTML=html;
+}
+
+function renderAll(){renderStats();renderCharts();renderTables();save()}
+
+function modalHTML(t){
+  const e=!!t,v=t||{platform:'Web UAE',file:'',feature:'Checkout',name:'',desc:'',severity:'CRITICAL',tags:'',status:'Active',count:1,testmoId:''};
+  return `<h3>${e?'Edit':'Add'} Test</h3>
+  <div class="form-group"><label>🔗 Testmo Test ID</label><input id="mTestmo" value="${v.testmoId||''}" placeholder="e.g. 1234 (from Testmo)"></div>
+  <div class="form-group"><label>Platform</label><select id="mPlatform">${PLATFORMS.map(p=>`<option ${v.platform===p?'selected':''}>${p}</option>`).join('')}</select></div>
+  <div class="form-group"><label>File Name</label><input id="mFile" value="${v.file}" placeholder="e.g. test_cart.py"></div>
+  <div class="form-group"><label>Feature</label><select id="mFeature">${FEATURES.map(f=>`<option ${v.feature===f?'selected':''}>${f}</option>`).join('')}</select></div>
+  <div class="form-group"><label>Test Name</label><input id="mName" value="${v.name}" placeholder="test_function_name"></div>
+  <div class="form-group"><label>Description</label><textarea id="mDesc">${v.desc}</textarea></div>
+  <div class="form-group"><label>Severity</label><select id="mSeverity">${SEVERITIES.map(s=>`<option ${v.severity===s?'selected':''}>${s}</option>`).join('')}</select></div>
+  <div class="form-group"><label>Tags</label><input id="mTags" value="${v.tags}" placeholder="CC, Coupon"></div>
+  <div class="form-group"><label>Status</label><select id="mStatus">${STATUSES.map(s=>`<option ${v.status===s?'selected':''}>${s}</option>`).join('')}</select></div>
+  <div class="form-group"><label>Execution Count</label><input type="number" id="mCount" value="${v.count}" min="1"></div>
+  <div class="form-actions"><button class="btn btn-danger" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="${e?`saveEdit(${t.id})`:'saveNew()'}">Save</button></div>`;
+}
+
+function openAddModal(){if(!editMode)return;document.getElementById('testModal').innerHTML=modalHTML(null);document.getElementById('modalOverlay').classList.add('show')}
+function openEditModal(id){if(!editMode)return;document.getElementById('testModal').innerHTML=modalHTML(tests.find(x=>x.id===id));document.getElementById('modalOverlay').classList.add('show')}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('show')}
+function getFormData(){return{testmoId:document.getElementById('mTestmo').value.trim(),platform:document.getElementById('mPlatform').value,file:document.getElementById('mFile').value,feature:document.getElementById('mFeature').value,name:document.getElementById('mName').value,desc:document.getElementById('mDesc').value,severity:document.getElementById('mSeverity').value,tags:document.getElementById('mTags').value,status:document.getElementById('mStatus').value,count:parseInt(document.getElementById('mCount').value)||1}}
+function saveNew(){const d=getFormData();if(!d.name||!d.file){alert('Name and File required');return}tests.push({id:nextId++,...d});closeModal();renderAll()}
+function saveEdit(id){const d=getFormData(),i=tests.findIndex(t=>t.id===id);if(i>=0)Object.assign(tests[i],d);closeModal();renderAll()}
+function deleteTest(id){if(!editMode||!confirm('Delete this test?'))return;tests=tests.filter(t=>t.id!==id);renderAll()}
+function downloadJSON(){const b=new Blob([JSON.stringify(tests,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='mumzworld_test_data.json';a.click()}
+function importJSON(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){try{tests=JSON.parse(ev.target.result);nextId=Math.max(...tests.map(t=>t.id))+1;renderAll();alert('Imported '+tests.length+' tests!')}catch(err){alert('Invalid JSON')}};r.readAsText(f);e.target.value=''}
+function downloadHTML(){const a=document.createElement('a');a.href='data:text/html;charset=utf-8,'+encodeURIComponent(document.documentElement.outerHTML);a.download='mumzworld_test_coverage_report.html';a.click()}
+document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal()});
+load();renderAll();
+</script>
+</body>
+</html>
