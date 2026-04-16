@@ -64,6 +64,11 @@ select option{background:#1e293b}
 .badge-yes{background:#065f46;color:#6ee7b7}
 .badge-no{background:#78350f;color:#fcd34d}
 .badge-cant{background:#3b0764;color:#d8b4fe}
+.badge-passed{background:#065f46;color:#6ee7b7;font-size:9px;padding:2px 6px;margin:1px}
+.badge-fail{background:#7f1d1d;color:#fca5a5;font-size:9px;padding:2px 6px;margin:1px}
+.badge-broken{background:#78350f;color:#fcd34d;font-size:9px;padding:2px 6px;margin:1px}
+.badge-skipped-sm{background:#1e3a5f;color:#7dd3fc;font-size:9px;padding:2px 6px;margin:1px}
+.reg-history{display:flex;flex-wrap:wrap;gap:2px;max-width:200px}
 .testmo-highlight{border-left:3px solid #818cf8;padding-left:6px}
 </style>
 </head>
@@ -76,6 +81,7 @@ select option{background:#1e293b}
 <button class="btn btn-outline read-only" onclick="promptPassword()">🔓 Unlock Edit Mode</button>
 <button class="btn btn-danger edit-only" onclick="lockEditing()">🔒 Lock & Save</button>
 <button class="btn btn-primary edit-only" onclick="openAddModal()">➕ Add Test</button>
+<button class="btn btn-success edit-only" onclick="openAllureModal()">📊 Import Allure Run</button>
 <button class="btn btn-amber edit-only" onclick="downloadJSON()">📥 Export JSON</button>
 <button class="btn btn-success edit-only" onclick="document.getElementById('importFile').click()">📤 Import JSON</button>
 <button class="btn btn-primary" onclick="downloadHTML()">💾 Download Report</button>
@@ -261,12 +267,12 @@ function renderTables(){
   const ft=filteredTests();
   let html='';const grouped={};
   ft.forEach(t=>{const k=t.platform+'|||'+t.file;if(!grouped[k])grouped[k]=[];grouped[k].push(t)});
-  let cp='';const fRow=`<tr class="filter-row"><th></th><th><input placeholder="Filter..." value="${filters.testmoId}" oninput="applyFilters('testmoId',this.value)"></th><th><input placeholder="Filter..." value="${filters.name}" oninput="applyFilters('name',this.value)"></th><th><input placeholder="Filter..." value="${filters.desc}" oninput="applyFilters('desc',this.value)"></th><th><select onchange="applyFilters('feature',this.value)"><option value="">All</option>${FEATURES.map(f=>`<option ${filters.feature===f?'selected':''}>${f}</option>`).join('')}</select></th><th><select onchange="applyFilters('severity',this.value)"><option value="">All</option>${SEVERITIES.map(s=>`<option ${filters.severity===s?'selected':''}>${s}</option>`).join('')}</select></th><th><input placeholder="Filter..." value="${filters.tags}" oninput="applyFilters('tags',this.value)"></th><th><select onchange="applyFilters('status',this.value)"><option value="">All</option>${STATUSES.map(s=>`<option ${filters.status===s?'selected':''}>${s}</option>`).join('')}</select></th><th><select onchange="applyFilters('isAutomated',this.value)"><option value="">All</option>${AUTOMATED_OPTS.map(a=>`<option ${filters.isAutomated===a?'selected':''}>${a}</option>`).join('')}</select></th><th></th><th class="edit-only"></th></tr>`;
+  let cp='';const fRow=`<tr class="filter-row"><th></th><th><input placeholder="Filter..." value="${filters.testmoId}" oninput="applyFilters('testmoId',this.value)"></th><th><input placeholder="Filter..." value="${filters.name}" oninput="applyFilters('name',this.value)"></th><th><input placeholder="Filter..." value="${filters.desc}" oninput="applyFilters('desc',this.value)"></th><th><select onchange="applyFilters('feature',this.value)"><option value="">All</option>${FEATURES.map(f=>`<option ${filters.feature===f?'selected':''}>${f}</option>`).join('')}</select></th><th><select onchange="applyFilters('severity',this.value)"><option value="">All</option>${SEVERITIES.map(s=>`<option ${filters.severity===s?'selected':''}>${s}</option>`).join('')}</select></th><th><input placeholder="Filter..." value="${filters.tags}" oninput="applyFilters('tags',this.value)"></th><th><select onchange="applyFilters('status',this.value)"><option value="">All</option>${STATUSES.map(s=>`<option ${filters.status===s?'selected':''}>${s}</option>`).join('')}</select></th><th><select onchange="applyFilters('isAutomated',this.value)"><option value="">All</option>${AUTOMATED_OPTS.map(a=>`<option ${filters.isAutomated===a?'selected':''}>${a}</option>`).join('')}</select></th><th></th><th></th><th class="edit-only"></th></tr>`;
   Object.keys(grouped).sort().forEach(k=>{
     const[plat,file]=k.split('|||'),items=grouped[k],ec=items.reduce((s,t)=>s+t.count,0);
     if(plat!==cp){const ic=plat==='App'?'📱':plat==='Manual'?'📋':'🌐';const pc=ft.filter(t=>t.platform===plat).reduce((s,t)=>s+t.count,0);html+=`<h2 class="section-title">${ic} ${plat} Tests (${pc})</h2>`;cp=plat}
     html+=`<h3 style="color:#94a3b8;margin:12px 0 6px;font-size:14px">${file} (${ec})</h3>`;
-    html+=`<table><thead><tr><th>#</th><th>Testmo ID</th><th>Test Name</th><th>Description</th><th>Feature</th><th>Severity</th><th>Tags</th><th>Status</th><th>Is Automated</th><th>Runs</th><th class="edit-only">Actions</th></tr>${fRow}</thead><tbody>`;
+    html+=`<table><thead><tr><th>#</th><th>Testmo ID</th><th>Test Name</th><th>Description</th><th>Feature</th><th>Severity</th><th>Tags</th><th>Status</th><th>Is Automated</th><th>Regression History</th><th>Runs</th><th class="edit-only">Actions</th></tr>${fRow}</thead><tbody>`;
     items.forEach((t,i)=>{
       const sv=t.severity==='CRITICAL'?'badge-critical':'badge-normal';
       const stMap={'Active':'badge-active','Skipped':'badge-skip','Failed':'badge-failed'};
@@ -277,7 +283,8 @@ function renderTables(){
       const aB=autoMap[av]||'badge-no';
       const aL=av==='Yes'?'✅ Yes':av==="Can't be automated"?"🚫 Can't":'❌ No';
       const tm=t.testmoId&&t.testmoId.trim()?`<span class="badge badge-testmo">T-${t.testmoId}</span>`:`<span class="badge badge-unmapped">—</span>`;
-      html+=`<tr><td>${i+1}</td><td>${tm}</td><td style="max-width:200px;word-break:break-all">${t.name}</td><td>${t.desc}</td><td>${t.feature}</td><td><span class="badge ${sv}">${t.severity}</span></td><td>${t.tags}</td><td><span class="badge ${stB}">${stL}</span></td><td><span class="badge ${aB}">${aL}</span></td><td>${t.count>1?'×'+t.count:t.count}</td><td class="edit-only"><button class="btn btn-primary btn-sm" onclick="openEditModal(${t.id})">✏️</button> <button class="btn btn-danger btn-sm" onclick="deleteTest(${t.id})">🗑️</button></td></tr>`;
+      const rh=(t.regressionHistory||[]).map(h=>{const cls=h.status==='passed'?'badge-passed':h.status==='failed'?'badge-fail':h.status==='broken'?'badge-broken':'badge-skipped-sm';return`<span class="badge ${cls}" title="${h.label} (${h.date})">${h.label}: ${h.status}</span>`}).join('')||'<span style="color:#475569;font-size:10px">—</span>';
+      html+=`<tr><td>${i+1}</td><td>${tm}</td><td style="max-width:200px;word-break:break-all">${t.name}</td><td>${t.desc}</td><td>${t.feature}</td><td><span class="badge ${sv}">${t.severity}</span></td><td>${t.tags}</td><td><span class="badge ${stB}">${stL}</span></td><td><span class="badge ${aB}">${aL}</span></td><td class="reg-history">${rh}</td><td>${t.count>1?'×'+t.count:t.count}</td><td class="edit-only"><button class="btn btn-primary btn-sm" onclick="openEditModal(${t.id})">✏️</button> <button class="btn btn-danger btn-sm" onclick="deleteTest(${t.id})">🗑️</button></td></tr>`;
     });
     html+=`</tbody></table>`;
   });
@@ -314,6 +321,127 @@ function downloadJSON(){const b=new Blob([JSON.stringify(tests,null,2)],{type:'a
 function importJSON(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){try{tests=JSON.parse(ev.target.result);nextId=Math.max(...tests.map(t=>t.id))+1;renderAll();alert('Imported '+tests.length+' tests!')}catch(err){alert('Invalid JSON')}};r.readAsText(f);e.target.value=''}
 function downloadHTML(){const a=document.createElement('a');a.href='data:text/html;charset=utf-8,'+encodeURIComponent(document.documentElement.outerHTML);a.download='mumzworld_test_coverage_report.html';a.click()}
 document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal()});
+
+const ALLURE_BASE='https://allure-reports.mumzstage.com/allure-docker-service';
+const TITLE_MAP=[
+["verifying odp","test_uae_checkout_cc_verify_odp"],
+["store credit + verifying","test_uae_checkout_full_sc_verify_balance"],
+["cc + coupon (through coupon modal","test_uae_checkout_cc_coupon_modal_sheet"],
+["partial store credit and coupon","test_uae_checkout_cc_partial_sc_coupon"],
+["coupon and full store credit","test_uae_checkout_full_sc_and_normal_coupon"],
+["wrong otp","test_uae_checkout_cc_wrong_otp"],
+["invalid card","test_uae_checkout_invalid_cc"],
+["tabby + cashback coupon","test_uae_checkout_tabby_cashback_coupon"],
+["tabby + normal coupon","test_uae_checkout_tabby_normal_coupon"],
+["cc + normal coupon","test_uae_checkout_cc_normal_coupon"],
+["cod + normal coupon","test_uae_checkout_cod_normal_coupon"],
+["tamara + normal coupon","test_uae_checkout_tamara_normal_coupon"],
+["tamara + cashback coupon","test_uae_checkout_tamara_cashback_coupon"],
+["cc and partial store credit","test_uae_checkout_cc_and_partial_sc"],
+["full store credit (","test_uae_checkout_full_sc_no_coupon"],
+["existing user with orders and yalla","test_uae_cart_existing_user_orders_no_coupon_yalla"],
+["gift wrap","test_uae_cart_apply_gift_wrap_and_place_order"],
+["uae - checkout cc","test_uae_checkout_cc_no_coupon"],
+["uae - checkout cod","test_uae_checkout_cod_no_coupon"],
+["uae - checkout tabby","test_uae_checkout_tabby_no_coupon"],
+["uae - checkout tamara","test_uae_checkout_tamara_no_coupon"],
+["ksa - checkout cc","test_ksa_checkout_cc_no_coupon"],
+["ksa - checkout cod","test_ksa_checkout_cod_no_coupon"],
+["ksa - checkout tabby","test_ksa_checkout_tabby_no_coupon"],
+["ksa - checkout tamara","test_ksa_checkout_tamara_no_coupon"],
+["ksa - checkout full store credit","test_ksa_checkout_full_sc"],
+["ksa - checkout cc and partial","test_ksa_checkout_cc_partial_sc"],
+["register from account","test_uae_user_register_from_account_page"],
+["register from cart","test_uae_user_register_from_cart_page"],
+["login from account","test_uae_user_logs_in_from_account_page"],
+["login from cart","test_uae_user_logs_in_from_cart_page"],
+["cart uf5","test_uae_cart_uf5_checkout_cod_no_coupon"],
+["uf2","test_uae_uf2_cart_gift_wrap_wishlist"],
+["guest & login","test_uae_cart_guest_login_no_coupon_sc"],
+["newly registered user and apply cashback","test_uae_cart_add_items_as_new_user_cashback_coupon"],
+["register a new user and use a coupon","test_uae_checkout_with_cart_items_register_new_user_coupon"],
+["percentage of product price discount rules without max","test_uae_pct_discount_without_max_amount"],
+["percentage of product price discount rules with max","test_uae_pct_discount_with_max_amount"],
+["variant price discount with max","test_uae_pct_variant_discount_with_max"],
+["variant price discount without max","test_uae_pct_variant_discount_without_max"],
+["bank discount","test_uae_bank_discount_pct_product_price_rule"],
+];
+
+function matchAllureToTest(allureTitle){
+  const tl=allureTitle.toLowerCase();
+  for(const[key,tname]of TITLE_MAP){
+    if(tl.includes(key)){
+      const t=tests.find(x=>x.name===tname);
+      if(t)return t.id;
+    }
+  }
+  // Fallback: fuzzy match on desc
+  for(const t of tests){
+    if(t.desc&&tl.includes(t.desc.toLowerCase().substring(0,30)))return t.id;
+  }
+  return null;
+}
+
+async function fetchAllureProjects(){
+  try{
+    const r=await fetch(ALLURE_BASE+'/projects');
+    const d=await r.json();
+    return Object.keys(d.data.projects).sort();
+  }catch(e){alert('Failed to fetch Allure projects: '+e);return[]}
+}
+
+function openAllureModal(){
+  if(!editMode)return;
+  document.getElementById('testModal').innerHTML=`<h3>📊 Import Allure Regression Run</h3>
+  <div class="form-group"><label>Regression Label</label><input id="aLabel" placeholder="e.g. Sprint 14 Regression, Release 2.5"></div>
+  <div class="form-group"><label>Allure Project ID</label><input id="aProject" placeholder="e.g. 094aede0-a2b6-4668-bef7-0fdd95d5be26-ae-android"><p style="color:#64748b;font-size:11px;margin-top:4px">Paste the project ID from the Allure report URL</p></div>
+  <div class="form-group"><label>Or select from recent projects</label><select id="aProjectSelect" onchange="document.getElementById('aProject').value=this.value"><option value="">Loading...</option></select></div>
+  <div id="aStatus" style="color:#94a3b8;font-size:12px;margin:10px 0"></div>
+  <div class="form-actions"><button class="btn btn-danger" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="fetchAndImportAllure()">🚀 Fetch & Import</button></div>`;
+  document.getElementById('modalOverlay').classList.add('show');
+  fetchAllureProjects().then(projects=>{
+    const sel=document.getElementById('aProjectSelect');
+    sel.innerHTML='<option value="">-- Select Project --</option>'+projects.map(p=>'<option value="'+p+'">'+p+'</option>').join('');
+  });
+}
+
+async function fetchAndImportAllure(){
+  const label=document.getElementById('aLabel').value.trim();
+  const proj=document.getElementById('aProject').value.trim();
+  if(!label||!proj){alert('Label and Project ID are required');return}
+  const statusEl=document.getElementById('aStatus');
+  statusEl.textContent='⏳ Fetching results...';
+  try{
+    const r=await fetch(ALLURE_BASE+'/projects/'+proj+'/reports/latest/data/suites.json');
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const d=await r.json();
+    const results=[];
+    function extract(n){if(n.children)n.children.forEach(c=>extract(c));else results.push({name:n.name||'',status:n.status||'unknown'})}
+    (d.children||[]).forEach(c=>extract(c));
+    statusEl.textContent=`Found ${results.length} test results. Matching...`;
+    let matched=0,unmatched=0;
+    const ts=Date.now();
+    for(const r of results){
+      const tid=matchAllureToTest(r.name);
+      if(tid){
+        const t=tests.find(x=>x.id===tid);
+        if(t){
+          if(!t.regressionHistory)t.regressionHistory=[];
+          // Avoid duplicate labels
+          const existing=t.regressionHistory.findIndex(h=>h.label===label);
+          if(existing>=0)t.regressionHistory[existing]={label,status:r.status,date:new Date().toISOString().split('T')[0],project:proj};
+          else t.regressionHistory.push({label,status:r.status,date:new Date().toISOString().split('T')[0],project:proj});
+          // Keep last 5 runs
+          if(t.regressionHistory.length>5)t.regressionHistory=t.regressionHistory.slice(-5);
+          matched++;
+        }
+      }else{unmatched++}
+    }
+    statusEl.innerHTML=`✅ Done! Matched: <strong>${matched}</strong> | Unmatched: <strong>${unmatched}</strong><br>Label: <strong>${label}</strong>`;
+    renderAll();
+  }catch(e){statusEl.textContent='❌ Error: '+e.message}
+}
+
 (async()=>{const loaded=await loadFromGist();if(!loaded)load();renderAll()})();
 </script>
 </body>
