@@ -88,7 +88,9 @@ select option{background:#1e293b}
 <div class="stats-row" id="statsRow"></div>
 <div class="charts-grid">
 <div class="chart-card"><h3>📊 Automation Coverage</h3><canvas id="testmoChart"></canvas></div>
-<div class="chart-card"><h3>📊 Tests by Platform</h3><canvas id="platformChart"></canvas></div>
+<div class="chart-card"><h3>🌐 Web UAE — Automation Coverage</h3><canvas id="uaeChart"></canvas></div>
+<div class="chart-card"><h3>🌐 Web KSA — Automation Coverage</h3><canvas id="ksaChart"></canvas></div>
+<div class="chart-card"><h3>📱 App — Android & iOS Coverage</h3><canvas id="appChart"></canvas></div>
 <div class="chart-card"><h3>📊 Test Status Distribution</h3><canvas id="statusChart"></canvas></div>
 <div class="chart-card"><h3>📊 Tests by Feature Area</h3><canvas id="featureChart"></canvas></div>
 </div>
@@ -243,7 +245,11 @@ function renderCharts(){
   }
   const automated=tests.filter(t=>t.isAutomated==='Yes').length,manual=tests.filter(t=>t.isAutomated!=='Yes').length;
   mu('testmoChart','doughnut',[`Automated (${automated})`,`Not Automated (${manual})`],[automated,manual],['#4ade80','#a78bfa']);
-  mu('platformChart','doughnut',PLATFORMS.map(p=>`${p} (${countBy('platform',p)})`),PLATFORMS.map(p=>countBy('platform',p)),C.slice(0,3));
+  function platChart(id,plat){const a=tests.filter(t=>t.platform===plat&&t.isAutomated==='Yes').length,n=tests.filter(t=>t.platform===plat&&t.isAutomated!=='Yes').length;mu(id,'doughnut',[`Automated (${a})`,`Not Automated (${n})`],[a,n],['#4ade80','#f87171'])}
+  platChart('uaeChart','Web UAE');
+  platChart('ksaChart','Web KSA');
+  const appAuto=tests.filter(t=>t.platform==='App'&&t.isAutomated==='Yes').length,appManual=tests.filter(t=>t.platform==='App'&&t.isAutomated!=='Yes').length;
+  mu('appChart','doughnut',[`Android ✅ (${appAuto})`,`Android ❌ (${appManual})`,`iOS ✅ (${appAuto})`,`iOS ❌ (${appManual})`],[appAuto,appManual,appAuto,appManual],['#4ade80','#f87171','#38bdf8','#fbbf24']);
   const a=countByStatus('Active'),sk=countByStatus('Skipped');
   mu('statusChart','doughnut',[`Active (${a})`,`Skipped (${sk})`],[a,sk],['#4ade80','#fbbf24']);
   const fl=FEATURES.filter(f=>countBy('feature',f)>0);
