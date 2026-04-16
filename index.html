@@ -46,6 +46,7 @@ tr:hover{background:#1e3a5f}
 .badge-normal{background:#1e3a5f;color:#7dd3fc}
 .badge-testmo{background:#312e81;color:#a5b4fc;font-size:11px;padding:3px 10px}
 .badge-unmapped{background:#78350f;color:#fcd34d;font-size:11px;padding:3px 10px}
+.badge-manual{background:#3b0764;color:#d8b4fe;font-size:10px;padding:2px 8px}
 .footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:30px}
 .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:100;justify-content:center;align-items:center}
 .modal-overlay.show{display:flex}
@@ -80,7 +81,7 @@ select option{background:#1e293b}
 
 <div class="stats-row" id="statsRow"></div>
 <div class="charts-grid">
-<div class="chart-card"><h3>📊 Testmo Mapping Coverage</h3><canvas id="testmoChart"></canvas></div>
+<div class="chart-card"><h3>📊 Automation Coverage</h3><canvas id="testmoChart"></canvas></div>
 <div class="chart-card"><h3>📊 Tests by Platform</h3><canvas id="platformChart"></canvas></div>
 <div class="chart-card"><h3>📊 Test Status Distribution</h3><canvas id="statusChart"></canvas></div>
 <div class="chart-card"><h3>📊 Tests by Feature Area</h3><canvas id="featureChart"></canvas></div>
@@ -96,7 +97,7 @@ select option{background:#1e293b}
 <script>
 const EDIT_PASSWORD = "Mumz@SDET2026";
 let editMode = false;
-const PLATFORMS=['Web UAE','Web KSA','App'],FEATURES=['Checkout','Cart','Coupon','User','Account','Home','Search'],SEVERITIES=['CRITICAL','NORMAL'],STATUSES=['Active','Skipped'],PAYMENTS=['CC','COD','Tabby','Tamara','Store Credit','Cashback','Gift Wrap'];
+const PLATFORMS=['Web UAE','Web KSA','App','Manual'],FEATURES=['Checkout','Cart','Coupon','User','Account','Home','Search','Geo IP','PDP/PLP','Wishlist','Orders','Wallet','Gift Registry','Product Types','Catalogue'],SEVERITIES=['CRITICAL','NORMAL'],STATUSES=['Active','Skipped','Manual'],PAYMENTS=['CC','COD','Tabby','Tamara','Store Credit','Cashback','Gift Wrap'];
 
 let tests=[
 {id:1,platform:"Web UAE",file:"test_cart.py",feature:"Cart",name:"test_uae_cart_existing_user_orders_no_coupon_yalla",desc:"Verify Yalla free shipping on cart for existing user",severity:"NORMAL",tags:"Yalla",status:"Active",count:1,testmoId:""},
@@ -207,16 +208,17 @@ function countBy(k,v){return tests.filter(t=>t[k]===v).reduce((s,t)=>s+t.count,0
 function countByStatus(s){return tests.filter(t=>t.status===s).reduce((s2,t)=>s2+t.count,0)}
 
 function renderStats(){
-  const total=totalExec(),active=countByStatus('Active'),skip=countByStatus('Skipped'),pct=total?Math.round(active/total*100):0;
-  const mapped=tests.filter(t=>t.testmoId&&t.testmoId.trim()).length,unmapped=tests.length-mapped,mapPct=tests.length?Math.round(mapped/tests.length*100):0;
+  const total=totalExec(),active=countByStatus('Active'),skip=countByStatus('Skipped'),manual=countByStatus('Manual');
+  const automated=tests.filter(t=>t.status!=='Manual').length,totalTests=tests.length;
+  const autoPct=totalTests?Math.round(automated/totalTests*100):0;
+  const mapped=tests.filter(t=>t.testmoId&&t.testmoId.trim()).length,mapPct=totalTests?Math.round(mapped/totalTests*100):0;
   document.getElementById('statsRow').innerHTML=`
-    <div class="stat-card"><div class="number green">${tests.length}</div><div class="label">Test Functions</div></div>
-    <div class="stat-card"><div class="number blue">${total}</div><div class="label">Total Executions</div></div>
-    <div class="stat-card"><div class="number green">${pct}%</div><div class="label">Active Rate</div></div>
+    <div class="stat-card"><div class="number blue">${totalTests}</div><div class="label">Total Testmo Cases</div></div>
+    <div class="stat-card"><div class="number green">${automated}</div><div class="label">Automated</div></div>
+    <div class="stat-card"><div class="number purple">${manual}</div><div class="label">Manual Only</div></div>
+    <div class="stat-card"><div class="number cyan">${autoPct}%</div><div class="label">Automation Coverage</div></div>
     <div class="stat-card"><div class="number amber">${skip}</div><div class="label">Skipped</div></div>
-    <div class="stat-card"><div class="number purple">${mapped}</div><div class="label">Testmo Mapped</div></div>
-    <div class="stat-card"><div class="number red">${unmapped}</div><div class="label">Unmapped</div></div>
-    <div class="stat-card"><div class="number cyan">${mapPct}%</div><div class="label">Traceability</div></div>`;
+    <div class="stat-card"><div class="number green">${mapPct}%</div><div class="label">Testmo Mapped</div></div>`;
   document.getElementById('lastUpdated').textContent='Last updated: '+new Date().toLocaleString();
 }
 
@@ -228,8 +230,8 @@ function renderCharts(){
     if(type==='bar')Object.assign(o,{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#94a3b8'},grid:{color:'#1e293b'}},y:{ticks:{color:'#94a3b8',font:{size:11}},grid:{color:'#1e293b'}}}});
     chartInstances[id]=new Chart(document.getElementById(id),{type,data:{labels,datasets:[{label:'Tests',data,backgroundColor:bg,borderWidth:0,borderRadius:type==='bar'?4:0}]},options:o});
   }
-  const mapped=tests.filter(t=>t.testmoId&&t.testmoId.trim()).length,unmapped=tests.length-mapped;
-  mu('testmoChart','doughnut',[`Mapped (${mapped})`,`Unmapped (${unmapped})`],[mapped,unmapped],['#4ade80','#f87171']);
+  const automated=tests.filter(t=>t.status!=='Manual').length,manual=tests.length-automated;
+  mu('testmoChart','doughnut',[`Automated (${automated})`,`Manual Only (${manual})`],[automated,manual],['#4ade80','#a78bfa']);
   mu('platformChart','doughnut',PLATFORMS.map(p=>`${p} (${countBy('platform',p)})`),PLATFORMS.map(p=>countBy('platform',p)),C.slice(0,3));
   const a=countByStatus('Active'),sk=countByStatus('Skipped');
   mu('statusChart','doughnut',[`Active (${a})`,`Skipped (${sk})`],[a,sk],['#4ade80','#fbbf24']);
@@ -248,11 +250,12 @@ function renderTables(){
     html+=`<table><tr><th>#</th><th>Testmo ID</th><th>Test Name</th><th>Description</th><th>Severity</th><th>Tags</th><th>Status</th><th>Runs</th><th class="edit-only">Actions</th></tr>`;
     items.forEach((t,i)=>{
       const sv=t.severity==='CRITICAL'?'badge-critical':'badge-normal';
-      const st=t.status==='Active'?'badge-active':'badge-skip';
+      const st=t.status==='Active'?'badge-active':t.status==='Manual'?'badge-manual':'badge-skip';
+      const stLabel=t.status==='Active'?'✅ Automated':t.status==='Manual'?'📋 Manual':'⏸ Skipped';
       const tm=t.testmoId&&t.testmoId.trim()?`<span class="badge badge-testmo">T-${t.testmoId}</span>`:`<span class="badge badge-unmapped">—</span>`;
       html+=`<tr><td>${i+1}</td><td>${tm}</td><td style="max-width:200px;word-break:break-all">${t.name}</td><td>${t.desc}</td>
         <td><span class="badge ${sv}">${t.severity}</span></td><td>${t.tags}</td>
-        <td><span class="badge ${st}">${t.status==='Active'?'✅ Active':'⏸ Skipped'}</span></td><td>${t.count>1?'×'+t.count:t.count}</td>
+        <td><span class="badge ${st}">${stLabel}</span></td><td>${t.count>1?'×'+t.count:t.count}</td>
         <td class="edit-only"><button class="btn btn-primary btn-sm" onclick="openEditModal(${t.id})">✏️</button> <button class="btn btn-danger btn-sm" onclick="deleteTest(${t.id})">🗑️</button></td></tr>`;
     });
     html+=`</table>`;
