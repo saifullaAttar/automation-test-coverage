@@ -245,11 +245,12 @@ function renderCharts(){
   }
   const automated=tests.filter(t=>t.isAutomated==='Yes').length,manual=tests.filter(t=>t.isAutomated!=='Yes').length;
   mu('testmoChart','doughnut',[`Automated (${automated})`,`Not Automated (${manual})`],[automated,manual],['#4ade80','#a78bfa']);
-  function platChart(id,plat){const a=tests.filter(t=>t.platform===plat&&t.isAutomated==='Yes').length,n=tests.filter(t=>t.platform===plat&&t.isAutomated!=='Yes').length;mu(id,'doughnut',[`Automated (${a})`,`Not Automated (${n})`],[a,n],['#4ade80','#f87171'])}
+  const TT=81;
+  function platChart(id,plat){const a=tests.filter(t=>t.platform===plat&&t.isAutomated==='Yes').length,n=TT-a;mu(id,'doughnut',[`Automated (${a})`,`Not Automated (${n})`],[a,n],['#4ade80','#f87171'])}
   platChart('uaeChart','Web UAE');
   platChart('ksaChart','Web KSA');
-  const appAuto=tests.filter(t=>t.platform==='App'&&t.isAutomated==='Yes').length,appManual=tests.filter(t=>t.platform==='App'&&t.isAutomated!=='Yes').length;
-  mu('appChart','doughnut',[`Android ✅ (${appAuto})`,`Android ❌ (${appManual})`,`iOS ✅ (${appAuto})`,`iOS ❌ (${appManual})`],[appAuto,appManual,appAuto,appManual],['#4ade80','#f87171','#38bdf8','#fbbf24']);
+  const appA=tests.filter(t=>t.platform==='App'&&t.isAutomated==='Yes').length,appN=TT-appA;
+  mu('appChart','doughnut',[`Android ✅ (${appA})`,`Android ❌ (${appN})`,`iOS ✅ (${appA})`,`iOS ❌ (${appN})`],[appA,appN,appA,appN],['#4ade80','#f87171','#38bdf8','#fbbf24']);
   const a=countByStatus('Active'),sk=countByStatus('Skipped');
   mu('statusChart','doughnut',[`Active (${a})`,`Skipped (${sk})`],[a,sk],['#4ade80','#fbbf24']);
   const fl=FEATURES.filter(f=>countBy('feature',f)>0);
