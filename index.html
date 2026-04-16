@@ -219,12 +219,12 @@ function countBy(k,v){return tests.filter(t=>t[k]===v).reduce((s,t)=>s+t.count,0
 function countByStatus(s){return tests.filter(t=>t.status===s).reduce((s2,t)=>s2+t.count,0)}
 
 function renderStats(){
-  const total=totalExec(),active=countByStatus('Active'),skip=countByStatus('Skipped'),manual=countByStatus('Manual');
-  const automated=tests.filter(t=>t.status!=='Manual').length,totalTests=tests.length;
-  const autoPct=totalTests?Math.round(automated/totalTests*100):0;
-  const mapped=tests.filter(t=>t.testmoId&&t.testmoId.trim()).length,mapPct=totalTests?Math.round(mapped/totalTests*100):0;
+  const total=totalExec(),active=countByStatus('Active'),skip=countByStatus('Skipped'),failed=countByStatus('Failed');
+  const automated=tests.filter(t=>t.isAutomated==='Yes').length,manual=tests.filter(t=>t.isAutomated!=='Yes').length;
+  const autoPct=tests.length?Math.round(automated/tests.length*100):0;
+  const mapped=tests.filter(t=>t.testmoId&&t.testmoId.trim()).length,mapPct=tests.length?Math.round(mapped/tests.length*100):0;
   document.getElementById('statsRow').innerHTML=`
-    <div class="stat-card"><div class="number blue">${totalTests}</div><div class="label">Total Testmo Cases</div></div>
+    <div class="stat-card"><div class="number blue">${tests.length}</div><div class="label">Total Testmo Cases</div></div>
     <div class="stat-card"><div class="number green">${automated}</div><div class="label">Automated</div></div>
     <div class="stat-card"><div class="number purple">${manual}</div><div class="label">Manual Only</div></div>
     <div class="stat-card"><div class="number cyan">${autoPct}%</div><div class="label">Automation Coverage</div></div>
@@ -241,8 +241,8 @@ function renderCharts(){
     if(type==='bar')Object.assign(o,{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#94a3b8'},grid:{color:'#1e293b'}},y:{ticks:{color:'#94a3b8',font:{size:11}},grid:{color:'#1e293b'}}}});
     chartInstances[id]=new Chart(document.getElementById(id),{type,data:{labels,datasets:[{label:'Tests',data,backgroundColor:bg,borderWidth:0,borderRadius:type==='bar'?4:0}]},options:o});
   }
-  const automated=tests.filter(t=>t.status!=='Manual').length,manual=tests.length-automated;
-  mu('testmoChart','doughnut',[`Automated (${automated})`,`Manual Only (${manual})`],[automated,manual],['#4ade80','#a78bfa']);
+  const automated=tests.filter(t=>t.isAutomated==='Yes').length,manual=tests.filter(t=>t.isAutomated!=='Yes').length;
+  mu('testmoChart','doughnut',[`Automated (${automated})`,`Not Automated (${manual})`],[automated,manual],['#4ade80','#a78bfa']);
   mu('platformChart','doughnut',PLATFORMS.map(p=>`${p} (${countBy('platform',p)})`),PLATFORMS.map(p=>countBy('platform',p)),C.slice(0,3));
   const a=countByStatus('Active'),sk=countByStatus('Skipped');
   mu('statusChart','doughnut',[`Active (${a})`,`Skipped (${sk})`],[a,sk],['#4ade80','#fbbf24']);
