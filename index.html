@@ -58,6 +58,12 @@ tr:hover{background:#1e3a5f}
 .form-group textarea{height:60px;resize:vertical}
 .form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
 select option{background:#1e293b}
+.filter-row th{padding:4px 4px;background:#2d3748}
+.filter-row select,.filter-row input{width:100%;padding:4px 6px;border-radius:6px;border:1px solid #475569;background:#0f172a;color:#e2e8f0;font-size:11px}
+.badge-failed{background:#7f1d1d;color:#fca5a5}
+.badge-yes{background:#065f46;color:#6ee7b7}
+.badge-no{background:#78350f;color:#fcd34d}
+.badge-cant{background:#3b0764;color:#d8b4fe}
 .testmo-highlight{border-left:3px solid #818cf8;padding-left:6px}
 </style>
 </head>
@@ -97,7 +103,7 @@ select option{background:#1e293b}
 <script>
 const EDIT_PASSWORD = "Mumz@SDET2026";
 let editMode = false;
-const PLATFORMS=['Web UAE','Web KSA','App','Manual'],FEATURES=['Checkout','Cart','Coupon','User','Account','Home','Search','Geo IP','PDP/PLP','Wishlist','Orders','Wallet','Gift Registry','Product Types','Catalogue'],SEVERITIES=['CRITICAL','NORMAL'],STATUSES=['Active','Skipped','Manual'],PAYMENTS=['CC','COD','Tabby','Tamara','Store Credit','Cashback','Gift Wrap'];
+const PLATFORMS=['Web UAE','Web KSA','App','Manual'],FEATURES=['Checkout','Cart','Coupon','User','Account','Home','Search','Geo IP','PDP/PLP','Wishlist','Orders','Wallet','Gift Registry','Product Types','Catalogue'],SEVERITIES=['CRITICAL','NORMAL'],STATUSES=['Active','Skipped','Failed'],AUTOMATED_OPTS=['Yes','No',"Can't be automated"],PAYMENTS=['CC','COD','Tabby','Tamara','Store Credit','Cashback','Gift Wrap'];
 
 let tests=[
 {id:1,platform:"Web UAE",file:"test_cart.py",feature:"Cart",name:"test_uae_cart_existing_user_orders_no_coupon_yalla",desc:"Verify Yalla free shipping on cart for existing user",severity:"NORMAL",tags:"Yalla",status:"Active",count:1,testmoId:""},
@@ -196,6 +202,11 @@ function load(){const d=localStorage.getItem('mw_tests');if(d){tests=JSON.parse(
 </script>
 
 <script>
+let filters={testmoId:'',name:'',desc:'',feature:'',severity:'',tags:'',status:'',isAutomated:''};
+function applyFilters(key,val){filters[key]=val;renderTables()}
+function filteredTests(){return tests.filter(t=>{
+  for(const[k,v]of Object.entries(filters)){if(!v)continue;if(k==='name'||k==='desc'||k==='tags'||k==='testmoId'){if(!((t[k]||'').toLowerCase().includes(v.toLowerCase())))return false}else{if(t[k]!==v)return false}}return true})}
+
 function promptPassword(){
   const pw=prompt('Enter edit password:');
   if(pw===EDIT_PASSWORD){editMode=true;document.body.classList.add('edit-mode');document.getElementById('lockBanner').innerHTML='<span class="lock-icon">🔓</span> Edit mode active — You can add, edit, delete tests and map Testmo IDs.'}
@@ -240,25 +251,28 @@ function renderCharts(){
 }
 
 function renderTables(){
+  const ft=filteredTests();
   let html='';const grouped={};
-  tests.forEach(t=>{const k=t.platform+'|||'+t.file;if(!grouped[k])grouped[k]=[];grouped[k].push(t)});
-  let cp='';
+  ft.forEach(t=>{const k=t.platform+'|||'+t.file;if(!grouped[k])grouped[k]=[];grouped[k].push(t)});
+  let cp='';const fRow=`<tr class="filter-row"><th></th><th><input placeholder="Filter..." value="${filters.testmoId}" oninput="applyFilters('testmoId',this.value)"></th><th><input placeholder="Filter..." value="${filters.name}" oninput="applyFilters('name',this.value)"></th><th><input placeholder="Filter..." value="${filters.desc}" oninput="applyFilters('desc',this.value)"></th><th><select onchange="applyFilters('feature',this.value)"><option value="">All</option>${FEATURES.map(f=>`<option ${filters.feature===f?'selected':''}>${f}</option>`).join('')}</select></th><th><select onchange="applyFilters('severity',this.value)"><option value="">All</option>${SEVERITIES.map(s=>`<option ${filters.severity===s?'selected':''}>${s}</option>`).join('')}</select></th><th><input placeholder="Filter..." value="${filters.tags}" oninput="applyFilters('tags',this.value)"></th><th><select onchange="applyFilters('status',this.value)"><option value="">All</option>${STATUSES.map(s=>`<option ${filters.status===s?'selected':''}>${s}</option>`).join('')}</select></th><th><select onchange="applyFilters('isAutomated',this.value)"><option value="">All</option>${AUTOMATED_OPTS.map(a=>`<option ${filters.isAutomated===a?'selected':''}>${a}</option>`).join('')}</select></th><th></th><th class="edit-only"></th></tr>`;
   Object.keys(grouped).sort().forEach(k=>{
     const[plat,file]=k.split('|||'),items=grouped[k],ec=items.reduce((s,t)=>s+t.count,0);
-    if(plat!==cp){const ic=plat==='App'?'📱':'🌐';html+=`<h2 class="section-title">${ic} ${plat} Tests (${countBy('platform',plat)} executions)</h2>`;cp=plat}
-    html+=`<h3 style="color:#94a3b8;margin:12px 0 6px;font-size:14px">${file} (${ec} executions)</h3>`;
-    html+=`<table><tr><th>#</th><th>Testmo ID</th><th>Test Name</th><th>Description</th><th>Severity</th><th>Tags</th><th>Status</th><th>Runs</th><th class="edit-only">Actions</th></tr>`;
+    if(plat!==cp){const ic=plat==='App'?'📱':plat==='Manual'?'📋':'🌐';const pc=ft.filter(t=>t.platform===plat).reduce((s,t)=>s+t.count,0);html+=`<h2 class="section-title">${ic} ${plat} Tests (${pc})</h2>`;cp=plat}
+    html+=`<h3 style="color:#94a3b8;margin:12px 0 6px;font-size:14px">${file} (${ec})</h3>`;
+    html+=`<table><thead><tr><th>#</th><th>Testmo ID</th><th>Test Name</th><th>Description</th><th>Feature</th><th>Severity</th><th>Tags</th><th>Status</th><th>Is Automated</th><th>Runs</th><th class="edit-only">Actions</th></tr>${fRow}</thead><tbody>`;
     items.forEach((t,i)=>{
       const sv=t.severity==='CRITICAL'?'badge-critical':'badge-normal';
-      const st=t.status==='Active'?'badge-active':t.status==='Manual'?'badge-manual':'badge-skip';
-      const stLabel=t.status==='Active'?'✅ Automated':t.status==='Manual'?'📋 Manual':'⏸ Skipped';
+      const stMap={'Active':'badge-active','Skipped':'badge-skip','Failed':'badge-failed'};
+      const stB=stMap[t.status]||'badge-normal';
+      const stL=t.status==='Active'?'✅ Active':t.status==='Failed'?'❌ Failed':'⏸ Skipped';
+      const av=t.isAutomated||'No';
+      const autoMap={'Yes':'badge-yes','No':'badge-no',"Can't be automated":'badge-cant'};
+      const aB=autoMap[av]||'badge-no';
+      const aL=av==='Yes'?'✅ Yes':av==="Can't be automated"?"🚫 Can't":'❌ No';
       const tm=t.testmoId&&t.testmoId.trim()?`<span class="badge badge-testmo">T-${t.testmoId}</span>`:`<span class="badge badge-unmapped">—</span>`;
-      html+=`<tr><td>${i+1}</td><td>${tm}</td><td style="max-width:200px;word-break:break-all">${t.name}</td><td>${t.desc}</td>
-        <td><span class="badge ${sv}">${t.severity}</span></td><td>${t.tags}</td>
-        <td><span class="badge ${st}">${stLabel}</span></td><td>${t.count>1?'×'+t.count:t.count}</td>
-        <td class="edit-only"><button class="btn btn-primary btn-sm" onclick="openEditModal(${t.id})">✏️</button> <button class="btn btn-danger btn-sm" onclick="deleteTest(${t.id})">🗑️</button></td></tr>`;
+      html+=`<tr><td>${i+1}</td><td>${tm}</td><td style="max-width:200px;word-break:break-all">${t.name}</td><td>${t.desc}</td><td>${t.feature}</td><td><span class="badge ${sv}">${t.severity}</span></td><td>${t.tags}</td><td><span class="badge ${stB}">${stL}</span></td><td><span class="badge ${aB}">${aL}</span></td><td>${t.count>1?'×'+t.count:t.count}</td><td class="edit-only"><button class="btn btn-primary btn-sm" onclick="openEditModal(${t.id})">✏️</button> <button class="btn btn-danger btn-sm" onclick="deleteTest(${t.id})">🗑️</button></td></tr>`;
     });
-    html+=`</table>`;
+    html+=`</tbody></table>`;
   });
   document.getElementById('tablesContainer').innerHTML=html;
 }
@@ -266,7 +280,7 @@ function renderTables(){
 function renderAll(){renderStats();renderCharts();renderTables();save()}
 
 function modalHTML(t){
-  const e=!!t,v=t||{platform:'Web UAE',file:'',feature:'Checkout',name:'',desc:'',severity:'CRITICAL',tags:'',status:'Active',count:1,testmoId:''};
+  const e=!!t,v=t||{platform:'Web UAE',file:'',feature:'Checkout',name:'',desc:'',severity:'CRITICAL',tags:'',status:'Active',count:1,testmoId:'',isAutomated:'No'};
   return `<h3>${e?'Edit':'Add'} Test</h3>
   <div class="form-group"><label>🔗 Testmo Test ID</label><input id="mTestmo" value="${v.testmoId||''}" placeholder="e.g. 1234 (from Testmo)"></div>
   <div class="form-group"><label>Platform</label><select id="mPlatform">${PLATFORMS.map(p=>`<option ${v.platform===p?'selected':''}>${p}</option>`).join('')}</select></div>
@@ -277,6 +291,7 @@ function modalHTML(t){
   <div class="form-group"><label>Severity</label><select id="mSeverity">${SEVERITIES.map(s=>`<option ${v.severity===s?'selected':''}>${s}</option>`).join('')}</select></div>
   <div class="form-group"><label>Tags</label><input id="mTags" value="${v.tags}" placeholder="CC, Coupon"></div>
   <div class="form-group"><label>Status</label><select id="mStatus">${STATUSES.map(s=>`<option ${v.status===s?'selected':''}>${s}</option>`).join('')}</select></div>
+  <div class="form-group"><label>Is Automated</label><select id="mIsAutomated">${AUTOMATED_OPTS.map(a=>`<option ${(v.isAutomated||'No')===a?'selected':''}>${a}</option>`).join('')}</select></div>
   <div class="form-group"><label>Execution Count</label><input type="number" id="mCount" value="${v.count}" min="1"></div>
   <div class="form-actions"><button class="btn btn-danger" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="${e?`saveEdit(${t.id})`:'saveNew()'}">Save</button></div>`;
 }
@@ -284,7 +299,7 @@ function modalHTML(t){
 function openAddModal(){if(!editMode)return;document.getElementById('testModal').innerHTML=modalHTML(null);document.getElementById('modalOverlay').classList.add('show')}
 function openEditModal(id){if(!editMode)return;document.getElementById('testModal').innerHTML=modalHTML(tests.find(x=>x.id===id));document.getElementById('modalOverlay').classList.add('show')}
 function closeModal(){document.getElementById('modalOverlay').classList.remove('show')}
-function getFormData(){return{testmoId:document.getElementById('mTestmo').value.trim(),platform:document.getElementById('mPlatform').value,file:document.getElementById('mFile').value,feature:document.getElementById('mFeature').value,name:document.getElementById('mName').value,desc:document.getElementById('mDesc').value,severity:document.getElementById('mSeverity').value,tags:document.getElementById('mTags').value,status:document.getElementById('mStatus').value,count:parseInt(document.getElementById('mCount').value)||1}}
+function getFormData(){return{testmoId:document.getElementById('mTestmo').value.trim(),platform:document.getElementById('mPlatform').value,file:document.getElementById('mFile').value,feature:document.getElementById('mFeature').value,name:document.getElementById('mName').value,desc:document.getElementById('mDesc').value,severity:document.getElementById('mSeverity').value,tags:document.getElementById('mTags').value,status:document.getElementById('mStatus').value,isAutomated:document.getElementById('mIsAutomated').value,count:parseInt(document.getElementById('mCount').value)||1}}
 function saveNew(){const d=getFormData();if(!d.name||!d.file){alert('Name and File required');return}tests.push({id:nextId++,...d});closeModal();renderAll()}
 function saveEdit(id){const d=getFormData(),i=tests.findIndex(t=>t.id===id);if(i>=0)Object.assign(tests[i],d);closeModal();renderAll()}
 function deleteTest(id){if(!editMode||!confirm('Delete this test?'))return;tests=tests.filter(t=>t.id!==id);renderAll()}
