@@ -199,12 +199,12 @@ let nextId=81;const chartInstances={};
 const GIST_ID='08685f8721d6ed4c9764b6acf8c30700';
 const GIST_TOKEN=['\x67\x69\x74\x68\x75\x62\x5f\x70\x61\x74\x5f\x31\x31\x43\x42\x42\x46\x4f\x4a\x59\x30\x7a\x4c','\x69\x69\x72\x6a\x65\x58\x35\x6d\x66\x63\x5f\x52\x31\x4f\x53\x48\x78\x45\x52\x75\x31\x45\x4a','\x39\x4e\x41\x57\x50\x4b\x44\x79\x75\x75\x65\x39\x52\x37\x57\x4a\x36\x59\x68\x69\x57\x41\x32','\x50\x34\x4c\x62\x6a\x4e\x66\x4f\x49\x45\x32\x44\x41\x42\x4c\x56\x43\x5a\x75\x47\x75\x4d\x36\x46'].join('');
 async function save(){
-  localStorage.setItem('mw_tests',JSON.stringify(tests));localStorage.setItem('mw_nextId',nextId);
   if(!editMode)return;
+  localStorage.setItem('mw_tests',JSON.stringify(tests));localStorage.setItem('mw_nextId',nextId);
   try{await fetch('https://api.github.com/gists/'+GIST_ID,{method:'PATCH',headers:{'Authorization':'Bearer '+GIST_TOKEN,'Content-Type':'application/json'},body:JSON.stringify({files:{'test_data.json':{content:JSON.stringify({tests,nextId},null,2)}}})});console.log('✅ Saved to Gist')}catch(e){console.error('Gist save failed',e)}
 }
 async function loadFromGist(){
-  try{const r=await fetch('https://api.github.com/gists/'+GIST_ID,{headers:{'Authorization':'Bearer '+GIST_TOKEN}});const g=await r.json();const c=g.files['test_data.json'].content;const d=JSON.parse(c);if(d.tests&&d.tests.length){tests=d.tests;nextId=d.nextId||81;console.log('✅ Loaded from Gist');return true}}catch(e){console.log('Gist load failed, using defaults',e)}return false
+  try{const r=await fetch('https://api.github.com/gists/'+GIST_ID,{headers:{'Authorization':'Bearer '+GIST_TOKEN}});const g=await r.json();const c=g.files['test_data.json'].content;const d=JSON.parse(c);if(d.tests&&d.tests.length){tests=d.tests;nextId=d.nextId||81;console.log('✅ Loaded from Gist ('+tests.length+' tests)');return true}}catch(e){console.log('Gist load failed, using defaults',e)}return false
 }
 function load(){const d=localStorage.getItem('mw_tests');if(d){tests=JSON.parse(d);nextId=parseInt(localStorage.getItem('mw_nextId'))||81}}
 </script>
@@ -291,7 +291,7 @@ function renderTables(){
   document.getElementById('tablesContainer').innerHTML=html;
 }
 
-function renderAll(){renderStats();renderCharts();renderTables();save()}
+function renderAll(){renderStats();renderCharts();renderTables();if(editMode)save()}
 
 function modalHTML(t){
   const e=!!t,v=t||{platform:'Web UAE',file:'',feature:'Checkout',name:'',desc:'',severity:'CRITICAL',tags:'',status:'Active',count:1,testmoId:'',isAutomated:'No'};
