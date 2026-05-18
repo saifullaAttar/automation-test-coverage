@@ -13,7 +13,7 @@
             color: #333;
         }
         .container { 
-            max-width: 1200px; 
+            max-width: 1400px; 
             margin: 0 auto; 
             background: white;
             border-radius: 16px;
@@ -30,14 +30,14 @@
         .header p { font-size: 1.1em; opacity: 0.9; }
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             padding: 40px;
             background: #f8f9fa;
         }
         .stat-card {
             background: white;
-            padding: 30px;
+            padding: 25px;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             text-align: center;
@@ -45,7 +45,7 @@
         }
         .stat-card:hover { transform: translateY(-5px); }
         .stat-number { 
-            font-size: 3em; 
+            font-size: 2.5em; 
             font-weight: bold; 
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
@@ -53,7 +53,7 @@
             background-clip: text;
         }
         .stat-label { 
-            font-size: 1.1em; 
+            font-size: 1em; 
             color: #666; 
             margin-top: 10px;
         }
@@ -86,28 +86,50 @@
             font-weight: bold;
             transition: width 1s ease;
         }
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-        .category-card {
+        .test-list {
             background: #f8f9fa;
             padding: 20px;
             border-radius: 8px;
-            border-left: 4px solid #667eea;
+            margin: 20px 0;
+            max-height: 400px;
+            overflow-y: auto;
         }
-        .category-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #667eea;
+        .test-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 4px;
+            border-left: 3px solid #667eea;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
         }
-        .test-count {
-            font-size: 2em;
+        .uncovered-item {
+            border-left-color: #e74c3c;
+        }
+        .section-tabs {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 10px 20px;
+            background: #e0e0e0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
             font-weight: bold;
-            color: #333;
+            transition: all 0.3s;
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
         }
         .footer {
             background: #2d3748;
@@ -124,6 +146,25 @@
             font-size: 0.9em;
             margin-top: 10px;
         }
+        .split-view {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .covered-section {
+            background: #d4edda;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .uncovered-section {
+            background: #f8d7da;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        @media (max-width: 768px) {
+            .split-view { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -137,15 +178,23 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-number">90</div>
-                <div class="stat-label">Total Automated Tests</div>
+                <div class="stat-label">Total Automated</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">67</div>
-                <div class="stat-label">Web Tests (UAE + KSA)</div>
+                <div class="stat-number">35</div>
+                <div class="stat-label">Web UAE</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">32</div>
+                <div class="stat-label">Web KSA</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">23</div>
-                <div class="stat-label">Mobile App Tests</div>
+                <div class="stat-label">Android App</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">23</div>
+                <div class="stat-label">iOS App</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">39.1%</div>
@@ -154,32 +203,102 @@
         </div>
 
         <div class="coverage-section">
-            <h2 class="coverage-header">🌐 Web Automation Coverage</h2>
-            <p><strong>Automated:</strong> 67 tests | <strong>Total in Testmo:</strong> 150 tests</p>
+            <h2 class="coverage-header">🌐 Web UAE Automation</h2>
+            <p><strong>Automated:</strong> 35 | <strong>Total in Testmo:</strong> 75 | <strong>Coverage:</strong> 46.7%</p>
             <div class="progress-bar">
-                <div class="progress-fill" style="width: 44.7%">44.7%</div>
+                <div class="progress-fill" style="width: 46.7%">46.7%</div>
             </div>
-
-            <h3 style="margin-top: 40px; color: #667eea;">UAE Web Tests (35 tests)</h3>
-            <div class="category-grid">
-                <div class="category-card"><div class="category-title">User</div><div class="test-count">4 tests</div></div><div class="category-card"><div class="category-title">Cart</div><div class="test-count">12 tests</div></div><div class="category-card"><div class="category-title">Checkout</div><div class="test-count">19 tests</div></div>
+            
+            <div class="section-tabs">
+                <button class="tab-btn active" onclick="showTab('uae-covered')">✅ Covered Tests (35)</button>
+                <button class="tab-btn" onclick="showTab('uae-uncovered')">❌ Not Covered (40)</button>
             </div>
-
-            <h3 style="margin-top: 40px; color: #667eea;">KSA Web Tests (32 tests)</h3>
-            <div class="category-grid">
-                <div class="category-card"><div class="category-title">Checkout Ksa</div><div class="test-count">16 tests</div></div><div class="category-card"><div class="category-title">Cart Ksa</div><div class="test-count">12 tests</div></div><div class="category-card"><div class="category-title">User Ksa</div><div class="test-count">4 tests</div></div>
+            
+            <div id="uae-covered" class="tab-content active">
+                <div class="test-list">
+                    <div class="test-item">✅ test_uae_user_register_from_account_page <span style="color:#999">(test_user.py)</span></div><div class="test-item">✅ test_uae_user_register_from_cart_page <span style="color:#999">(test_user.py)</span></div><div class="test-item">✅ test_uae_user_logs_in_from_account_page <span style="color:#999">(test_user.py)</span></div><div class="test-item">✅ test_uae_user_logs_in_from_cart_page <span style="color:#999">(test_user.py)</span></div><div class="test-item">✅ test_uae_cart_existing_user_orders_no_coupon_yalla <span style="color:#999">(test_cart.py)</span></div><div class="test-item">✅ test_uae_cart_guest_login_no_coupon_sc <span style="color:#999">(test_cart.py)</span></div><div class="test-item">✅ test_uae_cart_add_items_to_cart_as_a_newly_registered_user_and_apply_cashback_coupon <span style="color:#999">(test_cart.py)</span></div><div class="test-item">✅ test_uae_checkout_with_cart_items_register_a_new_user_and_coupon <span style="color:#999">(test_cart.py)</span></div><div class="test-item">✅ test_uae_uf2_cart_gift_wrap_wishlist <span style="color:#999">(test_cart.py)</span></div><div class="test-item">✅ test_uae_cart_uf5_checkout_cod_no_coupon <span style="color:#999">(test_cart.py)</span></div><div class="test-item">✅ test_uae_percentage_of_product_price_discount_rules_without_max_amount <span style="color:#999">(test_cart.py)</span></div><div class="test-item">✅ test_uae_percentage_of_product_price_discount_rules_with_max_amount <span style="color:#999">(test_cart.py)</span></div><div class="test-item">✅ test_uae_percentage_of_product_variant_price_discount_rules_with_max_amount <span style="color:#999">(test_cart.py)</span></div><div class="test-item">✅ test_uae_percentage_of_product_variant_price_discount_rules_without_max_amount <span style="color:#999">(test_cart.py)</span></div><div class="test-item">✅ test_uae_bank_discount_percentage_of_product_price_rule <span style="color:#999">(test_cart.py)</span></div><div class="test-item">✅ test_uae_cart_apply_gift_wrap_and_place_order <span style="color:#999">(test_cart.py)</span></div><div class="test-item">✅ test_uae_checkout_cc_no_coupon <span style="color:#999">(test_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_cod_no_coupon <span style="color:#999">(test_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_tabby_no_coupon <span style="color:#999">(test_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_tabby_cashback_coupon <span style="color:#999">(test_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_cc_normal_coupon <span style="color:#999">(test_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_cod_normal_coupon <span style="color:#999">(test_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_tabby_normal_coupon <span style="color:#999">(test_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_full_sc_no_coupon <span style="color:#999">(test_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_cc_and_partial_sc_no_coupon <span style="color:#999">(test_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_tamara_no_coupon <span style="color:#999">(test_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_tamara_normal_coupon <span style="color:#999">(test_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_tamara_cashback_coupon <span style="color:#999">(test_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_invalid_cc_no_coupon <span style="color:#999">(test_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_full_sc_and_normal_coupon <span style="color:#999">(test_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_cc_partial_sc_and_normal_coupon <span style="color:#999">(test_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_cc_wrong_otp_no_coupon <span style="color:#999">(test_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_cc_coupon_modal_sheet <span style="color:#999">(test_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_full_sc_and_verify_sc_balance <span style="color:#999">(test_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_cc_and_verify_odp <span style="color:#999">(test_checkout.py)</span></div>
+                </div>
+            </div>
+            
+            <div id="uae-uncovered" class="tab-content">
+                <div class="test-list">
+                    <div class="test-item uncovered-item">⚠️ Update from Testmo regression suite to see uncovered tests</div>
+                </div>
             </div>
         </div>
 
         <div class="coverage-section" style="background: #f8f9fa;">
-            <h2 class="coverage-header">📱 Mobile App Automation Coverage</h2>
-            <p><strong>Automated:</strong> 23 tests | <strong>Total in Testmo:</strong> 80 tests</p>
+            <h2 class="coverage-header">🌐 Web KSA Automation</h2>
+            <p><strong>Automated:</strong> 32 | <strong>Total in Testmo:</strong> 75 | <strong>Coverage:</strong> 42.7%</p>
             <div class="progress-bar">
-                <div class="progress-fill" style="width: 28.7%">28.7%</div>
+                <div class="progress-fill" style="width: 42.7%">42.7%</div>
             </div>
+            
+            <div class="section-tabs">
+                <button class="tab-btn active" onclick="showTab('ksa-covered')">✅ Covered Tests (32)</button>
+                <button class="tab-btn" onclick="showTab('ksa-uncovered')">❌ Not Covered (43)</button>
+            </div>
+            
+            <div id="ksa-covered" class="tab-content active">
+                <div class="test-list">
+                    <div class="test-item">✅ test_ksa_checkout_cc_no_coupon <span style="color:#999">(test_checkout_ksa.py)</span></div><div class="test-item">✅ test_ksa_checkout_cod_no_coupon <span style="color:#999">(test_checkout_ksa.py)</span></div><div class="test-item">✅ test_ksa_checkout_tabby_no_coupon <span style="color:#999">(test_checkout_ksa.py)</span></div><div class="test-item">✅ test_ksa_checkout_tabby_cashback_coupon <span style="color:#999">(test_checkout_ksa.py)</span></div><div class="test-item">✅ test_ksa_checkout_cc_normal_coupon <span style="color:#999">(test_checkout_ksa.py)</span></div><div class="test-item">✅ test_ksa_checkout_cod_normal_coupon <span style="color:#999">(test_checkout_ksa.py)</span></div><div class="test-item">✅ test_ksa_checkout_tabby_normal_coupon <span style="color:#999">(test_checkout_ksa.py)</span></div><div class="test-item">✅ test_ksa_checkout_full_sc_no_coupon <span style="color:#999">(test_checkout_ksa.py)</span></div><div class="test-item">✅ test_ksa_checkout_cc_and_partial_sc_no_coupon <span style="color:#999">(test_checkout_ksa.py)</span></div><div class="test-item">✅ test_ksa_checkout_tamara_no_coupon <span style="color:#999">(test_checkout_ksa.py)</span></div><div class="test-item">✅ test_ksa_checkout_tamara_normal_coupon <span style="color:#999">(test_checkout_ksa.py)</span></div><div class="test-item">✅ test_ksa_checkout_tamara_cashback_coupon <span style="color:#999">(test_checkout_ksa.py)</span></div><div class="test-item">✅ test_ksa_checkout_invalid_cc_no_coupon <span style="color:#999">(test_checkout_ksa.py)</span></div><div class="test-item">✅ test_ksa_checkout_full_sc_and_normal_coupon <span style="color:#999">(test_checkout_ksa.py)</span></div><div class="test-item">✅ test_ksa_checkout_cc_partial_sc_and_normal_coupon <span style="color:#999">(test_checkout_ksa.py)</span></div><div class="test-item">✅ test_ksa_checkout_cc_wrong_otp_no_coupon <span style="color:#999">(test_checkout_ksa.py)</span></div><div class="test-item">✅ test_ksa_cart_existing_user_orders_no_coupon_yalla <span style="color:#999">(test_cart_ksa.py)</span></div><div class="test-item">✅ test_ksa_cart_guest_login_no_coupon_sc <span style="color:#999">(test_cart_ksa.py)</span></div><div class="test-item">✅ test_ksa_cart_add_items_to_cart_as_a_newly_registered_user_and_apply_cashback_coupon <span style="color:#999">(test_cart_ksa.py)</span></div><div class="test-item">✅ test_ksa_checkout_with_cart_items_register_a_new_user_and_coupon <span style="color:#999">(test_cart_ksa.py)</span></div><div class="test-item">✅ test_ksa_uf2_cart_gift_wrap_wishlist <span style="color:#999">(test_cart_ksa.py)</span></div><div class="test-item">✅ test_ksa_cart_uf5_checkout_cod_no_coupon <span style="color:#999">(test_cart_ksa.py)</span></div><div class="test-item">✅ test_ksa_percentage_of_product_price_discount_rules_without_max_amount <span style="color:#999">(test_cart_ksa.py)</span></div><div class="test-item">✅ test_ksa_percentage_of_product_price_discount_rules_with_max_amount <span style="color:#999">(test_cart_ksa.py)</span></div><div class="test-item">✅ test_ksa_percentage_of_product_variant_price_discount_rules_with_max_amount <span style="color:#999">(test_cart_ksa.py)</span></div><div class="test-item">✅ test_ksa_percentage_of_product_variant_price_discount_rules_without_max_amount <span style="color:#999">(test_cart_ksa.py)</span></div><div class="test-item">✅ test_ksa_bank_discount_percentage_of_product_price_rule <span style="color:#999">(test_cart_ksa.py)</span></div><div class="test-item">✅ test_ksa_cart_apply_gift_wrap_and_place_order <span style="color:#999">(test_cart_ksa.py)</span></div><div class="test-item">✅ test_ksa_user_register_from_account_page <span style="color:#999">(test_user_ksa.py)</span></div><div class="test-item">✅ test_ksa_user_register_from_cart_page <span style="color:#999">(test_user_ksa.py)</span></div><div class="test-item">✅ test_ksa_user_logs_in_from_account_page <span style="color:#999">(test_user_ksa.py)</span></div><div class="test-item">✅ test_ksa_user_logs_in_from_cart_page <span style="color:#999">(test_user_ksa.py)</span></div>
+                </div>
+            </div>
+            
+            <div id="ksa-uncovered" class="tab-content">
+                <div class="test-list">
+                    <div class="test-item uncovered-item">⚠️ Update from Testmo regression suite to see uncovered tests</div>
+                </div>
+            </div>
+        </div>
 
-            <div class="category-grid" style="margin-top: 30px;">
-                <div class="category-card"><div class="category-title">App Cart</div><div class="test-count">9 tests</div></div><div class="category-card"><div class="category-title">App Home</div><div class="test-count">3 tests</div></div><div class="category-card"><div class="category-title">App Account</div><div class="test-count">4 tests</div></div><div class="category-card"><div class="category-title">App Checkout</div><div class="test-count">7 tests</div></div>
+        <div class="coverage-section">
+            <h2 class="coverage-header">📱 Android App Automation</h2>
+            <p><strong>Automated:</strong> 23 | <strong>Total in Testmo:</strong> 40 | <strong>Coverage:</strong> 57.5%</p>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 57.5%">57.5%</div>
+            </div>
+            
+            <div class="section-tabs">
+                <button class="tab-btn active" onclick="showTab('android-covered')">✅ Covered Tests (23)</button>
+                <button class="tab-btn" onclick="showTab('android-uncovered')">❌ Not Covered (17)</button>
+            </div>
+            
+            <div id="android-covered" class="tab-content active">
+                <div class="test-list">
+                    <div class="test-item">✅ test_uae_cart_quantity_workflow <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_remove_item <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_move_to_wishlist <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_app_uae_cart_remaining_items_unaffected_after_partial_removal <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_increase_and_decrease_quantity <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_item_integrity_after_quantity_change <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_bundle_multiple_variants <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_configurable_multiple_variants <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_app_uae_cart_remove_item_with_applied_coupon <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_customer_can_search_brand <span style="color:#999">(test_app_home.py)</span></div><div class="test-item">✅ test_customer_can_search_product_in_specific_category <span style="color:#999">(test_app_home.py)</span></div><div class="test-item">✅ test_app_explore_screen_elements_and_navigate_to_account <span style="color:#999">(test_app_home.py)</span></div><div class="test-item">✅ test_user_signup <span style="color:#999">(test_app_account.py)</span></div><div class="test-item">✅ test_existing_user_profile <span style="color:#999">(test_app_account.py)</span></div><div class="test-item">✅ test_existing_user_delivery_address <span style="color:#999">(test_app_account.py)</span></div><div class="test-item">✅ test_add_new_address_and_make_default_and_delete <span style="color:#999">(test_app_account.py)</span></div><div class="test-item">✅ test_uae_checkout_cc_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_cc_and_partial_sc_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_cod_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_apply_gift_wrap_place_order <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_tabby_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_app_uae_checkout_tamara_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_guest_checkout_login_bottom_sheet_and_place_order <span style="color:#999">(test_app_checkout.py)</span></div>
+                </div>
+            </div>
+            
+            <div id="android-uncovered" class="tab-content">
+                <div class="test-list">
+                    <div class="test-item uncovered-item">⚠️ Update from Testmo regression suite to see uncovered tests</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="coverage-section" style="background: #f8f9fa;">
+            <h2 class="coverage-header">📱 iOS App Automation</h2>
+            <p><strong>Automated:</strong> 23 | <strong>Total in Testmo:</strong> 40 | <strong>Coverage:</strong> 57.5%</p>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 57.5%">57.5%</div>
+            </div>
+            
+            <div class="section-tabs">
+                <button class="tab-btn active" onclick="showTab('ios-covered')">✅ Covered Tests (23)</button>
+                <button class="tab-btn" onclick="showTab('ios-uncovered')">❌ Not Covered (17)</button>
+            </div>
+            
+            <div id="ios-covered" class="tab-content active">
+                <div class="test-list">
+                    <div class="test-item">✅ test_uae_cart_quantity_workflow <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_remove_item <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_move_to_wishlist <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_app_uae_cart_remaining_items_unaffected_after_partial_removal <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_increase_and_decrease_quantity <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_item_integrity_after_quantity_change <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_bundle_multiple_variants <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_configurable_multiple_variants <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_app_uae_cart_remove_item_with_applied_coupon <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_customer_can_search_brand <span style="color:#999">(test_app_home.py)</span></div><div class="test-item">✅ test_customer_can_search_product_in_specific_category <span style="color:#999">(test_app_home.py)</span></div><div class="test-item">✅ test_app_explore_screen_elements_and_navigate_to_account <span style="color:#999">(test_app_home.py)</span></div><div class="test-item">✅ test_user_signup <span style="color:#999">(test_app_account.py)</span></div><div class="test-item">✅ test_existing_user_profile <span style="color:#999">(test_app_account.py)</span></div><div class="test-item">✅ test_existing_user_delivery_address <span style="color:#999">(test_app_account.py)</span></div><div class="test-item">✅ test_add_new_address_and_make_default_and_delete <span style="color:#999">(test_app_account.py)</span></div><div class="test-item">✅ test_uae_checkout_cc_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_cc_and_partial_sc_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_cod_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_apply_gift_wrap_place_order <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_tabby_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_app_uae_checkout_tamara_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_guest_checkout_login_bottom_sheet_and_place_order <span style="color:#999">(test_app_checkout.py)</span></div>
+                </div>
+            </div>
+            
+            <div id="ios-uncovered" class="tab-content">
+                <div class="test-list">
+                    <div class="test-item uncovered-item">⚠️ Update from Testmo regression suite to see uncovered tests</div>
+                </div>
             </div>
         </div>
 
@@ -190,8 +309,28 @@
                 <a href="https://allure-reports.mumzstage.com/allure-docker-service" target="_blank">Allure Reports</a> | 
                 <a href="https://mumzworld.testmo.net" target="_blank">Testmo</a>
             </p>
-            <p class="timestamp">Last Updated: 2026-05-18 14:00:47</p>
+            <p class="timestamp">Last Updated: 2026-05-18 14:05:45</p>
         </div>
     </div>
+    
+    <script>
+        function showTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabId).classList.add('active');
+            
+            // Activate clicked button
+            event.target.classList.add('active');
+        }
+    </script>
 </body>
 </html>
