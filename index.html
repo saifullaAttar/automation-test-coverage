@@ -108,8 +108,8 @@ tr:hover{background:#f8f9ff}
 
   <!-- Coverage Trend -->
   <div class="section" style="margin-bottom:20px">
-    <h2>📈 Coverage Trend</h2>
-    <canvas id="trendChart" height="80"></canvas>
+    <h2>📈 Coverage Trend — Tests Added & Modified Per Month</h2>
+    <canvas id="trendChart" height="280"></canvas>
   </div>
 
   <!-- Allure Last Run Summary -->
@@ -616,58 +616,83 @@ function renderTrendChart() {
   const canvas = document.getElementById('trendChart');
   const ctx = canvas.getContext('2d');
   const W = canvas.width = canvas.parentElement.offsetWidth - 40;
-  const H = canvas.height = 200;
-  const pad = {top: 20, right: 20, bottom: 40, left: 50};
+  const H = canvas.height = 280;
+  const pad = {top: 30, right: 60, bottom: 50, left: 50};
   const chartW = W - pad.left - pad.right;
   const chartH = H - pad.top - pad.bottom;
+  const n = COVERAGE_TREND.length;
+  if (!n) return;
   
   ctx.clearRect(0, 0, W, H);
   
-  // Grid
-  ctx.strokeStyle = '#eee';
-  ctx.lineWidth = 1;
+  const maxTotal = Math.max(...COVERAGE_TREND.map(d => d.total_tests));
+  const maxBar = Math.max(...COVERAGE_TREND.map(d => Math.max(d.added, d.modified_commits)));
+  const barScale = maxBar > 0 ? chartH * 0.4 / maxBar : 1;
+  const lineScale = chartH / (maxTotal * 1.1);
+  const barW = Math.min(chartW / n * 0.3, 20);
+  
+  // Grid lines
+  ctx.strokeStyle = '#eee'; ctx.lineWidth = 1;
   for (let i = 0; i <= 4; i++) {
     const y = pad.top + (chartH / 4) * i;
     ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
-    ctx.fillStyle = '#999'; ctx.font = '11px sans-serif'; ctx.textAlign = 'right';
-    ctx.fillText((100 - i * 25) + '%', pad.left - 8, y + 4);
+    ctx.fillStyle = '#999'; ctx.font = '10px sans-serif'; ctx.textAlign = 'right';
+    ctx.fillText(Math.round(maxTotal * 1.1 - (maxTotal * 1.1 / 4) * i), pad.left - 8, y + 3);
   }
   
-  // Draw lines
-  function drawLine(data, color) {
-    ctx.beginPath(); ctx.strokeStyle = color; ctx.lineWidth = 3;
-    data.forEach((d, i) => {
-      const x = pad.left + (i / (data.length - 1)) * chartW;
-      const y = pad.top + chartH - (d / 100) * chartH;
-      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-    });
-    ctx.stroke();
-    // Dots
-    data.forEach((d, i) => {
-      const x = pad.left + (i / (data.length - 1)) * chartW;
-      const y = pad.top + chartH - (d / 100) * chartH;
-      ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI * 2); ctx.fillStyle = color; ctx.fill();
-      ctx.fillStyle = '#333'; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'center';
-      ctx.fillText(d + '%', x, y - 12);
-    });
-  }
-  
-  drawLine(COVERAGE_TREND.map(d => d.web), '#667eea');
-  drawLine(COVERAGE_TREND.map(d => d.app), '#28a745');
-  
-  // X labels
-  ctx.fillStyle = '#666'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+  // Bars: Added (green) and Modified commits (orange)
   COVERAGE_TREND.forEach((d, i) => {
-    const x = pad.left + (i / (COVERAGE_TREND.length - 1)) * chartW;
-    ctx.fillText(d.label, x, H - 10);
+    const x = pad.left + (i + 0.5) / n * chartW;
+    // Added bar
+    const addH = d.added * barScale;
+    ctx.fillStyle = 'rgba(40,167,69,0.7)';
+    ctx.fillRect(x - barW - 1, pad.top + chartH - addH, barW, addH);
+    // Modified bar
+    const modH = d.modified_commits * barScale;
+    ctx.fillStyle = 'rgba(255,193,7,0.7)';
+    ctx.fillRect(x + 1, pad.top + chartH - modH, barW, modH);
+    // Bar labels
+    if (d.added > 0) {
+      ctx.fillStyle = '#155724'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('+' + d.added, x - barW/2 - 1, pad.top + chartH - addH - 4);
+    }
+  });
+  
+  // Line: Total tests
+  ctx.beginPath(); ctx.strokeStyle = '#667eea'; ctx.lineWidth = 3;
+  COVERAGE_TREND.forEach((d, i) => {
+    const x = pad.left + (i + 0.5) / n * chartW;
+    const y = pad.top + chartH - d.total_tests * lineScale;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+  
+  // Dots + labels on line
+  COVERAGE_TREND.forEach((d, i) => {
+    const x = pad.left + (i + 0.5) / n * chartW;
+    const y = pad.top + chartH - d.total_tests * lineScale;
+    ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI * 2); ctx.fillStyle = '#667eea'; ctx.fill();
+    ctx.fillStyle = '#333'; ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(d.total_tests, x, y - 10);
+  });
+  
+  // X labels (months)
+  ctx.fillStyle = '#555'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
+  COVERAGE_TREND.forEach((d, i) => {
+    const x = pad.left + (i + 0.5) / n * chartW;
+    ctx.save(); ctx.translate(x, H - 8); ctx.rotate(-0.4);
+    ctx.fillText(d.month, 0, 0); ctx.restore();
   });
   
   // Legend
-  ctx.font = '12px sans-serif';
-  ctx.fillStyle = '#667eea'; ctx.fillRect(W - 180, 10, 12, 12);
-  ctx.fillStyle = '#333'; ctx.textAlign = 'left'; ctx.fillText('Web Coverage', W - 164, 20);
-  ctx.fillStyle = '#28a745'; ctx.fillRect(W - 180, 28, 12, 12);
-  ctx.fillStyle = '#333'; ctx.fillText('App Coverage', W - 164, 38);
+  const lx = W - 200;
+  ctx.font = '11px sans-serif';
+  ctx.fillStyle = '#667eea'; ctx.fillRect(lx, 8, 12, 12);
+  ctx.fillStyle = '#333'; ctx.textAlign = 'left'; ctx.fillText('Total Tests', lx + 16, 18);
+  ctx.fillStyle = 'rgba(40,167,69,0.7)'; ctx.fillRect(lx, 24, 12, 12);
+  ctx.fillStyle = '#333'; ctx.fillText('Tests Added', lx + 16, 34);
+  ctx.fillStyle = 'rgba(255,193,7,0.7)'; ctx.fillRect(lx, 40, 12, 12);
+  ctx.fillStyle = '#333'; ctx.fillText('Modified (commits)', lx + 16, 50);
 }
 
 // Init

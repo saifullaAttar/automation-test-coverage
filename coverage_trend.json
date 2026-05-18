@@ -1,6 +1,16 @@
 [
-  {"date": "2026-04-01", "web": 25, "app": 0, "label": "Initial"},
-  {"date": "2026-04-15", "web": 28, "app": 10, "label": "Sprint 1"},
-  {"date": "2026-05-01", "web": 30, "app": 30, "label": "Sprint 2"},
-  {"date": "2026-05-18", "web": 38, "app": 37, "label": "Current"}
+  {"month": "Apr 2025", "total_tests": 18, "added": 18, "modified_commits": 0},
+  {"month": "May 2025", "total_tests": 22, "added": 4, "modified_commits": 34},
+  {"month": "Jun 2025", "total_tests": 27, "added": 5, "modified_commits": 14},
+  {"month": "Jul 2025", "total_tests": 32, "added": 5, "modified_commits": 17},
+  {"month": "Aug 2025", "total_tests": 34, "added": 2, "modified_commits": 11},
+  {"month": "Sep 2025", "total_tests": 65, "added": 31, "modified_commits": 6},
+  {"month": "Oct 2025", "total_tests": 69, "added": 4, "modified_commits": 13},
+  {"month": "Nov 2025", "total_tests": 70, "added": 1, "modified_commits": 3},
+  {"month": "Dec 2025", "total_tests": 72, "added": 2, "modified_commits": 3},
+  {"month": "Jan 2026", "total_tests": 73, "added": 1, "modified_commits": 2},
+  {"month": "Feb 2026", "total_tests": 74, "added": 1, "modified_commits": 3},
+  {"month": "Mar 2026", "total_tests": 79, "added": 5, "modified_commits": 9},
+  {"month": "Apr 2026", "total_tests": 81, "added": 2, "modified_commits": 15},
+  {"month": "May 2026", "total_tests": 90, "added": 9, "modified_commits": 22}
 ]
