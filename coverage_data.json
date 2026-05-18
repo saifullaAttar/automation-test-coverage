@@ -3,482 +3,475 @@
     "total_automated": 90,
     "web_uae": 35,
     "web_ksa": 32,
-    "android": 23,
-    "ios": 23,
+    "app": 23,
     "overall_coverage": 39.1
   },
   "covered_tests": {
     "web_uae": [
       {
         "name": "test_uae_user_register_from_account_page",
-        "file": "test_user.py"
+        "file": "test_user.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_user_register_from_cart_page",
-        "file": "test_user.py"
+        "file": "test_user.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_user_logs_in_from_account_page",
-        "file": "test_user.py"
+        "file": "test_user.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_user_logs_in_from_cart_page",
-        "file": "test_user.py"
+        "file": "test_user.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_cart_existing_user_orders_no_coupon_yalla",
-        "file": "test_cart.py"
+        "file": "test_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_cart_guest_login_no_coupon_sc",
-        "file": "test_cart.py"
+        "file": "test_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_cart_add_items_to_cart_as_a_newly_registered_user_and_apply_cashback_coupon",
-        "file": "test_cart.py"
+        "file": "test_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_with_cart_items_register_a_new_user_and_coupon",
-        "file": "test_cart.py"
+        "file": "test_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_uf2_cart_gift_wrap_wishlist",
-        "file": "test_cart.py"
+        "file": "test_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_cart_uf5_checkout_cod_no_coupon",
-        "file": "test_cart.py"
+        "file": "test_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_percentage_of_product_price_discount_rules_without_max_amount",
-        "file": "test_cart.py"
+        "file": "test_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_percentage_of_product_price_discount_rules_with_max_amount",
-        "file": "test_cart.py"
+        "file": "test_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_percentage_of_product_variant_price_discount_rules_with_max_amount",
-        "file": "test_cart.py"
+        "file": "test_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_percentage_of_product_variant_price_discount_rules_without_max_amount",
-        "file": "test_cart.py"
+        "file": "test_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_bank_discount_percentage_of_product_price_rule",
-        "file": "test_cart.py"
+        "file": "test_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_cart_apply_gift_wrap_and_place_order",
-        "file": "test_cart.py"
+        "file": "test_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_cc_no_coupon",
-        "file": "test_checkout.py"
+        "file": "test_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_cod_no_coupon",
-        "file": "test_checkout.py"
+        "file": "test_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_tabby_no_coupon",
-        "file": "test_checkout.py"
+        "file": "test_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_tabby_cashback_coupon",
-        "file": "test_checkout.py"
+        "file": "test_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_cc_normal_coupon",
-        "file": "test_checkout.py"
+        "file": "test_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_cod_normal_coupon",
-        "file": "test_checkout.py"
+        "file": "test_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_tabby_normal_coupon",
-        "file": "test_checkout.py"
+        "file": "test_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_full_sc_no_coupon",
-        "file": "test_checkout.py"
+        "file": "test_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_cc_and_partial_sc_no_coupon",
-        "file": "test_checkout.py"
+        "file": "test_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_tamara_no_coupon",
-        "file": "test_checkout.py"
+        "file": "test_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_tamara_normal_coupon",
-        "file": "test_checkout.py"
+        "file": "test_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_tamara_cashback_coupon",
-        "file": "test_checkout.py"
+        "file": "test_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_invalid_cc_no_coupon",
-        "file": "test_checkout.py"
+        "file": "test_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_full_sc_and_normal_coupon",
-        "file": "test_checkout.py"
+        "file": "test_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_cc_partial_sc_and_normal_coupon",
-        "file": "test_checkout.py"
+        "file": "test_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_cc_wrong_otp_no_coupon",
-        "file": "test_checkout.py"
+        "file": "test_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_cc_coupon_modal_sheet",
-        "file": "test_checkout.py"
+        "file": "test_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_full_sc_and_verify_sc_balance",
-        "file": "test_checkout.py"
+        "file": "test_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_cc_and_verify_odp",
-        "file": "test_checkout.py"
+        "file": "test_checkout.py",
+        "testmo_id": ""
       }
     ],
     "web_ksa": [
       {
         "name": "test_ksa_checkout_cc_no_coupon",
-        "file": "test_checkout_ksa.py"
+        "file": "test_checkout_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_checkout_cod_no_coupon",
-        "file": "test_checkout_ksa.py"
+        "file": "test_checkout_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_checkout_tabby_no_coupon",
-        "file": "test_checkout_ksa.py"
+        "file": "test_checkout_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_checkout_tabby_cashback_coupon",
-        "file": "test_checkout_ksa.py"
+        "file": "test_checkout_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_checkout_cc_normal_coupon",
-        "file": "test_checkout_ksa.py"
+        "file": "test_checkout_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_checkout_cod_normal_coupon",
-        "file": "test_checkout_ksa.py"
+        "file": "test_checkout_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_checkout_tabby_normal_coupon",
-        "file": "test_checkout_ksa.py"
+        "file": "test_checkout_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_checkout_full_sc_no_coupon",
-        "file": "test_checkout_ksa.py"
+        "file": "test_checkout_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_checkout_cc_and_partial_sc_no_coupon",
-        "file": "test_checkout_ksa.py"
+        "file": "test_checkout_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_checkout_tamara_no_coupon",
-        "file": "test_checkout_ksa.py"
+        "file": "test_checkout_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_checkout_tamara_normal_coupon",
-        "file": "test_checkout_ksa.py"
+        "file": "test_checkout_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_checkout_tamara_cashback_coupon",
-        "file": "test_checkout_ksa.py"
+        "file": "test_checkout_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_checkout_invalid_cc_no_coupon",
-        "file": "test_checkout_ksa.py"
+        "file": "test_checkout_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_checkout_full_sc_and_normal_coupon",
-        "file": "test_checkout_ksa.py"
+        "file": "test_checkout_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_checkout_cc_partial_sc_and_normal_coupon",
-        "file": "test_checkout_ksa.py"
+        "file": "test_checkout_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_checkout_cc_wrong_otp_no_coupon",
-        "file": "test_checkout_ksa.py"
+        "file": "test_checkout_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_cart_existing_user_orders_no_coupon_yalla",
-        "file": "test_cart_ksa.py"
+        "file": "test_cart_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_cart_guest_login_no_coupon_sc",
-        "file": "test_cart_ksa.py"
+        "file": "test_cart_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_cart_add_items_to_cart_as_a_newly_registered_user_and_apply_cashback_coupon",
-        "file": "test_cart_ksa.py"
+        "file": "test_cart_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_checkout_with_cart_items_register_a_new_user_and_coupon",
-        "file": "test_cart_ksa.py"
+        "file": "test_cart_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_uf2_cart_gift_wrap_wishlist",
-        "file": "test_cart_ksa.py"
+        "file": "test_cart_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_cart_uf5_checkout_cod_no_coupon",
-        "file": "test_cart_ksa.py"
+        "file": "test_cart_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_percentage_of_product_price_discount_rules_without_max_amount",
-        "file": "test_cart_ksa.py"
+        "file": "test_cart_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_percentage_of_product_price_discount_rules_with_max_amount",
-        "file": "test_cart_ksa.py"
+        "file": "test_cart_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_percentage_of_product_variant_price_discount_rules_with_max_amount",
-        "file": "test_cart_ksa.py"
+        "file": "test_cart_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_percentage_of_product_variant_price_discount_rules_without_max_amount",
-        "file": "test_cart_ksa.py"
+        "file": "test_cart_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_bank_discount_percentage_of_product_price_rule",
-        "file": "test_cart_ksa.py"
+        "file": "test_cart_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_cart_apply_gift_wrap_and_place_order",
-        "file": "test_cart_ksa.py"
+        "file": "test_cart_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_user_register_from_account_page",
-        "file": "test_user_ksa.py"
+        "file": "test_user_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_user_register_from_cart_page",
-        "file": "test_user_ksa.py"
+        "file": "test_user_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_user_logs_in_from_account_page",
-        "file": "test_user_ksa.py"
+        "file": "test_user_ksa.py",
+        "testmo_id": ""
       },
       {
         "name": "test_ksa_user_logs_in_from_cart_page",
-        "file": "test_user_ksa.py"
+        "file": "test_user_ksa.py",
+        "testmo_id": ""
       }
     ],
-    "android": [
+    "app": [
       {
         "name": "test_uae_cart_quantity_workflow",
-        "file": "test_app_cart.py"
+        "file": "test_app_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_cart_remove_item",
-        "file": "test_app_cart.py"
+        "file": "test_app_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_cart_move_to_wishlist",
-        "file": "test_app_cart.py"
+        "file": "test_app_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_app_uae_cart_remaining_items_unaffected_after_partial_removal",
-        "file": "test_app_cart.py"
+        "file": "test_app_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_cart_increase_and_decrease_quantity",
-        "file": "test_app_cart.py"
+        "file": "test_app_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_cart_item_integrity_after_quantity_change",
-        "file": "test_app_cart.py"
+        "file": "test_app_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_cart_bundle_multiple_variants",
-        "file": "test_app_cart.py"
+        "file": "test_app_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_cart_configurable_multiple_variants",
-        "file": "test_app_cart.py"
+        "file": "test_app_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_app_uae_cart_remove_item_with_applied_coupon",
-        "file": "test_app_cart.py"
+        "file": "test_app_cart.py",
+        "testmo_id": ""
       },
       {
         "name": "test_customer_can_search_brand",
-        "file": "test_app_home.py"
+        "file": "test_app_home.py",
+        "testmo_id": ""
       },
       {
         "name": "test_customer_can_search_product_in_specific_category",
-        "file": "test_app_home.py"
+        "file": "test_app_home.py",
+        "testmo_id": ""
       },
       {
         "name": "test_app_explore_screen_elements_and_navigate_to_account",
-        "file": "test_app_home.py"
+        "file": "test_app_home.py",
+        "testmo_id": ""
       },
       {
         "name": "test_user_signup",
-        "file": "test_app_account.py"
+        "file": "test_app_account.py",
+        "testmo_id": ""
       },
       {
         "name": "test_existing_user_profile",
-        "file": "test_app_account.py"
+        "file": "test_app_account.py",
+        "testmo_id": ""
       },
       {
         "name": "test_existing_user_delivery_address",
-        "file": "test_app_account.py"
+        "file": "test_app_account.py",
+        "testmo_id": ""
       },
       {
         "name": "test_add_new_address_and_make_default_and_delete",
-        "file": "test_app_account.py"
+        "file": "test_app_account.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_cc_no_coupon",
-        "file": "test_app_checkout.py"
+        "file": "test_app_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_cc_and_partial_sc_no_coupon",
-        "file": "test_app_checkout.py"
+        "file": "test_app_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_cod_no_coupon",
-        "file": "test_app_checkout.py"
+        "file": "test_app_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_apply_gift_wrap_place_order",
-        "file": "test_app_checkout.py"
+        "file": "test_app_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_checkout_tabby_no_coupon",
-        "file": "test_app_checkout.py"
+        "file": "test_app_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_app_uae_checkout_tamara_no_coupon",
-        "file": "test_app_checkout.py"
+        "file": "test_app_checkout.py",
+        "testmo_id": ""
       },
       {
         "name": "test_uae_guest_checkout_login_bottom_sheet_and_place_order",
-        "file": "test_app_checkout.py"
-      }
-    ],
-    "ios": [
-      {
-        "name": "test_uae_cart_quantity_workflow",
-        "file": "test_app_cart.py"
-      },
-      {
-        "name": "test_uae_cart_remove_item",
-        "file": "test_app_cart.py"
-      },
-      {
-        "name": "test_uae_cart_move_to_wishlist",
-        "file": "test_app_cart.py"
-      },
-      {
-        "name": "test_app_uae_cart_remaining_items_unaffected_after_partial_removal",
-        "file": "test_app_cart.py"
-      },
-      {
-        "name": "test_uae_cart_increase_and_decrease_quantity",
-        "file": "test_app_cart.py"
-      },
-      {
-        "name": "test_uae_cart_item_integrity_after_quantity_change",
-        "file": "test_app_cart.py"
-      },
-      {
-        "name": "test_uae_cart_bundle_multiple_variants",
-        "file": "test_app_cart.py"
-      },
-      {
-        "name": "test_uae_cart_configurable_multiple_variants",
-        "file": "test_app_cart.py"
-      },
-      {
-        "name": "test_app_uae_cart_remove_item_with_applied_coupon",
-        "file": "test_app_cart.py"
-      },
-      {
-        "name": "test_customer_can_search_brand",
-        "file": "test_app_home.py"
-      },
-      {
-        "name": "test_customer_can_search_product_in_specific_category",
-        "file": "test_app_home.py"
-      },
-      {
-        "name": "test_app_explore_screen_elements_and_navigate_to_account",
-        "file": "test_app_home.py"
-      },
-      {
-        "name": "test_user_signup",
-        "file": "test_app_account.py"
-      },
-      {
-        "name": "test_existing_user_profile",
-        "file": "test_app_account.py"
-      },
-      {
-        "name": "test_existing_user_delivery_address",
-        "file": "test_app_account.py"
-      },
-      {
-        "name": "test_add_new_address_and_make_default_and_delete",
-        "file": "test_app_account.py"
-      },
-      {
-        "name": "test_uae_checkout_cc_no_coupon",
-        "file": "test_app_checkout.py"
-      },
-      {
-        "name": "test_uae_checkout_cc_and_partial_sc_no_coupon",
-        "file": "test_app_checkout.py"
-      },
-      {
-        "name": "test_uae_checkout_cod_no_coupon",
-        "file": "test_app_checkout.py"
-      },
-      {
-        "name": "test_uae_checkout_apply_gift_wrap_place_order",
-        "file": "test_app_checkout.py"
-      },
-      {
-        "name": "test_uae_checkout_tabby_no_coupon",
-        "file": "test_app_checkout.py"
-      },
-      {
-        "name": "test_app_uae_checkout_tamara_no_coupon",
-        "file": "test_app_checkout.py"
-      },
-      {
-        "name": "test_uae_guest_checkout_login_bottom_sheet_and_place_order",
-        "file": "test_app_checkout.py"
+        "file": "test_app_checkout.py",
+        "testmo_id": ""
       }
     ]
   },
   "uncovered_tests": {
     "web_uae": [],
     "web_ksa": [],
-    "android": [],
-    "ios": []
+    "app": []
   },
   "testmo_totals": {
     "web_uae": 75,
     "web_ksa": 75,
-    "android": 40,
-    "ios": 40
+    "app": 80
   }
 }

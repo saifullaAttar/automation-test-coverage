@@ -190,11 +190,7 @@
             </div>
             <div class="stat-card">
                 <div class="stat-number">23</div>
-                <div class="stat-label">Android App</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">23</div>
-                <div class="stat-label">iOS App</div>
+                <div class="stat-label">Mobile App</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">39.1%</div>
@@ -211,7 +207,7 @@
             
             <div class="section-tabs">
                 <button class="tab-btn active" onclick="showTab('uae-covered')">✅ Covered Tests (35)</button>
-                <button class="tab-btn" onclick="showTab('uae-uncovered')">❌ Not Covered (40)</button>
+                <button class="tab-btn" onclick="showTab('uae-uncovered')">❌ Not Covered (0)</button>
             </div>
             
             <div id="uae-covered" class="tab-content active">
@@ -222,7 +218,7 @@
             
             <div id="uae-uncovered" class="tab-content">
                 <div class="test-list">
-                    <div class="test-item uncovered-item">⚠️ Update from Testmo regression suite to see uncovered tests</div>
+                    <div class="test-item uncovered-item">⚠️ No uncovered tests data. Run: python3 import_testmo_tests.py</div>
                 </div>
             </div>
         </div>
@@ -236,7 +232,7 @@
             
             <div class="section-tabs">
                 <button class="tab-btn active" onclick="showTab('ksa-covered')">✅ Covered Tests (32)</button>
-                <button class="tab-btn" onclick="showTab('ksa-uncovered')">❌ Not Covered (43)</button>
+                <button class="tab-btn" onclick="showTab('ksa-uncovered')">❌ Not Covered (0)</button>
             </div>
             
             <div id="ksa-covered" class="tab-content active">
@@ -247,57 +243,32 @@
             
             <div id="ksa-uncovered" class="tab-content">
                 <div class="test-list">
-                    <div class="test-item uncovered-item">⚠️ Update from Testmo regression suite to see uncovered tests</div>
+                    <div class="test-item uncovered-item">⚠️ No uncovered tests data. Run: python3 import_testmo_tests.py</div>
                 </div>
             </div>
         </div>
 
         <div class="coverage-section">
-            <h2 class="coverage-header">📱 Android App Automation</h2>
-            <p><strong>Automated:</strong> 23 | <strong>Total in Testmo:</strong> 40 | <strong>Coverage:</strong> 57.5%</p>
+            <h2 class="coverage-header">📱 Mobile App Automation (Android & iOS)</h2>
+            <p><strong>Automated:</strong> 23 | <strong>Total in Testmo:</strong> 80 | <strong>Coverage:</strong> 28.7%</p>
             <div class="progress-bar">
-                <div class="progress-fill" style="width: 57.5%">57.5%</div>
+                <div class="progress-fill" style="width: 28.7%">28.7%</div>
             </div>
             
             <div class="section-tabs">
-                <button class="tab-btn active" onclick="showTab('android-covered')">✅ Covered Tests (23)</button>
-                <button class="tab-btn" onclick="showTab('android-uncovered')">❌ Not Covered (17)</button>
+                <button class="tab-btn active" onclick="showTab('app-covered')">✅ Covered Tests (23)</button>
+                <button class="tab-btn" onclick="showTab('app-uncovered')">❌ Not Covered (0)</button>
             </div>
             
-            <div id="android-covered" class="tab-content active">
+            <div id="app-covered" class="tab-content active">
                 <div class="test-list">
                     <div class="test-item">✅ test_uae_cart_quantity_workflow <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_remove_item <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_move_to_wishlist <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_app_uae_cart_remaining_items_unaffected_after_partial_removal <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_increase_and_decrease_quantity <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_item_integrity_after_quantity_change <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_bundle_multiple_variants <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_configurable_multiple_variants <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_app_uae_cart_remove_item_with_applied_coupon <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_customer_can_search_brand <span style="color:#999">(test_app_home.py)</span></div><div class="test-item">✅ test_customer_can_search_product_in_specific_category <span style="color:#999">(test_app_home.py)</span></div><div class="test-item">✅ test_app_explore_screen_elements_and_navigate_to_account <span style="color:#999">(test_app_home.py)</span></div><div class="test-item">✅ test_user_signup <span style="color:#999">(test_app_account.py)</span></div><div class="test-item">✅ test_existing_user_profile <span style="color:#999">(test_app_account.py)</span></div><div class="test-item">✅ test_existing_user_delivery_address <span style="color:#999">(test_app_account.py)</span></div><div class="test-item">✅ test_add_new_address_and_make_default_and_delete <span style="color:#999">(test_app_account.py)</span></div><div class="test-item">✅ test_uae_checkout_cc_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_cc_and_partial_sc_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_cod_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_apply_gift_wrap_place_order <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_tabby_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_app_uae_checkout_tamara_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_guest_checkout_login_bottom_sheet_and_place_order <span style="color:#999">(test_app_checkout.py)</span></div>
                 </div>
             </div>
             
-            <div id="android-uncovered" class="tab-content">
+            <div id="app-uncovered" class="tab-content">
                 <div class="test-list">
-                    <div class="test-item uncovered-item">⚠️ Update from Testmo regression suite to see uncovered tests</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="coverage-section" style="background: #f8f9fa;">
-            <h2 class="coverage-header">📱 iOS App Automation</h2>
-            <p><strong>Automated:</strong> 23 | <strong>Total in Testmo:</strong> 40 | <strong>Coverage:</strong> 57.5%</p>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 57.5%">57.5%</div>
-            </div>
-            
-            <div class="section-tabs">
-                <button class="tab-btn active" onclick="showTab('ios-covered')">✅ Covered Tests (23)</button>
-                <button class="tab-btn" onclick="showTab('ios-uncovered')">❌ Not Covered (17)</button>
-            </div>
-            
-            <div id="ios-covered" class="tab-content active">
-                <div class="test-list">
-                    <div class="test-item">✅ test_uae_cart_quantity_workflow <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_remove_item <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_move_to_wishlist <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_app_uae_cart_remaining_items_unaffected_after_partial_removal <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_increase_and_decrease_quantity <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_item_integrity_after_quantity_change <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_bundle_multiple_variants <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_uae_cart_configurable_multiple_variants <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_app_uae_cart_remove_item_with_applied_coupon <span style="color:#999">(test_app_cart.py)</span></div><div class="test-item">✅ test_customer_can_search_brand <span style="color:#999">(test_app_home.py)</span></div><div class="test-item">✅ test_customer_can_search_product_in_specific_category <span style="color:#999">(test_app_home.py)</span></div><div class="test-item">✅ test_app_explore_screen_elements_and_navigate_to_account <span style="color:#999">(test_app_home.py)</span></div><div class="test-item">✅ test_user_signup <span style="color:#999">(test_app_account.py)</span></div><div class="test-item">✅ test_existing_user_profile <span style="color:#999">(test_app_account.py)</span></div><div class="test-item">✅ test_existing_user_delivery_address <span style="color:#999">(test_app_account.py)</span></div><div class="test-item">✅ test_add_new_address_and_make_default_and_delete <span style="color:#999">(test_app_account.py)</span></div><div class="test-item">✅ test_uae_checkout_cc_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_cc_and_partial_sc_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_cod_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_apply_gift_wrap_place_order <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_checkout_tabby_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_app_uae_checkout_tamara_no_coupon <span style="color:#999">(test_app_checkout.py)</span></div><div class="test-item">✅ test_uae_guest_checkout_login_bottom_sheet_and_place_order <span style="color:#999">(test_app_checkout.py)</span></div>
-                </div>
-            </div>
-            
-            <div id="ios-uncovered" class="tab-content">
-                <div class="test-list">
-                    <div class="test-item uncovered-item">⚠️ Update from Testmo regression suite to see uncovered tests</div>
+                    <div class="test-item uncovered-item">⚠️ No uncovered tests data. Run: python3 import_testmo_tests.py</div>
                 </div>
             </div>
         </div>
@@ -309,7 +280,7 @@
                 <a href="https://allure-reports.mumzstage.com/allure-docker-service" target="_blank">Allure Reports</a> | 
                 <a href="https://mumzworld.testmo.net" target="_blank">Testmo</a>
             </p>
-            <p class="timestamp">Last Updated: 2026-05-18 14:12:31</p>
+            <p class="timestamp">Last Updated: 2026-05-18 14:19:22</p>
         </div>
     </div>
     

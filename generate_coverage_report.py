@@ -70,51 +70,55 @@ web_uae, web_uae_list = count_tests_by_category("tests/web/UAE")
 web_ksa, web_ksa_list = count_tests_by_category("tests/web/KSA")
 app_tests, app_list = count_tests_by_category("tests/app")
 
-# Separate app tests by platform
-android_tests, android_list = app_tests, [t for t in app_list]  # All app tests run on both platforms
-ios_tests, ios_list = app_tests, [t for t in app_list]
-
 # Calculate totals
 web_uae_total = len(web_uae_list)
 web_ksa_total = len(web_ksa_list)
 app_total = len(app_list)
-android_total = len(android_list)
-ios_total = len(ios_list)
 grand_total = web_uae_total + web_ksa_total + app_total
 
 # Testmo regression suite totals (manual input based on regression suites)
 testmo_web_uae_total = 75  # Placeholder - update from Testmo
 testmo_web_ksa_total = 75  # Placeholder - update from Testmo
-testmo_android_total = 40  # Placeholder - update from Testmo
-testmo_ios_total = 40      # Placeholder - update from Testmo
+testmo_app_total = 80      # Placeholder - update from Testmo (Android + iOS combined)
 
 testmo_web_total = testmo_web_uae_total + testmo_web_ksa_total
-testmo_app_total = testmo_android_total + testmo_ios_total
+testmo_total = testmo_web_total + testmo_app_total
 
 # Calculate coverage percentages
 web_uae_coverage = round(web_uae_total / testmo_web_uae_total * 100, 1) if testmo_web_uae_total > 0 else 0
 web_ksa_coverage = round(web_ksa_total / testmo_web_ksa_total * 100, 1) if testmo_web_ksa_total > 0 else 0
-android_coverage = round(android_total / testmo_android_total * 100, 1) if testmo_android_total > 0 else 0
-ios_coverage = round(ios_total / testmo_ios_total * 100, 1) if testmo_ios_total > 0 else 0
-web_coverage = round((web_uae_total + web_ksa_total) / testmo_web_total * 100, 1) if testmo_web_total > 0 else 0
 app_coverage = round(app_total / testmo_app_total * 100, 1) if testmo_app_total > 0 else 0
-overall_coverage = round(grand_total / (testmo_web_total + testmo_app_total) * 100, 1)
+web_coverage = round((web_uae_total + web_ksa_total) / testmo_web_total * 100, 1) if testmo_web_total > 0 else 0
+overall_coverage = round(grand_total / testmo_total * 100, 1)
 
-# Generate test lists for JSON export
+# Load Testmo mapping if exists
+testmo_mapping_path = Path("testmo_mapping.json")
+if testmo_mapping_path.exists():
+    testmo_mapping = json.loads(testmo_mapping_path.read_text())
+else:
+    testmo_mapping = {
+        'web_uae': {},
+        'web_ksa': {},
+        'app': {}
+    }
+
+# Generate test lists for JSON export with Testmo IDs
 covered_tests = {
-    'web_uae': [{'name': t['name'], 'file': t['file']} for t in web_uae_list],
-    'web_ksa': [{'name': t['name'], 'file': t['file']} for t in web_ksa_list],
-    'android': [{'name': t['name'], 'file': t['file']} for t in android_list],
-    'ios': [{'name': t['name'], 'file': t['file']} for t in ios_list]
+    'web_uae': [{'name': t['name'], 'file': t['file'], 'testmo_id': testmo_mapping.get('web_uae', {}).get(t['name'], '')} for t in web_uae_list],
+    'web_ksa': [{'name': t['name'], 'file': t['file'], 'testmo_id': testmo_mapping.get('web_ksa', {}).get(t['name'], '')} for t in web_ksa_list],
+    'app': [{'name': t['name'], 'file': t['file'], 'testmo_id': testmo_mapping.get('app', {}).get(t['name'], '')} for t in app_list]
 }
 
-# Placeholder for uncovered tests (to be manually added from Testmo)
-uncovered_tests = {
-    'web_uae': [],  # Add from Testmo regression suite
-    'web_ksa': [],  # Add from Testmo regression suite
-    'android': [],  # Add from Testmo regression suite
-    'ios': []       # Add from Testmo regression suite
-}
+# Load uncovered tests from file
+uncovered_path = Path("uncovered_tests.json")
+if uncovered_path.exists():
+    uncovered_tests = json.loads(uncovered_path.read_text())
+else:
+    uncovered_tests = {
+        'web_uae': [],
+        'web_ksa': [],
+        'app': []
+    }
 
 # Generate HTML report
 html_content = f"""<!DOCTYPE html>
@@ -308,12 +312,8 @@ html_content = f"""<!DOCTYPE html>
                 <div class="stat-label">Web KSA</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">{android_total}</div>
-                <div class="stat-label">Android App</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">{ios_total}</div>
-                <div class="stat-label">iOS App</div>
+                <div class="stat-number">{app_total}</div>
+                <div class="stat-label">Mobile App</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">{overall_coverage}%</div>
@@ -330,18 +330,18 @@ html_content = f"""<!DOCTYPE html>
             
             <div class="section-tabs">
                 <button class="tab-btn active" onclick="showTab('uae-covered')">✅ Covered Tests ({web_uae_total})</button>
-                <button class="tab-btn" onclick="showTab('uae-uncovered')">❌ Not Covered ({testmo_web_uae_total - web_uae_total})</button>
+                <button class="tab-btn" onclick="showTab('uae-uncovered')">❌ Not Covered ({len(uncovered_tests.get('web_uae', []))})</button>
             </div>
             
             <div id="uae-covered" class="tab-content active">
                 <div class="test-list">
-                    {''.join(f'<div class="test-item">✅ {t["name"]} <span style="color:#999">({t["file"]})</span></div>' for t in web_uae_list)}
+                    {''.join(f'<div class="test-item">✅ {t["name"]} <span style="color:#999">({t["file"]})</span>' + (f' <span style="color:#667eea">Testmo: {t["testmo_id"]}</span>' if t.get("testmo_id") else '') + '</div>' for t in covered_tests['web_uae'])}
                 </div>
             </div>
             
             <div id="uae-uncovered" class="tab-content">
                 <div class="test-list">
-                    <div class="test-item uncovered-item">⚠️ Update from Testmo regression suite to see uncovered tests</div>
+                    {''.join(f'<div class="test-item uncovered-item">❌ {t["name"]} <span style="color:#999">Testmo: {t["testmo_id"]}</span></div>' for t in uncovered_tests.get('web_uae', [])) if uncovered_tests.get('web_uae') else '<div class="test-item uncovered-item">⚠️ No uncovered tests data. Run: python3 import_testmo_tests.py</div>'}
                 </div>
             </div>
         </div>
@@ -355,68 +355,43 @@ html_content = f"""<!DOCTYPE html>
             
             <div class="section-tabs">
                 <button class="tab-btn active" onclick="showTab('ksa-covered')">✅ Covered Tests ({web_ksa_total})</button>
-                <button class="tab-btn" onclick="showTab('ksa-uncovered')">❌ Not Covered ({testmo_web_ksa_total - web_ksa_total})</button>
+                <button class="tab-btn" onclick="showTab('ksa-uncovered')">❌ Not Covered ({len(uncovered_tests.get('web_ksa', []))})</button>
             </div>
             
             <div id="ksa-covered" class="tab-content active">
                 <div class="test-list">
-                    {''.join(f'<div class="test-item">✅ {t["name"]} <span style="color:#999">({t["file"]})</span></div>' for t in web_ksa_list)}
+                    {''.join(f'<div class="test-item">✅ {t["name"]} <span style="color:#999">({t["file"]})</span>' + (f' <span style="color:#667eea">Testmo: {t["testmo_id"]}</span>' if t.get("testmo_id") else '') + '</div>' for t in covered_tests['web_ksa'])}
                 </div>
             </div>
             
             <div id="ksa-uncovered" class="tab-content">
                 <div class="test-list">
-                    <div class="test-item uncovered-item">⚠️ Update from Testmo regression suite to see uncovered tests</div>
+                    {''.join(f'<div class="test-item uncovered-item">❌ {t["name"]} <span style="color:#999">Testmo: {t["testmo_id"]}</span></div>' for t in uncovered_tests.get('web_ksa', [])) if uncovered_tests.get('web_ksa') else '<div class="test-item uncovered-item">⚠️ No uncovered tests data. Run: python3 import_testmo_tests.py</div>'}
                 </div>
             </div>
         </div>
 
         <div class="coverage-section">
-            <h2 class="coverage-header">📱 Android App Automation</h2>
-            <p><strong>Automated:</strong> {android_total} | <strong>Total in Testmo:</strong> {testmo_android_total} | <strong>Coverage:</strong> {android_coverage}%</p>
+            <h2 class="coverage-header">📱 Mobile App Automation (Android & iOS)</h2>
+            <p><strong>Automated:</strong> {app_total} | <strong>Total in Testmo:</strong> {testmo_app_total} | <strong>Coverage:</strong> {app_coverage}%</p>
             <div class="progress-bar">
-                <div class="progress-fill" style="width: {android_coverage}%">{android_coverage}%</div>
+                <div class="progress-fill" style="width: {app_coverage}%">{app_coverage}%</div>
             </div>
             
             <div class="section-tabs">
-                <button class="tab-btn active" onclick="showTab('android-covered')">✅ Covered Tests ({android_total})</button>
-                <button class="tab-btn" onclick="showTab('android-uncovered')">❌ Not Covered ({testmo_android_total - android_total})</button>
+                <button class="tab-btn active" onclick="showTab('app-covered')">✅ Covered Tests ({app_total})</button>
+                <button class="tab-btn" onclick="showTab('app-uncovered')">❌ Not Covered ({len(uncovered_tests.get('app', []))})</button>
             </div>
             
-            <div id="android-covered" class="tab-content active">
+            <div id="app-covered" class="tab-content active">
                 <div class="test-list">
-                    {''.join(f'<div class="test-item">✅ {t["name"]} <span style="color:#999">({t["file"]})</span></div>' for t in android_list)}
+                    {''.join(f'<div class="test-item">✅ {t["name"]} <span style="color:#999">({t["file"]})</span>' + (f' <span style="color:#667eea">Testmo: {t["testmo_id"]}</span>' if t.get("testmo_id") else '') + '</div>' for t in covered_tests['app'])}
                 </div>
             </div>
             
-            <div id="android-uncovered" class="tab-content">
+            <div id="app-uncovered" class="tab-content">
                 <div class="test-list">
-                    <div class="test-item uncovered-item">⚠️ Update from Testmo regression suite to see uncovered tests</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="coverage-section" style="background: #f8f9fa;">
-            <h2 class="coverage-header">📱 iOS App Automation</h2>
-            <p><strong>Automated:</strong> {ios_total} | <strong>Total in Testmo:</strong> {testmo_ios_total} | <strong>Coverage:</strong> {ios_coverage}%</p>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: {ios_coverage}%">{ios_coverage}%</div>
-            </div>
-            
-            <div class="section-tabs">
-                <button class="tab-btn active" onclick="showTab('ios-covered')">✅ Covered Tests ({ios_total})</button>
-                <button class="tab-btn" onclick="showTab('ios-uncovered')">❌ Not Covered ({testmo_ios_total - ios_total})</button>
-            </div>
-            
-            <div id="ios-covered" class="tab-content active">
-                <div class="test-list">
-                    {''.join(f'<div class="test-item">✅ {t["name"]} <span style="color:#999">({t["file"]})</span></div>' for t in ios_list)}
-                </div>
-            </div>
-            
-            <div id="ios-uncovered" class="tab-content">
-                <div class="test-list">
-                    <div class="test-item uncovered-item">⚠️ Update from Testmo regression suite to see uncovered tests</div>
+                    {''.join(f'<div class="test-item uncovered-item">❌ {t["name"]} <span style="color:#999">Testmo: {t["testmo_id"]}</span></div>' for t in uncovered_tests.get('app', [])) if uncovered_tests.get('app') else '<div class="test-item uncovered-item">⚠️ No uncovered tests data. Run: python3 import_testmo_tests.py</div>'}
                 </div>
             </div>
         </div>
@@ -465,8 +440,7 @@ json_data = {
         'total_automated': grand_total,
         'web_uae': web_uae_total,
         'web_ksa': web_ksa_total,
-        'android': android_total,
-        'ios': ios_total,
+        'app': app_total,
         'overall_coverage': overall_coverage
     },
     'covered_tests': covered_tests,
@@ -474,8 +448,7 @@ json_data = {
     'testmo_totals': {
         'web_uae': testmo_web_uae_total,
         'web_ksa': testmo_web_ksa_total,
-        'android': testmo_android_total,
-        'ios': testmo_ios_total
+        'app': testmo_app_total
     }
 }
 
@@ -487,7 +460,6 @@ print(f"✅ JSON data exported: {json_path}")
 print(f"\n📊 Summary:")
 print(f"  Web UAE: {web_uae_total} / {testmo_web_uae_total} ({web_uae_coverage}%)")
 print(f"  Web KSA: {web_ksa_total} / {testmo_web_ksa_total} ({web_ksa_coverage}%)")
-print(f"  Android: {android_total} / {testmo_android_total} ({android_coverage}%)")
-print(f"  iOS: {ios_total} / {testmo_ios_total} ({ios_coverage}%)")
+print(f"  App: {app_total} / {testmo_app_total} ({app_coverage}%)")
 print(f"  Total: {grand_total} tests")
 print(f"  Overall Coverage: {overall_coverage}%")
