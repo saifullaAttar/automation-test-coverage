@@ -604,54 +604,10 @@ let COVERAGE_TREND = [];
 
 async function loadTrend() {
   try {
-    const since = '2026-04-01T00:00:00Z';
-    const repo = 'mumzworld-tech/automation_web_2.0';
-    const perPage = 100;
-    let page = 1, allCommits = [];
-    
-    // Fetch all commits to tests/ since April 2026
-    while (true) {
-      const resp = await fetch(`https://api.github.com/repos/${repo}/commits?since=${since}&path=tests&per_page=${perPage}&page=${page}`);
-      if (!resp.ok) break;
-      const commits = await resp.json();
-      if (!commits.length) break;
-      allCommits = allCommits.concat(commits);
-      if (commits.length < perPage) break;
-      page++;
-    }
-    
-    // Group by month
-    const months = {};
-    allCommits.forEach(c => {
-      const d = new Date(c.commit.author.date);
-      const key = d.toLocaleString('en-US', {month: 'short', year: 'numeric'});
-      if (!months[key]) months[key] = {added: 0, fixed: 0, date: d};
-      const msg = c.commit.message.toLowerCase();
-      if (msg.includes('add') || msg.includes('new') || msg.includes('feat') || msg.includes('automat')) {
-        months[key].added++;
-      } else {
-        months[key].fixed++;
-      }
-    });
-    
-    // Sort by date and build trend
-    COVERAGE_TREND = Object.entries(months)
-      .sort((a, b) => a[1].date - b[1].date)
-      .map(([month, data]) => ({
-        month,
-        tests_added: data.added,
-        tests_fixed: data.fixed,
-        total_commits: data.added + data.fixed
-      }));
-    
+    const resp = await fetch('coverage_trend.json');
+    COVERAGE_TREND = await resp.json();
   } catch(e) {
-    // Fallback to static file
-    try {
-      const resp = await fetch('coverage_trend.json');
-      COVERAGE_TREND = await resp.json();
-    } catch(e2) {
-      COVERAGE_TREND = [];
-    }
+    COVERAGE_TREND = [];
   }
   renderTrendChart();
 }
