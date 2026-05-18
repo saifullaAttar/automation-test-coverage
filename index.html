@@ -71,7 +71,7 @@ tr:hover{background:#f8f9ff}
 <div class="container">
   <div class="header">
     <h1>🧪 Mumzworld Automation Test Coverage</h1>
-    <p>TestMO Run #2154 → automation_web_2.0 | Source of Truth for Regression Coverage</p>
+    <p>TestMO Web Run #2154 | App Run #2192 → automation_web_2.0 | Source of Truth for Regression Coverage</p>
   </div>
 
   <div class="toolbar" id="toolbar">
@@ -98,6 +98,9 @@ tr:hover{background:#f8f9ff}
   <div class="stats-grid" id="statsGrid"></div>
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
 
+  <div class="section" style="padding:20px;margin-bottom:0">
+    <h2>🌐 Web Tests — TestMO Run #2154</h2>
+  </div>
   <div style="overflow-x:auto">
     <table>
       <thead>
@@ -117,9 +120,25 @@ tr:hover{background:#f8f9ff}
   </div>
 
   <div class="section" id="appSection">
-    <h2>📱 Mobile App Tests (TestMO Suite Pending)</h2>
-    <p style="color:#666;margin-bottom:15px">App TestMO regression suite CSV will be provided later. Below are the 23 automated app tests currently available:</p>
-    <div id="appTestsList"></div>
+    <h2>📱 Mobile App Tests — TestMO Run #2192</h2>
+    <div class="stats-grid" id="appStatsGrid"></div>
+    <div class="progress-bar"><div class="progress-fill" id="appProgressFill"></div></div>
+    <div style="overflow-x:auto;margin-top:15px">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:80px">Case ID</th>
+            <th style="width:30%">Test Name</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th style="width:30%">Mapped Automated Tests</th>
+            <th style="width:100px">Coverage</th>
+            <th style="width:15%">Notes</th>
+          </tr>
+        </thead>
+        <tbody id="appTableBody"></tbody>
+      </table>
+    </div>
   </div>
 
   <div class="section">
@@ -130,7 +149,8 @@ tr:hover{background:#f8f9ff}
   <div class="footer">
     <p><strong>Mumzworld SDET Team</strong> | 
       <a href="https://github.com/mumzworld-tech/automation_web_2.0" target="_blank">GitHub Repo</a> | 
-      <a href="https://mumzworld.testmo.net/runs/view/2154" target="_blank">TestMO Run #2154</a> | 
+      <a href="https://mumzworld.testmo.net/runs/view/2154" target="_blank">TestMO Web #2154</a> | 
+      <a href="https://mumzworld.testmo.net/runs/view/2192" target="_blank">TestMO App #2192</a> | 
       <a href="https://allure-reports.mumzstage.com/allure-docker-service" target="_blank">Allure Reports</a>
     </p>
     <p style="margin-top:8px" id="lastUpdated"></p>
@@ -158,8 +178,16 @@ async function init() {
   if (saved) {
     try {
       const edits = JSON.parse(saved);
-      edits.forEach(edit => {
+      if (edits.web) edits.web.forEach(edit => {
         const test = DATA.testmo_tests.find(t => t.case_id === edit.case_id);
+        if (test) {
+          if (edit.automated_tests !== undefined) test.automated_tests = edit.automated_tests;
+          if (edit.coverage_status !== undefined) test.coverage_status = edit.coverage_status;
+          if (edit.notes !== undefined) test.notes = edit.notes;
+        }
+      });
+      if (edits.app) edits.app.forEach(edit => {
+        const test = (DATA.app_testmo_tests||[]).find(t => t.case_id === edit.case_id);
         if (test) {
           if (edit.automated_tests !== undefined) test.automated_tests = edit.automated_tests;
           if (edit.coverage_status !== undefined) test.coverage_status = edit.coverage_status;
@@ -176,7 +204,7 @@ function render() {
   renderStats();
   renderFilters();
   renderTable();
-  renderAppTests();
+  renderAppSection();
   renderFolderBreakdown();
   document.getElementById('unsavedBadge').classList.toggle('hidden', !hasUnsavedChanges);
   document.getElementById('lastUpdated').textContent = `Last generated: ${DATA.metadata.last_updated}`;
@@ -185,18 +213,23 @@ function render() {
 function renderStats() {
   const total = DATA.testmo_tests.length;
   const covered = DATA.testmo_tests.filter(t => t.coverage_status !== 'none').length;
-  const pct = Math.round(covered / total * 100);
+  const appTests = DATA.app_testmo_tests || [];
+  const appTotal = appTests.length;
+  const appCovered = appTests.filter(t => t.coverage_status !== 'none').length;
+  const combinedTotal = total + appTotal;
+  const combinedCovered = covered + appCovered;
+  const pct = Math.round(combinedCovered / combinedTotal * 100);
   const totalAuto = DATA.metadata.total_automated_tests;
   
   document.getElementById('statsGrid').innerHTML = `
-    <div class="stat-card"><div class="stat-number">${total}</div><div class="stat-label">TestMO Cases</div></div>
-    <div class="stat-card"><div class="stat-number">${covered}</div><div class="stat-label">Covered</div></div>
-    <div class="stat-card"><div class="stat-number">${total - covered}</div><div class="stat-label">Not Covered</div></div>
-    <div class="stat-card"><div class="stat-number">${pct}%</div><div class="stat-label">Coverage</div></div>
+    <div class="stat-card"><div class="stat-number">${combinedTotal}</div><div class="stat-label">Total TestMO Cases</div></div>
+    <div class="stat-card"><div class="stat-number">${combinedCovered}</div><div class="stat-label">Covered</div></div>
+    <div class="stat-card"><div class="stat-number">${combinedTotal - combinedCovered}</div><div class="stat-label">Not Covered</div></div>
+    <div class="stat-card"><div class="stat-number">${pct}%</div><div class="stat-label">Overall Coverage</div></div>
     <div class="stat-card"><div class="stat-number">${totalAuto}</div><div class="stat-label">Automated Tests</div></div>
   `;
-  document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressFill').textContent = pct + '% Coverage';
+  document.getElementById('progressFill').style.width = Math.round(covered/total*100) + '%';
+  document.getElementById('progressFill').textContent = Math.round(covered/total*100) + '% Web Coverage';
 }
 
 function renderFilters() {
@@ -247,11 +280,97 @@ function renderTable() {
   }).join('');
 }
 
-function renderAppTests() {
-  const appTests = DATA.automated_tests.app;
-  document.getElementById('appTestsList').innerHTML = appTests.map(t => 
-    `<div class="app-test-item">🤖 <strong>${t.name}</strong> <small style="color:#888">(${t.file})</small>${t.title ? ' — ' + t.title : ''}</div>`
-  ).join('');
+function renderAppSection() {
+  const appTests = DATA.app_testmo_tests || [];
+  if (!appTests.length) return;
+  
+  const total = appTests.length;
+  const covered = appTests.filter(t => t.coverage_status !== 'none').length;
+  const pct = Math.round(covered / total * 100);
+  
+  document.getElementById('appStatsGrid').innerHTML = `
+    <div class="stat-card"><div class="stat-number">${total}</div><div class="stat-label">App TestMO Cases</div></div>
+    <div class="stat-card"><div class="stat-number">${covered}</div><div class="stat-label">Covered</div></div>
+    <div class="stat-card"><div class="stat-number">${total - covered}</div><div class="stat-label">Not Covered</div></div>
+    <div class="stat-card"><div class="stat-number">${pct}%</div><div class="stat-label">App Coverage</div></div>
+  `;
+  document.getElementById('appProgressFill').style.width = pct + '%';
+  document.getElementById('appProgressFill').textContent = pct + '% App Coverage';
+  
+  document.getElementById('appTableBody').innerHTML = appTests.map(t => {
+    const statusClass = `status-${t.coverage_status}`;
+    const statusLabel = t.coverage_status === 'full' ? '✅ Covered' : '❌ None';
+    const tags = t.automated_tests.map(at => 
+      `<span class="test-tag">${at}<span class="remove-tag" onclick="removeAppTest('${t.case_id}','${at}')">×</span></span>`
+    ).join('');
+    return `<tr>
+      <td><a href="https://mumzworld.testmo.net/runs/view/2192" target="_blank" style="color:#667eea;font-weight:600">C-${t.case_id}</a></td>
+      <td><strong>${t.name}</strong></td>
+      <td>${t.priority}</td>
+      <td>${t.status}</td>
+      <td class="edit-cell" id="appcell-${t.case_id}">${tags}<br><span class="add-test-btn" onclick="showAppAutocomplete('${t.case_id}')">+ Add test</span></td>
+      <td><span class="${statusClass}">${statusLabel}</span></td>
+      <td><textarea class="notes-input" onchange="updateAppNotes('${t.case_id}', this.value)" placeholder="Add notes...">${t.notes || ''}</textarea></td>
+    </tr>`;
+  }).join('');
+}
+
+function showAppAutocomplete(caseId) {
+  closeAutocomplete();
+  const cell = document.getElementById('appcell-' + caseId);
+  const test = DATA.app_testmo_tests.find(t => t.case_id === caseId);
+  const existing = new Set(test.automated_tests);
+  const appAutoTests = DATA.automated_tests.app.filter(t => !existing.has(t.name));
+  
+  const div = document.createElement('div');
+  div.className = 'autocomplete';
+  div.id = 'autocomplete-active';
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.placeholder = 'Type to filter app tests...';
+  input.style.cssText = 'width:100%;padding:8px;border:none;border-bottom:1px solid #eee;font-size:.85em';
+  div.appendChild(input);
+  const list = document.createElement('div');
+  div.appendChild(list);
+  
+  function renderList(filter) {
+    const filtered = filter ? appAutoTests.filter(t => t.name.toLowerCase().includes(filter.toLowerCase())) : appAutoTests;
+    list.innerHTML = filtered.slice(0, 20).map(t => 
+      `<div class="autocomplete-item" onclick="addAppTest('${caseId}','${t.name}')">${t.name}<small>${t.file}</small></div>`
+    ).join('');
+  }
+  input.oninput = () => renderList(input.value);
+  renderList('');
+  cell.appendChild(div);
+  input.focus();
+  setTimeout(() => document.addEventListener('click', closeOnOutside), 100);
+}
+
+function addAppTest(caseId, testName) {
+  const test = DATA.app_testmo_tests.find(t => t.case_id === caseId);
+  if (!test.automated_tests.includes(testName)) {
+    test.automated_tests.push(testName);
+    test.coverage_status = 'full';
+    saveEdits();
+    closeAutocomplete();
+    renderAppSection();
+    renderStats();
+  }
+}
+
+function removeAppTest(caseId, testName) {
+  const test = DATA.app_testmo_tests.find(t => t.case_id === caseId);
+  test.automated_tests = test.automated_tests.filter(t => t !== testName);
+  test.coverage_status = test.automated_tests.length > 0 ? 'full' : 'none';
+  saveEdits();
+  renderAppSection();
+  renderStats();
+}
+
+function updateAppNotes(caseId, value) {
+  const test = DATA.app_testmo_tests.find(t => t.case_id === caseId);
+  test.notes = value;
+  saveEdits();
 }
 
 function renderFolderBreakdown() {
@@ -358,12 +477,10 @@ function updateNotes(caseId, value) {
 
 // === Persistence ===
 function saveEdits() {
-  const edits = DATA.testmo_tests.map(t => ({
-    case_id: t.case_id,
-    automated_tests: t.automated_tests,
-    coverage_status: t.coverage_status,
-    notes: t.notes
-  }));
+  const edits = {
+    web: DATA.testmo_tests.map(t => ({case_id: t.case_id, automated_tests: t.automated_tests, coverage_status: t.coverage_status, notes: t.notes})),
+    app: (DATA.app_testmo_tests||[]).map(t => ({case_id: t.case_id, automated_tests: t.automated_tests, coverage_status: t.coverage_status, notes: t.notes}))
+  };
   localStorage.setItem(LS_KEY, JSON.stringify(edits));
   hasUnsavedChanges = true;
   document.getElementById('unsavedBadge').classList.remove('hidden');

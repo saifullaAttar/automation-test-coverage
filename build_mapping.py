@@ -128,10 +128,81 @@ EXPLICIT_MAPPINGS = {
     "2439823": [],  # Cross border GCC - not automated
 }
 
+# === App TestMO Mappings (Run 2192, 43 cases) ===
+APP_EXPLICIT_MAPPINGS = {
+    # Home
+    "1435389": ["test_app_explore_screen_elements_and_navigate_to_account"],  # Home page loading
+    "1435417": [],  # Home banners - not automated
+    "1435425": ["test_customer_can_search_product_in_specific_category"],  # Categories from home
+    "1435426": [],  # Collections from home - not automated
+    "1435390": [],  # Categories L1/L2/L3 - not automated
+    
+    # PLP/PDP/Search
+    "1435404": [],  # Filter and sort on PLP - not automated
+    "1435391": [],  # PDP all product types - not automated
+    "1435416": ["test_customer_can_search_brand"],  # Brand page
+    "1435402": ["test_customer_can_search_brand", "test_customer_can_search_product_in_specific_category"],  # Search products
+    "1435403": [],  # Filter/sort on search - not automated
+    
+    # Registration/Account
+    "1435392": ["test_user_signup"],  # New user registration
+    "1435393": ["test_existing_user_profile"],  # Access profile
+    "1435394": [],  # Order list/details - not automated
+    "1435395": [],  # Wishlist loading - not automated
+    "1435396": ["test_uae_cart_move_to_wishlist"],  # Add to wishlist
+    "1435397": [],  # Remove from wishlist - not automated
+    "1435398": [],  # Wallet page - not automated
+    "1435400": ["test_existing_user_delivery_address", "test_add_new_address_and_make_default_and_delete"],  # Address CRUD
+    
+    # Cart
+    "1435401": ["test_uae_cart_quantity_workflow"],  # Add all product types
+    "1435405": ["test_uae_cart_quantity_workflow", "test_uae_cart_bundle_multiple_variants", "test_uae_cart_configurable_multiple_variants"],  # Product list in cart
+    "1435406": ["test_uae_cart_increase_and_decrease_quantity", "test_uae_cart_item_integrity_after_quantity_change"],  # Update qty
+    "1435407": ["test_uae_cart_remove_item", "test_app_uae_cart_remaining_items_unaffected_after_partial_removal"],  # Remove from cart
+    "1435408": ["test_uae_checkout_apply_gift_wrap_place_order"],  # Gift wrap
+    "1435409": ["test_app_uae_cart_remove_item_with_applied_coupon"],  # Apply/remove coupon
+    "1543903": [],  # Order summary in cart - not automated standalone
+    "1543904": [],  # Order summary - not automated
+    "1435418": [],  # Add items to GR - not automated
+    
+    # Checkout
+    "1543905": [],  # Shipping address on checkout - not automated standalone
+    "1543906": [],  # Payment methods on checkout - not automated standalone
+    "1543907": ["test_uae_checkout_cc_no_coupon", "test_app_uae_checkout_tamara_no_coupon", "test_uae_checkout_tabby_no_coupon"],  # Place orders (Tamara/Tabby/CC)
+    "2283419": [],  # CC order from admin - not automated in app
+    "1543926": ["test_uae_checkout_cc_and_partial_sc_no_coupon"],  # Apply/remove SC (if exists)
+    
+    # GR / Multi-cart
+    "1435419": [],  # GR cart checkout - not automated
+    "1435420": [],  # Multiple carts - not automated
+    
+    # Guest checkout
+    "1543957": ["test_uae_guest_checkout_login_bottom_sheet_and_place_order"],  # Cart merge guest > existing
+    
+    # DY / App lifecycle
+    "1543908": [],  # DYs across screens - not automated
+    "1435415": [],  # Close/reopen app - not automated
+    
+    # Deeplinks / Notifications
+    "1543946": [],  # Deeplinks - not automated
+    "1543948": [],  # PN app open - not automated
+    "2282943": [],  # PN app killed - not automated
+    "2282944": [],  # PN app background - not automated
+    
+    # Maya / CT
+    "2673949": [],  # Maya loading - not automated
+    "2673950": [],  # Maya add to cart - not automated
+    "2673955": [],  # CT events - not automated
+}
+
 def build_mapping():
     base = Path(__file__).parent
     testmo_tests = json.loads((base / "testmo_tests.json").read_text())
     automated_tests = json.loads((base / "automated_tests.json").read_text())
+    
+    # Load app TestMO tests if available
+    app_testmo_path = base / "app_testmo_tests.json"
+    app_testmo_tests = json.loads(app_testmo_path.read_text()) if app_testmo_path.exists() else []
     
     # Build flat list of all automated test names for validation
     all_auto_names = set()
@@ -139,30 +210,38 @@ def build_mapping():
         for t in platform:
             all_auto_names.add(t["name"])
     
-    # Apply mappings
+    # Apply web mappings
     for test in testmo_tests:
         case_id = test["case_id"]
         mapped = EXPLICIT_MAPPINGS.get(case_id, [])
-        # Filter to only valid test names
         valid_mapped = [t for t in mapped if t in all_auto_names]
         test["automated_tests"] = valid_mapped
-        
-        if valid_mapped:
-            test["coverage_status"] = "full"
-        else:
-            test["coverage_status"] = "none"
+        test["coverage_status"] = "full" if valid_mapped else "none"
+        test["notes"] = ""
+    
+    # Apply app mappings
+    for test in app_testmo_tests:
+        case_id = test["case_id"]
+        mapped = APP_EXPLICIT_MAPPINGS.get(case_id, [])
+        valid_mapped = [t for t in mapped if t in all_auto_names]
+        test["automated_tests"] = valid_mapped
+        test["coverage_status"] = "full" if valid_mapped else "none"
         test["notes"] = ""
     
     # Build final mapping.json
     mapping = {
         "testmo_tests": testmo_tests,
+        "app_testmo_tests": app_testmo_tests,
         "automated_tests": automated_tests,
-        "app_testmo_placeholder": True,
+        "app_testmo_placeholder": False,
         "metadata": {
-            "testmo_run_id": 2154,
-            "testmo_url": "https://mumzworld.testmo.net/runs/view/2154",
+            "testmo_run_id_web": 2154,
+            "testmo_run_id_app": 2192,
+            "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
+            "testmo_url_app": "https://mumzworld.testmo.net/runs/view/2192",
             "last_updated": str(date.today()),
-            "total_testmo_cases": len(testmo_tests),
+            "total_testmo_cases_web": len(testmo_tests),
+            "total_testmo_cases_app": len(app_testmo_tests),
             "total_automated_tests": sum(len(v) for v in automated_tests.values()),
         }
     }
@@ -171,11 +250,12 @@ def build_mapping():
     output.write_text(json.dumps(mapping, indent=2))
     
     # Stats
-    covered = sum(1 for t in testmo_tests if t["coverage_status"] != "none")
+    web_covered = sum(1 for t in testmo_tests if t["coverage_status"] != "none")
+    app_covered = sum(1 for t in app_testmo_tests if t["coverage_status"] != "none")
     print(f"✅ Mapping complete → {output}")
-    print(f"   TestMO cases: {len(testmo_tests)}")
-    print(f"   Covered: {covered} ({covered*100//len(testmo_tests)}%)")
-    print(f"   Not covered: {len(testmo_tests) - covered}")
+    print(f"   Web TestMO: {web_covered}/{len(testmo_tests)} covered ({web_covered*100//len(testmo_tests)}%)")
+    print(f"   App TestMO: {app_covered}/{len(app_testmo_tests)} covered ({app_covered*100//len(app_testmo_tests) if app_testmo_tests else 0}%)")
+    print(f"   Total automated tests: {sum(len(v) for v in automated_tests.values())}")
 
 if __name__ == "__main__":
     build_mapping()
