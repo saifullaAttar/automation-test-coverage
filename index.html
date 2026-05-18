@@ -80,6 +80,7 @@ tr:hover{background:#f8f9ff}
     <select id="filterStatus">
       <option value="">All Status</option>
       <option value="full">✅ Covered</option>
+      <option value="partial">⚠️ Partial</option>
       <option value="none">❌ Not Covered</option>
     </select>
     <select id="filterPriority">
@@ -109,7 +110,6 @@ tr:hover{background:#f8f9ff}
           <th style="width:25%">Test Name</th>
           <th>Folder</th>
           <th>Priority</th>
-          <th>Status</th>
           <th style="width:30%">Mapped Automated Tests</th>
           <th style="width:120px">Coverage</th>
           <th style="width:15%">Notes</th>
@@ -130,9 +130,8 @@ tr:hover{background:#f8f9ff}
             <th style="width:80px">Case ID</th>
             <th style="width:30%">Test Name</th>
             <th>Priority</th>
-            <th>Status</th>
             <th style="width:30%">Mapped Automated Tests</th>
-            <th style="width:100px">Coverage</th>
+            <th style="width:120px">Coverage</th>
             <th style="width:15%">Notes</th>
           </tr>
         </thead>
@@ -261,8 +260,6 @@ function renderTable() {
   const tbody = document.getElementById('tableBody');
   tbody.innerHTML = tests.map(t => {
     const prioClass = t.priority.startsWith('P0') ? 'priority-p0' : t.priority.startsWith('P1') ? 'priority-p1' : 'priority-p2';
-    const statusClass = `status-${t.coverage_status}`;
-    const statusLabel = t.coverage_status === 'full' ? '✅ Covered' : t.coverage_status === 'partial' ? '⚠️ Partial' : '❌ None';
     const tags = t.automated_tests.map(at => 
       `<span class="test-tag">${at}<span class="remove-tag" onclick="removeTest('${t.case_id}','${at}')">×</span></span>`
     ).join('');
@@ -272,9 +269,12 @@ function renderTable() {
       <td><strong>${t.name}</strong>${t.summary ? '<br><small style="color:#888">' + t.summary.substring(0,100) + '</small>' : ''}</td>
       <td>${t.folder}</td>
       <td class="${prioClass}">${t.priority}</td>
-      <td>${t.status}</td>
       <td class="edit-cell" id="cell-${t.case_id}">${tags}<br><span class="add-test-btn" onclick="showAutocomplete('${t.case_id}')">+ Add test</span></td>
-      <td><span class="${statusClass}">${statusLabel}</span></td>
+      <td><select class="coverage-select" onchange="updateCoverage('${t.case_id}', this.value)" style="padding:4px;border-radius:4px;border:1px solid #ddd;font-size:.8em;background:${t.coverage_status==='full'?'#d4edda':t.coverage_status==='partial'?'#fff3cd':'#f8d7da'}">
+        <option value="full" ${t.coverage_status==='full'?'selected':''}>✅ Covered</option>
+        <option value="partial" ${t.coverage_status==='partial'?'selected':''}>⚠️ Partial</option>
+        <option value="none" ${t.coverage_status==='none'?'selected':''}>❌ Not Covered</option>
+      </select></td>
       <td><textarea class="notes-input" onchange="updateNotes('${t.case_id}', this.value)" placeholder="Add notes...">${t.notes || ''}</textarea></td>
     </tr>`;
   }).join('');
@@ -298,8 +298,6 @@ function renderAppSection() {
   document.getElementById('appProgressFill').textContent = pct + '% App Coverage';
   
   document.getElementById('appTableBody').innerHTML = appTests.map(t => {
-    const statusClass = `status-${t.coverage_status}`;
-    const statusLabel = t.coverage_status === 'full' ? '✅ Covered' : '❌ None';
     const tags = t.automated_tests.map(at => 
       `<span class="test-tag">${at}<span class="remove-tag" onclick="removeAppTest('${t.case_id}','${at}')">×</span></span>`
     ).join('');
@@ -307,9 +305,12 @@ function renderAppSection() {
       <td><a href="https://mumzworld.testmo.net/runs/view/2192" target="_blank" style="color:#667eea;font-weight:600">C-${t.case_id}</a></td>
       <td><strong>${t.name}</strong></td>
       <td>${t.priority}</td>
-      <td>${t.status}</td>
       <td class="edit-cell" id="appcell-${t.case_id}">${tags}<br><span class="add-test-btn" onclick="showAppAutocomplete('${t.case_id}')">+ Add test</span></td>
-      <td><span class="${statusClass}">${statusLabel}</span></td>
+      <td><select class="coverage-select" onchange="updateAppCoverage('${t.case_id}', this.value)" style="padding:4px;border-radius:4px;border:1px solid #ddd;font-size:.8em;background:${t.coverage_status==='full'?'#d4edda':t.coverage_status==='partial'?'#fff3cd':'#f8d7da'}">
+        <option value="full" ${t.coverage_status==='full'?'selected':''}>✅ Covered</option>
+        <option value="partial" ${t.coverage_status==='partial'?'selected':''}>⚠️ Partial</option>
+        <option value="none" ${t.coverage_status==='none'?'selected':''}>❌ Not Covered</option>
+      </select></td>
       <td><textarea class="notes-input" onchange="updateAppNotes('${t.case_id}', this.value)" placeholder="Add notes...">${t.notes || ''}</textarea></td>
     </tr>`;
   }).join('');
@@ -371,6 +372,14 @@ function updateAppNotes(caseId, value) {
   const test = DATA.app_testmo_tests.find(t => t.case_id === caseId);
   test.notes = value;
   saveEdits();
+}
+
+function updateAppCoverage(caseId, value) {
+  const test = DATA.app_testmo_tests.find(t => t.case_id === caseId);
+  test.coverage_status = value;
+  saveEdits();
+  renderAppSection();
+  renderStats();
 }
 
 function renderFolderBreakdown() {
@@ -473,6 +482,14 @@ function updateNotes(caseId, value) {
   const test = DATA.testmo_tests.find(t => t.case_id === caseId);
   test.notes = value;
   saveEdits();
+}
+
+function updateCoverage(caseId, value) {
+  const test = DATA.testmo_tests.find(t => t.case_id === caseId);
+  test.coverage_status = value;
+  saveEdits();
+  renderStats();
+  renderFolderBreakdown();
 }
 
 // === Persistence ===
