@@ -1,448 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mumzworld Automation Test Coverage Report</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f172a;color:#e2e8f0;padding:20px}
-.header{text-align:center;padding:40px 20px;background:linear-gradient(135deg,#1e293b,#334155);border-radius:16px;margin-bottom:30px;border:1px solid #475569}
-.header h1{font-size:28px;background:linear-gradient(90deg,#38bdf8,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
-.header p{color:#94a3b8;font-size:14px}
-.toolbar{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap}
-.btn{padding:8px 20px;border-radius:8px;border:none;cursor:pointer;font-size:13px;font-weight:600;transition:all .2s}
-.btn-primary{background:#3b82f6;color:#fff}.btn-primary:hover{background:#2563eb}
-.btn-success{background:#22c55e;color:#fff}.btn-success:hover{background:#16a34a}
-.btn-danger{background:#ef4444;color:#fff}.btn-danger:hover{background:#dc2626}
-.btn-amber{background:#f59e0b;color:#000}.btn-amber:hover{background:#d97706}
-.btn-outline{background:transparent;border:1px solid #475569;color:#94a3b8}.btn-outline:hover{border-color:#818cf8;color:#818cf8}
-.btn-sm{padding:4px 10px;font-size:11px;border-radius:6px}
-.edit-only{display:none}
-body.edit-mode .edit-only{display:inline-block}
-body.edit-mode .read-only{display:none}
-.lock-banner{background:#1e293b;border:1px solid #334155;border-radius:10px;padding:12px 20px;text-align:center;margin-bottom:20px;color:#94a3b8;font-size:13px}
-.lock-banner .lock-icon{font-size:18px;margin-right:6px}
-body.edit-mode .lock-banner{background:#172554;border-color:#3b82f6;color:#93c5fd}
-.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-bottom:30px}
-.stat-card{background:#1e293b;border-radius:12px;padding:18px;text-align:center;border:1px solid #334155}
-.stat-card .number{font-size:32px;font-weight:700;margin-bottom:4px}
-.stat-card .label{color:#94a3b8;font-size:11px;text-transform:uppercase;letter-spacing:1px}
-.green{color:#4ade80}.blue{color:#38bdf8}.purple{color:#a78bfa}.amber{color:#fbbf24}.red{color:#f87171}.cyan{color:#22d3ee}
-.charts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:20px;margin-bottom:30px}
-.chart-card{background:#1e293b;border-radius:12px;padding:24px;border:1px solid #334155}
-.chart-card h3{margin-bottom:16px;font-size:15px;color:#cbd5e1}
-.section-title{font-size:20px;font-weight:600;margin:30px 0 16px;padding-left:12px;border-left:4px solid #818cf8}
-table{width:100%;border-collapse:collapse;margin-bottom:24px;background:#1e293b;border-radius:12px;overflow:hidden}
-th{background:#334155;padding:10px 10px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#94a3b8}
-td{padding:8px 10px;border-bottom:1px solid #0f172a;font-size:12px}
-tr:nth-child(even){background:#1e293b}tr:nth-child(odd){background:#172033}
-tr:hover{background:#1e3a5f}
-.badge{padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600;display:inline-block}
-.badge-active{background:#065f46;color:#6ee7b7}
-.badge-skip{background:#78350f;color:#fcd34d}
-.badge-critical{background:#7f1d1d;color:#fca5a5}
-.badge-normal{background:#1e3a5f;color:#7dd3fc}
-.badge-testmo{background:#312e81;color:#a5b4fc;font-size:11px;padding:3px 10px}
-.badge-unmapped{background:#78350f;color:#fcd34d;font-size:11px;padding:3px 10px}
-.badge-manual{background:#3b0764;color:#d8b4fe;font-size:10px;padding:2px 8px}
-.footer{text-align:center;padding:20px;color:#64748b;font-size:12px;margin-top:30px}
-.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:100;justify-content:center;align-items:center}
-.modal-overlay.show{display:flex}
-.modal{background:#1e293b;border-radius:16px;padding:30px;width:560px;max-width:95vw;border:1px solid #475569;max-height:90vh;overflow-y:auto}
-.modal h3{margin-bottom:20px;color:#e2e8f0}
-.form-group{margin-bottom:14px}
-.form-group label{display:block;margin-bottom:4px;color:#94a3b8;font-size:12px}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:8px 12px;border-radius:8px;border:1px solid #475569;background:#0f172a;color:#e2e8f0;font-size:13px}
-.form-group textarea{height:60px;resize:vertical}
-.form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
-select option{background:#1e293b}
-.filter-row th{padding:4px 4px;background:#2d3748}
-.filter-row select,.filter-row input{width:100%;padding:4px 6px;border-radius:6px;border:1px solid #475569;background:#0f172a;color:#e2e8f0;font-size:11px}
-.badge-failed{background:#7f1d1d;color:#fca5a5}
-.badge-yes{background:#065f46;color:#6ee7b7}
-.badge-no{background:#78350f;color:#fcd34d}
-.badge-cant{background:#3b0764;color:#d8b4fe}
-.badge-passed{background:#065f46;color:#6ee7b7;font-size:9px;padding:2px 6px;margin:1px}
-.badge-fail{background:#7f1d1d;color:#fca5a5;font-size:9px;padding:2px 6px;margin:1px}
-.badge-broken{background:#78350f;color:#fcd34d;font-size:9px;padding:2px 6px;margin:1px}
-.badge-skipped-sm{background:#1e3a5f;color:#7dd3fc;font-size:9px;padding:2px 6px;margin:1px}
-.reg-history{display:flex;flex-wrap:wrap;gap:2px;max-width:200px}
-.testmo-highlight{border-left:3px solid #818cf8;padding-left:6px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mumzworld Automation Test Coverage</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: #333;
+        }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .header p { font-size: 1.1em; opacity: 0.9; }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            background: #f8f9fa;
+        }
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .stat-card:hover { transform: translateY(-5px); }
+        .stat-number { 
+            font-size: 3em; 
+            font-weight: bold; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat-label { 
+            font-size: 1.1em; 
+            color: #666; 
+            margin-top: 10px;
+        }
+        .coverage-section {
+            padding: 40px;
+        }
+        .coverage-header {
+            font-size: 2em;
+            margin-bottom: 30px;
+            color: #333;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 50px;
+            height: 40px;
+            margin: 20px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: width 1s ease;
+        }
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .category-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .category-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+        .test-count {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+        }
+        .footer {
+            background: #2d3748;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .timestamp {
+            color: #a0aec0;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-<div class="header">
-<h1>🧪 Mumzworld — Automation ↔ Testmo Traceability Report</h1>
-<p>Repository: mumzworld-tech/automation_web_2.0 &nbsp;|&nbsp; Framework: Python + Selenium + Appium + Pytest + Allure</p>
-<p style="color:#64748b;font-size:12px;margin-top:4px" id="lastUpdated"></p>
-<div class="toolbar">
-<button class="btn btn-outline read-only" onclick="promptPassword()">🔓 Unlock Edit Mode</button>
-<button class="btn btn-danger edit-only" onclick="lockEditing()">🔒 Lock & Save</button>
-<button class="btn btn-primary edit-only" onclick="openAddModal()">➕ Add Test</button>
-<button class="btn btn-success edit-only" onclick="openAllureModal()">📊 Import Allure Run</button>
-<button class="btn btn-amber edit-only" onclick="downloadJSON()">📥 Export JSON</button>
-<button class="btn btn-success edit-only" onclick="document.getElementById('importFile').click()">📤 Import JSON</button>
-<button class="btn btn-primary" onclick="downloadHTML()">💾 Download Report</button>
-<input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)">
-</div>
-</div>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Mumzworld Automation Test Coverage</h1>
+            <p>Repository: mumzworld-tech/automation_web_2.0</p>
+            <p>Framework: Python + Selenium + Appium + Pytest + Allure</p>
+        </div>
 
-<div id="lockBanner" class="lock-banner"><span class="lock-icon">🔒</span> Read-only mode — Stakeholder view. Only authorized users can edit.</div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">90</div>
+                <div class="stat-label">Total Automated Tests</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">67</div>
+                <div class="stat-label">Web Tests (UAE + KSA)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">23</div>
+                <div class="stat-label">Mobile App Tests</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">39.1%</div>
+                <div class="stat-label">Overall Coverage</div>
+            </div>
+        </div>
 
-<div class="stats-row" id="statsRow"></div>
-<div class="charts-grid">
-<div class="chart-card"><h3>📊 Automation Coverage</h3><canvas id="testmoChart"></canvas></div>
-<div class="chart-card"><h3>🌐 Web UAE — Automation Coverage</h3><canvas id="uaeChart"></canvas></div>
-<div class="chart-card"><h3>🌐 Web KSA — Automation Coverage</h3><canvas id="ksaChart"></canvas></div>
-<div class="chart-card"><h3>📱 App — Android & iOS Coverage</h3><canvas id="appChart"></canvas></div>
-<div class="chart-card"><h3>📊 Test Status Distribution</h3><canvas id="statusChart"></canvas></div>
-<div class="chart-card"><h3>📊 Tests by Feature Area</h3><canvas id="featureChart"></canvas></div>
-</div>
-<div id="tablesContainer"></div>
+        <div class="coverage-section">
+            <h2 class="coverage-header">🌐 Web Automation Coverage</h2>
+            <p><strong>Automated:</strong> 67 tests | <strong>Total in Testmo:</strong> 150 tests</p>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 44.7%">44.7%</div>
+            </div>
 
-<div class="modal-overlay" id="modalOverlay">
-<div class="modal" id="testModal"></div>
-</div>
+            <h3 style="margin-top: 40px; color: #667eea;">UAE Web Tests (35 tests)</h3>
+            <div class="category-grid">
+                <div class="category-card"><div class="category-title">User</div><div class="test-count">4 tests</div></div><div class="category-card"><div class="category-title">Cart</div><div class="test-count">12 tests</div></div><div class="category-card"><div class="category-title">Checkout</div><div class="test-count">19 tests</div></div>
+            </div>
 
-<div class="footer"><p>Mumzworld SDET Team — Automation ↔ Testmo Traceability Report</p></div>
+            <h3 style="margin-top: 40px; color: #667eea;">KSA Web Tests (32 tests)</h3>
+            <div class="category-grid">
+                <div class="category-card"><div class="category-title">Checkout Ksa</div><div class="test-count">16 tests</div></div><div class="category-card"><div class="category-title">Cart Ksa</div><div class="test-count">12 tests</div></div><div class="category-card"><div class="category-title">User Ksa</div><div class="test-count">4 tests</div></div>
+            </div>
+        </div>
 
-<script>
-const EDIT_PASSWORD = "Mumz@SDET2026";
-let editMode = false;
-const PLATFORMS=['Web UAE','Web KSA','App','Manual'],FEATURES=['Checkout','Cart','Coupon','User','Account','Home','Search','Geo IP','PDP/PLP','Wishlist','Orders','Wallet','Gift Registry','Product Types','Catalogue'],SEVERITIES=['CRITICAL','NORMAL'],STATUSES=['Active','Skipped','Failed'],AUTOMATED_OPTS=['Yes','No',"Can't be automated"],PAYMENTS=['CC','COD','Tabby','Tamara','Store Credit','Cashback','Gift Wrap'];
+        <div class="coverage-section" style="background: #f8f9fa;">
+            <h2 class="coverage-header">📱 Mobile App Automation Coverage</h2>
+            <p><strong>Automated:</strong> 23 tests | <strong>Total in Testmo:</strong> 80 tests</p>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 28.7%">28.7%</div>
+            </div>
 
-let tests=[
-{id:1,platform:"Web UAE",file:"test_cart.py",feature:"Cart",name:"test_uae_cart_existing_user_orders_no_coupon_yalla",desc:"Verify Yalla free shipping on cart for existing user",severity:"NORMAL",tags:"Yalla",status:"Active",count:1,testmoId:""},
-{id:2,platform:"Web UAE",file:"test_cart.py",feature:"Cart",name:"test_uae_cart_guest_login_no_coupon_sc",desc:"Guest adds to cart, logs in, pays with Store Credit",severity:"CRITICAL",tags:"Guest, SC",status:"Active",count:1,testmoId:""},
-{id:3,platform:"Web UAE",file:"test_cart.py",feature:"Cart",name:"test_uae_cart_add_items_as_new_user_cashback_coupon",desc:"New user signup, add to cart, apply cashback coupon",severity:"CRITICAL",tags:"Cashback",status:"Active",count:1,testmoId:""},
-{id:4,platform:"Web UAE",file:"test_cart.py",feature:"Cart",name:"test_uae_checkout_with_cart_items_register_new_user_coupon",desc:"Guest checkout → register → apply coupon → place order",severity:"CRITICAL",tags:"Guest, Coupon",status:"Active",count:1,testmoId:""},
-{id:5,platform:"Web UAE",file:"test_cart.py",feature:"Cart",name:"test_uae_uf2_cart_gift_wrap_wishlist",desc:"Gift wrap, qty increase, signup, wishlist, CC order",severity:"NORMAL",tags:"Gift Wrap, Wishlist",status:"Active",count:1,testmoId:""},
-{id:6,platform:"Web UAE",file:"test_cart.py",feature:"Cart",name:"test_uae_cart_uf5_checkout_cod_no_coupon",desc:"Sign out/in flow, qty changes, COD checkout",severity:"CRITICAL",tags:"COD",status:"Active",count:1,testmoId:""},
-{id:7,platform:"Web UAE",file:"test_cart.py",feature:"Coupon",name:"test_uae_pct_discount_without_max_amount",desc:"Bundle product + coupon (no max) → CC order",severity:"CRITICAL",tags:"CC, Coupon",status:"Active",count:1,testmoId:""},
-{id:8,platform:"Web UAE",file:"test_cart.py",feature:"Coupon",name:"test_uae_pct_discount_with_max_amount",desc:"Simple product + coupon (max 50) → COD order",severity:"CRITICAL",tags:"COD, Coupon",status:"Active",count:1,testmoId:""},
-{id:9,platform:"Web UAE",file:"test_cart.py",feature:"Coupon",name:"test_uae_pct_variant_discount_with_max",desc:"Sales + non-sales product, coupon on checkout → COD",severity:"CRITICAL",tags:"COD, Coupon",status:"Active",count:1,testmoId:""},
-{id:10,platform:"Web UAE",file:"test_cart.py",feature:"Coupon",name:"test_uae_pct_variant_discount_without_max",desc:"Sales + non-sales product, coupon on cart → CC",severity:"CRITICAL",tags:"CC, Coupon",status:"Active",count:1,testmoId:""},
-{id:11,platform:"Web UAE",file:"test_cart.py",feature:"Coupon",name:"test_uae_bank_discount_pct_product_price_rule",desc:"Bank coupon, qty increase, CC order",severity:"CRITICAL",tags:"CC, Bank Coupon",status:"Active",count:1,testmoId:""},
-{id:12,platform:"Web UAE",file:"test_cart.py",feature:"Cart",name:"test_uae_cart_apply_gift_wrap_and_place_order",desc:"Add gift wrap on cart, checkout with CC",severity:"CRITICAL",tags:"Gift Wrap, CC",status:"Active",count:1,testmoId:""},
-{id:13,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_cc_no_coupon",desc:"CC checkout (simple/bundle/configurable/custom)",severity:"CRITICAL",tags:"CC",status:"Active",count:4,testmoId:""},
-{id:14,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_cod_no_coupon",desc:"COD checkout (simple/bundle/configurable/custom)",severity:"CRITICAL",tags:"COD",status:"Active",count:4,testmoId:""},
-{id:15,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_tabby_no_coupon",desc:"Tabby checkout (simple/bundle/configurable/custom)",severity:"CRITICAL",tags:"Tabby",status:"Active",count:4,testmoId:""},
-{id:16,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_tabby_cashback_coupon",desc:"Tabby + cashback coupon",severity:"CRITICAL",tags:"Tabby, Cashback",status:"Active",count:1,testmoId:""},
-{id:17,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_cc_normal_coupon",desc:"CC + normal discount coupon",severity:"CRITICAL",tags:"CC, Coupon",status:"Active",count:1,testmoId:""},
-{id:18,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_cod_normal_coupon",desc:"COD + normal discount coupon",severity:"CRITICAL",tags:"COD, Coupon",status:"Active",count:1,testmoId:""},
-{id:19,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_tabby_normal_coupon",desc:"Tabby + normal coupon",severity:"CRITICAL",tags:"Tabby, Coupon",status:"Active",count:1,testmoId:""},
-{id:20,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_full_sc_no_coupon",desc:"Full Store Credit payment",severity:"CRITICAL",tags:"Store Credit",status:"Active",count:1,testmoId:""},
-{id:21,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_cc_and_partial_sc",desc:"CC + partial Store Credit",severity:"CRITICAL",tags:"CC, Store Credit",status:"Active",count:1,testmoId:""},
-{id:22,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_tamara_no_coupon",desc:"Tamara checkout (simple/bundle/configurable/custom)",severity:"CRITICAL",tags:"Tamara",status:"Active",count:4,testmoId:""},
-{id:23,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_tamara_normal_coupon",desc:"Tamara + normal coupon",severity:"CRITICAL",tags:"Tamara, Coupon",status:"Skipped",count:1,testmoId:""},
-{id:24,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_tamara_cashback_coupon",desc:"Tamara + cashback coupon",severity:"CRITICAL",tags:"Tamara, Cashback",status:"Skipped",count:1,testmoId:""},
-{id:25,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_invalid_cc",desc:"Invalid CC → verify payment failed popup",severity:"CRITICAL",tags:"CC, Invalid CC",status:"Active",count:1,testmoId:""},
-{id:26,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_full_sc_and_normal_coupon",desc:"Full SC + normal coupon + wallet balance",severity:"CRITICAL",tags:"Store Credit, Coupon",status:"Active",count:1,testmoId:""},
-{id:27,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_cc_partial_sc_coupon",desc:"CC + partial SC + normal coupon",severity:"CRITICAL",tags:"CC, SC, Coupon",status:"Active",count:1,testmoId:""},
-{id:28,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_cc_wrong_otp",desc:"CC with wrong OTP → verify error",severity:"CRITICAL",tags:"CC, Wrong OTP",status:"Active",count:1,testmoId:""},
-{id:29,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_cc_coupon_modal_sheet",desc:"Apply coupon from modal sheet → CC order",severity:"CRITICAL",tags:"CC, Coupon Modal",status:"Active",count:1,testmoId:""},
-{id:30,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_full_sc_verify_balance",desc:"Full SC + verify wallet balance after purchase",severity:"CRITICAL",tags:"Store Credit",status:"Active",count:1,testmoId:""},
-{id:31,platform:"Web UAE",file:"test_checkout.py",feature:"Checkout",name:"test_uae_checkout_cc_verify_odp",desc:"CC order + verify Order Details Page",severity:"CRITICAL",tags:"CC, ODP",status:"Active",count:1,testmoId:""},
-{id:32,platform:"Web UAE",file:"test_user.py",feature:"User",name:"test_uae_user_register_from_account_page",desc:"Guest registers from account page",severity:"NORMAL",tags:"New User",status:"Active",count:1,testmoId:""},
-{id:33,platform:"Web UAE",file:"test_user.py",feature:"User",name:"test_uae_user_register_from_cart_page",desc:"Guest registers from cart/checkout flow",severity:"NORMAL",tags:"New User",status:"Active",count:1,testmoId:""},
-{id:34,platform:"Web UAE",file:"test_user.py",feature:"User",name:"test_uae_user_logs_in_from_account_page",desc:"Existing user login from account page + sign out",severity:"NORMAL",tags:"Existing User",status:"Active",count:1,testmoId:""},
-{id:35,platform:"Web UAE",file:"test_user.py",feature:"User",name:"test_uae_user_logs_in_from_cart_page",desc:"Existing user login from cart page + sign out",severity:"NORMAL",tags:"Existing User",status:"Active",count:1,testmoId:""},
-{id:36,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Cart",name:"test_ksa_cart_existing_user_yalla",desc:"Verify Yalla free shipping on cart for existing user",severity:"NORMAL",tags:"Yalla",status:"Active",count:1,testmoId:""},
-{id:37,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Cart",name:"test_ksa_cart_guest_login_sc",desc:"Guest adds to cart, logs in, pays with Store Credit",severity:"CRITICAL",tags:"Guest, SC",status:"Active",count:1,testmoId:""},
-{id:38,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Cart",name:"test_ksa_cart_new_user_cashback_coupon",desc:"New user signup, add to cart, apply cashback coupon",severity:"CRITICAL",tags:"Cashback",status:"Active",count:1,testmoId:""},
-{id:39,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Cart",name:"test_ksa_checkout_register_new_user_coupon",desc:"Guest checkout → register → apply coupon → place order",severity:"CRITICAL",tags:"Guest, Coupon",status:"Active",count:1,testmoId:""},
-{id:40,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Cart",name:"test_ksa_uf2_cart_gift_wrap_wishlist",desc:"Gift wrap, qty increase, signup, wishlist, CC order",severity:"NORMAL",tags:"Gift Wrap, Wishlist",status:"Active",count:1,testmoId:""},
-{id:41,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Cart",name:"test_ksa_cart_uf5_checkout_cod",desc:"Sign out/in flow, qty changes, COD checkout",severity:"CRITICAL",tags:"COD",status:"Active",count:1,testmoId:""},
-{id:42,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Coupon",name:"test_ksa_pct_discount_without_max",desc:"Bundle product + coupon (no max) → CC order",severity:"CRITICAL",tags:"CC, Coupon",status:"Active",count:1,testmoId:""},
-{id:43,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Coupon",name:"test_ksa_pct_discount_with_max",desc:"Simple product + coupon (max 50) → COD order",severity:"CRITICAL",tags:"COD, Coupon",status:"Active",count:1,testmoId:""},
-{id:44,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Coupon",name:"test_ksa_pct_variant_discount_with_max",desc:"Sales + non-sales, coupon on checkout → COD",severity:"CRITICAL",tags:"COD, Coupon",status:"Active",count:1,testmoId:""},
-{id:45,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Coupon",name:"test_ksa_pct_variant_discount_without_max",desc:"Sales + non-sales, coupon on cart → CC",severity:"CRITICAL",tags:"CC, Coupon",status:"Active",count:1,testmoId:""},
-{id:46,platform:"Web KSA",file:"test_cart_ksa.py",feature:"Coupon",name:"test_ksa_bank_discount_pct_rule",desc:"Bank coupon, qty increase, CC order",severity:"CRITICAL",tags:"CC, Bank Coupon",status:"Active",count:1,testmoId:""},
-{id:47,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_cc_no_coupon",desc:"CC checkout (simple/bundle/configurable/custom)",severity:"CRITICAL",tags:"CC",status:"Active",count:4,testmoId:""},
-{id:48,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_cod_no_coupon",desc:"COD checkout, no coupon",severity:"CRITICAL",tags:"COD",status:"Active",count:1,testmoId:""},
-{id:49,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_tabby_no_coupon",desc:"Tabby checkout, no coupon",severity:"CRITICAL",tags:"Tabby",status:"Skipped",count:1,testmoId:""},
-{id:50,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_tabby_cashback_coupon",desc:"Tabby + cashback coupon",severity:"CRITICAL",tags:"Tabby, Cashback",status:"Skipped",count:1,testmoId:""},
-{id:51,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_cc_normal_coupon",desc:"CC + normal discount coupon",severity:"CRITICAL",tags:"CC, Coupon",status:"Active",count:1,testmoId:""},
-{id:52,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_cod_normal_coupon",desc:"COD + normal discount coupon",severity:"CRITICAL",tags:"COD, Coupon",status:"Active",count:1,testmoId:""},
-{id:53,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_tabby_normal_coupon",desc:"Tabby + normal coupon",severity:"CRITICAL",tags:"Tabby, Coupon",status:"Skipped",count:1,testmoId:""},
-{id:54,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_full_sc",desc:"Full Store Credit payment",severity:"CRITICAL",tags:"Store Credit",status:"Active",count:1,testmoId:""},
-{id:55,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_cc_partial_sc",desc:"CC + partial Store Credit",severity:"CRITICAL",tags:"CC, Store Credit",status:"Active",count:1,testmoId:""},
-{id:56,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_tamara_no_coupon",desc:"Tamara checkout, no coupon",severity:"CRITICAL",tags:"Tamara",status:"Skipped",count:1,testmoId:""},
-{id:57,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_tamara_normal_coupon",desc:"Tamara + normal coupon",severity:"CRITICAL",tags:"Tamara, Coupon",status:"Skipped",count:1,testmoId:""},
-{id:58,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_tamara_cashback_coupon",desc:"Tamara + cashback coupon",severity:"CRITICAL",tags:"Tamara, Cashback",status:"Skipped",count:1,testmoId:""},
-{id:59,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_invalid_cc",desc:"Invalid CC → verify payment failed popup",severity:"CRITICAL",tags:"CC, Invalid CC",status:"Active",count:1,testmoId:""},
-{id:60,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_full_sc_coupon",desc:"Full SC + normal coupon",severity:"CRITICAL",tags:"Store Credit, Coupon",status:"Active",count:1,testmoId:""},
-{id:61,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_cc_partial_sc_coupon",desc:"CC + partial SC + normal coupon",severity:"CRITICAL",tags:"CC, SC, Coupon",status:"Active",count:1,testmoId:""},
-{id:62,platform:"Web KSA",file:"test_checkout_ksa.py",feature:"Checkout",name:"test_ksa_checkout_cc_wrong_otp",desc:"CC with wrong OTP → verify error",severity:"CRITICAL",tags:"CC, Wrong OTP",status:"Active",count:1,testmoId:""},
-{id:63,platform:"Web KSA",file:"test_user_ksa.py",feature:"User",name:"test_ksa_user_register_from_account_page",desc:"Guest registers from account page",severity:"NORMAL",tags:"New User",status:"Active",count:1,testmoId:""},
-{id:64,platform:"Web KSA",file:"test_user_ksa.py",feature:"User",name:"test_ksa_user_register_from_cart_page",desc:"Guest registers from cart/checkout flow",severity:"NORMAL",tags:"New User",status:"Active",count:1,testmoId:""},
-{id:65,platform:"Web KSA",file:"test_user_ksa.py",feature:"User",name:"test_ksa_user_logs_in_from_account_page",desc:"Existing user login from account page + sign out",severity:"NORMAL",tags:"Existing User",status:"Active",count:1,testmoId:""},
-{id:66,platform:"Web KSA",file:"test_user_ksa.py",feature:"User",name:"test_ksa_user_logs_in_from_cart_page",desc:"Existing user login from cart page + sign out",severity:"NORMAL",tags:"Existing User",status:"Active",count:1,testmoId:""},
-{id:67,platform:"App",file:"test_app_account.py",feature:"Account",name:"test_user_signup",desc:"Guest user creates new account from account page",severity:"CRITICAL",tags:"New Account",status:"Active",count:1,testmoId:""},
-{id:68,platform:"App",file:"test_app_account.py",feature:"Account",name:"test_existing_user_profile",desc:"Existing user accesses and verifies My Profile",severity:"CRITICAL",tags:"My Profile",status:"Active",count:1,testmoId:""},
-{id:69,platform:"App",file:"test_app_account.py",feature:"Account",name:"test_existing_user_delivery_address",desc:"Verify delivery addresses page details",severity:"CRITICAL",tags:"Delivery Address",status:"Active",count:1,testmoId:""},
-{id:70,platform:"App",file:"test_app_account.py",feature:"Account",name:"test_add_new_address_make_default_delete",desc:"Add address, set default, delete, verify count",severity:"CRITICAL",tags:"Delivery Address",status:"Active",count:1,testmoId:""},
-{id:71,platform:"App",file:"test_app_cart.py",feature:"Cart",name:"test_uae_cart_quantity_workflow",desc:"Increase/decrease cart item quantity",severity:"CRITICAL",tags:"Cart",status:"Active",count:1,testmoId:""},
-{id:72,platform:"App",file:"test_app_cart.py",feature:"Cart",name:"test_uae_cart_remove_item",desc:"Remove item from cart, verify empty",severity:"CRITICAL",tags:"Cart",status:"Active",count:1,testmoId:""},
-{id:73,platform:"App",file:"test_app_cart.py",feature:"Cart",name:"test_uae_cart_move_to_wishlist",desc:"Move cart item to wishlist, verify empty cart",severity:"NORMAL",tags:"Cart, Wishlist",status:"Active",count:1,testmoId:""},
-{id:74,platform:"App",file:"test_app_checkout.py",feature:"Checkout",name:"test_uae_checkout_cc_no_coupon (App)",desc:"Search → PDP → Cart → Checkout with CC",severity:"CRITICAL",tags:"CC",status:"Active",count:1,testmoId:""},
-{id:75,platform:"App",file:"test_app_checkout.py",feature:"Checkout",name:"test_uae_checkout_cc_partial_sc (App)",desc:"CC + partial Store Credit checkout",severity:"CRITICAL",tags:"CC, SC",status:"Active",count:1,testmoId:""},
-{id:76,platform:"App",file:"test_app_checkout.py",feature:"Checkout",name:"test_uae_checkout_cod_no_coupon (App)",desc:"COD checkout on app",severity:"CRITICAL",tags:"COD",status:"Active",count:1,testmoId:""},
-{id:77,platform:"App",file:"test_app_checkout.py",feature:"Checkout",name:"test_uae_checkout_gift_wrap_cc (App)",desc:"Gift wrap + CC checkout on app",severity:"CRITICAL",tags:"Gift Wrap, CC",status:"Active",count:1,testmoId:""},
-{id:78,platform:"App",file:"test_app_home.py",feature:"Search",name:"test_customer_can_search_brand",desc:"Search brand from suggestions, verify brand page",severity:"NORMAL",tags:"Brand Search",status:"Active",count:1,testmoId:""},
-{id:79,platform:"App",file:"test_app_home.py",feature:"Search",name:"test_customer_can_search_category",desc:"Search category suggestion, verify PLP filter",severity:"NORMAL",tags:"Category Search",status:"Active",count:1,testmoId:""},
-{id:80,platform:"App",file:"test_app_home.py",feature:"Home",name:"test_app_explore_screen_and_navigate",desc:"Verify explore screen elements, navigate to account",severity:"CRITICAL",tags:"Smoke, Navigation",status:"Active",count:1,testmoId:""},
-];
-let nextId=81;const chartInstances={};
-const GIST_ID='08685f8721d6ed4c9764b6acf8c30700';
-const GIST_TOKEN=['\x67\x69\x74\x68\x75\x62\x5f\x70\x61\x74\x5f\x31\x31\x43\x42\x42\x46\x4f\x4a\x59\x30\x7a\x4c','\x69\x69\x72\x6a\x65\x58\x35\x6d\x66\x63\x5f\x52\x31\x4f\x53\x48\x78\x45\x52\x75\x31\x45\x4a','\x39\x4e\x41\x57\x50\x4b\x44\x79\x75\x75\x65\x39\x52\x37\x57\x4a\x36\x59\x68\x69\x57\x41\x32','\x50\x34\x4c\x62\x6a\x4e\x66\x4f\x49\x45\x32\x44\x41\x42\x4c\x56\x43\x5a\x75\x47\x75\x4d\x36\x46'].join('');
-async function save(){
-  if(!editMode)return;
-  localStorage.setItem('mw_tests',JSON.stringify(tests));localStorage.setItem('mw_nextId',nextId);
-  try{await fetch('https://api.github.com/gists/'+GIST_ID,{method:'PATCH',headers:{'Authorization':'Bearer '+GIST_TOKEN,'Content-Type':'application/json'},body:JSON.stringify({files:{'test_data.json':{content:JSON.stringify({tests,nextId},null,2)}}})});console.log('✅ Saved to Gist')}catch(e){console.error('Gist save failed',e)}
-}
-async function loadFromGist(){
-  try{const r=await fetch('https://api.github.com/gists/'+GIST_ID,{headers:{'Authorization':'Bearer '+GIST_TOKEN}});const g=await r.json();const c=g.files['test_data.json'].content;const d=JSON.parse(c);if(d.tests&&d.tests.length){tests=d.tests;nextId=d.nextId||81;console.log('✅ Loaded from Gist ('+tests.length+' tests)');return true}}catch(e){console.log('Gist load failed, using defaults',e)}return false
-}
-function load(){const d=localStorage.getItem('mw_tests');if(d){tests=JSON.parse(d);nextId=parseInt(localStorage.getItem('mw_nextId'))||81}}
-</script>
+            <div class="category-grid" style="margin-top: 30px;">
+                <div class="category-card"><div class="category-title">App Cart</div><div class="test-count">9 tests</div></div><div class="category-card"><div class="category-title">App Home</div><div class="test-count">3 tests</div></div><div class="category-card"><div class="category-title">App Account</div><div class="test-count">4 tests</div></div><div class="category-card"><div class="category-title">App Checkout</div><div class="test-count">7 tests</div></div>
+            </div>
+        </div>
 
-<script>
-let filters={testmoId:'',name:'',desc:'',feature:'',severity:'',tags:'',status:'',isAutomated:''};
-function applyFilters(key,val){filters[key]=val;renderTables()}
-function filteredTests(){return tests.filter(t=>{
-  for(const[k,v]of Object.entries(filters)){if(!v)continue;if(k==='name'||k==='desc'||k==='tags'||k==='testmoId'){if(!((t[k]||'').toLowerCase().includes(v.toLowerCase())))return false}else{if(t[k]!==v)return false}}return true})}
-
-function promptPassword(){
-  const pw=prompt('Enter edit password:');
-  if(pw===EDIT_PASSWORD){editMode=true;document.body.classList.add('edit-mode');document.getElementById('lockBanner').innerHTML='<span class="lock-icon">🔓</span> Edit mode active — You can add, edit, delete tests and map Testmo IDs.'}
-  else if(pw!==null) alert('❌ Incorrect password')
-}
-function lockEditing(){editMode=false;document.body.classList.remove('edit-mode');document.getElementById('lockBanner').innerHTML='<span class="lock-icon">🔒</span> Read-only mode — Stakeholder view. Only authorized users can edit.';save()}
-
-function totalExec(){return tests.reduce((s,t)=>s+t.count,0)}
-function countBy(k,v){return tests.filter(t=>t[k]===v).reduce((s,t)=>s+t.count,0)}
-function countByStatus(s){return tests.filter(t=>t.status===s).reduce((s2,t)=>s2+t.count,0)}
-
-function renderStats(){
-  const total=totalExec(),active=countByStatus('Active'),skip=countByStatus('Skipped'),failed=countByStatus('Failed');
-  const automated=tests.filter(t=>t.isAutomated==='Yes').length,manual=tests.filter(t=>t.isAutomated!=='Yes').length;
-  const autoPct=tests.length?Math.round(automated/tests.length*100):0;
-  const mapped=tests.filter(t=>t.testmoId&&t.testmoId.trim()).length,mapPct=tests.length?Math.round(mapped/tests.length*100):0;
-  document.getElementById('statsRow').innerHTML=`
-    <div class="stat-card"><div class="number blue">${tests.length}</div><div class="label">Total Testmo Cases</div></div>
-    <div class="stat-card"><div class="number green">${automated}</div><div class="label">Automated</div></div>
-    <div class="stat-card"><div class="number purple">${manual}</div><div class="label">Manual Only</div></div>
-    <div class="stat-card"><div class="number cyan">${autoPct}%</div><div class="label">Automation Coverage</div></div>
-    <div class="stat-card"><div class="number amber">${skip}</div><div class="label">Skipped</div></div>
-    <div class="stat-card"><div class="number green">${mapPct}%</div><div class="label">Testmo Mapped</div></div>`;
-  document.getElementById('lastUpdated').textContent='Last updated: '+new Date().toLocaleString();
-}
-
-function renderCharts(){
-  const C=['#38bdf8','#a78bfa','#4ade80','#fbbf24','#f87171','#22d3ee','#fb923c','#e879f9'];
-  function mu(id,type,labels,data,bg){
-    if(chartInstances[id]){chartInstances[id].data.labels=labels;chartInstances[id].data.datasets[0].data=data;chartInstances[id].data.datasets[0].backgroundColor=bg;chartInstances[id].update();return}
-    const o={responsive:true,plugins:{legend:{labels:{color:'#94a3b8',font:{size:11}}}}};
-    if(type==='bar')Object.assign(o,{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#94a3b8'},grid:{color:'#1e293b'}},y:{ticks:{color:'#94a3b8',font:{size:11}},grid:{color:'#1e293b'}}}});
-    chartInstances[id]=new Chart(document.getElementById(id),{type,data:{labels,datasets:[{label:'Tests',data,backgroundColor:bg,borderWidth:0,borderRadius:type==='bar'?4:0}]},options:o});
-  }
-  const automated=tests.filter(t=>t.isAutomated==='Yes').length,manual=tests.filter(t=>t.isAutomated!=='Yes').length;
-  mu('testmoChart','doughnut',[`Automated (${automated})`,`Not Automated (${manual})`],[automated,manual],['#4ade80','#a78bfa']);
-  const TT=81;
-  function platChart(id,plat){const a=tests.filter(t=>t.platform===plat&&t.isAutomated==='Yes').length,n=TT-a;mu(id,'doughnut',[`Automated (${a})`,`Not Automated (${n})`],[a,n],['#4ade80','#f87171'])}
-  platChart('uaeChart','Web UAE');
-  platChart('ksaChart','Web KSA');
-  const appA=tests.filter(t=>t.platform==='App'&&t.isAutomated==='Yes').length,appN=TT-appA;
-  mu('appChart','doughnut',[`Android ✅ (${appA})`,`Android ❌ (${appN})`,`iOS ✅ (${appA})`,`iOS ❌ (${appN})`],[appA,appN,appA,appN],['#4ade80','#f87171','#38bdf8','#fbbf24']);
-  const a=countByStatus('Active'),sk=countByStatus('Skipped');
-  mu('statusChart','doughnut',[`Active (${a})`,`Skipped (${sk})`],[a,sk],['#4ade80','#fbbf24']);
-  const fl=FEATURES.filter(f=>countBy('feature',f)>0);
-  mu('featureChart','bar',fl,fl.map(f=>countBy('feature',f)),C.slice(0,fl.length));
-}
-
-function renderTables(){
-  const ft=filteredTests();
-  let html='';const grouped={};
-  ft.forEach(t=>{const k=t.platform+'|||'+t.file;if(!grouped[k])grouped[k]=[];grouped[k].push(t)});
-  let cp='';const fRow=`<tr class="filter-row"><th></th><th><input placeholder="Filter..." value="${filters.testmoId}" oninput="applyFilters('testmoId',this.value)"></th><th><input placeholder="Filter..." value="${filters.name}" oninput="applyFilters('name',this.value)"></th><th><input placeholder="Filter..." value="${filters.desc}" oninput="applyFilters('desc',this.value)"></th><th><select onchange="applyFilters('feature',this.value)"><option value="">All</option>${FEATURES.map(f=>`<option ${filters.feature===f?'selected':''}>${f}</option>`).join('')}</select></th><th><select onchange="applyFilters('severity',this.value)"><option value="">All</option>${SEVERITIES.map(s=>`<option ${filters.severity===s?'selected':''}>${s}</option>`).join('')}</select></th><th><input placeholder="Filter..." value="${filters.tags}" oninput="applyFilters('tags',this.value)"></th><th><select onchange="applyFilters('status',this.value)"><option value="">All</option>${STATUSES.map(s=>`<option ${filters.status===s?'selected':''}>${s}</option>`).join('')}</select></th><th><select onchange="applyFilters('isAutomated',this.value)"><option value="">All</option>${AUTOMATED_OPTS.map(a=>`<option ${filters.isAutomated===a?'selected':''}>${a}</option>`).join('')}</select></th><th></th><th class="edit-only"></th></tr>`;
-  Object.keys(grouped).sort().forEach(k=>{
-    const[plat,file]=k.split('|||'),items=grouped[k],ec=items.reduce((s,t)=>s+t.count,0);
-    if(plat!==cp){const ic=plat==='App'?'📱':plat==='Manual'?'📋':'🌐';const pc=ft.filter(t=>t.platform===plat).reduce((s,t)=>s+t.count,0);html+=`<h2 class="section-title">${ic} ${plat} Tests (${pc})</h2>`;cp=plat}
-    html+=`<h3 style="color:#94a3b8;margin:12px 0 6px;font-size:14px">${file} (${ec})</h3>`;
-    html+=`<table><thead><tr><th>#</th><th>Testmo ID</th><th>Test Name</th><th>Description</th><th>Feature</th><th>Severity</th><th>Tags</th><th>Status</th><th>Is Automated</th><th>Regression History</th><th class="edit-only">Actions</th></tr>${fRow}</thead><tbody>`;
-    items.forEach((t,i)=>{
-      const sv=t.severity==='CRITICAL'?'badge-critical':'badge-normal';
-      const stMap={'Active':'badge-active','Skipped':'badge-skip','Failed':'badge-failed'};
-      const stB=stMap[t.status]||'badge-normal';
-      const stL=t.status==='Active'?'✅ Active':t.status==='Failed'?'❌ Failed':'⏸ Skipped';
-      const av=t.isAutomated||'No';
-      const autoMap={'Yes':'badge-yes','No':'badge-no',"Can't be automated":'badge-cant'};
-      const aB=autoMap[av]||'badge-no';
-      const aL=av==='Yes'?'✅ Yes':av==="Can't be automated"?"🚫 Can't":'❌ No';
-      const tm=t.testmoId&&t.testmoId.trim()?`<span class="badge badge-testmo">T-${t.testmoId}</span>`:`<span class="badge badge-unmapped">—</span>`;
-      const rh=(t.regressionHistory||[]).map(h=>{const st=h.status==='passed'?'passed':h.status==='failed'||h.status==='broken'?'fail':'skipped-sm';const icon=h.status==='passed'?'✅':h.status==='failed'||h.status==='broken'?'❌':'⏸';return`<span class="badge badge-${st}" title="${h.label}">${h.date} ${icon}</span>`}).join('')||'<span style="color:#475569;font-size:10px">—</span>';
-      html+=`<tr><td>${i+1}</td><td>${tm}</td><td style="max-width:200px;word-break:break-all">${t.name}</td><td>${t.desc}</td><td>${t.feature}</td><td><span class="badge ${sv}">${t.severity}</span></td><td>${t.tags}</td><td><span class="badge ${stB}">${stL}</span></td><td><span class="badge ${aB}">${aL}</span></td><td class="reg-history">${rh}</td><td class="edit-only"><button class="btn btn-primary btn-sm" onclick="openEditModal(${t.id})">✏️</button> <button class="btn btn-danger btn-sm" onclick="deleteTest(${t.id})">🗑️</button></td></tr>`;
-    });
-    html+=`</tbody></table>`;
-  });
-  document.getElementById('tablesContainer').innerHTML=html;
-}
-
-function renderAll(){renderStats();renderCharts();renderTables();if(editMode)save()}
-
-function modalHTML(t){
-  const e=!!t,v=t||{platform:'Web UAE',file:'',feature:'Checkout',name:'',desc:'',severity:'CRITICAL',tags:'',status:'Active',count:1,testmoId:'',isAutomated:'No'};
-  return `<h3>${e?'Edit':'Add'} Test</h3>
-  <div class="form-group"><label>🔗 Testmo Test ID</label><input id="mTestmo" value="${v.testmoId||''}" placeholder="e.g. 1234 (from Testmo)"></div>
-  <div class="form-group"><label>Platform</label><select id="mPlatform">${PLATFORMS.map(p=>`<option ${v.platform===p?'selected':''}>${p}</option>`).join('')}</select></div>
-  <div class="form-group"><label>File Name</label><input id="mFile" value="${v.file}" placeholder="e.g. test_cart.py"></div>
-  <div class="form-group"><label>Feature</label><select id="mFeature">${FEATURES.map(f=>`<option ${v.feature===f?'selected':''}>${f}</option>`).join('')}</select></div>
-  <div class="form-group"><label>Test Name</label><input id="mName" value="${v.name}" placeholder="test_function_name"></div>
-  <div class="form-group"><label>Description</label><textarea id="mDesc">${v.desc}</textarea></div>
-  <div class="form-group"><label>Severity</label><select id="mSeverity">${SEVERITIES.map(s=>`<option ${v.severity===s?'selected':''}>${s}</option>`).join('')}</select></div>
-  <div class="form-group"><label>Tags</label><input id="mTags" value="${v.tags}" placeholder="CC, Coupon"></div>
-  <div class="form-group"><label>Status</label><select id="mStatus">${STATUSES.map(s=>`<option ${v.status===s?'selected':''}>${s}</option>`).join('')}</select></div>
-  <div class="form-group"><label>Is Automated</label><select id="mIsAutomated">${AUTOMATED_OPTS.map(a=>`<option ${(v.isAutomated||'No')===a?'selected':''}>${a}</option>`).join('')}</select></div>
-  <div class="form-group"><label>Execution Count</label><input type="number" id="mCount" value="${v.count}" min="1"></div>
-  <div class="form-actions"><button class="btn btn-danger" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="${e?`saveEdit(${t.id})`:'saveNew()'}">Save</button></div>`;
-}
-
-function openAddModal(){if(!editMode)return;document.getElementById('testModal').innerHTML=modalHTML(null);document.getElementById('modalOverlay').classList.add('show')}
-function openEditModal(id){if(!editMode)return;document.getElementById('testModal').innerHTML=modalHTML(tests.find(x=>x.id===id));document.getElementById('modalOverlay').classList.add('show')}
-function closeModal(){document.getElementById('modalOverlay').classList.remove('show')}
-function getFormData(){return{testmoId:document.getElementById('mTestmo').value.trim(),platform:document.getElementById('mPlatform').value,file:document.getElementById('mFile').value,feature:document.getElementById('mFeature').value,name:document.getElementById('mName').value,desc:document.getElementById('mDesc').value,severity:document.getElementById('mSeverity').value,tags:document.getElementById('mTags').value,status:document.getElementById('mStatus').value,isAutomated:document.getElementById('mIsAutomated').value,count:parseInt(document.getElementById('mCount').value)||1}}
-function saveNew(){const d=getFormData();if(!d.name||!d.file){alert('Name and File required');return}tests.push({id:nextId++,...d});closeModal();renderAll()}
-function saveEdit(id){const d=getFormData(),i=tests.findIndex(t=>t.id===id);if(i>=0)Object.assign(tests[i],d);closeModal();renderAll()}
-function deleteTest(id){if(!editMode||!confirm('Delete this test?'))return;tests=tests.filter(t=>t.id!==id);renderAll()}
-function downloadJSON(){const b=new Blob([JSON.stringify(tests,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='mumzworld_test_data.json';a.click()}
-function importJSON(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){try{tests=JSON.parse(ev.target.result);nextId=Math.max(...tests.map(t=>t.id))+1;renderAll();alert('Imported '+tests.length+' tests!')}catch(err){alert('Invalid JSON')}};r.readAsText(f);e.target.value=''}
-function downloadHTML(){const a=document.createElement('a');a.href='data:text/html;charset=utf-8,'+encodeURIComponent(document.documentElement.outerHTML);a.download='mumzworld_test_coverage_report.html';a.click()}
-document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal()});
-
-const ALLURE_BASE='https://allure-reports.mumzstage.com/allure-docker-service';
-const TITLE_MAP=[
-["verifying odp","test_uae_checkout_cc_verify_odp"],
-["store credit + verifying","test_uae_checkout_full_sc_verify_balance"],
-["cc + coupon (through coupon modal","test_uae_checkout_cc_coupon_modal_sheet"],
-["partial store credit and coupon","test_uae_checkout_cc_partial_sc_coupon"],
-["coupon and full store credit","test_uae_checkout_full_sc_and_normal_coupon"],
-["wrong otp","test_uae_checkout_cc_wrong_otp"],
-["invalid card","test_uae_checkout_invalid_cc"],
-["tabby + cashback coupon","test_uae_checkout_tabby_cashback_coupon"],
-["tabby + normal coupon","test_uae_checkout_tabby_normal_coupon"],
-["cc + normal coupon","test_uae_checkout_cc_normal_coupon"],
-["cod + normal coupon","test_uae_checkout_cod_normal_coupon"],
-["tamara + normal coupon","test_uae_checkout_tamara_normal_coupon"],
-["tamara + cashback coupon","test_uae_checkout_tamara_cashback_coupon"],
-["cc and partial store credit","test_uae_checkout_cc_and_partial_sc"],
-["full store credit (","test_uae_checkout_full_sc_no_coupon"],
-["existing user with orders and yalla","test_uae_cart_existing_user_orders_no_coupon_yalla"],
-["gift wrap","test_uae_cart_apply_gift_wrap_and_place_order"],
-["uae - checkout cc","test_uae_checkout_cc_no_coupon"],
-["uae - checkout cod","test_uae_checkout_cod_no_coupon"],
-["uae - checkout tabby","test_uae_checkout_tabby_no_coupon"],
-["uae - checkout tamara","test_uae_checkout_tamara_no_coupon"],
-["ksa - checkout cc","test_ksa_checkout_cc_no_coupon"],
-["ksa - checkout cod","test_ksa_checkout_cod_no_coupon"],
-["ksa - checkout tabby","test_ksa_checkout_tabby_no_coupon"],
-["ksa - checkout tamara","test_ksa_checkout_tamara_no_coupon"],
-["ksa - checkout full store credit","test_ksa_checkout_full_sc"],
-["ksa - checkout cc and partial","test_ksa_checkout_cc_partial_sc"],
-["register from account","test_uae_user_register_from_account_page"],
-["register from cart","test_uae_user_register_from_cart_page"],
-["login from account","test_uae_user_logs_in_from_account_page"],
-["login from cart","test_uae_user_logs_in_from_cart_page"],
-["cart uf5","test_uae_cart_uf5_checkout_cod_no_coupon"],
-["uf2","test_uae_uf2_cart_gift_wrap_wishlist"],
-["guest & login","test_uae_cart_guest_login_no_coupon_sc"],
-["newly registered user and apply cashback","test_uae_cart_add_items_as_new_user_cashback_coupon"],
-["register a new user and use a coupon","test_uae_checkout_with_cart_items_register_new_user_coupon"],
-["percentage of product price discount rules without max","test_uae_pct_discount_without_max_amount"],
-["percentage of product price discount rules with max","test_uae_pct_discount_with_max_amount"],
-["variant price discount with max","test_uae_pct_variant_discount_with_max"],
-["variant price discount without max","test_uae_pct_variant_discount_without_max"],
-["bank discount","test_uae_bank_discount_pct_product_price_rule"],
-];
-
-function matchAllureToTest(allureTitle){
-  const tl=allureTitle.toLowerCase();
-  for(const[key,tname]of TITLE_MAP){
-    if(tl.includes(key)){
-      const t=tests.find(x=>x.name===tname);
-      if(t)return t.id;
-    }
-  }
-  // Fallback: fuzzy match on desc
-  for(const t of tests){
-    if(t.desc&&tl.includes(t.desc.toLowerCase().substring(0,30)))return t.id;
-  }
-  return null;
-}
-
-async function fetchAllureProjects(){
-  try{
-    const r=await fetch(ALLURE_BASE+'/projects');
-    const d=await r.json();
-    return Object.keys(d.data.projects).sort();
-  }catch(e){alert('Failed to fetch Allure projects: '+e);return[]}
-}
-
-function openAllureModal(){
-  if(!editMode)return;
-  document.getElementById('testModal').innerHTML=`<h3>📊 Import Allure Regression Run</h3>
-  <div class="form-group"><label>Regression Label</label><input id="aLabel" placeholder="e.g. Sprint 14 Regression, Release 2.5"></div>
-  <div class="form-group"><label>Allure Project ID</label><input id="aProject" placeholder="e.g. 094aede0-a2b6-4668-bef7-0fdd95d5be26-ae-android"><p style="color:#64748b;font-size:11px;margin-top:4px">Paste the project ID from the Allure report URL</p></div>
-  <div class="form-group"><label>Or select from recent projects</label><select id="aProjectSelect" onchange="document.getElementById('aProject').value=this.value"><option value="">Loading...</option></select></div>
-  <div id="aStatus" style="color:#94a3b8;font-size:12px;margin:10px 0"></div>
-  <div class="form-actions"><button class="btn btn-danger" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="fetchAndImportAllure()">🚀 Fetch & Import</button></div>`;
-  document.getElementById('modalOverlay').classList.add('show');
-  fetchAllureProjects().then(projects=>{
-    const sel=document.getElementById('aProjectSelect');
-    sel.innerHTML='<option value="">-- Select Project --</option>'+projects.map(p=>'<option value="'+p+'">'+p+'</option>').join('');
-  });
-}
-
-async function fetchAndImportAllure(){
-  const label=document.getElementById('aLabel').value.trim();
-  const proj=document.getElementById('aProject').value.trim();
-  if(!label||!proj){alert('Label and Project ID are required');return}
-  const statusEl=document.getElementById('aStatus');
-  statusEl.textContent='⏳ Fetching results...';
-  try{
-    const r=await fetch(ALLURE_BASE+'/projects/'+proj+'/reports/latest/data/suites.json');
-    if(!r.ok)throw new Error('HTTP '+r.status);
-    const d=await r.json();
-    const results=[];
-    function extract(n){if(n.children)n.children.forEach(c=>extract(c));else results.push({name:n.name||'',status:n.status||'unknown'})}
-    (d.children||[]).forEach(c=>extract(c));
-    statusEl.textContent=`Found ${results.length} test results. Matching...`;
-    let matched=0,unmatched=0;
-    const ts=Date.now();
-    for(const r of results){
-      const tid=matchAllureToTest(r.name);
-      if(tid){
-        const t=tests.find(x=>x.id===tid);
-        if(t){
-          if(!t.regressionHistory)t.regressionHistory=[];
-          // Avoid duplicate labels
-          const existing=t.regressionHistory.findIndex(h=>h.label===label);
-          if(existing>=0)t.regressionHistory[existing]={label,status:r.status,date:new Date().toISOString().split('T')[0],project:proj};
-          else t.regressionHistory.push({label,status:r.status,date:new Date().toISOString().split('T')[0],project:proj});
-          // Keep last 5 runs
-          if(t.regressionHistory.length>5)t.regressionHistory=t.regressionHistory.slice(-5);
-          matched++;
-        }
-      }else{unmatched++}
-    }
-    statusEl.innerHTML=`✅ Done! Matched: <strong>${matched}</strong> | Unmatched: <strong>${unmatched}</strong><br>Label: <strong>${label}</strong>`;
-    renderAll();
-  }catch(e){statusEl.textContent='❌ Error: '+e.message}
-}
-
-(async()=>{const loaded=await loadFromGist();if(!loaded)load();renderAll()})();
-</script>
+        <div class="footer">
+            <p><strong>Mumzworld SDET Team</strong></p>
+            <p style="margin-top: 10px;">
+                <a href="https://github.com/mumzworld-tech/automation_web_2.0" target="_blank">GitHub Repository</a> | 
+                <a href="https://allure-reports.mumzstage.com/allure-docker-service" target="_blank">Allure Reports</a> | 
+                <a href="https://mumzworld.testmo.net" target="_blank">Testmo</a>
+            </p>
+            <p class="timestamp">Last Updated: 2026-05-18 14:00:47</p>
+        </div>
+    </div>
 </body>
 </html>
