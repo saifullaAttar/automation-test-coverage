@@ -1,68 +1,55 @@
-# Automation Test Coverage Report
+# Mumzworld Automation Test Coverage Report
 
-Live report: https://saifullaattar.github.io/automation-test-coverage/
+**Live:** https://saifullaattar.github.io/automation-test-coverage/
 
-## Prerequisites
+Single source of truth for automation coverage against the TestMO regression suite (Run #2154).
 
-Clone automation repo next to this repo:
-```bash
-cd ..
-git clone https://github.com/mumzworld-tech/automation_web_2.0.git
-```
-
-## Update Report
+## Quick Start
 
 ```bash
-cd automation-test-coverage
-python3 generate_coverage_report.py
-git add .
-git commit -m "Update coverage report"
-git push origin main
+make generate   # Parse CSV + extract tests + build mapping
+make open       # Generate and open in browser
 ```
 
-## Add Testmo IDs to Covered Tests
+## How It Works
 
-Create a file with format: `test_name,testmo_id`
-```
-test_uae_checkout_cc_no_coupon,12345
-test_uae_checkout_cod_no_coupon,12346
-```
+1. `parse_testmo_csv.py` — Parses TestMO CSV export into `testmo_tests.json`
+2. `extract_tests.py` — Scans `automation_web_2.0` repo for test functions → `automated_tests.json`
+3. `build_mapping.py` — Maps TestMO cases to automated tests → `mapping.json`
+4. `index.html` — Editable report that loads `mapping.json`
 
-Then run:
+## Editing Mappings
+
+The report is **editable in the browser**:
+- Click "+ Add test" on any row to map an automated test
+- Click "×" on a tag to remove a mapping
+- Add notes in the Notes column
+- Edits are saved to localStorage automatically
+
+### Persisting Changes
+1. Make your edits in the browser
+2. Click **Export JSON** to download the updated `mapping.json`
+3. Replace `mapping.json` in this repo and commit
+
+### Resetting
+Click **Reset** to discard localStorage edits and reload from the committed `mapping.json`.
+
+## Regenerating
+
+When new tests are added to `automation_web_2.0`:
 ```bash
-python3 map_testmo_ids.py web_uae mapping_file.txt
-python3 generate_coverage_report.py
+make clean && make generate
 ```
 
-## Add Uncovered Tests from Testmo
+Then update the explicit mappings in `build_mapping.py` for any new TestMO cases.
 
-Create a file with format: `testmo_id,test_name`
-```
-12347,test_guest_checkout
-12348,test_payment_wallet
-```
+## Coverage Summary
 
-Then run:
-```bash
-python3 import_testmo_tests.py web_uae uncovered_file.txt
-python3 generate_coverage_report.py
-```
+- **TestMO Cases:** 81 (from Run #2154)
+- **Automated Tests:** 90 (35 UAE + 32 KSA + 23 App)
+- **Current Coverage:** 31/81 (38%)
 
-## Update Testmo Totals
-
-Edit `generate_coverage_report.py`:
-```python
-testmo_web_uae_total = 75  # Update from Testmo
-testmo_web_ksa_total = 75  # Update from Testmo
-testmo_app_total = 80      # Update from Testmo (Android + iOS combined)
-```
-
-## Files
-
-- `generate_coverage_report.py` - Report generator
-- `map_testmo_ids.py` - Map Testmo IDs to automated tests
-- `import_testmo_tests.py` - Import uncovered tests from Testmo
-- `testmo_mapping.json` - Testmo ID mappings (auto-generated)
-- `uncovered_tests.json` - Uncovered tests list (auto-generated)
-- `index.html` - Live report
-- `coverage_data.json` - JSON export
+## Stack
+- Python + Selenium + Appium + Pytest + Allure
+- Test Management: [TestMO](https://mumzworld.testmo.net/runs/view/2154)
+- CI: BrowserStack

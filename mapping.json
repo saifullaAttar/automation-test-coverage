@@ -1,0 +1,2182 @@
+{
+  "testmo_tests": [
+    {
+      "case_id": "1018731",
+      "test_id": "14641247",
+      "name": "Country and City detection for logged in user with one default address",
+      "folder": "GeoIp/Store (30 minutes)",
+      "functionality": "Geo IP",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To Check if the country selector displays the country and city from customer's default address",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1018732",
+      "test_id": "14641248",
+      "name": "Country and City detection for logged in user with multiple saved address",
+      "folder": "GeoIp/Store (30 minutes)",
+      "functionality": "Geo IP",
+      "priority": "P2 - Medium",
+      "status": "Failed",
+      "summary": "To Check the country selector displays the country , City and Area based on the customer's default address and on changing the changing the default address to a different address , the Geo IP displays data accordingly",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1018733",
+      "test_id": "14641249",
+      "name": "Country and City for logged in user with no saved address / Guest User",
+      "folder": "GeoIp/Store (30 minutes)",
+      "functionality": "Geo IP",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To Check if the country selector displays the country and city by user's current location",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1018736",
+      "test_id": "14641252",
+      "name": "Switching Country/Website by logged in/Guest user",
+      "folder": "GeoIp/Store (30 minutes)",
+      "functionality": "Switching Website",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To Verify the guest / logged in user can switch from UAE to Saudi Website or vice versa",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1018734",
+      "test_id": "14641250",
+      "name": "Switching Language store by logged in / guest user",
+      "folder": "GeoIp/Store (30 minutes)",
+      "functionality": "Switching Store",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To Verify the guest / logged in user can switch from English store to Arabic or vice versa",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1018735",
+      "test_id": "14641251",
+      "name": "Switching currency from different pages by logged in and guest user",
+      "folder": "GeoIp/Store (30 minutes)",
+      "functionality": "Switching Currency",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To Check the currency displayed by default for a user and to check if the user can switch currency from the currency switcher",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1548291",
+      "test_id": "14641264",
+      "name": "Check Sale Page for correct applying Filters (Category, Brand, Price) and mweb",
+      "folder": "Catalogue (25 minutes)",
+      "functionality": "Catalog - Sale",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "Verify that the filters (Category, Brand, Price) on the Sale Page work correctly and that displayed products align with selected criteria.",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1548292",
+      "test_id": "14641265",
+      "name": "Check Category Page for correct applying Filters (Category, Brand, Price)",
+      "folder": "Catalogue (25 minutes)",
+      "functionality": "",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "Verify that the filters (Category, Brand, Price) on the category Page work correctly and that displayed products align with selected criteria.",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1548293",
+      "test_id": "14641266",
+      "name": "Check Brand Page for correct applying Filters (Category, Price)",
+      "folder": "Catalogue (25 minutes)",
+      "functionality": "Catalog - Brand",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "Verify that the filters (Category, Brand, Price) on the Brand Page work correctly and that displayed products align with selected criteria.",
+      "tags": "",
+      "automated_tests": [
+        "test_customer_can_search_brand"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "1018743",
+      "test_id": "14641253",
+      "name": "Product regular price and tax  on PLP,  PDP and search page",
+      "folder": "PDP/PLP - Tax, Price, Promotions (1 hour)",
+      "functionality": "Product regular price on pages",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "Verify that the correct regular price including tax is shown on the Product Details Page, Product List Page and search page for all product types",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1018744",
+      "test_id": "14641254",
+      "name": "Discount on PLP, PDP and search page",
+      "folder": "PDP/PLP - Tax, Price, Promotions (1 hour)",
+      "functionality": "Product special price on pages",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "Verify that the discounts is shown on the Product Details Page, Product List Page and search page for all product types",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2337052",
+      "test_id": "14641291",
+      "name": "New registration from registration popup",
+      "folder": "Registration",
+      "functionality": "Sign up",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To verify the user is able to create new account from registration popup",
+      "tags": "",
+      "automated_tests": [
+        "test_uae_user_register_from_account_page",
+        "test_ksa_user_register_from_account_page",
+        "test_user_signup"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337053",
+      "test_id": "14641292",
+      "name": "New registration from cart page",
+      "folder": "Registration",
+      "functionality": "Sign up",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To verify the user is able to create new account from cart page while proceeding to checkout page",
+      "tags": "",
+      "automated_tests": [
+        "test_uae_user_register_from_cart_page",
+        "test_ksa_user_register_from_cart_page"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337055",
+      "test_id": "14641293",
+      "name": "Log into using existing customer account from login pop",
+      "folder": "Log in /Logged out",
+      "functionality": "Login",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "Verify that existing customer can login from login popup successfully",
+      "tags": "",
+      "automated_tests": [
+        "test_uae_user_logs_in_from_account_page",
+        "test_ksa_user_logs_in_from_account_page"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337057",
+      "test_id": "14641295",
+      "name": "Log into using existing customer account from cart page",
+      "folder": "Log in /Logged out",
+      "functionality": "Login",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "Verify that existing customer can login from cart page while proceeding to checkout page successfully",
+      "tags": "",
+      "automated_tests": [
+        "test_uae_user_logs_in_from_cart_page",
+        "test_ksa_user_logs_in_from_cart_page"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337056",
+      "test_id": "14641294",
+      "name": "Sign out from account",
+      "folder": "Log in /Logged out",
+      "functionality": "Sign out",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "Verify the customer is able to sign out from their account",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1018723",
+      "test_id": "14641246",
+      "name": "Login cross different platforms",
+      "folder": "Log in /Logged out",
+      "functionality": "Login",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "Verify that customer that creates their account on the web can log in using the mobile applications successfully",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2337058",
+      "test_id": "14641296",
+      "name": "Reset an existing user password using Forgot Password",
+      "folder": "Forget&Reset the password",
+      "functionality": "",
+      "priority": "P0 - Critical",
+      "status": "Failed",
+      "summary": "Verify that customer can reset their password from login popup.",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1018709",
+      "test_id": "14641235",
+      "name": "Accessing My profile page by users",
+      "folder": "My profile",
+      "functionality": "Accessing my profile page",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "To Check accessing the my profile page by newly registered / existing users",
+      "tags": "",
+      "automated_tests": [
+        "test_existing_user_profile"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "1018710",
+      "test_id": "14641236",
+      "name": "Editing account info details",
+      "folder": "My profile",
+      "functionality": "Editing account details",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To Check users editing account info displayed in the My accounts section",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1230430",
+      "test_id": "14641263",
+      "name": "Delete Account",
+      "folder": "My profile",
+      "functionality": "",
+      "priority": "Default",
+      "status": "Passed",
+      "summary": "To check deleting an account by the user from both the Desktop and Mweb pages.",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1018706",
+      "test_id": "14641232",
+      "name": "My Orders section : New user / user with no orders",
+      "folder": "Orders",
+      "functionality": "Empty My orders page",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To Check the My Orders section in the order details page as newly registered or existing user with no orders in their account",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1018707",
+      "test_id": "14641233",
+      "name": "My orders section for user's with existing orders",
+      "folder": "Orders",
+      "functionality": "Orders list in My orders page",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To Check the My orders page for users with existing orders",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1018708",
+      "test_id": "14641234",
+      "name": "Order details and order status in the My orders page",
+      "folder": "Orders",
+      "functionality": "Order details in My orders page",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To check the order details and order statuses at different stages of order are displayed correctly in the my orders and order details page",
+      "tags": "",
+      "automated_tests": [
+        "test_uae_checkout_cc_and_verify_odp"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "1018714",
+      "test_id": "14641240",
+      "name": "New user with no items added in the Wishlist",
+      "folder": "My Wishlist",
+      "functionality": "",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "Verify that new user is able to add items to the Wishlist successfully",
+      "tags": "",
+      "automated_tests": [
+        "test_uae_cart_move_to_wishlist"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "1018717",
+      "test_id": "14641243",
+      "name": "Delete products from wishlist",
+      "folder": "My Wishlist",
+      "functionality": "",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "Verify that existing user with orders in several countries and has product/s in wishlist is able to delete product from the Wishlist succesfully",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1018719",
+      "test_id": "14641245",
+      "name": "Existing user with orders & address in 1 country added to the Wishlist  Configurable, Custom and Bundle",
+      "folder": "My Wishlist",
+      "functionality": "",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "Verify that the existing user with orders and address is able to add products with options ( Custom, Bundle, Configurable ) from the Wishlist to the cart successfully",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1018715",
+      "test_id": "14641241",
+      "name": "Empty wallet without any transactions",
+      "folder": "Wallet",
+      "functionality": "Wallet",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "Verify that a newly registered user can see an empty wallet balance and empty transaction history.",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1018716",
+      "test_id": "14641242",
+      "name": "Wallet after placing order with entire/portion Wallet amount",
+      "folder": "Wallet",
+      "functionality": "Wallet",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "Verify that the wallet balance after placing an order using store credit (Wallet amount)",
+      "tags": "",
+      "automated_tests": [
+        "test_uae_checkout_full_sc_and_verify_sc_balance"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "1018718",
+      "test_id": "14641244",
+      "name": "Wallet - Checking conversion based on currency rate after switching stores/currencies",
+      "folder": "Wallet",
+      "functionality": "Wallet",
+      "priority": "P2 - Medium",
+      "status": "Passed",
+      "summary": "To verify that the conversion of currency rates for the Wallet balance and transactions is correct.",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1018711",
+      "test_id": "14641237",
+      "name": "New users with no saved addresses",
+      "folder": "Address book",
+      "functionality": "New User",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To check if new users with no saved addresses can save address from both address book and checkout page",
+      "tags": "",
+      "automated_tests": [
+        "test_add_new_address_and_make_default_and_delete"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "1018712",
+      "test_id": "14641238",
+      "name": "Users updating saved address from address book",
+      "folder": "Address book",
+      "functionality": "Existing user with more saved address",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To Check if users with 2+ addresses saved can update the default address ,modify the address details and delete any address from the address book",
+      "tags": "",
+      "automated_tests": [
+        "test_add_new_address_and_make_default_and_delete"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "1018713",
+      "test_id": "14641239",
+      "name": "Users updating saved addresses from checkout page",
+      "folder": "Address book",
+      "functionality": "Updating address from checkout",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "To Check if users with 2+ addresses saved can update the default address and modify the address details from the checkout page",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1125847",
+      "test_id": "14641262",
+      "name": "To verify for OTP on the customer profile page for new phone number",
+      "folder": "OTP Verification",
+      "functionality": "",
+      "priority": "Default",
+      "status": "Passed",
+      "summary": "",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2337029",
+      "test_id": "14641275",
+      "name": "UF1 - Existing user with orders and 1 default address NO wallet/coupon applied and Yalla free shipping on the cart",
+      "folder": "Cart (15 minutes)",
+      "functionality": "Shopping cart",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "Verify that an existing user with a default address in 1 country saved can successfully add products to cart, navigate to cart page and proceed to checkout without any errors. Verify that Yalla free shipping label appears for each Yalla item based on Yalla threshold and user able to get yalla free shipping",
+      "tags": "international,ksa,uae",
+      "automated_tests": [
+        "test_uae_cart_existing_user_orders_no_coupon_yalla",
+        "test_ksa_cart_existing_user_orders_no_coupon_yalla"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337030",
+      "test_id": "14641276",
+      "name": "UF2-Newly registered  on Proceed to checkout user with no orders placed , no wallet and no coupons used and GW added",
+      "folder": "Cart (15 minutes)",
+      "functionality": "Shopping Cart",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "Verify that the Newly registered user on proceed to checkout with no address saved , no coupons and no wallet used can successfully add products to cart, navigate to cart page and cart loads without any errors. Verify that user is able to add gift wrap and the gift fee are added correctly after user sign up on checkout page",
+      "tags": "international,ksa,uae",
+      "automated_tests": [
+        "test_uae_uf2_cart_gift_wrap_wishlist",
+        "test_ksa_uf2_cart_gift_wrap_wishlist",
+        "test_uae_checkout_apply_gift_wrap_place_order"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337022",
+      "test_id": "14641270",
+      "name": "UF3 - Guest (and login existing)  with multiple addresses in 1 country and wallet balance.",
+      "folder": "Cart (15 minutes)",
+      "functionality": "Shopping cart",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "Verify that a guest user with multiple addresses saved can successfully add products to cart, navigate to cart page apply the wallet and proceed to checkout without any errors.",
+      "tags": "international,ksa,uae",
+      "automated_tests": [
+        "test_uae_cart_guest_login_no_coupon_sc",
+        "test_ksa_cart_guest_login_no_coupon_sc"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337031",
+      "test_id": "14641277",
+      "name": "UF4- Add items in cart as a Newly registered user with No Wallet and Cashback coupon applied",
+      "folder": "Cart (15 minutes)",
+      "functionality": "Shopping Cart",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "Verify that a newly registered user with no wallet and Cashback coupon applied can successfully add products to the cart, navigate to the cart page and proceed to checkout without any errors.",
+      "tags": "ksa,uae",
+      "automated_tests": [
+        "test_uae_cart_add_items_to_cart_as_a_newly_registered_user_and_apply_cashback_coupon",
+        "test_ksa_cart_add_items_to_cart_as_a_newly_registered_user_and_apply_cashback_coupon"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337032",
+      "test_id": "14641278",
+      "name": "UF5- Existing user retains the previously added items in the cart on login action after logging out for COD eligible items",
+      "folder": "Cart (15 minutes)",
+      "functionality": "Shopping Cart",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "Verify that a logged-in user (after logging out) can retain the previously added items in the cart and add new items and update previously added items and proceed to checkout without any errors.",
+      "tags": "ksa,uae",
+      "automated_tests": [
+        "test_uae_cart_uf5_checkout_cod_no_coupon",
+        "test_ksa_cart_uf5_checkout_cod_no_coupon"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337033",
+      "test_id": "14641279",
+      "name": "UF6 - Checkout with cart items as a guest . Register a new user and use a coupon.",
+      "folder": "Cart (15 minutes)",
+      "functionality": "Shopping cart",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "Verify that a guest user can add items to the cart, navigate to the cart page, continue to Checkout after registering a new user while retaining products in their cart, and then place an order using a coupon added.",
+      "tags": "international",
+      "automated_tests": [
+        "test_uae_checkout_with_cart_items_register_a_new_user_and_coupon",
+        "test_ksa_checkout_with_cart_items_register_a_new_user_and_coupon"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337034",
+      "test_id": "14641280",
+      "name": "UF7- Checkout with cart items as a guest . Log onto an existing user with wallet balance.",
+      "folder": "Cart (15 minutes)",
+      "functionality": "Shopping cart",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "Verify that a guest user can add items to the cart, navigate to the cart page, continue to Checkout after logging in to an existing user while retaining products in their cart, and then place an order using store credit cover the order total",
+      "tags": "ksa,uae",
+      "automated_tests": [
+        "test_uae_cart_guest_login_no_coupon_sc",
+        "test_ksa_cart_guest_login_no_coupon_sc"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337023",
+      "test_id": "14641271",
+      "name": "UF-8 - Existing user with orders adding product with OOS product in the cart",
+      "folder": "Cart (15 minutes)",
+      "functionality": "Shopping cart",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "Verify that an existing user with a default address in 1 country saved can successfully add products to cart with already OOS product",
+      "tags": "",
+      "automated_tests": [
+        "test_app_uae_cart_remaining_items_unaffected_after_partial_removal"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337024",
+      "test_id": "14641272",
+      "name": "UF-9 - Guest (and login existing) with low stock products",
+      "folder": "Cart (15 minutes)",
+      "functionality": "Shopping cart",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "Verify the low stock alert shows after placing order after product stock be below threshold Verify that low stock alert shows for guest cart and after logging , and customer can switch between websites and proceed to checkout page without any errors.",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2337025",
+      "test_id": "14641273",
+      "name": "UF-10 Checkout -  Existing user with orders and Free gift",
+      "folder": "Cart (15 minutes)",
+      "functionality": "Shopping cart",
+      "priority": "P1 - High",
+      "status": "Passed",
+      "summary": "Verify that an existing user with orders able to add free gift based on conditions added in BE , navigate to cart page and place an order without any errors",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2114394",
+      "test_id": "14641267",
+      "name": "UF-11 New user  and place ApplePay order from cart",
+      "folder": "Cart (15 minutes)",
+      "functionality": "",
+      "priority": "P1 - High",
+      "status": "Untested",
+      "summary": "",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2114395",
+      "test_id": "14641268",
+      "name": "UF-12 Existing user with saved address and place ApplePay order from cart",
+      "folder": "Cart (15 minutes)",
+      "functionality": "",
+      "priority": "P1 - High",
+      "status": "Untested",
+      "summary": "",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2337026",
+      "test_id": "14641274",
+      "name": "Check free gift UI",
+      "folder": "Cart (15 minutes)",
+      "functionality": "",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To verify that free gift ui appeared according to the design https://www.figma.com/file/JK5bcuA9mNbkN6tbGxrCD5/E-commerce-(App%2Bweb)?type=design&node-id=152-22660&mode=design&t=e4vUOzcBPYphgGz8-4",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2337036",
+      "test_id": "14641281",
+      "name": "Checkout- Apple pay",
+      "folder": "Checkout (30 minutes)",
+      "functionality": "Placing order Apple pay",
+      "priority": "P0 - Critical",
+      "status": "Untested",
+      "summary": "To verify that customer can go through the flow without any issues and successfully place the order. To verify the cart doesn't retain the products after placing successful order.",
+      "tags": "international,ksa,uae",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2337037",
+      "test_id": "14641282",
+      "name": "Checkout -  Credit card payment",
+      "folder": "Checkout (30 minutes)",
+      "functionality": "Placing order using Credit Card",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To verify that customer can go through the flow without any issues and successfully place the order. To verify the cart doesn't retain the products after placing sucessful order.",
+      "tags": "international,ksa,uae",
+      "automated_tests": [
+        "test_uae_checkout_cc_no_coupon",
+        "test_ksa_checkout_cc_no_coupon",
+        "test_uae_checkout_cc_no_coupon"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337038",
+      "test_id": "14641283",
+      "name": "Checkout -  Credit card and partial store credit",
+      "folder": "Checkout (30 minutes)",
+      "functionality": "Placing order using Store Credit",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To verify that customer can go through the flow without any issues and successfully place the order To verify the cart doesn't retain the products after placing sucessful order.",
+      "tags": "",
+      "automated_tests": [
+        "test_uae_checkout_cc_and_partial_sc_no_coupon",
+        "test_ksa_checkout_cc_and_partial_sc_no_coupon",
+        "test_uae_checkout_cc_and_partial_sc_no_coupon"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337039",
+      "test_id": "14641284",
+      "name": "Checkout -  Cash on delivery and cashback rule",
+      "folder": "Checkout (30 minutes)",
+      "functionality": "Placing order using COD",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To verify that user can go through the flow without any issues and successfully place the order To verify the cart doesn't retain the products after placing sucessful order. To verify the customer can place order using COD after entering correct OTP",
+      "tags": "",
+      "automated_tests": [
+        "test_uae_checkout_cod_no_coupon",
+        "test_ksa_checkout_cod_no_coupon",
+        "test_uae_checkout_cod_no_coupon"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337040",
+      "test_id": "14641285",
+      "name": "Checkout - No payment required",
+      "folder": "Checkout (30 minutes)",
+      "functionality": "No Payment Required",
+      "priority": "P0 - Critical",
+      "status": "Untested",
+      "summary": "To verify that customer can go through the flow without any issues and successfully place the order To verify the cart doesn't retain the products after placing sucessful order.",
+      "tags": "",
+      "automated_tests": [
+        "test_uae_checkout_full_sc_no_coupon",
+        "test_ksa_checkout_full_sc_no_coupon"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337041",
+      "test_id": "14641286",
+      "name": "Checkout - Invalid transactions",
+      "folder": "Checkout (30 minutes)",
+      "functionality": "Invalid Transaction",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To verify the customer is not able to place successful order after entering wrong OTP or using invalid cart Verify the cart retains the items after unsuccessful payment",
+      "tags": "",
+      "automated_tests": [
+        "test_uae_checkout_invalid_cc_no_coupon",
+        "test_uae_checkout_cc_wrong_otp_no_coupon"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337042",
+      "test_id": "14641287",
+      "name": "Checkout - Applying both SC and coupon",
+      "folder": "Checkout (30 minutes)",
+      "functionality": "No Payment Required",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To verify that customer can go through the flow without any issues and successfully place the order To verify the cart doesn't retain the products after placing sucessful order.",
+      "tags": "",
+      "automated_tests": [
+        "test_uae_checkout_full_sc_and_normal_coupon",
+        "test_uae_checkout_cc_partial_sc_and_normal_coupon",
+        "test_ksa_checkout_full_sc_and_normal_coupon",
+        "test_ksa_checkout_cc_partial_sc_and_normal_coupon"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337043",
+      "test_id": "14641288",
+      "name": "Checkout - Tamara payment",
+      "folder": "Checkout (30 minutes)",
+      "functionality": "Placing order using Tamara",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To verify that customer can go through the flow without any issues and successfully place the order. To verify the cart doesn't retain the products after placing sucessful order.",
+      "tags": "",
+      "automated_tests": [
+        "test_uae_checkout_tamara_no_coupon",
+        "test_uae_checkout_tamara_normal_coupon",
+        "test_uae_checkout_tamara_cashback_coupon",
+        "test_ksa_checkout_tamara_no_coupon",
+        "test_ksa_checkout_tamara_normal_coupon",
+        "test_ksa_checkout_tamara_cashback_coupon",
+        "test_app_uae_checkout_tamara_no_coupon"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337044",
+      "test_id": "14641289",
+      "name": "Checkout - TABBY Payment",
+      "folder": "Checkout (30 minutes)",
+      "functionality": "Placing order using Tamara",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "To verify that customer can go through the flow without any issues and successfully place the order. To verify the cart doesn't retain the products after placing sucessful order.",
+      "tags": "",
+      "automated_tests": [
+        "test_uae_checkout_tabby_no_coupon",
+        "test_uae_checkout_tabby_cashback_coupon",
+        "test_uae_checkout_tabby_normal_coupon",
+        "test_ksa_checkout_tabby_no_coupon",
+        "test_ksa_checkout_tabby_cashback_coupon",
+        "test_ksa_checkout_tabby_normal_coupon",
+        "test_uae_checkout_tabby_no_coupon"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2337045",
+      "test_id": "14641290",
+      "name": "Exit Checkout Prompt Feature",
+      "folder": "Checkout (30 minutes)",
+      "functionality": "",
+      "priority": "Default",
+      "status": "Untested",
+      "summary": "https://www.figma.com/file/JK5bcuA9mNbkN6tbGxrCD5/E-commerce-(App%2Bweb)?type=design&node-id=727-13074&mode=design&t=UxnKn9KlJAyMx5Vn-0",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2283422",
+      "test_id": "14641269",
+      "name": "Checkout -  CC order from Admin - check ODP, Admin and invoice",
+      "folder": "Checkout (30 minutes)",
+      "functionality": "",
+      "priority": "P0 - Critical",
+      "status": "Passed",
+      "summary": "",
+      "tags": "",
+      "automated_tests": [
+        "test_uae_checkout_cc_and_verify_odp"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "1018758",
+      "test_id": "14641255",
+      "name": "Applying single use coupons in cart & checkout",
+      "folder": "Coupon (2.5 hours)",
+      "functionality": "Single use coupons in cart & checkout",
+      "priority": "P0 - Critical",
+      "status": "Untested",
+      "summary": "To verify that single use-coupons cannot be used multiple times by the same customer/ another customer",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1018759",
+      "test_id": "14641256",
+      "name": "Percentage of Product price discount rule",
+      "folder": "Coupon (2.5 hours)",
+      "functionality": "Percentage Rule",
+      "priority": "P0 - Critical",
+      "status": "Untested",
+      "summary": "To verify the \"Percentage of Product price discount\" rule is applied successfully, the discount is calculated correctly when placing order. And verify the correct discount sends to NS. To verify that coupon codes are visible on PDP/Cart/Checkout , user able to view e coupon codes and applied in the cart/checkout and place an order without issues . Discount calculated correctly and order sends to NS",
+      "tags": "international,ksa,uae",
+      "automated_tests": [
+        "test_uae_percentage_of_product_price_discount_rules_without_max_amount",
+        "test_uae_percentage_of_product_price_discount_rules_with_max_amount"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "1018760",
+      "test_id": "14641257",
+      "name": "Percentage of Product price discount with variant",
+      "folder": "Coupon (2.5 hours)",
+      "functionality": "Percentage Rule",
+      "priority": "P0 - Critical",
+      "status": "Untested",
+      "summary": "To verify the \"Percentage of Product price discount with variant\" rule is applied successfully, the discount is calculated correctly when placing order. And verify the correct discount sends to NS.",
+      "tags": "international,ksa,uae",
+      "automated_tests": [
+        "test_uae_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "test_uae_percentage_of_product_variant_price_discount_rules_without_max_amount"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "1018761",
+      "test_id": "14641258",
+      "name": "Bank discount",
+      "folder": "Coupon (2.5 hours)",
+      "functionality": "Bank Discount",
+      "priority": "P0 - Critical",
+      "status": "Untested",
+      "summary": "To verify the bank coupon discount applies only when the credit card is selected. To verify that coupon codes are visible on PDP/Cart/Checkout , user able to view e coupon codes and applied in the cart/checkout and place an order without issues . Discount calculated correctly and order sends to NS",
+      "tags": "",
+      "automated_tests": [
+        "test_uae_bank_discount_percentage_of_product_price_rule"
+      ],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "1018762",
+      "test_id": "14641259",
+      "name": "Fixed product price discount rule",
+      "folder": "Coupon (2.5 hours)",
+      "functionality": "Fixed Rule",
+      "priority": "P0 - Critical",
+      "status": "Untested",
+      "summary": "To verify the \"Fixed product price discount \" & \"Fixed product price discount with variant\" rule are applied successfully, the discount is calculated correctly when placing order. And verify the correct discount sends to NS.",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1084824",
+      "test_id": "14641261",
+      "name": "Multiple Tiered Discount rule",
+      "folder": "Coupon (2.5 hours)",
+      "functionality": "",
+      "priority": "Default",
+      "status": "Untested",
+      "summary": "Verify the \"For Each 100$ Spent, get Whole Cart 10% Cheaper\" discount rule, both for max-limited discount amounts and for non-max-limited discounts.",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2337059",
+      "test_id": "14641297",
+      "name": "Gift Registry creation on My account ( My registries)  and PDP",
+      "folder": "Gift Registry (2 hours)",
+      "functionality": "",
+      "priority": "P0 - Critical",
+      "status": "Untested",
+      "summary": "To check Registry owner is able to create a gift registry from My account and PDP",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2337061",
+      "test_id": "14641299",
+      "name": "Setup the Gift registry",
+      "folder": "Gift Registry (2 hours)",
+      "functionality": "",
+      "priority": "P0 - Critical",
+      "status": "Untested",
+      "summary": "To verify the registry owner is able to fill the details to the registry",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2337060",
+      "test_id": "14641298",
+      "name": "Adding product  to GR",
+      "folder": "Gift Registry (2 hours)",
+      "functionality": "",
+      "priority": "P0 - Critical",
+      "status": "Untested",
+      "summary": "To verify that the customer with gift registry is able to add product from PDP to the Registry",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2337062",
+      "test_id": "14641300",
+      "name": "Add to cart GR products",
+      "folder": "Gift Registry (2 hours)",
+      "functionality": "",
+      "priority": "P0 - Critical",
+      "status": "Untested",
+      "summary": "To verify Buyer is able to add to the cart products from GR shared by Owner",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2337063",
+      "test_id": "14641301",
+      "name": "Checkout with GR",
+      "folder": "Gift Registry (2 hours)",
+      "functionality": "",
+      "priority": "P0 - Critical",
+      "status": "Untested",
+      "summary": "Verify that user can go through the flow without any issues , checkout loads normally",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "1018774",
+      "test_id": "14641260",
+      "name": "To check the registry after order placement",
+      "folder": "Gift Registry (2 hours)",
+      "functionality": "",
+      "priority": "P0 - Critical",
+      "status": "Untested",
+      "summary": "To verify that purchased tab display order details correctly To verify that the desired qty decreased after order placed",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2439692",
+      "test_id": "14641302",
+      "name": "Verify adding simple item from Admin",
+      "folder": "Product types",
+      "functionality": "",
+      "priority": "Default",
+      "status": "Untested",
+      "summary": "",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2439693",
+      "test_id": "14641303",
+      "name": "Verify adding custom item from Admin",
+      "folder": "Product types",
+      "functionality": "",
+      "priority": "Default",
+      "status": "Untested",
+      "summary": "",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2439697",
+      "test_id": "14641307",
+      "name": "Verify adding custom/installation item from Admin",
+      "folder": "Product types",
+      "functionality": "",
+      "priority": "Default",
+      "status": "Untested",
+      "summary": "",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2439694",
+      "test_id": "14641304",
+      "name": "Verify adding configurable item from Admin",
+      "folder": "Product types",
+      "functionality": "",
+      "priority": "Default",
+      "status": "Untested",
+      "summary": "",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2439695",
+      "test_id": "14641305",
+      "name": "Verify adding colour variant item from Admin",
+      "folder": "Product types",
+      "functionality": "",
+      "priority": "Default",
+      "status": "Untested",
+      "summary": "",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2439696",
+      "test_id": "14641306",
+      "name": "Verify adding configurable custom item from Admin",
+      "folder": "Product types",
+      "functionality": "",
+      "priority": "Default",
+      "status": "Untested",
+      "summary": "",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2439698",
+      "test_id": "14641308",
+      "name": "Verify adding bundle item with fix price from Admin",
+      "folder": "Product types",
+      "functionality": "",
+      "priority": "Default",
+      "status": "Untested",
+      "summary": "",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2439699",
+      "test_id": "14641309",
+      "name": "Verify adding bundle item with dynamic price from Admin",
+      "folder": "Product types",
+      "functionality": "",
+      "priority": "Default",
+      "status": "Untested",
+      "summary": "",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2439821",
+      "test_id": "14641310",
+      "name": "Verify adding qcom item",
+      "folder": "Product types",
+      "functionality": "",
+      "priority": "Default",
+      "status": "Untested",
+      "summary": "",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2439822",
+      "test_id": "14641311",
+      "name": "Verify adding global item in KSA store",
+      "folder": "Product types",
+      "functionality": "",
+      "priority": "Default",
+      "status": "Untested",
+      "summary": "",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2439823",
+      "test_id": "14641312",
+      "name": "Verify adding cross boarder item in GCC store",
+      "folder": "Product types",
+      "functionality": "",
+      "priority": "Default",
+      "status": "Untested",
+      "summary": "",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    }
+  ],
+  "automated_tests": {
+    "web_uae": [
+      {
+        "name": "test_uae_cart_existing_user_orders_no_coupon_yalla",
+        "file": "test_cart.py",
+        "title": "UAE - Existing user with orders and Yalla free shipping on Cart",
+        "tags": [
+          "Yalla"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Search specific product through search 2. Filter for Yalla items on the PLP 3. Navigate to the PDP of the 1st Yalla product from PLP 4. Verify the 'Yalla' icon on the PDP 5. Click add to bag for th"
+      },
+      {
+        "name": "test_uae_cart_guest_login_no_coupon_sc",
+        "file": "test_cart.py",
+        "title": "UAE - Checkout with cart items as guest & login to existing user and pay with SC",
+        "tags": [
+          "Guest"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Go to homepage as Guest user 2. Search specific product through search 3. Navigate to the PDP of the 1st product from PLP 4. Click add to bag for this item 5. Go to cart and click 'Proceed to Check"
+      },
+      {
+        "name": "test_uae_cart_add_items_to_cart_as_a_newly_registered_user_and_apply_cashback_coupon",
+        "file": "test_cart.py",
+        "title": "UAE - Cart UF4 (through product search)",
+        "tags": [
+          "Cashback"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Apply cashback coupon"
+      },
+      {
+        "name": "test_uae_checkout_with_cart_items_register_a_new_user_and_coupon",
+        "file": "test_cart.py",
+        "title": "UAE - Checkout with cart items as a guest. Register a new user and use a coupon",
+        "tags": [
+          "Guest"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Go to homepage as Guest user 2. Search specific product through search 3. Navigate to the PDP of the 1st product from PLP 4. Click add to bag for this item 5. Go to cart and click 'Proceed to Check"
+      },
+      {
+        "name": "test_uae_uf2_cart_gift_wrap_wishlist",
+        "file": "test_cart.py",
+        "title": "UAE - Cart: Guest user, Gift Wrap, Sign up, Wishlist",
+        "tags": [
+          "Gift Wrap",
+          "New User",
+          "Wishlist"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Go to homepage as Guest user 2. Search for an item in category page and add it to cart 3. Search for an item by brand page (simple product) and add it to cart 4. Go to cart page 5. Add GW to all it"
+      },
+      {
+        "name": "test_uae_cart_uf5_checkout_cod_no_coupon",
+        "file": "test_cart.py",
+        "title": "UAE - Cart UF5 scenarios - Checkout COD (through product search)",
+        "tags": [
+          "COD"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Go to homepage as Guest user. 2. Search for an item in category page and add it to cart. 3. Search for an item by brand page (simple product) and add it to cart. 4. Click on my account and select S"
+      },
+      {
+        "name": "test_uae_percentage_of_product_price_discount_rules_without_max_amount",
+        "file": "test_cart.py",
+        "title": "UAE - Percentage of product price discount rules without max amount (through product search)",
+        "tags": [
+          "CC",
+          "AUTO_MAX_0"
+        ],
+        "feature": "Coupon",
+        "docstring": "1. Go to homepage as Guest user. 2. Search for bundle product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order"
+      },
+      {
+        "name": "test_uae_percentage_of_product_price_discount_rules_with_max_amount",
+        "file": "test_cart.py",
+        "title": "UAE - Percentage of product price discount rules with max amount (through product search)",
+        "tags": [
+          "COD",
+          "AUTO_MAX_50"
+        ],
+        "feature": "Coupon",
+        "docstring": "1. Go to homepage as Guest user. 2. Search for bundle product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select COD 7. Place order"
+      },
+      {
+        "name": "test_uae_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "file": "test_cart.py",
+        "title": "UAE - Percentage of Product variant price discount with max amount (through product search) and Place (COD) order",
+        "tags": [
+          "COD",
+          "AUTO_V_MAX_0"
+        ],
+        "feature": "Coupon",
+        "docstring": "1. Go to homepage. 2. Add sales and none-salse product 3. Proceed to checkout. 4. Apply coupon. 5. Verify order summary calculation. 6. Select COD 7. Place order"
+      },
+      {
+        "name": "test_uae_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "file": "test_cart.py",
+        "title": "",
+        "tags": [],
+        "feature": "",
+        "docstring": "1. Go to homepage. 2. Add sales and none-salse product. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order"
+      },
+      {
+        "name": "test_uae_bank_discount_percentage_of_product_price_rule",
+        "file": "test_cart.py",
+        "title": "UAE - Bank discount - percentage of product price discount rules (through product search)",
+        "tags": [
+          "CC",
+          "AUTO_BANK_10"
+        ],
+        "feature": "Coupon",
+        "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Procee"
+      },
+      {
+        "name": "test_uae_cart_apply_gift_wrap_and_place_order",
+        "file": "test_cart.py",
+        "title": "UAE - Apply gift wrap to product and place order",
+        "tags": [
+          "Gift Wrap"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Login using automation+1004@mumzworld.com / Test@123 2. Go to home screen explore 3. In mweb, from explore screen search product: Hape - Wooden Bunny Stacking Ring 4. Add to cart the first product "
+      },
+      {
+        "name": "test_uae_checkout_cc_no_coupon",
+        "file": "test_checkout.py",
+        "title": "",
+        "tags": [],
+        "feature": "",
+        "docstring": "Parameterized test for different product types: 1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item (method varies by product"
+      },
+      {
+        "name": "test_uae_checkout_cod_no_coupon",
+        "file": "test_checkout.py",
+        "title": "",
+        "tags": [],
+        "feature": "",
+        "docstring": "Parameterized test for different product types: 1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item (method varies by product"
+      },
+      {
+        "name": "test_uae_checkout_tabby_no_coupon",
+        "file": "test_checkout.py",
+        "title": "",
+        "tags": [],
+        "feature": "",
+        "docstring": "Parameterized test for different product types: 1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item (method varies by product"
+      },
+      {
+        "name": "test_uae_checkout_tabby_cashback_coupon",
+        "file": "test_checkout.py",
+        "title": "UAE - Checkout Tabby + Cashback Coupon (through product search)",
+        "tags": [
+          "Tabby",
+          "Cashback Coupon"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Apply cashback coupon on checkout"
+      },
+      {
+        "name": "test_uae_checkout_cc_normal_coupon",
+        "file": "test_checkout.py",
+        "title": "UAE - Checkout CC + Normal Coupon (through product search)",
+        "tags": [
+          "CC",
+          "Coupon"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using CC w/normal coupon"
+      },
+      {
+        "name": "test_uae_checkout_cod_normal_coupon",
+        "file": "test_checkout.py",
+        "title": "UAE - Checkout COD + Normal Coupon (through product search)",
+        "tags": [
+          "COD",
+          "Coupon"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using COD w/normal coupon"
+      },
+      {
+        "name": "test_uae_checkout_tabby_normal_coupon",
+        "file": "test_checkout.py",
+        "title": "UAE - Checkout Tabby + Normal Coupon (through product search)",
+        "tags": [
+          "Tabby",
+          "Coupon"
+        ],
+        "feature": "Checkout",
+        "docstring": ""
+      },
+      {
+        "name": "test_uae_checkout_full_sc_no_coupon",
+        "file": "test_checkout.py",
+        "title": "UAE - Checkout full Store Credit (through product search)",
+        "tags": [
+          "Store Credit"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using full store credit w/no "
+      },
+      {
+        "name": "test_uae_checkout_cc_and_partial_sc_no_coupon",
+        "file": "test_checkout.py",
+        "title": "UAE - Checkout CC and partial Store Credit (through product search)",
+        "tags": [
+          "CC",
+          "Store Credit"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card and partial"
+      },
+      {
+        "name": "test_uae_checkout_tamara_no_coupon",
+        "file": "test_checkout.py",
+        "title": "",
+        "tags": [],
+        "feature": "",
+        "docstring": "Parameterized test for different product types: 1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item (method varies by product"
+      },
+      {
+        "name": "test_uae_checkout_tamara_normal_coupon",
+        "file": "test_checkout.py",
+        "title": "UAE - Checkout Tamara + Normal Coupon (through product search)",
+        "tags": [
+          "Tamara",
+          "Coupon"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/normal coupon"
+      },
+      {
+        "name": "test_uae_checkout_tamara_cashback_coupon",
+        "file": "test_checkout.py",
+        "title": "UAE - Checkout Tamara + Cashback Coupon (through product search)",
+        "tags": [
+          "Tamara",
+          "Cashback Coupon"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/cashback coupo"
+      },
+      {
+        "name": "test_uae_checkout_invalid_cc_no_coupon",
+        "file": "test_checkout.py",
+        "title": "UAE - Checkout CC and invalid card (through product search)",
+        "tags": [
+          "CC",
+          "Invalid CC"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using cc invalid cc w/no coup"
+      },
+      {
+        "name": "test_uae_checkout_full_sc_and_normal_coupon",
+        "file": "test_checkout.py",
+        "title": "UAE - Checkout with coupon and full Store Credit(through product search)",
+        "tags": [
+          "Full SC",
+          "Normal Coupon"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Apply normal coupon on cart 6. Apply wallet balance on c"
+      },
+      {
+        "name": "test_uae_checkout_cc_partial_sc_and_normal_coupon",
+        "file": "test_checkout.py",
+        "title": "UAE - Checkout CC, partial Store Credit and coupon(through product search)",
+        "tags": [
+          "CC",
+          "SC",
+          "Coupon"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card and partial"
+      },
+      {
+        "name": "test_uae_checkout_cc_wrong_otp_no_coupon",
+        "file": "test_checkout.py",
+        "title": "UAE - Checkout CC with wrong otp (through product search)",
+        "tags": [
+          "CC",
+          "Wrong OTP"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card with wrong "
+      },
+      {
+        "name": "test_uae_checkout_cc_coupon_modal_sheet",
+        "file": "test_checkout.py",
+        "title": "UAE - Checkout CC + Coupon (through coupon modal sheet)",
+        "tags": [
+          "CC",
+          "Coupon Modal Sheet"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Add a coupon from the coupon modal sheet 6. Proceed to c"
+      },
+      {
+        "name": "test_uae_checkout_full_sc_and_verify_sc_balance",
+        "file": "test_checkout.py",
+        "title": "UAE - Checkout full Store Credit + verifying SC balance",
+        "tags": [
+          "Store Credit"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Go to the wallet and see the initial balance 2. Search specific product through search 3. Navigate to the PDP of the 1st product from PLP 4. Click add to bag for this item 5. Go to cart 6. Proceed "
+      },
+      {
+        "name": "test_uae_checkout_cc_and_verify_odp",
+        "file": "test_checkout.py",
+        "title": "UAE - Checkout CC + verifying ODP",
+        "tags": [
+          "CC",
+          "Verify ODP"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using CC w/no coupon 7. Go to"
+      },
+      {
+        "name": "test_uae_user_register_from_account_page",
+        "file": "test_user.py",
+        "title": "UAE: Guest user, Register from account page",
+        "tags": [
+          "New User"
+        ],
+        "feature": "User",
+        "docstring": "1. Go to homepage as Guest user 2. Navigate to Account page 3. Click on Sign in. 4. Click on create account 5. Fill in all fields 6. Click on register 7. Verify customer account name"
+      },
+      {
+        "name": "test_uae_user_register_from_cart_page",
+        "file": "test_user.py",
+        "title": "UAE: Guest user, Register from cart page",
+        "tags": [
+          "New User"
+        ],
+        "feature": "User",
+        "docstring": "1. Go to homepage as Guest user 2. Search for product. 3. Add simple product to cart. 4. Proceed to checkout. 5. Click on create account 6. Fill in all fields 7. Click on register."
+      },
+      {
+        "name": "test_uae_user_logs_in_from_account_page",
+        "file": "test_user.py",
+        "title": "UAE - User: Guest user login from account page",
+        "tags": [
+          "Existing User"
+        ],
+        "feature": "User",
+        "docstring": "1. Go to homepage as Guest user 2. Navigate to account page 3. Click on sign button 4. Enter email and password 5. Click on login 6. Sign out"
+      },
+      {
+        "name": "test_uae_user_logs_in_from_cart_page",
+        "file": "test_user.py",
+        "title": "UAE - User: Guest user login from cart page",
+        "tags": [
+          "Existing User"
+        ],
+        "feature": "User",
+        "docstring": "1. Go to homepage as Guest user 2. Search for an item in category page and add it to cart 3. Go to cart page 4. Click \"Proceed to Checkout\" 5. Sign in with existing user account 6. Sign out"
+      }
+    ],
+    "web_ksa": [
+      {
+        "name": "test_ksa_cart_existing_user_orders_no_coupon_yalla",
+        "file": "test_cart_ksa.py",
+        "title": "KSA - Existing user with orders and Yalla free shipping on Cart",
+        "tags": [
+          "Yalla"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Search specific product through search 2. Filter for Yalla items on the PLP 3. Navigate to the PDP of the 1st Yalla product from PLP 4. Verify the 'Yalla' icon on the PDP 5. Click add to bag for th"
+      },
+      {
+        "name": "test_ksa_cart_guest_login_no_coupon_sc",
+        "file": "test_cart_ksa.py",
+        "title": "KSA - Checkout with cart items as guest & login to existing user and pay with SC",
+        "tags": [
+          "Guest"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Go to homepage as Guest user 2. Search specific product through search 3. Navigate to the PDP of the 1st product from PLP 4. Click add to bag for this item 5. Go to cart and click 'Proceed to Check"
+      },
+      {
+        "name": "test_ksa_cart_add_items_to_cart_as_a_newly_registered_user_and_apply_cashback_coupon",
+        "file": "test_cart_ksa.py",
+        "title": "KSA - Cart UF4 (through product search)",
+        "tags": [
+          "Cashback"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Apply cashback coupon"
+      },
+      {
+        "name": "test_ksa_checkout_with_cart_items_register_a_new_user_and_coupon",
+        "file": "test_cart_ksa.py",
+        "title": "KSA - Checkout with cart items as a guest. Register a new user and use a coupon",
+        "tags": [
+          "Guest"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Go to homepage as Guest user 2. Search specific product through search 3. Navigate to the PDP of the 1st product from PLP 4. Click add to bag for this item 5. Go to cart and click 'Proceed to Check"
+      },
+      {
+        "name": "test_ksa_uf2_cart_gift_wrap_wishlist",
+        "file": "test_cart_ksa.py",
+        "title": "KSA - Cart: Guest user, Gift Wrap, Sign up, Wishlist",
+        "tags": [
+          "Gift Wrap",
+          "New User",
+          "Wishlist"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Go to homepage as Guest user 2. Search for an item in category page and add it to cart 3. Search for an item by brand page (simple product) and add it to cart 4. Go to cart page 5. Add GW to all it"
+      },
+      {
+        "name": "test_ksa_cart_uf5_checkout_cod_no_coupon",
+        "file": "test_cart_ksa.py",
+        "title": "KSA - Cart UF5 scenarios - Checkout COD (through product search)",
+        "tags": [
+          "COD"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Go to homepage as Guest user. 2. Search for an item in category page and add it to cart. 3. Search for an item by brand page (simple product) and add it to cart. 4. Click on my account and select S"
+      },
+      {
+        "name": "test_ksa_percentage_of_product_price_discount_rules_without_max_amount",
+        "file": "test_cart_ksa.py",
+        "title": "KSA - Percentage of product price discount rules without max amount (through product search)",
+        "tags": [
+          "CC",
+          "AUTO_MAX_0"
+        ],
+        "feature": "Coupon",
+        "docstring": "1. Go to homepage as Guest user. 2. Search for bundle product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order"
+      },
+      {
+        "name": "test_ksa_percentage_of_product_price_discount_rules_with_max_amount",
+        "file": "test_cart_ksa.py",
+        "title": "KSA - Percentage of product price discount rules with max amount (through product search)",
+        "tags": [
+          "COD",
+          "AUTO_MAX_50"
+        ],
+        "feature": "Coupon",
+        "docstring": "1. Go to homepage as Guest user. 2. Search for bundle product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select COD 7. Place order"
+      },
+      {
+        "name": "test_ksa_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "file": "test_cart_ksa.py",
+        "title": "KSA - Percentage of Product variant price discount with max amount (through product search) and Place (COD) order",
+        "tags": [
+          "COD",
+          "AUTO_V_MAX_0"
+        ],
+        "feature": "Coupon",
+        "docstring": "1. Go to homepage. 2. Add sales and none-sale product 3. Proceed to checkout. 4. Apply coupon. 5. Verify order summary calculation. 6. Select COD 7. Place order"
+      },
+      {
+        "name": "test_ksa_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "file": "test_cart_ksa.py",
+        "title": "KSA - Percentage of Product variant price discount without max amount (through product search) and Place (CC) order",
+        "tags": [
+          "CC",
+          "AUTO_V_MAX_60"
+        ],
+        "feature": "Coupon",
+        "docstring": "1. Go to homepage. 2. Add sales and none-salse product. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order"
+      },
+      {
+        "name": "test_ksa_bank_discount_percentage_of_product_price_rule",
+        "file": "test_cart_ksa.py",
+        "title": "KSA - Bank discount - percentage of product price discount rules (through product search)",
+        "tags": [
+          "CC",
+          "AUTO_BANk_10"
+        ],
+        "feature": "Coupon",
+        "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Procee"
+      },
+      {
+        "name": "test_ksa_cart_apply_gift_wrap_and_place_order",
+        "file": "test_cart_ksa.py",
+        "title": "KSA - Apply gift wrap to product and place order",
+        "tags": [
+          "Gift Wrap"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Login using auto+ksa+041@mumzworld.com / Test@123 2. Go to home screen explore 3. In mweb, from explore screen search product: Hape - Wooden Bunny Stacking Ring 4. Add to cart the first product on "
+      },
+      {
+        "name": "test_ksa_checkout_cc_no_coupon",
+        "file": "test_checkout_ksa.py",
+        "title": "",
+        "tags": [],
+        "feature": "",
+        "docstring": "Parameterized test for different product types: 1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item (method varies by product"
+      },
+      {
+        "name": "test_ksa_checkout_cod_no_coupon",
+        "file": "test_checkout_ksa.py",
+        "title": "KSA - Checkout COD (through product search)",
+        "tags": [
+          "COD"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using COD w/no coupon"
+      },
+      {
+        "name": "test_ksa_checkout_tabby_no_coupon",
+        "file": "test_checkout_ksa.py",
+        "title": "KSA - Checkout Tabby (through product search)",
+        "tags": [
+          "Tabby"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tabby w/no coupon"
+      },
+      {
+        "name": "test_ksa_checkout_tabby_cashback_coupon",
+        "file": "test_checkout_ksa.py",
+        "title": "KSA - Checkout Tabby + Cashback Coupon (through product search)",
+        "tags": [
+          "Tabby",
+          "Cashback Coupon"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tabby w/cashback coupon"
+      },
+      {
+        "name": "test_ksa_checkout_cc_normal_coupon",
+        "file": "test_checkout_ksa.py",
+        "title": "KSA - Checkout CC + Normal Coupon (through product search)",
+        "tags": [
+          "CC",
+          "Coupon"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using CC w/normal coupon"
+      },
+      {
+        "name": "test_ksa_checkout_cod_normal_coupon",
+        "file": "test_checkout_ksa.py",
+        "title": "KSA - Checkout COD + Normal Coupon (through product search)",
+        "tags": [
+          "COD",
+          "Coupon"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using COD w/normal coupon"
+      },
+      {
+        "name": "test_ksa_checkout_tabby_normal_coupon",
+        "file": "test_checkout_ksa.py",
+        "title": "KSA - Checkout Tabby + Normal Coupon (through product search)",
+        "tags": [
+          "Tabby",
+          "Coupon"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tabby w/normal coupon"
+      },
+      {
+        "name": "test_ksa_checkout_full_sc_no_coupon",
+        "file": "test_checkout_ksa.py",
+        "title": "KSA - Checkout full Store Credit (through product search)",
+        "tags": [
+          "Store Credit"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using full store credit w/no "
+      },
+      {
+        "name": "test_ksa_checkout_cc_and_partial_sc_no_coupon",
+        "file": "test_checkout_ksa.py",
+        "title": "KSA - Checkout CC and partial Store Credit (through product search)",
+        "tags": [
+          "CC",
+          "Store Credit"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card and partial"
+      },
+      {
+        "name": "test_ksa_checkout_tamara_no_coupon",
+        "file": "test_checkout_ksa.py",
+        "title": "KSA - Checkout Tamara (through product search)",
+        "tags": [
+          "Tamara"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/no coupon"
+      },
+      {
+        "name": "test_ksa_checkout_tamara_normal_coupon",
+        "file": "test_checkout_ksa.py",
+        "title": "KSA - Checkout Tamara + Normal Coupon (through product search)",
+        "tags": [
+          "Tamara",
+          "Coupon"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/normal coupon"
+      },
+      {
+        "name": "test_ksa_checkout_tamara_cashback_coupon",
+        "file": "test_checkout_ksa.py",
+        "title": "KSA - Checkout Tamara + Cashback Coupon (through product search)",
+        "tags": [
+          "Tamara",
+          "Cashback Coupon"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/cashback coupo"
+      },
+      {
+        "name": "test_ksa_checkout_invalid_cc_no_coupon",
+        "file": "test_checkout_ksa.py",
+        "title": "KSA - Checkout CC and invalid card (through product search)",
+        "tags": [
+          "CC",
+          "Invalid CC"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using cc invalid cc w/no coup"
+      },
+      {
+        "name": "test_ksa_checkout_full_sc_and_normal_coupon",
+        "file": "test_checkout_ksa.py",
+        "title": "KSA - Checkout with coupon and full Store Credit(through product search)",
+        "tags": [
+          "Full SC",
+          "Normal Coupon"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card and full st"
+      },
+      {
+        "name": "test_ksa_checkout_cc_partial_sc_and_normal_coupon",
+        "file": "test_checkout_ksa.py",
+        "title": "KSA - Checkout CC, partial Store Credit and coupon(through product search)",
+        "tags": [
+          "CC",
+          "SC",
+          "Coupon"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card and partial"
+      },
+      {
+        "name": "test_ksa_checkout_cc_wrong_otp_no_coupon",
+        "file": "test_checkout_ksa.py",
+        "title": "KSA - Checkout CC with wrong otp (through product search)",
+        "tags": [
+          "CC",
+          "Wrong OTP"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card with wrong "
+      },
+      {
+        "name": "test_ksa_user_register_from_account_page",
+        "file": "test_user_ksa.py",
+        "title": "KSA: Guest user, Register from account page",
+        "tags": [
+          "New User"
+        ],
+        "feature": "User",
+        "docstring": "1. Go to homepage as Guest user 2. Navigate to Account page 3. Click on Sign in. 4. Click on create account 5. Fill in all fields 6. Click on register 7. Verify customer account name"
+      },
+      {
+        "name": "test_ksa_user_register_from_cart_page",
+        "file": "test_user_ksa.py",
+        "title": "KSA: Guest user, Register from cart page",
+        "tags": [
+          "New User"
+        ],
+        "feature": "User",
+        "docstring": "1. Go to homepage as Guest user 2. Search for product. 3. Add simple product to cart. 4. Proceed to checkout. 5. Click on create account 6. Fill in all fields 7. Click on register."
+      },
+      {
+        "name": "test_ksa_user_logs_in_from_account_page",
+        "file": "test_user_ksa.py",
+        "title": "KSA - User: Guest user login from account page",
+        "tags": [
+          "Existing User"
+        ],
+        "feature": "User",
+        "docstring": "1. Go to homepage as Guest user 2. Navigate to account page 3. Click on sign button 4. Enter email and password 5. Click on login 6. Sign out"
+      },
+      {
+        "name": "test_ksa_user_logs_in_from_cart_page",
+        "file": "test_user_ksa.py",
+        "title": "KSA - User: Guest user login from cart page",
+        "tags": [
+          "Existing User"
+        ],
+        "feature": "User",
+        "docstring": "1. Go to homepage as Guest user 2. Search for an item in category page and add it to cart 3. Go to cart page 4. Click \"Proceed to Checkout\" 5. Sign in with existing user account 6. Sign out"
+      }
+    ],
+    "app": [
+      {
+        "name": "test_user_signup",
+        "file": "test_app_account.py",
+        "title": "",
+        "tags": [],
+        "feature": "",
+        "docstring": "1. Navigate to account page 2. Click on Signin 3. Click on Create account 4. Fill in all data 5. Click on Signup"
+      },
+      {
+        "name": "test_existing_user_profile",
+        "file": "test_app_account.py",
+        "title": "Verify existing user can access their profile",
+        "tags": [
+          "My Profile"
+        ],
+        "feature": "User Profile",
+        "docstring": "1. Navigate to account page 2. Click on Signin 3. Sign in to an existing account 4. Go to My Profile 5. Verify all the details on the My Profile page"
+      },
+      {
+        "name": "test_existing_user_delivery_address",
+        "file": "test_app_account.py",
+        "title": "Verify existing user can access the Delivery Addresses",
+        "tags": [
+          "Delivery Address"
+        ],
+        "feature": "User Profile",
+        "docstring": "1. Navigate to account page 2. Click on Signin 3. Sign in to an existing account 4. Go to Delivery Address 5. Verify all the details inside the Delivery Addresses page 6. Verify the number of delivery"
+      },
+      {
+        "name": "test_add_new_address_and_make_default_and_delete",
+        "file": "test_app_account.py",
+        "title": "Verify existing user can add new address and set it as default",
+        "tags": [
+          "Delivery Address"
+        ],
+        "feature": "User Profile",
+        "docstring": "1. Navigate to account page 2. Click on Signin 3. Sign in to an existing account (USER_EMAIL_4) 4. Go to Delivery Address 5. Click on 'Add New Address' button 6. Fill in all address fields using test_"
+      },
+      {
+        "name": "test_uae_cart_quantity_workflow",
+        "file": "test_app_cart.py",
+        "title": "Cart quantity workflow (increase and decrease)",
+        "tags": [
+          "Cart"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Verify initial quantity is 1 6. Increase quantity and ve"
+      },
+      {
+        "name": "test_uae_cart_remove_item",
+        "file": "test_app_cart.py",
+        "title": "Remove item from cart",
+        "tags": [
+          "Cart"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Add product to cart 2. Verify cart has 1 item 3. Remove item from cart 4. Verify cart is empty (0 items)"
+      },
+      {
+        "name": "test_uae_cart_move_to_wishlist",
+        "file": "test_app_cart.py",
+        "title": "Move item to wishlist from cart",
+        "tags": [
+          "Cart",
+          "Wishlist"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Add product to cart 2. Verify cart has 1 item 3. Move item to wishlist 4. Verify cart is empty (0 items)"
+      },
+      {
+        "name": "test_app_uae_cart_remaining_items_unaffected_after_partial_removal",
+        "file": "test_app_cart.py",
+        "title": "Remaining items unaffected after partial removal",
+        "tags": [
+          "Cart"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Add two different products to cart 2. Verify cart has 2 items 3. Capture name of second item before removal 4. Remove first item from cart 5. Verify cart has 1 item remaining 6. Verify remaining it"
+      },
+      {
+        "name": "test_uae_cart_increase_and_decrease_quantity",
+        "file": "test_app_cart.py",
+        "title": "",
+        "tags": [],
+        "feature": "",
+        "docstring": "Parameterized test for different product types: 1. Add product to cart 2. Verify initial quantity is 1 3. Increase quantity to 2 and verify 4. Increase quantity to 3 and verify 5. Decrease quantity to"
+      },
+      {
+        "name": "test_uae_cart_item_integrity_after_quantity_change",
+        "file": "test_app_cart.py",
+        "title": "",
+        "tags": [],
+        "feature": "",
+        "docstring": "Verifies cart item integrity is maintained after a quantity change. 1. Add product to cart, capture product name and unit price 2. Increase quantity to 2 3. Verify product name is unchanged 4. Verify "
+      },
+      {
+        "name": "test_uae_cart_bundle_multiple_variants",
+        "file": "test_app_cart.py",
+        "title": "Cart: Add multiple variants of bundle product and verify quantity update",
+        "tags": [
+          "Cart",
+          "Bundle",
+          "Variant"
+        ],
+        "feature": "Cart",
+        "docstring": "Test adding multiple variants of a bundle product to cart. 1. Search bundle product, go to PDP, select option 1 from both dropdowns, add to cart 2. Navigate back, search same product, select option 2 "
+      },
+      {
+        "name": "test_uae_cart_configurable_multiple_variants",
+        "file": "test_app_cart.py",
+        "title": "Cart: Add multiple variants of configurable product and verify quantity update",
+        "tags": [
+          "Cart",
+          "Configurable",
+          "Variant"
+        ],
+        "feature": "Cart",
+        "docstring": "Test adding multiple variants of a configurable product to cart. 1. Search configurable product, go to PDP, select '0 to 3 Months', add to cart 2. Navigate back, search same product, select '6 Months'"
+      },
+      {
+        "name": "test_app_uae_cart_remove_item_with_applied_coupon",
+        "file": "test_app_cart.py",
+        "title": "Remove item from cart with applied coupon and verify totals recalculate",
+        "tags": [
+          "Cart",
+          "Coupon"
+        ],
+        "feature": "Cart",
+        "docstring": "Verify that user can remove an item when coupon is applied and totals recalculate correctly."
+      },
+      {
+        "name": "test_uae_checkout_cc_no_coupon",
+        "file": "test_app_checkout.py",
+        "title": "Successful user checkout in uae with CC no coupon",
+        "tags": [
+          "CC"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using CC w/no coupon"
+      },
+      {
+        "name": "test_uae_checkout_cc_and_partial_sc_no_coupon",
+        "file": "test_app_checkout.py",
+        "title": "Successful user checkout in uae with CC and SC no coupon",
+        "tags": [
+          "CC",
+          "SC"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Apply Store Credit 7. Pay using C"
+      },
+      {
+        "name": "test_uae_checkout_cod_no_coupon",
+        "file": "test_app_checkout.py",
+        "title": "Successful user checkout in UAE with COD no coupon",
+        "tags": [
+          "COD"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Login to App 2. Click on Explore 3. Click on Search and enter: Search > Category 11 - Fashion > press enter 4. Add first product on plp page 5. Click on cart 6. Click on Checkout button 7. Find pay"
+      },
+      {
+        "name": "test_uae_checkout_apply_gift_wrap_place_order",
+        "file": "test_app_checkout.py",
+        "title": "UAE - Apply gift wrap to product and place order (App)",
+        "tags": [
+          "Gift Wrap",
+          "CC"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Login to App 2. Click on Explore 3. Click on Search and enter: Search > Category 11 - Fashion > press enter 4. Add first product on plp page 5. Click on cart 6. Add Gift Wrap to the product 7. Clic"
+      },
+      {
+        "name": "test_uae_checkout_tabby_no_coupon",
+        "file": "test_app_checkout.py",
+        "title": "UAE - Checkout Tabby no coupon (simple product)",
+        "tags": [
+          "Tabby"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tabby w/no coupon"
+      },
+      {
+        "name": "test_app_uae_checkout_tamara_no_coupon",
+        "file": "test_app_checkout.py",
+        "title": "Successful user checkout in UAE with Tamara no coupon App",
+        "tags": [
+          "Tamara"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/no coupon"
+      },
+      {
+        "name": "test_uae_guest_checkout_login_bottom_sheet_and_place_order",
+        "file": "test_app_checkout.py",
+        "title": "",
+        "tags": [],
+        "feature": "",
+        "docstring": "Guest checkout flow (parametrized by product type): 1. Precondition: Login, clear cart, sign out 2. As guest, search and add product to cart 3. Navigate to cart and verify item present 4. Tap checkout"
+      },
+      {
+        "name": "test_customer_can_search_brand",
+        "file": "test_app_home.py",
+        "title": "Customer user can open brand page from search suggestions",
+        "tags": [
+          "Brand Search"
+        ],
+        "feature": "Search",
+        "docstring": "1. Ensure the home page is visible 2. Type a brand name in the search bar 3. Select the matching brand suggestion 4. Confirm the brand page opens"
+      },
+      {
+        "name": "test_customer_can_search_product_in_specific_category",
+        "file": "test_app_home.py",
+        "title": "Customer user can open category page from search suggestions",
+        "tags": [
+          "Category Search"
+        ],
+        "feature": "Search",
+        "docstring": "Test that customer can search for products in a specific category using category suggestions. Steps: 1. Navigate to the home page 2. Search for a term and select category suggestion 3. Verify category"
+      },
+      {
+        "name": "test_app_explore_screen_elements_and_navigate_to_account",
+        "file": "test_app_home.py",
+        "title": "Explore screen shows key elements and navigates to Account",
+        "tags": [
+          "smoke",
+          "navigation"
+        ],
+        "feature": "Home",
+        "docstring": "1. Close all popups and select country 2. Verify explore screen key elements (feed, search header, bottom nav tabs) 3. Tap the Account tab in bottom navigation 4. Verify the Account screen loads"
+      }
+    ]
+  },
+  "app_testmo_placeholder": true,
+  "metadata": {
+    "testmo_run_id": 2154,
+    "testmo_url": "https://mumzworld.testmo.net/runs/view/2154",
+    "last_updated": "2026-05-18",
+    "total_testmo_cases": 81,
+    "total_automated_tests": 90
+  }
+}
