@@ -99,6 +99,26 @@ tr:hover{background:#f8f9ff}
   <div class="stats-grid" id="statsGrid"></div>
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
 
+  <!-- Priority Risk Section -->
+  <div class="section" id="riskSection" style="background:#fff5f5;border:2px solid #fc8181;margin-bottom:20px">
+    <h2 style="color:#c53030;border-bottom-color:#fc8181">🚨 Priority Risk — Uncovered P0/P1 Tests</h2>
+    <p style="color:#666;margin-bottom:10px;font-size:.9em">Critical and high-priority tests without automation coverage</p>
+    <div id="riskList"></div>
+  </div>
+
+  <!-- Coverage Trend -->
+  <div class="section" style="margin-bottom:20px">
+    <h2>📈 Coverage Trend</h2>
+    <canvas id="trendChart" height="80"></canvas>
+  </div>
+
+  <!-- Allure Last Run Summary -->
+  <div class="section" id="allureSection" style="margin-bottom:20px">
+    <h2>🧪 Last Allure Run Status</h2>
+    <div id="allureStats" style="margin-bottom:10px"></div>
+    <div id="allureDetails" style="max-height:300px;overflow-y:auto"></div>
+  </div>
+
   <div class="section" style="padding:20px;margin-bottom:0">
     <h2>🌐 Web Tests</h2>
   </div>
@@ -162,42 +182,6 @@ tr:hover{background:#f8f9ff}
 let DATA = null;
 let hasUnsavedChanges = false;
 const LS_KEY = 'mumz_coverage_edits';
-
-async function init() {
-  // Load mapping.json
-  try {
-    const resp = await fetch('mapping.json');
-    DATA = await resp.json();
-  } catch(e) {
-    console.error('Failed to load mapping.json', e);
-    return;
-  }
-  // Merge localStorage overrides
-  const saved = localStorage.getItem(LS_KEY);
-  if (saved) {
-    try {
-      const edits = JSON.parse(saved);
-      if (edits.web) edits.web.forEach(edit => {
-        const test = DATA.testmo_tests.find(t => t.case_id === edit.case_id);
-        if (test) {
-          if (edit.automated_tests !== undefined) test.automated_tests = edit.automated_tests;
-          if (edit.coverage_status !== undefined) test.coverage_status = edit.coverage_status;
-          if (edit.notes !== undefined) test.notes = edit.notes;
-        }
-      });
-      if (edits.app) edits.app.forEach(edit => {
-        const test = (DATA.app_testmo_tests||[]).find(t => t.case_id === edit.case_id);
-        if (test) {
-          if (edit.automated_tests !== undefined) test.automated_tests = edit.automated_tests;
-          if (edit.coverage_status !== undefined) test.coverage_status = edit.coverage_status;
-          if (edit.notes !== undefined) test.notes = edit.notes;
-        }
-      });
-      hasUnsavedChanges = true;
-    } catch(e) { localStorage.removeItem(LS_KEY); }
-  }
-  render();
-}
 
 function render() {
   renderStats();
@@ -548,7 +532,182 @@ function resetChanges() {
   document.getElementById(id).addEventListener('change', renderTable);
 });
 
+// === Priority Risk Section ===
+function renderRiskSection() {
+  const allTests = [...DATA.testmo_tests, ...(DATA.app_testmo_tests || [])];
+  const riskTests = allTests.filter(t => 
+    t.coverage_status === 'none' && (t.priority.includes('P0') || t.priority.includes('P1'))
+  );
+  
+  if (!riskTests.length) {
+    document.getElementById('riskSection').style.display = 'none';
+    return;
+  }
+  
+  document.getElementById('riskList').innerHTML = riskTests.map(t => 
+    `<div style="padding:8px 12px;margin:4px 0;background:#fff;border-radius:4px;border-left:4px solid ${t.priority.includes('P0')?'#e53e3e':'#dd6b20'};font-size:.85em">
+      <strong style="color:${t.priority.includes('P0')?'#e53e3e':'#dd6b20'}">${t.priority}</strong> — 
+      <strong>C-${t.case_id}</strong>: ${t.name}
+      <span style="color:#888;margin-left:8px">(${t.folder})</span>
+    </div>`
+  ).join('');
+}
+
+// === Allure Last Run Status ===
+const ALLURE_PROJECTS = [
+  {id: '13ff2b60-b2bc-4292-b2d4-1c3f8895fbad-ae-android', label: 'UAE Web (Latest)'}
+];
+
+async function fetchAllureStatus() {
+  const section = document.getElementById('allureSection');
+  for (const proj of ALLURE_PROJECTS) {
+    try {
+      const base = 'https://allure-reports.mumzstage.com/allure-docker-service';
+      const summaryResp = await fetch(`${base}/projects/${proj.id}/reports/latest/widgets/summary.json`);
+      const summary = await summaryResp.json();
+      const s = summary.statistic;
+      const runTime = summary.time?.stop ? new Date(summary.time.stop).toLocaleString() : 'N/A';
+      const passRate = s.total ? Math.round(s.passed / s.total * 100) : 0;
+      
+      document.getElementById('allureStats').innerHTML = `
+        <div class="stats-grid" style="margin-bottom:10px">
+          <div class="stat-card" style="border-top:3px solid #28a745"><div class="stat-number" style="color:#28a745">${s.passed}</div><div class="stat-label">Passed</div></div>
+          <div class="stat-card" style="border-top:3px solid #dc3545"><div class="stat-number" style="color:#dc3545">${s.failed}</div><div class="stat-label">Failed</div></div>
+          <div class="stat-card" style="border-top:3px solid #ffc107"><div class="stat-number" style="color:#ffc107">${s.skipped}</div><div class="stat-label">Skipped</div></div>
+          <div class="stat-card" style="border-top:3px solid #667eea"><div class="stat-number">${passRate}%</div><div class="stat-label">Pass Rate</div></div>
+        </div>
+        <p style="font-size:.85em;color:#666">📅 Last run: ${runTime} | <a href="https://allure-reports.mumzstage.com/allure-docker-service/projects/${proj.id}/reports/latest/index.html" target="_blank" style="color:#667eea">View Full Report →</a></p>
+      `;
+      
+      // Get individual test results
+      const suitesResp = await fetch(`${base}/projects/${proj.id}/reports/latest/data/suites.json`);
+      const suites = await suitesResp.json();
+      const tests = [];
+      function findTests(node) {
+        if (node.children) node.children.forEach(findTests);
+        else tests.push({name: node.name, status: node.status});
+      }
+      findTests(suites);
+      
+      document.getElementById('allureDetails').innerHTML = `<table style="width:100%">
+        <tr><th>Test</th><th style="width:80px">Status</th></tr>
+        ${tests.map(t => `<tr><td style="font-size:.8em">${t.name}</td><td><span style="padding:2px 6px;border-radius:3px;font-size:.75em;background:${t.status==='passed'?'#d4edda':t.status==='failed'?'#f8d7da':'#fff3cd'};color:${t.status==='passed'?'#155724':t.status==='failed'?'#721c24':'#856404'}">${t.status==='passed'?'✅':'⏭️'} ${t.status}</span></td></tr>`).join('')}
+      </table>`;
+    } catch(e) {
+      document.getElementById('allureStats').innerHTML = '<p style="color:#999">⚠️ Could not fetch Allure data. Check CORS or network.</p>';
+    }
+  }
+}
+
+// === Coverage Trend ===
+let COVERAGE_TREND = [];
+
+async function loadTrend() {
+  try {
+    const resp = await fetch('coverage_trend.json');
+    COVERAGE_TREND = await resp.json();
+  } catch(e) {
+    COVERAGE_TREND = [{date:'2026-05-18',web:38,app:37,label:'Current'}];
+  }
+  renderTrendChart();
+}
+
+function renderTrendChart() {
+  const canvas = document.getElementById('trendChart');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width = canvas.parentElement.offsetWidth - 40;
+  const H = canvas.height = 200;
+  const pad = {top: 20, right: 20, bottom: 40, left: 50};
+  const chartW = W - pad.left - pad.right;
+  const chartH = H - pad.top - pad.bottom;
+  
+  ctx.clearRect(0, 0, W, H);
+  
+  // Grid
+  ctx.strokeStyle = '#eee';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.top + (chartH / 4) * i;
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+    ctx.fillStyle = '#999'; ctx.font = '11px sans-serif'; ctx.textAlign = 'right';
+    ctx.fillText((100 - i * 25) + '%', pad.left - 8, y + 4);
+  }
+  
+  // Draw lines
+  function drawLine(data, color) {
+    ctx.beginPath(); ctx.strokeStyle = color; ctx.lineWidth = 3;
+    data.forEach((d, i) => {
+      const x = pad.left + (i / (data.length - 1)) * chartW;
+      const y = pad.top + chartH - (d / 100) * chartH;
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+    // Dots
+    data.forEach((d, i) => {
+      const x = pad.left + (i / (data.length - 1)) * chartW;
+      const y = pad.top + chartH - (d / 100) * chartH;
+      ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI * 2); ctx.fillStyle = color; ctx.fill();
+      ctx.fillStyle = '#333'; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText(d + '%', x, y - 12);
+    });
+  }
+  
+  drawLine(COVERAGE_TREND.map(d => d.web), '#667eea');
+  drawLine(COVERAGE_TREND.map(d => d.app), '#28a745');
+  
+  // X labels
+  ctx.fillStyle = '#666'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+  COVERAGE_TREND.forEach((d, i) => {
+    const x = pad.left + (i / (COVERAGE_TREND.length - 1)) * chartW;
+    ctx.fillText(d.label, x, H - 10);
+  });
+  
+  // Legend
+  ctx.font = '12px sans-serif';
+  ctx.fillStyle = '#667eea'; ctx.fillRect(W - 180, 10, 12, 12);
+  ctx.fillStyle = '#333'; ctx.textAlign = 'left'; ctx.fillText('Web Coverage', W - 164, 20);
+  ctx.fillStyle = '#28a745'; ctx.fillRect(W - 180, 28, 12, 12);
+  ctx.fillStyle = '#333'; ctx.fillText('App Coverage', W - 164, 38);
+}
+
 // Init
+async function init() {
+  try {
+    const resp = await fetch('mapping.json');
+    DATA = await resp.json();
+  } catch(e) { console.error('Failed to load mapping.json', e); return; }
+  
+  // Merge localStorage overrides
+  const saved = localStorage.getItem(LS_KEY);
+  if (saved) {
+    try {
+      const edits = JSON.parse(saved);
+      if (edits.web) edits.web.forEach(edit => {
+        const test = DATA.testmo_tests.find(t => t.case_id === edit.case_id);
+        if (test) {
+          if (edit.automated_tests !== undefined) test.automated_tests = edit.automated_tests;
+          if (edit.coverage_status !== undefined) test.coverage_status = edit.coverage_status;
+          if (edit.notes !== undefined) test.notes = edit.notes;
+        }
+      });
+      if (edits.app) edits.app.forEach(edit => {
+        const test = (DATA.app_testmo_tests||[]).find(t => t.case_id === edit.case_id);
+        if (test) {
+          if (edit.automated_tests !== undefined) test.automated_tests = edit.automated_tests;
+          if (edit.coverage_status !== undefined) test.coverage_status = edit.coverage_status;
+          if (edit.notes !== undefined) test.notes = edit.notes;
+        }
+      });
+      hasUnsavedChanges = true;
+    } catch(e) { localStorage.removeItem(LS_KEY); }
+  }
+  
+  render();
+  renderRiskSection();
+  loadTrend();
+  fetchAllureStatus();
+}
+
 init();
 </script>
 </body>

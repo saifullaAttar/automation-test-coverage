@@ -1,0 +1,6 @@
+[
+  {"date": "2026-04-01", "web": 25, "app": 0, "label": "Initial"},
+  {"date": "2026-04-15", "web": 28, "app": 10, "label": "Sprint 1"},
+  {"date": "2026-05-01", "web": 30, "app": 30, "label": "Sprint 2"},
+  {"date": "2026-05-18", "web": 38, "app": 37, "label": "Current"}
+]
