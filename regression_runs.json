@@ -1,3 +1,6 @@
 [
-  {"date": "2026-05-12", "environment": "STPP", "country": "AE", "platform": "Android", "passed": 29, "failed": 0, "skipped": 2, "total": 31}
+  {"date": "2026-05-12", "environment": "STPP", "country": "AE", "platform": "Android", "passed": 29, "failed": 0, "skipped": 2, "total": 31},
+  {"date": "2026-05-12", "environment": "STPP", "country": "AE", "platform": "iOS", "passed": 29, "failed": 0, "skipped": 2, "total": 31},
+  {"date": "2026-05-12", "environment": "STPP", "country": "SA", "platform": "Android", "passed": 27, "failed": 0, "skipped": 2, "total": 29},
+  {"date": "2026-05-12", "environment": "STPP", "country": "SA", "platform": "iOS", "passed": 27, "failed": 0, "skipped": 2, "total": 29}
 ]
