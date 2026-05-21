@@ -2864,6 +2864,11 @@
     "last_updated": "2026-05-21",
     "total_testmo_cases_web": 81,
     "total_testmo_cases_app": 43,
-    "total_automated_tests": 93
+    "total_automated_tests": 93,
+    "newly_covered": [
+      "1435408",
+      "1543903",
+      "1543907"
+    ]
   }
 }

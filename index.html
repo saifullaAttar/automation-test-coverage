@@ -82,6 +82,7 @@ tr:hover{background:#f8f9ff}
       <option value="full">✅ Covered</option>
       <option value="partial">⚠️ Partial</option>
       <option value="none">❌ Not Covered</option>
+      <option value="new">🆕 Newly Covered This Month</option>
     </select>
     <select id="filterPriority">
       <option value="">All Priorities</option>
@@ -91,7 +92,8 @@ tr:hover{background:#f8f9ff}
       <option value="Default">Default</option>
     </select>
     <span id="unsavedBadge" class="unsaved-badge hidden">⚠ Unsaved Changes</span>
-    <button class="btn btn-success" onclick="exportMapping()">📥 Export JSON</button>
+    <button class="btn btn-success" onclick="saveForEveryone()">💾 Save for Everyone</button>
+    <button class="btn btn-outline" onclick="exportMapping()">📥 Export JSON</button>
     <button class="btn btn-outline" onclick="importMapping()">📤 Import</button>
     <button class="btn btn-danger" onclick="resetChanges()">🔄 Reset</button>
     <button class="btn btn-primary" id="updateBtn" onclick="updateFromMain()">🔄 Update from Main</button>
@@ -265,10 +267,12 @@ function getFilteredTests() {
   const folder = document.getElementById('filterFolder').value;
   const status = document.getElementById('filterStatus').value;
   const priority = document.getElementById('filterPriority').value;
+  const newCases = new Set(DATA.metadata.newly_covered || []);
   
   return DATA.testmo_tests.filter(t => {
     if (folder && t.folder !== folder) return false;
-    if (status && t.coverage_status !== status) return false;
+    if (status === 'new') { if (!newCases.has(t.case_id)) return false; }
+    else if (status && t.coverage_status !== status) return false;
     if (priority && t.priority !== priority) return false;
     if (search) {
       const hay = (t.name + t.case_id + t.folder + t.functionality + t.automated_tests.join(' ')).toLowerCase();
@@ -713,6 +717,17 @@ function renderTrendChart() {
   ctx.fillStyle = '#333'; ctx.fillText('New Tests Added (commits with add/new/feat)', pad.left + 20, 19);
   ctx.fillStyle = '#667eea'; ctx.fillRect(pad.left + 320, 8, 14, 14);
   ctx.fillStyle = '#333'; ctx.fillText('Tests Fixed / Updated', pad.left + 340, 19);
+
+  // Coverage target annotation
+  const totalCases = (DATA ? DATA.testmo_tests.length + (DATA.app_testmo_tests||[]).length : 124);
+  const currentCovered = DATA ? DATA.testmo_tests.filter(t=>t.coverage_status!=='none').length + (DATA.app_testmo_tests||[]).filter(t=>t.coverage_status!=='none').length : 48;
+  const targetPct = 80;
+  const targetCases = Math.ceil(totalCases * targetPct / 100);
+  const remaining = targetCases - currentCovered;
+  ctx.save();
+  ctx.fillStyle = '#dc3545'; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'right';
+  ctx.fillText(`🎯 Target: ${targetPct}% (${targetCases}/${totalCases} cases) — ${remaining > 0 ? remaining + ' more needed by Q3 2026' : '✅ Achieved!'}`, W - pad.right, H - 8);
+  ctx.restore();
 }
 
 // === Regression Run History ===
@@ -809,6 +824,38 @@ function renderRegressionChart() {
     </tr>`).join('')}</tbody></table>`;
 }
 
+// === Persist to Gist ===
+const GIST_ID = '37aafe3290f5c00dbd0ddb910a19f939';
+const GIST_RAW = `https://gist.githubusercontent.com/saifullaAttar/${GIST_ID}/raw/mapping.json`;
+
+async function saveForEveryone() {
+  const pwd = prompt('Enter edit password to save for everyone:');
+  if (!pwd) return;
+  if (pwd !== 'Mumz@SDET2026') { alert('❌ Incorrect password'); return; }
+  const token = localStorage.getItem('gist_token');
+  if (!token) {
+    const t = prompt('First time: enter GitHub token (gist scope) — saved locally for future:');
+    if (!t) return;
+    localStorage.setItem('gist_token', t);
+    return saveForEveryone();
+  }
+  try {
+    const resp = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
+      method: 'PATCH',
+      headers: {'Authorization': `token ${token}`, 'Content-Type': 'application/json'},
+      body: JSON.stringify({files: {'mapping.json': {content: JSON.stringify(DATA, null, 2)}}})
+    });
+    if (!resp.ok) {
+      if (resp.status === 401) { localStorage.removeItem('gist_token'); alert('❌ Token expired. Try again.'); return; }
+      throw new Error(resp.statusText);
+    }
+    localStorage.removeItem(LS_KEY);
+    hasUnsavedChanges = false;
+    document.getElementById('unsavedBadge').classList.add('hidden');
+    alert('✅ Saved! All users will see the updated mappings.');
+  } catch(e) { alert('❌ Save failed: ' + e.message); }
+}
+
 // === Update from Main ===
 async function updateFromMain() {
   const btn = document.getElementById('updateBtn');
@@ -842,9 +889,20 @@ async function updateFromMain() {
 // Init
 async function init() {
   try {
-    const resp = await fetch('mapping.json');
-    DATA = await resp.json();
-  } catch(e) { console.error('Failed to load mapping.json', e); return; }
+    // Try loading from shared Gist first (latest edits from anyone)
+    const gistResp = await fetch(GIST_RAW + '?t=' + Date.now());
+    if (gistResp.ok) {
+      DATA = await gistResp.json();
+    } else {
+      throw new Error('Gist unavailable');
+    }
+  } catch(e) {
+    // Fallback to local mapping.json
+    try {
+      const resp = await fetch('mapping.json');
+      DATA = await resp.json();
+    } catch(e2) { console.error('Failed to load mapping.json', e2); return; }
+  }
   
   // Merge localStorage overrides
   const saved = localStorage.getItem(LS_KEY);

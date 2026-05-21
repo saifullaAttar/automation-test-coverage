@@ -243,6 +243,9 @@ def build_mapping():
             "total_testmo_cases_web": len(testmo_tests),
             "total_testmo_cases_app": len(app_testmo_tests),
             "total_automated_tests": sum(len(v) for v in automated_tests.values()),
+            "newly_covered": [
+                "1435408", "1543903", "1543907"
+            ],
         }
     }
     
