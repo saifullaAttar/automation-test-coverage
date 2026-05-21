@@ -137,6 +137,7 @@ tr:hover{background:#f8f9ff}
           <th style="width:30%">Mapped Automated Tests</th>
           <th style="width:120px">Coverage</th>
           <th style="width:15%">Notes</th>
+          <th style="width:40px"></th>
         </tr>
       </thead>
       <tbody id="tableBody"></tbody>
@@ -158,6 +159,7 @@ tr:hover{background:#f8f9ff}
             <th style="width:30%">Mapped Automated Tests</th>
             <th style="width:120px">Coverage</th>
             <th style="width:15%">Notes</th>
+            <th style="width:40px"></th>
           </tr>
         </thead>
         <tbody id="appTableBody"></tbody>
@@ -298,6 +300,7 @@ function renderTable() {
         <option value="none" ${t.coverage_status==='none'?'selected':''}>❌ Not Covered</option>
       </select></td>
       <td><textarea class="notes-input" onchange="updateNotes('${t.case_id}', this.value)" placeholder="Add notes...">${t.notes || ''}</textarea></td>
+      <td><span onclick="deleteWebCase('${t.case_id}')" style="cursor:pointer;color:#dc3545;font-size:1.1em" title="Delete">🗑️</span></td>
     </tr>`;
   }).join('');
 }
@@ -334,6 +337,7 @@ function renderAppSection() {
         <option value="none" ${t.coverage_status==='none'?'selected':''}>❌ Not Covered</option>
       </select></td>
       <td><textarea class="notes-input" onchange="updateAppNotes('${t.case_id}', this.value)" placeholder="Add notes...">${t.notes || ''}</textarea></td>
+      <td><span onclick="deleteAppCase('${t.case_id}')" style="cursor:pointer;color:#dc3545;font-size:1.1em" title="Delete">🗑️</span></td>
     </tr>`;
   }).join('');
 }
@@ -546,6 +550,24 @@ function addNewAppCase() {
     functionality: '', priority: priority, status: '', summary: '',
     tags: '', automated_tests: [], coverage_status: 'none', notes: ''
   });
+  saveEdits();
+  render();
+  renderRiskSection();
+}
+
+function deleteWebCase(caseId) {
+  const test = DATA.testmo_tests.find(t => t.case_id === caseId);
+  if (!confirm(`Delete web test C-${caseId}: "${test.name}"?`)) return;
+  DATA.testmo_tests = DATA.testmo_tests.filter(t => t.case_id !== caseId);
+  saveEdits();
+  render();
+  renderRiskSection();
+}
+
+function deleteAppCase(caseId) {
+  const test = (DATA.app_testmo_tests||[]).find(t => t.case_id === caseId);
+  if (!confirm(`Delete app test C-${caseId}: "${test.name}"?`)) return;
+  DATA.app_testmo_tests = DATA.app_testmo_tests.filter(t => t.case_id !== caseId);
   saveEdits();
   render();
   renderRiskSection();

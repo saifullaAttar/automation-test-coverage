@@ -169,7 +169,8 @@ APP_EXPLICIT_MAPPINGS = {
     "1543905": [],  # Shipping address on checkout - not automated standalone
     "1543906": [],  # Payment methods on checkout - not automated standalone
     "1543907": ["test_uae_checkout_cc_no_coupon", "test_app_uae_checkout_tamara_no_coupon", "test_uae_checkout_tabby_no_coupon", "test_app_checkout_tabby_cashback_coupon"],  # Place orders (Tamara/Tabby/CC)
-    "2283419": [],  # CC order from admin - not automated in app
+    "2884189": [],  # Submit a review - not automated
+    "2884190": [],  # Reviews and ratings in PDP - not automated
     "1543926": ["test_uae_checkout_cc_and_partial_sc_no_coupon"],  # Apply/remove SC (if exists)
     
     # GR / Multi-cart
@@ -192,7 +193,7 @@ APP_EXPLICIT_MAPPINGS = {
     # Maya / CT
     "2673949": [],  # Maya loading - not automated
     "2673950": [],  # Maya add to cart - not automated
-    "2673955": [],  # CT events - not automated
+    "2673956": [],  # GTM events - not automated
 }
 
 def build_mapping():

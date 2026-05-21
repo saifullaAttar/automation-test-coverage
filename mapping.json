@@ -1339,6 +1339,34 @@
       "notes": ""
     },
     {
+      "case_id": "2884189",
+      "test_id": "",
+      "name": "Verify the user is able to submit a review",
+      "folder": "Release checklist",
+      "functionality": "",
+      "priority": "Default",
+      "status": "",
+      "summary": "",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2884190",
+      "test_id": "",
+      "name": "Verify reviews and ratings in PDP",
+      "folder": "Release checklist",
+      "functionality": "",
+      "priority": "Default",
+      "status": "",
+      "summary": "",
+      "tags": "",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
       "case_id": "1435418",
       "test_id": "14772257",
       "name": "Verify user can add items to GR - All product types (Simple, custom , installation , configurable, configurable custom, colour variant  bundle, and egift )",
@@ -1699,20 +1727,6 @@
       "notes": ""
     },
     {
-      "case_id": "2283419",
-      "test_id": "14772273",
-      "name": "Place CC order from Admin - check ODP, Admin and invoice",
-      "folder": "Release checklist",
-      "functionality": "",
-      "priority": "Default",
-      "status": "Skipped",
-      "summary": "",
-      "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": ""
-    },
-    {
       "case_id": "1435419",
       "test_id": "14772258",
       "name": "Verify GR cart and proceed to checkout",
@@ -1869,13 +1883,13 @@
       "notes": ""
     },
     {
-      "case_id": "2673955",
-      "test_id": "14772276",
-      "name": "Verify CT events is triggered (sign-in, sign-up, ATC, and search)",
+      "case_id": "2673956",
+      "test_id": "",
+      "name": "Verify GTM events is triggered (sign-in, sign-up, ATC, and search)",
       "folder": "Release checklist",
       "functionality": "",
       "priority": "Default",
-      "status": "Passed",
+      "status": "Skipped",
       "summary": "",
       "tags": "",
       "automated_tests": [],
@@ -2863,7 +2877,7 @@
     "testmo_url_app": "https://mumzworld.testmo.net/runs/view/2192",
     "last_updated": "2026-05-21",
     "total_testmo_cases_web": 81,
-    "total_testmo_cases_app": 43,
+    "total_testmo_cases_app": 44,
     "total_automated_tests": 93,
     "newly_covered": [
       "1435408",
