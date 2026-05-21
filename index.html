@@ -170,6 +170,10 @@ tr:hover{background:#f8f9ff;transition:background .2s}
         <div><label style="font-size:.8em;color:#666">Environment</label><select id="runEnv" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"><option>PREPROD</option><option>STPP</option><option>UAT</option><option>PROD</option></select></div>
         <div><label style="font-size:.8em;color:#666">Country</label><select id="runCountry" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"><option>AE</option><option>SA</option><option>BH</option><option>KW</option></select></div>
         <div><label style="font-size:.8em;color:#666">Platform</label><select id="runPlatform" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"><option>Android</option><option>iOS</option></select></div>
+        <div style="grid-column:1/-1;text-align:center;margin:5px 0">
+          <button class="btn btn-warning" onclick="fetchFromAllure()" id="fetchAllureBtn">⚡ Fetch from Allure</button>
+          <span id="fetchStatus" style="font-size:.8em;color:#666;margin-left:8px"></span>
+        </div>
         <div><label style="font-size:.8em;color:#666">Passed</label><input type="number" id="runPassed" min="0" value="0" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"></div>
         <div><label style="font-size:.8em;color:#666">Failed</label><input type="number" id="runFailed" min="0" value="0" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"></div>
         <div><label style="font-size:.8em;color:#666">Skipped</label><input type="number" id="runSkipped" min="0" value="0" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"></div>
@@ -971,6 +975,60 @@ const GIST_RAW = `https://gist.githubusercontent.com/saifullaAttar/${GIST_ID}/ra
 function showAddRunModal() {
   document.getElementById('runDate').value = new Date().toISOString().split('T')[0];
   document.getElementById('addRunModal').style.display = 'flex';
+}
+
+async function fetchFromAllure() {
+  const btn = document.getElementById('fetchAllureBtn');
+  const status = document.getElementById('fetchStatus');
+  const date = document.getElementById('runDate').value;
+  const country = document.getElementById('runCountry').value.toLowerCase();
+  const platform = document.getElementById('runPlatform').value.toLowerCase();
+  const suffix = `${country}-${platform}`;
+
+  btn.disabled = true;
+  btn.textContent = '⏳ Fetching...';
+  status.textContent = '';
+
+  try {
+    // Get all projects from Allure
+    const projResp = await fetch(`${ALLURE_BASE}/projects`);
+    const projData = await projResp.json();
+    const allProjects = Object.keys(projData.data?.projects || {});
+    const matching = allProjects.filter(p => p.endsWith(`-${suffix}`) && p !== `latest-${suffix}`);
+
+    // Check each matching project's date to find the one for selected date
+    let found = null;
+    for (const proj of matching.reverse()) {
+      try {
+        const resp = await fetch(`${ALLURE_BASE}/projects/${proj}/reports/latest/widgets/summary.json`);
+        if (!resp.ok) continue;
+        const d = await resp.json();
+        const stop = d.time?.stop;
+        if (!stop) continue;
+        const projDate = new Date(stop).toISOString().split('T')[0];
+        if (projDate === date) {
+          found = d.statistic;
+          break;
+        }
+      } catch { continue; }
+    }
+
+    if (found) {
+      document.getElementById('runPassed').value = found.passed || 0;
+      document.getElementById('runFailed').value = (found.failed || 0) + (found.broken || 0);
+      document.getElementById('runSkipped').value = found.skipped || 0;
+      status.textContent = '✅ Data filled from Allure';
+      status.style.color = '#28a745';
+    } else {
+      status.textContent = `❌ No report found for ${date} / ${country.toUpperCase()} / ${platform}`;
+      status.style.color = '#dc3545';
+    }
+  } catch(e) {
+    status.textContent = '❌ Failed to fetch: ' + e.message;
+    status.style.color = '#dc3545';
+  }
+  btn.disabled = false;
+  btn.textContent = '⚡ Fetch from Allure';
 }
 
 async function saveRun() {
