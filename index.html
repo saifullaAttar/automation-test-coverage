@@ -116,13 +116,6 @@ tr:hover{background:#f8f9ff}
     <canvas id="trendChart" height="280"></canvas>
   </div>
 
-  <!-- Allure Last Run Summary -->
-  <div class="section" id="allureSection" style="margin-bottom:20px">
-    <h2>🧪 Last Allure Run Status</h2>
-    <div id="allureStats" style="margin-bottom:10px"></div>
-    <div id="allureDetails" style="max-height:300px;overflow-y:auto"></div>
-  </div>
-
   <!-- Regression Run History -->
   <div class="section" style="margin-bottom:20px">
     <h2>🏁 FALCON Regression Run History</h2>
@@ -596,52 +589,6 @@ function renderRiskSection() {
   ).join('');
 }
 
-// === Allure Last Run Status ===
-const ALLURE_PROJECTS = [
-  {id: '13ff2b60-b2bc-4292-b2d4-1c3f8895fbad-ae-android', label: 'UAE Web (Latest)'}
-];
-
-async function fetchAllureStatus() {
-  const section = document.getElementById('allureSection');
-  for (const proj of ALLURE_PROJECTS) {
-    try {
-      const base = 'https://allure-reports.mumzstage.com/allure-docker-service';
-      const summaryResp = await fetch(`${base}/projects/${proj.id}/reports/latest/widgets/summary.json`);
-      const summary = await summaryResp.json();
-      const s = summary.statistic;
-      const runTime = summary.time?.stop ? new Date(summary.time.stop).toLocaleString() : 'N/A';
-      const passRate = s.total ? Math.round(s.passed / s.total * 100) : 0;
-      
-      document.getElementById('allureStats').innerHTML = `
-        <div class="stats-grid" style="margin-bottom:10px">
-          <div class="stat-card" style="border-top:3px solid #28a745"><div class="stat-number" style="color:#28a745">${s.passed}</div><div class="stat-label">Passed</div></div>
-          <div class="stat-card" style="border-top:3px solid #dc3545"><div class="stat-number" style="color:#dc3545">${s.failed}</div><div class="stat-label">Failed</div></div>
-          <div class="stat-card" style="border-top:3px solid #ffc107"><div class="stat-number" style="color:#ffc107">${s.skipped}</div><div class="stat-label">Skipped</div></div>
-          <div class="stat-card" style="border-top:3px solid #667eea"><div class="stat-number">${passRate}%</div><div class="stat-label">Pass Rate</div></div>
-        </div>
-        <p style="font-size:.85em;color:#666">📅 Last run: ${runTime} | <a href="https://allure-reports.mumzstage.com/allure-docker-service/projects/${proj.id}/reports/latest/index.html" target="_blank" style="color:#667eea">View Full Report →</a></p>
-      `;
-      
-      // Get individual test results
-      const suitesResp = await fetch(`${base}/projects/${proj.id}/reports/latest/data/suites.json`);
-      const suites = await suitesResp.json();
-      const tests = [];
-      function findTests(node) {
-        if (node.children) node.children.forEach(findTests);
-        else tests.push({name: node.name, status: node.status});
-      }
-      findTests(suites);
-      
-      document.getElementById('allureDetails').innerHTML = `<table style="width:100%">
-        <tr><th>Test</th><th style="width:80px">Status</th></tr>
-        ${tests.map(t => `<tr><td style="font-size:.8em">${t.name}</td><td><span style="padding:2px 6px;border-radius:3px;font-size:.75em;background:${t.status==='passed'?'#d4edda':t.status==='failed'?'#f8d7da':'#fff3cd'};color:${t.status==='passed'?'#155724':t.status==='failed'?'#721c24':'#856404'}">${t.status==='passed'?'✅':'⏭️'} ${t.status}</span></td></tr>`).join('')}
-      </table>`;
-    } catch(e) {
-      document.getElementById('allureStats').innerHTML = '<p style="color:#999">⚠️ Could not fetch Allure data. Check CORS or network.</p>';
-    }
-  }
-}
-
 // === Coverage Trend ===
 let COVERAGE_TREND = [];
 
@@ -933,7 +880,6 @@ async function init() {
   renderRiskSection();
   loadTrend();
   loadRegressionRuns();
-  fetchAllureStatus();
 }
 
 init();
