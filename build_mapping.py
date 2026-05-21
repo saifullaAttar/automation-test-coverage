@@ -159,16 +159,16 @@ APP_EXPLICIT_MAPPINGS = {
     "1435405": ["test_uae_cart_quantity_workflow", "test_uae_cart_bundle_multiple_variants", "test_uae_cart_configurable_multiple_variants"],  # Product list in cart
     "1435406": ["test_uae_cart_increase_and_decrease_quantity", "test_uae_cart_item_integrity_after_quantity_change"],  # Update qty
     "1435407": ["test_uae_cart_remove_item", "test_app_uae_cart_remaining_items_unaffected_after_partial_removal"],  # Remove from cart
-    "1435408": ["test_uae_checkout_apply_gift_wrap_place_order"],  # Gift wrap
+    "1435408": ["test_uae_checkout_apply_gift_wrap_place_order", "test_app_cart_apply_gift_wrap_and_place_order"],  # Gift wrap
     "1435409": ["test_app_uae_cart_remove_item_with_applied_coupon"],  # Apply/remove coupon
-    "1543903": [],  # Order summary in cart - not automated standalone
+    "1543903": ["test_app_uae_cart_order_summary_updates_after_item_removal"],  # Order summary in cart
     "1543904": [],  # Order summary - not automated
     "1435418": [],  # Add items to GR - not automated
     
     # Checkout
     "1543905": [],  # Shipping address on checkout - not automated standalone
     "1543906": [],  # Payment methods on checkout - not automated standalone
-    "1543907": ["test_uae_checkout_cc_no_coupon", "test_app_uae_checkout_tamara_no_coupon", "test_uae_checkout_tabby_no_coupon"],  # Place orders (Tamara/Tabby/CC)
+    "1543907": ["test_uae_checkout_cc_no_coupon", "test_app_uae_checkout_tamara_no_coupon", "test_uae_checkout_tabby_no_coupon", "test_app_checkout_tabby_cashback_coupon"],  # Place orders (Tamara/Tabby/CC)
     "2283419": [],  # CC order from admin - not automated in app
     "1543926": ["test_uae_checkout_cc_and_partial_sc_no_coupon"],  # Apply/remove SC (if exists)
     

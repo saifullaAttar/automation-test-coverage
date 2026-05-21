@@ -1463,7 +1463,8 @@
       "summary": "",
       "tags": "",
       "automated_tests": [
-        "test_uae_checkout_apply_gift_wrap_place_order"
+        "test_uae_checkout_apply_gift_wrap_place_order",
+        "test_app_cart_apply_gift_wrap_and_place_order"
       ],
       "coverage_status": "full",
       "notes": ""
@@ -1630,8 +1631,10 @@
       "status": "Skipped",
       "summary": "",
       "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
+      "automated_tests": [
+        "test_app_uae_cart_order_summary_updates_after_item_removal"
+      ],
+      "coverage_status": "full",
       "notes": ""
     },
     {
@@ -1689,7 +1692,8 @@
       "automated_tests": [
         "test_uae_checkout_cc_no_coupon",
         "test_app_uae_checkout_tamara_no_coupon",
-        "test_uae_checkout_tabby_no_coupon"
+        "test_uae_checkout_tabby_no_coupon",
+        "test_app_checkout_tabby_cashback_coupon"
       ],
       "coverage_status": "full",
       "notes": ""
@@ -1979,9 +1983,12 @@
       {
         "name": "test_uae_percentage_of_product_variant_price_discount_rules_without_max_amount",
         "file": "test_cart.py",
-        "title": "",
-        "tags": [],
-        "feature": "",
+        "title": "UAE - Percentage of Product variant price discount without max amount (through product search) and Place (CC) order",
+        "tags": [
+          "CC",
+          "AUTO_V_MAX_60"
+        ],
+        "feature": "Coupon",
         "docstring": "1. Go to homepage. 2. Add sales and none-salse product. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order"
       },
       {
@@ -2713,6 +2720,28 @@
         "docstring": "Verify that user can remove an item when coupon is applied and totals recalculate correctly."
       },
       {
+        "name": "test_app_cart_apply_gift_wrap_and_place_order",
+        "file": "test_app_cart.py",
+        "title": "UAE - Apply gift wrap to product and place order",
+        "tags": [
+          "Cart",
+          "Gift Wrap"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Login using automation+uae+041@mumzworld.com / Test@123 2. Go to home screen (Explore) 3. Search product: Hape - Wooden Bunny Stacking Ring 4. Add to cart the first product on PDP page 5. Go to car"
+      },
+      {
+        "name": "test_app_uae_cart_order_summary_updates_after_item_removal",
+        "file": "test_app_cart.py",
+        "title": "Order summary updates correctly after item removal",
+        "tags": [
+          "Cart",
+          "OrderSummary"
+        ],
+        "feature": "Cart",
+        "docstring": "Steps: 1. Add two products to cart 2. Proceed to checkout 3. Go back to cart 4. Capture initial cart order summary (subtotal, discount, VAT, total) 5. Remove one item 6. Verify remaining item count is"
+      },
+      {
         "name": "test_uae_checkout_cc_no_coupon",
         "file": "test_app_checkout.py",
         "title": "Successful user checkout in uae with CC no coupon",
@@ -2763,6 +2792,17 @@
         ],
         "feature": "Checkout",
         "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tabby w/no coupon"
+      },
+      {
+        "name": "test_app_checkout_tabby_cashback_coupon",
+        "file": "test_app_checkout.py",
+        "title": "Checkout Tabby + Cashback Coupon (App)",
+        "tags": [
+          "Tabby",
+          "Cashback Coupon"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Apply cashback coupon on checkout"
       },
       {
         "name": "test_app_uae_checkout_tamara_no_coupon",
@@ -2821,9 +2861,9 @@
     "testmo_run_id_app": 2192,
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
     "testmo_url_app": "https://mumzworld.testmo.net/runs/view/2192",
-    "last_updated": "2026-05-18",
+    "last_updated": "2026-05-21",
     "total_testmo_cases_web": 81,
     "total_testmo_cases_app": 43,
-    "total_automated_tests": 90
+    "total_automated_tests": 93
   }
 }

@@ -94,6 +94,7 @@ tr:hover{background:#f8f9ff}
     <button class="btn btn-success" onclick="exportMapping()">📥 Export JSON</button>
     <button class="btn btn-outline" onclick="importMapping()">📤 Import</button>
     <button class="btn btn-danger" onclick="resetChanges()">🔄 Reset</button>
+    <button class="btn btn-primary" id="updateBtn" onclick="updateFromMain()">🔄 Update from Main</button>
   </div>
 
   <div class="stats-grid" id="statsGrid"></div>
@@ -674,6 +675,34 @@ function renderTrendChart() {
   ctx.fillStyle = '#333'; ctx.fillText('New Tests Added (commits with add/new/feat)', pad.left + 20, 19);
   ctx.fillStyle = '#667eea'; ctx.fillRect(pad.left + 320, 8, 14, 14);
   ctx.fillStyle = '#333'; ctx.fillText('Tests Fixed / Updated', pad.left + 340, 19);
+}
+
+// === Update from Main ===
+async function updateFromMain() {
+  const btn = document.getElementById('updateBtn');
+  btn.textContent = '⏳ Updating...';
+  btn.disabled = true;
+  try {
+    const ts = Date.now();
+    const [mappingResp, trendResp] = await Promise.all([
+      fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/mapping.json?t=${ts}`),
+      fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/coverage_trend.json?t=${ts}`)
+    ]);
+    if (!mappingResp.ok || !trendResp.ok) throw new Error('Fetch failed');
+    DATA = await mappingResp.json();
+    COVERAGE_TREND = await trendResp.json();
+    localStorage.removeItem(LS_KEY);
+    hasUnsavedChanges = false;
+    render();
+    renderRiskSection();
+    renderTrendChart();
+    btn.textContent = '✅ Updated!';
+    setTimeout(() => { btn.textContent = '🔄 Update from Main'; }, 2000);
+  } catch(e) {
+    btn.textContent = '❌ Failed';
+    setTimeout(() => { btn.textContent = '🔄 Update from Main'; }, 2000);
+  }
+  btn.disabled = false;
 }
 
 // Init
