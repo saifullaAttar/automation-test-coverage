@@ -1007,8 +1007,10 @@ async function fetchFromAllure() {
         if (!stop) continue;
         const projDate = new Date(stop).toISOString().split('T')[0];
         if (projDate === date) {
-          found = d.statistic;
-          break;
+          if ((found === null) && d.statistic.total >= 10) {
+            found = d.statistic;
+            break;
+          }
         }
       } catch { continue; }
     }
