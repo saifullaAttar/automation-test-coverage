@@ -742,11 +742,50 @@ function renderTrendChart() {
 let REGRESSION_RUNS = [];
 const ENV_COLORS = {STPP:'#667eea', PREPROD:'#f59e0b', PROD:'#10b981', UAT:'#8b5cf6'};
 
+const ALLURE_BASE = 'https://allure-reports.mumzstage.com/allure-docker-service';
+const ALLURE_RUNS = [
+  {project: '40878e36-5b02-47cc-90cb-9876754ef89d-ae-android', country: 'AE', platform: 'Android'},
+  {project: '92100adb-705d-4162-b91e-c23b52dfeabf-ae-ios', country: 'AE', platform: 'iOS'},
+  {project: '556dd6d6-9c83-47d4-99b1-726f8e740b0d-sa-android', country: 'SA', platform: 'Android'},
+  {project: 'd63c9675-c32c-4f8d-82d4-7972b0c2e871-sa-ios', country: 'SA', platform: 'iOS'},
+];
+
 async function loadRegressionRuns() {
+  // Load historical runs from JSON
   try {
     const resp = await fetch('regression_runs.json');
     REGRESSION_RUNS = await resp.json();
   } catch(e) { REGRESSION_RUNS = []; }
+
+  // Fetch latest from Allure API and append if newer
+  try {
+    const results = await Promise.all(ALLURE_RUNS.map(async (r) => {
+      const resp = await fetch(`${ALLURE_BASE}/projects/${r.project}/reports/latest/widgets/summary.json`);
+      if (!resp.ok) return null;
+      const data = await resp.json();
+      const s = data.statistic;
+      const stop = data.time?.stop;
+      if (!stop || s.total < 2) return null;
+      return {
+        date: new Date(stop).toISOString().split('T')[0],
+        environment: 'STPP',
+        country: r.country,
+        platform: r.platform,
+        passed: s.passed,
+        failed: s.failed + (s.broken || 0),
+        skipped: s.skipped,
+        total: s.total
+      };
+    }));
+    const liveRuns = results.filter(Boolean);
+    // Append live runs if their date is newer than last historical entry
+    const lastHistDate = REGRESSION_RUNS.length ? REGRESSION_RUNS[REGRESSION_RUNS.length - 1].date : '';
+    liveRuns.forEach(run => {
+      const exists = REGRESSION_RUNS.some(r => r.date === run.date && r.country === run.country && r.platform === run.platform);
+      if (!exists && run.date >= lastHistDate) REGRESSION_RUNS.push(run);
+    });
+  } catch(e) { /* Allure unavailable, use historical only */ }
+
   renderRegressionChart();
 }
 
