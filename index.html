@@ -98,6 +98,7 @@ tr:hover{background:#f8f9ff}
   </div>
 
   <div class="stats-grid" id="statsGrid"></div>
+  <div id="coverageSummary" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px"></div>
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
 
   <!-- Priority Risk Section -->
@@ -211,6 +212,10 @@ function renderStats() {
   const combinedCovered = covered + appCovered;
   const pct = Math.round(combinedCovered / combinedTotal * 100);
   const totalAuto = DATA.metadata.total_automated_tests;
+  const webAuto = (DATA.automated_tests.web_uae||[]).length + (DATA.automated_tests.web_ksa||[]).length;
+  const appAuto = (DATA.automated_tests.app||[]).length;
+  const webPct = Math.round(covered / total * 100);
+  const appPct = appTotal ? Math.round(appCovered / appTotal * 100) : 0;
   
   document.getElementById('statsGrid').innerHTML = `
     <div class="stat-card"><div class="stat-number">${combinedTotal}</div><div class="stat-label">Total TestMO Cases</div></div>
@@ -219,8 +224,34 @@ function renderStats() {
     <div class="stat-card"><div class="stat-number">${pct}%</div><div class="stat-label">Overall Coverage</div></div>
     <div class="stat-card"><div class="stat-number">${totalAuto}</div><div class="stat-label">Automated Tests</div></div>
   `;
-  document.getElementById('progressFill').style.width = Math.round(covered/total*100) + '%';
-  document.getElementById('progressFill').textContent = Math.round(covered/total*100) + '% Web Coverage';
+
+  document.getElementById('coverageSummary').innerHTML = `
+    <div style="background:#fff;border-radius:10px;padding:20px;box-shadow:0 2px 4px rgba(0,0,0,.1);border-top:4px solid #667eea">
+      <h3 style="margin:0 0 12px;color:#667eea">🌐 mWeb Coverage</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#333">${total}</div><div style="font-size:.8em;color:#666">Total Cases</div></div>
+        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#28a745">${covered}</div><div style="font-size:.8em;color:#666">Automated</div></div>
+        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#dc3545">${total - covered}</div><div style="font-size:.8em;color:#666">Not Automated</div></div>
+        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#667eea">${webPct}%</div><div style="font-size:.8em;color:#666">Covered</div></div>
+      </div>
+      <div style="background:#e9ecef;border-radius:10px;height:12px;margin-top:12px;overflow:hidden"><div style="height:100%;width:${webPct}%;background:linear-gradient(90deg,#667eea,#764ba2);border-radius:10px"></div></div>
+      <div style="margin-top:8px;font-size:.8em;color:#666">Automated tests: ${webAuto} (UAE: ${(DATA.automated_tests.web_uae||[]).length} + KSA: ${(DATA.automated_tests.web_ksa||[]).length})</div>
+    </div>
+    <div style="background:#fff;border-radius:10px;padding:20px;box-shadow:0 2px 4px rgba(0,0,0,.1);border-top:4px solid #764ba2">
+      <h3 style="margin:0 0 12px;color:#764ba2">📱 App Coverage</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#333">${appTotal}</div><div style="font-size:.8em;color:#666">Total Cases</div></div>
+        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#28a745">${appCovered}</div><div style="font-size:.8em;color:#666">Automated</div></div>
+        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#dc3545">${appTotal - appCovered}</div><div style="font-size:.8em;color:#666">Not Automated</div></div>
+        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#764ba2">${appPct}%</div><div style="font-size:.8em;color:#666">Covered</div></div>
+      </div>
+      <div style="background:#e9ecef;border-radius:10px;height:12px;margin-top:12px;overflow:hidden"><div style="height:100%;width:${appPct}%;background:linear-gradient(90deg,#764ba2,#667eea);border-radius:10px"></div></div>
+      <div style="margin-top:8px;font-size:.8em;color:#666">Automated tests: ${appAuto}</div>
+    </div>
+  `;
+
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressFill').textContent = pct + '% Overall Coverage';
 }
 
 function renderFilters() {
