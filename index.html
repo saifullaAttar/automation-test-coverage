@@ -700,8 +700,8 @@ function renderRegressionChart() {
   const canvas = document.getElementById('regressionChart');
   const ctx = canvas.getContext('2d');
   const W = canvas.width = canvas.parentElement.offsetWidth - 40;
-  const H = canvas.height = 300;
-  const pad = {top: 30, right: 30, bottom: 70, left: 50};
+  const H = canvas.height = 320;
+  const pad = {top: 30, right: 30, bottom: 85, left: 50};
   const chartW = W - pad.left - pad.right;
   const chartH = H - pad.top - pad.bottom;
   const n = REGRESSION_RUNS.length;
@@ -730,27 +730,27 @@ function renderRegressionChart() {
     const failH = d.failed * scale;
     const skipH = (d.skipped || 0) * scale;
 
-    // Passed (green)
     ctx.fillStyle = '#28a745';
     ctx.fillRect(cx - barW * 1.5, pad.top + chartH - passH, barW, passH);
     if (d.passed) { ctx.fillStyle='#155724'; ctx.font='bold 11px sans-serif'; ctx.textAlign='center'; ctx.fillText(d.passed, cx - barW, pad.top + chartH - passH - 5); }
 
-    // Failed (red)
     ctx.fillStyle = '#dc3545';
     ctx.fillRect(cx - barW * 0.5, pad.top + chartH - failH, barW, failH);
     if (d.failed) { ctx.fillStyle='#721c24'; ctx.font='bold 11px sans-serif'; ctx.textAlign='center'; ctx.fillText(d.failed, cx, pad.top + chartH - failH - 5); }
 
-    // Skipped (yellow)
     ctx.fillStyle = '#ffc107';
     ctx.fillRect(cx + barW * 0.5, pad.top + chartH - skipH, barW, skipH);
     if (d.skipped) { ctx.fillStyle='#856404'; ctx.font='bold 11px sans-serif'; ctx.textAlign='center'; ctx.fillText(d.skipped, cx + barW, pad.top + chartH - skipH - 5); }
 
-    // Labels
-    ctx.fillStyle = ENV_COLORS[d.environment] || '#333'; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText(d.environment, cx, pad.top + chartH + 18);
+    // Labels: Environment | Country | Platform | Date
+    ctx.textAlign = 'center';
+    ctx.fillStyle = ENV_COLORS[d.environment] || '#333'; ctx.font = 'bold 11px sans-serif';
+    ctx.fillText(d.environment, cx, pad.top + chartH + 16);
+    ctx.fillStyle = '#333'; ctx.font = '11px sans-serif';
+    ctx.fillText(`${d.country} · ${d.platform}`, cx, pad.top + chartH + 32);
     ctx.fillStyle = '#666'; ctx.font = '10px sans-serif';
-    ctx.fillText(d.date, cx, pad.top + chartH + 34);
-    ctx.fillText(d.total + ' tests', cx, pad.top + chartH + 48);
+    ctx.fillText(d.date, cx, pad.top + chartH + 48);
+    ctx.fillText(d.total + ' tests', cx, pad.top + chartH + 62);
   });
 
   // Legend
@@ -764,10 +764,12 @@ function renderRegressionChart() {
 
   // Table
   document.getElementById('regressionTable').innerHTML = `<table style="width:100%">
-    <thead><tr><th>Date</th><th>Environment</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Total</th><th>Pass Rate</th></tr></thead>
+    <thead><tr><th>Date</th><th>Environment</th><th>Country</th><th>Platform</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Total</th><th>Pass Rate</th></tr></thead>
     <tbody>${REGRESSION_RUNS.slice().reverse().map(d => `<tr>
       <td>${d.date}</td>
       <td><span style="color:${ENV_COLORS[d.environment]||'#333'};font-weight:600">${d.environment}</span></td>
+      <td>${d.country}</td>
+      <td>${d.platform}</td>
       <td style="color:#28a745;font-weight:600">${d.passed}</td>
       <td style="color:#dc3545;font-weight:600">${d.failed}</td>
       <td style="color:#ffc107;font-weight:600">${d.skipped||0}</td>
