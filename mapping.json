@@ -1720,8 +1720,7 @@
       "automated_tests": [
         "test_uae_checkout_cc_no_coupon",
         "test_app_uae_checkout_tamara_no_coupon",
-        "test_uae_checkout_tabby_no_coupon",
-        "test_app_checkout_tabby_cashback_coupon"
+        "test_uae_checkout_tabby_no_coupon"
       ],
       "coverage_status": "full",
       "notes": ""
@@ -2808,17 +2807,6 @@
         "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tabby w/no coupon"
       },
       {
-        "name": "test_app_checkout_tabby_cashback_coupon",
-        "file": "test_app_checkout.py",
-        "title": "Checkout Tabby + Cashback Coupon (App)",
-        "tags": [
-          "Tabby",
-          "Cashback Coupon"
-        ],
-        "feature": "Checkout",
-        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Apply cashback coupon on checkout"
-      },
-      {
         "name": "test_app_uae_checkout_tamara_no_coupon",
         "file": "test_app_checkout.py",
         "title": "Successful user checkout in UAE with Tamara no coupon App",
@@ -2878,7 +2866,7 @@
     "last_updated": "2026-05-21",
     "total_testmo_cases_web": 81,
     "total_testmo_cases_app": 44,
-    "total_automated_tests": 93,
+    "total_automated_tests": 92,
     "newly_covered": [
       "1435408",
       "1543903",
