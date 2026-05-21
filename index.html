@@ -123,28 +123,6 @@ tr:hover{background:#f8f9ff}
     <div id="regressionTable" style="margin-top:15px"></div>
   </div>
 
-  <div class="section" style="padding:20px;margin-bottom:0">
-    <h2>🌐 Web Tests</h2>
-  </div>
-  <div style="overflow-x:auto">
-    <table>
-      <thead>
-        <tr>
-          <th style="width:80px">Case ID</th>
-          <th style="width:25%">Test Name</th>
-          <th>Folder</th>
-          <th>Priority</th>
-          <th style="width:30%">Mapped Automated Tests</th>
-          <th style="width:120px">Coverage</th>
-          <th style="width:15%">Notes</th>
-          <th style="width:40px"></th>
-        </tr>
-      </thead>
-      <tbody id="tableBody"></tbody>
-    </table>
-    <div style="padding:10px;text-align:center"><button class="btn btn-outline" onclick="addNewWebCase()" style="font-size:.9em">➕ Add Web Test Case</button></div>
-  </div>
-
   <div class="section" id="appSection">
     <h2>📱 Mobile App Tests</h2>
     <div class="stats-grid" id="appStatsGrid"></div>
@@ -166,6 +144,28 @@ tr:hover{background:#f8f9ff}
       </table>
       <div style="padding:10px;text-align:center"><button class="btn btn-outline" onclick="addNewAppCase()" style="font-size:.9em">➕ Add App Test Case</button></div>
     </div>
+  </div>
+
+  <div class="section" style="padding:20px;margin-bottom:0">
+    <h2>🌐 Web Tests</h2>
+  </div>
+  <div style="overflow-x:auto">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:80px">Case ID</th>
+          <th style="width:25%">Test Name</th>
+          <th>Folder</th>
+          <th>Priority</th>
+          <th style="width:30%">Mapped Automated Tests</th>
+          <th style="width:120px">Coverage</th>
+          <th style="width:15%">Notes</th>
+          <th style="width:40px"></th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+    <div style="padding:10px;text-align:center"><button class="btn btn-outline" onclick="addNewWebCase()" style="font-size:.9em">➕ Add Web Test Case</button></div>
   </div>
 
   <div class="section">
@@ -225,17 +225,6 @@ function renderStats() {
   `;
 
   document.getElementById('coverageSummary').innerHTML = `
-    <div style="background:#fff;border-radius:10px;padding:20px;box-shadow:0 2px 4px rgba(0,0,0,.1);border-top:4px solid #667eea">
-      <h3 style="margin:0 0 12px;color:#667eea">🌐 mWeb Coverage</h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#333">${total}</div><div style="font-size:.8em;color:#666">Total Cases</div></div>
-        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#28a745">${covered}</div><div style="font-size:.8em;color:#666">Automated</div></div>
-        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#dc3545">${total - covered}</div><div style="font-size:.8em;color:#666">Not Automated</div></div>
-        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#667eea">${webPct}%</div><div style="font-size:.8em;color:#666">Covered</div></div>
-      </div>
-      <div style="background:#e9ecef;border-radius:10px;height:12px;margin-top:12px;overflow:hidden"><div style="height:100%;width:${webPct}%;background:linear-gradient(90deg,#667eea,#764ba2);border-radius:10px"></div></div>
-      <div style="margin-top:8px;font-size:.8em;color:#666">Automated tests: ${webAuto} (UAE: ${(DATA.automated_tests.web_uae||[]).length} + KSA: ${(DATA.automated_tests.web_ksa||[]).length})</div>
-    </div>
     <div style="background:#fff;border-radius:10px;padding:20px;box-shadow:0 2px 4px rgba(0,0,0,.1);border-top:4px solid #764ba2">
       <h3 style="margin:0 0 12px;color:#764ba2">📱 App Coverage</h3>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
@@ -246,6 +235,17 @@ function renderStats() {
       </div>
       <div style="background:#e9ecef;border-radius:10px;height:12px;margin-top:12px;overflow:hidden"><div style="height:100%;width:${appPct}%;background:linear-gradient(90deg,#764ba2,#667eea);border-radius:10px"></div></div>
       <div style="margin-top:8px;font-size:.8em;color:#666">Automated tests: ${appAuto}</div>
+    </div>
+    <div style="background:#fff;border-radius:10px;padding:20px;box-shadow:0 2px 4px rgba(0,0,0,.1);border-top:4px solid #667eea">
+      <h3 style="margin:0 0 12px;color:#667eea">🌐 mWeb Coverage</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#333">${total}</div><div style="font-size:.8em;color:#666">Total Cases</div></div>
+        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#28a745">${covered}</div><div style="font-size:.8em;color:#666">Automated</div></div>
+        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#dc3545">${total - covered}</div><div style="font-size:.8em;color:#666">Not Automated</div></div>
+        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#667eea">${webPct}%</div><div style="font-size:.8em;color:#666">Covered</div></div>
+      </div>
+      <div style="background:#e9ecef;border-radius:10px;height:12px;margin-top:12px;overflow:hidden"><div style="height:100%;width:${webPct}%;background:linear-gradient(90deg,#667eea,#764ba2);border-radius:10px"></div></div>
+      <div style="margin-top:8px;font-size:.8em;color:#666">Automated tests: ${webAuto} (UAE: ${(DATA.automated_tests.web_uae||[]).length} + KSA: ${(DATA.automated_tests.web_ksa||[]).length})</div>
     </div>
   `;
 
