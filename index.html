@@ -120,6 +120,13 @@ tr:hover{background:#f8f9ff}
     <div id="allureDetails" style="max-height:300px;overflow-y:auto"></div>
   </div>
 
+  <!-- Regression Run History -->
+  <div class="section" style="margin-bottom:20px">
+    <h2>🏁 FALCON Regression Run History</h2>
+    <canvas id="regressionChart" height="300"></canvas>
+    <div id="regressionTable" style="margin-top:15px"></div>
+  </div>
+
   <div class="section" style="padding:20px;margin-bottom:0">
     <h2>🌐 Web Tests</h2>
   </div>
@@ -677,6 +684,98 @@ function renderTrendChart() {
   ctx.fillStyle = '#333'; ctx.fillText('Tests Fixed / Updated', pad.left + 340, 19);
 }
 
+// === Regression Run History ===
+let REGRESSION_RUNS = [];
+const ENV_COLORS = {STPP:'#667eea', PREPROD:'#f59e0b', PROD:'#10b981', UAT:'#8b5cf6'};
+
+async function loadRegressionRuns() {
+  try {
+    const resp = await fetch('regression_runs.json');
+    REGRESSION_RUNS = await resp.json();
+  } catch(e) { REGRESSION_RUNS = []; }
+  renderRegressionChart();
+}
+
+function renderRegressionChart() {
+  const canvas = document.getElementById('regressionChart');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width = canvas.parentElement.offsetWidth - 40;
+  const H = canvas.height = 300;
+  const pad = {top: 30, right: 30, bottom: 70, left: 50};
+  const chartW = W - pad.left - pad.right;
+  const chartH = H - pad.top - pad.bottom;
+  const n = REGRESSION_RUNS.length;
+
+  ctx.clearRect(0, 0, W, H);
+  if (!n) { ctx.fillStyle='#999'; ctx.font='14px sans-serif'; ctx.fillText('No regression runs recorded yet.', 20, 40); return; }
+
+  const maxVal = Math.max(...REGRESSION_RUNS.map(d => d.total));
+  const scale = chartH / (maxVal * 1.2);
+  const groupW = chartW / n;
+  const barW = Math.min(groupW * 0.25, 40);
+
+  // Grid
+  ctx.strokeStyle = '#eee'; ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.top + (chartH / 4) * i;
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+    ctx.fillStyle = '#999'; ctx.font = '10px sans-serif'; ctx.textAlign = 'right';
+    ctx.fillText(Math.round(maxVal * 1.2 - (maxVal * 1.2 / 4) * i), pad.left - 8, y + 3);
+  }
+
+  // Bars
+  REGRESSION_RUNS.forEach((d, i) => {
+    const cx = pad.left + (i + 0.5) * groupW;
+    const passH = d.passed * scale;
+    const failH = d.failed * scale;
+    const skipH = (d.skipped || 0) * scale;
+
+    // Passed (green)
+    ctx.fillStyle = '#28a745';
+    ctx.fillRect(cx - barW * 1.5, pad.top + chartH - passH, barW, passH);
+    if (d.passed) { ctx.fillStyle='#155724'; ctx.font='bold 11px sans-serif'; ctx.textAlign='center'; ctx.fillText(d.passed, cx - barW, pad.top + chartH - passH - 5); }
+
+    // Failed (red)
+    ctx.fillStyle = '#dc3545';
+    ctx.fillRect(cx - barW * 0.5, pad.top + chartH - failH, barW, failH);
+    if (d.failed) { ctx.fillStyle='#721c24'; ctx.font='bold 11px sans-serif'; ctx.textAlign='center'; ctx.fillText(d.failed, cx, pad.top + chartH - failH - 5); }
+
+    // Skipped (yellow)
+    ctx.fillStyle = '#ffc107';
+    ctx.fillRect(cx + barW * 0.5, pad.top + chartH - skipH, barW, skipH);
+    if (d.skipped) { ctx.fillStyle='#856404'; ctx.font='bold 11px sans-serif'; ctx.textAlign='center'; ctx.fillText(d.skipped, cx + barW, pad.top + chartH - skipH - 5); }
+
+    // Labels
+    ctx.fillStyle = ENV_COLORS[d.environment] || '#333'; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(d.environment, cx, pad.top + chartH + 18);
+    ctx.fillStyle = '#666'; ctx.font = '10px sans-serif';
+    ctx.fillText(d.date, cx, pad.top + chartH + 34);
+    ctx.fillText(d.total + ' tests', cx, pad.top + chartH + 48);
+  });
+
+  // Legend
+  ctx.font = '12px sans-serif'; ctx.textAlign = 'left';
+  ctx.fillStyle = '#28a745'; ctx.fillRect(pad.left, 8, 12, 12);
+  ctx.fillStyle = '#333'; ctx.fillText('Passed', pad.left + 16, 18);
+  ctx.fillStyle = '#dc3545'; ctx.fillRect(pad.left + 80, 8, 12, 12);
+  ctx.fillStyle = '#333'; ctx.fillText('Failed', pad.left + 96, 18);
+  ctx.fillStyle = '#ffc107'; ctx.fillRect(pad.left + 150, 8, 12, 12);
+  ctx.fillStyle = '#333'; ctx.fillText('Skipped', pad.left + 166, 18);
+
+  // Table
+  document.getElementById('regressionTable').innerHTML = `<table style="width:100%">
+    <thead><tr><th>Date</th><th>Environment</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Total</th><th>Pass Rate</th></tr></thead>
+    <tbody>${REGRESSION_RUNS.slice().reverse().map(d => `<tr>
+      <td>${d.date}</td>
+      <td><span style="color:${ENV_COLORS[d.environment]||'#333'};font-weight:600">${d.environment}</span></td>
+      <td style="color:#28a745;font-weight:600">${d.passed}</td>
+      <td style="color:#dc3545;font-weight:600">${d.failed}</td>
+      <td style="color:#ffc107;font-weight:600">${d.skipped||0}</td>
+      <td>${d.total}</td>
+      <td><strong>${Math.round(d.passed/d.total*100)}%</strong></td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
 // === Update from Main ===
 async function updateFromMain() {
   const btn = document.getElementById('updateBtn');
@@ -684,13 +783,15 @@ async function updateFromMain() {
   btn.disabled = true;
   try {
     const ts = Date.now();
-    const [mappingResp, trendResp] = await Promise.all([
+    const [mappingResp, trendResp, regResp] = await Promise.all([
       fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/mapping.json?t=${ts}`),
-      fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/coverage_trend.json?t=${ts}`)
+      fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/coverage_trend.json?t=${ts}`),
+      fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/regression_runs.json?t=${ts}`)
     ]);
     if (!mappingResp.ok || !trendResp.ok) throw new Error('Fetch failed');
     DATA = await mappingResp.json();
     COVERAGE_TREND = await trendResp.json();
+    if (regResp.ok) { REGRESSION_RUNS = await regResp.json(); renderRegressionChart(); }
     localStorage.removeItem(LS_KEY);
     hasUnsavedChanges = false;
     render();
@@ -740,6 +841,7 @@ async function init() {
   render();
   renderRiskSection();
   loadTrend();
+  loadRegressionRuns();
   fetchAllureStatus();
 }
 
