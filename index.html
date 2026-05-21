@@ -86,11 +86,20 @@ tr:hover{background:#f8f9ff;transition:background .2s}
 <body>
 <div class="auth-overlay" id="authOverlay">
   <div class="auth-box">
-    <h2>🔒 Protected Report</h2>
-    <p style="color:#666;margin-bottom:20px;font-size:.9em">Enter password to view the full report</p>
-    <div class="auth-error" id="authError">❌ Incorrect password</div>
-    <input type="password" id="authPassword" placeholder="Enter password" onkeydown="if(event.key==='Enter')unlockReport()">
-    <button class="btn btn-primary" onclick="unlockReport()">Unlock Report</button>
+    <h2>🔒 Full Report is Protected</h2>
+    <p style="color:#666;margin-bottom:20px;font-size:.9em">Some sections require a password to view</p>
+    <div id="authStep1">
+      <button class="btn btn-primary" onclick="showPasswordInput()" style="margin-bottom:10px">🔓 Unlock Full Report</button>
+      <br>
+      <button class="btn btn-outline" onclick="dismissOverlay()">Cancel</button>
+    </div>
+    <div id="authStep2" style="display:none">
+      <div class="auth-error" id="authError">❌ Incorrect password</div>
+      <input type="password" id="authPassword" placeholder="Enter password" onkeydown="if(event.key==='Enter')unlockReport()">
+      <button class="btn btn-primary" onclick="unlockReport()" style="margin-bottom:10px">Unlock Report</button>
+      <br>
+      <button class="btn btn-outline" onclick="dismissOverlay()">Cancel</button>
+    </div>
   </div>
 </div>
 <div class="container">
@@ -215,6 +224,13 @@ tr:hover{background:#f8f9ff;transition:background .2s}
 <input type="file" id="importFile" accept=".json" style="display:none">
 
 <script>
+function showPasswordInput() {
+  document.getElementById('authStep1').style.display = 'none';
+  document.getElementById('authStep2').style.display = '';
+}
+function dismissOverlay() {
+  document.getElementById('authOverlay').style.display = 'none';
+}
 function unlockReport() {
   const pwd = document.getElementById('authPassword').value;
   if (pwd === 'Mumz@SDET2026') {
