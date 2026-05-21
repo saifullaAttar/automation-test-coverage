@@ -141,6 +141,7 @@ tr:hover{background:#f8f9ff}
       </thead>
       <tbody id="tableBody"></tbody>
     </table>
+    <div style="padding:10px;text-align:center"><button class="btn btn-outline" onclick="addNewWebCase()" style="font-size:.9em">➕ Add Web Test Case</button></div>
   </div>
 
   <div class="section" id="appSection">
@@ -161,6 +162,7 @@ tr:hover{background:#f8f9ff}
         </thead>
         <tbody id="appTableBody"></tbody>
       </table>
+      <div style="padding:10px;text-align:center"><button class="btn btn-outline" onclick="addNewAppCase()" style="font-size:.9em">➕ Add App Test Case</button></div>
     </div>
   </div>
 
@@ -510,6 +512,43 @@ function updateCoverage(caseId, value) {
   saveEdits();
   renderStats();
   renderFolderBreakdown();
+}
+
+// === Add New Test Cases ===
+function addNewWebCase() {
+  const caseId = prompt('Enter TestMO Case ID (e.g., 1234567):');
+  if (!caseId || !caseId.trim()) return;
+  if (DATA.testmo_tests.find(t => t.case_id === caseId.trim())) { alert('Case ID already exists'); return; }
+  const name = prompt('Enter test case name:');
+  if (!name) return;
+  const folder = prompt('Enter folder (e.g., Checkout, Cart, Registration):') || '';
+  const priority = prompt('Enter priority (P0 - Critical, P1 - High, P2 - Medium):') || 'P2 - Medium';
+  DATA.testmo_tests.push({
+    case_id: caseId.trim(), test_id: '', name: name, folder: folder,
+    functionality: '', priority: priority, status: '', summary: '',
+    tags: '', automated_tests: [], coverage_status: 'none', notes: ''
+  });
+  saveEdits();
+  render();
+  renderRiskSection();
+}
+
+function addNewAppCase() {
+  const caseId = prompt('Enter TestMO Case ID (e.g., 1234567):');
+  if (!caseId || !caseId.trim()) return;
+  if ((DATA.app_testmo_tests||[]).find(t => t.case_id === caseId.trim())) { alert('Case ID already exists'); return; }
+  const name = prompt('Enter test case name:');
+  if (!name) return;
+  const priority = prompt('Enter priority (P0 - Critical, P1 - High, P2 - Medium):') || 'P2 - Medium';
+  if (!DATA.app_testmo_tests) DATA.app_testmo_tests = [];
+  DATA.app_testmo_tests.push({
+    case_id: caseId.trim(), test_id: '', name: name, folder: '',
+    functionality: '', priority: priority, status: '', summary: '',
+    tags: '', automated_tests: [], coverage_status: 'none', notes: ''
+  });
+  saveEdits();
+  render();
+  renderRiskSection();
 }
 
 // === Persistence ===
