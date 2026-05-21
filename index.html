@@ -156,9 +156,29 @@ tr:hover{background:#f8f9ff;transition:background .2s}
 
   <!-- Regression Run History -->
   <div class="section" style="margin-bottom:20px">
-    <h2>🏁 FALCON Regression Run History</h2>
+    <h2>🏁 FALCON Regression Run History <button class="btn btn-outline" onclick="showAddRunModal()" style="font-size:.8em;margin-left:10px">➕ Add Run</button></h2>
     <canvas id="regressionChart" height="300"></canvas>
     <div id="regressionTable" style="margin-top:15px"></div>
+  </div>
+
+  <!-- Add Run Modal -->
+  <div class="auth-overlay" id="addRunModal" style="display:none">
+    <div class="auth-box" style="max-width:500px;text-align:left">
+      <h2 style="text-align:center;margin-bottom:20px">➕ Add Regression Run</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div><label style="font-size:.8em;color:#666">Date</label><input type="date" id="runDate" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"></div>
+        <div><label style="font-size:.8em;color:#666">Environment</label><select id="runEnv" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"><option>PREPROD</option><option>STPP</option><option>UAT</option><option>PROD</option></select></div>
+        <div><label style="font-size:.8em;color:#666">Country</label><select id="runCountry" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"><option>AE</option><option>SA</option><option>BH</option><option>KW</option></select></div>
+        <div><label style="font-size:.8em;color:#666">Platform</label><select id="runPlatform" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"><option>Android</option><option>iOS</option></select></div>
+        <div><label style="font-size:.8em;color:#666">Passed</label><input type="number" id="runPassed" min="0" value="0" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"></div>
+        <div><label style="font-size:.8em;color:#666">Failed</label><input type="number" id="runFailed" min="0" value="0" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"></div>
+        <div><label style="font-size:.8em;color:#666">Skipped</label><input type="number" id="runSkipped" min="0" value="0" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px"></div>
+      </div>
+      <div style="text-align:center;margin-top:20px">
+        <button class="btn btn-primary" onclick="saveRun()">Save Run</button>
+        <button class="btn btn-outline" onclick="document.getElementById('addRunModal').style.display='none'" style="margin-left:10px">Cancel</button>
+      </div>
+    </div>
   </div>
 
   <div class="section protected" id="appSection">
@@ -811,11 +831,24 @@ const ALLURE_RUNS = [
 ];
 
 async function loadRegressionRuns() {
-  // Load historical runs from JSON
+  // Load runs from Gist (persisted manual entries) with fallback to local file
   try {
-    const resp = await fetch('regression_runs.json');
-    REGRESSION_RUNS = await resp.json();
-  } catch(e) { REGRESSION_RUNS = []; }
+    const gistResp = await fetch(`https://api.github.com/gists/${GIST_ID}`);
+    if (gistResp.ok) {
+      const gist = await gistResp.json();
+      if (gist.files['regression_runs.json']) {
+        REGRESSION_RUNS = JSON.parse(gist.files['regression_runs.json'].content);
+      } else {
+        const resp = await fetch('regression_runs.json');
+        REGRESSION_RUNS = await resp.json();
+      }
+    } else {
+      const resp = await fetch('regression_runs.json');
+      REGRESSION_RUNS = await resp.json();
+    }
+  } catch(e) {
+    try { const resp = await fetch('regression_runs.json'); REGRESSION_RUNS = await resp.json(); } catch { REGRESSION_RUNS = []; }
+  }
 
   // Fetch latest from Allure API and append if newer
   try {
@@ -934,6 +967,50 @@ function renderRegressionChart() {
 // === Persist to Gist ===
 const GIST_ID = '37aafe3290f5c00dbd0ddb910a19f939';
 const GIST_RAW = `https://gist.githubusercontent.com/saifullaAttar/${GIST_ID}/raw/mapping.json`;
+
+function showAddRunModal() {
+  document.getElementById('runDate').value = new Date().toISOString().split('T')[0];
+  document.getElementById('addRunModal').style.display = 'flex';
+}
+
+async function saveRun() {
+  const pwd = prompt('Enter edit password:');
+  if (pwd !== 'Mumz@SDET2026') { alert('❌ Incorrect password'); return; }
+  const token = localStorage.getItem('gist_token');
+  if (!token) {
+    const t = prompt('Enter GitHub token (gist scope):');
+    if (!t) return;
+    localStorage.setItem('gist_token', t);
+    return saveRun();
+  }
+  const passed = parseInt(document.getElementById('runPassed').value) || 0;
+  const failed = parseInt(document.getElementById('runFailed').value) || 0;
+  const skipped = parseInt(document.getElementById('runSkipped').value) || 0;
+  const entry = {
+    date: document.getElementById('runDate').value,
+    environment: document.getElementById('runEnv').value,
+    country: document.getElementById('runCountry').value,
+    platform: document.getElementById('runPlatform').value,
+    passed, failed, skipped, total: passed + failed + skipped
+  };
+  try {
+    const gistResp = await fetch(`https://api.github.com/gists/${GIST_ID}`, { headers: { 'Authorization': `token ${token}` } });
+    if (!gistResp.ok) { if (gistResp.status === 401) { localStorage.removeItem('gist_token'); alert('❌ Token expired. Try again.'); return; } throw new Error(gistResp.statusText); }
+    const gist = await gistResp.json();
+    const runs = JSON.parse(gist.files['regression_runs.json']?.content || '[]');
+    runs.push(entry);
+    const resp = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
+      method: 'PATCH',
+      headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ files: { 'regression_runs.json': { content: JSON.stringify(runs, null, 2) } } })
+    });
+    if (!resp.ok) throw new Error(resp.statusText);
+    REGRESSION_RUNS.push(entry);
+    renderRegressionChart();
+    document.getElementById('addRunModal').style.display = 'none';
+    alert('✅ Run added!');
+  } catch(e) { alert('❌ Failed: ' + e.message); }
+}
 
 async function saveForEveryone() {
   const pwd = prompt('Enter edit password to save for everyone:');
