@@ -150,7 +150,7 @@ tr:hover{background:#f8f9ff;transition:background .2s}
 
   <!-- Coverage Trend -->
   <div class="section" style="margin-bottom:20px">
-    <h2>📈 Coverage Trend — Tests Added & Modified Per Month</h2>
+    <h2>📈 Coverage Trend — Tests Added & Modified Per Month <button class="btn btn-primary" onclick="fetchLatestTrend()" id="fetchTrendBtn" style="font-size:.8em;margin-left:10px">🔄 Fetch Latest</button></h2>
     <canvas id="trendChart" height="280"></canvas>
   </div>
 
@@ -745,6 +745,24 @@ async function loadTrend() {
     COVERAGE_TREND = [];
   }
   renderTrendChart();
+}
+
+async function fetchLatestTrend() {
+  const btn = document.getElementById('fetchTrendBtn');
+  btn.textContent = '⏳ Fetching...';
+  btn.disabled = true;
+  try {
+    const resp = await fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/coverage_trend.json?t=${Date.now()}`);
+    if (!resp.ok) throw new Error('Fetch failed');
+    COVERAGE_TREND = await resp.json();
+    renderTrendChart();
+    btn.textContent = '✅ Updated!';
+    setTimeout(() => { btn.textContent = '🔄 Fetch Latest'; }, 2000);
+  } catch(e) {
+    btn.textContent = '❌ Failed';
+    setTimeout(() => { btn.textContent = '🔄 Fetch Latest'; }, 2000);
+  }
+  btn.disabled = false;
 }
 
 function renderTrendChart() {
