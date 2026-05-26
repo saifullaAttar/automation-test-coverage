@@ -752,13 +752,34 @@ async function fetchLatestTrend() {
   btn.textContent = '⏳ Fetching...';
   btn.disabled = true;
   try {
-    const resp = await fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/coverage_trend.json?t=${Date.now()}`);
-    if (!resp.ok) throw new Error('Fetch failed');
-    COVERAGE_TREND = await resp.json();
+    // Fetch commits touching tests/ from automation_web_2.0 repo (last 12 months)
+    const since = new Date(Date.now() - 365*24*60*60*1000).toISOString();
+    const resp = await fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/commits?path=tests/&since=${since}&per_page=100`);
+    if (!resp.ok) throw new Error('GitHub API failed');
+    const commits = await resp.json();
+    
+    // Group by month and classify
+    const months = {};
+    commits.forEach(c => {
+      const d = new Date(c.commit.author.date);
+      const key = d.toLocaleString('en-US', {month:'short', year:'numeric'});
+      if (!months[key]) months[key] = {month:key, tests_added:0, tests_fixed:0, total_commits:0, _date:d};
+      months[key].total_commits++;
+      const msg = c.commit.message.toLowerCase();
+      if (/add|new|feat|create|implement/.test(msg)) months[key].tests_added++;
+      else months[key].tests_fixed++;
+    });
+    
+    COVERAGE_TREND = Object.values(months).sort((a,b) => a._date - b._date).map(({_date,...rest}) => rest);
     renderTrendChart();
     btn.textContent = '✅ Updated!';
     setTimeout(() => { btn.textContent = '🔄 Fetch Latest'; }, 2000);
   } catch(e) {
+    // Fallback to static file
+    try {
+      const resp = await fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/coverage_trend.json?t=${Date.now()}`);
+      if (resp.ok) { COVERAGE_TREND = await resp.json(); renderTrendChart(); }
+    } catch{}
     btn.textContent = '❌ Failed';
     setTimeout(() => { btn.textContent = '🔄 Fetch Latest'; }, 2000);
   }
@@ -1112,14 +1133,31 @@ async function updateFromMain() {
   btn.disabled = true;
   try {
     const ts = Date.now();
+    const since = new Date(Date.now() - 365*24*60*60*1000).toISOString();
     const [mappingResp, trendResp, regResp] = await Promise.all([
       fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/mapping.json?t=${ts}`),
-      fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/coverage_trend.json?t=${ts}`),
+      fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/commits?path=tests/&since=${since}&per_page=100`),
       fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/regression_runs.json?t=${ts}`)
     ]);
-    if (!mappingResp.ok || !trendResp.ok) throw new Error('Fetch failed');
+    if (!mappingResp.ok) throw new Error('Fetch failed');
     DATA = await mappingResp.json();
-    COVERAGE_TREND = await trendResp.json();
+    
+    // Build trend from live GitHub commits
+    if (trendResp.ok) {
+      const commits = await trendResp.json();
+      const months = {};
+      commits.forEach(c => {
+        const d = new Date(c.commit.author.date);
+        const key = d.toLocaleString('en-US', {month:'short', year:'numeric'});
+        if (!months[key]) months[key] = {month:key, tests_added:0, tests_fixed:0, total_commits:0, _date:d};
+        months[key].total_commits++;
+        const msg = c.commit.message.toLowerCase();
+        if (/add|new|feat|create|implement/.test(msg)) months[key].tests_added++;
+        else months[key].tests_fixed++;
+      });
+      COVERAGE_TREND = Object.values(months).sort((a,b) => a._date - b._date).map(({_date,...rest}) => rest);
+    }
+    
     if (regResp.ok) { REGRESSION_RUNS = await regResp.json(); renderRegressionChart(); }
     localStorage.removeItem(LS_KEY);
     hasUnsavedChanges = false;
