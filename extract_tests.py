@@ -71,6 +71,17 @@ def scan_platform(base_path, rel_dir):
 if __name__ == "__main__":
     repo = Path(sys.argv[1]) if len(sys.argv) > 1 else Path.home() / "automation_web_2.0"
     
+    # Pull latest from main before scanning
+    import subprocess
+    if (repo / ".git").exists():
+        print("📥 Pulling latest from main...")
+        subprocess.run(["git", "checkout", "main"], cwd=repo, capture_output=True)
+        result_pull = subprocess.run(["git", "pull", "origin", "main"], cwd=repo, capture_output=True, text=True)
+        if result_pull.returncode == 0:
+            print(f"   {result_pull.stdout.strip()}")
+        else:
+            print(f"⚠️  git pull failed: {result_pull.stderr.strip()}")
+    
     result = {
         "web_uae": scan_platform(repo, "tests/web/UAE"),
         "web_ksa": scan_platform(repo, "tests/web/KSA"),

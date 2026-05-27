@@ -150,7 +150,7 @@ tr:hover{background:#f8f9ff;transition:background .2s}
 
   <!-- Coverage Trend -->
   <div class="section" style="margin-bottom:20px">
-    <h2>📈 Coverage Trend — Tests Added & Modified Per Month <button class="btn btn-primary" onclick="fetchLatestTrend()" id="fetchTrendBtn" style="font-size:.8em;margin-left:10px">🔄 Fetch Latest</button></h2>
+    <h2>📈 Coverage Trend — Tests Added & Modified Per Month <button class="btn btn-primary" onclick="fetchLatestTrend()" id="fetchTrendBtn" style="font-size:.8em;margin-left:10px">🔄 Fetch Latest</button> <button class="btn btn-success" onclick="fetchFromMain()" id="fetchFromMainBtn" style="font-size:.8em;margin-left:5px">📥 Fetch from Main</button></h2>
     <canvas id="trendChart" height="280"></canvas>
   </div>
 
@@ -782,6 +782,88 @@ async function fetchLatestTrend() {
     } catch{}
     btn.textContent = '❌ Failed';
     setTimeout(() => { btn.textContent = '🔄 Fetch Latest'; }, 2000);
+  }
+  btn.disabled = false;
+}
+
+// === Fetch from Main — pull latest test files from automation_web_2.0 main ===
+async function fetchFromMain() {
+  const btn = document.getElementById('fetchFromMainBtn');
+  btn.textContent = '⏳ Fetching...';
+  btn.disabled = true;
+  try {
+    const baseUrl = 'https://api.github.com/repos/mumzworld-tech/automation_web_2.0';
+    const headers = {};
+    
+    // Fetch test file trees for all platforms
+    const [uaeResp, ksaResp, appResp] = await Promise.all([
+      fetch(`${baseUrl}/git/trees/main?recursive=1`),
+      fetch(`${baseUrl}/git/trees/main?recursive=1`),
+      fetch(`${baseUrl}/git/trees/main?recursive=1`)
+    ]);
+    
+    // We only need one tree call since recursive=1 gives everything
+    if (!uaeResp.ok) throw new Error('GitHub API failed — check if repo is accessible');
+    const tree = await uaeResp.json();
+    const allFiles = tree.tree.filter(f => f.type === 'blob');
+    
+    const uaeFiles = allFiles.filter(f => f.path.startsWith('tests/web/UAE/') && f.path.match(/test_.*\.py$/));
+    const ksaFiles = allFiles.filter(f => f.path.startsWith('tests/web/KSA/') && f.path.match(/test_.*\.py$/));
+    const appFiles = allFiles.filter(f => f.path.startsWith('tests/app/') && f.path.match(/test_.*\.py$/));
+    
+    // Fetch content of each test file and extract test functions
+    async function extractTestsFromGitHub(files) {
+      const tests = [];
+      for (const file of files) {
+        try {
+          const resp = await fetch(`${baseUrl}/contents/${file.path}?ref=main`, {headers});
+          if (!resp.ok) continue;
+          const data = await resp.json();
+          const content = atob(data.content.replace(/\n/g, ''));
+          const funcPattern = /def (test_\w+)\(/g;
+          let match;
+          while ((match = funcPattern.exec(content)) !== null) {
+            tests.push({name: match[1], file: file.path.split('/').pop()});
+          }
+        } catch { continue; }
+      }
+      return tests;
+    }
+    
+    const [uaeTests, ksaTests, appTests] = await Promise.all([
+      extractTestsFromGitHub(uaeFiles),
+      extractTestsFromGitHub(ksaFiles),
+      extractTestsFromGitHub(appFiles)
+    ]);
+    
+    // Update DATA with new automated tests
+    const oldUae = DATA.automated_tests.web_uae.length;
+    const oldKsa = DATA.automated_tests.web_ksa.length;
+    const oldApp = DATA.automated_tests.app.length;
+    
+    DATA.automated_tests.web_uae = uaeTests;
+    DATA.automated_tests.web_ksa = ksaTests;
+    DATA.automated_tests.app = appTests;
+    DATA.metadata.total_automated_tests = uaeTests.length + ksaTests.length + appTests.length;
+    DATA.metadata.last_updated = new Date().toISOString().split('T')[0];
+    
+    const newTotal = uaeTests.length + ksaTests.length + appTests.length;
+    const oldTotal = oldUae + oldKsa + oldApp;
+    const diff = newTotal - oldTotal;
+    
+    render();
+    renderRiskSection();
+    
+    btn.textContent = `✅ ${newTotal} tests${diff > 0 ? ' (+' + diff + ' new)' : ''}`;
+    setTimeout(() => { btn.textContent = '📥 Fetch from Main'; }, 4000);
+    
+    if (diff !== 0) {
+      hasUnsavedChanges = true;
+      document.getElementById('unsavedBadge').classList.remove('hidden');
+    }
+  } catch(e) {
+    btn.textContent = '❌ ' + e.message;
+    setTimeout(() => { btn.textContent = '📥 Fetch from Main'; }, 3000);
   }
   btn.disabled = false;
 }
