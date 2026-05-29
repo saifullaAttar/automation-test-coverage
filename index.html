@@ -481,6 +481,7 @@ function addAppTest(caseId, testName) {
     closeAutocomplete();
     renderAppSection();
     renderStats();
+    refreshUnmapped();
   }
 }
 
@@ -600,6 +601,7 @@ function addTest(caseId, testName) {
     closeAutocomplete();
     renderTable();
     renderStats();
+    refreshUnmapped();
     renderFolderBreakdown();
   }
 }
@@ -925,6 +927,29 @@ async function loadRegressionRuns() {
   } catch(e) { /* Allure unavailable, use historical only */ }
 
   renderRegressionChart();
+}
+
+function refreshUnmapped() {
+  const mapped = new Set();
+  for (const t of DATA.testmo_tests) t.automated_tests.forEach(n => mapped.add(n));
+  for (const t of (DATA.app_testmo_tests||[])) t.automated_tests.forEach(n => mapped.add(n));
+  const unmappedApp = DATA.automated_tests.app.filter(t => !mapped.has(t.name));
+  const unmappedWeb = [...(DATA.automated_tests.web_uae||[]), ...(DATA.automated_tests.web_ksa||[])].filter(t => !mapped.has(t.name));
+  const all = [...unmappedApp.map(t => ({...t, platform:'app'})), ...unmappedWeb.map(t => ({...t, platform:'web'}))];
+  const notice = document.getElementById('unmappedNotice');
+  const list = document.getElementById('unmappedList');
+  if (all.length > 0) {
+    notice.style.display = 'block';
+    list.innerHTML = all.map(t => 
+      `<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #ffe082">
+        <span style="background:${t.platform==='app'?'#764ba2':'#667eea'};color:#fff;padding:2px 8px;border-radius:4px;font-size:.75em">${t.platform}</span>
+        <code style="font-size:.85em">${t.name}</code>
+        <span style="color:#999;font-size:.8em">(${t.file})</span>
+      </div>`
+    ).join('');
+  } else {
+    notice.style.display = 'none';
+  }
 }
 
 function renderRegressionChart() {
