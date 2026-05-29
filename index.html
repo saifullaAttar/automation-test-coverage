@@ -739,26 +739,11 @@ let COVERAGE_TREND = [];
 
 async function loadTrend() {
   try {
-    const resp = await fetch('coverage_trend.json');
-    COVERAGE_TREND = await resp.json();
-  } catch(e) {
-    COVERAGE_TREND = [];
-  }
-  renderTrendChart();
-}
-
-async function fetchLatestTrend() {
-  const btn = document.getElementById('fetchTrendBtn');
-  btn.textContent = '⏳ Fetching...';
-  btn.disabled = true;
-  try {
-    // Fetch commits touching tests/ from automation_web_2.0 repo (last 12 months)
+    // Auto-fetch latest commits from automation_web_2.0 main
     const since = '2026-04-01T00:00:00Z';
     const resp = await fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/commits?path=tests/&since=${since}&per_page=100`);
-    if (!resp.ok) throw new Error('GitHub API failed');
+    if (!resp.ok) throw new Error('API failed');
     const commits = await resp.json();
-    
-    // Group by month and classify
     const months = {};
     commits.forEach(c => {
       const d = new Date(c.commit.author.date);
@@ -769,103 +754,12 @@ async function fetchLatestTrend() {
       if (/add|new|feat|create|implement/.test(msg)) months[key].tests_added++;
       else months[key].tests_fixed++;
     });
-    
     COVERAGE_TREND = Object.values(months).sort((a,b) => a._date - b._date).map(({_date,...rest}) => rest);
-    renderTrendChart();
-    btn.textContent = '✅ Updated!';
-    setTimeout(() => { btn.textContent = '🔄 Fetch Latest'; }, 2000);
   } catch(e) {
     // Fallback to static file
-    try {
-      const resp = await fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/coverage_trend.json?t=${Date.now()}`);
-      if (resp.ok) { COVERAGE_TREND = await resp.json(); renderTrendChart(); }
-    } catch{}
-    btn.textContent = '❌ Failed';
-    setTimeout(() => { btn.textContent = '🔄 Fetch Latest'; }, 2000);
+    try { const resp = await fetch('coverage_trend.json'); COVERAGE_TREND = await resp.json(); } catch { COVERAGE_TREND = []; }
   }
-  btn.disabled = false;
-}
-
-// === Fetch from Main — pull latest test files from automation_web_2.0 main ===
-async function fetchFromMain() {
-  const btn = document.getElementById('fetchFromMainBtn');
-  btn.textContent = '⏳ Fetching...';
-  btn.disabled = true;
-  try {
-    const baseUrl = 'https://api.github.com/repos/mumzworld-tech/automation_web_2.0';
-    const headers = {};
-    
-    // Fetch test file trees for all platforms
-    const [uaeResp, ksaResp, appResp] = await Promise.all([
-      fetch(`${baseUrl}/git/trees/main?recursive=1`),
-      fetch(`${baseUrl}/git/trees/main?recursive=1`),
-      fetch(`${baseUrl}/git/trees/main?recursive=1`)
-    ]);
-    
-    // We only need one tree call since recursive=1 gives everything
-    if (!uaeResp.ok) throw new Error('GitHub API failed — check if repo is accessible');
-    const tree = await uaeResp.json();
-    const allFiles = tree.tree.filter(f => f.type === 'blob');
-    
-    const uaeFiles = allFiles.filter(f => f.path.startsWith('tests/web/UAE/') && f.path.match(/test_.*\.py$/));
-    const ksaFiles = allFiles.filter(f => f.path.startsWith('tests/web/KSA/') && f.path.match(/test_.*\.py$/));
-    const appFiles = allFiles.filter(f => f.path.startsWith('tests/app/') && f.path.match(/test_.*\.py$/));
-    
-    // Fetch content of each test file and extract test functions
-    async function extractTestsFromGitHub(files) {
-      const tests = [];
-      for (const file of files) {
-        try {
-          const resp = await fetch(`${baseUrl}/contents/${file.path}?ref=main`, {headers});
-          if (!resp.ok) continue;
-          const data = await resp.json();
-          const content = atob(data.content.replace(/\n/g, ''));
-          const funcPattern = /def (test_\w+)\(/g;
-          let match;
-          while ((match = funcPattern.exec(content)) !== null) {
-            tests.push({name: match[1], file: file.path.split('/').pop()});
-          }
-        } catch { continue; }
-      }
-      return tests;
-    }
-    
-    const [uaeTests, ksaTests, appTests] = await Promise.all([
-      extractTestsFromGitHub(uaeFiles),
-      extractTestsFromGitHub(ksaFiles),
-      extractTestsFromGitHub(appFiles)
-    ]);
-    
-    // Update DATA with new automated tests
-    const oldUae = DATA.automated_tests.web_uae.length;
-    const oldKsa = DATA.automated_tests.web_ksa.length;
-    const oldApp = DATA.automated_tests.app.length;
-    
-    DATA.automated_tests.web_uae = uaeTests;
-    DATA.automated_tests.web_ksa = ksaTests;
-    DATA.automated_tests.app = appTests;
-    DATA.metadata.total_automated_tests = uaeTests.length + ksaTests.length + appTests.length;
-    DATA.metadata.last_updated = new Date().toISOString().split('T')[0];
-    
-    const newTotal = uaeTests.length + ksaTests.length + appTests.length;
-    const oldTotal = oldUae + oldKsa + oldApp;
-    const diff = newTotal - oldTotal;
-    
-    render();
-    renderRiskSection();
-    
-    btn.textContent = `✅ ${newTotal} tests${diff > 0 ? ' (+' + diff + ' new)' : ''}`;
-    setTimeout(() => { btn.textContent = '📥 Fetch from Main'; }, 4000);
-    
-    if (diff !== 0) {
-      hasUnsavedChanges = true;
-      document.getElementById('unsavedBadge').classList.remove('hidden');
-    }
-  } catch(e) {
-    btn.textContent = '❌ ' + e.message;
-    setTimeout(() => { btn.textContent = '📥 Fetch from Main'; }, 3000);
-  }
-  btn.disabled = false;
+  renderTrendChart();
 }
 
 function renderTrendChart() {
@@ -1302,6 +1196,47 @@ async function init() {
   renderRiskSection();
   loadTrend();
   loadRegressionRuns();
+  refreshTestsFromMain(); // Auto-pull latest tests from automation_web_2.0 main
+}
+
+// Auto-fetch latest test functions from automation_web_2.0 main on every page load
+async function refreshTestsFromMain() {
+  try {
+    const baseUrl = 'https://api.github.com/repos/mumzworld-tech/automation_web_2.0';
+    const treeResp = await fetch(`${baseUrl}/git/trees/main?recursive=1`);
+    if (!treeResp.ok) return;
+    const tree = await treeResp.json();
+    const allFiles = tree.tree.filter(f => f.type === 'blob' && f.path.match(/tests\/.+\/test_.*\.py$/));
+
+    const uaeFiles = allFiles.filter(f => f.path.startsWith('tests/web/UAE/'));
+    const ksaFiles = allFiles.filter(f => f.path.startsWith('tests/web/KSA/'));
+    const appFiles = allFiles.filter(f => f.path.startsWith('tests/app/'));
+
+    async function extractTests(files) {
+      const tests = [];
+      for (const file of files) {
+        try {
+          const resp = await fetch(`${baseUrl}/contents/${file.path}?ref=main`);
+          if (!resp.ok) continue;
+          const data = await resp.json();
+          const content = atob(data.content.replace(/\n/g, ''));
+          const re = /def (test_\w+)\(/g;
+          let m;
+          while ((m = re.exec(content)) !== null) tests.push({name: m[1], file: file.path.split('/').pop()});
+        } catch { continue; }
+      }
+      return tests;
+    }
+
+    const [uae, ksa, app] = await Promise.all([extractTests(uaeFiles), extractTests(ksaFiles), extractTests(appFiles)]);
+    DATA.automated_tests.web_uae = uae;
+    DATA.automated_tests.web_ksa = ksa;
+    DATA.automated_tests.app = app;
+    DATA.metadata.total_automated_tests = uae.length + ksa.length + app.length;
+    DATA.metadata.last_updated = new Date().toISOString().split('T')[0];
+    render();
+    renderRiskSection();
+  } catch(e) { /* silent fail — use existing data */ }
 }
 
 init();
