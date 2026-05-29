@@ -138,7 +138,7 @@ tr:hover{background:#f8f9ff;transition:background .2s}
   </div>
 
   <div class="stats-grid" id="statsGrid"></div>
-  <div id="unmappedNotice" style="display:none;background:#fff8e1;border:2px solid #ffc107;border-radius:10px;padding:16px;margin-bottom:20px">
+  <div id="unmappedNotice" class="protected" style="display:none;background:#fff8e1;border:2px solid #ffc107;border-radius:10px;padding:16px;margin-bottom:20px">
     <h3 style="margin:0 0 8px;color:#f57c00">⚠️ Unmapped Tests — Map these to increase coverage</h3>
     <p style="color:#666;margin:0 0 10px;font-size:.85em">These tests exist in the repo but aren't mapped to any Testmo case. Click a suggestion or use "+Add test" in the table below.</p>
     <div id="unmappedList"></div>
@@ -162,8 +162,7 @@ tr:hover{background:#f8f9ff;transition:background .2s}
   <!-- Regression Run History -->
   <div class="section" style="margin-bottom:20px">
     <h2>🏁 FALCON Regression Run History <button class="btn btn-outline" onclick="showAddRunModal()" style="font-size:.8em;margin-left:10px">➕ Add Run</button></h2>
-    <canvas id="regressionChart" height="300"></canvas>
-    <div id="regressionTable" style="margin-top:15px"></div>
+    <div id="regressionTable" style="margin-top:10px"></div>
   </div>
 
   <!-- Add Run Modal -->
@@ -929,85 +928,51 @@ async function loadRegressionRuns() {
 }
 
 function renderRegressionChart() {
-  const canvas = document.getElementById('regressionChart');
-  const ctx = canvas.getContext('2d');
-  const W = canvas.width = canvas.parentElement.offsetWidth - 40;
-  const H = canvas.height = 320;
-  const pad = {top: 30, right: 30, bottom: 85, left: 50};
-  const chartW = W - pad.left - pad.right;
-  const chartH = H - pad.top - pad.bottom;
-  const n = REGRESSION_RUNS.length;
-
-  ctx.clearRect(0, 0, W, H);
-  if (!n) { ctx.fillStyle='#999'; ctx.font='14px sans-serif'; ctx.fillText('No regression runs recorded yet.', 20, 40); return; }
-
-  const maxVal = Math.max(...REGRESSION_RUNS.map(d => d.total));
-  const scale = chartH / (maxVal * 1.2);
-  const groupW = chartW / n;
-  const barW = Math.min(groupW * 0.25, 40);
-
-  // Grid
-  ctx.strokeStyle = '#eee'; ctx.lineWidth = 1;
-  for (let i = 0; i <= 4; i++) {
-    const y = pad.top + (chartH / 4) * i;
-    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
-    ctx.fillStyle = '#999'; ctx.font = '10px sans-serif'; ctx.textAlign = 'right';
-    ctx.fillText(Math.round(maxVal * 1.2 - (maxVal * 1.2 / 4) * i), pad.left - 8, y + 3);
+  const container = document.getElementById('regressionTable');
+  if (!REGRESSION_RUNS.length) {
+    container.innerHTML = '<p style="color:#999;text-align:center;padding:20px">No regression runs recorded yet.</p>';
+    return;
   }
 
-  // Bars
-  REGRESSION_RUNS.forEach((d, i) => {
-    const cx = pad.left + (i + 0.5) * groupW;
-    const passH = d.passed * scale;
-    const failH = d.failed * scale;
-    const skipH = (d.skipped || 0) * scale;
+  // Build allure report URL from run data
+  function getAllureUrl(run) {
+    const country = (run.country || 'ae').toLowerCase();
+    const platform = (run.platform || 'android').toLowerCase();
+    const project = run.project || `${run.environment?.toLowerCase() || 'preprod'}-${country}-${platform}`;
+    return `${ALLURE_BASE}/projects/${project}/reports/latest`;
+  }
 
-    ctx.fillStyle = '#28a745';
-    ctx.fillRect(cx - barW * 1.5, pad.top + chartH - passH, barW, passH);
-    if (d.passed) { ctx.fillStyle='#155724'; ctx.font='bold 11px sans-serif'; ctx.textAlign='center'; ctx.fillText(d.passed, cx - barW, pad.top + chartH - passH - 5); }
+  function getRunLabel(run) {
+    const date = (run.date || '').replace(/-/g, '');
+    return `${run.environment}-${run.platform}-${run.country}-${date}`;
+  }
 
-    ctx.fillStyle = '#dc3545';
-    ctx.fillRect(cx - barW * 0.5, pad.top + chartH - failH, barW, failH);
-    if (d.failed) { ctx.fillStyle='#721c24'; ctx.font='bold 11px sans-serif'; ctx.textAlign='center'; ctx.fillText(d.failed, cx, pad.top + chartH - failH - 5); }
-
-    ctx.fillStyle = '#ffc107';
-    ctx.fillRect(cx + barW * 0.5, pad.top + chartH - skipH, barW, skipH);
-    if (d.skipped) { ctx.fillStyle='#856404'; ctx.font='bold 11px sans-serif'; ctx.textAlign='center'; ctx.fillText(d.skipped, cx + barW, pad.top + chartH - skipH - 5); }
-
-    // Labels: Environment | Country | Platform | Date
-    ctx.textAlign = 'center';
-    ctx.fillStyle = ENV_COLORS[d.environment] || '#333'; ctx.font = 'bold 11px sans-serif';
-    ctx.fillText(d.environment, cx, pad.top + chartH + 16);
-    ctx.fillStyle = '#333'; ctx.font = '11px sans-serif';
-    ctx.fillText(`${d.country} · ${d.platform}`, cx, pad.top + chartH + 32);
-    ctx.fillStyle = '#666'; ctx.font = '10px sans-serif';
-    ctx.fillText(d.date, cx, pad.top + chartH + 48);
-    ctx.fillText(d.total + ' tests', cx, pad.top + chartH + 62);
-  });
-
-  // Legend
-  ctx.font = '12px sans-serif'; ctx.textAlign = 'left';
-  ctx.fillStyle = '#28a745'; ctx.fillRect(pad.left, 8, 12, 12);
-  ctx.fillStyle = '#333'; ctx.fillText('Passed', pad.left + 16, 18);
-  ctx.fillStyle = '#dc3545'; ctx.fillRect(pad.left + 80, 8, 12, 12);
-  ctx.fillStyle = '#333'; ctx.fillText('Failed', pad.left + 96, 18);
-  ctx.fillStyle = '#ffc107'; ctx.fillRect(pad.left + 150, 8, 12, 12);
-  ctx.fillStyle = '#333'; ctx.fillText('Skipped', pad.left + 166, 18);
-
-  // Table
-  document.getElementById('regressionTable').innerHTML = `<table style="width:100%">
-    <thead><tr><th>Date</th><th>Environment</th><th>Country</th><th>Platform</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Total</th><th>Pass Rate</th></tr></thead>
-    <tbody>${REGRESSION_RUNS.slice().reverse().map(d => `<tr>
-      <td>${d.date}</td>
-      <td><span style="color:${ENV_COLORS[d.environment]||'#333'};font-weight:600">${d.environment}</span></td>
-      <td>${d.country}</td>
-      <td>${d.platform}</td>
-      <td style="color:#28a745;font-weight:600">${d.passed}</td>
-      <td style="color:#dc3545;font-weight:600">${d.failed}</td>
-      <td style="color:#ffc107;font-weight:600">${d.skipped||0}</td>
-      <td>${d.total}</td>
-      <td><strong>${Math.round(d.passed/d.total*100)}%</strong></td>
-    </tr>`).join('')}</tbody></table>`;
+  const runs = REGRESSION_RUNS.slice().reverse();
+  container.innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px">
+      ${runs.map(d => {
+        const passRate = d.total ? Math.round(d.passed / d.total * 100) : 0;
+        const color = passRate >= 90 ? '#28a745' : passRate >= 70 ? '#f59e0b' : '#dc3545';
+        const url = getAllureUrl(d);
+        const label = getRunLabel(d);
+        return `<a href="${url}" target="_blank" style="text-decoration:none;display:block;background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px 18px;transition:all .2s;border-left:4px solid ${ENV_COLORS[d.environment]||'#667eea'};" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,.1)';this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow='none';this.style.transform='none'">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-weight:700;font-size:1em;color:#1a202c">${label}</div>
+              <div style="font-size:.8em;color:#666;margin-top:4px">
+                <span style="color:#28a745">✅ ${d.passed}</span> · 
+                <span style="color:#dc3545">❌ ${d.failed}</span> · 
+                <span style="color:#f59e0b">⏭️ ${d.skipped||0}</span>
+              </div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:1.4em;font-weight:700;color:${color}">${passRate}%</div>
+              <div style="font-size:.75em;color:#999">${d.total} tests</div>
+            </div>
+          </div>
+        </a>`;
+      }).join('')}
+    </div>`;
 }
 
 // === Persist to Gist ===
@@ -1089,6 +1054,7 @@ async function saveRun() {
     environment: document.getElementById('runEnv').value,
     country: document.getElementById('runCountry').value,
     platform: document.getElementById('runPlatform').value,
+    project: `${document.getElementById('runEnv').value.toLowerCase()}-${document.getElementById('runCountry').value.toLowerCase()}-${document.getElementById('runPlatform').value.toLowerCase()}`,
     passed, failed, skipped, total: passed + failed + skipped
   };
   try {
