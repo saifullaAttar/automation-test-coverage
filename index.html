@@ -161,7 +161,7 @@ tr:hover{background:#f8f9ff;transition:background .2s}
 
   <!-- Regression Run History -->
   <div class="section" style="margin-bottom:20px">
-    <h2>🏁 FALCON Regression Run History <button class="btn btn-outline" onclick="showAddRunModal()" style="font-size:.8em;margin-left:10px">➕ Add Run</button></h2>
+    <h2>🏁 FALCON Regression Run History</h2>
     <div id="regressionTable" style="margin-top:10px"></div>
   </div>
 
@@ -976,7 +976,8 @@ function renderRegressionChart() {
   container.innerHTML = `
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px">
       ${runs.map(d => {
-        const passRate = d.total ? Math.round(d.passed / d.total * 100) : 0;
+        const runTotal = d.passed + d.failed;
+        const passRate = runTotal ? Math.round(d.passed / runTotal * 100) : 0;
         const color = passRate >= 90 ? '#28a745' : passRate >= 70 ? '#f59e0b' : '#dc3545';
         const url = getAllureUrl(d);
         const label = getRunLabel(d);
@@ -992,7 +993,7 @@ function renderRegressionChart() {
             </div>
             <div style="text-align:right">
               <div style="font-size:1.4em;font-weight:700;color:${color}">${passRate}%</div>
-              <div style="font-size:.75em;color:#999">${d.total} tests</div>
+              <div style="font-size:.75em;color:#999">${runTotal} run</div>
             </div>
           </div>
         </a>`;
