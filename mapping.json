@@ -2781,6 +2781,18 @@
         "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Procee"
       },
       {
+        "name": "test_app_cart_guest_login_no_coupon_sc",
+        "file": "test_app_cart.py",
+        "title": "Checkout with cart items as guest & login to existing user and pay with SC",
+        "tags": [
+          "Cart",
+          "Guest",
+          "StoreCredit"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Precondition: Login, clear cart, sign out 2. As guest, search and add product to cart 3. Navigate to cart and verify item present 4. Tap checkout \u2192 login bottom sheet is displayed 5. Login with exi"
+      },
+      {
         "name": "test_uae_checkout_cc_no_coupon",
         "file": "test_app_checkout.py",
         "title": "Successful user checkout in uae with CC no coupon",
@@ -2800,6 +2812,16 @@
         ],
         "feature": "Checkout",
         "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Apply Store Credit 7. Pay using C"
+      },
+      {
+        "name": "test_app_checkout_full_sc_no_coupon",
+        "file": "test_app_checkout.py",
+        "title": "Successful user checkout in UAE with full Store Credit no coupon",
+        "tags": [
+          "Store Credit"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using full store credit w/no "
       },
       {
         "name": "test_uae_checkout_cod_no_coupon",
@@ -2851,6 +2873,17 @@
         ],
         "feature": "Checkout",
         "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Apply cashback coupon on checkout"
+      },
+      {
+        "name": "test_app_checkout_tabby_normal_coupon",
+        "file": "test_app_checkout.py",
+        "title": "Checkout Tabby + Normal Coupon (App)",
+        "tags": [
+          "Tabby",
+          "Coupon"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Apply normal coupon on checkout 7"
       },
       {
         "name": "test_app_uae_checkout_tamara_no_coupon",
@@ -2912,7 +2945,7 @@
     "last_updated": "2026-05-29",
     "total_testmo_cases_web": 81,
     "total_testmo_cases_app": 44,
-    "total_automated_tests": 96,
+    "total_automated_tests": 99,
     "newly_covered": [
       "1435408",
       "1543903",
