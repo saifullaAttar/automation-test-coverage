@@ -1125,20 +1125,129 @@ async function saveForEveryone() {
 }
 
 // === Update from Main ===
+async function fetchTestFile(path, token) {
+  const resp = await fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/contents/${path}`, {
+    headers: {'Authorization': `token ${token}`}
+  });
+  if (!resp.ok) return '';
+  const data = await resp.json();
+  return atob(data.content);
+}
+
+function extractTestsFromSource(source, fileName) {
+  const tests = [];
+  const regex = /((?:@[^\n]+\n)*)def (test_\w+)\(/g;
+  let match;
+  while ((match = regex.exec(source)) !== null) {
+    const decorators = match[1] || '';
+    const name = match[2];
+    let title = '';
+    const titleMatch = decorators.match(/@allure\.title\(["'](.+?)["']\)/);
+    if (titleMatch) title = titleMatch[1];
+    let tags = [];
+    const tagMatches = decorators.matchAll(/@allure\.tag\((.+?)\)/g);
+    for (const tm of tagMatches) {
+      tags.push(...tm[1].split(',').map(t => t.trim().replace(/['"]/g, '')));
+    }
+    let feature = '';
+    const featMatch = decorators.match(/@allure\.feature\(["'](.+?)["']\)/);
+    if (featMatch) feature = featMatch[1];
+    // Extract docstring
+    const fnStart = source.indexOf(`def ${name}(`, match.index);
+    const afterDef = source.indexOf(':', fnStart);
+    const docMatch = source.substring(afterDef, afterDef + 500).match(/:\s*\n\s*"""([\s\S]*?)"""/);
+    const docstring = docMatch ? docMatch[1].replace(/\s+/g, ' ').trim().substring(0, 200) : '';
+    tests.push({ name, file: fileName, title, tags, feature, docstring });
+  }
+  return tests;
+}
+
 async function updateFromMain() {
   const btn = document.getElementById('updateBtn');
   btn.textContent = '⏳ Updating...';
   btn.disabled = true;
   try {
     const ts = Date.now();
+    const token = _gt();
     const since = '2026-04-01T00:00:00Z';
-    const [mappingResp, trendResp, regResp] = await Promise.all([
+    
+    // Fetch mapping, trend commits, regression runs, and test file listings in parallel
+    const [mappingResp, trendResp, regResp, appDirResp, uaeDirResp, ksaDirResp] = await Promise.all([
       fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/mapping.json?t=${ts}`),
-      fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/commits?path=tests/&since=${since}&per_page=100`, {headers:{'Authorization':`token ${_gt()}`}}),
-      fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/regression_runs.json?t=${ts}`)
+      fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/commits?path=tests/&since=${since}&per_page=100`, {headers:{'Authorization':`token ${token}`}}),
+      fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/regression_runs.json?t=${ts}`),
+      fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/contents/tests/app`, {headers:{'Authorization':`token ${token}`}}),
+      fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/contents/tests/web/UAE`, {headers:{'Authorization':`token ${token}`}}),
+      fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/contents/tests/web/KSA`, {headers:{'Authorization':`token ${token}`}})
     ]);
-    if (!mappingResp.ok) throw new Error('Fetch failed');
+    if (!mappingResp.ok) throw new Error('Fetch mapping failed');
     DATA = await mappingResp.json();
+    
+    // Discover tests from actual repo test files
+    const testFiles = { app: [], web_uae: [], web_ksa: [] };
+    
+    if (appDirResp.ok) {
+      const appFiles = (await appDirResp.json()).filter(f => f.name.startsWith('test_') && f.name.endsWith('.py'));
+      for (const f of appFiles) {
+        const src = await fetchTestFile(f.path, token);
+        testFiles.app.push(...extractTestsFromSource(src, f.name));
+      }
+    }
+    if (uaeDirResp.ok) {
+      const uaeFiles = (await uaeDirResp.json()).filter(f => f.name.startsWith('test_') && f.name.endsWith('.py'));
+      for (const f of uaeFiles) {
+        const src = await fetchTestFile(f.path, token);
+        testFiles.web_uae.push(...extractTestsFromSource(src, f.name));
+      }
+    }
+    if (ksaDirResp.ok) {
+      const ksaFiles = (await ksaDirResp.json()).filter(f => f.name.startsWith('test_') && f.name.endsWith('.py'));
+      for (const f of ksaFiles) {
+        const src = await fetchTestFile(f.path, token);
+        testFiles.web_ksa.push(...extractTestsFromSource(src, f.name));
+      }
+    }
+    
+    // Update automated_tests with discovered tests (add new ones, keep existing metadata)
+    for (const platform of ['app', 'web_uae', 'web_ksa']) {
+      const existingNames = new Set((DATA.automated_tests[platform]||[]).map(t => t.name));
+      for (const t of testFiles[platform]) {
+        if (!existingNames.has(t.name)) {
+          DATA.automated_tests[platform].push(t);
+        }
+      }
+      // Remove tests that no longer exist in repo
+      const repoNames = new Set(testFiles[platform].map(t => t.name));
+      if (testFiles[platform].length > 0) {
+        DATA.automated_tests[platform] = DATA.automated_tests[platform].filter(t => repoNames.has(t.name));
+      }
+    }
+    
+    // Auto-map: for each testmo case, check if any automated test name contains relevant keywords
+    // Update coverage_status based on whether automated_tests array has entries
+    const allAutoNames = new Set([
+      ...DATA.automated_tests.app.map(t => t.name),
+      ...DATA.automated_tests.web_uae.map(t => t.name),
+      ...DATA.automated_tests.web_ksa.map(t => t.name)
+    ]);
+    
+    // Recalculate coverage_status for all testmo cases based on current mappings
+    for (const t of DATA.testmo_tests) {
+      // Remove any mapped tests that no longer exist
+      t.automated_tests = t.automated_tests.filter(name => allAutoNames.has(name));
+      t.coverage_status = t.automated_tests.length > 0 ? 'full' : (t.coverage_status === 'partial' ? 'partial' : 'none');
+    }
+    for (const t of (DATA.app_testmo_tests||[])) {
+      t.automated_tests = t.automated_tests.filter(name => allAutoNames.has(name));
+      t.coverage_status = t.automated_tests.length > 0 ? 'full' : (t.coverage_status === 'partial' ? 'partial' : 'none');
+    }
+    
+    // Recalculate metadata
+    DATA.metadata.total_automated_tests = 
+      (DATA.automated_tests.web_uae||[]).length + 
+      (DATA.automated_tests.web_ksa||[]).length + 
+      (DATA.automated_tests.app||[]).length;
+    DATA.metadata.last_updated = new Date().toISOString().split('T')[0];
     
     // Build trend from live GitHub commits
     if (trendResp.ok) {
@@ -1158,16 +1267,8 @@ async function updateFromMain() {
     
     if (regResp.ok) { REGRESSION_RUNS = await regResp.json(); renderRegressionChart(); }
     
-    // Recalculate metadata from actual data
-    DATA.metadata.total_automated_tests = 
-      (DATA.automated_tests.web_uae||[]).length + 
-      (DATA.automated_tests.web_ksa||[]).length + 
-      (DATA.automated_tests.app||[]).length;
-    DATA.metadata.last_updated = new Date().toISOString().split('T')[0];
-    
-    // Sync gist with latest data from main
+    // Sync gist with updated data
     try {
-      const token = _gt();
       await fetch(`https://api.github.com/gists/${GIST_ID}`, {
         method: 'PATCH',
         headers: {'Authorization': `token ${token}`, 'Content-Type': 'application/json'},
@@ -1183,6 +1284,7 @@ async function updateFromMain() {
     btn.textContent = '✅ Updated!';
     setTimeout(() => { btn.textContent = '🔄 Update from Main'; }, 2000);
   } catch(e) {
+    console.error('Update failed:', e);
     btn.textContent = '❌ Failed';
     setTimeout(() => { btn.textContent = '🔄 Update from Main'; }, 2000);
   }
