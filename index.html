@@ -150,7 +150,7 @@ tr:hover{background:#f8f9ff;transition:background .2s}
 
   <!-- Coverage Trend -->
   <div class="section" style="margin-bottom:20px">
-    <h2>📈 Coverage Trend — Tests Added & Modified Per Month <button class="btn btn-primary" onclick="fetchLatestTrend()" id="fetchTrendBtn" style="font-size:.8em;margin-left:10px">🔄 Fetch Latest</button> <button class="btn btn-success" onclick="fetchFromMain()" id="fetchFromMainBtn" style="font-size:.8em;margin-left:5px">📥 Fetch from Main</button></h2>
+    <h2>📈 Coverage Trend — Tests Added & Modified Per Month</h2>
     <canvas id="trendChart" height="280"></canvas>
   </div>
 
@@ -753,7 +753,7 @@ async function fetchLatestTrend() {
   btn.disabled = true;
   try {
     // Fetch commits touching tests/ from automation_web_2.0 repo (last 12 months)
-    const since = new Date(Date.now() - 365*24*60*60*1000).toISOString();
+    const since = '2026-04-01T00:00:00Z';
     const resp = await fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/commits?path=tests/&since=${since}&per_page=100`);
     if (!resp.ok) throw new Error('GitHub API failed');
     const commits = await resp.json();
@@ -1215,7 +1215,7 @@ async function updateFromMain() {
   btn.disabled = true;
   try {
     const ts = Date.now();
-    const since = new Date(Date.now() - 365*24*60*60*1000).toISOString();
+    const since = '2026-04-01T00:00:00Z';
     const [mappingResp, trendResp, regResp] = await Promise.all([
       fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/mapping.json?t=${ts}`),
       fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/commits?path=tests/&since=${since}&per_page=100`),
