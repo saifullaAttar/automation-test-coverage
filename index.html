@@ -138,6 +138,11 @@ tr:hover{background:#f8f9ff;transition:background .2s}
   </div>
 
   <div class="stats-grid" id="statsGrid"></div>
+  <div id="unmappedNotice" style="display:none;background:#fff8e1;border:2px solid #ffc107;border-radius:10px;padding:16px;margin-bottom:20px">
+    <h3 style="margin:0 0 8px;color:#f57c00">⚠️ Unmapped Tests — Map these to increase coverage</h3>
+    <p style="color:#666;margin:0 0 10px;font-size:.85em">These tests exist in the repo but aren't mapped to any Testmo case. Click a suggestion or use "+Add test" in the table below.</p>
+    <div id="unmappedList"></div>
+  </div>
   <div id="coverageSummary" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px"></div>
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
 
@@ -1223,17 +1228,116 @@ async function updateFromMain() {
       }
     }
     
-    // Auto-map: for each testmo case, check if any automated test name contains relevant keywords
-    // Update coverage_status based on whether automated_tests array has entries
+    // Auto-map new tests to Testmo cases based on keyword matching
     const allAutoNames = new Set([
       ...DATA.automated_tests.app.map(t => t.name),
       ...DATA.automated_tests.web_uae.map(t => t.name),
       ...DATA.automated_tests.web_ksa.map(t => t.name)
     ]);
     
-    // Recalculate coverage_status for all testmo cases based on current mappings
+    // Build set of already-mapped test names
+    const alreadyMapped = new Set();
+    for (const t of DATA.testmo_tests) t.automated_tests.forEach(n => alreadyMapped.add(n));
+    for (const t of (DATA.app_testmo_tests||[])) t.automated_tests.forEach(n => alreadyMapped.add(n));
+    
+    // Find unmapped tests
+    const unmappedApp = DATA.automated_tests.app.filter(t => !alreadyMapped.has(t.name));
+    const unmappedWeb = [...DATA.automated_tests.web_uae, ...DATA.automated_tests.web_ksa].filter(t => !alreadyMapped.has(t.name));
+    
+    // Smart matching: extract core action keywords from test name
+    function getTestIntent(testName) {
+      // Remove prefix: test_app_, test_uae_, test_ksa_
+      const core = testName.replace(/^test_(app_|uae_|ksa_)?/, '');
+      const parts = core.split('_');
+      return { parts, core, 
+        hasCheckout: parts.includes('checkout'),
+        hasCart: parts.includes('cart'),
+        hasPayment: /cc|cod|tabby|tamara|sc|apple/.test(core),
+        hasCoupon: /coupon|cashback|discount|bank/.test(core),
+        hasUser: /user|signup|login|register|profile|address/.test(core),
+        hasHome: /home|explore|search|brand|category/.test(core),
+      };
+    }
+    
+    function smartMatch(test, testmoCase) {
+      const intent = getTestIntent(test.name);
+      const caseText = (testmoCase.name + ' ' + (testmoCase.summary||'') + ' ' + (testmoCase.functionality||'')).toLowerCase();
+      let score = 0;
+      
+      // Strong signals: feature area match
+      if (intent.hasCheckout && /checkout|payment|place.*order|paying/.test(caseText)) score += 4;
+      if (intent.hasCart && /cart|add.*item|remove.*item|qty|quantity/.test(caseText)) score += 4;
+      if (intent.hasPayment && /payment|credit card|cod|tabby|tamara|store credit|apple.?pay/.test(caseText)) score += 4;
+      if (intent.hasCoupon && /coupon|discount|cashback/.test(caseText)) score += 4;
+      if (intent.hasUser && /register|login|sign|profile|account/.test(caseText)) score += 4;
+      if (intent.hasHome && /home|search|brand|categor/.test(caseText)) score += 4;
+      
+      // Specific keyword matches from test name parts
+      for (const part of intent.parts) {
+        if (part.length > 3 && caseText.includes(part)) score += 1;
+      }
+      
+      // Penalty: don't map checkout tests to cart cases or vice versa
+      if (intent.hasCheckout && !intent.hasCart && /\bcart\b/.test(caseText) && !/checkout/.test(caseText)) score -= 5;
+      if (intent.hasCart && !intent.hasCheckout && /checkout/.test(caseText) && !/cart/.test(caseText)) score -= 5;
+      
+      return score;
+    }
+    
+    // Auto-map unmapped app tests to UNCOVERED cases first (to increase coverage)
+    const stillUnmappedApp = [];
+    for (const test of unmappedApp) {
+      let bestCase = null, bestScore = 0;
+      // Prefer uncovered cases
+      const uncoveredApp = (DATA.app_testmo_tests||[]).filter(tc => tc.coverage_status === 'none');
+      for (const tc of uncoveredApp) {
+        const score = smartMatch(test, tc);
+        if (score > bestScore) { bestScore = score; bestCase = tc; }
+      }
+      if (bestCase && bestScore >= 5) {
+        bestCase.automated_tests.push(test.name);
+        bestCase.coverage_status = 'full';
+      } else {
+        stillUnmappedApp.push(test);
+      }
+    }
+    
+    // Auto-map unmapped web tests to UNCOVERED cases first
+    const stillUnmappedWeb = [];
+    for (const test of unmappedWeb) {
+      let bestCase = null, bestScore = 0;
+      const uncoveredWeb = DATA.testmo_tests.filter(tc => tc.coverage_status === 'none');
+      for (const tc of uncoveredWeb) {
+        const score = smartMatch(test, tc);
+        if (score > bestScore) { bestScore = score; bestCase = tc; }
+      }
+      if (bestCase && bestScore >= 5) {
+        bestCase.automated_tests.push(test.name);
+        bestCase.coverage_status = 'full';
+      } else {
+        stillUnmappedWeb.push(test);
+      }
+    }
+    
+    // Show unmapped tests in UI for manual mapping
+    const unmappedNotice = document.getElementById('unmappedNotice');
+    const unmappedList = document.getElementById('unmappedList');
+    const allUnmapped = [...stillUnmappedApp.map(t => ({...t, platform:'app'})), ...stillUnmappedWeb.map(t => ({...t, platform:'web'}))];
+    if (allUnmapped.length > 0) {
+      unmappedNotice.style.display = 'block';
+      unmappedList.innerHTML = allUnmapped.map(t => 
+        `<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #ffe082">
+          <span style="background:${t.platform==='app'?'#764ba2':'#667eea'};color:#fff;padding:2px 8px;border-radius:4px;font-size:.75em">${t.platform}</span>
+          <code style="font-size:.85em">${t.name}</code>
+          <span style="color:#999;font-size:.8em">(${t.file})</span>
+        </div>`
+      ).join('');
+    } else {
+      unmappedNotice.style.display = 'none';
+    }
+    
+    // Recalculate coverage_status for all testmo cases
     for (const t of DATA.testmo_tests) {
-      // Remove any mapped tests that no longer exist
       t.automated_tests = t.automated_tests.filter(name => allAutoNames.has(name));
       t.coverage_status = t.automated_tests.length > 0 ? 'full' : (t.coverage_status === 'partial' ? 'partial' : 'none');
     }
