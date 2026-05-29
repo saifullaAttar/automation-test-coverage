@@ -438,7 +438,7 @@ function showAppAutocomplete(caseId) {
   div.id = 'autocomplete-active';
   const input = document.createElement('input');
   input.type = 'text';
-  input.placeholder = 'Type to filter app tests...';
+  input.placeholder = 'Type test name or press Enter to add custom...';
   input.style.cssText = 'width:100%;padding:8px;border:none;border-bottom:1px solid #eee;font-size:.85em';
   div.appendChild(input);
   const list = document.createElement('div');
@@ -446,11 +446,22 @@ function showAppAutocomplete(caseId) {
   
   function renderList(filter) {
     const filtered = filter ? appAutoTests.filter(t => t.name.toLowerCase().includes(filter.toLowerCase())) : appAutoTests;
-    list.innerHTML = filtered.slice(0, 20).map(t => 
+    const exactMatch = filter && appAutoTests.some(t => t.name === filter);
+    const alreadyMapped = filter && existing.has(filter);
+    let html = filtered.slice(0, 20).map(t => 
       `<div class="autocomplete-item" onclick="addAppTest('${caseId}','${t.name}')">${t.name}<small>${t.file}</small></div>`
     ).join('');
+    if (filter && !exactMatch && !alreadyMapped) {
+      html = `<div class="autocomplete-item" style="color:#1a73e8;font-weight:500" onclick="addAppTest('${caseId}','${filter.trim()}')">➕ Add "${filter.trim()}" (custom)<small>Press Enter or click</small></div>` + html;
+    }
+    list.innerHTML = html;
   }
   input.oninput = () => renderList(input.value);
+  input.onkeydown = (e) => {
+    if (e.key === 'Enter' && input.value.trim()) {
+      addAppTest(caseId, input.value.trim());
+    }
+  };
   renderList('');
   cell.appendChild(div);
   input.focus();
@@ -531,7 +542,7 @@ function showAutocomplete(caseId) {
   
   const input = document.createElement('input');
   input.type = 'text';
-  input.placeholder = 'Type to filter tests...';
+  input.placeholder = 'Type test name or press Enter to add custom...';
   input.style.cssText = 'width:100%;padding:8px;border:none;border-bottom:1px solid #eee;font-size:.85em';
   div.appendChild(input);
   
@@ -540,12 +551,23 @@ function showAutocomplete(caseId) {
   
   function renderList(filter) {
     const filtered = filter ? allTests.filter(t => t.name.toLowerCase().includes(filter.toLowerCase())) : allTests.slice(0, 20);
-    list.innerHTML = filtered.slice(0, 20).map(t => 
+    const exactMatch = filter && allTests.some(t => t.name === filter);
+    const alreadyMapped = filter && existing.has(filter);
+    let html = filtered.slice(0, 20).map(t => 
       `<div class="autocomplete-item" onclick="addTest('${caseId}','${t.name}')">${t.name}<small>${t.platform} — ${t.file}</small></div>`
     ).join('');
+    if (filter && !exactMatch && !alreadyMapped) {
+      html = `<div class="autocomplete-item" style="color:#1a73e8;font-weight:500" onclick="addTest('${caseId}','${filter.trim()}')">➕ Add "${filter.trim()}" (custom)<small>Press Enter or click</small></div>` + html;
+    }
+    list.innerHTML = html;
   }
   
   input.oninput = () => renderList(input.value);
+  input.onkeydown = (e) => {
+    if (e.key === 'Enter' && input.value.trim()) {
+      addTest(caseId, input.value.trim());
+    }
+  };
   renderList('');
   
   cell.appendChild(div);
@@ -1244,3 +1266,4 @@ init();
 </script>
 </body>
 </html>
+
