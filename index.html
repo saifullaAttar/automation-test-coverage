@@ -1157,6 +1157,24 @@ async function updateFromMain() {
     }
     
     if (regResp.ok) { REGRESSION_RUNS = await regResp.json(); renderRegressionChart(); }
+    
+    // Recalculate metadata from actual data
+    DATA.metadata.total_automated_tests = 
+      (DATA.automated_tests.web_uae||[]).length + 
+      (DATA.automated_tests.web_ksa||[]).length + 
+      (DATA.automated_tests.app||[]).length;
+    DATA.metadata.last_updated = new Date().toISOString().split('T')[0];
+    
+    // Sync gist with latest data from main
+    try {
+      const token = _gt();
+      await fetch(`https://api.github.com/gists/${GIST_ID}`, {
+        method: 'PATCH',
+        headers: {'Authorization': `token ${token}`, 'Content-Type': 'application/json'},
+        body: JSON.stringify({files: {'mapping.json': {content: JSON.stringify(DATA, null, 2)}}})
+      });
+    } catch(syncErr) { console.warn('Gist sync failed:', syncErr); }
+    
     localStorage.removeItem(LS_KEY);
     hasUnsavedChanges = false;
     render();
