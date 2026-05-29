@@ -741,7 +741,7 @@ async function loadTrend() {
   try {
     // Auto-fetch latest commits from automation_web_2.0 main
     const since = '2026-04-01T00:00:00Z';
-    const resp = await fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/commits?path=tests/&since=${since}&per_page=100`);
+    const resp = await fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/commits?path=tests/&since=${since}&per_page=100`, {headers:{'Authorization':`token ${_gt()}`}});
     if (!resp.ok) throw new Error('API failed');
     const commits = await resp.json();
     const months = {};
@@ -1112,7 +1112,7 @@ async function updateFromMain() {
     const since = '2026-04-01T00:00:00Z';
     const [mappingResp, trendResp, regResp] = await Promise.all([
       fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/mapping.json?t=${ts}`),
-      fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/commits?path=tests/&since=${since}&per_page=100`),
+      fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/commits?path=tests/&since=${since}&per_page=100`, {headers:{'Authorization':`token ${_gt()}`}}),
       fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/regression_runs.json?t=${ts}`)
     ]);
     if (!mappingResp.ok) throw new Error('Fetch failed');
@@ -1203,7 +1203,8 @@ async function init() {
 async function refreshTestsFromMain() {
   try {
     const baseUrl = 'https://api.github.com/repos/mumzworld-tech/automation_web_2.0';
-    const treeResp = await fetch(`${baseUrl}/git/trees/main?recursive=1`);
+    const headers = {'Authorization': `token ${_gt()}`};
+    const treeResp = await fetch(`${baseUrl}/git/trees/main?recursive=1`, {headers});
     if (!treeResp.ok) return;
     const tree = await treeResp.json();
     const allFiles = tree.tree.filter(f => f.type === 'blob' && f.path.match(/tests\/.+\/test_.*\.py$/));
@@ -1216,7 +1217,7 @@ async function refreshTestsFromMain() {
       const tests = [];
       for (const file of files) {
         try {
-          const resp = await fetch(`${baseUrl}/contents/${file.path}?ref=main`);
+          const resp = await fetch(`${baseUrl}/contents/${file.path}?ref=main`, {headers});
           if (!resp.ok) continue;
           const data = await resp.json();
           const content = atob(data.content.replace(/\n/g, ''));
