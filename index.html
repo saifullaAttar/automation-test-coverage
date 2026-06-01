@@ -153,6 +153,12 @@ tr:hover{background:#f8f9ff;transition:background .2s}
     <div id="riskList"></div>
   </div>
 
+  <!-- Tests Per Module -->
+  <div class="section" style="margin-bottom:20px">
+    <h2>📂 Tests Per Module</h2>
+    <div id="testsPerModule" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px"></div>
+  </div>
+
   <!-- Coverage Trend -->
   <div class="section" style="margin-bottom:20px">
     <h2>📈 Coverage Trend — Tests Added & Modified Per Month</h2>
@@ -239,11 +245,6 @@ tr:hover{background:#f8f9ff;transition:background .2s}
   <div class="section">
     <h2>📊 Coverage by Folder</h2>
     <div class="folder-breakdown" id="folderBreakdown"></div>
-  </div>
-
-  <div class="section">
-    <h2>📂 Tests Per Module</h2>
-    <div id="testsPerModule" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px"></div>
   </div>
 
   <div class="footer">
@@ -535,31 +536,36 @@ function renderFolderBreakdown() {
 }
 
 function renderTestsPerModule() {
-  // Group tests by file
-  const appByFile = {};
-  (DATA.automated_tests.app||[]).forEach(t => {
-    if (!appByFile[t.file]) appByFile[t.file] = 0;
-    appByFile[t.file]++;
-  });
-  const uaeByFile = {};
-  (DATA.automated_tests.web_uae||[]).forEach(t => {
-    if (!uaeByFile[t.file]) uaeByFile[t.file] = 0;
-    uaeByFile[t.file]++;
-  });
-  const ksaByFile = {};
-  (DATA.automated_tests.web_ksa||[]).forEach(t => {
-    if (!ksaByFile[t.file]) ksaByFile[t.file] = 0;
-    ksaByFile[t.file]++;
-  });
+  const container = document.getElementById('testsPerModule');
+  const token = _gt();
+  
+  async function fetchTestCounts(dirPath) {
+    try {
+      const resp = await fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/contents/${dirPath}`, {headers:{'Authorization':`token ${token}`}});
+      if (!resp.ok) return {};
+      const files = (await resp.json()).filter(f => f.name.startsWith('test_') && f.name.endsWith('.py'));
+      const counts = {};
+      for (const f of files) {
+        const srcResp = await fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/contents/${f.path}`, {headers:{'Authorization':`token ${token}`}});
+        if (!srcResp.ok) continue;
+        const data = await srcResp.json();
+        const src = atob(data.content);
+        const matches = src.match(/^def test_/gm);
+        counts[f.name] = matches ? matches.length : 0;
+      }
+      return counts;
+    } catch { return {}; }
+  }
 
   function renderFileList(title, icon, color, byFile) {
     const entries = Object.entries(byFile).sort((a,b) => b[1] - a[1]);
     const total = entries.reduce((s, [,c]) => s + c, 0);
+    const max = Math.max(...entries.map(e=>e[1]), 1);
     return `<div style="background:#fff;border-radius:10px;padding:18px;box-shadow:0 2px 4px rgba(0,0,0,.08);border-top:4px solid ${color}">
       <h3 style="margin:0 0 12px;color:${color}">${icon} ${title} <span style="font-size:.7em;color:#666;font-weight:400">(${total} tests)</span></h3>
       ${entries.map(([file, count]) => {
         const module = file.replace('test_', '').replace('.py', '').replace(/_/g, ' ');
-        const barW = Math.round(count / Math.max(...entries.map(e=>e[1])) * 100);
+        const barW = Math.round(count / max * 100);
         return `<div style="margin-bottom:8px">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
             <span style="font-size:.85em;text-transform:capitalize">${module}</span>
@@ -571,10 +577,18 @@ function renderTestsPerModule() {
     </div>`;
   }
 
-  document.getElementById('testsPerModule').innerHTML = 
-    renderFileList('App Tests (tests/app)', '📱', '#764ba2', appByFile) +
-    renderFileList('mWeb UAE (tests/web/UAE)', '🇦🇪', '#667eea', uaeByFile) +
-    renderFileList('mWeb KSA (tests/web/KSA)', '🇸🇦', '#10b981', ksaByFile);
+  container.innerHTML = '<p style="color:#999;text-align:center">⏳ Fetching test counts from main branch...</p>';
+  
+  Promise.all([
+    fetchTestCounts('tests/app'),
+    fetchTestCounts('tests/web/UAE'),
+    fetchTestCounts('tests/web/KSA')
+  ]).then(([app, uae, ksa]) => {
+    container.innerHTML = 
+      renderFileList('App Tests (tests/app)', '📱', '#764ba2', app) +
+      renderFileList('mWeb UAE (tests/web/UAE)', '🇦🇪', '#667eea', uae) +
+      renderFileList('mWeb KSA (tests/web/KSA)', '🇸🇦', '#10b981', ksa);
+  });
 }
 
 // === Edit Functions ===
