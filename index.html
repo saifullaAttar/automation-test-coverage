@@ -542,7 +542,7 @@ function renderTestsPerModule() {
   async function fetchTestCounts(dirPath) {
     try {
       const resp = await fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/contents/${dirPath}`, {headers:{'Authorization':`token ${token}`}});
-      if (!resp.ok) return {};
+      if (!resp.ok) return null;
       const files = (await resp.json()).filter(f => f.name.startsWith('test_') && f.name.endsWith('.py'));
       const counts = {};
       for (const f of files) {
@@ -553,8 +553,14 @@ function renderTestsPerModule() {
         const matches = src.match(/^def test_/gm);
         counts[f.name] = matches ? matches.length : 0;
       }
-      return counts;
-    } catch { return {}; }
+      return Object.keys(counts).length > 0 ? counts : null;
+    } catch { return null; }
+  }
+
+  function countsFromData(tests) {
+    const byFile = {};
+    (tests||[]).forEach(t => { byFile[t.file] = (byFile[t.file]||0) + 1; });
+    return byFile;
   }
 
   function renderFileList(title, icon, color, byFile) {
@@ -577,17 +583,20 @@ function renderTestsPerModule() {
     </div>`;
   }
 
-  container.innerHTML = '<p style="color:#999;text-align:center">⏳ Fetching test counts from main branch...</p>';
+  container.innerHTML = '<p style="color:#999;text-align:center">⏳ Loading test counts...</p>';
   
   Promise.all([
     fetchTestCounts('tests/app'),
     fetchTestCounts('tests/web/UAE'),
     fetchTestCounts('tests/web/KSA')
   ]).then(([app, uae, ksa]) => {
+    const appData = app || countsFromData(DATA.automated_tests.app);
+    const uaeData = uae || countsFromData(DATA.automated_tests.web_uae);
+    const ksaData = ksa || countsFromData(DATA.automated_tests.web_ksa);
     container.innerHTML = 
-      renderFileList('App Tests (tests/app)', '📱', '#764ba2', app) +
-      renderFileList('mWeb UAE (tests/web/UAE)', '🇦🇪', '#667eea', uae) +
-      renderFileList('mWeb KSA (tests/web/KSA)', '🇸🇦', '#10b981', ksa);
+      renderFileList('App Tests (tests/app)', '📱', '#764ba2', appData) +
+      renderFileList('mWeb UAE (tests/web/UAE)', '🇦🇪', '#667eea', uaeData) +
+      renderFileList('mWeb KSA (tests/web/KSA)', '🇸🇦', '#10b981', ksaData);
   });
 }
 
