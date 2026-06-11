@@ -152,8 +152,10 @@
       "status": "Passed",
       "summary": "Verify that the discounts is shown on the Product Details Page, Product List Page and search page for all product types",
       "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
+      "automated_tests": [
+        "test_ksa_percentage_of_product_price_discount_rules_without_max_amount"
+      ],
+      "coverage_status": "full",
       "notes": ""
     },
     {
@@ -485,8 +487,10 @@
       "status": "Passed",
       "summary": "To Check if users with 2+ addresses saved can update the default address and modify the address details from the checkout page",
       "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
+      "automated_tests": [
+        "test_uae_checkout_cc_coupon_modal_sheet"
+      ],
+      "coverage_status": "full",
       "notes": ""
     },
     {
@@ -649,8 +653,10 @@
       "status": "Passed",
       "summary": "Verify the low stock alert shows after placing order after product stock be below threshold Verify that low stock alert shows for guest cart and after logging , and customer can switch between websites and proceed to checkout page without any errors.",
       "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
+      "automated_tests": [
+        "test_ksa_checkout_cod_normal_coupon"
+      ],
+      "coverage_status": "full",
       "notes": ""
     },
     {
@@ -663,8 +669,10 @@
       "status": "Passed",
       "summary": "Verify that an existing user with orders able to add free gift based on conditions added in BE , navigate to cart page and place an order without any errors",
       "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
+      "automated_tests": [
+        "test_uae_cart_apply_gift_wrap_and_place_order"
+      ],
+      "coverage_status": "full",
       "notes": ""
     },
     {
@@ -677,8 +685,10 @@
       "status": "Untested",
       "summary": "",
       "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
+      "automated_tests": [
+        "test_ksa_cart_apply_gift_wrap_and_place_order"
+      ],
+      "coverage_status": "full",
       "notes": ""
     },
     {
@@ -719,8 +729,10 @@
       "status": "Untested",
       "summary": "To verify that customer can go through the flow without any issues and successfully place the order. To verify the cart doesn't retain the products after placing successful order.",
       "tags": "international,ksa,uae",
-      "automated_tests": [],
-      "coverage_status": "none",
+      "automated_tests": [
+        "test_uae_checkout_cod_normal_coupon"
+      ],
+      "coverage_status": "full",
       "notes": ""
     },
     {
@@ -884,8 +896,10 @@
       "status": "Untested",
       "summary": "https://www.figma.com/file/JK5bcuA9mNbkN6tbGxrCD5/E-commerce-(App%2Bweb)?type=design&node-id=727-13074&mode=design&t=UxnKn9KlJAyMx5Vn-0",
       "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
+      "automated_tests": [
+        "test_ksa_checkout_invalid_cc_no_coupon"
+      ],
+      "coverage_status": "full",
       "notes": ""
     },
     {
@@ -914,8 +928,10 @@
       "status": "Untested",
       "summary": "To verify that single use-coupons cannot be used multiple times by the same customer/ another customer",
       "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
+      "automated_tests": [
+        "test_uae_checkout_cc_normal_coupon"
+      ],
+      "coverage_status": "full",
       "notes": ""
     },
     {
@@ -978,8 +994,10 @@
       "status": "Untested",
       "summary": "To verify the \"Fixed product price discount \" & \"Fixed product price discount with variant\" rule are applied successfully, the discount is calculated correctly when placing order. And verify the correct discount sends to NS.",
       "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
+      "automated_tests": [
+        "test_ksa_percentage_of_product_price_discount_rules_with_max_amount"
+      ],
+      "coverage_status": "full",
       "notes": ""
     },
     {
@@ -992,8 +1010,10 @@
       "status": "Untested",
       "summary": "Verify the \"For Each 100$ Spent, get Whole Cart 10% Cheaper\" discount rule, both for max-limited discount amounts and for non-max-limited discounts.",
       "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
+      "automated_tests": [
+        "test_ksa_percentage_of_product_variant_price_discount_rules_with_max_amount"
+      ],
+      "coverage_status": "full",
       "notes": ""
     },
     {
@@ -1062,8 +1082,10 @@
       "status": "Untested",
       "summary": "Verify that user can go through the flow without any issues , checkout loads normally",
       "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
+      "automated_tests": [
+        "test_ksa_checkout_cc_normal_coupon"
+      ],
+      "coverage_status": "full",
       "notes": ""
     },
     {
@@ -1676,8 +1698,10 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
+      "automated_tests": [
+        "test_app_cart_guest_login_no_coupon_sc"
+      ],
+      "coverage_status": "full",
       "notes": ""
     },
     {
@@ -1690,8 +1714,10 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
+      "automated_tests": [
+        "test_app_checkout_tabby_normal_coupon"
+      ],
+      "coverage_status": "full",
       "notes": ""
     },
     {
@@ -1704,8 +1730,10 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
+      "automated_tests": [
+        "test_app_checkout_full_sc_no_coupon"
+      ],
+      "coverage_status": "full",
       "notes": ""
     },
     {
@@ -2793,6 +2821,60 @@
         "docstring": "1. Precondition: Login, clear cart, sign out 2. As guest, search and add product to cart 3. Navigate to cart and verify item present 4. Tap checkout \u2192 login bottom sheet is displayed 5. Login with exi"
       },
       {
+        "name": "test_app_wishlist_all_product_types",
+        "file": "test_app_cart.py",
+        "title": "",
+        "tags": [],
+        "feature": "Cart",
+        "docstring": "Wishlist Flow for Guest and Logged-in Users: 1. Setup user (guest: logout after login, logged_in: stay logged in) 2. Add all product types to cart 3. Move first item to wishlist (guest: login prompt, "
+      },
+      {
+        "name": "test_app_cart_partial_sc_and_checkout_with_cc",
+        "file": "test_app_cart.py",
+        "title": "Apply partial SC on cart, remove, re-apply then checkout with CC",
+        "tags": [
+          "Cart",
+          "StoreCredit",
+          "CC"
+        ],
+        "feature": "Cart",
+        "docstring": "FALCONS-268: Validate partial store credit apply/remove flow on cart page, then checkout. 1. Add product to cart 2. On cart: apply partial SC (AED 10), verify applied + validate order summary 3. On ca"
+      },
+      {
+        "name": "test_app_cart_full_sc_and_checkout",
+        "file": "test_app_cart.py",
+        "title": "UAE - Apply full SC on cart, remove, re-apply then place order with SC only",
+        "tags": [
+          "Cart",
+          "StoreCredit",
+          "FullSC"
+        ],
+        "feature": "Cart",
+        "docstring": "FALCONS-268: Validate full store credit apply/remove flow on cart page, then checkout. 1. Add product to cart 2. On cart: apply full SC (single-click Apply, balance must be \u2265 AED 800), verify applied "
+      },
+      {
+        "name": "test_app_cart_existing_user_orders_no_coupon_yalla",
+        "file": "test_app_cart.py",
+        "title": "App - Existing user with orders and Yalla free shipping on Cart",
+        "tags": [
+          "Yalla"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Search specific product through search 2. Filter for Yalla items on the PLP 3. Navigate to the PDP of the 1st Yalla product from PLP 4. Verify the 'Yalla' icon on the PDP 5. Click add to bag for th"
+      },
+      {
+        "name": "test_app_cart_uf5_checkout_cod_no_coupon",
+        "file": "test_app_cart.py",
+        "title": "App - UF5 Cart flow: add items, logout/login, modify qty, checkout with COD",
+        "tags": [
+          "Cart",
+          "COD",
+          "UF5"
+        ],
+        "feature": "Cart",
+        "docstring": "1. Go to homepage as signed-in user. 2. Search for a simple B2B product and add it to cart. 3. Search for a product by brand name and add it to cart. 4. Sign out from account page. 5. Sign back in wit"
+      },
+      {
         "name": "test_uae_checkout_cc_no_coupon",
         "file": "test_app_checkout.py",
         "title": "Successful user checkout in uae with CC no coupon",
@@ -2896,6 +2978,17 @@
         "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/no coupon"
       },
       {
+        "name": "test_app_checkout_tamara_normal_coupon",
+        "file": "test_app_checkout.py",
+        "title": "Checkout Tamara + Normal Coupon (App)",
+        "tags": [
+          "Tamara",
+          "Coupon"
+        ],
+        "feature": "Checkout",
+        "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Apply normal coupon on checkout 7"
+      },
+      {
         "name": "test_uae_guest_checkout_login_bottom_sheet_and_place_order",
         "file": "test_app_checkout.py",
         "title": "",
@@ -2942,10 +3035,10 @@
     "testmo_run_id_app": 2192,
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
     "testmo_url_app": "https://mumzworld.testmo.net/runs/view/2192",
-    "last_updated": "2026-05-29",
+    "last_updated": "2026-06-11",
     "total_testmo_cases_web": 81,
     "total_testmo_cases_app": 44,
-    "total_automated_tests": 99,
+    "total_automated_tests": 105,
     "newly_covered": [
       "1435408",
       "1543903",
