@@ -121,6 +121,96 @@ code{background:#e8eaf6;padding:2px 6px;border-radius:3px;font-size:.8em;font-fa
     <div class="stat-card"><div class="stat-number red">0</div><div class="stat-label">🚫 CI Gates</div></div>
 </div>
 
+<!-- Bug Prevention & Time Saved -->
+<div class="grid-2" style="margin-bottom:20px">
+    <div class="section" style="margin-top:0;background:linear-gradient(135deg,#d4edda,#c3e6cb);border:1px solid #28a745">
+        <h2 style="border-bottom-color:#28a745;font-size:1em;margin-bottom:10px">🛡️ Bug Prevention Counter (ROI)</h2>
+        <div style="display:flex;align-items:center;gap:20px">
+            <div style="text-align:center">
+                <div style="font-size:3em;font-weight:800;color:#155724" id="bugCount">0</div>
+                <div style="font-size:.8em;color:#155724">Bugs caught at PR</div>
+            </div>
+            <div style="font-size:.85em;color:#155724;line-height:1.6">
+                <p>Each bug caught by a component test <strong>before</strong> reaching production saves:</p>
+                <ul style="padding-left:16px;margin-top:4px">
+                    <li>~2-4 hours of QA investigation</li>
+                    <li>~1-2 hours of hotfix development</li>
+                    <li>Customer trust & potential revenue</li>
+                </ul>
+                <p style="margin-top:8px"><strong>Estimated savings:</strong> <span id="savingsEstimate">$0</span> / quarter</p>
+            </div>
+        </div>
+        <div style="margin-top:12px;padding-top:10px;border-top:1px dashed #28a745">
+            <label style="font-size:.75em;color:#155724">Update bug count: </label>
+            <input type="number" id="bugInput" value="0" min="0" style="width:60px;padding:4px;border:1px solid #28a745;border-radius:4px;font-size:.85em" onchange="updateBugCounter()">
+            <span style="font-size:.7em;color:#666;margin-left:8px">(Increment each time a test catches a regression)</span>
+        </div>
+    </div>
+
+    <div class="section" style="margin-top:0;background:linear-gradient(135deg,#e8eaf6,#c5cae9);border:1px solid #667eea">
+        <h2 style="border-bottom-color:#667eea;font-size:1em;margin-bottom:10px">⏱️ Time Saved Calculator</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:.85em">
+            <div>
+                <label style="color:#666;font-size:.8em">Test files written:</label>
+                <input type="number" id="calcTests" value="3" min="0" style="width:100%;padding:6px;border:1px solid #667eea;border-radius:4px;margin-top:2px" oninput="calcTimeSaved()">
+            </div>
+            <div>
+                <label style="color:#666;font-size:.8em">Avg test cases per file:</label>
+                <input type="number" id="calcCases" value="6" min="1" style="width:100%;padding:6px;border:1px solid #667eea;border-radius:4px;margin-top:2px" oninput="calcTimeSaved()">
+            </div>
+        </div>
+        <div style="margin-top:16px;padding:12px;background:#fff;border-radius:8px;text-align:center">
+            <div style="display:flex;justify-content:space-around">
+                <div><div style="font-size:1.8em;font-weight:700;color:#667eea" id="calcTime">0.3s</div><div style="font-size:.75em;color:#666">Component test time</div></div>
+                <div style="font-size:1.5em;color:#999;align-self:center">vs</div>
+                <div><div style="font-size:1.8em;font-weight:700;color:#dc3545" id="calcManual">27min</div><div style="font-size:.75em;color:#666">Manual QA equivalent</div></div>
+            </div>
+            <div style="margin-top:12px;font-size:.85em;color:#333"><strong id="calcWeekly">~4.5 hours</strong> saved per week across all PRs</div>
+        </div>
+    </div>
+</div>
+
+<!-- Coverage Trend -->
+<div class="section" style="margin-bottom:20px">
+    <h2>📈 Coverage % Trend — Weekly Progress</h2>
+    <div class="chart-container chart-sm"><canvas id="trendChart"></canvas></div>
+</div>
+
+<!-- Write a Test Guides -->
+<div class="grid-2" style="margin-bottom:20px">
+    <div class="section" style="margin-top:0;border-left:4px solid #667eea">
+        <h2 style="font-size:1em;margin-bottom:10px">📝 Write a Component Test — Quick Start</h2>
+        <p style="font-size:.85em;color:#666;margin-bottom:12px">For developers new to writing tests in <code>mumzworld-nextjs</code></p>
+        <ol style="font-size:.85em;padding-left:20px;color:#555;line-height:2">
+            <li>Create <code>ComponentName.test.tsx</code> next to the component</li>
+            <li>Import: <code>import { render, screen } from '@testing-library/react'</code></li>
+            <li>Mock: <code>vi.mock('next-intl', ...)</code> and any hooks</li>
+            <li>Render: <code>render(&lt;Component prop="value" /&gt;)</code></li>
+            <li>Assert: <code>expect(screen.getByText('...')).toBeInTheDocument()</code></li>
+            <li>Run: <code>npm test -w apps/checkout -- YourFile.test.tsx</code></li>
+        </ol>
+        <div style="margin-top:12px">
+            <a href="https://github.com/mumzworld-tech/mumzworld-nextjs/blob/test/checkout-component-tests/apps/checkout/src/components/If/If.test.tsx" target="_blank" style="color:#667eea;font-size:.85em;font-weight:600;text-decoration:none">→ See example: If.test.tsx</a>
+        </div>
+    </div>
+
+    <div class="section" style="margin-top:0;border-left:4px solid #764ba2">
+        <h2 style="font-size:1em;margin-bottom:10px">🤖 Write an E2E Test — Quick Start</h2>
+        <p style="font-size:.85em;color:#666;margin-bottom:12px">For developers adding tests to <code>automation_web_2.0</code></p>
+        <ol style="font-size:.85em;padding-left:20px;color:#555;line-height:2">
+            <li>Create test file in <code>tests/web/UAE/</code> or <code>tests/app/</code></li>
+            <li>Use Page Object from <code>pages/</code></li>
+            <li>Locators in <code>resources/locators/locators.json</code></li>
+            <li>Use <code>@pytest.mark.regression</code> marker</li>
+            <li>Run: <code>pytest tests/web/UAE/test_file.py -v</code></li>
+            <li>Check report: <a href="https://allure-reports.mumzstage.com/allure-docker-service" target="_blank" style="color:#764ba2">Allure Dashboard</a></li>
+        </ol>
+        <div style="margin-top:12px">
+            <a href="https://github.com/mumzworld-tech/automation_web_2.0" target="_blank" style="color:#764ba2;font-size:.85em;font-weight:600;text-decoration:none">→ Automation Repo: automation_web_2.0</a>
+        </div>
+    </div>
+</div>
+
 <!-- Progress bars -->
 <div class="grid-2">
     <div>
@@ -383,6 +473,65 @@ function showPanel(id){
     document.getElementById('panel-'+id).classList.add('active');
     event.target.classList.add('active');
 }
+
+// Bug Prevention Counter
+function updateBugCounter(){
+    const count = parseInt(document.getElementById('bugInput').value) || 0;
+    document.getElementById('bugCount').textContent = count;
+    // Each bug saved ≈ $500 (3h dev time × $100/hr + QA + opportunity cost)
+    document.getElementById('savingsEstimate').textContent = '$' + (count * 500).toLocaleString();
+    localStorage.setItem('bugCount', count);
+}
+// Load saved value
+const savedBugs = localStorage.getItem('bugCount');
+if(savedBugs){ document.getElementById('bugInput').value = savedBugs; updateBugCounter(); }
+
+// Time Saved Calculator
+function calcTimeSaved(){
+    const tests = parseInt(document.getElementById('calcTests').value) || 0;
+    const cases = parseInt(document.getElementById('calcCases').value) || 1;
+    const totalCases = tests * cases;
+    // Component test: ~20ms per case
+    const compSeconds = (totalCases * 0.02).toFixed(1);
+    // Manual QA: ~90s per equivalent check
+    const manualMinutes = ((totalCases * 90) / 60).toFixed(0);
+    // Weekly: assume 5 PRs/day × 5 days
+    const weeklyHours = ((25 * totalCases * 90) / 3600).toFixed(1);
+    document.getElementById('calcTime').textContent = compSeconds + 's';
+    document.getElementById('calcManual').textContent = manualMinutes + 'min';
+    document.getElementById('calcWeekly').textContent = '~' + weeklyHours + ' hours';
+}
+calcTimeSaved();
+
+// Coverage Trend Chart
+new Chart(document.getElementById('trendChart'),{
+    type:'line',
+    data:{
+        labels:['15 Jun','22 Jun','29 Jun','6 Jul','13 Jul','20 Jul','27 Jul','3 Aug'],
+        datasets:[{
+            label:'Coverage %',
+            data:[2, null, null, null, null, null, null, null],
+            borderColor:'#667eea',
+            backgroundColor:'rgba(102,126,234,.1)',
+            fill:true,
+            tension:.3,
+            pointRadius:6,
+            pointBackgroundColor:'#667eea',
+            spanGaps:false
+        },{
+            label:'Target %',
+            data:[2, 5, 10, 15, 22, 30, 35, 40],
+            borderColor:'#28a745',
+            backgroundColor:'rgba(40,167,69,.05)',
+            fill:false,
+            tension:.3,
+            pointRadius:4,
+            pointBackgroundColor:'#28a745',
+            borderDash:[6,4]
+        }]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true,max:50,title:{display:true,text:'Coverage %'}},x:{title:{display:true,text:'Week'}}}}
+});
 
 new Chart(document.getElementById('donutChart'),{
     type:'doughnut',
