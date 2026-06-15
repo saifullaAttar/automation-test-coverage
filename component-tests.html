@@ -121,67 +121,32 @@ code{background:#e8eaf6;padding:2px 6px;border-radius:3px;font-size:.8em;font-fa
     <div class="stat-card"><div class="stat-number red">0</div><div class="stat-label">🚫 CI Gates</div></div>
 </div>
 
-<!-- Time Saved Calculator -->
+<!-- Time Saved Calculator — auto-updates when Update Report is clicked -->
 <div style="margin-bottom:20px">
     <div class="section" style="margin-top:0;background:linear-gradient(135deg,#e8eaf6,#c5cae9);border:1px solid #667eea">
         <h2 style="border-bottom-color:#667eea;font-size:1em;margin-bottom:10px">⏱️ Time Saved Calculator</h2>
-        <p style="font-size:.8em;color:#555;margin-bottom:12px">Based on today's progress: 2 unit test files (17 cases) + 1 component test file (3 cases) = <strong>20 test cases</strong></p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:.85em">
-            <div>
-                <label style="color:#666;font-size:.8em">Test files written:</label>
-                <input type="number" id="calcTests" value="3" min="0" style="width:100%;padding:6px;border:1px solid #667eea;border-radius:4px;margin-top:2px" oninput="calcTimeSaved()">
-            </div>
-            <div>
-                <label style="color:#666;font-size:.8em">Avg test cases per file:</label>
-                <input type="number" id="calcCases" value="7" min="1" style="width:100%;padding:6px;border:1px solid #667eea;border-radius:4px;margin-top:2px" oninput="calcTimeSaved()">
-            </div>
-        </div>
-        <div style="margin-top:16px;padding:12px;background:#fff;border-radius:8px;text-align:center">
+        <p style="font-size:.8em;color:#555;margin-bottom:12px" id="calcDescription">Based on current progress: <strong id="calcTotal">3 files × 7 cases = 21 test cases</strong></p>
+        <div style="margin-top:8px;padding:12px;background:#fff;border-radius:8px;text-align:center">
             <div style="display:flex;justify-content:space-around">
                 <div><div style="font-size:1.8em;font-weight:700;color:#667eea" id="calcTime">0.4s</div><div style="font-size:.75em;color:#666">Component test time</div></div>
                 <div style="font-size:1.5em;color:#999;align-self:center">vs</div>
                 <div><div style="font-size:1.8em;font-weight:700;color:#dc3545" id="calcManual">31min</div><div style="font-size:.75em;color:#666">Manual QA equivalent</div></div>
             </div>
             <div style="margin-top:12px;font-size:.85em;color:#333"><strong id="calcWeekly">~13 hours</strong> saved per week across all PRs</div>
-            <p style="font-size:.7em;color:#999;margin-top:6px">Assumes 5 PRs/day × 5 days. Each test case takes ~90s to verify manually.</p>
-        </div>
-    </div>
-</div>
-
-<!-- Coverage Trend -->
-<div class="section" style="margin-bottom:20px">
-    <h2>📈 Coverage % Trend — Weekly Progress</h2>
-    <div class="chart-container chart-sm"><canvas id="trendChart"></canvas></div>
-</div>
-
-<!-- Write a Test Guide -->
-<div style="margin-bottom:20px">
-    <div class="section" style="margin-top:0;border-left:4px solid #667eea">
-        <h2 style="font-size:1em;margin-bottom:10px">📝 Write a Component Test — Quick Start</h2>
-        <p style="font-size:.85em;color:#666;margin-bottom:12px">For developers new to writing tests in <code>mumzworld-nextjs</code></p>
-        <ol style="font-size:.85em;padding-left:20px;color:#555;line-height:2">
-            <li>Create <code>ComponentName.test.tsx</code> next to the component</li>
-            <li>Import: <code>import { render, screen } from '@testing-library/react'</code></li>
-            <li>Mock: <code>vi.mock('next-intl', ...)</code> and any hooks</li>
-            <li>Render: <code>render(&lt;Component prop="value" /&gt;)</code></li>
-            <li>Assert: <code>expect(screen.getByText('...')).toBeInTheDocument()</code></li>
-            <li>Run: <code>npm test -w apps/checkout -- YourFile.test.tsx</code></li>
-        </ol>
-        <div style="margin-top:12px">
-            <a href="https://github.com/mumzworld-tech/mumzworld-nextjs/blob/test/checkout-component-tests/apps/checkout/src/components/If/If.test.tsx" target="_blank" style="color:#667eea;font-size:.85em;font-weight:600;text-decoration:none">→ See example: If.test.tsx</a>
+            <p style="font-size:.7em;color:#999;margin-top:6px">Assumes 5 PRs/day × 5 days. Each test case takes ~90s to verify manually. Auto-updates when you click "Update Report".</p>
         </div>
     </div>
 </div>
 
 <!-- Progress bars -->
-<div class="grid-2">
+<div class="grid-2" style="margin-bottom:20px">
     <div>
-        <p style="font-size:.85em;color:#666;margin-bottom:4px"><strong>Unit Tests:</strong> 2 / 17 files (12%)</p>
-        <div class="progress-bar"><div class="progress-fill" style="width:12%;background:linear-gradient(90deg,#17a2b8,#28a745)">12%</div></div>
+        <p style="font-size:.85em;color:#666;margin-bottom:4px"><strong>Unit Tests:</strong> <span id="progUnitLabel">2 / 17 files (12%)</span></p>
+        <div class="progress-bar"><div class="progress-fill" id="progUnitFill" style="width:12%;background:linear-gradient(90deg,#17a2b8,#28a745)">12%</div></div>
     </div>
     <div>
-        <p style="font-size:.85em;color:#666;margin-bottom:4px"><strong>Component Tests:</strong> 1 / 147 files (&lt;1%)</p>
-        <div class="progress-bar"><div class="progress-fill" style="width:2%;background:linear-gradient(90deg,#667eea,#764ba2)">&lt;1%</div></div>
+        <p style="font-size:.85em;color:#666;margin-bottom:4px"><strong>Component Tests:</strong> <span id="progCompLabel">1 / 147 files (&lt;1%)</span></p>
+        <div class="progress-bar"><div class="progress-fill" id="progCompFill" style="width:2%;background:linear-gradient(90deg,#667eea,#764ba2)">&lt;1%</div></div>
     </div>
 </div>
 
@@ -422,6 +387,31 @@ code{background:#e8eaf6;padding:2px 6px;border-radius:3px;font-size:.8em;font-fa
     </div>
 </div>
 
+<!-- Coverage Trend -->
+<div class="section" style="margin-bottom:20px">
+    <h2>📈 Coverage % Trend — Weekly Progress</h2>
+    <div class="chart-container chart-sm"><canvas id="trendChart"></canvas></div>
+</div>
+
+<!-- Write a Test Guide -->
+<div style="margin-bottom:20px">
+    <div class="section" style="margin-top:0;border-left:4px solid #667eea">
+        <h2 style="font-size:1em;margin-bottom:10px">📝 Write a Component Test — Quick Start</h2>
+        <p style="font-size:.85em;color:#666;margin-bottom:12px">For developers new to writing tests in <code>mumzworld-nextjs</code></p>
+        <ol style="font-size:.85em;padding-left:20px;color:#555;line-height:2">
+            <li>Create <code>ComponentName.test.tsx</code> next to the component</li>
+            <li>Import: <code>import { render, screen } from '@testing-library/react'</code></li>
+            <li>Mock: <code>vi.mock('next-intl', ...)</code> and any hooks</li>
+            <li>Render: <code>render(&lt;Component prop="value" /&gt;)</code></li>
+            <li>Assert: <code>expect(screen.getByText('...')).toBeInTheDocument()</code></li>
+            <li>Run: <code>npm test -w apps/checkout -- YourFile.test.tsx</code></li>
+        </ol>
+        <div style="margin-top:12px">
+            <a href="https://github.com/mumzworld-tech/mumzworld-nextjs/blob/test/checkout-component-tests/apps/checkout/src/components/If/If.test.tsx" target="_blank" style="color:#667eea;font-size:.85em;font-weight:600;text-decoration:none">→ See example: If.test.tsx</a>
+        </div>
+    </div>
+</div>
+
 <div class="footer">
     <p>Mumzworld Storefront · Component & Unit Test Coverage · <a href="https://github.com/mumzworld-tech/mumzworld-nextjs">mumzworld-nextjs</a></p>
 </div>
@@ -436,20 +426,18 @@ function showPanel(id){
     event.target.classList.add('active');
 }
 
-// Time Saved Calculator
-function calcTimeSaved(){
-    const tests = parseInt(document.getElementById('calcTests').value) || 0;
-    const cases = parseInt(document.getElementById('calcCases').value) || 1;
-    const totalCases = tests * cases;
-    // Component test: ~20ms per case
+// Time Saved Calculator — auto-updates based on test count
+function calcTimeSaved(testFiles, avgCases){
+    const files = testFiles || 3;
+    const cases = avgCases || 7;
+    const totalCases = files * cases;
     const compSeconds = (totalCases * 0.02).toFixed(1);
-    // Manual QA: ~90s per equivalent check
     const manualMinutes = ((totalCases * 90) / 60).toFixed(0);
-    // Weekly: assume 5 PRs/day × 5 days
     const weeklyHours = ((25 * totalCases * 90) / 3600).toFixed(1);
     document.getElementById('calcTime').textContent = compSeconds + 's';
     document.getElementById('calcManual').textContent = manualMinutes + 'min';
     document.getElementById('calcWeekly').textContent = '~' + weeklyHours + ' hours';
+    document.getElementById('calcTotal').textContent = files + ' files × ' + cases + ' cases = ' + totalCases + ' test cases';
 }
 calcTimeSaved();
 
@@ -649,6 +637,19 @@ async function updateReport() {
         statCards[3].textContent = uniqueUnit.length;
         statCards[4].textContent = uniqueComponent.length;
         document.querySelectorAll('.stat-card').forEach(c => { c.classList.add('bounce'); setTimeout(() => c.classList.remove('bounce'), 500); });
+
+        // Auto-update Time Saved Calculator (estimate 7 cases per file avg)
+        calcTimeSaved(totalDone, 7);
+
+        // Auto-update progress bars
+        const unitPct = Math.round((uniqueUnit.length / 17) * 100);
+        const compPct = Math.round((uniqueComponent.length / 147) * 100);
+        document.getElementById('progUnitLabel').textContent = `${uniqueUnit.length} / 17 files (${unitPct}%)`;
+        document.getElementById('progUnitFill').style.width = unitPct + '%';
+        document.getElementById('progUnitFill').textContent = unitPct + '%';
+        document.getElementById('progCompLabel').textContent = `${uniqueComponent.length} / 147 files (${compPct || '<1'}%)`;
+        document.getElementById('progCompFill').style.width = Math.max(compPct, 2) + '%';
+        document.getElementById('progCompFill').textContent = (compPct || '<1') + '%';
 
         status.textContent = `✅ Found ${totalDone} test files across ${testBranches.length} branches`;
         status.style.color = '#28a745';
