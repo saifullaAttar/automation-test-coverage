@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Component & Unit Test Coverage — Mumzworld Storefront</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f2f5;color:#333}
+.container{max-width:1600px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:30px;border-radius:12px;margin-bottom:20px;text-align:center;animation:slideDown .6s ease}
+.header h1{font-size:2em;margin-bottom:5px}
+.header p{opacity:.85;font-size:.95em}
+.header .meta{display:flex;justify-content:center;gap:20px;margin-top:12px;font-size:.8em;opacity:.85;flex-wrap:wrap}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes countUp{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+/* Nav */
+.nav{display:flex;gap:4px;margin-bottom:20px;background:#fff;padding:8px;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.1);flex-wrap:wrap}
+.nav a{padding:10px 18px;border-radius:6px;font-size:.85em;font-weight:600;color:#555;text-decoration:none;transition:all .2s}
+.nav a:hover{background:#f0f2f5}
+.nav a.active{background:#667eea;color:#fff}
+/* Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:15px;margin-bottom:20px}
+.stat-card{background:#fff;padding:20px;border-radius:10px;text-align:center;box-shadow:0 2px 4px rgba(0,0,0,.1);animation:slideUp .6s ease both;transition:transform .2s,box-shadow .2s}
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.stat-card:nth-child(1){animation-delay:.1s}.stat-card:nth-child(2){animation-delay:.2s}.stat-card:nth-child(3){animation-delay:.3s}.stat-card:nth-child(4){animation-delay:.4s}.stat-card:nth-child(5){animation-delay:.5s}.stat-card:nth-child(6){animation-delay:.6s}
+.stat-number{font-size:2.2em;font-weight:700;color:#667eea;animation:countUp .5s ease both}
+.stat-number.green{color:#28a745}.stat-number.red{color:#dc3545}.stat-number.orange{color:#fd7e14}
+.stat-label{font-size:.85em;color:#666;margin-top:5px}
+/* Progress */
+.progress-bar{background:#e9ecef;border-radius:20px;height:30px;margin:15px 0;overflow:hidden;position:relative}
+.progress-fill{height:100%;border-radius:20px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.85em;transition:width 1s ease-in-out}
+/* Section */
+.section{margin-top:20px;padding:20px;background:#fff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.1);animation:slideUp .6s ease both}
+.section h2{margin-bottom:15px;color:#333;border-bottom:2px solid #667eea;padding-bottom:8px;font-size:1.2em}
+/* Tables */
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 4px rgba(0,0,0,.1)}
+th{background:#f8f9fa;padding:12px;text-align:left;font-size:.8em;color:#555;border-bottom:2px solid #e9ecef;text-transform:uppercase;letter-spacing:.03em}
+td{padding:10px 12px;border-bottom:1px solid #f0f0f0;font-size:.85em;vertical-align:top}
+tr:hover{background:#f8f9ff}
+code{background:#e8eaf6;padding:2px 6px;border-radius:3px;font-size:.8em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+/* Status badges */
+.status-done{background:#d4edda;color:#155724;padding:3px 8px;border-radius:4px;font-size:.75em;font-weight:600}
+.status-pending{background:#fff3cd;color:#856404;padding:3px 8px;border-radius:4px;font-size:.75em;font-weight:600}
+.status-not-started{background:#f8d7da;color:#721c24;padding:3px 8px;border-radius:4px;font-size:.75em;font-weight:600}
+/* Severity */
+.sev-high{color:#dc3545;font-weight:700}.sev-med{color:#fd7e14;font-weight:600}.sev-low{color:#28a745}
+.sev-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px}
+.dot-red{background:#dc3545}.dot-orange{background:#fd7e14}.dot-green{background:#28a745}
+/* Tabs within page */
+.tabs{display:flex;gap:2px;margin-bottom:16px;border-bottom:2px solid #e9ecef}
+.tab-btn{padding:10px 20px;cursor:pointer;font-size:.85em;font-weight:600;color:#666;border:none;background:none;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab-btn.active{color:#667eea;border-bottom-color:#667eea}
+.tab-btn:hover{color:#333}
+.tab-panel{display:none}.tab-panel.active{display:block}
+/* Phase cards */
+.phase-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px;margin-top:15px}
+.phase-card{padding:20px;background:#fff;border-radius:8px;border-top:4px solid #667eea;box-shadow:0 2px 4px rgba(0,0,0,.1)}
+.phase-card h3{font-size:1em;margin-bottom:8px}.phase-card .phase-tag{font-size:.7em;text-transform:uppercase;letter-spacing:.05em;font-weight:700;margin-bottom:6px}
+.phase-card ul{padding-left:16px;font-size:.85em;color:#555}.phase-card li{margin:4px 0}
+/* Chart */
+.chart-container{position:relative;height:300px;margin-top:15px}
+.chart-sm{height:240px}
+/* Grid */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:768px){.grid-2{grid-template-columns:1fr}}
+/* Cost bar */
+.cost-row{display:flex;align-items:center;gap:10px;margin:8px 0}
+.cost-row .lbl{width:140px;font-size:.8em;color:#666;text-align:right}
+.cost-row .track{flex:1;background:#e9ecef;border-radius:6px;height:28px;overflow:hidden}
+.cost-row .fill{height:100%;display:flex;align-items:center;padding-left:10px;font-size:.75em;font-weight:700;color:#fff;border-radius:6px}
+.footer{text-align:center;padding:20px;color:#666;font-size:.85em;margin-top:30px}
+.footer a{color:#667eea;text-decoration:none}
+/* Click animations */
+.stat-card{cursor:pointer;user-select:none}
+.stat-card.bounce{animation:bounce .5s ease}
+@keyframes bounce{0%{transform:scale(1)}30%{transform:scale(1.15) rotate(-2deg)}50%{transform:scale(.95) rotate(1deg)}70%{transform:scale(1.05)}100%{transform:scale(1)}}
+.chart-container canvas{cursor:pointer}
+.wiggle{animation:wiggle .4s ease}
+@keyframes wiggle{0%{transform:rotate(0)}25%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}75%{transform:rotate(-1deg)}100%{transform:rotate(0)}}
+.pulse-green{animation:pulseGreen .6s ease}
+@keyframes pulseGreen{0%{box-shadow:0 0 0 0 rgba(40,167,69,.4)}70%{box-shadow:0 0 0 15px rgba(40,167,69,0)}100%{box-shadow:0 0 0 0 rgba(40,167,69,0)}}
+.confetti{position:fixed;pointer-events:none;z-index:9999}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+    <h1>⚛️ Component & Unit Test Coverage</h1>
+    <p>mumzworld-nextjs/apps/checkout — Storefront Quality Dashboard</p>
+    <div class="meta">
+        <span>Owner: <strong>Saifulla Attar</strong></span>
+        <span>Framework: <strong>Vitest + React Testing Library</strong></span>
+        <span>Last Updated: <strong>15 Jun 2026</strong></span>
+    </div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+    <a href="index.html">🧪 E2E Coverage</a>
+    <a href="component-tests.html" class="active">⚛️ Component & Unit Tests</a>
+    <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+        <input type="text" id="ghToken" placeholder="GitHub Token (optional)" style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;font-size:.8em;width:180px">
+        <button class="btn btn-primary" onclick="updateReport()" id="updateBtn" style="padding:8px 16px;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-size:.85em;background:#667eea;color:#fff;transition:all .2s">🔄 Update Report</button>
+    </div>
+</div>
+<div id="updateStatus" style="font-size:.8em;color:#666;text-align:center;margin-bottom:10px;min-height:20px"></div>
+
+<!-- STATS -->
+<div class="stats-grid">
+    <div class="stat-card"><div class="stat-number green">3</div><div class="stat-label">✅ Tests Written</div></div>
+    <div class="stat-card"><div class="stat-number orange">45+</div><div class="stat-label">📋 Pending</div></div>
+    <div class="stat-card"><div class="stat-number">164</div><div class="stat-label">📁 Total Files</div></div>
+    <div class="stat-card"><div class="stat-number">2</div><div class="stat-label">🧪 Unit (.test.ts)</div></div>
+    <div class="stat-card"><div class="stat-number">1</div><div class="stat-label">⚛️ Component (.test.tsx)</div></div>
+    <div class="stat-card"><div class="stat-number red">0</div><div class="stat-label">🚫 CI Gates</div></div>
+</div>
+
+<!-- Progress bars -->
+<div class="grid-2">
+    <div>
+        <p style="font-size:.85em;color:#666;margin-bottom:4px"><strong>Unit Tests:</strong> 2 / 17 files (12%)</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:12%;background:linear-gradient(90deg,#17a2b8,#28a745)">12%</div></div>
+    </div>
+    <div>
+        <p style="font-size:.85em;color:#666;margin-bottom:4px"><strong>Component Tests:</strong> 1 / 147 files (&lt;1%)</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:2%;background:linear-gradient(90deg,#667eea,#764ba2)">&lt;1%</div></div>
+    </div>
+</div>
+
+<!-- TABS -->
+<div class="section">
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showPanel('overview')">📊 Overview</button>
+        <button class="tab-btn" onclick="showPanel('unit')">🧪 Unit Tests (.test.ts)</button>
+        <button class="tab-btn" onclick="showPanel('component')">⚛️ Component Tests (.test.tsx)</button>
+        <button class="tab-btn" onclick="showPanel('plan')">📅 Plan & Timeline</button>
+        <button class="tab-btn" onclick="showPanel('why')">💡 Why This Matters</button>
+    </div>
+
+    <!-- OVERVIEW PANEL -->
+    <div class="tab-panel active" id="panel-overview">
+        <div class="grid-2">
+            <div><div class="chart-container chart-sm"><canvas id="donutChart"></canvas></div></div>
+            <div><div class="chart-container chart-sm"><canvas id="barChart"></canvas></div></div>
+        </div>
+    </div>
+
+    <!-- UNIT TESTS PANEL -->
+    <div class="tab-panel" id="panel-unit">
+        <h2 style="border:none;padding:0;margin-bottom:12px">✅ Completed Unit Tests</h2>
+        <table>
+            <thead><tr><th>Source File</th><th>Test File</th><th>Test Cases</th><th>Status</th></tr></thead>
+            <tbody>
+                <tr><td><code>src/utils/isLessThan24HoursAfterNow.ts</code></td><td><code>isLessThan24HoursAfterNow.test.ts</code></td><td>5 cases</td><td><span class="status-done">✅ Passing</span></td></tr>
+                <tr><td><code>src/utils/currency.ts</code></td><td><code>currency.test.ts</code></td><td>12 cases</td><td><span class="status-done">✅ Passing</span></td></tr>
+            </tbody>
+        </table>
+
+        <h2 style="border:none;padding:0;margin:24px 0 12px">📋 Pending Unit Tests</h2>
+        <table>
+            <thead><tr><th>Source File</th><th>Expected Test File</th><th>Severity</th><th>Difficulty</th><th>Status</th></tr></thead>
+            <tbody>
+                <tr><td><code>src/utils/getOutOfStock.ts</code></td><td><code>getOutOfStock.test.ts</code></td><td><span class="sev-dot dot-red"></span><span class="sev-high">High</span></td><td>Medium</td><td><span class="status-pending">⏳ Pending</span></td></tr>
+                <tr><td><code>src/utils/flattenCartData.ts</code></td><td><code>flattenCartData.test.ts</code></td><td><span class="sev-dot dot-red"></span><span class="sev-high">High</span></td><td>Medium</td><td><span class="status-pending">⏳ Pending</span></td></tr>
+                <tr><td><code>src/utils/validateLoyaltyReferralsCode.ts</code></td><td><code>validateLoyaltyReferralsCode.test.ts</code></td><td><span class="sev-dot dot-red"></span><span class="sev-high">High</span></td><td>Medium</td><td><span class="status-pending">⏳ Pending</span></td></tr>
+                <tr><td><code>src/utils/cn.ts</code></td><td><code>cn.test.ts</code></td><td><span class="sev-dot dot-orange"></span><span class="sev-med">Medium</span></td><td>Easy</td><td><span class="status-not-started">❌ Not Started</span></td></tr>
+                <tr><td><code>src/utils/getDeviceType.ts</code></td><td><code>getDeviceType.test.ts</code></td><td><span class="sev-dot dot-orange"></span><span class="sev-med">Medium</span></td><td>Easy</td><td><span class="status-not-started">❌ Not Started</span></td></tr>
+                <tr><td><code>src/utils/url.ts</code></td><td><code>url.test.ts</code></td><td><span class="sev-dot dot-orange"></span><span class="sev-med">Medium</span></td><td>Easy</td><td><span class="status-not-started">❌ Not Started</span></td></tr>
+                <tr><td><code>src/utils/date.ts</code></td><td><code>date.test.ts</code></td><td><span class="sev-dot dot-orange"></span><span class="sev-med">Medium</span></td><td>Easy</td><td><span class="status-not-started">❌ Not Started</span></td></tr>
+                <tr><td><code>src/utils/getStore.ts</code></td><td><code>getStore.test.ts</code></td><td><span class="sev-dot dot-green"></span><span class="sev-low">Low</span></td><td>Easy</td><td><span class="status-not-started">❌ Not Started</span></td></tr>
+                <tr><td><code>src/utils/getStoreTZ.ts</code></td><td><code>getStoreTZ.test.ts</code></td><td><span class="sev-dot dot-green"></span><span class="sev-low">Low</span></td><td>Easy</td><td><span class="status-not-started">❌ Not Started</span></td></tr>
+                <tr><td><code>src/utils/shippingMethod.ts</code></td><td><code>shippingMethod.test.ts</code></td><td><span class="sev-dot dot-green"></span><span class="sev-low">Low</span></td><td>Easy</td><td><span class="status-not-started">❌ Not Started</span></td></tr>
+                <tr><td><code>src/utils/store.ts</code></td><td><code>store.test.ts</code></td><td><span class="sev-dot dot-green"></span><span class="sev-low">Low</span></td><td>Easy</td><td><span class="status-not-started">❌ Not Started</span></td></tr>
+                <tr><td><code>src/utils/nativeMobile.ts</code></td><td><code>nativeMobile.test.ts</code></td><td><span class="sev-dot dot-green"></span><span class="sev-low">Low</span></td><td>Easy</td><td><span class="status-not-started">❌ Not Started</span></td></tr>
+                <tr><td><code>src/utils/updateCache.ts</code></td><td><code>updateCache.test.ts</code></td><td><span class="sev-dot dot-green"></span><span class="sev-low">Low</span></td><td>Medium</td><td><span class="status-not-started">❌ Not Started</span></td></tr>
+                <tr><td><code>src/utils/fetchCartEvents.ts</code></td><td><code>fetchCartEvents.test.ts</code></td><td><span class="sev-dot dot-green"></span><span class="sev-low">Low</span></td><td>Medium</td><td><span class="status-not-started">❌ Not Started</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- COMPONENT TESTS PANEL -->
+    <div class="tab-panel" id="panel-component">
+        <h2 style="border:none;padding:0;margin-bottom:12px">✅ Completed Component Tests</h2>
+        <table>
+            <thead><tr><th>Component</th><th>Test File</th><th>What It Tests</th><th>Status</th></tr></thead>
+            <tbody>
+                <tr><td><code>components/If/If.tsx</code></td><td><code>If.test.tsx</code></td><td>Conditional render (show/hide children)</td><td><span class="status-done">✅ Passing</span></td></tr>
+            </tbody>
+        </table>
+
+        <h2 style="border:none;padding:0;margin:24px 0 12px">🔴 High Priority — Revenue-Critical Components</h2>
+        <table>
+            <thead><tr><th>Component</th><th>Expected Test File</th><th>Customer Impact if Broken</th><th>Difficulty</th></tr></thead>
+            <tbody>
+                <tr><td><code>PlaceOrderButton/PlaceOrderButton.tsx</code></td><td><code>PlaceOrderButton.test.tsx</code></td><td>Customer can't place order → lost sale</td><td>Medium</td></tr>
+                <tr><td><code>Summary/Summary.tsx</code></td><td><code>Summary.test.tsx</code></td><td>Wrong total/discount shown → trust lost</td><td>Medium</td></tr>
+                <tr><td><code>WalletAndCoupon/Coupon.tsx</code></td><td><code>Coupon.test.tsx</code></td><td>Coupon apply fails → customer leaves</td><td>Medium</td></tr>
+                <tr><td><code>WalletAndCoupon/Wallet.tsx</code></td><td><code>Wallet.test.tsx</code></td><td>Wallet balance not applied → overcharged</td><td>Medium</td></tr>
+                <tr><td><code>Payments/Payments.tsx</code></td><td><code>Payments.test.tsx</code></td><td>Payment options not shown → can't pay</td><td>Medium</td></tr>
+                <tr><td><code>CashOnDelivery/CashOnDelivery.tsx</code></td><td><code>CashOnDelivery.test.tsx</code></td><td>COD unavailable → lost sale</td><td>Easy</td></tr>
+                <tr><td><code>CheckoutAlerts/CheckoutAlerts.tsx</code></td><td><code>CheckoutAlerts.test.tsx</code></td><td>Errors not shown → bad order placed</td><td>Easy</td></tr>
+                <tr><td><code>OutOfStockAlert/OutOfStockAlert.tsx</code></td><td><code>OutOfStockAlert.test.tsx</code></td><td>OOS items not flagged → failed order</td><td>Easy</td></tr>
+                <tr><td><code>ProductsList/ProductItem.tsx</code></td><td><code>ProductItem.test.tsx</code></td><td>Cart items not displayed → confusion</td><td>Medium</td></tr>
+                <tr><td><code>Header/Header.tsx</code></td><td><code>Header.test.tsx</code></td><td>Can't navigate back → stuck on page</td><td>Easy</td></tr>
+            </tbody>
+        </table>
+
+        <h2 style="border:none;padding:0;margin:24px 0 12px">🟡 Medium Priority — UX-Important Components</h2>
+        <table>
+            <thead><tr><th>Component</th><th>Expected Test File</th><th>Customer Impact</th><th>Difficulty</th></tr></thead>
+            <tbody>
+                <tr><td><code>GiftRegistryChip/GiftRegistryChip.tsx</code></td><td><code>GiftRegistryChip.test.tsx</code></td><td>Gift label missing</td><td>Easy</td></tr>
+                <tr><td><code>FreeGiftTag/FreeGiftTag.tsx</code></td><td><code>FreeGiftTag.test.tsx</code></td><td>Free gift not indicated</td><td>Easy</td></tr>
+                <tr><td><code>ShippingAddress/SelectedAddress.tsx</code></td><td><code>SelectedAddress.test.tsx</code></td><td>Wrong address shown</td><td>Medium</td></tr>
+                <tr><td><code>ShippingMethod/ShippingMethod.tsx</code></td><td><code>ShippingMethod.test.tsx</code></td><td>Delivery options broken</td><td>Medium</td></tr>
+                <tr><td><code>GiftWrap/Giftwrap.tsx</code></td><td><code>Giftwrap.test.tsx</code></td><td>Gift wrap option missing</td><td>Medium</td></tr>
+                <tr><td><code>Price/index.tsx</code></td><td><code>Price.test.tsx</code></td><td>Prices not displayed</td><td>Easy</td></tr>
+                <tr><td><code>CurrencySymbol/CurrencySymbol.tsx</code></td><td><code>CurrencySymbol.test.tsx</code></td><td>Wrong currency symbol</td><td>Easy</td></tr>
+                <tr><td><code>LowStockFlag/LowStockFlag.tsx</code></td><td><code>LowStockFlag.test.tsx</code></td><td>"Only X left" not shown</td><td>Easy</td></tr>
+                <tr><td><code>MobileHeader/MobileHeader.tsx</code></td><td><code>MobileHeader.test.tsx</code></td><td>Mobile nav broken</td><td>Easy</td></tr>
+                <tr><td><code>ExitPrompt/ExitPrompt.tsx</code></td><td><code>ExitPrompt.test.tsx</code></td><td>Accidental exit not caught</td><td>Easy</td></tr>
+            </tbody>
+        </table>
+
+        <h2 style="border:none;padding:0;margin:24px 0 12px">🟢 Low Priority — Tracking & Infrastructure</h2>
+        <table>
+            <thead><tr><th>Component</th><th>Expected Test File</th><th>Purpose</th><th>Difficulty</th></tr></thead>
+            <tbody>
+                <tr><td><code>GTM/gtm.tsx</code></td><td><code>gtm.test.tsx</code></td><td>Google Tag Manager</td><td>Easy</td></tr>
+                <tr><td><code>Clevertap/cleverTap.tsx</code></td><td><code>cleverTap.test.tsx</code></td><td>CleverTap analytics</td><td>Easy</td></tr>
+                <tr><td><code>BrazePageView/BrazePageView.tsx</code></td><td><code>BrazePageView.test.tsx</code></td><td>Braze events</td><td>Easy</td></tr>
+                <tr><td><code>LottieLoader/LottieLoader.tsx</code></td><td><code>LottieLoader.test.tsx</code></td><td>Loading animation</td><td>Easy</td></tr>
+                <tr><td><code>ImageFallback/ImageFallback.tsx</code></td><td><code>ImageFallback.test.tsx</code></td><td>Fallback image</td><td>Easy</td></tr>
+                <tr><td><code>PageLoader/PageLoader.tsx</code></td><td><code>PageLoader.test.tsx</code></td><td>Page loader</td><td>Easy</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- PLAN PANEL -->
+    <div class="tab-panel" id="panel-plan">
+        <p style="font-size:.85em;color:#666;margin-bottom:12px;background:#fff3cd;padding:8px 12px;border-radius:6px;border-left:4px solid #ffc107">
+            ✏️ <strong>Editable:</strong> Timeline dates are targets and can shift based on team availability. Update this page as priorities change.
+        </p>
+        <div class="phase-grid">
+            <div class="phase-card" style="border-top-color:#17a2b8">
+                <div class="phase-tag" style="color:#17a2b8">Phase 1 — 15 Jun – 21 Jun 2026</div>
+                <h3>Unit Tests (.test.ts)</h3>
+                <ul>
+                    <li>✅ isLessThan24HoursAfterNow</li>
+                    <li>✅ currency</li>
+                    <li>⬜ getOutOfStock</li>
+                    <li>⬜ flattenCartData</li>
+                    <li>⬜ validateLoyaltyReferralsCode</li>
+                    <li>⬜ cn, date, url, getDeviceType</li>
+                </ul>
+                <p style="font-size:.75em;color:#999;margin-top:8px">Target: 17 unit test files complete</p>
+            </div>
+            <div class="phase-card" style="border-top-color:#764ba2">
+                <div class="phase-tag" style="color:#764ba2">Phase 2 — 22 Jun – 5 Jul 2026</div>
+                <h3>Component Tests (.test.tsx)</h3>
+                <ul>
+                    <li>✅ If</li>
+                    <li>⬜ GiftRegistryChip</li>
+                    <li>⬜ FreeGiftTag</li>
+                    <li>⬜ OutOfStockAlert</li>
+                    <li>⬜ PlaceOrderButton</li>
+                    <li>⬜ Summary</li>
+                    <li>⬜ Coupon / Wallet</li>
+                    <li>⬜ CashOnDelivery</li>
+                </ul>
+                <p style="font-size:.75em;color:#999;margin-top:8px">Target: 20+ component test files</p>
+            </div>
+            <div class="phase-card" style="border-top-color:#dc3545">
+                <div class="phase-tag" style="color:#dc3545">Phase 3 — 6 Jul onwards</div>
+                <h3>CI Gate & Expand</h3>
+                <ul>
+                    <li>⬜ Coverage threshold floor</li>
+                    <li>⬜ GitHub Actions PR workflow</li>
+                    <li>⬜ Required status check</li>
+                    <li>⬜ Expand to apps/web</li>
+                    <li>⬜ Playwright integration tests</li>
+                    <li>⬜ Reduce E2E to 15-20 critical flows</li>
+                </ul>
+                <p style="font-size:.75em;color:#999;margin-top:8px">Target: Tests run as required PR check</p>
+            </div>
+        </div>
+
+        <h2 style="margin-top:24px">📈 Projected Growth (starting 15 Jun 2026)</h2>
+        <div class="chart-container"><canvas id="growthChart"></canvas></div>
+    </div>
+
+    <!-- WHY PANEL -->
+    <div class="tab-panel" id="panel-why">
+
+        <h2 style="border:none;padding:0;margin-bottom:16px">🔺 The Testing Pyramid — How It Should Be</h2>
+        <div class="grid-2">
+            <div style="text-align:center">
+                <p style="font-size:.8em;color:#28a745;font-weight:700;margin-bottom:8px">✅ IDEAL (What we're building)</p>
+                <div style="max-width:300px;margin:0 auto">
+                    <div style="background:#dc354530;border:2px solid #dc3545;padding:8px;text-align:center;border-radius:4px 4px 0 0;font-size:.8em;font-weight:600;width:40%;margin:0 auto">E2E<br><span style="font-size:.7em;color:#666">15-20 tests</span></div>
+                    <div style="background:#ffc10730;border:2px solid #ffc107;border-top:0;padding:8px;text-align:center;font-size:.8em;font-weight:600;width:65%;margin:0 auto">Integration<br><span style="font-size:.7em;color:#666">50-80 tests</span></div>
+                    <div style="background:#28a74530;border:2px solid #28a745;border-top:0;padding:12px;text-align:center;border-radius:0 0 4px 4px;font-size:.8em;font-weight:600;width:100%;margin:0 auto">Unit + Component<br><span style="font-size:.7em;color:#666">200+ tests (fast, cheap, reliable)</span></div>
+                </div>
+                <p style="font-size:.75em;color:#666;margin-top:8px">Wide base = fast, cheap tests. Narrow top = few slow E2E.</p>
+            </div>
+            <div style="text-align:center">
+                <p style="font-size:.8em;color:#dc3545;font-weight:700;margin-bottom:8px">❌ CURRENT (Inverted — Anti-pattern)</p>
+                <div style="max-width:300px;margin:0 auto">
+                    <div style="background:#dc354530;border:2px solid #dc3545;padding:12px;text-align:center;border-radius:4px 4px 0 0;font-size:.8em;font-weight:600;width:100%;margin:0 auto">E2E (Selenium + Appium)<br><span style="font-size:.7em;color:#666">200+ tests — slow, flaky, expensive</span></div>
+                    <div style="background:#ffc10730;border:2px solid #ffc107;border-top:0;padding:8px;text-align:center;font-size:.8em;font-weight:600;width:50%;margin:0 auto">Integration<br><span style="font-size:.7em;color:#666">0 tests</span></div>
+                    <div style="background:#28a74530;border:2px solid #28a745;border-top:0;padding:6px;text-align:center;border-radius:0 0 4px 4px;font-size:.8em;font-weight:600;width:25%;margin:0 auto">Unit<br><span style="font-size:.7em;color:#666">21 tests</span></div>
+                </div>
+                <p style="font-size:.75em;color:#666;margin-top:8px">Heavy top = slow feedback, high cost, flaky results.</p>
+            </div>
+        </div>
+
+        <h2 style="border:none;padding:0;margin:32px 0 16px">🎯 The Plan: Flip the Pyramid</h2>
+        <div style="background:#f0fff4;border:1px solid #c6f6d5;border-radius:8px;padding:16px;margin-bottom:20px">
+            <p style="font-size:.85em;margin-bottom:8px"><strong>Goal:</strong> Reduce E2E tests from 200+ down to <strong>15-20 critical flows</strong> on both Web and App.</p>
+            <p style="font-size:.85em;margin-bottom:8px">These 15-20 E2E tests become the <strong>last gate of quality</strong> — run only after component + integration tests pass.</p>
+            <p style="font-size:.85em;margin-bottom:0"><strong>Everything else</strong> gets covered faster, cheaper, and more reliably by component + integration tests at the PR level.</p>
+        </div>
+        <table>
+            <thead><tr><th>Layer</th><th>Current</th><th>Target</th><th>Where It Runs</th><th>Speed</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Unit + Component</strong></td><td>21 tests</td><td>200+ tests</td><td>Every PR (CI)</td><td>Seconds</td></tr>
+                <tr><td><strong>Integration (Playwright)</strong></td><td>0 tests</td><td>50-80 tests</td><td>Every PR (CI)</td><td>30-60 sec</td></tr>
+                <tr><td><strong>E2E (Selenium/Appium)</strong></td><td>200+ tests</td><td><strong>15-20 critical flows</strong></td><td>Pre-release gate only</td><td>Minutes</td></tr>
+            </tbody>
+        </table>
+
+        <h2 style="border:none;padding:0;margin:32px 0 16px">💰 Cost of a Bug — When It's Found</h2>
+        <p style="font-size:.85em;color:#666;margin-bottom:16px">The later a bug is caught, the more expensive it is to fix. Component tests catch bugs at the cheapest point.</p>
+        <div style="max-width:700px">
+            <div class="cost-row"><div class="lbl">PR (component test)</div><div class="track"><div class="fill" style="width:6%;background:#28a745">1×</div></div></div>
+            <div class="cost-row"><div class="lbl">Code Review</div><div class="track"><div class="fill" style="width:14%;background:#17a2b8">~3×</div></div></div>
+            <div class="cost-row"><div class="lbl">Manual QA / Staging</div><div class="track"><div class="fill" style="width:38%;background:#ffc107">~10×</div></div></div>
+            <div class="cost-row"><div class="lbl">Production / Customer</div><div class="track"><div class="fill" style="width:100%;background:#dc3545">30–100×</div></div></div>
+        </div>
+
+        <h2 style="border:none;padding:0;margin:32px 0 16px">🧪 Component Tests vs E2E — Why Shift Left</h2>
+        <table>
+            <thead><tr><th>Aspect</th><th>Component Test (Vitest)</th><th>E2E (Selenium/Appium)</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Speed</strong></td><td>Milliseconds</td><td>30–90 seconds per test</td></tr>
+                <tr><td><strong>Reliability</strong></td><td>100% deterministic</td><td>Flaky (network, popups, timing)</td></tr>
+                <tr><td><strong>Cost</strong></td><td>Free (runs in CI)</td><td>BrowserStack minutes ($$$)</td></tr>
+                <tr><td><strong>Feedback</strong></td><td>On the PR, instantly</td><td>After deploy to device farm</td></tr>
+                <tr><td><strong>Maintenance</strong></td><td>Low (coupled to component)</td><td>High (locators break often)</td></tr>
+                <tr><td><strong>Coverage depth</strong></td><td>Every branch/state/edge case</td><td>Usually only happy path</td></tr>
+                <tr><td><strong>Role in pyramid</strong></td><td>Base — many, fast, cheap</td><td>Top — few, slow, expensive (last gate)</td></tr>
+            </tbody>
+        </table>
+
+        <h2 style="border:none;padding:0;margin:32px 0 16px">📊 Current State — The Gap</h2>
+        <table>
+            <thead><tr><th>Area</th><th>Total Files</th><th>Tests</th><th>Coverage</th><th>Risk</th></tr></thead>
+            <tbody>
+                <tr><td><strong>checkout/src/utils</strong></td><td>17</td><td>2</td><td>12%</td><td><span class="status-pending">⚠️ Medium</span></td></tr>
+                <tr><td><strong>checkout/src/components</strong></td><td>147</td><td>1</td><td>&lt;1%</td><td><span class="status-not-started">🔴 Critical</span></td></tr>
+                <tr style="background:#f8f9fa;font-weight:600"><td>Total</td><td>164</td><td>3</td><td>~2%</td><td><span class="status-not-started">🔴 Critical</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="footer">
+    <p>Mumzworld Storefront · Component & Unit Test Coverage · <a href="https://github.com/mumzworld-tech/mumzworld-nextjs">mumzworld-nextjs</a></p>
+</div>
+
+</div>
+
+<script>
+function showPanel(id){
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    document.getElementById('panel-'+id).classList.add('active');
+    event.target.classList.add('active');
+}
+
+new Chart(document.getElementById('donutChart'),{
+    type:'doughnut',
+    data:{labels:['Done (3)','Pending Unit (15)','Pending Component (146)'],datasets:[{data:[3,15,146],backgroundColor:['#28a745','#17a2b8','#764ba2'],borderWidth:2,borderColor:'#fff',cutout:'60%'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:12}}}}
+});
+
+new Chart(document.getElementById('barChart'),{
+    type:'bar',
+    data:{labels:['Utils (unit)','Components (UI)'],datasets:[{label:'Done',data:[2,1],backgroundColor:'#28a745'},{label:'Pending',data:[15,146],backgroundColor:'#dc354580'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true}}}
+});
+
+new Chart(document.getElementById('growthChart'),{
+    type:'line',
+    data:{
+        labels:['15 Jun','22 Jun','29 Jun','6 Jul','13 Jul','20 Jul','27 Jul'],
+        datasets:[
+            {label:'Unit Tests (.test.ts)',data:[2,8,15,17,17,17,17],borderColor:'#17a2b8',backgroundColor:'rgba(23,162,184,.1)',fill:true,tension:.3,pointRadius:5,pointBackgroundColor:'#17a2b8'},
+            {label:'Component Tests (.test.tsx)',data:[1,2,6,12,20,30,40],borderColor:'#764ba2',backgroundColor:'rgba(118,75,162,.1)',fill:true,tension:.3,pointRadius:5,pointBackgroundColor:'#764ba2'},
+            {label:'E2E Tests (target reduction)',data:[200,200,180,150,100,50,20],borderColor:'#dc3545',backgroundColor:'rgba(220,53,69,.05)',fill:true,tension:.3,pointRadius:5,pointBackgroundColor:'#dc3545',borderDash:[5,5]}
+        ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true,title:{display:true,text:'Number of Tests'}},x:{title:{display:true,text:'Week Starting'}}}}
+});
+
+// Add click animations to stat cards
+document.querySelectorAll('.stat-card').forEach(card => {
+    card.addEventListener('click', () => {
+        card.classList.remove('bounce','pulse-green');
+        void card.offsetWidth; // force reflow
+        card.classList.add('bounce','pulse-green');
+        setTimeout(() => card.classList.remove('bounce','pulse-green'), 600);
+    });
+});
+
+// Add wiggle to charts on click
+document.querySelectorAll('.chart-container canvas').forEach(canvas => {
+    canvas.addEventListener('click', () => {
+        canvas.parentElement.classList.remove('wiggle');
+        void canvas.parentElement.offsetWidth;
+        canvas.parentElement.classList.add('wiggle');
+        setTimeout(() => canvas.parentElement.classList.remove('wiggle'), 400);
+    });
+});
+
+// Mini confetti burst on stat card click
+function miniConfetti(e) {
+    const colors = ['#667eea','#764ba2','#28a745','#ffc107','#dc3545','#17a2b8'];
+    for (let i = 0; i < 12; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'confetti';
+        dot.style.cssText = `left:${e.clientX}px;top:${e.clientY}px;width:8px;height:8px;border-radius:50%;background:${colors[i%colors.length]};position:fixed;`;
+        document.body.appendChild(dot);
+        const angle = (i / 12) * Math.PI * 2;
+        const dist = 40 + Math.random() * 40;
+        dot.animate([
+            {transform:'translate(0,0) scale(1)',opacity:1},
+            {transform:`translate(${Math.cos(angle)*dist}px,${Math.sin(angle)*dist}px) scale(0)`,opacity:0}
+        ], {duration:600,easing:'ease-out'});
+        setTimeout(() => dot.remove(), 600);
+    }
+}
+document.querySelectorAll('.stat-card').forEach(card => card.addEventListener('click', miniConfetti));
+
+// Update Report — fetch test files from test/* branches
+async function updateReport() {
+    const btn = document.getElementById('updateBtn');
+    const status = document.getElementById('updateStatus');
+    const token = document.getElementById('ghToken').value.trim();
+    btn.disabled = true;
+    btn.textContent = '⏳ Fetching...';
+    status.textContent = '';
+    status.style.color = '#666';
+
+    // Try multiple possible repo names
+    const repos = ['mumzworld-tech/mumzworld-nextjs', 'mumzworld/mumzworld-nextjs'];
+    const headers = token ? {'Authorization': `token ${token}`} : {};
+    let apiBase = '';
+    let branchRes;
+
+    for (const repo of repos) {
+        const url = `https://api.github.com/repos/${repo}/branches?per_page=100`;
+        branchRes = await fetch(url, {headers}).catch(() => null);
+        if (branchRes && branchRes.ok) {
+            apiBase = `https://api.github.com/repos/${repo}`;
+            break;
+        }
+    }
+
+    if (!apiBase || !branchRes || !branchRes.ok) {
+        status.textContent = '❌ Cannot access repo. Paste a GitHub token with repo access above.';
+        status.style.color = '#dc3545';
+        btn.textContent = '🔄 Update Report';
+        btn.disabled = false;
+        setTimeout(() => { status.textContent = ''; }, 8000);
+        return;
+    }
+
+    try {
+        const branches = await branchRes.json();
+        const testBranches = branches.filter(b => b.name.startsWith('test/'));
+
+        if (testBranches.length === 0) {
+            status.textContent = '⚠️ No test/* branches found in the repo';
+            status.style.color = '#856404';
+            btn.textContent = '🔄 Update Report';
+            btn.disabled = false;
+            setTimeout(() => { status.textContent = ''; }, 5000);
+            return;
+        }
+
+        let unitTests = [];
+        let componentTests = [];
+
+        for (const branch of testBranches) {
+            const treeRes = await fetch(`${apiBase}/git/trees/${branch.commit.sha}?recursive=1`, {headers});
+            if (!treeRes.ok) continue;
+            const tree = await treeRes.json();
+
+            tree.tree.forEach(file => {
+                if (file.path.endsWith('.test.ts') && !file.path.includes('node_modules')) {
+                    unitTests.push({ file: file.path, branch: branch.name });
+                }
+                if (file.path.endsWith('.test.tsx') && !file.path.includes('node_modules')) {
+                    componentTests.push({ file: file.path, branch: branch.name });
+                }
+            });
+        }
+
+        const uniqueUnit = [...new Map(unitTests.map(t => [t.file, t])).values()];
+        const uniqueComponent = [...new Map(componentTests.map(t => [t.file, t])).values()];
+
+        let html = `<div style="margin-top:16px;padding:16px;background:#fff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.1);animation:slideUp .4s ease">`;
+        html += `<h3 style="margin-bottom:12px;color:#333">📡 Live from test/* branches (${testBranches.length} found)</h3>`;
+        html += `<p style="font-size:.85em;color:#666;margin-bottom:12px">Branches: ${testBranches.map(b => '<code>' + b.name + '</code>').join(', ')}</p>`;
+
+        html += `<h4 style="margin:12px 0 8px;color:#17a2b8">🧪 Unit Tests — ${uniqueUnit.length} files</h4>`;
+        if (uniqueUnit.length) {
+            html += `<table><thead><tr><th>File</th><th>Branch</th></tr></thead><tbody>`;
+            uniqueUnit.forEach(t => { html += `<tr><td><code>${t.file}</code></td><td><span class="status-done">${t.branch}</span></td></tr>`; });
+            html += `</tbody></table>`;
+        } else { html += `<p style="font-size:.85em;color:#999">No .test.ts files found</p>`; }
+
+        html += `<h4 style="margin:16px 0 8px;color:#764ba2">⚛️ Component Tests — ${uniqueComponent.length} files</h4>`;
+        if (uniqueComponent.length) {
+            html += `<table><thead><tr><th>File</th><th>Branch</th></tr></thead><tbody>`;
+            uniqueComponent.forEach(t => { html += `<tr><td><code>${t.file}</code></td><td><span class="status-done">${t.branch}</span></td></tr>`; });
+            html += `</tbody></table>`;
+        } else { html += `<p style="font-size:.85em;color:#999">No .test.tsx files found</p>`; }
+
+        html += `<p style="font-size:.75em;color:#999;margin-top:12px">Last fetched: ${new Date().toLocaleString()}</p></div>`;
+
+        let existing = document.getElementById('liveResults');
+        if (existing) existing.remove();
+        const div = document.createElement('div');
+        div.id = 'liveResults';
+        div.innerHTML = html;
+        document.querySelector('.stats-grid').after(div);
+
+        // Update stat cards with animation
+        const statCards = document.querySelectorAll('.stat-card .stat-number');
+        const totalDone = uniqueUnit.length + uniqueComponent.length;
+        statCards[0].textContent = totalDone;
+        statCards[3].textContent = uniqueUnit.length;
+        statCards[4].textContent = uniqueComponent.length;
+        document.querySelectorAll('.stat-card').forEach(c => { c.classList.add('bounce'); setTimeout(() => c.classList.remove('bounce'), 500); });
+
+        status.textContent = `✅ Found ${totalDone} test files across ${testBranches.length} branches`;
+        status.style.color = '#28a745';
+        setTimeout(() => { status.textContent = ''; }, 6000);
+    } catch (err) {
+        status.textContent = `❌ Error: ${err.message}`;
+        status.style.color = '#dc3545';
+        setTimeout(() => { status.textContent = ''; }, 8000);
+        console.error(err);
+    }
+
+    btn.textContent = '🔄 Update Report';
+    btn.disabled = false;
+}
+</script>
+</body>
+</html>
