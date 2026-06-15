@@ -337,45 +337,102 @@ code{background:#e8eaf6;padding:2px 6px;border-radius:3px;font-size:.8em;font-fa
     <!-- WHY PANEL -->
     <div class="tab-panel" id="panel-why">
 
-        <h2 style="border:none;padding:0;margin-bottom:16px">🔺 The Testing Pyramid — How It Should Be</h2>
+        <!-- The Problem -->
+        <div style="background:#fff5f5;border:1px solid #fc8181;border-radius:8px;padding:16px;margin-bottom:20px;border-left:4px solid #dc3545">
+            <p style="font-size:.9em;margin:0"><strong>The problem in one line:</strong> 83% of our automated tests are heavy, slow, device-dependent E2E, while the storefront's logic and components are almost entirely untested. We pay for breadth at the most expensive, flakiest layer — and still can't confidently say "nothing is broken" before a release.</p>
+        </div>
+
+        <!-- Headline KPIs -->
+        <div class="stats-grid" style="margin-bottom:20px">
+            <div class="stat-card"><div class="stat-number red">100</div><div class="stat-label">Heavy E2E tests today</div><div style="font-size:.7em;color:#666;margin-top:4px">67 mWeb + 33 App</div></div>
+            <div class="stat-card"><div class="stat-number">21</div><div class="stat-label">Component/Unit tests</div><div style="font-size:.7em;color:#666;margin-top:4px">Vitest + RTL</div></div>
+            <div class="stat-card"><div class="stat-number red">0</div><div class="stat-label">Integration tests</div><div style="font-size:.7em;color:#666;margin-top:4px">The missing middle layer</div></div>
+            <div class="stat-card"><div class="stat-number red">~1%</div><div class="stat-label">Storefront test coverage</div><div style="font-size:.7em;color:#666;margin-top:4px">21 tests / 1,892 modules</div></div>
+        </div>
+
+        <!-- Testing Pyramid -->
+        <h2 style="border:none;padding:0;margin-bottom:16px">🔺 The Testing Pyramid — Now vs Target</h2>
         <div class="grid-2">
             <div style="text-align:center">
-                <p style="font-size:.8em;color:#28a745;font-weight:700;margin-bottom:8px">✅ IDEAL (What we're building)</p>
-                <div style="max-width:300px;margin:0 auto">
-                    <div style="background:#dc354530;border:2px solid #dc3545;padding:8px;text-align:center;border-radius:4px 4px 0 0;font-size:.8em;font-weight:600;width:40%;margin:0 auto">E2E<br><span style="font-size:.7em;color:#666">15-20 tests</span></div>
-                    <div style="background:#ffc10730;border:2px solid #ffc107;border-top:0;padding:8px;text-align:center;font-size:.8em;font-weight:600;width:65%;margin:0 auto">Integration<br><span style="font-size:.7em;color:#666">50-80 tests</span></div>
-                    <div style="background:#28a74530;border:2px solid #28a745;border-top:0;padding:12px;text-align:center;border-radius:0 0 4px 4px;font-size:.8em;font-weight:600;width:100%;margin:0 auto">Unit + Component<br><span style="font-size:.7em;color:#666">200+ tests (fast, cheap, reliable)</span></div>
+                <p style="font-size:.8em;color:#dc3545;font-weight:700;margin-bottom:8px">❌ TODAY — Inverted (Anti-pattern)</p>
+                <div style="max-width:320px;margin:0 auto">
+                    <div style="background:#dc354530;border:2px solid #dc3545;padding:10px;text-align:center;border-radius:4px 4px 0 0;font-size:.8em;font-weight:600;width:100%;margin:0 auto">E2E (Selenium + Appium)<br><span style="font-size:.7em;color:#666">100 tests · 83% — slow, flaky, $$$</span></div>
+                    <div style="background:#ffc10730;border:2px solid #ffc107;border-top:0;padding:6px;text-align:center;font-size:.8em;font-weight:600;width:40%;margin:0 auto">Integration<br><span style="font-size:.7em;color:#666">0</span></div>
+                    <div style="background:#28a74530;border:2px solid #28a745;border-top:0;padding:6px;text-align:center;border-radius:0 0 4px 4px;font-size:.8em;font-weight:600;width:20%;margin:0 auto">Unit<br><span style="font-size:.7em;color:#666">21</span></div>
                 </div>
-                <p style="font-size:.75em;color:#666;margin-top:8px">Wide base = fast, cheap tests. Narrow top = few slow E2E.</p>
+                <p style="font-size:.7em;color:#666;margin-top:6px">Top-heavy: most coverage at slowest, most fragile layer</p>
             </div>
             <div style="text-align:center">
-                <p style="font-size:.8em;color:#dc3545;font-weight:700;margin-bottom:8px">❌ CURRENT (Inverted — Anti-pattern)</p>
-                <div style="max-width:300px;margin:0 auto">
-                    <div style="background:#dc354530;border:2px solid #dc3545;padding:12px;text-align:center;border-radius:4px 4px 0 0;font-size:.8em;font-weight:600;width:100%;margin:0 auto">E2E (Selenium + Appium)<br><span style="font-size:.7em;color:#666">200+ tests — slow, flaky, expensive</span></div>
-                    <div style="background:#ffc10730;border:2px solid #ffc107;border-top:0;padding:8px;text-align:center;font-size:.8em;font-weight:600;width:50%;margin:0 auto">Integration<br><span style="font-size:.7em;color:#666">0 tests</span></div>
-                    <div style="background:#28a74530;border:2px solid #28a745;border-top:0;padding:6px;text-align:center;border-radius:0 0 4px 4px;font-size:.8em;font-weight:600;width:25%;margin:0 auto">Unit<br><span style="font-size:.7em;color:#666">21 tests</span></div>
+                <p style="font-size:.8em;color:#28a745;font-weight:700;margin-bottom:8px">✅ TARGET — Healthy (~250 tests)</p>
+                <div style="max-width:320px;margin:0 auto">
+                    <div style="background:#dc354530;border:2px solid #dc3545;padding:6px;text-align:center;border-radius:4px 4px 0 0;font-size:.8em;font-weight:600;width:30%;margin:0 auto">E2E<br><span style="font-size:.7em;color:#666">~25</span></div>
+                    <div style="background:#ffc10730;border:2px solid #ffc107;border-top:0;padding:8px;text-align:center;font-size:.8em;font-weight:600;width:60%;margin:0 auto">Integration (Playwright)<br><span style="font-size:.7em;color:#666">~45</span></div>
+                    <div style="background:#28a74530;border:2px solid #28a745;border-top:0;padding:12px;text-align:center;border-radius:0 0 4px 4px;font-size:.8em;font-weight:600;width:100%;margin:0 auto">Unit + Component (Vitest)<br><span style="font-size:.7em;color:#666">~180 (fast, cheap, reliable)</span></div>
                 </div>
-                <p style="font-size:.75em;color:#666;margin-top:8px">Heavy top = slow feedback, high cost, flaky results.</p>
+                <p style="font-size:.7em;color:#666;margin-top:6px">72% of tests at fast, deterministic layers. E2E = golden paths only.</p>
             </div>
         </div>
 
-        <h2 style="border:none;padding:0;margin:32px 0 16px">🎯 The Plan: Flip the Pyramid</h2>
+        <!-- How E2E gets rebalanced -->
+        <h2 style="border:none;padding:0;margin:28px 0 12px">📦 How the 67 mWeb E2E Cases Get Re-balanced</h2>
+        <table>
+            <thead><tr><th>Current E2E Group</th><th>Cases</th><th>Best Home</th><th>Why</th></tr></thead>
+            <tbody>
+                <tr><td>Checkout — payment permutations (CC/COD/Tabby/Tamara × coupon)</td><td>35</td><td><span class="status-pending">Integration</span> + <span class="status-done">Component</span></td><td>Logic & rendering. Mock GraphQL; keep 1 golden path per method as E2E.</td></tr>
+                <tr><td>Cart — add/remove/qty/coupon/totals</td><td>24</td><td><span class="status-done">Component</span></td><td>Cart state is API-testable; UI math is component-testable in ms.</td></tr>
+                <tr><td>User — register / sign-in / address CRUD</td><td>8</td><td><span class="status-pending">Integration</span></td><td>Form + validation + routing; deterministic with mocked auth.</td></tr>
+                <tr style="background:#f8f9fa;font-weight:600"><td>Keep as mWeb E2E (golden paths)</td><td>~10</td><td><span class="status-not-started">E2E</span></td><td>One checkout per method, login, search→PDP→cart. Real cross-system confidence.</td></tr>
+            </tbody>
+        </table>
+
+        <!-- The Plan -->
+        <h2 style="border:none;padding:0;margin:28px 0 12px">🎯 The Plan: Flip the Pyramid</h2>
         <div style="background:#f0fff4;border:1px solid #c6f6d5;border-radius:8px;padding:16px;margin-bottom:20px">
-            <p style="font-size:.85em;margin-bottom:8px"><strong>Goal:</strong> Reduce E2E tests from 200+ down to <strong>15-20 critical flows</strong> on both Web and App.</p>
-            <p style="font-size:.85em;margin-bottom:8px">These 15-20 E2E tests become the <strong>last gate of quality</strong> — run only after component + integration tests pass.</p>
-            <p style="font-size:.85em;margin-bottom:0"><strong>Everything else</strong> gets covered faster, cheaper, and more reliably by component + integration tests at the PR level.</p>
+            <p style="font-size:.85em;margin-bottom:8px"><strong>Goal:</strong> Reduce E2E from 100 → <strong>15-20 critical flows</strong> (Web + App combined).</p>
+            <p style="font-size:.85em;margin-bottom:8px">These 15-20 E2E tests become the <strong>last gate of quality</strong> — run only pre-release, after component + integration tests pass on the PR.</p>
+            <p style="font-size:.85em;margin-bottom:0"><strong>Everything else</strong> gets covered faster, cheaper, and more reliably by Vitest + Playwright at the PR level.</p>
         </div>
         <table>
             <thead><tr><th>Layer</th><th>Current</th><th>Target</th><th>Where It Runs</th><th>Speed</th></tr></thead>
             <tbody>
-                <tr><td><strong>Unit + Component</strong></td><td>21 tests</td><td>200+ tests</td><td>Every PR (CI)</td><td>Seconds</td></tr>
-                <tr><td><strong>Integration (Playwright)</strong></td><td>0 tests</td><td>50-80 tests</td><td>Every PR (CI)</td><td>30-60 sec</td></tr>
-                <tr><td><strong>E2E (Selenium/Appium)</strong></td><td>200+ tests</td><td><strong>15-20 critical flows</strong></td><td>Pre-release gate only</td><td>Minutes</td></tr>
+                <tr><td><strong>Unit + Component</strong></td><td>21 tests</td><td>~180 tests</td><td>Every PR (CI)</td><td>Milliseconds</td></tr>
+                <tr><td><strong>Integration (Playwright)</strong></td><td>0 tests</td><td>~45 tests</td><td>Every PR (CI)</td><td>10-20 sec headless</td></tr>
+                <tr><td><strong>E2E (Selenium/Appium)</strong></td><td>100 tests</td><td><strong>15-20 golden paths</strong></td><td>Pre-release gate only</td><td>~30 min BrowserStack</td></tr>
             </tbody>
         </table>
 
-        <h2 style="border:none;padding:0;margin:32px 0 16px">💰 Cost of a Bug — When It's Found</h2>
-        <p style="font-size:.85em;color:#666;margin-bottom:16px">The later a bug is caught, the more expensive it is to fix. Component tests catch bugs at the cheapest point.</p>
+        <!-- What it buys -->
+        <h2 style="border:none;padding:0;margin:28px 0 12px">💎 What This Buys Us</h2>
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-number green">85%↓</div><div class="stat-label">BrowserStack minutes</div><div style="font-size:.7em;color:#666;margin-top:4px">201 min → ~30 min per run</div></div>
+            <div class="stat-card"><div class="stat-number green">100%</div><div class="stat-label">Deterministic</div><div style="font-size:.7em;color:#666;margin-top:4px">No "phone in use", popups, A/B flakiness</div></div>
+            <div class="stat-card"><div class="stat-number green">min→sec</div><div class="stat-label">Feedback speed</div><div style="font-size:.7em;color:#666;margin-top:4px">Component: ms · Integration: ~20s</div></div>
+        </div>
+
+        <!-- Release Gate -->
+        <h2 style="border:none;padding:0;margin:28px 0 12px">🚦 Release Gate — "Nothing Broken Before Ship"</h2>
+        <div class="grid-2">
+            <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:16px;border-top:3px solid #28a745">
+                <p style="font-weight:700;margin-bottom:8px">On Every PR (fast, blocking)</p>
+                <ul style="font-size:.85em;padding-left:16px;color:#555;line-height:1.8">
+                    <li>Vitest component/unit + coverage threshold (ratchet up)</li>
+                    <li>Changed-area rule: edited component → test in same PR</li>
+                    <li>Playwright integration for touched flow (mocked GraphQL)</li>
+                    <li>Lint + type-check (already via Husky)</li>
+                </ul>
+            </div>
+            <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:16px;border-top:3px solid #dc3545">
+                <p style="font-weight:700;margin-bottom:8px">Pre-Release (nightly / pre-deploy)</p>
+                <ul style="font-size:.85em;padding-left:16px;color:#555;line-height:1.8">
+                    <li>Full Playwright suite (Chromium + WebKit)</li>
+                    <li>~10 mWeb + critical app E2E golden paths on BrowserStack</li>
+                    <li>Coverage report published; release blocked if gate red</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Cost of a Bug -->
+        <h2 style="border:none;padding:0;margin:28px 0 12px">💰 Cost of a Bug — When It's Found</h2>
         <div style="max-width:700px">
             <div class="cost-row"><div class="lbl">PR (component test)</div><div class="track"><div class="fill" style="width:6%;background:#28a745">1×</div></div></div>
             <div class="cost-row"><div class="lbl">Code Review</div><div class="track"><div class="fill" style="width:14%;background:#17a2b8">~3×</div></div></div>
@@ -383,7 +440,22 @@ code{background:#e8eaf6;padding:2px 6px;border-radius:3px;font-size:.8em;font-fa
             <div class="cost-row"><div class="lbl">Production / Customer</div><div class="track"><div class="fill" style="width:100%;background:#dc3545">30–100×</div></div></div>
         </div>
 
-        <h2 style="border:none;padding:0;margin:32px 0 16px">🧪 Component Tests vs E2E — Why Shift Left</h2>
+        <!-- Coverage by area full -->
+        <h2 style="border:none;padding:0;margin:28px 0 12px">📊 Full Storefront Coverage by Area</h2>
+        <table>
+            <thead><tr><th>Area</th><th>Source Modules</th><th>Components</th><th>Test Files</th><th>Coverage</th><th>Status</th></tr></thead>
+            <tbody>
+                <tr><td><strong>apps/web</strong></td><td>1,344</td><td>624</td><td>16</td><td>~1%</td><td><span class="status-not-started">🔴 Critical</span></td></tr>
+                <tr><td><strong>apps/checkout</strong></td><td>396</td><td>178</td><td>3</td><td>&lt;1%</td><td><span class="status-not-started">🔴 Critical</span></td></tr>
+                <tr><td><strong>packages/ui</strong> (design system)</td><td>45</td><td>38</td><td>0</td><td>0%</td><td><span class="status-not-started">🔴 None</span></td></tr>
+                <tr><td>packages/hooks</td><td>17</td><td>4</td><td>0</td><td>0%</td><td><span class="status-not-started">🔴 None</span></td></tr>
+                <tr><td>packages/tracking</td><td>60</td><td>0</td><td>1</td><td>~2%</td><td><span class="status-pending">⚠️ Low</span></td></tr>
+                <tr style="background:#f8f9fa;font-weight:600"><td>Total</td><td>1,892</td><td>~846</td><td>21</td><td>~1.1%</td><td><span class="status-not-started">🔴 Critical</span></td></tr>
+            </tbody>
+        </table>
+
+        <!-- Comparison table -->
+        <h2 style="border:none;padding:0;margin:28px 0 12px">⚡ Component Tests vs E2E — Side by Side</h2>
         <table>
             <thead><tr><th>Aspect</th><th>Component Test (Vitest)</th><th>E2E (Selenium/Appium)</th></tr></thead>
             <tbody>
@@ -393,19 +465,10 @@ code{background:#e8eaf6;padding:2px 6px;border-radius:3px;font-size:.8em;font-fa
                 <tr><td><strong>Feedback</strong></td><td>On the PR, instantly</td><td>After deploy to device farm</td></tr>
                 <tr><td><strong>Maintenance</strong></td><td>Low (coupled to component)</td><td>High (locators break often)</td></tr>
                 <tr><td><strong>Coverage depth</strong></td><td>Every branch/state/edge case</td><td>Usually only happy path</td></tr>
-                <tr><td><strong>Role in pyramid</strong></td><td>Base — many, fast, cheap</td><td>Top — few, slow, expensive (last gate)</td></tr>
+                <tr><td><strong>Role in pyramid</strong></td><td>Base — many, fast, cheap</td><td>Top — few, slow, last gate only</td></tr>
             </tbody>
         </table>
 
-        <h2 style="border:none;padding:0;margin:32px 0 16px">📊 Current State — The Gap</h2>
-        <table>
-            <thead><tr><th>Area</th><th>Total Files</th><th>Tests</th><th>Coverage</th><th>Risk</th></tr></thead>
-            <tbody>
-                <tr><td><strong>checkout/src/utils</strong></td><td>17</td><td>2</td><td>12%</td><td><span class="status-pending">⚠️ Medium</span></td></tr>
-                <tr><td><strong>checkout/src/components</strong></td><td>147</td><td>1</td><td>&lt;1%</td><td><span class="status-not-started">🔴 Critical</span></td></tr>
-                <tr style="background:#f8f9fa;font-weight:600"><td>Total</td><td>164</td><td>3</td><td>~2%</td><td><span class="status-not-started">🔴 Critical</span></td></tr>
-            </tbody>
-        </table>
     </div>
 </div>
 
