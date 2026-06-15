@@ -125,6 +125,7 @@ code{background:#e8eaf6;padding:2px 6px;border-radius:3px;font-size:.8em;font-fa
 <div style="margin-bottom:20px">
     <div class="section" style="margin-top:0;background:linear-gradient(135deg,#e8eaf6,#c5cae9);border:1px solid #667eea">
         <h2 style="border-bottom-color:#667eea;font-size:1em;margin-bottom:10px">⏱️ Time Saved Calculator</h2>
+        <p style="font-size:.8em;color:#555;margin-bottom:12px">Based on today's progress: 2 unit test files (17 cases) + 1 component test file (3 cases) = <strong>20 test cases</strong></p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:.85em">
             <div>
                 <label style="color:#666;font-size:.8em">Test files written:</label>
@@ -132,16 +133,17 @@ code{background:#e8eaf6;padding:2px 6px;border-radius:3px;font-size:.8em;font-fa
             </div>
             <div>
                 <label style="color:#666;font-size:.8em">Avg test cases per file:</label>
-                <input type="number" id="calcCases" value="6" min="1" style="width:100%;padding:6px;border:1px solid #667eea;border-radius:4px;margin-top:2px" oninput="calcTimeSaved()">
+                <input type="number" id="calcCases" value="7" min="1" style="width:100%;padding:6px;border:1px solid #667eea;border-radius:4px;margin-top:2px" oninput="calcTimeSaved()">
             </div>
         </div>
         <div style="margin-top:16px;padding:12px;background:#fff;border-radius:8px;text-align:center">
             <div style="display:flex;justify-content:space-around">
-                <div><div style="font-size:1.8em;font-weight:700;color:#667eea" id="calcTime">0.3s</div><div style="font-size:.75em;color:#666">Component test time</div></div>
+                <div><div style="font-size:1.8em;font-weight:700;color:#667eea" id="calcTime">0.4s</div><div style="font-size:.75em;color:#666">Component test time</div></div>
                 <div style="font-size:1.5em;color:#999;align-self:center">vs</div>
-                <div><div style="font-size:1.8em;font-weight:700;color:#dc3545" id="calcManual">27min</div><div style="font-size:.75em;color:#666">Manual QA equivalent</div></div>
+                <div><div style="font-size:1.8em;font-weight:700;color:#dc3545" id="calcManual">31min</div><div style="font-size:.75em;color:#666">Manual QA equivalent</div></div>
             </div>
-            <div style="margin-top:12px;font-size:.85em;color:#333"><strong id="calcWeekly">~4.5 hours</strong> saved per week across all PRs</div>
+            <div style="margin-top:12px;font-size:.85em;color:#333"><strong id="calcWeekly">~13 hours</strong> saved per week across all PRs</div>
+            <p style="font-size:.7em;color:#999;margin-top:6px">Assumes 5 PRs/day × 5 days. Each test case takes ~90s to verify manually.</p>
         </div>
     </div>
 </div>
