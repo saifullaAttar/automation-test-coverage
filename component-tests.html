@@ -446,6 +446,14 @@ function showPanel(id){
     document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
     document.getElementById('panel-'+id).classList.add('active');
     event.target.classList.add('active');
+
+    // Show lock for protected tabs if not unlocked
+    if((id==='unit' || id==='component') && sessionStorage.getItem('tabs_unlocked')!=='1'){
+        document.getElementById('unitLocked').style.display = (id==='unit') ? 'block' : 'none';
+        document.getElementById('unitContent').style.display = 'none';
+        document.getElementById('compLocked').style.display = (id==='component') ? 'block' : 'none';
+        document.getElementById('compContent').style.display = 'none';
+    }
 }
 
 // Password protection for unit/component tabs
