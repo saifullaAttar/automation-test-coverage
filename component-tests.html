@@ -168,8 +168,17 @@ code{background:#e8eaf6;padding:2px 6px;border-radius:3px;font-size:.8em;font-fa
         </div>
     </div>
 
-    <!-- UNIT TESTS PANEL -->
-    <div class="tab-panel" id="panel-unit">
+    <!-- UNIT TESTS PANEL (protected) -->
+    <div class="tab-panel" id="panel-unit" style="display:none">
+        <div id="unitLocked" style="text-align:center;padding:40px 20px">
+            <div style="font-size:3em;margin-bottom:12px">🔒</div>
+            <h3 style="margin-bottom:8px">This section is protected</h3>
+            <p style="font-size:.85em;color:#666;margin-bottom:16px">Enter password to view test details</p>
+            <input type="password" id="tabPassword" placeholder="Enter password" style="padding:8px 12px;border:1px solid #ddd;border-radius:6px;font-size:.9em;width:200px" onkeydown="if(event.key==='Enter')unlockTabs()">
+            <button onclick="unlockTabs()" style="padding:8px 16px;border:none;border-radius:6px;background:#667eea;color:#fff;font-weight:600;cursor:pointer;margin-left:8px">Unlock</button>
+            <p id="tabAuthError" style="color:#dc3545;font-size:.8em;margin-top:8px;display:none">❌ Incorrect password</p>
+        </div>
+        <div id="unitContent" style="display:none">
         <h2 style="border:none;padding:0;margin-bottom:12px">✅ Completed Unit Tests</h2>
         <table>
             <thead><tr><th>Source File</th><th>Test File</th><th>Test Cases</th><th>Status</th></tr></thead>
@@ -200,9 +209,20 @@ code{background:#e8eaf6;padding:2px 6px;border-radius:3px;font-size:.8em;font-fa
             </tbody>
         </table>
     </div>
+    </div><!-- close unitContent -->
+    </div><!-- close panel-unit -->
 
-    <!-- COMPONENT TESTS PANEL -->
-    <div class="tab-panel" id="panel-component">
+    <!-- COMPONENT TESTS PANEL (protected) -->
+    <div class="tab-panel" id="panel-component" style="display:none">
+        <div id="compLocked" style="text-align:center;padding:40px 20px">
+            <div style="font-size:3em;margin-bottom:12px">🔒</div>
+            <h3 style="margin-bottom:8px">This section is protected</h3>
+            <p style="font-size:.85em;color:#666;margin-bottom:16px">Enter password to view test details</p>
+            <input type="password" id="tabPassword2" placeholder="Enter password" style="padding:8px 12px;border:1px solid #ddd;border-radius:6px;font-size:.9em;width:200px" onkeydown="if(event.key==='Enter')unlockTabs()">
+            <button onclick="unlockTabs()" style="padding:8px 16px;border:none;border-radius:6px;background:#667eea;color:#fff;font-weight:600;cursor:pointer;margin-left:8px">Unlock</button>
+            <p id="tabAuthError2" style="color:#dc3545;font-size:.8em;margin-top:8px;display:none">❌ Incorrect password</p>
+        </div>
+        <div id="compContent" style="display:none">
         <h2 style="border:none;padding:0;margin-bottom:12px">✅ Completed Component Tests</h2>
         <table>
             <thead><tr><th>Component</th><th>Test File</th><th>What It Tests</th><th>Status</th></tr></thead>
@@ -258,6 +278,8 @@ code{background:#e8eaf6;padding:2px 6px;border-radius:3px;font-size:.8em;font-fa
             </tbody>
         </table>
     </div>
+    </div><!-- close compContent -->
+    </div><!-- close panel-component -->
 
     <!-- PLAN PANEL -->
     <div class="tab-panel" id="panel-plan">
@@ -424,6 +446,30 @@ function showPanel(id){
     document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
     document.getElementById('panel-'+id).classList.add('active');
     event.target.classList.add('active');
+}
+
+// Password protection for unit/component tabs
+function unlockTabs(){
+    const pwd = document.getElementById('tabPassword')?.value || document.getElementById('tabPassword2')?.value || '';
+    if(pwd === 'Mumz@SDET2026'){
+        document.getElementById('unitLocked').style.display='none';
+        document.getElementById('unitContent').style.display='block';
+        document.getElementById('compLocked').style.display='none';
+        document.getElementById('compContent').style.display='block';
+        sessionStorage.setItem('tabs_unlocked','1');
+    } else {
+        const err1 = document.getElementById('tabAuthError');
+        const err2 = document.getElementById('tabAuthError2');
+        if(err1) err1.style.display='block';
+        if(err2) err2.style.display='block';
+    }
+}
+// Auto-unlock if already authenticated this session
+if(sessionStorage.getItem('tabs_unlocked')==='1'){
+    document.getElementById('unitLocked').style.display='none';
+    document.getElementById('unitContent').style.display='block';
+    document.getElementById('compLocked').style.display='none';
+    document.getElementById('compContent').style.display='block';
 }
 
 // Time Saved Calculator — auto-updates based on test count
