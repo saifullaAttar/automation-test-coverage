@@ -415,7 +415,7 @@ function renderTable() {
       <option value="NO" ${autoVal==='NO'?'selected':''}>NO</option>
     </select>`;
     return `<tr>
-      <td><a href="https://mumzworld.testmo.net/repositories/9?group_id=73711&case_id=${t.case_id}" target="_blank" style="color:#667eea;font-weight:600">C-${t.case_id}</a></td>
+      <td><a href="https://mumzworld.testmo.net/runs/view/2154?test_id=${t.test_id}" target="_blank" style="color:#667eea;font-weight:600">C-${t.case_id}</a></td>
       <td><strong>${t.name}</strong>${t.summary ? '<br><small style="color:#888">' + t.summary.substring(0,100) + '</small>' : ''}</td>
       <td>${t.folder}</td>
       <td class="${prioClass}">${t.priority}</td>
