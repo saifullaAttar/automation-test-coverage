@@ -233,12 +233,13 @@ tr:hover{background:#f8f9ff;transition:background .2s}
       <thead>
         <tr>
           <th style="width:80px">Case ID</th>
-          <th style="width:25%">Test Name</th>
+          <th style="width:23%">Test Name</th>
           <th>Folder</th>
           <th>Priority</th>
-          <th style="width:30%">Mapped Automated Tests</th>
+          <th style="width:80px">Automated</th>
+          <th style="width:28%">Mapped Automated Tests</th>
           <th style="width:120px">Coverage</th>
-          <th style="width:15%">Notes</th>
+          <th style="width:13%">Notes</th>
           <th style="width:40px"></th>
         </tr>
       </thead>
@@ -406,11 +407,19 @@ function renderTable() {
       `<span class="test-tag">${at}<span class="remove-tag" onclick="removeTest('${t.case_id}','${at}')">×</span></span>`
     ).join('');
     
+    const autoVal = (t.automated || '').toUpperCase();
+    const autoBg = autoVal === 'YES' ? '#d4edda' : autoVal === 'NO' ? '#f8d7da' : '#ffffff';
+    const autoColor = autoVal === 'YES' ? '#155724' : autoVal === 'NO' ? '#721c24' : '#333';
+    const autoDropdown = `<select class="automated-select" onchange="updateWebAutomated('${t.case_id}', this.value)" style="padding:4px 8px;border-radius:12px;border:1px solid #ddd;font-size:.78em;font-weight:600;background:${autoBg};color:${autoColor};cursor:pointer">
+      <option value="YES" ${autoVal==='YES'?'selected':''}>YES</option>
+      <option value="NO" ${autoVal==='NO'?'selected':''}>NO</option>
+    </select>`;
     return `<tr>
       <td><a href="https://mumzworld.testmo.net/runs/view/2154?group_id=73711" target="_blank" style="color:#667eea;font-weight:600">C-${t.case_id}</a></td>
       <td><strong>${t.name}</strong>${t.summary ? '<br><small style="color:#888">' + t.summary.substring(0,100) + '</small>' : ''}</td>
       <td>${t.folder}</td>
       <td class="${prioClass}">${t.priority}</td>
+      <td>${autoDropdown}</td>
       <td class="edit-cell" id="cell-${t.case_id}">${tags}<br><span class="add-test-btn" onclick="showAutocomplete('${t.case_id}')">+ Add test</span></td>
       <td><select class="coverage-select" onchange="updateCoverage('${t.case_id}', this.value)" style="padding:4px;border-radius:4px;border:1px solid #ddd;font-size:.8em;background:${t.coverage_status==='full'?'#d4edda':t.coverage_status==='partial'?'#fff3cd':'#f8d7da'}">
         <option value="full" ${t.coverage_status==='full'?'selected':''}>✅ Covered</option>
@@ -740,6 +749,13 @@ function updateCoverage(caseId, value) {
   renderFolderBreakdown();
 }
 
+function updateWebAutomated(caseId, value) {
+  const test = DATA.testmo_tests.find(t => t.case_id === caseId);
+  test.automated = value;
+  saveEdits();
+  render();
+}
+
 // === Add New Test Cases ===
 function addNewWebCase() {
   const caseId = prompt('Enter TestMO Case ID (e.g., 1234567):');
@@ -798,7 +814,7 @@ function deleteAppCase(caseId) {
 // === Persistence ===
 function saveEdits() {
   const edits = {
-    web: DATA.testmo_tests.map(t => ({case_id: t.case_id, automated_tests: t.automated_tests, coverage_status: t.coverage_status, notes: t.notes})),
+    web: DATA.testmo_tests.map(t => ({case_id: t.case_id, automated: t.automated, automated_tests: t.automated_tests, coverage_status: t.coverage_status, notes: t.notes})),
     app: (DATA.app_testmo_tests||[]).map(t => ({case_id: t.case_id, automated: t.automated, automated_tests: t.automated_tests, coverage_status: t.coverage_status, notes: t.notes}))
   };
   localStorage.setItem(LS_KEY, JSON.stringify(edits));
@@ -1523,6 +1539,7 @@ async function init() {
       if (edits.web) edits.web.forEach(edit => {
         const test = DATA.testmo_tests.find(t => t.case_id === edit.case_id);
         if (test) {
+          if (edit.automated !== undefined) test.automated = edit.automated;
           if (edit.automated_tests !== undefined) test.automated_tests = edit.automated_tests;
           if (edit.coverage_status !== undefined) test.coverage_status = edit.coverage_status;
           if (edit.notes !== undefined) test.notes = edit.notes;
