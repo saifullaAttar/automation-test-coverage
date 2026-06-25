@@ -444,16 +444,18 @@ function renderAppSection() {
     const tags = t.automated_tests.map(at => 
       `<span class="test-tag">${at}<span class="remove-tag" onclick="removeAppTest('${t.case_id}','${at}')">×</span></span>`
     ).join('');
-    const autoBadge = (t.automated === 'YES')
-      ? `<span style="background:#d4edda;color:#155724;padding:3px 10px;border-radius:12px;font-size:.78em;font-weight:600">YES</span>`
-      : (t.automated === 'NO')
-        ? `<span style="background:#f8d7da;color:#721c24;padding:3px 10px;border-radius:12px;font-size:.78em;font-weight:600">NO</span>`
-        : `<span style="color:#999;font-size:.78em">—</span>`;
+    const autoVal = (t.automated || '').toUpperCase();
+    const autoBg = autoVal === 'YES' ? '#d4edda' : autoVal === 'NO' ? '#f8d7da' : '#ffffff';
+    const autoColor = autoVal === 'YES' ? '#155724' : autoVal === 'NO' ? '#721c24' : '#333';
+    const autoDropdown = `<select class="automated-select" onchange="updateAppAutomated('${t.case_id}', this.value)" style="padding:4px 8px;border-radius:12px;border:1px solid #ddd;font-size:.78em;font-weight:600;background:${autoBg};color:${autoColor};cursor:pointer">
+      <option value="YES" ${autoVal==='YES'?'selected':''}>YES</option>
+      <option value="NO" ${autoVal==='NO'?'selected':''}>NO</option>
+    </select>`;
     return `<tr>
       <td><a href="https://mumzworld.testmo.net/repositories/9?group_id=110524&case_id=${t.case_id}" target="_blank" style="color:#667eea;font-weight:600">C-${t.case_id}</a></td>
       <td><strong>${t.name}</strong></td>
       <td>${t.priority}</td>
-      <td>${autoBadge}</td>
+      <td>${autoDropdown}</td>
       <td class="edit-cell" id="appcell-${t.case_id}">${tags}<br><span class="add-test-btn" onclick="showAppAutocomplete('${t.case_id}')">+ Add test</span></td>
       <td><select class="coverage-select" onchange="updateAppCoverage('${t.case_id}', this.value)" style="padding:4px;border-radius:4px;border:1px solid #ddd;font-size:.8em;background:${t.coverage_status==='full'?'#d4edda':t.coverage_status==='partial'?'#fff3cd':'#f8d7da'}">
         <option value="full" ${t.coverage_status==='full'?'selected':''}>✅ Covered</option>
@@ -542,6 +544,13 @@ function updateAppCoverage(caseId, value) {
   saveEdits();
   renderAppSection();
   renderStats();
+}
+
+function updateAppAutomated(caseId, value) {
+  const test = DATA.app_testmo_tests.find(t => t.case_id === caseId);
+  test.automated = value;
+  saveEdits();
+  renderAppSection();
 }
 
 function renderFolderBreakdown() {
