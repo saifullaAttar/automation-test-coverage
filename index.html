@@ -799,7 +799,7 @@ function deleteAppCase(caseId) {
 function saveEdits() {
   const edits = {
     web: DATA.testmo_tests.map(t => ({case_id: t.case_id, automated_tests: t.automated_tests, coverage_status: t.coverage_status, notes: t.notes})),
-    app: (DATA.app_testmo_tests||[]).map(t => ({case_id: t.case_id, automated_tests: t.automated_tests, coverage_status: t.coverage_status, notes: t.notes}))
+    app: (DATA.app_testmo_tests||[]).map(t => ({case_id: t.case_id, automated: t.automated, automated_tests: t.automated_tests, coverage_status: t.coverage_status, notes: t.notes}))
   };
   localStorage.setItem(LS_KEY, JSON.stringify(edits));
   hasUnsavedChanges = true;
@@ -1531,6 +1531,7 @@ async function init() {
       if (edits.app) edits.app.forEach(edit => {
         const test = (DATA.app_testmo_tests||[]).find(t => t.case_id === edit.case_id);
         if (test) {
+          if (edit.automated !== undefined) test.automated = edit.automated;
           if (edit.automated_tests !== undefined) test.automated_tests = edit.automated_tests;
           if (edit.coverage_status !== undefined) test.coverage_status = edit.coverage_status;
           if (edit.notes !== undefined) test.notes = edit.notes;
