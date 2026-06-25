@@ -444,7 +444,7 @@ function renderAppSection() {
       `<span class="test-tag">${at}<span class="remove-tag" onclick="removeAppTest('${t.case_id}','${at}')">×</span></span>`
     ).join('');
     return `<tr>
-      <td><a href="https://mumzworld.testmo.net/runs/view/2192" target="_blank" style="color:#667eea;font-weight:600">C-${t.case_id}</a></td>
+      <td><a href="https://mumzworld.testmo.net/repositories/9?group_id=110524&case_id=${t.case_id}" target="_blank" style="color:#667eea;font-weight:600">C-${t.case_id}</a></td>
       <td><strong>${t.name}</strong></td>
       <td>${t.priority}</td>
       <td class="edit-cell" id="appcell-${t.case_id}">${tags}<br><span class="add-test-btn" onclick="showAppAutocomplete('${t.case_id}')">+ Add test</span></td>
