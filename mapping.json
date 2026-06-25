@@ -1259,68 +1259,8 @@
   ],
   "app_testmo_tests": [
     {
-      "case_id": "1435389",
-      "test_id": "14772234",
-      "name": "Verify home page is loading",
-      "folder": "Release checklist",
-      "functionality": "",
-      "priority": "Default",
-      "status": "Passed",
-      "summary": "",
-      "tags": "",
-      "automated_tests": [
-        "test_app_explore_screen_elements_and_navigate_to_account"
-      ],
-      "coverage_status": "full",
-      "notes": ""
-    },
-    {
-      "case_id": "1435417",
-      "test_id": "14772256",
-      "name": "Verify home page  banners are loading",
-      "folder": "Release checklist",
-      "functionality": "",
-      "priority": "Default",
-      "status": "Passed",
-      "summary": "",
-      "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": ""
-    },
-    {
-      "case_id": "1435425",
-      "test_id": "14772260",
-      "name": "Verify user can access categories from home page on UAE/KSA/GCC/International store",
-      "folder": "Release checklist",
-      "functionality": "",
-      "priority": "Default",
-      "status": "Passed",
-      "summary": "",
-      "tags": "",
-      "automated_tests": [
-        "test_customer_can_search_product_in_specific_category"
-      ],
-      "coverage_status": "full",
-      "notes": ""
-    },
-    {
-      "case_id": "1435426",
-      "test_id": "14772261",
-      "name": "Verify user can access collections from home page on UAE/KSA/GCC/International store",
-      "folder": "Release checklist",
-      "functionality": "",
-      "priority": "Default",
-      "status": "Passed",
-      "summary": "",
-      "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": ""
-    },
-    {
       "case_id": "1435390",
-      "test_id": "14772235",
+      "test_id": "",
       "name": "Categories tab - Verify categories L1,L2 and L3 are loading",
       "folder": "Release checklist",
       "functionality": "",
@@ -1328,13 +1268,14 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "NO",
       "automated_tests": [],
       "coverage_status": "none",
       "notes": ""
     },
     {
       "case_id": "1435404",
-      "test_id": "14772248",
+      "test_id": "",
       "name": "Verify customer can apply filter and sort on PLP",
       "folder": "Release checklist",
       "functionality": "",
@@ -1342,20 +1283,7 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": ""
-    },
-    {
-      "case_id": "1435391",
-      "test_id": "14772236",
-      "name": "Verify PDP for all product types (Simple, custom , installation , configurable, configurable custom , colour variant  bundle, and egift )",
-      "folder": "Release checklist",
-      "functionality": "",
-      "priority": "Default",
-      "status": "Passed",
-      "summary": "",
-      "tags": "",
+      "automated": "NO",
       "automated_tests": [],
       "coverage_status": "none",
       "notes": ""
@@ -1370,27 +1298,14 @@
       "status": "",
       "summary": "",
       "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": ""
-    },
-    {
-      "case_id": "2884190",
-      "test_id": "",
-      "name": "Verify reviews and ratings in PDP",
-      "folder": "Release checklist",
-      "functionality": "",
-      "priority": "Default",
-      "status": "",
-      "summary": "",
-      "tags": "",
+      "automated": "NO",
       "automated_tests": [],
       "coverage_status": "none",
       "notes": ""
     },
     {
       "case_id": "1435418",
-      "test_id": "14772257",
+      "test_id": "",
       "name": "Verify user can add items to GR - All product types (Simple, custom , installation , configurable, configurable custom, colour variant  bundle, and egift )",
       "folder": "Release checklist",
       "functionality": "",
@@ -1398,29 +1313,59 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "NO",
       "automated_tests": [],
       "coverage_status": "none",
       "notes": ""
     },
     {
-      "case_id": "1435416",
-      "test_id": "14772255",
-      "name": "Verify brand page is loading",
+      "case_id": "2885050",
+      "test_id": "",
+      "name": "Verify products are loading , and applying filter and sort",
       "folder": "Release checklist",
       "functionality": "",
       "priority": "Default",
-      "status": "Passed",
+      "status": "",
       "summary": "",
       "tags": "",
-      "automated_tests": [
-        "test_customer_can_search_brand"
-      ],
+      "automated": "NO",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": ""
+    },
+    {
+      "case_id": "2885052",
+      "test_id": "",
+      "name": "Verify user can login from login form",
+      "folder": "Release checklist",
+      "functionality": "",
+      "priority": "Default",
+      "status": "",
+      "summary": "",
+      "tags": "",
+      "automated": "YES",
+      "automated_tests": [],
+      "coverage_status": "full",
+      "notes": ""
+    },
+    {
+      "case_id": "2885053",
+      "test_id": "",
+      "name": "Verify user can login from gmail",
+      "folder": "Release checklist",
+      "functionality": "",
+      "priority": "Default",
+      "status": "",
+      "summary": "",
+      "tags": "",
+      "automated": "YES",
+      "automated_tests": [],
       "coverage_status": "full",
       "notes": ""
     },
     {
       "case_id": "1435392",
-      "test_id": "14772237",
+      "test_id": "",
       "name": "Verify new user registration",
       "folder": "Release checklist",
       "functionality": "",
@@ -1428,6 +1373,7 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "NO",
       "automated_tests": [
         "test_user_signup"
       ],
@@ -1436,14 +1382,15 @@
     },
     {
       "case_id": "1435401",
-      "test_id": "14772245",
-      "name": "Verify user can add all product types from PLP, DY, search, brand, PDP (Simple, custom , installation , configurable, configurable custom, colour variant  bundle, and egift )",
+      "test_id": "",
+      "name": "Verify user can add all product types from PLP, search, brand, PDP (Simple, custom , installation , configurable, configurable custom, colour variant  bundle, and egift )",
       "folder": "Release checklist",
       "functionality": "",
       "priority": "Default",
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "YES",
       "automated_tests": [
         "test_uae_cart_quantity_workflow",
         "test_app_add_all_product_types_from_srp"
@@ -1453,7 +1400,7 @@
     },
     {
       "case_id": "1435405",
-      "test_id": "14772249",
+      "test_id": "",
       "name": "Verify product list in cart - All product types",
       "folder": "Release checklist",
       "functionality": "",
@@ -1461,6 +1408,7 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "YES",
       "automated_tests": [
         "test_uae_cart_quantity_workflow",
         "test_uae_cart_bundle_multiple_variants",
@@ -1471,7 +1419,7 @@
     },
     {
       "case_id": "1435406",
-      "test_id": "14772250",
+      "test_id": "",
       "name": "Verify user can update product qty  on cart-All product types",
       "folder": "Release checklist",
       "functionality": "",
@@ -1479,6 +1427,7 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "YES",
       "automated_tests": [
         "test_uae_cart_increase_and_decrease_quantity",
         "test_uae_cart_item_integrity_after_quantity_change"
@@ -1488,7 +1437,7 @@
     },
     {
       "case_id": "1435407",
-      "test_id": "14772251",
+      "test_id": "",
       "name": "Verify user can remove products from cart -All product types",
       "folder": "Release checklist",
       "functionality": "",
@@ -1496,6 +1445,7 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "YES",
       "automated_tests": [
         "test_uae_cart_remove_item",
         "test_app_uae_cart_remaining_items_unaffected_after_partial_removal"
@@ -1505,7 +1455,7 @@
     },
     {
       "case_id": "1435408",
-      "test_id": "14772252",
+      "test_id": "",
       "name": "Verify user can apply GW to products",
       "folder": "Release checklist",
       "functionality": "",
@@ -1513,6 +1463,7 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "NO",
       "automated_tests": [
         "test_uae_checkout_apply_gift_wrap_place_order",
         "test_app_cart_apply_gift_wrap_and_place_order"
@@ -1522,7 +1473,7 @@
     },
     {
       "case_id": "1435409",
-      "test_id": "14772253",
+      "test_id": "",
       "name": "Verify user can apply and remove coupon on cart",
       "folder": "Release checklist",
       "functionality": "",
@@ -1530,6 +1481,7 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "YES",
       "automated_tests": [
         "test_app_uae_cart_remove_item_with_applied_coupon"
       ],
@@ -1538,7 +1490,7 @@
     },
     {
       "case_id": "1435393",
-      "test_id": "14772238",
+      "test_id": "",
       "name": "Verify existing user can access their profile",
       "folder": "Release checklist",
       "functionality": "",
@@ -1546,6 +1498,7 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "NO",
       "automated_tests": [
         "test_existing_user_profile"
       ],
@@ -1553,22 +1506,8 @@
       "notes": ""
     },
     {
-      "case_id": "1435394",
-      "test_id": "14772239",
-      "name": "Verify existing user can access order list and order details page",
-      "folder": "Release checklist",
-      "functionality": "",
-      "priority": "Default",
-      "status": "Passed",
-      "summary": "",
-      "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": ""
-    },
-    {
       "case_id": "1435395",
-      "test_id": "14772240",
+      "test_id": "",
       "name": "Verify wishlist loading for existing customer",
       "folder": "Release checklist",
       "functionality": "",
@@ -1576,13 +1515,14 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "NO",
       "automated_tests": [],
       "coverage_status": "none",
       "notes": ""
     },
     {
       "case_id": "1435396",
-      "test_id": "14772241",
+      "test_id": "",
       "name": "Verify user can add all product types to wishlist from cart, PLP and PDP",
       "folder": "Release checklist",
       "functionality": "",
@@ -1590,6 +1530,7 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "NO",
       "automated_tests": [
         "test_uae_cart_move_to_wishlist"
       ],
@@ -1598,7 +1539,7 @@
     },
     {
       "case_id": "1435397",
-      "test_id": "14772242",
+      "test_id": "",
       "name": "Verify user can remove all product types from wishlist",
       "folder": "Release checklist",
       "functionality": "",
@@ -1606,27 +1547,14 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": ""
-    },
-    {
-      "case_id": "1435398",
-      "test_id": "14772243",
-      "name": "Verify user can access wallet page",
-      "folder": "Release checklist",
-      "functionality": "",
-      "priority": "Default",
-      "status": "Passed",
-      "summary": "",
-      "tags": "",
+      "automated": "NO",
       "automated_tests": [],
       "coverage_status": "none",
       "notes": ""
     },
     {
       "case_id": "1435400",
-      "test_id": "14772244",
+      "test_id": "",
       "name": "Verify user can add, update and delete address",
       "folder": "Release checklist",
       "functionality": "",
@@ -1634,6 +1562,7 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "NO",
       "automated_tests": [
         "test_existing_user_delivery_address",
         "test_add_new_address_and_make_default_and_delete"
@@ -1643,7 +1572,7 @@
     },
     {
       "case_id": "1435402",
-      "test_id": "14772246",
+      "test_id": "",
       "name": "Verify customer can search  for products",
       "folder": "Release checklist",
       "functionality": "",
@@ -1651,6 +1580,7 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "NO",
       "automated_tests": [
         "test_customer_can_search_brand",
         "test_customer_can_search_product_in_specific_category"
@@ -1660,7 +1590,7 @@
     },
     {
       "case_id": "1435403",
-      "test_id": "14772247",
+      "test_id": "",
       "name": "Verify customer can apply filter and sort on search page",
       "folder": "Release checklist",
       "functionality": "",
@@ -1668,13 +1598,14 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "NO",
       "automated_tests": [],
       "coverage_status": "none",
       "notes": ""
     },
     {
       "case_id": "1543903",
-      "test_id": "14772262",
+      "test_id": "",
       "name": "Verify user can apply and remove SC",
       "folder": "Release checklist",
       "functionality": "",
@@ -1682,6 +1613,7 @@
       "status": "Skipped",
       "summary": "",
       "tags": "",
+      "automated": "YES",
       "automated_tests": [
         "test_app_uae_cart_order_summary_updates_after_item_removal"
       ],
@@ -1690,7 +1622,7 @@
     },
     {
       "case_id": "1543904",
-      "test_id": "14772263",
+      "test_id": "",
       "name": "Verify order summary in cart",
       "folder": "Release checklist",
       "functionality": "",
@@ -1698,6 +1630,7 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "YES",
       "automated_tests": [
         "test_app_cart_guest_login_no_coupon_sc"
       ],
@@ -1706,7 +1639,7 @@
     },
     {
       "case_id": "1543905",
-      "test_id": "14772264",
+      "test_id": "",
       "name": "Verify shipping address on checkout page",
       "folder": "Release checklist",
       "functionality": "",
@@ -1714,6 +1647,7 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "NO",
       "automated_tests": [
         "test_app_checkout_tabby_normal_coupon"
       ],
@@ -1722,7 +1656,7 @@
     },
     {
       "case_id": "1543906",
-      "test_id": "14772265",
+      "test_id": "",
       "name": "Verify payment methods on checkout page",
       "folder": "Release checklist",
       "functionality": "",
@@ -1730,6 +1664,7 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "NO",
       "automated_tests": [
         "test_app_checkout_full_sc_no_coupon"
       ],
@@ -1738,7 +1673,7 @@
     },
     {
       "case_id": "1543907",
-      "test_id": "14772266",
+      "test_id": "",
       "name": "Place Tamara, Tabby, Apple pay and CC orders - check ODP, Admin and invoice",
       "folder": "Release checklist",
       "functionality": "",
@@ -1746,6 +1681,7 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "YES",
       "automated_tests": [
         "test_uae_checkout_cc_no_coupon",
         "test_app_uae_checkout_tamara_no_coupon",
@@ -1757,7 +1693,7 @@
     },
     {
       "case_id": "1435419",
-      "test_id": "14772258",
+      "test_id": "",
       "name": "Verify GR cart and proceed to checkout",
       "folder": "Release checklist",
       "functionality": "",
@@ -1765,13 +1701,14 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "NO",
       "automated_tests": [],
       "coverage_status": "none",
       "notes": ""
     },
     {
       "case_id": "1435420",
-      "test_id": "14772259",
+      "test_id": "",
       "name": "Verify multiple carts and proceed to checkout",
       "folder": "Release checklist",
       "functionality": "",
@@ -1779,13 +1716,14 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "NO",
       "automated_tests": [],
       "coverage_status": "none",
       "notes": ""
     },
     {
       "case_id": "1543957",
-      "test_id": "14772270",
+      "test_id": "",
       "name": "Verify cart merge guest > existing user with items",
       "folder": "Release checklist",
       "functionality": "",
@@ -1793,136 +1731,11 @@
       "status": "Passed",
       "summary": "",
       "tags": "",
+      "automated": "NO",
       "automated_tests": [
         "test_uae_guest_checkout_login_bottom_sheet_and_place_order"
       ],
       "coverage_status": "full",
-      "notes": ""
-    },
-    {
-      "case_id": "1543908",
-      "test_id": "14772267",
-      "name": "Verify DYs across all screens",
-      "folder": "Release checklist",
-      "functionality": "",
-      "priority": "Default",
-      "status": "Passed",
-      "summary": "",
-      "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": ""
-    },
-    {
-      "case_id": "1435415",
-      "test_id": "14772254",
-      "name": "Close / reopen the app",
-      "folder": "Release checklist",
-      "functionality": "",
-      "priority": "Default",
-      "status": "Passed",
-      "summary": "",
-      "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": ""
-    },
-    {
-      "case_id": "1543946",
-      "test_id": "14772268",
-      "name": "Verify deeplinks external/email/banners",
-      "folder": "Release checklist",
-      "functionality": "",
-      "priority": "Default",
-      "status": "Passed",
-      "summary": "",
-      "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": ""
-    },
-    {
-      "case_id": "1543948",
-      "test_id": "14772269",
-      "name": "Verify PN and in-app notifications with app open",
-      "folder": "Release checklist",
-      "functionality": "",
-      "priority": "Default",
-      "status": "Passed",
-      "summary": "",
-      "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": ""
-    },
-    {
-      "case_id": "2282943",
-      "test_id": "14772271",
-      "name": "Verify PN and in-app notifications with app killed",
-      "folder": "Release checklist",
-      "functionality": "",
-      "priority": "Default",
-      "status": "Passed",
-      "summary": "",
-      "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": ""
-    },
-    {
-      "case_id": "2282944",
-      "test_id": "14772272",
-      "name": "Verify PN and in-app notifications with app in the background",
-      "folder": "Release checklist",
-      "functionality": "",
-      "priority": "Default",
-      "status": "Passed",
-      "summary": "",
-      "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": ""
-    },
-    {
-      "case_id": "2673949",
-      "test_id": "14772274",
-      "name": "Verify Maya is loading and user can navigate to PDP - All product types",
-      "folder": "Release checklist",
-      "functionality": "",
-      "priority": "Default",
-      "status": "Passed",
-      "summary": "",
-      "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": ""
-    },
-    {
-      "case_id": "2673950",
-      "test_id": "14772275",
-      "name": "Verify Maya is loading and user can add items to cart - All product types",
-      "folder": "Release checklist",
-      "functionality": "",
-      "priority": "Default",
-      "status": "Passed",
-      "summary": "",
-      "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": ""
-    },
-    {
-      "case_id": "2673956",
-      "test_id": "",
-      "name": "Verify GTM events is triggered (sign-in, sign-up, ATC, and search)",
-      "folder": "Release checklist",
-      "functionality": "",
-      "priority": "Default",
-      "status": "Skipped",
-      "summary": "",
-      "tags": "",
-      "automated_tests": [],
-      "coverage_status": "none",
       "notes": ""
     }
   ],
