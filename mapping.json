@@ -954,7 +954,8 @@
       "automated": "NO",
       "automated_tests": [],
       "coverage_status": "none",
-      "notes": ""
+      "notes": "",
+      "page": 1
     },
     {
       "case_id": "1435404",
@@ -969,7 +970,8 @@
       "automated": "NO",
       "automated_tests": [],
       "coverage_status": "none",
-      "notes": ""
+      "notes": "",
+      "page": 1
     },
     {
       "case_id": "2884189",
@@ -984,7 +986,8 @@
       "automated": "NO",
       "automated_tests": [],
       "coverage_status": "none",
-      "notes": ""
+      "notes": "",
+      "page": 3
     },
     {
       "case_id": "1435418",
@@ -999,7 +1002,8 @@
       "automated": "NO",
       "automated_tests": [],
       "coverage_status": "none",
-      "notes": ""
+      "notes": "",
+      "page": 2
     },
     {
       "case_id": "2885050",
@@ -1014,7 +1018,8 @@
       "automated": "NO",
       "automated_tests": [],
       "coverage_status": "none",
-      "notes": ""
+      "notes": "",
+      "page": 3
     },
     {
       "case_id": "2885052",
@@ -1029,7 +1034,8 @@
       "automated": "YES",
       "automated_tests": [],
       "coverage_status": "full",
-      "notes": ""
+      "notes": "",
+      "page": 3
     },
     {
       "case_id": "2885053",
@@ -1044,7 +1050,8 @@
       "automated": "YES",
       "automated_tests": [],
       "coverage_status": "full",
-      "notes": ""
+      "notes": "",
+      "page": 3
     },
     {
       "case_id": "1435392",
@@ -1061,7 +1068,8 @@
         "test_user_signup"
       ],
       "coverage_status": "full",
-      "notes": ""
+      "notes": "",
+      "page": 1
     },
     {
       "case_id": "1435401",
@@ -1079,7 +1087,8 @@
         "test_app_add_all_product_types_from_srp"
       ],
       "coverage_status": "full",
-      "notes": ""
+      "notes": "",
+      "page": 1
     },
     {
       "case_id": "1435405",
@@ -1098,7 +1107,8 @@
         "test_uae_cart_configurable_multiple_variants"
       ],
       "coverage_status": "full",
-      "notes": ""
+      "notes": "",
+      "page": 1
     },
     {
       "case_id": "1435406",
@@ -1116,7 +1126,8 @@
         "test_uae_cart_item_integrity_after_quantity_change"
       ],
       "coverage_status": "full",
-      "notes": ""
+      "notes": "",
+      "page": 1
     },
     {
       "case_id": "1435407",
@@ -1134,7 +1145,8 @@
         "test_app_uae_cart_remaining_items_unaffected_after_partial_removal"
       ],
       "coverage_status": "full",
-      "notes": ""
+      "notes": "",
+      "page": 1
     },
     {
       "case_id": "1435408",
@@ -1152,7 +1164,8 @@
         "test_app_cart_apply_gift_wrap_and_place_order"
       ],
       "coverage_status": "full",
-      "notes": ""
+      "notes": "",
+      "page": 1
     },
     {
       "case_id": "1435409",
@@ -1169,7 +1182,8 @@
         "test_app_uae_cart_remove_item_with_applied_coupon"
       ],
       "coverage_status": "full",
-      "notes": ""
+      "notes": "",
+      "page": 1
     },
     {
       "case_id": "1435393",
@@ -1186,7 +1200,8 @@
         "test_existing_user_profile"
       ],
       "coverage_status": "full",
-      "notes": ""
+      "notes": "",
+      "page": 1
     },
     {
       "case_id": "1435395",
@@ -1201,7 +1216,8 @@
       "automated": "NO",
       "automated_tests": [],
       "coverage_status": "none",
-      "notes": ""
+      "notes": "",
+      "page": 1
     },
     {
       "case_id": "1435396",
@@ -1218,7 +1234,8 @@
         "test_uae_cart_move_to_wishlist"
       ],
       "coverage_status": "full",
-      "notes": ""
+      "notes": "",
+      "page": 1
     },
     {
       "case_id": "1435397",
@@ -1233,7 +1250,8 @@
       "automated": "NO",
       "automated_tests": [],
       "coverage_status": "none",
-      "notes": ""
+      "notes": "",
+      "page": 1
     },
     {
       "case_id": "1435400",
@@ -1251,7 +1269,8 @@
         "test_add_new_address_and_make_default_and_delete"
       ],
       "coverage_status": "full",
-      "notes": ""
+      "notes": "",
+      "page": 1
     },
     {
       "case_id": "1435402",
@@ -1269,7 +1288,8 @@
         "test_customer_can_search_product_in_specific_category"
       ],
       "coverage_status": "full",
-      "notes": ""
+      "notes": "",
+      "page": 1
     },
     {
       "case_id": "1435403",
@@ -1284,7 +1304,8 @@
       "automated": "NO",
       "automated_tests": [],
       "coverage_status": "none",
-      "notes": ""
+      "notes": "",
+      "page": 1
     },
     {
       "case_id": "1543903",
@@ -1301,7 +1322,8 @@
         "test_app_uae_cart_order_summary_updates_after_item_removal"
       ],
       "coverage_status": "full",
-      "notes": ""
+      "notes": "",
+      "page": 2
     },
     {
       "case_id": "1543904",
@@ -1318,7 +1340,8 @@
         "test_app_cart_guest_login_no_coupon_sc"
       ],
       "coverage_status": "full",
-      "notes": ""
+      "notes": "",
+      "page": 2
     },
     {
       "case_id": "1543905",
@@ -1335,7 +1358,8 @@
         "test_app_checkout_tabby_normal_coupon"
       ],
       "coverage_status": "full",
-      "notes": ""
+      "notes": "",
+      "page": 2
     },
     {
       "case_id": "1543906",
@@ -1352,7 +1376,8 @@
         "test_app_checkout_full_sc_no_coupon"
       ],
       "coverage_status": "full",
-      "notes": ""
+      "notes": "",
+      "page": 2
     },
     {
       "case_id": "1543907",
@@ -1372,7 +1397,8 @@
         "test_app_checkout_tabby_cashback_coupon"
       ],
       "coverage_status": "full",
-      "notes": ""
+      "notes": "",
+      "page": 2
     },
     {
       "case_id": "1435419",
@@ -1387,7 +1413,8 @@
       "automated": "NO",
       "automated_tests": [],
       "coverage_status": "none",
-      "notes": ""
+      "notes": "",
+      "page": 2
     },
     {
       "case_id": "1435420",
@@ -1402,7 +1429,8 @@
       "automated": "NO",
       "automated_tests": [],
       "coverage_status": "none",
-      "notes": ""
+      "notes": "",
+      "page": 2
     },
     {
       "case_id": "1543957",
@@ -1419,7 +1447,8 @@
         "test_uae_guest_checkout_login_bottom_sheet_and_place_order"
       ],
       "coverage_status": "full",
-      "notes": ""
+      "notes": "",
+      "page": 2
     }
   ],
   "automated_tests": {

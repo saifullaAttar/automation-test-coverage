@@ -461,7 +461,7 @@ function renderAppSection() {
       <option value="NO" ${autoVal==='NO'?'selected':''}>NO</option>
     </select>`;
     return `<tr>
-      <td><a href="https://mumzworld.testmo.net/repositories/9?group_id=110524&case_id=${t.case_id}" target="_blank" style="color:#667eea;font-weight:600">C-${t.case_id}</a></td>
+      <td><a href="https://mumzworld.testmo.net/repositories/9?group_id=110524${t.page && t.page>1 ? '&pagination_current='+t.page : ''}&case_id=${t.case_id}" target="_blank" style="color:#667eea;font-weight:600">C-${t.case_id}</a></td>
       <td><strong>${t.name}</strong></td>
       <td>${t.priority}</td>
       <td>${autoDropdown}</td>
