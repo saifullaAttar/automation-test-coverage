@@ -12,7 +12,8 @@
     "automated": "NO",
     "automated_tests": [],
     "coverage_status": "none",
-    "notes": ""
+    "notes": "",
+    "page": 2
   },
   {
     "case_id": "1018744",
@@ -29,7 +30,8 @@
       "test_ksa_percentage_of_product_price_discount_rules_without_max_amount"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 2
   },
   {
     "case_id": "2337052",
@@ -48,7 +50,8 @@
       "test_user_signup"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 3
   },
   {
     "case_id": "2337053",
@@ -66,7 +69,8 @@
       "test_ksa_user_register_from_cart_page"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 4
   },
   {
     "case_id": "2337055",
@@ -84,7 +88,8 @@
       "test_ksa_user_logs_in_from_account_page"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 4
   },
   {
     "case_id": "2337057",
@@ -102,7 +107,8 @@
       "test_ksa_user_logs_in_from_cart_page"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 4
   },
   {
     "case_id": "2337056",
@@ -117,7 +123,8 @@
     "automated": "YES",
     "automated_tests": [],
     "coverage_status": "none",
-    "notes": ""
+    "notes": "",
+    "page": 4
   },
   {
     "case_id": "1018723",
@@ -132,7 +139,8 @@
     "automated": "NO",
     "automated_tests": [],
     "coverage_status": "none",
-    "notes": ""
+    "notes": "",
+    "page": 1
   },
   {
     "case_id": "2337058",
@@ -147,7 +155,8 @@
     "automated": "NO",
     "automated_tests": [],
     "coverage_status": "none",
-    "notes": ""
+    "notes": "",
+    "page": 4
   },
   {
     "case_id": "1018709",
@@ -164,7 +173,8 @@
       "test_existing_user_profile"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 1
   },
   {
     "case_id": "1018710",
@@ -179,7 +189,8 @@
     "automated": "NO",
     "automated_tests": [],
     "coverage_status": "none",
-    "notes": ""
+    "notes": "",
+    "page": 1
   },
   {
     "case_id": "1018706",
@@ -194,7 +205,8 @@
     "automated": "NO",
     "automated_tests": [],
     "coverage_status": "none",
-    "notes": ""
+    "notes": "",
+    "page": 1
   },
   {
     "case_id": "1018707",
@@ -209,7 +221,8 @@
     "automated": "NO",
     "automated_tests": [],
     "coverage_status": "none",
-    "notes": ""
+    "notes": "",
+    "page": 1
   },
   {
     "case_id": "1018708",
@@ -226,7 +239,8 @@
       "test_uae_checkout_cc_and_verify_odp"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 1
   },
   {
     "case_id": "1018714",
@@ -243,7 +257,8 @@
       "test_uae_cart_move_to_wishlist"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 1
   },
   {
     "case_id": "1018717",
@@ -258,7 +273,8 @@
     "automated": "NO",
     "automated_tests": [],
     "coverage_status": "none",
-    "notes": ""
+    "notes": "",
+    "page": 1
   },
   {
     "case_id": "1018719",
@@ -273,7 +289,8 @@
     "automated": "NO",
     "automated_tests": [],
     "coverage_status": "none",
-    "notes": ""
+    "notes": "",
+    "page": 1
   },
   {
     "case_id": "1018715",
@@ -288,7 +305,8 @@
     "automated": "NO",
     "automated_tests": [],
     "coverage_status": "none",
-    "notes": ""
+    "notes": "",
+    "page": 1
   },
   {
     "case_id": "1018716",
@@ -305,7 +323,8 @@
       "test_uae_checkout_full_sc_and_verify_sc_balance"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 1
   },
   {
     "case_id": "1018718",
@@ -320,7 +339,8 @@
     "automated": "NO",
     "automated_tests": [],
     "coverage_status": "none",
-    "notes": ""
+    "notes": "",
+    "page": 1
   },
   {
     "case_id": "1018711",
@@ -337,7 +357,8 @@
       "test_add_new_address_and_make_default_and_delete"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 1
   },
   {
     "case_id": "1018712",
@@ -354,7 +375,8 @@
       "test_add_new_address_and_make_default_and_delete"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 1
   },
   {
     "case_id": "1018713",
@@ -371,7 +393,8 @@
       "test_uae_checkout_cc_coupon_modal_sheet"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 1
   },
   {
     "case_id": "2337029",
@@ -389,7 +412,8 @@
       "test_ksa_cart_existing_user_orders_no_coupon_yalla"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 3
   },
   {
     "case_id": "2337030",
@@ -408,7 +432,8 @@
       "test_uae_checkout_apply_gift_wrap_place_order"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 3
   },
   {
     "case_id": "2337022",
@@ -426,7 +451,8 @@
       "test_ksa_cart_guest_login_no_coupon_sc"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 2
   },
   {
     "case_id": "2337031",
@@ -444,7 +470,8 @@
       "test_ksa_cart_add_items_to_cart_as_a_newly_registered_user_and_apply_cashback_coupon"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 3
   },
   {
     "case_id": "2337032",
@@ -462,7 +489,8 @@
       "test_ksa_cart_uf5_checkout_cod_no_coupon"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 3
   },
   {
     "case_id": "2337033",
@@ -480,7 +508,8 @@
       "test_ksa_checkout_with_cart_items_register_a_new_user_and_coupon"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 3
   },
   {
     "case_id": "2337034",
@@ -498,7 +527,8 @@
       "test_ksa_cart_guest_login_no_coupon_sc"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 3
   },
   {
     "case_id": "2337023",
@@ -515,7 +545,8 @@
       "test_app_uae_cart_remaining_items_unaffected_after_partial_removal"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 2
   },
   {
     "case_id": "2337024",
@@ -532,7 +563,8 @@
       "test_ksa_checkout_cod_normal_coupon"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 3
   },
   {
     "case_id": "2337025",
@@ -549,7 +581,8 @@
       "test_uae_cart_apply_gift_wrap_and_place_order"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 3
   },
   {
     "case_id": "2337026",
@@ -564,7 +597,8 @@
     "automated": "NO",
     "automated_tests": [],
     "coverage_status": "none",
-    "notes": ""
+    "notes": "",
+    "page": 3
   },
   {
     "case_id": "2337037",
@@ -583,7 +617,8 @@
       "test_uae_checkout_cc_no_coupon"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 3
   },
   {
     "case_id": "2337038",
@@ -602,7 +637,8 @@
       "test_uae_checkout_cc_and_partial_sc_no_coupon"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 3
   },
   {
     "case_id": "2337039",
@@ -621,7 +657,8 @@
       "test_uae_checkout_cod_no_coupon"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 3
   },
   {
     "case_id": "2337040",
@@ -639,7 +676,8 @@
       "test_ksa_checkout_full_sc_no_coupon"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 3
   },
   {
     "case_id": "2337041",
@@ -657,7 +695,8 @@
       "test_uae_checkout_cc_wrong_otp_no_coupon"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 3
   },
   {
     "case_id": "2337042",
@@ -677,7 +716,8 @@
       "test_ksa_checkout_cc_partial_sc_and_normal_coupon"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 3
   },
   {
     "case_id": "2337043",
@@ -700,7 +740,8 @@
       "test_app_uae_checkout_tamara_no_coupon"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 3
   },
   {
     "case_id": "2337044",
@@ -723,7 +764,8 @@
       "test_uae_checkout_tabby_no_coupon"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 3
   },
   {
     "case_id": "2337045",
@@ -740,7 +782,8 @@
       "test_ksa_checkout_invalid_cc_no_coupon"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 3
   },
   {
     "case_id": "1018758",
@@ -757,7 +800,8 @@
       "test_uae_checkout_cc_normal_coupon"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 2
   },
   {
     "case_id": "1018759",
@@ -775,7 +819,8 @@
       "test_uae_percentage_of_product_price_discount_rules_with_max_amount"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 2
   },
   {
     "case_id": "1018760",
@@ -793,7 +838,8 @@
       "test_uae_percentage_of_product_variant_price_discount_rules_without_max_amount"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 2
   },
   {
     "case_id": "1018761",
@@ -810,7 +856,8 @@
       "test_uae_bank_discount_percentage_of_product_price_rule"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 2
   },
   {
     "case_id": "1018762",
@@ -827,7 +874,8 @@
       "test_ksa_percentage_of_product_price_discount_rules_with_max_amount"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 2
   },
   {
     "case_id": "1084824",
@@ -844,7 +892,8 @@
       "test_ksa_percentage_of_product_variant_price_discount_rules_with_max_amount"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 2
   },
   {
     "case_id": "2337059",
@@ -859,7 +908,8 @@
     "automated": "NO",
     "automated_tests": [],
     "coverage_status": "none",
-    "notes": ""
+    "notes": "",
+    "page": 4
   },
   {
     "case_id": "2337061",
@@ -874,7 +924,8 @@
     "automated": "NO",
     "automated_tests": [],
     "coverage_status": "none",
-    "notes": ""
+    "notes": "",
+    "page": 4
   },
   {
     "case_id": "2337060",
@@ -889,7 +940,8 @@
     "automated": "NO",
     "automated_tests": [],
     "coverage_status": "none",
-    "notes": ""
+    "notes": "",
+    "page": 4
   },
   {
     "case_id": "2337062",
@@ -904,7 +956,8 @@
     "automated": "NO",
     "automated_tests": [],
     "coverage_status": "none",
-    "notes": ""
+    "notes": "",
+    "page": 4
   },
   {
     "case_id": "2337063",
@@ -921,7 +974,8 @@
       "test_ksa_checkout_cc_normal_coupon"
     ],
     "coverage_status": "full",
-    "notes": ""
+    "notes": "",
+    "page": 4
   },
   {
     "case_id": "1018774",
@@ -936,6 +990,7 @@
     "automated": "NO",
     "automated_tests": [],
     "coverage_status": "none",
-    "notes": ""
+    "notes": "",
+    "page": 2
   }
 ]
