@@ -46,7 +46,6 @@ jobs:
       - name: Rebuild the inventory and mapping
         run: |
           python3 extract_tests.py "$GITHUB_WORKSPACE/automation_web_2.0"
-          python3 generate_trend.py "$GITHUB_WORKSPACE/automation_web_2.0"
           python3 build_mapping.py
           python3 verify_mapping.py
 
@@ -54,7 +53,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add automated_tests.json coverage_trend.json mapping.json
+          git add automated_tests.json mapping.json
           if git diff --cached --quiet; then
             echo "No change — main has not moved."
           else

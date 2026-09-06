@@ -15,7 +15,7 @@ REPO    ?= $(HOME)/automation_web_2.0
 
 .PHONY: generate clean open verify
 
-generate: testmo_tests.json app_testmo_tests.json web_regression_tests.json automated_tests.json mapping.json coverage_trend.json
+generate: testmo_tests.json app_testmo_tests.json web_regression_tests.json automated_tests.json mapping.json
 	@$(MAKE) --no-print-directory verify
 	@echo "Report ready -- open index.html"
 
@@ -43,8 +43,6 @@ automated_tests.json: extract_tests.py
 mapping.json: build_mapping.py testmo_tests.json app_testmo_tests.json web_regression_tests.json automated_tests.json
 	python3 build_mapping.py
 
-coverage_trend.json: generate_trend.py
-	python3 generate_trend.py
 
 verify:
 	@python3 verify_mapping.py

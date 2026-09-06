@@ -146,6 +146,9 @@ tr:hover{background:#f8f9ff;transition:background .2s}
     <label style="display:flex;align-items:center;gap:6px;font-size:.85em;color:#555;cursor:pointer">
       <input type="checkbox" id="showNotPlanned" onchange="render()"> Show <em>Not planned</em> <span id="notPlannedCount"></span>
     </label>
+    <label style="display:flex;align-items:center;gap:6px;font-size:.85em;color:#555;cursor:pointer" title="Turn on the inline editing controls">
+      <input type="checkbox" id="editMode" onchange="render()"> ✏️ Edit mode
+    </label>
     <span id="unsavedBadge" class="unsaved-badge hidden">⚠ Unsaved Changes</span>
     <button class="btn btn-success" onclick="saveForEveryone()">💾 Save for Everyone</button>
     <button class="btn btn-outline" onclick="exportMapping()">📥 Export JSON</button>
@@ -171,36 +174,19 @@ tr:hover{background:#f8f9ff;transition:background .2s}
     re-mapping: the store-credit, order-summary, wishlist and gift-registry tests were previously linked to the wrong cases
     or to none. Neither figure was moved to look better; both are reproducible with <code>make generate</code>.
   </div>
-  <div id="unmappedNotice" class="protected" style="display:none;background:#fff8e1;border:2px solid #ffc107;border-radius:10px;padding:16px;margin-bottom:20px">
-    <h3 style="margin:0 0 8px;color:#f57c00">🔗 Automated tests not linked to any TestMO case</h3>
-    <div id="unmappedList"></div>
-  </div>
-  <div id="coverageSummary" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px"></div>
-  <div id="arabicPanel" class="section" style="margin-bottom:20px"></div>
-  <div id="flagPanel" class="section protected" style="margin-bottom:20px"></div>
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-
-  <!-- Priority Risk Section -->
+  <div id="coverageSummary" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px"></div>
+  <div class="section">
+    <h2>📊 Coverage by Folder</h2>
+    <div class="folder-breakdown" id="folderBreakdown"></div>
+  </div>
   <div class="section protected" id="riskSection" style="background:#fff5f5;border:2px solid #fc8181;margin-bottom:20px">
     <h2 style="color:#c53030;border-bottom-color:#fc8181">⚠️ Covered on Paper Only</h2>
     <p style="color:#666;margin-bottom:10px;font-size:.9em">Cases whose only mapped script is hard-skipped — nothing guards them in a run</p>
     <div id="riskList"></div>
   </div>
-
-  <!-- Tests Per Module -->
-  <div class="section" style="margin-bottom:20px">
-    <h2>📂 Tests Per Module</h2>
-    <div id="testsPerModule" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px"></div>
-  </div>
-
-  <!-- Coverage Trend -->
-  <div class="section" style="margin-bottom:20px">
-    <h2>📈 Coverage Trend — Tests Added &amp; Modified Per Month</h2>
-    <p style="color:#666;font-size:.85em;margin:8px 0 0">Counted from the diffs on <code>origin/main</code>: green is <code>def test_</code> functions actually added, blue is commits that changed existing tests without adding one. Rolling 12 months to the current month.</p>
-    <canvas id="trendChart" height="280"></canvas>
-  </div>
-
-  <!-- Regression Run History -->
+  <div id="arabicPanel" class="section" style="margin-bottom:20px"></div>
+  <div id="flagPanel" class="section protected" style="margin-bottom:20px"></div>
   <div class="section" style="margin-bottom:20px">
     <h2>🏁 FALCON Regression Run History</h2>
     <p style="color:#666;font-size:.85em;margin:8px 0 4px">Execution results — separate from the coverage figures above, which measure mapping only.
@@ -248,12 +234,12 @@ tr:hover{background:#f8f9ff;transition:background .2s}
             <th style="width:26%">Mapped Automated Tests</th>
             <th style="width:100px">Coverage</th>
             <th style="width:24%">Evidence / gaps</th>
-            <th style="width:40px"></th>
+            <th style="width:40px" class="edit-only"></th>
           </tr>
         </thead>
         <tbody id="appTableBody"></tbody>
       </table>
-      <div style="padding:10px;text-align:center"><button class="btn btn-outline" onclick="addNewAppCase()" style="font-size:.9em">➕ Add App Test Case</button></div>
+      <div class="edit-only" style="padding:10px;text-align:center"><button class="btn btn-outline" onclick="addNewAppCase()" style="font-size:.9em">➕ Add App Test Case</button></div>
     </div>
   </div>
 
@@ -273,35 +259,18 @@ tr:hover{background:#f8f9ff;transition:background .2s}
           <th style="width:26%">Mapped Automated Tests</th>
           <th style="width:100px">Coverage</th>
           <th style="width:22%">Evidence / gaps</th>
-          <th style="width:40px"></th>
+          <th style="width:40px" class="edit-only"></th>
         </tr>
       </thead>
       <tbody id="tableBody"></tbody>
     </table>
-    <div style="padding:10px;text-align:center"><button class="btn btn-outline" onclick="addNewWebCase()" style="font-size:.9em">➕ Add Web Test Case</button></div>
+    <div class="edit-only" style="padding:10px;text-align:center"><button class="btn btn-outline" onclick="addNewWebCase()" style="font-size:.9em">➕ Add Web Test Case</button></div>
   </div>
   </div>
 
-  <div class="section">
-    <h2>📊 Coverage by Folder</h2>
-    <div class="folder-breakdown" id="folderBreakdown"></div>
-  </div>
-
-  <!-- Write a Test Guide -->
-  <div class="section" style="border-left:4px solid #764ba2">
-    <h2 style="color:#764ba2;border-bottom-color:#764ba2">🤖 Write an E2E Test — Quick Start</h2>
-    <p style="font-size:.85em;color:#666;margin-bottom:12px">For developers adding tests to <code>automation_web_2.0</code></p>
-    <ol style="font-size:.85em;padding-left:20px;color:#555;line-height:2">
-      <li>Create test file in <code>tests/web/UAE/</code> or <code>tests/app/</code></li>
-      <li>Use Page Object from <code>pages/</code></li>
-      <li>Locators in <code>resources/locators/locators.json</code></li>
-      <li>Use <code>@pytest.mark.regression</code> marker</li>
-      <li>Run: <code>pytest tests/web/UAE/test_file.py -v</code></li>
-      <li>Check report: <a href="https://allure-reports.mumzstage.com/allure-docker-service" target="_blank" style="color:#764ba2">Allure Dashboard</a></li>
-    </ol>
-    <div style="margin-top:12px">
-      <a href="https://github.com/mumzworld-tech/automation_web_2.0" target="_blank" style="color:#764ba2;font-size:.85em;font-weight:600;text-decoration:none">→ Automation Repo: automation_web_2.0</a>
-    </div>
+  <div id="unmappedNotice" class="protected" style="display:none;background:#fff8e1;border:2px solid #ffc107;border-radius:10px;padding:16px;margin-bottom:20px">
+    <h3 style="margin:0 0 8px;color:#f57c00">🔗 Automated tests not linked to any TestMO case</h3>
+    <div id="unmappedList"></div>
   </div>
 
   <div class="footer">
@@ -347,6 +316,11 @@ const LS_KEY = 'mumz_coverage_edits';
 // "Not planned" cases keep their mapping but never enter a percentage.
 const PLATFORM_COLOR = {app:'#764ba2', web_uae:'#667eea', web_ksa:'#0e9f6e', web_commons:'#d97706'};
 const PLATFORM_LABEL = {app:'app', web_uae:'UAE', web_ksa:'KSA', web_commons:'web'};
+
+function isEditing() {
+  const el = document.getElementById('editMode');
+  return !!(el && el.checked);
+}
 
 function isScoped(c) { return c.in_scope !== false; }
 function scoped(list) { return (list||[]).filter(isScoped); }
@@ -399,9 +373,9 @@ function render() {
   renderArabicPanel();
   renderFlagPanel();
   renderFolderBreakdown();
-  renderTestsPerModule();
   const notPlanned = (DATA.testmo_tests||[]).filter(c => !isScoped(c)).length
                    + (DATA.app_testmo_tests||[]).filter(c => !isScoped(c)).length;
+  document.querySelectorAll('.edit-only').forEach(el => { el.style.display = isEditing() ? '' : 'none'; });
   const badge = document.getElementById('notPlannedCount');
   if (badge) badge.textContent = `(${notPlanned})`;
   document.getElementById('unsavedBadge').classList.toggle('hidden', !hasUnsavedChanges);
@@ -529,8 +503,8 @@ function testTag(caseId, ref, remover) {
     ? `${meta.path || meta.file || ''}${meta.title ? ' — ' + meta.title : ''}${skip ? '\nSKIPPED: ' + (skip.reason || skip.type) : ''}`
     : 'Not found in the current main branch';
   return `<span class="test-tag" title="${String(title).replace(/"/g, '&quot;')}" style="${hard ? 'opacity:.7;border:1px dashed #dc3545' : ''}">
-    <span style="background:${colour};color:#fff;padding:0 4px;border-radius:3px;font-size:.85em;margin-right:4px">${label}</span>${hard ? '⚠️ ' : ''}${refName(ref)}${meta ? '' : ' ❓'}
-    <span class="remove-tag" onclick="${remover}('${caseId}','${ref}')">×</span></span>`;
+    <span style="background:${colour};color:#fff;padding:0 4px;border-radius:3px;font-size:.85em;margin-right:4px">${label}</span>${hard ? '⚠️ ' : ''}${refName(ref)}${meta ? '' : ' ❓'}${
+      isEditing() ? `<span class="remove-tag" onclick="${remover}('${caseId}','${ref}')">×</span>` : ''}</span>`;
 }
 
 function flagBadge(t) {
@@ -555,16 +529,27 @@ function notesRows(text) {
 }
 
 function notesCell(t, handler) {
+  if (!isEditing()) {
+    return t.notes
+      ? `<div style="font-size:.82em;line-height:1.5;color:#444">${t.notes}</div>`
+      : '<span style="color:#bbb;font-size:.8em">—</span>';
+  }
   return `<textarea class="notes-input" rows="${notesRows(t.notes)}" onchange="${handler}('${t.case_id}', this.value)" placeholder="What is and is not covered...">${t.notes || ''}</textarea>`;
 }
 
 function coverageSelect(t, handler) {
+  const tail = t.skipped_only ? '<div style="font-size:.7em;color:#dc3545;margin-top:4px">only skipped scripts</div>' : '';
+  if (!isEditing()) {
+    const cls = {full: 'status-full', partial: 'status-partial', none: 'status-none'}[t.coverage_status];
+    const text = {full: '✅ Full', partial: '⚠️ Partial', none: '❌ None'}[t.coverage_status];
+    return `<span class="${cls}">${text}</span>${tail}`;
+  }
   const bg = t.coverage_status === 'full' ? '#d4edda' : t.coverage_status === 'partial' ? '#fff3cd' : '#f8d7da';
   return `<select class="coverage-select" onchange="${handler}('${t.case_id}', this.value)" style="padding:4px;border-radius:4px;border:1px solid #ddd;font-size:.8em;background:${bg}">
     <option value="full" ${t.coverage_status==='full'?'selected':''}>✅ Full</option>
     <option value="partial" ${t.coverage_status==='partial'?'selected':''}>⚠️ Partial</option>
     <option value="none" ${t.coverage_status==='none'?'selected':''}>❌ None</option>
-  </select>${t.skipped_only ? '<div style="font-size:.7em;color:#dc3545;margin-top:4px">only skipped scripts</div>' : ''}`;
+  </select>${tail}`;
 }
 
 function renderTable() {
@@ -582,10 +567,10 @@ function renderTable() {
       <td>${t.folder}</td>
       <td>${flagBadge(t)}</td>
       <td>${localeBadge(t)}</td>
-      <td class="edit-cell" id="cell-${t.case_id}">${tags}<br><span class="add-test-btn" onclick="showAutocomplete('${t.case_id}')">+ Add test</span></td>
+      <td class="edit-cell" id="cell-${t.case_id}">${tags || '<span style="color:#bbb;font-size:.8em">—</span>'}${isEditing() ? `<br><span class="add-test-btn" onclick="showAutocomplete('${t.case_id}')">+ Add test</span>` : ''}</td>
       <td>${coverageSelect(t, 'updateCoverage')}</td>
       <td>${notesCell(t, 'updateNotes')}</td>
-      <td><span onclick="deleteWebCase('${t.case_id}')" style="cursor:pointer;color:#dc3545;font-size:1.1em" title="Delete">🗑️</span></td>
+      ${isEditing() ? `<td><span onclick="deleteWebCase('${t.case_id}')" style="cursor:pointer;color:#dc3545;font-size:1.1em" title="Delete">🗑️</span></td>` : ''}
     </tr>`;
   }).join('');
 }
@@ -614,10 +599,10 @@ function renderAppSection() {
       <td><strong>${c.name}</strong></td>
       <td>${flagBadge(c)}</td>
       <td>${localeBadge(c)}</td>
-      <td class="edit-cell" id="appcell-${c.case_id}">${tags}<br><span class="add-test-btn" onclick="showAppAutocomplete('${c.case_id}')">+ Add test</span></td>
+      <td class="edit-cell" id="appcell-${c.case_id}">${tags || '<span style="color:#bbb;font-size:.8em">—</span>'}${isEditing() ? `<br><span class="add-test-btn" onclick="showAppAutocomplete('${c.case_id}')">+ Add test</span>` : ''}</td>
       <td>${coverageSelect(c, 'updateAppCoverage')}</td>
       <td>${notesCell(c, 'updateAppNotes')}</td>
-      <td><span onclick="deleteAppCase('${c.case_id}')" style="cursor:pointer;color:#dc3545;font-size:1.1em" title="Delete">🗑️</span></td>
+      ${isEditing() ? `<td><span onclick="deleteAppCase('${c.case_id}')" style="cursor:pointer;color:#dc3545;font-size:1.1em" title="Delete">🗑️</span></td>` : ''}
     </tr>`;
   }).join('');
 }
@@ -824,74 +809,6 @@ function renderFolderBreakdown() {
         <div class="folder-stats">${s.full} full · ${s.partial} partial of ${s.total} in scope (${pct}%)</div>
       </div>`;
     }).join('');
-}
-
-function renderTestsPerModule() {
-  const container = document.getElementById('testsPerModule');
-  const token = _gt();   // falls back to countsFromData() when absent
-  
-  async function fetchTestCounts(dirPath) {
-    try {
-      const resp = await fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/contents/${dirPath}`, {headers:{'Authorization':`token ${token}`}});
-      if (!resp.ok) return null;
-      const files = (await resp.json()).filter(f => f.name.startsWith('test_') && f.name.endsWith('.py'));
-      const counts = {};
-      for (const f of files) {
-        const srcResp = await fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/contents/${f.path}`, {headers:{'Authorization':`token ${token}`}});
-        if (!srcResp.ok) continue;
-        const data = await srcResp.json();
-        const src = atob(data.content);
-        const matches = src.match(/^def test_/gm);
-        counts[f.name] = matches ? matches.length : 0;
-      }
-      return Object.keys(counts).length > 0 ? counts : null;
-    } catch { return null; }
-  }
-
-  function countsFromData(tests) {
-    const byFile = {};
-    (tests||[]).forEach(t => { byFile[t.file] = (byFile[t.file]||0) + 1; });
-    return byFile;
-  }
-
-  function renderFileList(title, icon, color, byFile) {
-    const entries = Object.entries(byFile).sort((a,b) => b[1] - a[1]);
-    const total = entries.reduce((s, [,c]) => s + c, 0);
-    const max = Math.max(...entries.map(e=>e[1]), 1);
-    return `<div style="background:#fff;border-radius:10px;padding:18px;box-shadow:0 2px 4px rgba(0,0,0,.08);border-top:4px solid ${color}">
-      <h3 style="margin:0 0 12px;color:${color}">${icon} ${title} <span style="font-size:.7em;color:#666;font-weight:400">(${total} tests)</span></h3>
-      ${entries.map(([file, count]) => {
-        const module = file.replace('test_', '').replace('.py', '').replace(/_/g, ' ');
-        const barW = Math.round(count / max * 100);
-        return `<div style="margin-bottom:8px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
-            <span style="font-size:.85em;text-transform:capitalize">${module}</span>
-            <span style="font-weight:700;font-size:.9em;color:${color}">${count}</span>
-          </div>
-          <div style="background:#e9ecef;border-radius:4px;height:6px;overflow:hidden"><div style="height:100%;width:${barW}%;background:${color};border-radius:4px"></div></div>
-        </div>`;
-      }).join('')}
-    </div>`;
-  }
-
-  container.innerHTML = '<p style="color:#999;text-align:center">⏳ Loading test counts...</p>';
-  
-  Promise.all([
-    fetchTestCounts('tests/app'),
-    fetchTestCounts('tests/web/UAE'),
-    fetchTestCounts('tests/web/KSA'),
-    fetchTestCounts('tests/web/commons')
-  ]).then(([app, uae, ksa, commons]) => {
-    const appData = app || countsFromData(DATA.automated_tests.app);
-    const uaeData = uae || countsFromData(DATA.automated_tests.web_uae);
-    const ksaData = ksa || countsFromData(DATA.automated_tests.web_ksa);
-    const commonsData = commons || countsFromData(DATA.automated_tests.web_commons);
-    container.innerHTML = 
-      renderFileList('App Tests (tests/app)', '📱', '#764ba2', appData) +
-      renderFileList('mWeb UAE (tests/web/UAE)', '🇦🇪', '#667eea', uaeData) +
-      renderFileList('mWeb KSA (tests/web/KSA)', '🇸🇦', '#10b981', ksaData) +
-      (Object.keys(commonsData).length ? renderFileList('mWeb shared (tests/web/commons)', '🔗', '#d97706', commonsData) : '');
-  });
 }
 
 // === Edit Functions ===
@@ -1101,98 +1018,6 @@ function renderRiskSection() {
       <div style="color:#c53030;margin-top:4px;font-family:ui-monospace,monospace;font-size:.9em">${reasons}</div>
     </div>`;
   }).join('');
-}
-
-// === Coverage Trend ===
-let COVERAGE_TREND = [];
-
-async function loadTrend() {
-  // Always the committed file. generate_trend.py counts real `def test_` lines
-  // from origin/main; the old in-browser version guessed from commit subjects
-  // and disagreed with it whenever a token was present.
-  try {
-    const resp = await fetch('coverage_trend.json?t=' + Date.now());
-    COVERAGE_TREND = resp.ok ? await resp.json() : [];
-  } catch { COVERAGE_TREND = []; }
-  renderTrendChart();
-}
-
-function renderTrendChart() {
-  const canvas = document.getElementById('trendChart');
-  const ctx = canvas.getContext('2d');
-  const W = canvas.width = canvas.parentElement.offsetWidth - 40;
-  const H = canvas.height = 280;
-  const pad = {top: 30, right: 30, bottom: 60, left: 50};
-  const chartW = W - pad.left - pad.right;
-  const chartH = H - pad.top - pad.bottom;
-  const n = COVERAGE_TREND.length;
-  if (!n) { ctx.fillStyle='#999'; ctx.font='14px sans-serif'; ctx.fillText('Loading trend data from GitHub...', 20, 40); return; }
-  
-  ctx.clearRect(0, 0, W, H);
-  
-  const maxBar = Math.max(...COVERAGE_TREND.map(d => Math.max(d.tests_added || 0, d.tests_fixed || 0)));
-  const barScale = maxBar > 0 ? chartH / (maxBar * 1.4) : 1;
-  const groupW = chartW / n;
-  const barW = Math.min(groupW * 0.3, 50);
-  
-  // Grid
-  ctx.strokeStyle = '#eee'; ctx.lineWidth = 1;
-  for (let i = 0; i <= 4; i++) {
-    const y = pad.top + (chartH / 4) * i;
-    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
-    ctx.fillStyle = '#999'; ctx.font = '10px sans-serif'; ctx.textAlign = 'right';
-    ctx.fillText(Math.round(maxBar * 1.4 - (maxBar * 1.4 / 4) * i), pad.left - 8, y + 3);
-  }
-  
-  // Bars
-  COVERAGE_TREND.forEach((d, i) => {
-    const cx = pad.left + (i + 0.5) * groupW;
-    const added = d.tests_added || 0;
-    const fixed = d.tests_fixed || 0;
-    
-    // Added bar (green)
-    const addH = added * barScale;
-    ctx.fillStyle = '#28a745';
-    ctx.fillRect(cx - barW - 2, pad.top + chartH - addH, barW, addH);
-    ctx.fillStyle = '#155724'; ctx.font = 'bold 12px sans-serif'; ctx.textAlign = 'center';
-    if (added) ctx.fillText('+' + added, cx - barW/2 - 2, pad.top + chartH - addH - 6);
-    
-    // Fixed bar (blue/purple)
-    const fixH = fixed * barScale;
-    ctx.fillStyle = '#667eea';
-    ctx.fillRect(cx + 2, pad.top + chartH - fixH, barW, fixH);
-    ctx.fillStyle = '#333'; ctx.font = 'bold 12px sans-serif';
-    if (fixed) ctx.fillText(fixed, cx + barW/2 + 2, pad.top + chartH - fixH - 6);
-    
-    // Total commits
-    ctx.fillStyle = '#666'; ctx.font = '10px sans-serif';
-    ctx.fillText((d.total_commits || added+fixed) + ' commits', cx, pad.top + chartH + 18);
-    
-    // Month label
-    ctx.fillStyle = '#333'; ctx.font = 'bold 12px sans-serif';
-    ctx.fillText(d.month, cx, pad.top + chartH + 36);
-  });
-  
-  // Legend
-  ctx.font = '12px sans-serif'; ctx.textAlign = 'left';
-  ctx.fillStyle = '#28a745'; ctx.fillRect(pad.left, 8, 14, 14);
-  ctx.fillStyle = '#333'; ctx.fillText('New test functions added', pad.left + 20, 19);
-  ctx.fillStyle = '#667eea'; ctx.fillRect(pad.left + 320, 8, 14, 14);
-  ctx.fillStyle = '#333'; ctx.fillText('Commits changing existing tests', pad.left + 340, 19);
-
-  // Coverage target annotation
-  const totalCases = DATA ? scoped(DATA.testmo_tests).length + scoped(DATA.app_testmo_tests).length : 84;
-  const currentCovered = DATA
-    ? scoped(DATA.testmo_tests).filter(t=>t.coverage_status!=='none').length +
-      scoped(DATA.app_testmo_tests).filter(t=>t.coverage_status!=='none').length
-    : 54;
-  const targetPct = 80;
-  const targetCases = Math.ceil(totalCases * targetPct / 100);
-  const remaining = targetCases - currentCovered;
-  ctx.save();
-  ctx.fillStyle = '#dc3545'; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'right';
-  ctx.fillText(`🎯 Target: ${targetPct}% (${targetCases}/${totalCases} in-scope cases) — ${remaining > 0 ? remaining + ' more needed by Q3 2026' : '✅ Achieved!'}`, W - pad.right, H - 8);
-  ctx.restore();
 }
 
 // === Regression Run History ===
@@ -1667,21 +1492,6 @@ async function updateFromMain() {
     DATA.metadata.total_automated_tests = allAutomated().length;
     DATA.metadata.last_updated = new Date().toISOString().split('T')[0];
     
-    // Build trend from live GitHub commits
-    if (trendResp.ok) {
-      const commits = await trendResp.json();
-      const months = {};
-      commits.forEach(c => {
-        const d = new Date(c.commit.author.date);
-        const key = d.toLocaleString('en-US', {month:'short', year:'numeric'});
-        if (!months[key]) months[key] = {month:key, tests_added:0, tests_fixed:0, total_commits:0, _date:d};
-        months[key].total_commits++;
-        const msg = c.commit.message.toLowerCase();
-        if (/add|new|feat|create|implement/.test(msg)) months[key].tests_added++;
-        else months[key].tests_fixed++;
-      });
-      COVERAGE_TREND = Object.values(months).sort((a,b) => a._date - b._date).map(({_date,...rest}) => rest);
-    }
     
     if (regResp.ok) { REGRESSION_RUNS = await regResp.json(); renderRegressionChart(); }
     
@@ -1698,7 +1508,6 @@ async function updateFromMain() {
     hasUnsavedChanges = false;
     render();
     renderRiskSection();
-    renderTrendChart();
     btn.textContent = '✅ Updated!';
     setTimeout(() => { btn.textContent = '🔄 Update from Main'; }, 2000);
   } catch(e) {
@@ -1797,7 +1606,6 @@ async function init() {
   render();
   renderRiskSection();
   refreshUnmapped();
-  loadTrend();
   loadRegressionRuns();
   refreshTestsFromMain();
 }
