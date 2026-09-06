@@ -189,10 +189,11 @@ def main():
         result[platform] = tests
         print(f"  {platform:12s} {len(files)} files, {len(tests):3d} tests")
 
+    result["_meta"] = {"ref": REF, "sha": head, "repo": str(repo)}
     out = Path(__file__).parent / "automated_tests.json"
     out.write_text(json.dumps(result, indent=2, ensure_ascii=False))
 
-    flat = [t for v in result.values() for t in v]
+    flat = [t for k, v in result.items() if k != "_meta" for t in v]
     hard = sum(1 for t in flat if t["skip"] and t["skip"]["type"] == "hard")
     cond = sum(1 for t in flat if t["skip"] and t["skip"]["type"] == "conditional")
     ar = sum(1 for t in flat if "ar" in t["locales"])

@@ -21,7 +21,14 @@ name: Publish coverage report
 on:
   push:
     branches: [main]
-    paths: ['tests/**']
+    paths:
+      - 'tests/**'          # the mapping is derived from these files
+      - 'pages/**'          # skip markers and locale-aware code move with them
+      - 'pagesApp/**'
+      - 'resources/**'
+  schedule:
+    - cron: '0 6 * * *'     # safety net: AR detection reads commit history, which
+                            # can change without tests/ being touched
   workflow_dispatch:
 
 jobs:

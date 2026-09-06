@@ -543,16 +543,16 @@ def _case_pages():
 
 
 def _source_sha():
-    """Short SHA of the automation-repo commit this report describes."""
+    """Short SHA of the automation-repo commit this report describes.
+
+    Taken from automated_tests.json, which extract_tests.py stamps with the ref
+    it actually read. It used to shell out to git at ../automation_web_2.0 -- a
+    path that only exists locally, so CI produced an empty sha and the report
+    header lost its provenance line.
+    """
     try:
         inv = json.loads((HERE / "automated_tests.json").read_text())
-        repo = (HERE / ".." / "automation_web_2.0").resolve()
-        for ref in ("origin/main", "main", "HEAD"):
-            out = subprocess.run(["git", "rev-parse", "--short", ref],
-                                 cwd=repo, capture_output=True, text=True)
-            if out.returncode == 0 and out.stdout.strip():
-                return out.stdout.strip()
-        return ""
+        return (inv.get("_meta") or {}).get("sha", "")
     except Exception:
         return ""
 
@@ -723,7 +723,7 @@ def main():
         c.setdefault("name_source", "testmo")
     app = load("app_testmo_tests.json")
     automated = load("automated_tests.json")
-    inventory = {t["ref"]: t for v in automated.values() for t in v}
+    inventory = {t["ref"]: t for k, v in automated.items() if k != "_meta" for t in v}
 
     prev_path = HERE / "mapping.json"
     prev = json.loads(prev_path.read_text()) if prev_path.exists() else {}
@@ -776,7 +776,7 @@ def main():
     out = {
         "testmo_tests": web,
         "app_testmo_tests": app,
-        "automated_tests": automated,
+        "automated_tests": {k: v for k, v in automated.items() if k != "_meta"},
         "arabic": ARABIC,
         "flag_reconciliation": reconciliation,
         "unmapped_tests": sorted(r for r in inventory if r not in mapped),
@@ -804,7 +804,7 @@ def main():
                          "web_by_source": by_source},
             "projection": projection(web, app, plan_gaps, reconciliation),
             "regression_repo": reg_stats,
-            "platforms": {k: len(v) for k, v in automated.items()},
+            "platforms": {k: len(v) for k, v in automated.items() if k != "_meta"},
             "total_automated_tests": len(flat),
             "active_tests": len(flat) - len(hard) - len(cond),
             "skipped_hard": len(hard),
