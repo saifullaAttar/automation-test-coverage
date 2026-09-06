@@ -1,93 +1,149 @@
-# Mumzworld Automation Test Coverage Report
+# Mumzworld Automation Test Coverage
 
 **Live:** https://saifullaattar.github.io/automation-test-coverage/
 
-Single source of truth for automation coverage against the TestMO regression suite (Run #2154).
+Single source of truth for what the `automation_web_2.0` suite actually guards, mapped
+case by case against TestMO.
 
-## Quick Start
+* **mWeb** — [regression repository 3 / group 73697](https://mumzworld.testmo.net/repositories/3?group_id=73697).
+  Read via the **run 2154** export, because that is what carries the case names; the
+  repository export has no `Case` column. The build cross-checks the two: same case ids,
+  same `Automated` flags, and every in-scope regression case present.
+* **Native app** — [repository 241](https://mumzworld.testmo.net/repositories/241) release checklist.
+
+## Coverage
+
+Measured against `automation_web_2.0` **`origin/main`**.
+
+| | Full | Partial | Not covered | In scope | Coverage |
+|---|---|---|---|---|---|
+| mWeb — regression repo 3 / group 73697 | 27 | 4 | 24 | 55 | **56 %** |
+| Native app — repository 241 | 9 | 14 | 6 | 29 | **79 %** |
+| **Combined** | **36** | **18** | **30** | **84** | **64 %** |
+
+Automated tests on main: **131** — 111 active, 15 hard-skipped, 5 OS-gated.
+103 are verified in Arabic as well as English.
+
+### Scope: only `Automated = YES` or `NO` counts
+
+The `Automated` column in the TestMO export decides whether a case is an automation
+candidate. Cases marked **Not planned** — Admin-side product creation, Geo-IP, push
+notifications, Maya, GTM, Apple Pay — are kept in the report for reference but are
+excluded from every percentage. This is the same filter as
+`repositories/3?group_id=73697&filter=…custom_automated:[18,144]`.
+
+45 of the 129 cases are excluded this way (26 mWeb + 19 app). Tick **Show *Not planned***
+in the toolbar to see them; the numbers do not move.
+
+The report now mirrors the regression repository exactly: **all 104 cases** of group 73697,
+of which **55 are in scope and all 55 are mapped**. The other 49 are `Not planned` — mostly
+the Returns / refunds / credit-memo area, which has no automation at all. A further 11 Admin
+"Product types" cases sit outside group 73697 and are also `Not planned`, bringing the mWeb
+table to 115 rows.
+
+34 of those cases exist only in the repository export, which has no case-name column. They are
+labelled with TestMO's own **Summary** text, shown in italic with a `◦` marker, and carry
+`name_source: "summary"` — the report never displays a name TestMO did not write. Re-export
+with the case-name column and they pick up their real names automatically.
+
+### What "full" and "partial" mean
+
+* **full** — every scenario in the TestMO case is covered end to end.
+* **partial** — part of the case is covered, *or* the only script covering it is
+  `@pytest.mark.skip`. The Evidence column always says what is and is not covered.
+* **none** — nothing covers it. The Evidence column often records why, including why a
+  previously-recorded link was removed.
+
+Nothing is mapped by keyword similarity. Every link was checked by reading the test's
+docstring and allure title against the TestMO case's summary and steps.
+
+## How it works
 
 ```bash
-make generate   # Parse CSV + extract tests + build mapping
-make open       # Generate and open in browser
+make generate   # parse both exports + read origin/main + build + verify
+make open       # generate, then open the report
 ```
 
-## How It Works
+1. `parse_testmo_csv.py` — parses a TestMO export (run layout or repository layout) and
+   carries the `Automated` column through as `automated_flag` / `in_scope`. It refuses an
+   export with no case-name column rather than producing rows keyed on bare ids.
+2. `extract_tests.py` — reads `tests/app`, `tests/web/UAE`, `tests/web/KSA` and
+   `tests/web/commons` from `origin/main` via `git show`. It never checks out or pulls,
+   so your working branch in `automation_web_2.0` is left alone.
+3. `build_mapping.py` — holds the case-by-case mapping and validates it. It also reads
+   `REG_CSV` (the regression repository export) to tag each mWeb case with its group and to
+   fail the build if the two exports ever disagree on a case's `Automated` flag, or if an
+   in-scope regression case is missing from the report.
+4. `verify_mapping.py` — fails the build if any invariant breaks.
+5. `index.html` — the report; loads `mapping.json`.
 
-1. `parse_testmo_csv.py` — Parses TestMO CSV export into `testmo_tests.json`
-2. `extract_tests.py` — Scans `automation_web_2.0` repo for test functions → `automated_tests.json`
-3. `build_mapping.py` — Maps TestMO cases to automated tests → `mapping.json`
-4. `index.html` — Editable report that loads `mapping.json`
+### Test references are platform-qualified
 
-## Editing Mappings
+Refs look like `app::test_uae_cart_remove_item`, not a bare test name. Ten test names
+exist in two files at once — the app cart and checkout suites were ported from the web
+ones and kept their names — so `test_uae_cart_remove_item` alone cannot say whether the
+app or the mWeb test covers a case. Where a name repeats inside one platform, the file
+stem is appended too: `web_uae::test_uae_cart_apply_gift_wrap_and_place_order@test_checkout`.
 
-The report is **editable in the browser**:
-- Click "+ Add test" on any row to map an automated test
-- Click "×" on a tag to remove a mapping
-- Add notes in the Notes column
-- Click **💾 Save for Everyone** to persist changes for all users (requires password)
+### Arabic
 
-### Persisting Changes
-Edits are saved to a shared GitHub Gist (`37aafe3290f5c00dbd0ddb910a19f939`).
-1. Make your edits in the browser
-2. Click **💾 Save for Everyone**
-3. Enter password: `Mumz@SDET2026`
-4. First time only: enter a GitHub PAT with `gist` scope (saved in your browser)
+Arabic is a run dimension, not a second set of cases: the same suites run with `LOCALE=en`
+and `LOCALE=ar`, so the case counts are unchanged. Delivered by **FALCONS-321** (app),
+**FALCONS-330** (mWeb), **FALCONS-335** and **FALCONS-336** (stabilisation). `conftest.py`
+maps `(COUNTRY, LOCALE)` to `/ar`, `/sa-ar`, `/bh-ar`, `/kw-ar` and `/global-ar`;
+`locatorsApp.json` carries 233 locale-nested selectors. A test is marked AR-verified when
+one of those tickets touched its file or the file carries locale-aware code.
 
-All users will see the updated mappings on next page load.
+## Editing the report
 
-### Resetting
-Click **Reset** to discard localStorage edits and reload from the shared Gist.
+The report is editable in the browser:
 
-## Regenerating
+* **+ Add test** on any row, then pick from the real inventory on main.
+  A newly added link lands as **partial**, never **full** — promote it by hand once you
+  have read the test and written the Evidence note.
+* **×** on a tag removes a link.
+* **💾 Save for Everyone** persists to the shared Gist (`37aafe3290f5c00dbd0ddb910a19f939`).
+  It asks for an edit password and then for a **GitHub PAT with `gist` scope**, kept in your own
+  browser's `localStorage` and never committed.
 
-When new tests are added to `automation_web_2.0`:
-```bash
-make clean && make generate
-```
+### Credentials
 
-Then update the explicit mappings in `build_mapping.py` for any new TestMO cases.
+**This repo is public.** Anything in `index.html` is readable by every visitor, so no token is
+embedded in it. Reads degrade silently without one — the committed JSON already holds everything
+the report renders — and only the two write actions ("Save for Everyone", "Add Regression Run")
+and "Update from Main" ask for a token.
 
-## Auto-Update from FALCON Lambda
+The edit password is a speed bump against accidental edits, not access control: it is in the page
+source. Treat the whole report as public, and keep anything genuinely sensitive out of it.
 
-After each regression run, the FALCON Lambda can auto-append results to `regression_runs.json` via the GitHub Gist API. Add this to the post-run step in `handler.js`:
+`.github/workflows/refresh-coverage.yml` keeps the report current without any browser credential:
+CI checks out the automation repo with a read-only `AUTOMATION_REPO_TOKEN` secret, reruns
+`extract_tests.py` + `build_mapping.py` + `verify_mapping.py`, and commits the result.
 
-```javascript
-// After test run completes, append to regression_runs.json in the coverage Gist
-const coverageGist = '37aafe3290f5c00dbd0ddb910a19f939';
-const token = process.env.COVERAGE_GIST_TOKEN;
-const regResp = await fetch(`https://api.github.com/gists/${coverageGist}`, {
-  headers: { 'Authorization': `token ${token}` }
-});
-const gist = await regResp.json();
-const runs = JSON.parse(gist.files['regression_runs.json']?.content || '[]');
-runs.push({
-  date: new Date().toISOString().split('T')[0],
-  environment: process.env.ENV_CHOICE,
-  country: combo.country,
-  platform: combo.os,
-  passed: totalPassed,
-  failed: totalFailed,
-  skipped: totalSkipped,
-  total: totalPassed + totalFailed + totalSkipped
-});
-await fetch(`https://api.github.com/gists/${coverageGist}`, {
-  method: 'PATCH',
-  headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
-  body: JSON.stringify({ files: { 'regression_runs.json': { content: JSON.stringify(runs, null, 2) } } })
-});
-```
+Structural changes (new cases, re-mapping a whole area) belong in `build_mapping.py`, not
+in the browser — that file is the record of *why* each link exists.
 
-Set `COVERAGE_GIST_TOKEN` as a Lambda environment variable with a GitHub PAT that has `gist` scope.
+**🔄 Update from Main** refreshes the test inventory and drops links to tests that no
+longer exist. It does not create mappings. The keyword matcher that used to run here
+produced links such as `Checkout – Apple pay → test_uae_checkout_cod_normal_coupon`;
+it has been removed.
 
-## Coverage Summary
+## What is not mapped
 
-- **TestMO Cases:** 124 (81 Web from Run #2154 + 43 App from Run #2192)
-- **Automated Tests:** 93 (35 UAE + 32 KSA + 26 App)
-- **Web Coverage:** 31/81 (38%)
-- **App Coverage:** 17/43 (39%)
-- **Target:** 80% by Q3 2026
+19 tests on main are not linked to any case. 15 of those are hard-skipped, so they guard
+nothing today. The rest are UAE cart-behaviour tests (`test_uae_cart_remove_item`,
+`..._increase_and_decrease_quantity`, `..._bundle_multiple_variants`,
+`..._order_summary_updates_after_item_removal`, `..._add_all_product_types_and_verify` and
+friends) plus `test_app_cart_existing_user_orders_no_coupon_yalla` and
+`test_app_gift_registry_create_from_my_registries`.
+
+These are real, running tests with no matching case in either TestMO source — they test cart
+behaviour at a finer grain than the UF1–UF12 user flows the regression repository describes.
+The fix is TestMO-side: add cases for them, or widen the existing UF cases. The report lists
+them in the amber "Automated tests not linked to any case" panel so they stay visible.
 
 ## Stack
-- Python + Selenium + Appium + Pytest + Allure
-- Test Management: [TestMO](https://mumzworld.testmo.net/runs/view/2154)
-- CI: BrowserStack
+
+* Python + Selenium + Appium + Pytest + Allure
+* Test management: [TestMO](https://mumzworld.testmo.net/runs/view/2154)
+* CI: BrowserStack

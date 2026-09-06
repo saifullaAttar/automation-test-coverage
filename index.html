@@ -58,7 +58,7 @@ tr:hover{background:#f8f9ff;transition:background .2s}
 .autocomplete-item{padding:8px 12px;cursor:pointer;font-size:.8em;border-bottom:1px solid #f0f0f0}
 .autocomplete-item:hover{background:#f0f4ff}
 .autocomplete-item small{color:#999;display:block}
-.notes-input{width:100%;border:1px solid #eee;border-radius:4px;padding:4px 6px;font-size:.8em;resize:vertical;min-height:24px}
+.notes-input{width:100%;border:1px solid #eee;border-radius:4px;padding:6px 8px;font-size:.78em;line-height:1.45;resize:vertical;min-height:40px;background:#fcfcfd;color:#444}
 .notes-input:focus{border-color:#667eea;outline:none}
 .section{margin-top:30px;padding:20px;background:#fff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.1);animation:slideUp .6s ease both}
 .section h2{margin-bottom:15px;color:#333;border-bottom:2px solid #667eea;padding-bottom:8px}
@@ -105,7 +105,12 @@ tr:hover{background:#f8f9ff;transition:background .2s}
 <div class="container">
   <div class="header">
     <h1>🧪 Mumzworld Automation Test Coverage</h1>
-    <p>automation_web_2.0 | Source of Truth for Regression Coverage</p>
+    <p>automation_web_2.0 @ main | Source of Truth for Regression &amp; Release-Check Coverage</p>
+    <p style="font-size:.8em;opacity:.85;margin-top:6px">
+      mWeb: <a href="https://mumzworld.testmo.net/repositories/3?group_id=73697" target="_blank" style="color:#fff;text-decoration:underline">regression repository 3 / group 73697</a> (read via run 2154, which carries the case names) ·
+      App: <a href="https://mumzworld.testmo.net/repositories/9?group_id=110524" target="_blank" style="color:#fff;text-decoration:underline">repository 241 release checklist</a>
+    </p>
+    <p style="font-size:.8em;opacity:.8;margin-top:6px">Scope: TestMO cases flagged <strong>Automated = YES or NO</strong>. “Not planned” cases are kept for reference but excluded from every percentage.</p>
     <div style="display:flex;justify-content:space-between;margin-top:12px;font-size:.8em;opacity:.85">
       <span>Owner: <strong>Saifulla Attar</strong></span>
       <span id="lastUpdated"></span>
@@ -125,7 +130,6 @@ tr:hover{background:#f8f9ff;transition:background .2s}
       <option value="full">✅ Covered</option>
       <option value="partial">⚠️ Partial</option>
       <option value="none">❌ Not Covered</option>
-      <option value="new">🆕 Newly Covered This Month</option>
     </select>
     <select id="filterPriority">
       <option value="">All Priorities</option>
@@ -134,6 +138,14 @@ tr:hover{background:#f8f9ff;transition:background .2s}
       <option value="P2 - Medium">P2 - Medium</option>
       <option value="Default">Default</option>
     </select>
+    <select id="filterLocale">
+      <option value="">All Locales</option>
+      <option value="ar">🌍 EN + AR verified</option>
+      <option value="en">EN only</option>
+    </select>
+    <label style="display:flex;align-items:center;gap:6px;font-size:.85em;color:#555;cursor:pointer">
+      <input type="checkbox" id="showNotPlanned" onchange="render()"> Show <em>Not planned</em> <span id="notPlannedCount"></span>
+    </label>
     <span id="unsavedBadge" class="unsaved-badge hidden">⚠ Unsaved Changes</span>
     <button class="btn btn-success" onclick="saveForEveryone()">💾 Save for Everyone</button>
     <button class="btn btn-outline" onclick="exportMapping()">📥 Export JSON</button>
@@ -143,18 +155,35 @@ tr:hover{background:#f8f9ff;transition:background .2s}
   </div>
 
   <div class="stats-grid" id="statsGrid"></div>
+  <div id="scopeNote" style="background:#fff;border:1px solid #e2e1dc;border-left:4px solid #667eea;border-radius:8px;padding:14px 16px;margin-bottom:20px;font-size:.85em;color:#444">
+    <strong>What this measures.</strong> Coverage here is <em>TestMO cases that have at least one automated test mapped to them</em>,
+    against <code>automation_web_2.0</code> <span id="scopeCommit">main</span>. Every link was checked by reading the test's docstring
+    against the case's steps; the Evidence column on each row states what is and is not covered.
+    <br><br>
+    <strong>What it does not measure.</strong> It is not a pass rate — it says nothing about whether these tests currently pass.
+    “Covered” counts <span id="scopeFull"></span> fully covered plus <span id="scopePartial"></span> partially covered cases; on the strict
+    reading of fully covered only, the figure is <strong id="scopeStrict"></strong>. Arabic is AR-ready at the locator level and has not
+    been run on BrowserStack on either platform.
+    <br><br>
+    <strong>Why these differ from the 31 Aug review.</strong> That review put mWeb at 44% (16/36) and app at 55% (16/29).
+    Its mWeb denominator was a different TestMO group whose cases turned out to be empty placeholders; this report measures
+    the regression repository (group 73697) instead. The app denominator is identical — 29 — and the increase there is
+    re-mapping: the store-credit, order-summary, wishlist and gift-registry tests were previously linked to the wrong cases
+    or to none. Neither figure was moved to look better; both are reproducible with <code>make generate</code>.
+  </div>
   <div id="unmappedNotice" class="protected" style="display:none;background:#fff8e1;border:2px solid #ffc107;border-radius:10px;padding:16px;margin-bottom:20px">
-    <h3 style="margin:0 0 8px;color:#f57c00">⚠️ Unmapped Tests — Map these to increase coverage</h3>
-    <p style="color:#666;margin:0 0 10px;font-size:.85em">These tests exist in the repo but aren't mapped to any Testmo case. Click a suggestion or use "+Add test" in the table below.</p>
+    <h3 style="margin:0 0 8px;color:#f57c00">🔗 Automated tests not linked to any TestMO case</h3>
     <div id="unmappedList"></div>
   </div>
   <div id="coverageSummary" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px"></div>
+  <div id="arabicPanel" class="section" style="margin-bottom:20px"></div>
+  <div id="flagPanel" class="section protected" style="margin-bottom:20px"></div>
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
 
   <!-- Priority Risk Section -->
   <div class="section protected" id="riskSection" style="background:#fff5f5;border:2px solid #fc8181;margin-bottom:20px">
-    <h2 style="color:#c53030;border-bottom-color:#fc8181">🚨 Priority Risk — Uncovered P0/P1 Tests</h2>
-    <p style="color:#666;margin-bottom:10px;font-size:.9em">Critical and high-priority tests without automation coverage</p>
+    <h2 style="color:#c53030;border-bottom-color:#fc8181">⚠️ Covered on Paper Only</h2>
+    <p style="color:#666;margin-bottom:10px;font-size:.9em">Cases whose only mapped script is hard-skipped — nothing guards them in a run</p>
     <div id="riskList"></div>
   </div>
 
@@ -173,6 +202,9 @@ tr:hover{background:#f8f9ff;transition:background .2s}
   <!-- Regression Run History -->
   <div class="section" style="margin-bottom:20px">
     <h2>🏁 FALCON Regression Run History</h2>
+    <p style="color:#666;font-size:.85em;margin:8px 0 4px">Execution results — separate from the coverage figures above, which measure mapping only.
+      Runs marked <em>published run</em> come from the Allure reports cited in FALCONS-333; the May figures were hand-entered.
+      Every run here is an <strong>English</strong> run.</p>
     <div id="regressionTable" style="margin-top:10px"></div>
   </div>
 
@@ -209,12 +241,12 @@ tr:hover{background:#f8f9ff;transition:background .2s}
         <thead>
           <tr>
             <th style="width:80px">Case ID</th>
-            <th style="width:28%">Test Name</th>
-            <th>Priority</th>
-            <th style="width:80px">Automated</th>
-            <th style="width:28%">Mapped Automated Tests</th>
-            <th style="width:120px">Coverage</th>
-            <th style="width:13%">Notes</th>
+            <th style="width:24%">Test Name</th>
+            <th style="width:70px" title="TestMO Automated column. Only YES/NO cases count towards coverage.">Auto</th>
+            <th style="width:70px" title="Locales the mapped tests are AR-ready for (locator level, not a run)">Locale</th>
+            <th style="width:26%">Mapped Automated Tests</th>
+            <th style="width:100px">Coverage</th>
+            <th style="width:24%">Evidence / gaps</th>
             <th style="width:40px"></th>
           </tr>
         </thead>
@@ -233,13 +265,13 @@ tr:hover{background:#f8f9ff;transition:background .2s}
       <thead>
         <tr>
           <th style="width:80px">Case ID</th>
-          <th style="width:23%">Test Name</th>
+          <th style="width:19%">Test Name</th>
           <th>Folder</th>
-          <th>Priority</th>
-          <th style="width:80px">Automated</th>
-          <th style="width:28%">Mapped Automated Tests</th>
-          <th style="width:120px">Coverage</th>
-          <th style="width:13%">Notes</th>
+          <th style="width:70px" title="TestMO Automated column. Only YES/NO cases count towards coverage.">Auto</th>
+          <th style="width:70px" title="Locales the mapped tests are AR-ready for (locator level, not a run)">Locale</th>
+          <th style="width:26%">Mapped Automated Tests</th>
+          <th style="width:100px">Coverage</th>
+          <th style="width:22%">Evidence / gaps</th>
           <th style="width:40px"></th>
         </tr>
       </thead>
@@ -309,93 +341,229 @@ let DATA = null;
 let hasUnsavedChanges = false;
 const LS_KEY = 'mumz_coverage_edits';
 
+// === Scope, refs and small shared helpers ===
+// Only cases flagged Automated = YES/NO in TestMO are automation candidates.
+// "Not planned" cases keep their mapping but never enter a percentage.
+const PLATFORM_COLOR = {app:'#764ba2', web_uae:'#667eea', web_ksa:'#0e9f6e', web_commons:'#d97706'};
+const PLATFORM_LABEL = {app:'app', web_uae:'UAE', web_ksa:'KSA', web_commons:'web'};
+
+function isScoped(c) { return c.in_scope !== false; }
+function scoped(list) { return (list||[]).filter(isScoped); }
+function showingNotPlanned() {
+  const el = document.getElementById('showNotPlanned');
+  return !!(el && el.checked);
+}
+function visibleCases(list) {
+  return showingNotPlanned() ? (list||[]) : scoped(list);
+}
+
+function allAutomated() {
+  return Object.values(DATA.automated_tests || {}).flat();
+}
+function testByRef(ref) {
+  return allAutomated().find(t => (t.ref || t.name) === ref) || null;
+}
+function refName(ref) {
+  const at = String(ref).indexOf('@');
+  const base = at === -1 ? String(ref) : String(ref).slice(0, at);
+  const sep = base.indexOf('::');
+  return sep === -1 ? base : base.slice(sep + 2);
+}
+function refPlatform(ref) {
+  const sep = String(ref).indexOf('::');
+  return sep === -1 ? '' : String(ref).slice(0, sep);
+}
+
+function tally(list) {
+  const s = scoped(list);
+  const full = s.filter(c => c.coverage_status === 'full').length;
+  const partial = s.filter(c => c.coverage_status === 'partial').length;
+  return {
+    total: (list||[]).length, inScope: s.length, outOfScope: (list||[]).length - s.length,
+    full, partial, covered: full + partial, none: s.length - full - partial,
+    pct: s.length ? Math.round((full + partial) / s.length * 100) : 0,
+    pctFull: s.length ? Math.round(full / s.length * 100) : 0,
+  };
+}
+
+function skippedRefs() {
+  return allAutomated().filter(t => t.skip && t.skip.type === 'hard');
+}
+
 function render() {
   renderStats();
   renderFilters();
   renderTable();
   renderAppSection();
+  renderArabicPanel();
+  renderFlagPanel();
   renderFolderBreakdown();
   renderTestsPerModule();
+  const notPlanned = (DATA.testmo_tests||[]).filter(c => !isScoped(c)).length
+                   + (DATA.app_testmo_tests||[]).filter(c => !isScoped(c)).length;
+  const badge = document.getElementById('notPlannedCount');
+  if (badge) badge.textContent = `(${notPlanned})`;
   document.getElementById('unsavedBadge').classList.toggle('hidden', !hasUnsavedChanges);
-  document.getElementById('lastUpdated').textContent = `Last generated: ${DATA.metadata.last_updated}`;
+  const gen = DATA.metadata.generated_at || DATA.metadata.last_updated;
+  const ageDays = Math.floor((Date.now() - new Date(gen).getTime()) / 86400000);
+  const stale = ageDays > 14;
+  const edits = DATA._gistEdits ? ` · ${DATA._gistEdits} browser edit(s) applied` : '';
+  document.getElementById('lastUpdated').innerHTML =
+    `${stale ? '⚠️ ' : ''}Generated ${DATA.metadata.last_updated}` +
+    (DATA.metadata.source_sha ? ` from main @ <code>${DATA.metadata.source_sha}</code>` : '') +
+    ` · ${ageDays === 0 ? 'today' : ageDays + ' day' + (ageDays === 1 ? '' : 's') + ' ago'}${edits}` +
+    (stale ? ' — <strong>re-run the refresh workflow</strong>' : '');
 }
 
 function renderStats() {
-  const total = DATA.testmo_tests.length;
-  const covered = DATA.testmo_tests.filter(t => t.coverage_status !== 'none').length;
-  const appTests = DATA.app_testmo_tests || [];
-  const appTotal = appTests.length;
-  const appCovered = appTests.filter(t => t.coverage_status !== 'none').length;
-  const combinedTotal = total + appTotal;
-  const combinedCovered = covered + appCovered;
-  const pct = Math.round(combinedCovered / combinedTotal * 100);
-  const totalAuto = DATA.metadata.total_automated_tests;
-  const webAuto = (DATA.automated_tests.web_uae||[]).length + (DATA.automated_tests.web_ksa||[]).length;
-  const appAuto = (DATA.automated_tests.app||[]).length;
-  const webPct = Math.round(covered / total * 100);
-  const appPct = appTotal ? Math.round(appCovered / appTotal * 100) : 0;
-  
+  const web = tally(DATA.testmo_tests);
+  const app = tally(DATA.app_testmo_tests);
+  const all = {
+    inScope: web.inScope + app.inScope,
+    full: web.full + app.full,
+    partial: web.partial + app.partial,
+    outOfScope: web.outOfScope + app.outOfScope,
+  };
+  all.covered = all.full + all.partial;
+  all.none = all.inScope - all.covered;
+  all.pct = all.inScope ? Math.round(all.covered / all.inScope * 100) : 0;
+  all.pctFull = all.inScope ? Math.round(all.full / all.inScope * 100) : 0;
+
+  const auto = allAutomated();
+  const skipped = skippedRefs().length;
+
   document.getElementById('statsGrid').innerHTML = `
-    <div class="stat-card"><div class="stat-number">${combinedTotal}</div><div class="stat-label">Total TestMO Cases</div></div>
-    <div class="stat-card"><div class="stat-number">${combinedCovered}</div><div class="stat-label">Covered</div></div>
-    <div class="stat-card"><div class="stat-number">${combinedTotal - combinedCovered}</div><div class="stat-label">Not Covered</div></div>
-    <div class="stat-card"><div class="stat-number">${pct}%</div><div class="stat-label">Overall Coverage</div></div>
-    <div class="stat-card"><div class="stat-number">${totalAuto}</div><div class="stat-label">Automated Tests</div></div>
+    <div class="stat-card"><div class="stat-number">${all.inScope}</div><div class="stat-label">Cases in scope<br><small style="color:#999">${all.outOfScope} “Not planned” excluded</small></div></div>
+    <div class="stat-card"><div class="stat-number" style="color:#28a745">${all.full}</div><div class="stat-label">Fully covered (${all.pctFull}%)</div></div>
+    <div class="stat-card"><div class="stat-number" style="color:#f0ad4e">${all.partial}</div><div class="stat-label">Partially covered</div></div>
+    <div class="stat-card"><div class="stat-number" style="color:#dc3545">${all.none}</div><div class="stat-label">Not covered</div></div>
+    <div class="stat-card"><div class="stat-number">${all.pct}%</div><div class="stat-label">Coverage — ${all.covered}/${all.inScope}</div></div>
+    <div class="stat-card"><div class="stat-number">${auto.length}</div><div class="stat-label">Automated tests</div></div>
+    <div class="stat-card"><div class="stat-number" style="color:${skipped ? '#dc3545' : '#28a745'}">${skipped}</div><div class="stat-label">Automated but not running<br><small style="color:#999">hard-skipped scripts</small></div></div>
+    <div class="stat-card"><div class="stat-number" style="color:#0e6b3d">${(DATA.metadata.unmapped_count || 0) - (DATA.metadata.unmapped_and_skipped || 0)}</div><div class="stat-label">Passing, but no TestMO case<br><small style="color:#999">coverage the plan does not describe</small></div></div>
   `;
 
-  document.getElementById('coverageSummary').innerHTML = `
-    <div style="background:#fff;border-radius:10px;padding:20px;box-shadow:0 2px 4px rgba(0,0,0,.1);border-top:4px solid #764ba2">
-      <h3 style="margin:0 0 12px;color:#764ba2">📱 App Coverage</h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#333">${appTotal}</div><div style="font-size:.8em;color:#666">Total Cases</div></div>
-        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#28a745">${appCovered}</div><div style="font-size:.8em;color:#666">Cases Covered</div></div>
-        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#dc3545">${appTotal - appCovered}</div><div style="font-size:.8em;color:#666">Cases Not Covered</div></div>
-        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#764ba2">${appPct}%</div><div style="font-size:.8em;color:#666">Coverage</div></div>
+  const card = (icon, title, colour, t, scripts) => `
+    <div style="background:#fff;border-radius:10px;padding:20px;box-shadow:0 2px 4px rgba(0,0,0,.1);border-top:4px solid ${colour}">
+      <h3 style="margin:0 0 12px;color:${colour}">${icon} ${title}
+        <span style="font-size:.65em;color:#888;font-weight:400">${t.inScope} in scope · ${t.outOfScope} not planned</span></h3>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#28a745">${t.full}</div><div style="font-size:.8em;color:#666">Full</div></div>
+        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#f0ad4e">${t.partial}</div><div style="font-size:.8em;color:#666">Partial</div></div>
+        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#dc3545">${t.none}</div><div style="font-size:.8em;color:#666">None</div></div>
+        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:${colour}">${t.pct}%</div><div style="font-size:.8em;color:#666">Covered</div></div>
       </div>
-      <div style="background:#e9ecef;border-radius:10px;height:12px;margin-top:12px;overflow:hidden"><div style="height:100%;width:${appPct}%;background:linear-gradient(90deg,#764ba2,#667eea);border-radius:10px"></div></div>
-      <div style="margin-top:8px;font-size:.8em;color:#666">Test scripts: ${appAuto}</div>
-    </div>
-    <div style="background:#fff;border-radius:10px;padding:20px;box-shadow:0 2px 4px rgba(0,0,0,.1);border-top:4px solid #667eea">
-      <h3 style="margin:0 0 12px;color:#667eea">🌐 mWeb Coverage</h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#333">${total}</div><div style="font-size:.8em;color:#666">Total Cases</div></div>
-        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#28a745">${covered}</div><div style="font-size:.8em;color:#666">Cases Covered</div></div>
-        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#dc3545">${total - covered}</div><div style="font-size:.8em;color:#666">Cases Not Covered</div></div>
-        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#667eea">${webPct}%</div><div style="font-size:.8em;color:#666">Coverage</div></div>
+      <div style="background:#e9ecef;border-radius:10px;height:12px;margin-top:12px;overflow:hidden;display:flex">
+        <div style="height:100%;width:${t.inScope ? t.full / t.inScope * 100 : 0}%;background:#28a745"></div>
+        <div style="height:100%;width:${t.inScope ? t.partial / t.inScope * 100 : 0}%;background:#f0ad4e"></div>
       </div>
-      <div style="background:#e9ecef;border-radius:10px;height:12px;margin-top:12px;overflow:hidden"><div style="height:100%;width:${webPct}%;background:linear-gradient(90deg,#667eea,#764ba2);border-radius:10px"></div></div>
-      <div style="margin-top:8px;font-size:.8em;color:#666">Test scripts: ${webAuto} (UAE: ${(DATA.automated_tests.web_uae||[]).length} + KSA: ${(DATA.automated_tests.web_ksa||[]).length})</div>
-    </div>
-  `;
+      <div style="margin-top:8px;font-size:.8em;color:#666">${scripts}</div>
+    </div>`;
 
-  document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressFill').textContent = pct + '% Overall Coverage';
+  const n = k => (DATA.automated_tests[k] || []).length;
+  const reg = DATA.metadata.regression_repo;
+  const webScripts = `Test scripts: ${n('web_uae') + n('web_ksa') + n('web_commons')} (UAE ${n('web_uae')} + KSA ${n('web_ksa')} + shared ${n('web_commons')})`
+    + (reg ? `<br><span style="color:#0e9f6e">✓ mirrors regression repository 3 / group 73697 — all ${reg.total_cases} cases, ${reg.in_scope} in scope, all mapped</span>` : '');
+  const otherGroup = (DATA.testmo_tests || []).filter(c => c.source === 'other_group').length;
+  document.getElementById('coverageSummary').innerHTML =
+    card('📱', 'App Coverage', '#764ba2', app, `Test scripts: ${n('app')} · TestMO repository 241 release checklist`) +
+    card('🌐', 'mWeb Coverage', '#667eea', web,
+         webScripts + (otherGroup ? `<br><span style="color:#999">${otherGroup} Admin “Product types” cases sit outside that group (all Not planned)</span>` : ''));
+
+  const note = document.getElementById('scopeNote');
+  if (note) {
+    document.getElementById('scopeCommit').textContent = `main (${DATA.metadata.source_branch || 'origin/main'}, generated ${DATA.metadata.last_updated})`;
+    document.getElementById('scopeFull').textContent = `${all.full}`;
+    document.getElementById('scopePartial').textContent = `${all.partial}`;
+    document.getElementById('scopeStrict').textContent = `${all.full}/${all.inScope} = ${all.pctFull}%`;
+  }
+
+  const fill = document.getElementById('progressFill');
+  fill.style.width = all.pct + '%';
+  fill.textContent = `${all.pct}% covered — ${all.full} full + ${all.partial} partial of ${all.inScope} in-scope cases`;
 }
 
 function renderFilters() {
   const folders = [...new Set(DATA.testmo_tests.map(t => t.folder))].sort();
   const sel = document.getElementById('filterFolder');
+  const keep = sel.value;
   sel.innerHTML = '<option value="">All Folders</option>' + folders.map(f => `<option value="${f}">${f}</option>`).join('');
+  sel.value = keep;
+}
+
+function matchesFilters(t) {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const status = document.getElementById('filterStatus').value;
+  const priority = document.getElementById('filterPriority').value;
+  const localeEl = document.getElementById('filterLocale');
+  const locale = localeEl ? localeEl.value : '';
+  if (status && t.coverage_status !== status) return false;
+  if (priority && t.priority !== priority) return false;
+  const locales = t.locales || ['en'];
+  if (locale === 'ar' && !locales.includes('ar')) return false;
+  if (locale === 'en' && locales.includes('ar')) return false;
+  if (search) {
+    const hay = (t.name + t.case_id + t.folder + (t.functionality||'') + (t.notes||'') +
+                 t.automated_tests.join(' ')).toLowerCase();
+    if (!hay.includes(search)) return false;
+  }
+  return true;
 }
 
 function getFilteredTests() {
-  const search = document.getElementById('searchInput').value.toLowerCase();
   const folder = document.getElementById('filterFolder').value;
-  const status = document.getElementById('filterStatus').value;
-  const priority = document.getElementById('filterPriority').value;
-  const newCases = new Set(DATA.metadata.newly_covered || []);
-  
-  return DATA.testmo_tests.filter(t => {
-    if (folder && t.folder !== folder) return false;
-    if (status === 'new') { if (!newCases.has(t.case_id)) return false; }
-    else if (status && t.coverage_status !== status) return false;
-    if (priority && t.priority !== priority) return false;
-    if (search) {
-      const hay = (t.name + t.case_id + t.folder + t.functionality + t.automated_tests.join(' ')).toLowerCase();
-      if (!hay.includes(search)) return false;
-    }
-    return true;
-  });
+  return visibleCases(DATA.testmo_tests).filter(t => (!folder || t.folder === folder) && matchesFilters(t));
+}
+
+// A mapped test rendered as a tag: platform badge, bare name, and a warning
+// triangle when the script exists but is hard-skipped so it never runs.
+function testTag(caseId, ref, remover) {
+  const meta = testByRef(ref);
+  const platform = refPlatform(ref) || (meta && meta.platform) || '';
+  const colour = PLATFORM_COLOR[platform] || '#888';
+  const label = PLATFORM_LABEL[platform] || platform;
+  const skip = meta && meta.skip;
+  const hard = skip && skip.type === 'hard';
+  const title = meta
+    ? `${meta.path || meta.file || ''}${meta.title ? ' — ' + meta.title : ''}${skip ? '\nSKIPPED: ' + (skip.reason || skip.type) : ''}`
+    : 'Not found in the current main branch';
+  return `<span class="test-tag" title="${String(title).replace(/"/g, '&quot;')}" style="${hard ? 'opacity:.7;border:1px dashed #dc3545' : ''}">
+    <span style="background:${colour};color:#fff;padding:0 4px;border-radius:3px;font-size:.85em;margin-right:4px">${label}</span>${hard ? '⚠️ ' : ''}${refName(ref)}${meta ? '' : ' ❓'}
+    <span class="remove-tag" onclick="${remover}('${caseId}','${ref}')">×</span></span>`;
+}
+
+function flagBadge(t) {
+  const flag = (t.automated_flag || '').toUpperCase();
+  const style = {YES: '#28a745', NO: '#6c757d'}[flag] || '#bbb';
+  const text = flag === 'NOT PLANNED' ? 'n/p' : (flag || '?').toLowerCase();
+  const title = isScoped(t) ? `TestMO Automated = ${t.automated_flag}` :
+    `TestMO Automated = ${t.automated_flag} — excluded from every percentage`;
+  return `<span title="${title}" style="background:${style};color:#fff;padding:2px 6px;border-radius:4px;font-size:.75em;font-weight:600">${text}</span>`;
+}
+
+function localeBadge(t) {
+  const ar = (t.locales || ['en']).includes('ar');
+  return ar
+    ? '<span title="Mapped tests are AR-ready — locale-aware locators and data; not a passing Arabic run" style="background:#0e9f6e;color:#fff;padding:2px 6px;border-radius:4px;font-size:.75em;font-weight:600">EN·AR</span>'
+    : '<span title="Mapped tests are only verified in English" style="background:#e9ecef;color:#666;padding:2px 6px;border-radius:4px;font-size:.75em">EN</span>';
+}
+
+// Roughly fit the box to the note so the evidence reads as prose, not a slit.
+function notesRows(text) {
+  return Math.min(14, Math.max(2, Math.ceil((text || '').length / 34)));
+}
+
+function notesCell(t, handler) {
+  return `<textarea class="notes-input" rows="${notesRows(t.notes)}" onchange="${handler}('${t.case_id}', this.value)" placeholder="What is and is not covered...">${t.notes || ''}</textarea>`;
+}
+
+function coverageSelect(t, handler) {
+  const bg = t.coverage_status === 'full' ? '#d4edda' : t.coverage_status === 'partial' ? '#fff3cd' : '#f8d7da';
+  return `<select class="coverage-select" onchange="${handler}('${t.case_id}', this.value)" style="padding:4px;border-radius:4px;border:1px solid #ddd;font-size:.8em;background:${bg}">
+    <option value="full" ${t.coverage_status==='full'?'selected':''}>✅ Full</option>
+    <option value="partial" ${t.coverage_status==='partial'?'selected':''}>⚠️ Partial</option>
+    <option value="none" ${t.coverage_status==='none'?'selected':''}>❌ None</option>
+  </select>${t.skipped_only ? '<div style="font-size:.7em;color:#dc3545;margin-top:4px">only skipped scripts</div>' : ''}`;
 }
 
 function renderTable() {
@@ -403,30 +571,19 @@ function renderTable() {
   const tbody = document.getElementById('tableBody');
   tbody.innerHTML = tests.map(t => {
     const prioClass = t.priority.startsWith('P0') ? 'priority-p0' : t.priority.startsWith('P1') ? 'priority-p1' : 'priority-p2';
-    const tags = t.automated_tests.map(at => 
-      `<span class="test-tag">${at}<span class="remove-tag" onclick="removeTest('${t.case_id}','${at}')">×</span></span>`
-    ).join('');
-    
-    const autoVal = (t.automated || '').toUpperCase();
-    const autoBg = autoVal === 'YES' ? '#d4edda' : autoVal === 'NO' ? '#f8d7da' : '#ffffff';
-    const autoColor = autoVal === 'YES' ? '#155724' : autoVal === 'NO' ? '#721c24' : '#333';
-    const autoDropdown = `<select class="automated-select" onchange="updateWebAutomated('${t.case_id}', this.value)" style="padding:4px 8px;border-radius:12px;border:1px solid #ddd;font-size:.78em;font-weight:600;background:${autoBg};color:${autoColor};cursor:pointer">
-      <option value="YES" ${autoVal==='YES'?'selected':''}>YES</option>
-      <option value="NO" ${autoVal==='NO'?'selected':''}>NO</option>
-    </select>`;
-    return `<tr>
-      <td><a href="https://mumzworld.testmo.net/runs/view/2154?test_id=${t.test_id}${t.page && t.page>1 ? '&pagination_current='+t.page : ''}" target="_blank" style="color:#667eea;font-weight:600">C-${t.case_id}</a></td>
-      <td><strong>${t.name}</strong>${t.summary ? '<br><small style="color:#888">' + t.summary.substring(0,100) + '</small>' : ''}</td>
+    const tags = t.automated_tests.map(ref => testTag(t.case_id, ref, 'removeTest')).join('');
+    const dim = isScoped(t) ? '' : 'background:#fafafa;color:#999';
+    return `<tr style="${dim}">
+      <td><a href="https://mumzworld.testmo.net/runs/view/2154?test_id=${t.test_id}${t.page && t.page > 1 ? '&pagination_current=' + t.page : ''}" target="_blank" title="${t.source === 'other_group' ? 'Outside group 73697 — Admin “Product types” group' : 'Regression repository 3 / group 73697'}" style="color:#667eea;font-weight:600">C-${t.case_id}</a></td>
+      <td>${t.name_source === 'summary'
+            ? `<em style="color:#555" title="The repository export has no case-name column — this is TestMO's own Summary text">${t.name}</em> <span style="font-size:.7em;color:#b58900" title="Label taken from the TestMO Summary, not a case name">◦</span>`
+            : `<strong>${t.name}</strong>`}${t.summary && t.name_source !== 'summary' ? '<br><small style="color:#888">' + t.summary.substring(0,120) + '</small>' : ''}</td>
       <td>${t.folder}</td>
-      <td class="${prioClass}">${t.priority}</td>
-      <td>${autoDropdown}</td>
+      <td>${flagBadge(t)}</td>
+      <td>${localeBadge(t)}</td>
       <td class="edit-cell" id="cell-${t.case_id}">${tags}<br><span class="add-test-btn" onclick="showAutocomplete('${t.case_id}')">+ Add test</span></td>
-      <td><select class="coverage-select" onchange="updateCoverage('${t.case_id}', this.value)" style="padding:4px;border-radius:4px;border:1px solid #ddd;font-size:.8em;background:${t.coverage_status==='full'?'#d4edda':t.coverage_status==='partial'?'#fff3cd':'#f8d7da'}">
-        <option value="full" ${t.coverage_status==='full'?'selected':''}>✅ Covered</option>
-        <option value="partial" ${t.coverage_status==='partial'?'selected':''}>⚠️ Partial</option>
-        <option value="none" ${t.coverage_status==='none'?'selected':''}>❌ Not Covered</option>
-      </select></td>
-      <td><textarea class="notes-input" onchange="updateNotes('${t.case_id}', this.value)" placeholder="Add notes...">${t.notes || ''}</textarea></td>
+      <td>${coverageSelect(t, 'updateCoverage')}</td>
+      <td>${notesCell(t, 'updateNotes')}</td>
       <td><span onclick="deleteWebCase('${t.case_id}')" style="cursor:pointer;color:#dc3545;font-size:1.1em" title="Delete">🗑️</span></td>
     </tr>`;
   }).join('');
@@ -435,110 +592,193 @@ function renderTable() {
 function renderAppSection() {
   const appTests = DATA.app_testmo_tests || [];
   if (!appTests.length) return;
-  
-  const total = appTests.length;
-  const covered = appTests.filter(t => t.coverage_status !== 'none').length;
-  const pct = Math.round(covered / total * 100);
-  
+  const t = tally(appTests);
+
   document.getElementById('appStatsGrid').innerHTML = `
-    <div class="stat-card"><div class="stat-number">${total}</div><div class="stat-label">App TestMO Cases</div></div>
-    <div class="stat-card"><div class="stat-number">${covered}</div><div class="stat-label">Covered</div></div>
-    <div class="stat-card"><div class="stat-number">${total - covered}</div><div class="stat-label">Not Covered</div></div>
-    <div class="stat-card"><div class="stat-number">${pct}%</div><div class="stat-label">App Coverage</div></div>
+    <div class="stat-card"><div class="stat-number">${t.inScope}</div><div class="stat-label">App cases in scope<br><small style="color:#999">${t.outOfScope} “Not planned” excluded</small></div></div>
+    <div class="stat-card"><div class="stat-number" style="color:#28a745">${t.full}</div><div class="stat-label">Fully covered</div></div>
+    <div class="stat-card"><div class="stat-number" style="color:#f0ad4e">${t.partial}</div><div class="stat-label">Partially covered</div></div>
+    <div class="stat-card"><div class="stat-number" style="color:#dc3545">${t.none}</div><div class="stat-label">Not covered</div></div>
+    <div class="stat-card"><div class="stat-number">${t.pct}%</div><div class="stat-label">App coverage — ${t.covered}/${t.inScope}</div></div>
   `;
-  document.getElementById('appProgressFill').style.width = pct + '%';
-  document.getElementById('appProgressFill').textContent = pct + '% App Coverage';
-  
-  document.getElementById('appTableBody').innerHTML = appTests.map(t => {
-    const tags = t.automated_tests.map(at => 
-      `<span class="test-tag">${at}<span class="remove-tag" onclick="removeAppTest('${t.case_id}','${at}')">×</span></span>`
-    ).join('');
-    const autoVal = (t.automated || '').toUpperCase();
-    const autoBg = autoVal === 'YES' ? '#d4edda' : autoVal === 'NO' ? '#f8d7da' : '#ffffff';
-    const autoColor = autoVal === 'YES' ? '#155724' : autoVal === 'NO' ? '#721c24' : '#333';
-    const autoDropdown = `<select class="automated-select" onchange="updateAppAutomated('${t.case_id}', this.value)" style="padding:4px 8px;border-radius:12px;border:1px solid #ddd;font-size:.78em;font-weight:600;background:${autoBg};color:${autoColor};cursor:pointer">
-      <option value="YES" ${autoVal==='YES'?'selected':''}>YES</option>
-      <option value="NO" ${autoVal==='NO'?'selected':''}>NO</option>
-    </select>`;
-    return `<tr>
-      <td><a href="https://mumzworld.testmo.net/repositories/9?group_id=110524${t.page && t.page>1 ? '&pagination_current='+t.page : ''}&case_id=${t.case_id}" target="_blank" style="color:#667eea;font-weight:600">C-${t.case_id}</a></td>
-      <td><strong>${t.name}</strong></td>
-      <td>${t.priority}</td>
-      <td>${autoDropdown}</td>
-      <td class="edit-cell" id="appcell-${t.case_id}">${tags}<br><span class="add-test-btn" onclick="showAppAutocomplete('${t.case_id}')">+ Add test</span></td>
-      <td><select class="coverage-select" onchange="updateAppCoverage('${t.case_id}', this.value)" style="padding:4px;border-radius:4px;border:1px solid #ddd;font-size:.8em;background:${t.coverage_status==='full'?'#d4edda':t.coverage_status==='partial'?'#fff3cd':'#f8d7da'}">
-        <option value="full" ${t.coverage_status==='full'?'selected':''}>✅ Covered</option>
-        <option value="partial" ${t.coverage_status==='partial'?'selected':''}>⚠️ Partial</option>
-        <option value="none" ${t.coverage_status==='none'?'selected':''}>❌ Not Covered</option>
-      </select></td>
-      <td><textarea class="notes-input" onchange="updateAppNotes('${t.case_id}', this.value)" placeholder="Add notes...">${t.notes || ''}</textarea></td>
-      <td><span onclick="deleteAppCase('${t.case_id}')" style="cursor:pointer;color:#dc3545;font-size:1.1em" title="Delete">🗑️</span></td>
+  const fill = document.getElementById('appProgressFill');
+  fill.style.width = t.pct + '%';
+  fill.textContent = `${t.pct}% — ${t.full} full + ${t.partial} partial of ${t.inScope}`;
+
+  document.getElementById('appTableBody').innerHTML = visibleCases(appTests).filter(matchesFilters).map(c => {
+    const tags = c.automated_tests.map(ref => testTag(c.case_id, ref, 'removeAppTest')).join('');
+    const dim = isScoped(c) ? '' : 'background:#fafafa;color:#999';
+    return `<tr style="${dim}">
+      <td><a href="https://mumzworld.testmo.net/repositories/9?group_id=110524${c.page && c.page > 1 ? '&pagination_current=' + c.page : ''}&case_id=${c.case_id}" target="_blank" style="color:#667eea;font-weight:600">C-${c.case_id}</a></td>
+      <td><strong>${c.name}</strong></td>
+      <td>${flagBadge(c)}</td>
+      <td>${localeBadge(c)}</td>
+      <td class="edit-cell" id="appcell-${c.case_id}">${tags}<br><span class="add-test-btn" onclick="showAppAutocomplete('${c.case_id}')">+ Add test</span></td>
+      <td>${coverageSelect(c, 'updateAppCoverage')}</td>
+      <td>${notesCell(c, 'updateAppNotes')}</td>
+      <td><span onclick="deleteAppCase('${c.case_id}')" style="cursor:pointer;color:#dc3545;font-size:1.1em" title="Delete">🗑️</span></td>
     </tr>`;
   }).join('');
 }
 
-function showAppAutocomplete(caseId) {
-  closeAutocomplete();
-  const cell = document.getElementById('appcell-' + caseId);
-  const test = DATA.app_testmo_tests.find(t => t.case_id === caseId);
-  const existing = new Set(test.automated_tests);
-  const appAutoTests = DATA.automated_tests.app.filter(t => !existing.has(t.name));
-  
+// === Arabic locale ===
+// Arabic is a run dimension, not a second set of cases: the same suites run
+// with LOCALE=en and LOCALE=ar, so nothing here changes the case counts.
+function renderArabicPanel() {
+  const ar = DATA.arabic;
+  const panel = document.getElementById('arabicPanel');
+  if (!ar) { panel.style.display = 'none'; return; }
+  panel.style.display = '';
+  const auto = allAutomated();
+  const arTests = auto.filter(t => (t.locales || []).includes('ar'));
+  const byPlatform = {};
+  arTests.forEach(t => { byPlatform[t.platform] = (byPlatform[t.platform] || 0) + 1; });
+
+  panel.innerHTML = `
+    <h2 style="color:#0e9f6e;border-bottom-color:#0e9f6e">🌍 Arabic Locale Coverage</h2>
+    <p style="color:#555;font-size:.9em;margin:10px 0 10px">${ar.summary}</p>
+    ${ar.caveat ? `<div style="background:#fff8e1;border-left:4px solid #f0ad4e;border-radius:4px;padding:10px 12px;margin-bottom:16px;font-size:.85em;color:#5d4037"><strong>Read this before quoting the number.</strong> ${ar.caveat}</div>` : ''}
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px">
+      <div class="stat-card" style="animation:none"><div class="stat-number" style="color:#0e9f6e">${arTests.length}/${auto.length}</div><div class="stat-label">Tests AR-ready<br><small style="color:#999">locator level, not a run</small></div></div>
+      <div class="stat-card" style="animation:none"><div class="stat-number" style="color:#0e9f6e">${ar.stores.length}</div><div class="stat-label">Arabic storefronts</div></div>
+      <div class="stat-card" style="animation:none"><div class="stat-number" style="color:#0e9f6e">${ar.app_locale_selectors}</div><div class="stat-label">Locale-nested app selectors</div></div>
+      <div class="stat-card" style="animation:none"><div class="stat-number" style="color:#0e9f6e">${ar.tickets.length}</div><div class="stat-label">Delivery tickets</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+      <div>
+        <h3 style="font-size:.95em;margin-bottom:8px">Delivered by</h3>
+        ${ar.tickets.map(t => `<div style="padding:8px 12px;margin:4px 0;background:#f0fdf4;border-left:4px solid #0e9f6e;border-radius:4px;font-size:.85em">
+          <strong>${t.id}</strong>${t.pr ? ` <span style="color:#888">(PR #${t.pr})</span>` : ''}<br><span style="color:#555">${t.what}</span></div>`).join('')}
+      </div>
+      <div>
+        <h3 style="font-size:.95em;margin-bottom:8px">AR-verified tests per suite</h3>
+        ${Object.entries(byPlatform).map(([k, v]) => `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #eee;font-size:.85em">
+          <span><span style="background:${PLATFORM_COLOR[k]||'#888'};color:#fff;padding:1px 6px;border-radius:3px;font-size:.85em">${PLATFORM_LABEL[k]||k}</span> ${k}</span><strong>${v}</strong></div>`).join('')}
+        <h3 style="font-size:.95em;margin:16px 0 8px">Arabic storefronts covered</h3>
+        <div style="font-size:.85em;color:#555">${ar.stores.map(s => `<code style="background:#f0fdf4;padding:2px 6px;border-radius:3px;margin-right:6px">${s}</code>`).join('')}</div>
+      </div>
+      <div>
+        <h3 style="font-size:.95em;margin-bottom:8px">How it works</h3>
+        <ul style="font-size:.82em;color:#555;padding-left:18px;line-height:1.7">
+          ${ar.mechanics.map(m => `<li>${m}</li>`).join('')}
+        </ul>
+        <div style="font-size:.82em;color:#555;margin-top:10px">Translated data: ${ar.language_data_keys.map(k => `<code>${k}</code>`).join(', ')}</div>
+      </div>
+    </div>`;
+}
+
+// === TestMO Automated flag vs what the code actually does ===
+function renderFlagPanel() {
+  const rec = DATA.flag_reconciliation;
+  const panel = document.getElementById('flagPanel');
+  if (!rec) { panel.style.display = 'none'; return; }
+  const groups = [
+    ['no_but_automated', 'Flagged NO but fully automated — flip to YES', '#28a745'],
+    ['yes_but_none', 'Flagged YES but nothing covers it — flip to NO', '#dc3545'],
+    ['yes_but_partial', 'Flagged YES but only partially automated', '#f0ad4e'],
+    ['not_planned_but_automated', 'Marked Not planned but already automated — re-flag to bring into scope', '#667eea'],
+  ];
+  const rows = groups.map(([key, title, colour]) => {
+    const items = [...(rec.web?.[key] || []).map(e => ({...e, plat: 'mWEB'})),
+                   ...(rec.app?.[key] || []).map(e => ({...e, plat: 'App'}))];
+    if (!items.length) return '';
+    return `<div style="margin-bottom:14px">
+      <h3 style="font-size:.9em;color:${colour};margin-bottom:6px">${title} <span style="color:#888;font-weight:400">(${items.length})</span></h3>
+      ${items.map(e => `<div style="padding:5px 10px;margin:3px 0;background:#fff;border-left:3px solid ${colour};border-radius:3px;font-size:.82em">
+        <span style="color:#888">${e.plat}</span> <strong>C-${e.case_id}</strong> ${e.name}</div>`).join('')}
+    </div>`;
+  }).join('');
+  panel.style.display = '';
+  const pj = DATA.metadata.projection;
+  const now = DATA.metadata.coverage;
+  const banner = pj ? `
+    <div style="background:#f0f7ff;border:1px solid #b6d4fe;border-left:4px solid #2a78d6;border-radius:6px;padding:12px 14px;margin-bottom:14px">
+      <div style="font-size:.85em;color:#0a4a8f;font-weight:600;margin-bottom:6px">If TestMO is corrected — projection, not a measurement</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;font-size:.85em">
+        ${[['mWeb','web'],['App','app'],['Overall','combined']].map(([lab,k]) => `
+          <div><span style="color:#666">${lab}</span><br>
+            <span style="color:#999">${now[k].covered}/${now[k].in_scope} = ${now[k].pct}%</span>
+            <span style="color:#0a4a8f;font-weight:700"> → ${pj[k].covered}/${pj[k].in_scope} = ${pj[k].pct}%</span>
+          </div>`).join('')}
+      </div>
+      <ul style="margin:10px 0 0;padding-inline-start:18px;font-size:.82em;color:#333">
+        ${pj.actions.map(a => `<li><strong>${a.id}.</strong> ${a.what} — <span style="color:#666">${a.detail}</span></li>`).join('')}
+      </ul>
+      <p style="margin:8px 0 0;font-size:.78em;color:#666">The figures above the fold stay at
+        <strong>${now.combined.covered}/${now.combined.in_scope} = ${now.combined.pct}%</strong> until TestMO actually changes.
+        Nothing here is applied to them: A and C are TestMO flag decisions, and B would mean inventing case ids.</p>
+    </div>` : '';
+
+  panel.innerHTML = `<h2>🏷️ TestMO “Automated” flag — corrections to make</h2>
+    <p style="color:#666;font-size:.85em;margin:8px 0 14px">The flag decides which cases count towards coverage, so these disagreements between TestMO and the code are worth fixing in TestMO.</p>
+    ${banner}${rows}`;
+}
+
+// Shared autocomplete over the real test inventory. It inserts platform-qualified
+// refs -- 10 test names exist in two files at once, so a bare name is ambiguous.
+function buildAutocomplete(cell, existing, candidates, onPick) {
   const div = document.createElement('div');
   div.className = 'autocomplete';
   div.id = 'autocomplete-active';
   const input = document.createElement('input');
   input.type = 'text';
-  input.placeholder = 'Type test name or press Enter to add custom...';
+  input.placeholder = 'Type a test name…';
   input.style.cssText = 'width:100%;padding:8px;border:none;border-bottom:1px solid #eee;font-size:.85em';
   div.appendChild(input);
   const list = document.createElement('div');
   div.appendChild(list);
-  
+
   function renderList(filter) {
-    const filtered = filter ? appAutoTests.filter(t => t.name.toLowerCase().includes(filter.toLowerCase())) : appAutoTests;
-    const exactMatch = filter && appAutoTests.some(t => t.name === filter);
-    const alreadyMapped = filter && existing.has(filter);
-    let html = filtered.slice(0, 20).map(t => 
-      `<div class="autocomplete-item" onclick="addAppTest('${caseId}','${t.name}')">${t.name}<small>${t.file}</small></div>`
-    ).join('');
-    if (filter && !exactMatch && !alreadyMapped) {
-      html = `<div class="autocomplete-item" style="color:#1a73e8;font-weight:500" onclick="addAppTest('${caseId}','${filter.trim()}')">➕ Add "${filter.trim()}" (custom)<small>Press Enter or click</small></div>` + html;
-    }
-    list.innerHTML = html;
+    const f = (filter || '').toLowerCase();
+    const filtered = f ? candidates.filter(t => (t.ref || t.name).toLowerCase().includes(f)) : candidates;
+    list.innerHTML = filtered.slice(0, 25).map(t => {
+      const ref = t.ref || t.name;
+      const skip = t.skip ? ` · ⚠️ ${t.skip.type === 'hard' ? 'skipped' : 'OS-gated'}` : '';
+      return `<div class="autocomplete-item" onclick="${onPick}('${t._caseId}','${ref}')">${refName(ref)}
+        <small>${PLATFORM_LABEL[t.platform] || t.platform} — ${t.path || t.file || ''}${skip}</small></div>`;
+    }).join('') || '<div class="autocomplete-item" style="color:#999">No matching test on main</div>';
   }
   input.oninput = () => renderList(input.value);
-  input.onkeydown = (e) => {
-    if (e.key === 'Enter' && input.value.trim()) {
-      addAppTest(caseId, input.value.trim());
-    }
-  };
   renderList('');
   cell.appendChild(div);
   input.focus();
   setTimeout(() => document.addEventListener('click', closeOnOutside), 100);
 }
 
-function addAppTest(caseId, testName) {
+function showAppAutocomplete(caseId) {
+  closeAutocomplete();
   const test = DATA.app_testmo_tests.find(t => t.case_id === caseId);
-  if (!test.automated_tests.includes(testName)) {
-    test.automated_tests.push(testName);
-    test.coverage_status = 'full';
+  const existing = new Set(test.automated_tests);
+  const candidates = (DATA.automated_tests.app || [])
+    .filter(t => !existing.has(t.ref || t.name))
+    .map(t => ({...t, _caseId: caseId}));
+  buildAutocomplete(document.getElementById('appcell-' + caseId), existing, candidates, 'addAppTest');
+}
+
+function addAppTest(caseId, ref) {
+  const test = DATA.app_testmo_tests.find(t => t.case_id === caseId);
+  if (!test.automated_tests.includes(ref)) {
+    test.automated_tests.push(ref);
+    // Deliberately 'partial', not 'full': a link is evidence that something is
+    // covered, not proof the whole case is. Promote it by hand once you have
+    // read the test and written the note.
+    if (test.coverage_status === 'none') test.coverage_status = 'partial';
+    recomputeCase(test);
     saveEdits();
     closeAutocomplete();
-    renderAppSection();
-    renderStats();
+    render();
     refreshUnmapped();
   }
 }
 
-function removeAppTest(caseId, testName) {
+function removeAppTest(caseId, ref) {
   const test = DATA.app_testmo_tests.find(t => t.case_id === caseId);
-  test.automated_tests = test.automated_tests.filter(t => t !== testName);
-  test.coverage_status = test.automated_tests.length > 0 ? 'full' : 'none';
+  test.automated_tests = test.automated_tests.filter(r => r !== ref);
+  if (!test.automated_tests.length) test.coverage_status = 'none';
+  recomputeCase(test);
   saveEdits();
-  renderAppSection();
-  renderStats();
+  render();
+  refreshUnmapped();
 }
 
 function updateAppNotes(caseId, value) {
@@ -551,40 +791,43 @@ function updateAppCoverage(caseId, value) {
   const test = DATA.app_testmo_tests.find(t => t.case_id === caseId);
   test.coverage_status = value;
   saveEdits();
-  renderAppSection();
-  renderStats();
+  render();
 }
 
-function updateAppAutomated(caseId, value) {
-  const test = DATA.app_testmo_tests.find(t => t.case_id === caseId);
-  test.automated = value;
-  saveEdits();
-  renderAppSection();
+// Keep the derived fields (locales, skipped-only flag) honest after an edit.
+function recomputeCase(c) {
+  const metas = c.automated_tests.map(testByRef).filter(Boolean);
+  const locales = new Set();
+  metas.forEach(m => (m.locales || ['en']).forEach(l => locales.add(l)));
+  c.locales = locales.size ? [...locales].sort().reverse() : ['en'];
+  c.skipped_only = metas.length > 0 && metas.every(m => m.skip && m.skip.type === 'hard');
 }
 
 function renderFolderBreakdown() {
   const folders = {};
-  DATA.testmo_tests.forEach(t => {
-    if (!folders[t.folder]) folders[t.folder] = {total: 0, covered: 0};
+  scoped(DATA.testmo_tests).forEach(t => {
+    if (!folders[t.folder]) folders[t.folder] = {total: 0, full: 0, partial: 0};
     folders[t.folder].total++;
-    if (t.coverage_status !== 'none') folders[t.folder].covered++;
+    if (t.coverage_status === 'full') folders[t.folder].full++;
+    else if (t.coverage_status === 'partial') folders[t.folder].partial++;
   });
-  
+
   document.getElementById('folderBreakdown').innerHTML = Object.entries(folders)
     .sort((a,b) => b[1].total - a[1].total)
     .map(([name, s]) => {
-      const pct = Math.round(s.covered / s.total * 100);
+      const covered = s.full + s.partial;
+      const pct = Math.round(covered / s.total * 100);
       const cls = pct === 0 ? 'none' : pct === 100 ? 'covered' : 'partial';
       return `<div class="folder-card ${cls}">
         <div class="folder-name">${name}</div>
-        <div class="folder-stats">${s.covered}/${s.total} covered (${pct}%)</div>
+        <div class="folder-stats">${s.full} full · ${s.partial} partial of ${s.total} in scope (${pct}%)</div>
       </div>`;
     }).join('');
 }
 
 function renderTestsPerModule() {
   const container = document.getElementById('testsPerModule');
-  const token = _gt();
+  const token = _gt();   // falls back to countsFromData() when absent
   
   async function fetchTestCounts(dirPath) {
     try {
@@ -635,70 +878,30 @@ function renderTestsPerModule() {
   Promise.all([
     fetchTestCounts('tests/app'),
     fetchTestCounts('tests/web/UAE'),
-    fetchTestCounts('tests/web/KSA')
-  ]).then(([app, uae, ksa]) => {
+    fetchTestCounts('tests/web/KSA'),
+    fetchTestCounts('tests/web/commons')
+  ]).then(([app, uae, ksa, commons]) => {
     const appData = app || countsFromData(DATA.automated_tests.app);
     const uaeData = uae || countsFromData(DATA.automated_tests.web_uae);
     const ksaData = ksa || countsFromData(DATA.automated_tests.web_ksa);
+    const commonsData = commons || countsFromData(DATA.automated_tests.web_commons);
     container.innerHTML = 
       renderFileList('App Tests (tests/app)', '📱', '#764ba2', appData) +
       renderFileList('mWeb UAE (tests/web/UAE)', '🇦🇪', '#667eea', uaeData) +
-      renderFileList('mWeb KSA (tests/web/KSA)', '🇸🇦', '#10b981', ksaData);
+      renderFileList('mWeb KSA (tests/web/KSA)', '🇸🇦', '#10b981', ksaData) +
+      (Object.keys(commonsData).length ? renderFileList('mWeb shared (tests/web/commons)', '🔗', '#d97706', commonsData) : '');
   });
 }
 
 // === Edit Functions ===
 function showAutocomplete(caseId) {
   closeAutocomplete();
-  const cell = document.getElementById('cell-' + caseId);
   const test = DATA.testmo_tests.find(t => t.case_id === caseId);
   const existing = new Set(test.automated_tests);
-  
-  // Build list of all available tests
-  const allTests = [];
-  for (const [platform, tests] of Object.entries(DATA.automated_tests)) {
-    tests.forEach(t => { if (!existing.has(t.name)) allTests.push({...t, platform}); });
-  }
-  
-  const div = document.createElement('div');
-  div.className = 'autocomplete';
-  div.id = 'autocomplete-active';
-  
-  const input = document.createElement('input');
-  input.type = 'text';
-  input.placeholder = 'Type test name or press Enter to add custom...';
-  input.style.cssText = 'width:100%;padding:8px;border:none;border-bottom:1px solid #eee;font-size:.85em';
-  div.appendChild(input);
-  
-  const list = document.createElement('div');
-  div.appendChild(list);
-  
-  function renderList(filter) {
-    const filtered = filter ? allTests.filter(t => t.name.toLowerCase().includes(filter.toLowerCase())) : allTests.slice(0, 20);
-    const exactMatch = filter && allTests.some(t => t.name === filter);
-    const alreadyMapped = filter && existing.has(filter);
-    let html = filtered.slice(0, 20).map(t => 
-      `<div class="autocomplete-item" onclick="addTest('${caseId}','${t.name}')">${t.name}<small>${t.platform} — ${t.file}</small></div>`
-    ).join('');
-    if (filter && !exactMatch && !alreadyMapped) {
-      html = `<div class="autocomplete-item" style="color:#1a73e8;font-weight:500" onclick="addTest('${caseId}','${filter.trim()}')">➕ Add "${filter.trim()}" (custom)<small>Press Enter or click</small></div>` + html;
-    }
-    list.innerHTML = html;
-  }
-  
-  input.oninput = () => renderList(input.value);
-  input.onkeydown = (e) => {
-    if (e.key === 'Enter' && input.value.trim()) {
-      addTest(caseId, input.value.trim());
-    }
-  };
-  renderList('');
-  
-  cell.appendChild(div);
-  input.focus();
-  
-  // Close on outside click
-  setTimeout(() => document.addEventListener('click', closeOnOutside), 100);
+  const candidates = allAutomated()
+    .filter(t => !existing.has(t.ref || t.name))
+    .map(t => ({...t, _caseId: caseId}));
+  buildAutocomplete(document.getElementById('cell-' + caseId), existing, candidates, 'addTest');
 }
 
 function closeOnOutside(e) {
@@ -711,28 +914,27 @@ function closeAutocomplete() {
   document.removeEventListener('click', closeOnOutside);
 }
 
-function addTest(caseId, testName) {
+function addTest(caseId, ref) {
   const test = DATA.testmo_tests.find(t => t.case_id === caseId);
-  if (!test.automated_tests.includes(testName)) {
-    test.automated_tests.push(testName);
-    test.coverage_status = 'full';
+  if (!test.automated_tests.includes(ref)) {
+    test.automated_tests.push(ref);
+    if (test.coverage_status === 'none') test.coverage_status = 'partial';
+    recomputeCase(test);
     saveEdits();
     closeAutocomplete();
-    renderTable();
-    renderStats();
+    render();
     refreshUnmapped();
-    renderFolderBreakdown();
   }
 }
 
-function removeTest(caseId, testName) {
+function removeTest(caseId, ref) {
   const test = DATA.testmo_tests.find(t => t.case_id === caseId);
-  test.automated_tests = test.automated_tests.filter(t => t !== testName);
-  test.coverage_status = test.automated_tests.length > 0 ? 'full' : 'none';
+  test.automated_tests = test.automated_tests.filter(r => r !== ref);
+  if (!test.automated_tests.length) test.coverage_status = 'none';
+  recomputeCase(test);
   saveEdits();
-  renderTable();
-  renderStats();
-  renderFolderBreakdown();
+  render();
+  refreshUnmapped();
 }
 
 function updateNotes(caseId, value) {
@@ -744,14 +946,6 @@ function updateNotes(caseId, value) {
 function updateCoverage(caseId, value) {
   const test = DATA.testmo_tests.find(t => t.case_id === caseId);
   test.coverage_status = value;
-  saveEdits();
-  renderStats();
-  renderFolderBreakdown();
-}
-
-function updateWebAutomated(caseId, value) {
-  const test = DATA.testmo_tests.find(t => t.case_id === caseId);
-  test.automated = value;
   saveEdits();
   render();
 }
@@ -765,10 +959,12 @@ function addNewWebCase() {
   if (!name) return;
   const folder = prompt('Enter folder (e.g., Checkout, Cart, Registration):') || '';
   const priority = prompt('Enter priority (P0 - Critical, P1 - High, P2 - Medium):') || 'P2 - Medium';
+  const flag = (prompt('TestMO Automated flag — YES, NO or Not planned:', 'NO') || 'NO').trim();
   DATA.testmo_tests.push({
     case_id: caseId.trim(), test_id: '', name: name, folder: folder,
     functionality: '', priority: priority, status: '', summary: '',
-    tags: '', automated_tests: [], coverage_status: 'none', notes: ''
+    automated_flag: flag, in_scope: ['YES','NO'].includes(flag.toUpperCase()),
+    tags: '', automated_tests: [], coverage_status: 'none', notes: '', locales: ['en']
   });
   saveEdits();
   render();
@@ -782,11 +978,13 @@ function addNewAppCase() {
   const name = prompt('Enter test case name:');
   if (!name) return;
   const priority = prompt('Enter priority (P0 - Critical, P1 - High, P2 - Medium):') || 'P2 - Medium';
+  const flag = (prompt('TestMO Automated flag — YES, NO or Not planned:', 'NO') || 'NO').trim();
   if (!DATA.app_testmo_tests) DATA.app_testmo_tests = [];
   DATA.app_testmo_tests.push({
-    case_id: caseId.trim(), test_id: '', name: name, folder: '',
+    case_id: caseId.trim(), test_id: '', name: name, folder: 'Release checklist',
     functionality: '', priority: priority, status: '', summary: '',
-    tags: '', automated_tests: [], coverage_status: 'none', notes: ''
+    automated_flag: flag, in_scope: ['YES','NO'].includes(flag.toUpperCase()),
+    tags: '', automated_tests: [], coverage_status: 'none', notes: '', locales: ['en']
   });
   saveEdits();
   render();
@@ -814,8 +1012,8 @@ function deleteAppCase(caseId) {
 // === Persistence ===
 function saveEdits() {
   const edits = {
-    web: DATA.testmo_tests.map(t => ({case_id: t.case_id, automated: t.automated, automated_tests: t.automated_tests, coverage_status: t.coverage_status, notes: t.notes})),
-    app: (DATA.app_testmo_tests||[]).map(t => ({case_id: t.case_id, automated: t.automated, automated_tests: t.automated_tests, coverage_status: t.coverage_status, notes: t.notes}))
+    web: DATA.testmo_tests.map(t => ({case_id: t.case_id, automated_tests: t.automated_tests, coverage_status: t.coverage_status, notes: t.notes})),
+    app: (DATA.app_testmo_tests||[]).map(t => ({case_id: t.case_id, automated_tests: t.automated_tests, coverage_status: t.coverage_status, notes: t.notes}))
   };
   localStorage.setItem(LS_KEY, JSON.stringify(edits));
   hasUnsavedChanges = true;
@@ -842,10 +1040,17 @@ document.getElementById('importFile').addEventListener('change', function(e) {
   const reader = new FileReader();
   reader.onload = function(ev) {
     try {
-      DATA = JSON.parse(ev.target.result);
+      const incoming = JSON.parse(ev.target.result);
+      if (schemaOf(incoming) < SCHEMA) {
+        alert(`❌ That file is on schema ${schemaOf(incoming)}; this report needs ${SCHEMA}.\n\nRegenerate it with \`make generate\` before importing.`);
+        return;
+      }
+      DATA = incoming;
       localStorage.removeItem(LS_KEY);
       hasUnsavedChanges = false;
       render();
+      renderRiskSection();
+      refreshUnmapped();
       alert('✅ Mapping imported successfully!');
     } catch(err) { alert('❌ Invalid JSON file'); }
   };
@@ -862,30 +1067,39 @@ function resetChanges() {
 }
 
 // === Filter listeners ===
-['searchInput','filterFolder','filterStatus','filterPriority'].forEach(id => {
-  document.getElementById(id).addEventListener('input', renderTable);
-  document.getElementById(id).addEventListener('change', renderTable);
+// render(), not renderTable(): the app table and the folder breakdown honour
+// the same filters, so refreshing only the web table left them out of step.
+['searchInput','filterFolder','filterStatus','filterPriority','filterLocale'].forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const rerender = () => { renderTable(); renderAppSection(); renderFolderBreakdown(); };
+  el.addEventListener('input', rerender);
+  el.addEventListener('change', rerender);
 });
 
 // === Priority Risk Section ===
 function renderRiskSection() {
-  const allTests = [...DATA.testmo_tests, ...(DATA.app_testmo_tests || [])];
-  const riskTests = allTests.filter(t => 
-    t.coverage_status === 'none' && (t.priority.includes('P0') || t.priority.includes('P1'))
-  );
-  
-  if (!riskTests.length) {
-    document.getElementById('riskSection').style.display = 'none';
-    return;
-  }
-  
-  document.getElementById('riskList').innerHTML = riskTests.map(t => 
-    `<div style="padding:8px 12px;margin:4px 0;background:#fff;border-radius:4px;border-left:4px solid ${t.priority.includes('P0')?'#e53e3e':'#dd6b20'};font-size:.85em">
-      <strong style="color:${t.priority.includes('P0')?'#e53e3e':'#dd6b20'}">${t.priority}</strong> — 
+  const all = [...scoped(DATA.testmo_tests), ...scoped(DATA.app_testmo_tests)];
+  // Priority is "Default" on most cases, so a P0/P1 list said little. What does
+  // matter is a case that looks covered but whose only script is hard-skipped.
+  const skippedOnly = all.filter(t => t.skipped_only);
+
+  const section = document.getElementById('riskSection');
+  if (!skippedOnly.length) { section.style.display = 'none'; return; }
+  section.style.display = '';
+
+  document.getElementById('riskList').innerHTML = skippedOnly.map(t => {
+    const reasons = t.automated_tests.map(ref => {
+      const meta = testByRef(ref);
+      const why = meta && meta.skip ? meta.skip.reason : '';
+      return `${refName(ref)}${why ? ` — ${why}` : ''}`;
+    }).join('<br>');
+    return `<div style="padding:8px 12px;margin:4px 0;background:#fff;border-radius:4px;border-left:4px solid #c53030;font-size:.85em">
       <strong>C-${t.case_id}</strong>: ${t.name}
-      <span style="color:#888;margin-left:8px">(${t.folder})</span>
-    </div>`
-  ).join('');
+      <span style="color:#888;margin-left:8px">(${t.folder || 'App'})</span>
+      <div style="color:#c53030;margin-top:4px;font-family:ui-monospace,monospace;font-size:.9em">${reasons}</div>
+    </div>`;
+  }).join('');
 }
 
 // === Coverage Trend ===
@@ -895,6 +1109,7 @@ async function loadTrend() {
   try {
     // Auto-fetch latest commits from automation_web_2.0 main
     const since = '2026-04-01T00:00:00Z';
+    if (!_gt()) throw new Error('no token — use the committed trend');
     const resp = await fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/commits?path=tests/&since=${since}&per_page=100`, {headers:{'Authorization':`token ${_gt()}`}});
     if (!resp.ok) throw new Error('API failed');
     const commits = await resp.json();
@@ -911,7 +1126,7 @@ async function loadTrend() {
     COVERAGE_TREND = Object.values(months).sort((a,b) => a._date - b._date).map(({_date,...rest}) => rest);
   } catch(e) {
     // Fallback to static file
-    try { const resp = await fetch('coverage_trend.json'); COVERAGE_TREND = await resp.json(); } catch { COVERAGE_TREND = []; }
+    try { const resp = await fetch('coverage_trend.json?t=' + Date.now()); COVERAGE_TREND = await resp.json(); } catch { COVERAGE_TREND = []; }
   }
   renderTrendChart();
 }
@@ -980,14 +1195,17 @@ function renderTrendChart() {
   ctx.fillStyle = '#333'; ctx.fillText('Tests Fixed / Updated', pad.left + 340, 19);
 
   // Coverage target annotation
-  const totalCases = (DATA ? DATA.testmo_tests.length + (DATA.app_testmo_tests||[]).length : 124);
-  const currentCovered = DATA ? DATA.testmo_tests.filter(t=>t.coverage_status!=='none').length + (DATA.app_testmo_tests||[]).filter(t=>t.coverage_status!=='none').length : 48;
+  const totalCases = DATA ? scoped(DATA.testmo_tests).length + scoped(DATA.app_testmo_tests).length : 84;
+  const currentCovered = DATA
+    ? scoped(DATA.testmo_tests).filter(t=>t.coverage_status!=='none').length +
+      scoped(DATA.app_testmo_tests).filter(t=>t.coverage_status!=='none').length
+    : 54;
   const targetPct = 80;
   const targetCases = Math.ceil(totalCases * targetPct / 100);
   const remaining = targetCases - currentCovered;
   ctx.save();
   ctx.fillStyle = '#dc3545'; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'right';
-  ctx.fillText(`🎯 Target: ${targetPct}% (${targetCases}/${totalCases} cases) — ${remaining > 0 ? remaining + ' more needed by Q3 2026' : '✅ Achieved!'}`, W - pad.right, H - 8);
+  ctx.fillText(`🎯 Target: ${targetPct}% (${targetCases}/${totalCases} in-scope cases) — ${remaining > 0 ? remaining + ' more needed by Q3 2026' : '✅ Achieved!'}`, W - pad.right, H - 8);
   ctx.restore();
 }
 
@@ -1004,24 +1222,33 @@ const ALLURE_RUNS = [
 ];
 
 async function loadRegressionRuns() {
-  // Load runs from Gist (persisted manual entries) with fallback to local file
+  // The committed file is authoritative: its rows carry provenance (published
+  // Allure run vs hand-entered) and are deduplicated. The Gist is where the
+  // FALCON Lambda appends new runs, so it is merged in for anything the file
+  // does not already have -- it must not overwrite the file, which is what it
+  // used to do, hiding every corrected row behind a stale copy.
+  const key = r => `${r.date}|${r.suite || 'app'}|${r.country}|${r.platform}|${r.environment}`;
+  let fileRuns = [];
   try {
-    const gistResp = await fetch(`https://api.github.com/gists/${GIST_ID}`);
+    const resp = await fetch('regression_runs.json?t=' + Date.now());
+    if (resp.ok) fileRuns = await resp.json();
+  } catch(e) { /* fall back to the gist alone */ }
+
+  const seen = new Set(fileRuns.map(key));
+  try {
+    const gistResp = await fetch(`https://api.github.com/gists/${GIST_ID}?t=${Date.now()}`);
     if (gistResp.ok) {
       const gist = await gistResp.json();
-      if (gist.files['regression_runs.json']) {
-        REGRESSION_RUNS = JSON.parse(gist.files['regression_runs.json'].content);
-      } else {
-        const resp = await fetch('regression_runs.json');
-        REGRESSION_RUNS = await resp.json();
+      const raw = gist.files['regression_runs.json']?.content;
+      if (raw) {
+        for (const r of JSON.parse(raw)) {
+          if (!seen.has(key(r))) { seen.add(key(r)); fileRuns.push({...r, source: r.source || 'manual'}); }
+        }
       }
-    } else {
-      const resp = await fetch('regression_runs.json');
-      REGRESSION_RUNS = await resp.json();
     }
-  } catch(e) {
-    try { const resp = await fetch('regression_runs.json'); REGRESSION_RUNS = await resp.json(); } catch { REGRESSION_RUNS = []; }
-  }
+  } catch(e) { /* gist optional */ }
+
+  REGRESSION_RUNS = fileRuns.sort((a, b) => (a.date || '').localeCompare(b.date || ''));
 
   // Fetch latest from Allure API and append if newer
   try {
@@ -1057,25 +1284,50 @@ async function loadRegressionRuns() {
 
 function refreshUnmapped() {
   const mapped = new Set();
-  for (const t of DATA.testmo_tests) t.automated_tests.forEach(n => mapped.add(n));
-  for (const t of (DATA.app_testmo_tests||[])) t.automated_tests.forEach(n => mapped.add(n));
-  const unmappedApp = DATA.automated_tests.app.filter(t => !mapped.has(t.name));
-  const unmappedWeb = [...(DATA.automated_tests.web_uae||[]), ...(DATA.automated_tests.web_ksa||[])].filter(t => !mapped.has(t.name));
-  const all = [...unmappedApp.map(t => ({...t, platform:'app'})), ...unmappedWeb.map(t => ({...t, platform:'web'}))];
+  for (const t of DATA.testmo_tests) t.automated_tests.forEach(r => mapped.add(r));
+  for (const t of (DATA.app_testmo_tests||[])) t.automated_tests.forEach(r => mapped.add(r));
+  const all = allAutomated().filter(t => !mapped.has(t.ref || t.name));
+
   const notice = document.getElementById('unmappedNotice');
   const list = document.getElementById('unmappedList');
-  if (all.length > 0) {
-    notice.style.display = 'block';
-    list.innerHTML = all.map(t => 
-      `<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #ffe082">
-        <span style="background:${t.platform==='app'?'#764ba2':'#667eea'};color:#fff;padding:2px 8px;border-radius:4px;font-size:.75em">${t.platform}</span>
-        <code style="font-size:.85em">${t.name}</code>
-        <span style="color:#999;font-size:.8em">(${t.file})</span>
-      </div>`
-    ).join('');
-  } else {
-    notice.style.display = 'none';
+  if (!all.length) { notice.style.display = 'none'; return; }
+  notice.style.display = 'block';
+
+  // Two very different things were being lumped together here. A hard-skipped
+  // test with no case is a deficiency; a passing test with no case is coverage
+  // the TestMO plan does not yet describe.
+  const gaps = new Map((DATA.plan_gaps || []).map(g => [g.ref, g]));
+  const skipped = all.filter(t => t.skip && t.skip.type === 'hard');
+  const surplus = all.filter(t => !(t.skip && t.skip.type === 'hard'));
+
+  const row = (t, extra) => {
+    const ref = t.ref || t.name;
+    return `<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #ffe082;flex-wrap:wrap">
+      <span style="background:${PLATFORM_COLOR[t.platform]||'#888'};color:#fff;padding:2px 8px;border-radius:4px;font-size:.75em">${PLATFORM_LABEL[t.platform]||t.platform}</span>
+      <code style="font-size:.85em">${refName(ref)}</code>
+      <span style="color:#999;font-size:.8em">${t.path || t.file || ''}</span>
+      ${extra || ''}
+    </div>`;
+  };
+
+  let html = '';
+  if (surplus.length) {
+    html += `<h4 style="margin:4px 0 6px;font-size:.95em;color:#0e6b3d">✅ Coverage beyond the TestMO plan — ${surplus.length} passing tests with no case</h4>
+      <p style="font-size:.85em;color:#795548;margin-bottom:8px">These run and pass, so they guard the product today — but no TestMO case describes the behaviour,
+      so they cannot lift the case-coverage percentage. Most are the cart scenarios FALCONS-336 ported from the app suite.
+      Add the mirrored cases to TestMO and mWeb moves to roughly
+      <strong>${DATA.metadata.coverage.web.covered + (DATA.plan_gaps||[]).filter(g=>g.platform.startsWith('web')).length}/${DATA.metadata.coverage.web.in_scope + (DATA.plan_gaps||[]).filter(g=>g.platform.startsWith('web')).length}</strong>.</p>`;
+    html += surplus.map(t => {
+      const g = gaps.get(t.ref || t.name);
+      return row(t, g ? `<span style="font-size:.8em;color:#0e6b3d">↳ mirror TestMO case <strong>C-${g.mirrors_case}</strong> — ${g.mirrors_name}</span>` : '');
+    }).join('');
   }
+  if (skipped.length) {
+    html += `<h4 style="margin:16px 0 6px;font-size:.95em;color:#c53030">⚠️ Hard-skipped with no case — ${skipped.length} tests guarding nothing</h4>`;
+    html += skipped.map(t => row(t,
+      `<span style="color:#dc3545;font-size:.8em">skipped: ${t.skip.reason || ''}</span>`)).join('');
+  }
+  list.innerHTML = html;
 }
 
 function renderRegressionChart() {
@@ -1094,8 +1346,7 @@ function renderRegressionChart() {
   }
 
   function getRunLabel(run) {
-    const date = (run.date || '').replace(/-/g, '');
-    return `${run.environment}-${run.platform}-${run.country}-${date}`;
+    return `${run.suite || 'app'} · ${run.country}/${run.platform}`;
   }
 
   const runs = REGRESSION_RUNS.slice().reverse();
@@ -1111,6 +1362,10 @@ function renderRegressionChart() {
           <div style="display:flex;justify-content:space-between;align-items:center">
             <div>
               <div style="font-weight:700;font-size:1em;color:#1a202c">${label}</div>
+              <div style="font-size:.75em;color:#888;margin-top:2px">${d.date} · ${d.environment}
+                ${d.source === 'allure'
+                  ? '<span style="background:#d4edda;color:#155724;padding:1px 5px;border-radius:3px;margin-left:4px">published run</span>'
+                  : '<span style="background:#f1f1f1;color:#777;padding:1px 5px;border-radius:3px;margin-left:4px" title="Hand-entered figure, not a published Allure report">manually recorded</span>'}</div>
               <div style="font-size:.8em;color:#666;margin-top:4px">
                 <span style="color:#28a745">✅ ${d.passed}</span> · 
                 <span style="color:#dc3545">❌ ${d.failed}</span> · 
@@ -1192,12 +1447,31 @@ async function fetchFromAllure() {
   btn.textContent = '⚡ Fetch from Allure';
 }
 
-function _gt(){const d=[10,28,25,18,2,13,45,28,5,25,42,92,75,52,45,48,42,43,39,44,93,0,59,6,27,30,14,8,45,88,23,17,12,45,62,85,34,38,37,2,50,61,7,93,33,39,76,35,59,32,63,57,40,29,24,0,8,67,37,88,37,38,82,52,29,4,45,54,93,34,88,40,15,31,35,28,56,38,55,94,32,44,55,33,44,52,53,7,43,17,32,67,43];const k='mumzworld';return d.map((c,i)=>String.fromCharCode(c^k.charCodeAt(i%k.length))).join('');}
+// GitHub PAT. Never baked into this file: this page is served from a PUBLIC
+// repo, so anything embedded here is readable by every visitor -- the previous
+// XOR-obfuscated constant granted read access to the PRIVATE automation repo
+// and to gists. The token now lives only in the viewer's own localStorage.
+//
+// Reads (trend, inventory refresh, per-module counts) degrade silently without
+// one: the committed JSON already holds everything the report renders.
+const PAT_KEY = 'mumz_gh_pat';
+function _gt() { try { return localStorage.getItem(PAT_KEY) || ''; } catch { return ''; } }
+function requireToken() {
+  let t = _gt();
+  if (!t) {
+    t = (prompt('GitHub personal access token (repo + gist scope).\nStored only in this browser; never committed.') || '').trim();
+    if (!t) return '';
+    try { localStorage.setItem(PAT_KEY, t); } catch {}
+  }
+  return t;
+}
+function forgetToken() { try { localStorage.removeItem(PAT_KEY); } catch {} }
 
 async function saveRun() {
   const pwd = prompt('Enter edit password:');
   if (pwd !== 'Mumz@SDET2026') { alert('❌ Incorrect password'); return; }
-  const token = _gt();
+  const token = requireToken();
+  if (!token) { alert('A GitHub token is required to save.'); return; }
   const passed = parseInt(document.getElementById('runPassed').value) || 0;
   const failed = parseInt(document.getElementById('runFailed').value) || 0;
   const skipped = parseInt(document.getElementById('runSkipped').value) || 0;
@@ -1232,7 +1506,8 @@ async function saveForEveryone() {
   const pwd = prompt('Enter edit password to save for everyone:');
   if (!pwd) return;
   if (pwd !== 'Mumz@SDET2026') { alert('❌ Incorrect password'); return; }
-  const token = _gt();
+  const token = requireToken();
+  if (!token) { alert('A GitHub token is required to save.'); return; }
   try {
     const resp = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
       method: 'PATCH',
@@ -1257,31 +1532,50 @@ async function fetchTestFile(path, token) {
   return atob(data.content);
 }
 
-function extractTestsFromSource(source, fileName) {
+// Mirrors extract_tests.py: same fields, same platform-qualified ref, same
+// skip detection. Keep the two in step -- this is the browser's copy.
+function extractTestsFromSource(source, fileName, platform, path) {
   const tests = [];
   const regex = /((?:@[^\n]+\n)*)def (test_\w+)\(/g;
   let match;
   while ((match = regex.exec(source)) !== null) {
     const decorators = match[1] || '';
     const name = match[2];
-    let title = '';
     const titleMatch = decorators.match(/@allure\.title\(["'](.+?)["']\)/);
-    if (titleMatch) title = titleMatch[1];
-    let tags = [];
-    const tagMatches = decorators.matchAll(/@allure\.tag\((.+?)\)/g);
-    for (const tm of tagMatches) {
+    const featMatch = decorators.match(/@allure\.feature\(["'](.+?)["']\)/);
+    const tags = [];
+    for (const tm of decorators.matchAll(/@allure\.tag\((.+?)\)/g)) {
       tags.push(...tm[1].split(',').map(t => t.trim().replace(/['"]/g, '')));
     }
-    let feature = '';
-    const featMatch = decorators.match(/@allure\.feature\(["'](.+?)["']\)/);
-    if (featMatch) feature = featMatch[1];
-    // Extract docstring
+
+    let skip = null;
+    const hardSkip = decorators.match(/@pytest\.mark\.skip\(\s*(?:reason\s*=\s*)?["'](.*?)["']/s);
+    if (hardSkip) skip = {type: 'hard', reason: hardSkip[1]};
+    else if (/@pytest\.mark\.skip\(/.test(decorators)) skip = {type: 'hard', reason: ''};
+    else if (/@pytest\.mark\.skipif/.test(decorators)) skip = {type: 'conditional', reason: ''};
+
     const fnStart = source.indexOf(`def ${name}(`, match.index);
     const afterDef = source.indexOf(':', fnStart);
-    const docMatch = source.substring(afterDef, afterDef + 500).match(/:\s*\n\s*"""([\s\S]*?)"""/);
-    const docstring = docMatch ? docMatch[1].replace(/\s+/g, ' ').trim().substring(0, 200) : '';
-    tests.push({ name, file: fileName, title, tags, feature, docstring });
+    const docMatch = source.substring(afterDef, afterDef + 800).match(/:\s*\n\s*"""([\s\S]*?)"""/);
+    const docstring = docMatch ? docMatch[1].replace(/\s+/g, ' ').trim().substring(0, 400) : '';
+
+    tests.push({
+      ref: `${platform}::${name}`, name, platform,
+      path: path || '', file: fileName,
+      title: titleMatch ? titleMatch[1] : '',
+      feature: featMatch ? featMatch[1] : '',
+      tags, docstring, skip,
+      parametrized: /@pytest\.mark\.parametrize/.test(decorators),
+      locales: ['en'],
+    });
   }
+  // Same-platform name clashes get the file stem appended, exactly as
+  // extract_tests.py does, so the two copies can never be confused.
+  const counts = {};
+  tests.forEach(t => { counts[t.name] = (counts[t.name] || 0) + 1; });
+  tests.forEach(t => {
+    if (counts[t.name] > 1) t.ref = `${t.platform}::${t.name}@${t.file.replace(/\.py$/, '')}`;
+  });
   return tests;
 }
 
@@ -1291,184 +1585,100 @@ async function updateFromMain() {
   btn.disabled = true;
   try {
     const ts = Date.now();
-    const token = _gt();
+    const token = requireToken();
+    if (!token) {
+      btn.textContent = '🔄 Update from Main';
+      btn.disabled = false;
+      alert('A GitHub token with repo scope is required to read the private automation repo.');
+      return;
+    }
     const since = '2026-04-01T00:00:00Z';
     
     // Fetch mapping, trend commits, regression runs, and test file listings in parallel
-    const [mappingResp, trendResp, regResp, appDirResp, uaeDirResp, ksaDirResp] = await Promise.all([
+    const [mappingResp, trendResp, regResp, appDirResp, uaeDirResp, ksaDirResp, commonsDirResp] = await Promise.all([
       fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/mapping.json?t=${ts}`),
       fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/commits?path=tests/&since=${since}&per_page=100`, {headers:{'Authorization':`token ${token}`}}),
       fetch(`https://raw.githubusercontent.com/saifullaAttar/automation-test-coverage/main/regression_runs.json?t=${ts}`),
       fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/contents/tests/app`, {headers:{'Authorization':`token ${token}`}}),
       fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/contents/tests/web/UAE`, {headers:{'Authorization':`token ${token}`}}),
-      fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/contents/tests/web/KSA`, {headers:{'Authorization':`token ${token}`}})
+      fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/contents/tests/web/KSA`, {headers:{'Authorization':`token ${token}`}}),
+      fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/contents/tests/web/commons`, {headers:{'Authorization':`token ${token}`}})
     ]);
     if (!mappingResp.ok) throw new Error('Fetch mapping failed');
     DATA = await mappingResp.json();
     
     // Discover tests from actual repo test files
-    const testFiles = { app: [], web_uae: [], web_ksa: [] };
+    const testFiles = { app: [], web_uae: [], web_ksa: [], web_commons: [] };
     
     if (appDirResp.ok) {
       const appFiles = (await appDirResp.json()).filter(f => f.name.startsWith('test_') && f.name.endsWith('.py'));
       for (const f of appFiles) {
         const src = await fetchTestFile(f.path, token);
-        testFiles.app.push(...extractTestsFromSource(src, f.name));
+        testFiles.app.push(...extractTestsFromSource(src, f.name, 'app', f.path));
       }
     }
     if (uaeDirResp.ok) {
       const uaeFiles = (await uaeDirResp.json()).filter(f => f.name.startsWith('test_') && f.name.endsWith('.py'));
       for (const f of uaeFiles) {
         const src = await fetchTestFile(f.path, token);
-        testFiles.web_uae.push(...extractTestsFromSource(src, f.name));
+        testFiles.web_uae.push(...extractTestsFromSource(src, f.name, 'web_uae', f.path));
       }
     }
     if (ksaDirResp.ok) {
       const ksaFiles = (await ksaDirResp.json()).filter(f => f.name.startsWith('test_') && f.name.endsWith('.py'));
       for (const f of ksaFiles) {
         const src = await fetchTestFile(f.path, token);
-        testFiles.web_ksa.push(...extractTestsFromSource(src, f.name));
+        testFiles.web_ksa.push(...extractTestsFromSource(src, f.name, 'web_ksa', f.path));
+      }
+    }
+    if (commonsDirResp.ok) {
+      const commonFiles = (await commonsDirResp.json()).filter(f => f.name.startsWith('test_') && f.name.endsWith('.py'));
+      for (const f of commonFiles) {
+        const src = await fetchTestFile(f.path, token);
+        testFiles.web_commons.push(...extractTestsFromSource(src, f.name, 'web_commons', f.path));
       }
     }
     
-    // Update automated_tests with discovered tests (add new ones, keep existing metadata)
-    for (const platform of ['app', 'web_uae', 'web_ksa']) {
-      const existingNames = new Set((DATA.automated_tests[platform]||[]).map(t => t.name));
-      for (const t of testFiles[platform]) {
-        if (!existingNames.has(t.name)) {
-          DATA.automated_tests[platform].push(t);
-        }
+    // Refresh the inventory: add tests that appeared on main, drop tests that
+    // are gone, and keep the metadata we already hold for the survivors.
+    const added = [], removed = [];
+    for (const platform of ['app', 'web_uae', 'web_ksa', 'web_commons']) {
+      const discovered = testFiles[platform];
+      if (!discovered.length) continue;
+      const existing = DATA.automated_tests[platform] || [];
+      const byRef = new Map(existing.map(t => [t.ref || t.name, t]));
+      const next = [];
+      for (const t of discovered) {
+        const known = byRef.get(t.ref);
+        if (known) { next.push({...known, ...t, skip: t.skip, locales: known.locales || t.locales}); }
+        else { next.push(t); added.push(t.ref); }
       }
-      // Remove tests that no longer exist in repo
-      const repoNames = new Set(testFiles[platform].map(t => t.name));
-      if (testFiles[platform].length > 0) {
-        DATA.automated_tests[platform] = DATA.automated_tests[platform].filter(t => repoNames.has(t.name));
+      const discoveredRefs = new Set(discovered.map(t => t.ref));
+      existing.forEach(t => { if (!discoveredRefs.has(t.ref || t.name)) removed.push(t.ref || t.name); });
+      DATA.automated_tests[platform] = next;
+    }
+
+    // Drop links to tests that no longer exist, and never invent new ones.
+    // The keyword matcher that used to live here produced mappings such as
+    // "Checkout - Apple pay" -> test_uae_checkout_cod_normal_coupon. A source
+    // of truth has to be mapped by a human reading both sides.
+    const liveRefs = new Set(allAutomated().map(t => t.ref || t.name));
+    for (const c of [...DATA.testmo_tests, ...(DATA.app_testmo_tests || [])]) {
+      const before = c.automated_tests.length;
+      c.automated_tests = c.automated_tests.filter(r => liveRefs.has(r));
+      if (c.automated_tests.length !== before) {
+        c.notes = (c.notes ? c.notes + ' ' : '') +
+          `[auto] ${before - c.automated_tests.length} mapped test(s) no longer exist on main.`;
       }
+      if (!c.automated_tests.length) c.coverage_status = 'none';
+      recomputeCase(c);
     }
-    
-    // Auto-map new tests to Testmo cases based on keyword matching
-    const allAutoNames = new Set([
-      ...DATA.automated_tests.app.map(t => t.name),
-      ...DATA.automated_tests.web_uae.map(t => t.name),
-      ...DATA.automated_tests.web_ksa.map(t => t.name)
-    ]);
-    
-    // Build set of already-mapped test names
-    const alreadyMapped = new Set();
-    for (const t of DATA.testmo_tests) t.automated_tests.forEach(n => alreadyMapped.add(n));
-    for (const t of (DATA.app_testmo_tests||[])) t.automated_tests.forEach(n => alreadyMapped.add(n));
-    
-    // Find unmapped tests
-    const unmappedApp = DATA.automated_tests.app.filter(t => !alreadyMapped.has(t.name));
-    const unmappedWeb = [...DATA.automated_tests.web_uae, ...DATA.automated_tests.web_ksa].filter(t => !alreadyMapped.has(t.name));
-    
-    // Smart matching: extract core action keywords from test name
-    function getTestIntent(testName) {
-      // Remove prefix: test_app_, test_uae_, test_ksa_
-      const core = testName.replace(/^test_(app_|uae_|ksa_)?/, '');
-      const parts = core.split('_');
-      return { parts, core, 
-        hasCheckout: parts.includes('checkout'),
-        hasCart: parts.includes('cart'),
-        hasPayment: /cc|cod|tabby|tamara|sc|apple/.test(core),
-        hasCoupon: /coupon|cashback|discount|bank/.test(core),
-        hasUser: /user|signup|login|register|profile|address/.test(core),
-        hasHome: /home|explore|search|brand|category/.test(core),
-      };
+    if (added.length || removed.length) {
+      console.info(`Inventory refreshed: +${added.length} / -${removed.length}`, {added, removed});
     }
-    
-    function smartMatch(test, testmoCase) {
-      const intent = getTestIntent(test.name);
-      const caseText = (testmoCase.name + ' ' + (testmoCase.summary||'') + ' ' + (testmoCase.functionality||'')).toLowerCase();
-      let score = 0;
-      
-      // Strong signals: feature area match
-      if (intent.hasCheckout && /checkout|payment|place.*order|paying/.test(caseText)) score += 4;
-      if (intent.hasCart && /cart|add.*item|remove.*item|qty|quantity/.test(caseText)) score += 4;
-      if (intent.hasPayment && /payment|credit card|cod|tabby|tamara|store credit|apple.?pay/.test(caseText)) score += 4;
-      if (intent.hasCoupon && /coupon|discount|cashback/.test(caseText)) score += 4;
-      if (intent.hasUser && /register|login|sign|profile|account/.test(caseText)) score += 4;
-      if (intent.hasHome && /home|search|brand|categor/.test(caseText)) score += 4;
-      
-      // Specific keyword matches from test name parts
-      for (const part of intent.parts) {
-        if (part.length > 3 && caseText.includes(part)) score += 1;
-      }
-      
-      // Penalty: don't map checkout tests to cart cases or vice versa
-      if (intent.hasCheckout && !intent.hasCart && /\bcart\b/.test(caseText) && !/checkout/.test(caseText)) score -= 5;
-      if (intent.hasCart && !intent.hasCheckout && /checkout/.test(caseText) && !/cart/.test(caseText)) score -= 5;
-      
-      return score;
-    }
-    
-    // Auto-map unmapped app tests to UNCOVERED cases first (to increase coverage)
-    const stillUnmappedApp = [];
-    for (const test of unmappedApp) {
-      let bestCase = null, bestScore = 0;
-      // Prefer uncovered cases
-      const uncoveredApp = (DATA.app_testmo_tests||[]).filter(tc => tc.coverage_status === 'none');
-      for (const tc of uncoveredApp) {
-        const score = smartMatch(test, tc);
-        if (score > bestScore) { bestScore = score; bestCase = tc; }
-      }
-      if (bestCase && bestScore >= 5) {
-        bestCase.automated_tests.push(test.name);
-        bestCase.coverage_status = 'full';
-      } else {
-        stillUnmappedApp.push(test);
-      }
-    }
-    
-    // Auto-map unmapped web tests to UNCOVERED cases first
-    const stillUnmappedWeb = [];
-    for (const test of unmappedWeb) {
-      let bestCase = null, bestScore = 0;
-      const uncoveredWeb = DATA.testmo_tests.filter(tc => tc.coverage_status === 'none');
-      for (const tc of uncoveredWeb) {
-        const score = smartMatch(test, tc);
-        if (score > bestScore) { bestScore = score; bestCase = tc; }
-      }
-      if (bestCase && bestScore >= 5) {
-        bestCase.automated_tests.push(test.name);
-        bestCase.coverage_status = 'full';
-      } else {
-        stillUnmappedWeb.push(test);
-      }
-    }
-    
-    // Show unmapped tests in UI for manual mapping
-    const unmappedNotice = document.getElementById('unmappedNotice');
-    const unmappedList = document.getElementById('unmappedList');
-    const allUnmapped = [...stillUnmappedApp.map(t => ({...t, platform:'app'})), ...stillUnmappedWeb.map(t => ({...t, platform:'web'}))];
-    if (allUnmapped.length > 0) {
-      unmappedNotice.style.display = 'block';
-      unmappedList.innerHTML = allUnmapped.map(t => 
-        `<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #ffe082">
-          <span style="background:${t.platform==='app'?'#764ba2':'#667eea'};color:#fff;padding:2px 8px;border-radius:4px;font-size:.75em">${t.platform}</span>
-          <code style="font-size:.85em">${t.name}</code>
-          <span style="color:#999;font-size:.8em">(${t.file})</span>
-        </div>`
-      ).join('');
-    } else {
-      unmappedNotice.style.display = 'none';
-    }
-    
-    // Recalculate coverage_status for all testmo cases
-    for (const t of DATA.testmo_tests) {
-      t.automated_tests = t.automated_tests.filter(name => allAutoNames.has(name));
-      t.coverage_status = t.automated_tests.length > 0 ? 'full' : (t.coverage_status === 'partial' ? 'partial' : 'none');
-    }
-    for (const t of (DATA.app_testmo_tests||[])) {
-      t.automated_tests = t.automated_tests.filter(name => allAutoNames.has(name));
-      t.coverage_status = t.automated_tests.length > 0 ? 'full' : (t.coverage_status === 'partial' ? 'partial' : 'none');
-    }
-    
+
     // Recalculate metadata
-    DATA.metadata.total_automated_tests = 
-      (DATA.automated_tests.web_uae||[]).length + 
-      (DATA.automated_tests.web_ksa||[]).length + 
-      (DATA.automated_tests.app||[]).length;
+    DATA.metadata.total_automated_tests = allAutomated().length;
     DATA.metadata.last_updated = new Date().toISOString().split('T')[0];
     
     // Build trend from live GitHub commits
@@ -1514,96 +1724,161 @@ async function updateFromMain() {
 }
 
 // Init
-async function init() {
-  try {
-    // Try loading from shared Gist first (latest edits from anyone)
-    const gistResp = await fetch(GIST_RAW + '?t=' + Date.now());
-    if (gistResp.ok) {
-      DATA = await gistResp.json();
-    } else {
-      throw new Error('Gist unavailable');
+// The report and the shared Gist can hold different shapes. Anything older than
+// SCHEMA carries bare test names instead of platform-qualified refs, and no
+// in_scope flag -- rendering it would quietly resurrect the ambiguous mapping
+// and the wrong denominator, so it is refused rather than merged.
+const SCHEMA = 2;
+function schemaOf(d) { return (d && d.metadata && d.metadata.schema) || 1; }
+
+// Apply only the three fields a human can edit in the browser, and only to cases
+// the generated file still contains. Structure, inventory, scope and every derived
+// figure keep coming from the file.
+function mergeGistEdits(base, gist) {
+  let applied = 0;
+  const pairs = [[base.testmo_tests, gist.testmo_tests], [base.app_testmo_tests, gist.app_testmo_tests]];
+  for (const [into, from] of pairs) {
+    if (!Array.isArray(into) || !Array.isArray(from)) continue;
+    const byId = new Map(from.map(c => [c.case_id, c]));
+    for (const c of into) {
+      const edit = byId.get(c.case_id);
+      if (!edit) continue;
+      const differs = JSON.stringify(edit.automated_tests) !== JSON.stringify(c.automated_tests)
+        || edit.coverage_status !== c.coverage_status || (edit.notes || '') !== (c.notes || '');
+      if (!differs) continue;
+      c.automated_tests = edit.automated_tests ?? c.automated_tests;
+      c.coverage_status = edit.coverage_status ?? c.coverage_status;
+      c.notes = edit.notes ?? c.notes;
+      recomputeCase(c);
+      applied++;
     }
-  } catch(e) {
-    // Fallback to local mapping.json
-    try {
-      const resp = await fetch('mapping.json');
-      DATA = await resp.json();
-    } catch(e2) { console.error('Failed to load mapping.json', e2); return; }
   }
-  
-  // Merge localStorage overrides
-  const saved = localStorage.getItem(LS_KEY);
-  if (saved) {
-    try {
-      const edits = JSON.parse(saved);
-      if (edits.web) edits.web.forEach(edit => {
-        const test = DATA.testmo_tests.find(t => t.case_id === edit.case_id);
-        if (test) {
-          if (edit.automated !== undefined) test.automated = edit.automated;
-          if (edit.automated_tests !== undefined) test.automated_tests = edit.automated_tests;
-          if (edit.coverage_status !== undefined) test.coverage_status = edit.coverage_status;
-          if (edit.notes !== undefined) test.notes = edit.notes;
-        }
-      });
-      if (edits.app) edits.app.forEach(edit => {
-        const test = (DATA.app_testmo_tests||[]).find(t => t.case_id === edit.case_id);
-        if (test) {
-          if (edit.automated !== undefined) test.automated = edit.automated;
-          if (edit.automated_tests !== undefined) test.automated_tests = edit.automated_tests;
-          if (edit.coverage_status !== undefined) test.coverage_status = edit.coverage_status;
-          if (edit.notes !== undefined) test.notes = edit.notes;
-        }
-      });
-      hasUnsavedChanges = true;
-    } catch(e) { localStorage.removeItem(LS_KEY); }
-  }
-  
-  render();
-  renderRiskSection();
-  loadTrend();
-  loadRegressionRuns();
-  refreshTestsFromMain(); // Auto-pull latest tests from automation_web_2.0 main
+  if (applied) console.info(`${applied} browser edit(s) from the shared Gist applied on top of the generated mapping.`);
+  base._gistEdits = applied;
 }
 
-// Auto-fetch latest test functions from automation_web_2.0 main on every page load
+async function init() {
+  let repoData = null, gistData = null;
+  try {
+    const resp = await fetch('mapping.json?t=' + Date.now());
+    if (resp.ok) repoData = await resp.json();
+  } catch(e) { /* fall through to the gist */ }
+  try {
+    const gistResp = await fetch(GIST_RAW + '?t=' + Date.now());
+    if (gistResp.ok) gistData = await gistResp.json();
+  } catch(e) { /* gist optional */ }
+
+  // The committed mapping.json is authoritative. CI regenerates it from
+  // automation_web_2.0 @ main, so it is the only copy guaranteed to describe the
+  // current suite. The Gist holds edits people made in the browser, and those are
+  // merged ON TOP of it per case.
+  //
+  // It used to be the other way round: whichever Gist copy existed simply replaced
+  // the file. One click of "Save for Everyone" would then pin the report to that
+  // snapshot forever and every later CI refresh would be invisible.
+  if (schemaOf(repoData) >= SCHEMA) {
+    DATA = repoData;
+    if (schemaOf(gistData) >= SCHEMA) mergeGistEdits(DATA, gistData);
+    else if (gistData) console.warn(`Shared Gist is on schema ${schemaOf(gistData)}; expected ${SCHEMA}. Ignored — click "Save for Everyone" to refresh it.`);
+  } else if (schemaOf(gistData) >= SCHEMA) {
+    DATA = gistData;
+  } else {
+    DATA = repoData || gistData;
+    if (!DATA) { console.error('Failed to load mapping.json'); return; }
+  }
+
+  // Local edits only apply on top of matching-schema data.
+  const saved = localStorage.getItem(LS_KEY);
+  if (saved && schemaOf(DATA) >= SCHEMA) {
+    try {
+      const edits = JSON.parse(saved);
+      const applyTo = (list, list_edits) => (list_edits || []).forEach(edit => {
+        const test = (list || []).find(t => t.case_id === edit.case_id);
+        if (!test) return;
+        if (edit.automated_tests !== undefined) test.automated_tests = edit.automated_tests;
+        if (edit.coverage_status !== undefined) test.coverage_status = edit.coverage_status;
+        if (edit.notes !== undefined) test.notes = edit.notes;
+        recomputeCase(test);
+      });
+      applyTo(DATA.testmo_tests, edits.web);
+      applyTo(DATA.app_testmo_tests, edits.app);
+      hasUnsavedChanges = true;
+    } catch(e) { localStorage.removeItem(LS_KEY); }
+  } else if (saved) {
+    localStorage.removeItem(LS_KEY);
+  }
+
+  render();
+  renderRiskSection();
+  refreshUnmapped();
+  loadTrend();
+  loadRegressionRuns();
+  refreshTestsFromMain();
+}
+
+// Refresh the inventory from main on page load. This only ever adds newly
+// discovered tests and flags ones that disappeared -- it must not overwrite
+// automated_tests wholesale, which is what it used to do: every ref, skip
+// reason and locale would be replaced by a bare {name, file} pair.
 async function refreshTestsFromMain() {
   try {
+    // No token -> keep the committed inventory. It is generated from
+    // origin/main by `make generate`, so this call is an optimisation, not a
+    // dependency.
+    if (!_gt()) return;
     const baseUrl = 'https://api.github.com/repos/mumzworld-tech/automation_web_2.0';
     const headers = {'Authorization': `token ${_gt()}`};
     const treeResp = await fetch(`${baseUrl}/git/trees/main?recursive=1`, {headers});
     if (!treeResp.ok) return;
     const tree = await treeResp.json();
-    const allFiles = tree.tree.filter(f => f.type === 'blob' && f.path.match(/tests\/.+\/test_.*\.py$/));
+    const allFiles = tree.tree.filter(f => f.type === 'blob' && /tests\/.+\/test_.*\.py$/.test(f.path));
 
-    const uaeFiles = allFiles.filter(f => f.path.startsWith('tests/web/UAE/'));
-    const ksaFiles = allFiles.filter(f => f.path.startsWith('tests/web/KSA/'));
-    const appFiles = allFiles.filter(f => f.path.startsWith('tests/app/'));
+    const dirs = {
+      app: 'tests/app/',
+      web_uae: 'tests/web/UAE/',
+      web_ksa: 'tests/web/KSA/',
+      web_commons: 'tests/web/commons/',
+    };
 
-    async function extractTests(files) {
-      const tests = [];
+    let changed = false;
+    const summary = {added: [], removed: []};
+    for (const [platform, prefix] of Object.entries(dirs)) {
+      const files = allFiles.filter(f => f.path.startsWith(prefix));
+      if (!files.length) continue;
+      const discovered = [];
       for (const file of files) {
         try {
           const resp = await fetch(`${baseUrl}/contents/${file.path}?ref=main`, {headers});
           if (!resp.ok) continue;
           const data = await resp.json();
           const content = atob(data.content.replace(/\n/g, ''));
-          const re = /def (test_\w+)\(/g;
-          let m;
-          while ((m = re.exec(content)) !== null) tests.push({name: m[1], file: file.path.split('/').pop()});
+          discovered.push(...extractTestsFromSource(content, file.path.split('/').pop(), platform, file.path));
         } catch { continue; }
       }
-      return tests;
+      if (!discovered.length) continue;
+
+      const existing = DATA.automated_tests[platform] || [];
+      const known = new Map(existing.map(t => [t.ref || t.name, t]));
+      const next = discovered.map(t => {
+        const prev = known.get(t.ref);
+        // Keep the locale verdict from the generated data; the browser parser
+        // cannot see the git history the AR tickets live in.
+        return prev ? {...prev, ...t, locales: prev.locales || t.locales} : t;
+      });
+      const discoveredRefs = new Set(discovered.map(t => t.ref));
+      existing.forEach(t => { if (!discoveredRefs.has(t.ref || t.name)) summary.removed.push(t.ref || t.name); });
+      discovered.forEach(t => { if (!known.has(t.ref)) summary.added.push(t.ref); });
+      if (next.length !== existing.length || summary.added.length || summary.removed.length) changed = true;
+      DATA.automated_tests[platform] = next;
     }
 
-    const [uae, ksa, app] = await Promise.all([extractTests(uaeFiles), extractTests(ksaFiles), extractTests(appFiles)]);
-    DATA.automated_tests.web_uae = uae;
-    DATA.automated_tests.web_ksa = ksa;
-    DATA.automated_tests.app = app;
-    DATA.metadata.total_automated_tests = uae.length + ksa.length + app.length;
-    DATA.metadata.last_updated = new Date().toISOString().split('T')[0];
+    if (!changed) return;
+    DATA.metadata.total_automated_tests = allAutomated().length;
+    console.info(`Inventory refreshed from main: +${summary.added.length} / -${summary.removed.length}`, summary);
     render();
     renderRiskSection();
-  } catch(e) { /* silent fail — use existing data */ }
+    refreshUnmapped();
+  } catch(e) { /* silent -- keep the generated data */ }
 }
 
 init();

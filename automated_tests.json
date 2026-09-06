@@ -1,1005 +1,2892 @@
 {
-  "web_uae": [
-    {
-      "name": "test_uae_cart_existing_user_orders_no_coupon_yalla",
-      "file": "test_cart.py",
-      "title": "UAE - Existing user with orders and Yalla free shipping on Cart",
-      "tags": [
-        "Yalla"
-      ],
-      "feature": "Cart",
-      "docstring": "1. Search specific product through search 2. Filter for Yalla items on the PLP 3. Navigate to the PDP of the 1st Yalla product from PLP 4. Verify the 'Yalla' icon on the PDP 5. Click add to bag for th"
-    },
-    {
-      "name": "test_uae_cart_guest_login_no_coupon_sc",
-      "file": "test_cart.py",
-      "title": "UAE - Checkout with cart items as guest & login to existing user and pay with SC",
-      "tags": [
-        "Guest"
-      ],
-      "feature": "Cart",
-      "docstring": "1. Go to homepage as Guest user 2. Search specific product through search 3. Navigate to the PDP of the 1st product from PLP 4. Click add to bag for this item 5. Go to cart and click 'Proceed to Check"
-    },
-    {
-      "name": "test_uae_cart_add_items_to_cart_as_a_newly_registered_user_and_apply_cashback_coupon",
-      "file": "test_cart.py",
-      "title": "UAE - Cart UF4 (through product search)",
-      "tags": [
-        "Cashback"
-      ],
-      "feature": "Cart",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Apply cashback coupon"
-    },
-    {
-      "name": "test_uae_checkout_with_cart_items_register_a_new_user_and_coupon",
-      "file": "test_cart.py",
-      "title": "UAE - Checkout with cart items as a guest. Register a new user and use a coupon",
-      "tags": [
-        "Guest"
-      ],
-      "feature": "Cart",
-      "docstring": "1. Go to homepage as Guest user 2. Search specific product through search 3. Navigate to the PDP of the 1st product from PLP 4. Click add to bag for this item 5. Go to cart and click 'Proceed to Check"
-    },
-    {
-      "name": "test_uae_uf2_cart_gift_wrap_wishlist",
-      "file": "test_cart.py",
-      "title": "UAE - Cart: Guest user, Gift Wrap, Sign up, Wishlist",
-      "tags": [
-        "Gift Wrap",
-        "New User",
-        "Wishlist"
-      ],
-      "feature": "Cart",
-      "docstring": "1. Go to homepage as Guest user 2. Search for an item in category page and add it to cart 3. Search for an item by brand page (simple product) and add it to cart 4. Go to cart page 5. Add GW to all it"
-    },
-    {
-      "name": "test_uae_cart_uf5_checkout_cod_no_coupon",
-      "file": "test_cart.py",
-      "title": "UAE - Cart UF5 scenarios - Checkout COD (through product search)",
-      "tags": [
-        "COD"
-      ],
-      "feature": "Cart",
-      "docstring": "1. Go to homepage as Guest user. 2. Search for an item in category page and add it to cart. 3. Search for an item by brand page (simple product) and add it to cart. 4. Click on my account and select S"
-    },
-    {
-      "name": "test_uae_percentage_of_product_price_discount_rules_without_max_amount",
-      "file": "test_cart.py",
-      "title": "UAE - Percentage of product price discount rules without max amount (through product search)",
-      "tags": [
-        "CC",
-        "AUTO_MAX_0"
-      ],
-      "feature": "Coupon",
-      "docstring": "1. Go to homepage as Guest user. 2. Search for product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order"
-    },
-    {
-      "name": "test_uae_percentage_of_product_price_discount_rules_with_max_amount",
-      "file": "test_cart.py",
-      "title": "UAE - Percentage of product price discount rules with max amount (through product search)",
-      "tags": [
-        "COD",
-        "AUTO_MAX_50"
-      ],
-      "feature": "Coupon",
-      "docstring": "1. Go to homepage as Guest user. 2. Search for product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select COD 7. Place order"
-    },
-    {
-      "name": "test_uae_percentage_of_product_variant_price_discount_rules_with_max_amount",
-      "file": "test_cart.py",
-      "title": "UAE - Percentage of Product variant price discount with max amount (through product search) and Place (COD) order",
-      "tags": [
-        "COD",
-        "AUTO_V_MAX_0"
-      ],
-      "feature": "Coupon",
-      "docstring": "1. Go to homepage. 2. Add sales and none-salse product 3. Proceed to checkout. 4. Apply coupon. 5. Verify order summary calculation. 6. Select COD 7. Place order"
-    },
-    {
-      "name": "test_uae_percentage_of_product_variant_price_discount_rules_without_max_amount",
-      "file": "test_cart.py",
-      "title": "UAE - Percentage of Product variant price discount without max amount (through product search) and Place (CC) order",
-      "tags": [
-        "CC",
-        "AUTO_V_MAX_60"
-      ],
-      "feature": "Coupon",
-      "docstring": "1. Go to homepage. 2. Add sales and none-salse product. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order"
-    },
-    {
-      "name": "test_uae_bank_discount_percentage_of_product_price_rule",
-      "file": "test_cart.py",
-      "title": "UAE - Bank discount - percentage of product price discount rules (through product search)",
-      "tags": [
-        "CC",
-        "AUTO_BANK_10"
-      ],
-      "feature": "Coupon",
-      "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Procee"
-    },
-    {
-      "name": "test_uae_cart_apply_gift_wrap_and_place_order",
-      "file": "test_cart.py",
-      "title": "UAE - Apply gift wrap to product and place order",
-      "tags": [
-        "Gift Wrap"
-      ],
-      "feature": "Cart",
-      "docstring": "1. Login using automation+1004@mumzworld.com / Test@123 2. Go to home screen explore 3. In mweb, from explore screen search product: Hape - Wooden Bunny Stacking Ring 4. Add to cart the first product "
-    },
-    {
-      "name": "test_uae_checkout_cc_no_coupon",
-      "file": "test_checkout.py",
-      "title": "",
-      "tags": [],
-      "feature": "",
-      "docstring": "Parameterized test for different product types: 1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item (method varies by product"
-    },
-    {
-      "name": "test_uae_checkout_cod_no_coupon",
-      "file": "test_checkout.py",
-      "title": "",
-      "tags": [],
-      "feature": "",
-      "docstring": "Parameterized test for different product types: 1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item (method varies by product"
-    },
-    {
-      "name": "test_uae_checkout_tabby_no_coupon",
-      "file": "test_checkout.py",
-      "title": "",
-      "tags": [],
-      "feature": "",
-      "docstring": "Parameterized test for different product types: 1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item (method varies by product"
-    },
-    {
-      "name": "test_uae_checkout_tabby_cashback_coupon",
-      "file": "test_checkout.py",
-      "title": "UAE - Checkout Tabby + Cashback Coupon (through product search)",
-      "tags": [
-        "Tabby",
-        "Cashback Coupon"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Apply cashback coupon on checkout"
-    },
-    {
-      "name": "test_uae_checkout_cc_normal_coupon",
-      "file": "test_checkout.py",
-      "title": "UAE - Checkout CC + Normal Coupon (through product search)",
-      "tags": [
-        "CC",
-        "Coupon"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using CC w/normal coupon"
-    },
-    {
-      "name": "test_uae_checkout_cod_normal_coupon",
-      "file": "test_checkout.py",
-      "title": "UAE - Checkout COD + Normal Coupon (through product search)",
-      "tags": [
-        "COD",
-        "Coupon"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using COD w/normal coupon"
-    },
-    {
-      "name": "test_uae_checkout_tabby_normal_coupon",
-      "file": "test_checkout.py",
-      "title": "UAE - Checkout Tabby + Normal Coupon (through product search)",
-      "tags": [
-        "Tabby",
-        "Coupon"
-      ],
-      "feature": "Checkout",
-      "docstring": ""
-    },
-    {
-      "name": "test_uae_checkout_full_sc_no_coupon",
-      "file": "test_checkout.py",
-      "title": "UAE - Checkout full Store Credit (through product search)",
-      "tags": [
-        "Store Credit"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using full store credit w/no "
-    },
-    {
-      "name": "test_uae_checkout_cc_and_partial_sc_no_coupon",
-      "file": "test_checkout.py",
-      "title": "UAE - Checkout CC and partial Store Credit (through product search)",
-      "tags": [
-        "CC",
-        "Store Credit"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card and partial"
-    },
-    {
-      "name": "test_uae_checkout_tamara_no_coupon",
-      "file": "test_checkout.py",
-      "title": "",
-      "tags": [],
-      "feature": "",
-      "docstring": "Parameterized test for different product types: 1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item (method varies by product"
-    },
-    {
-      "name": "test_uae_checkout_tamara_normal_coupon",
-      "file": "test_checkout.py",
-      "title": "UAE - Checkout Tamara + Normal Coupon (through product search)",
-      "tags": [
-        "Tamara",
-        "Coupon"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/normal coupon"
-    },
-    {
-      "name": "test_uae_checkout_tamara_cashback_coupon",
-      "file": "test_checkout.py",
-      "title": "UAE - Checkout Tamara + Cashback Coupon (through product search)",
-      "tags": [
-        "Tamara",
-        "Cashback Coupon"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/cashback coupo"
-    },
-    {
-      "name": "test_uae_checkout_invalid_cc_no_coupon",
-      "file": "test_checkout.py",
-      "title": "UAE - Checkout CC and invalid card (through product search)",
-      "tags": [
-        "CC",
-        "Invalid CC"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using cc invalid cc w/no coup"
-    },
-    {
-      "name": "test_uae_checkout_full_sc_and_normal_coupon",
-      "file": "test_checkout.py",
-      "title": "UAE - Checkout with coupon and full Store Credit(through product search)",
-      "tags": [
-        "Full SC",
-        "Normal Coupon"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Apply normal coupon on cart 6. Apply wallet balance on c"
-    },
-    {
-      "name": "test_uae_checkout_cc_partial_sc_and_normal_coupon",
-      "file": "test_checkout.py",
-      "title": "UAE - Checkout CC, partial Store Credit and coupon(through product search)",
-      "tags": [
-        "CC",
-        "SC",
-        "Coupon"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card and partial"
-    },
-    {
-      "name": "test_uae_checkout_cc_wrong_otp_no_coupon",
-      "file": "test_checkout.py",
-      "title": "UAE - Checkout CC with wrong otp (through product search)",
-      "tags": [
-        "CC",
-        "Wrong OTP"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card with wrong "
-    },
-    {
-      "name": "test_uae_checkout_cc_coupon_modal_sheet",
-      "file": "test_checkout.py",
-      "title": "UAE - Checkout CC + Coupon (through coupon modal sheet)",
-      "tags": [
-        "CC",
-        "Coupon Modal Sheet"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Add a coupon from the coupon modal sheet 6. Proceed to c"
-    },
-    {
-      "name": "test_uae_checkout_full_sc_and_verify_sc_balance",
-      "file": "test_checkout.py",
-      "title": "UAE - Checkout full Store Credit + verifying SC balance",
-      "tags": [
-        "Store Credit"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Go to the wallet and see the initial balance 2. Search specific product through search 3. Navigate to the PDP of the 1st product from PLP 4. Click add to bag for this item 5. Go to cart 6. Proceed "
-    },
-    {
-      "name": "test_uae_checkout_cc_and_verify_odp",
-      "file": "test_checkout.py",
-      "title": "UAE - Checkout CC + verifying ODP",
-      "tags": [
-        "CC",
-        "Verify ODP"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using CC w/no coupon 7. Go to"
-    },
-    {
-      "name": "test_uae_user_register_from_account_page",
-      "file": "test_user.py",
-      "title": "UAE: Guest user, Register from account page",
-      "tags": [
-        "New User"
-      ],
-      "feature": "User",
-      "docstring": "1. Go to homepage as Guest user 2. Navigate to Account page 3. Click on Sign in. 4. Click on create account 5. Fill in all fields 6. Click on register 7. Verify customer account name"
-    },
-    {
-      "name": "test_uae_user_register_from_cart_page",
-      "file": "test_user.py",
-      "title": "UAE: Guest user, Register from cart page",
-      "tags": [
-        "New User"
-      ],
-      "feature": "User",
-      "docstring": "1. Go to homepage as Guest user 2. Search for product. 3. Add simple product to cart. 4. Proceed to checkout. 5. Click on create account 6. Fill in all fields 7. Click on register."
-    },
-    {
-      "name": "test_uae_user_logs_in_from_account_page",
-      "file": "test_user.py",
-      "title": "UAE - User: Guest user login from account page",
-      "tags": [
-        "Existing User"
-      ],
-      "feature": "User",
-      "docstring": "1. Go to homepage as Guest user 2. Navigate to account page 3. Click on sign button 4. Enter email and password 5. Click on login 6. Sign out"
-    },
-    {
-      "name": "test_uae_user_logs_in_from_cart_page",
-      "file": "test_user.py",
-      "title": "UAE - User: Guest user login from cart page",
-      "tags": [
-        "Existing User"
-      ],
-      "feature": "User",
-      "docstring": "1. Go to homepage as Guest user 2. Search for an item in category page and add it to cart 3. Go to cart page 4. Click \"Proceed to Checkout\" 5. Sign in with existing user account 6. Sign out"
-    }
-  ],
-  "web_ksa": [
-    {
-      "name": "test_ksa_cart_existing_user_orders_no_coupon_yalla",
-      "file": "test_cart_ksa.py",
-      "title": "KSA - Existing user with orders and Yalla free shipping on Cart",
-      "tags": [
-        "Yalla"
-      ],
-      "feature": "Cart",
-      "docstring": "1. Search specific product through search 2. Filter for Yalla items on the PLP 3. Navigate to the PDP of the 1st Yalla product from PLP 4. Verify the 'Yalla' icon on the PDP 5. Click add to bag for th"
-    },
-    {
-      "name": "test_ksa_cart_guest_login_no_coupon_sc",
-      "file": "test_cart_ksa.py",
-      "title": "KSA - Checkout with cart items as guest & login to existing user and pay with SC",
-      "tags": [
-        "Guest"
-      ],
-      "feature": "Cart",
-      "docstring": "1. Go to homepage as Guest user 2. Search specific product through search 3. Navigate to the PDP of the 1st product from PLP 4. Click add to bag for this item 5. Go to cart and click 'Proceed to Check"
-    },
-    {
-      "name": "test_ksa_cart_add_items_to_cart_as_a_newly_registered_user_and_apply_cashback_coupon",
-      "file": "test_cart_ksa.py",
-      "title": "KSA - Cart UF4 (through product search)",
-      "tags": [
-        "Cashback"
-      ],
-      "feature": "Cart",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Apply cashback coupon"
-    },
-    {
-      "name": "test_ksa_checkout_with_cart_items_register_a_new_user_and_coupon",
-      "file": "test_cart_ksa.py",
-      "title": "KSA - Checkout with cart items as a guest. Register a new user and use a coupon",
-      "tags": [
-        "Guest"
-      ],
-      "feature": "Cart",
-      "docstring": "1. Go to homepage as Guest user 2. Search specific product through search 3. Navigate to the PDP of the 1st product from PLP 4. Click add to bag for this item 5. Go to cart and click 'Proceed to Check"
-    },
-    {
-      "name": "test_ksa_uf2_cart_gift_wrap_wishlist",
-      "file": "test_cart_ksa.py",
-      "title": "KSA - Cart: Guest user, Gift Wrap, Sign up, Wishlist",
-      "tags": [
-        "Gift Wrap",
-        "New User",
-        "Wishlist"
-      ],
-      "feature": "Cart",
-      "docstring": "1. Go to homepage as Guest user 2. Search for an item in category page and add it to cart 3. Search for an item by brand page (simple product) and add it to cart 4. Go to cart page 5. Add GW to all it"
-    },
-    {
-      "name": "test_ksa_cart_uf5_checkout_cod_no_coupon",
-      "file": "test_cart_ksa.py",
-      "title": "KSA - Cart UF5 scenarios - Checkout COD (through product search)",
-      "tags": [
-        "COD"
-      ],
-      "feature": "Cart",
-      "docstring": "1. Go to homepage as Guest user. 2. Search for an item in category page and add it to cart. 3. Search for an item by brand page (simple product) and add it to cart. 4. Click on my account and select S"
-    },
-    {
-      "name": "test_ksa_percentage_of_product_price_discount_rules_without_max_amount",
-      "file": "test_cart_ksa.py",
-      "title": "KSA - Percentage of product price discount rules without max amount (through product search)",
-      "tags": [
-        "CC",
-        "AUTO_MAX_0"
-      ],
-      "feature": "Coupon",
-      "docstring": "1. Go to homepage as Guest user. 2. Search for bundle product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order"
-    },
-    {
-      "name": "test_ksa_percentage_of_product_price_discount_rules_with_max_amount",
-      "file": "test_cart_ksa.py",
-      "title": "KSA - Percentage of product price discount rules with max amount (through product search)",
-      "tags": [
-        "COD",
-        "AUTO_MAX_50"
-      ],
-      "feature": "Coupon",
-      "docstring": "1. Go to homepage as Guest user. 2. Search for bundle product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select COD 7. Place order"
-    },
-    {
-      "name": "test_ksa_percentage_of_product_variant_price_discount_rules_with_max_amount",
-      "file": "test_cart_ksa.py",
-      "title": "KSA - Percentage of Product variant price discount with max amount (through product search) and Place (COD) order",
-      "tags": [
-        "COD",
-        "AUTO_V_MAX_0"
-      ],
-      "feature": "Coupon",
-      "docstring": "1. Go to homepage. 2. Add sales and none-sale product 3. Proceed to checkout. 4. Apply coupon. 5. Verify order summary calculation. 6. Select COD 7. Place order"
-    },
-    {
-      "name": "test_ksa_percentage_of_product_variant_price_discount_rules_without_max_amount",
-      "file": "test_cart_ksa.py",
-      "title": "KSA - Percentage of Product variant price discount without max amount (through product search) and Place (CC) order",
-      "tags": [
-        "CC",
-        "AUTO_V_MAX_60"
-      ],
-      "feature": "Coupon",
-      "docstring": "1. Go to homepage. 2. Add sales and none-salse product. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order"
-    },
-    {
-      "name": "test_ksa_bank_discount_percentage_of_product_price_rule",
-      "file": "test_cart_ksa.py",
-      "title": "KSA - Bank discount - percentage of product price discount rules (through product search)",
-      "tags": [
-        "CC",
-        "AUTO_BANk_10"
-      ],
-      "feature": "Coupon",
-      "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Procee"
-    },
-    {
-      "name": "test_ksa_cart_apply_gift_wrap_and_place_order",
-      "file": "test_cart_ksa.py",
-      "title": "KSA - Apply gift wrap to product and place order",
-      "tags": [
-        "Gift Wrap"
-      ],
-      "feature": "Cart",
-      "docstring": "1. Login using auto+ksa+041@mumzworld.com / Test@123 2. Go to home screen explore 3. In mweb, from explore screen search product: Hape - Wooden Bunny Stacking Ring 4. Add to cart the first product on "
-    },
-    {
-      "name": "test_ksa_checkout_cc_no_coupon",
-      "file": "test_checkout_ksa.py",
-      "title": "",
-      "tags": [],
-      "feature": "",
-      "docstring": "Parameterized test for different product types: 1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item (method varies by product"
-    },
-    {
-      "name": "test_ksa_checkout_cod_no_coupon",
-      "file": "test_checkout_ksa.py",
-      "title": "KSA - Checkout COD (through product search)",
-      "tags": [
-        "COD"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using COD w/no coupon"
-    },
-    {
-      "name": "test_ksa_checkout_tabby_no_coupon",
-      "file": "test_checkout_ksa.py",
-      "title": "KSA - Checkout Tabby (through product search)",
-      "tags": [
-        "Tabby"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tabby w/no coupon"
-    },
-    {
-      "name": "test_ksa_checkout_tabby_cashback_coupon",
-      "file": "test_checkout_ksa.py",
-      "title": "KSA - Checkout Tabby + Cashback Coupon (through product search)",
-      "tags": [
-        "Tabby",
-        "Cashback Coupon"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tabby w/cashback coupon"
-    },
-    {
-      "name": "test_ksa_checkout_cc_normal_coupon",
-      "file": "test_checkout_ksa.py",
-      "title": "KSA - Checkout CC + Normal Coupon (through product search)",
-      "tags": [
-        "CC",
-        "Coupon"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using CC w/normal coupon"
-    },
-    {
-      "name": "test_ksa_checkout_cod_normal_coupon",
-      "file": "test_checkout_ksa.py",
-      "title": "KSA - Checkout COD + Normal Coupon (through product search)",
-      "tags": [
-        "COD",
-        "Coupon"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using COD w/normal coupon"
-    },
-    {
-      "name": "test_ksa_checkout_tabby_normal_coupon",
-      "file": "test_checkout_ksa.py",
-      "title": "KSA - Checkout Tabby + Normal Coupon (through product search)",
-      "tags": [
-        "Tabby",
-        "Coupon"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tabby w/normal coupon"
-    },
-    {
-      "name": "test_ksa_checkout_full_sc_no_coupon",
-      "file": "test_checkout_ksa.py",
-      "title": "KSA - Checkout full Store Credit (through product search)",
-      "tags": [
-        "Store Credit"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using full store credit w/no "
-    },
-    {
-      "name": "test_ksa_checkout_cc_and_partial_sc_no_coupon",
-      "file": "test_checkout_ksa.py",
-      "title": "KSA - Checkout CC and partial Store Credit (through product search)",
-      "tags": [
-        "CC",
-        "Store Credit"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card and partial"
-    },
-    {
-      "name": "test_ksa_checkout_tamara_no_coupon",
-      "file": "test_checkout_ksa.py",
-      "title": "KSA - Checkout Tamara (through product search)",
-      "tags": [
-        "Tamara"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/no coupon"
-    },
-    {
-      "name": "test_ksa_checkout_tamara_normal_coupon",
-      "file": "test_checkout_ksa.py",
-      "title": "KSA - Checkout Tamara + Normal Coupon (through product search)",
-      "tags": [
-        "Tamara",
-        "Coupon"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/normal coupon"
-    },
-    {
-      "name": "test_ksa_checkout_tamara_cashback_coupon",
-      "file": "test_checkout_ksa.py",
-      "title": "KSA - Checkout Tamara + Cashback Coupon (through product search)",
-      "tags": [
-        "Tamara",
-        "Cashback Coupon"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/cashback coupo"
-    },
-    {
-      "name": "test_ksa_checkout_invalid_cc_no_coupon",
-      "file": "test_checkout_ksa.py",
-      "title": "KSA - Checkout CC and invalid card (through product search)",
-      "tags": [
-        "CC",
-        "Invalid CC"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using cc invalid cc w/no coup"
-    },
-    {
-      "name": "test_ksa_checkout_full_sc_and_normal_coupon",
-      "file": "test_checkout_ksa.py",
-      "title": "KSA - Checkout with coupon and full Store Credit(through product search)",
-      "tags": [
-        "Full SC",
-        "Normal Coupon"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card and full st"
-    },
-    {
-      "name": "test_ksa_checkout_cc_partial_sc_and_normal_coupon",
-      "file": "test_checkout_ksa.py",
-      "title": "KSA - Checkout CC, partial Store Credit and coupon(through product search)",
-      "tags": [
-        "CC",
-        "SC",
-        "Coupon"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card and partial"
-    },
-    {
-      "name": "test_ksa_checkout_cc_wrong_otp_no_coupon",
-      "file": "test_checkout_ksa.py",
-      "title": "KSA - Checkout CC with wrong otp (through product search)",
-      "tags": [
-        "CC",
-        "Wrong OTP"
-      ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card with wrong "
-    },
-    {
-      "name": "test_ksa_user_register_from_account_page",
-      "file": "test_user_ksa.py",
-      "title": "KSA: Guest user, Register from account page",
-      "tags": [
-        "New User"
-      ],
-      "feature": "User",
-      "docstring": "1. Go to homepage as Guest user 2. Navigate to Account page 3. Click on Sign in. 4. Click on create account 5. Fill in all fields 6. Click on register 7. Verify customer account name"
-    },
-    {
-      "name": "test_ksa_user_register_from_cart_page",
-      "file": "test_user_ksa.py",
-      "title": "KSA: Guest user, Register from cart page",
-      "tags": [
-        "New User"
-      ],
-      "feature": "User",
-      "docstring": "1. Go to homepage as Guest user 2. Search for product. 3. Add simple product to cart. 4. Proceed to checkout. 5. Click on create account 6. Fill in all fields 7. Click on register."
-    },
-    {
-      "name": "test_ksa_user_logs_in_from_account_page",
-      "file": "test_user_ksa.py",
-      "title": "KSA - User: Guest user login from account page",
-      "tags": [
-        "Existing User"
-      ],
-      "feature": "User",
-      "docstring": "1. Go to homepage as Guest user 2. Navigate to account page 3. Click on sign button 4. Enter email and password 5. Click on login 6. Sign out"
-    },
-    {
-      "name": "test_ksa_user_logs_in_from_cart_page",
-      "file": "test_user_ksa.py",
-      "title": "KSA - User: Guest user login from cart page",
-      "tags": [
-        "Existing User"
-      ],
-      "feature": "User",
-      "docstring": "1. Go to homepage as Guest user 2. Search for an item in category page and add it to cart 3. Go to cart page 4. Click \"Proceed to Checkout\" 5. Sign in with existing user account 6. Sign out"
-    }
-  ],
   "app": [
     {
+      "ref": "app::test_user_signup",
       "name": "test_user_signup",
+      "platform": "app",
+      "path": "tests/app/test_app_account.py",
       "file": "test_app_account.py",
-      "title": "",
-      "tags": [],
-      "feature": "",
-      "docstring": "1. Navigate to account page 2. Click on Signin 3. Click on Create account 4. Fill in all data 5. Click on Signup"
+      "title": "Successful user signup",
+      "feature": "User Signup",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "New Account"
+      ],
+      "docstring": "1. Navigate to account page 2. Click on Signin 3. Click on Create account 4. Fill in all data 5. Click on Signup",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
     },
     {
+      "ref": "app::test_existing_user_profile",
       "name": "test_existing_user_profile",
+      "platform": "app",
+      "path": "tests/app/test_app_account.py",
       "file": "test_app_account.py",
       "title": "Verify existing user can access their profile",
+      "feature": "User Profile",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "My Profile"
       ],
-      "feature": "User Profile",
-      "docstring": "1. Navigate to account page 2. Click on Signin 3. Sign in to an existing account 4. Go to My Profile 5. Verify all the details on the My Profile page"
+      "docstring": "1. Navigate to account page 2. Click on Signin 3. Sign in to an existing account 4. Go to My Profile 5. Verify all the details on the My Profile page",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
     },
     {
+      "ref": "app::test_existing_user_delivery_address",
       "name": "test_existing_user_delivery_address",
+      "platform": "app",
+      "path": "tests/app/test_app_account.py",
       "file": "test_app_account.py",
       "title": "Verify existing user can access the Delivery Addresses",
+      "feature": "User Profile",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "Delivery Address"
       ],
-      "feature": "User Profile",
-      "docstring": "1. Navigate to account page 2. Click on Signin 3. Sign in to an existing account 4. Go to Delivery Address 5. Verify all the details inside the Delivery Addresses page 6. Verify the number of delivery"
+      "docstring": "1. Navigate to account page 2. Click on Signin 3. Sign in to an existing account 4. Go to Delivery Address 5. Verify all the details inside the Delivery Addresses page 6. Verify the number of delivery addresses present (only 1)",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
     },
     {
+      "ref": "app::test_add_new_address_and_make_default_and_delete",
       "name": "test_add_new_address_and_make_default_and_delete",
+      "platform": "app",
+      "path": "tests/app/test_app_account.py",
       "file": "test_app_account.py",
       "title": "Verify existing user can add new address and set it as default",
+      "feature": "User Profile",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "Delivery Address"
       ],
-      "feature": "User Profile",
-      "docstring": "1. Navigate to account page 2. Click on Signin 3. Sign in to an existing account (USER_EMAIL_4) 4. Go to Delivery Address 5. Click on 'Add New Address' button 6. Fill in all address fields using test_"
+      "docstring": "1. Navigate to account page 2. Click on Signin 3. Sign in to an existing account (USER_EMAIL_4) 4. Go to Delivery Address 5. Click on 'Add New Address' button 6. Fill in all address fields using test_data.json 7. Set the address as default using the toggle 8. Save the address 9. Verify the new address is added and set as default 10. Set second address as default 11. Delete the third address 12. Ve",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
     },
     {
+      "ref": "app::test_app_invalid_login_combinations",
+      "name": "test_app_invalid_login_combinations",
+      "platform": "app",
+      "path": "tests/app/test_app_account.py",
+      "file": "test_app_account.py",
+      "title": "",
+      "feature": "User Sign In",
+      "story": "",
+      "severity": "normal",
+      "tags": [
+        "Sign In",
+        "Negative"
+      ],
+      "docstring": "Verify the sign-in form surfaces the correct error for each invalid input combination. 1. Open the Sign In bottom sheet from the Account page 2. Enter the parametrized email and password values (blank values are skipped) 3. Tap Sign In without asserting form closure 4. Assert the expected error(s) — main banner and/or per-field error text",
+      "parametrized": true,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_sign_in_with_google",
+      "name": "test_sign_in_with_google",
+      "platform": "app",
+      "path": "tests/app/test_app_account.py",
+      "file": "test_app_account.py",
+      "title": "Verify user can sign in with Google",
+      "feature": "User Sign In",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Google Sign In"
+      ],
+      "docstring": "1. Navigate to account page 2. Click on Sign In 3. Click on 'Sign in with Google' button 4. Enter Google email and click Next 5. Enter Google password and click Next 6. Verify user is logged in (sign out button visible)",
+      "parametrized": false,
+      "skip": {
+        "type": "hard",
+        "reason": "This is marked as skipped as it requires 2F authentication"
+      },
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_uae_cart_quantity_workflow",
       "name": "test_uae_cart_quantity_workflow",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
       "file": "test_app_cart.py",
       "title": "Cart quantity workflow (increase and decrease)",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "Cart"
       ],
-      "feature": "Cart",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Verify initial quantity is 1 6. Increase quantity and ve"
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Verify initial quantity is 1 6. Increase quantity and verify it's 2 7. Decrease quantity and verify it's back to 1",
+      "parametrized": false,
+      "skip": {
+        "type": "hard",
+        "reason": "Duplicate Test"
+      },
+      "locales": [
+        "en",
+        "ar"
+      ]
     },
     {
+      "ref": "app::test_uae_cart_remove_item",
       "name": "test_uae_cart_remove_item",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
       "file": "test_app_cart.py",
       "title": "Remove item from cart",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "Cart"
       ],
-      "feature": "Cart",
-      "docstring": "1. Add product to cart 2. Verify cart has 1 item 3. Remove item from cart 4. Verify cart is empty (0 items)"
+      "docstring": "1. Add product to cart 2. Verify cart has 1 item 3. Remove item from cart 4. Verify cart is empty (0 items)",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
     },
     {
+      "ref": "app::test_uae_cart_move_to_wishlist",
       "name": "test_uae_cart_move_to_wishlist",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
       "file": "test_app_cart.py",
       "title": "Move item to wishlist from cart",
+      "feature": "Cart",
+      "story": "",
+      "severity": "normal",
       "tags": [
         "Cart",
         "Wishlist"
       ],
-      "feature": "Cart",
-      "docstring": "1. Add product to cart 2. Verify cart has 1 item 3. Move item to wishlist 4. Verify cart is empty (0 items)"
+      "docstring": "1. Add product to cart 2. Verify cart has 1 item 3. Move item to wishlist 4. Verify cart is empty (0 items)",
+      "parametrized": false,
+      "skip": {
+        "type": "hard",
+        "reason": "Duplicate Test"
+      },
+      "locales": [
+        "en",
+        "ar"
+      ]
     },
     {
+      "ref": "app::test_app_uae_cart_remaining_items_unaffected_after_partial_removal",
       "name": "test_app_uae_cart_remaining_items_unaffected_after_partial_removal",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
       "file": "test_app_cart.py",
       "title": "Remaining items unaffected after partial removal",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "Cart"
       ],
-      "feature": "Cart",
-      "docstring": "1. Add two different products to cart 2. Verify cart has 2 items 3. Capture name of second item before removal 4. Remove first item from cart 5. Verify cart has 1 item remaining 6. Verify remaining it"
+      "docstring": "1. Add two different products to cart 2. Verify cart has 2 items 3. Capture name of second item before removal 4. Remove first item from cart 5. Verify cart has 1 item remaining 6. Verify remaining item is the second product (unaffected)",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
     },
     {
+      "ref": "app::test_uae_cart_increase_and_decrease_quantity",
       "name": "test_uae_cart_increase_and_decrease_quantity",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
       "file": "test_app_cart.py",
       "title": "",
-      "tags": [],
-      "feature": "",
-      "docstring": "Parameterized test for different product types: 1. Add product to cart 2. Verify initial quantity is 1 3. Increase quantity to 2 and verify 4. Increase quantity to 3 and verify 5. Decrease quantity to"
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Quantity"
+      ],
+      "docstring": "Parameterized test for different product types: 1. Add product to cart 2. Verify initial quantity is 1 3. Increase quantity to 2 and verify 4. Increase quantity to 3 and verify 5. Decrease quantity to 2 and verify 6. Decrease quantity to 1 and verify :param search_term: The product search term to use :param product_type: Type of product (simple, bundle, configurable, custom) :param email: Email ID",
+      "parametrized": true,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
     },
     {
+      "ref": "app::test_uae_cart_item_integrity_after_quantity_change",
       "name": "test_uae_cart_item_integrity_after_quantity_change",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
       "file": "test_app_cart.py",
       "title": "",
-      "tags": [],
-      "feature": "",
-      "docstring": "Verifies cart item integrity is maintained after a quantity change. 1. Add product to cart, capture product name and unit price 2. Increase quantity to 2 3. Verify product name is unchanged 4. Verify "
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Quantity"
+      ],
+      "docstring": "Verifies cart item integrity is maintained after a quantity change. 1. Add product to cart, capture product name and unit price 2. Increase quantity to 2 3. Verify product name is unchanged 4. Verify unit price is unchanged 5. Verify cart still shows 1 product card (not duplicated) :param search_term: The product search term to use :param product_type: Type of product (simple, bundle, configurable",
+      "parametrized": true,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
     },
     {
+      "ref": "app::test_uae_cart_bundle_multiple_variants",
       "name": "test_uae_cart_bundle_multiple_variants",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
       "file": "test_app_cart.py",
       "title": "Cart: Add multiple variants of bundle product and verify quantity update",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "Cart",
         "Bundle",
         "Variant"
       ],
-      "feature": "Cart",
-      "docstring": "Test adding multiple variants of a bundle product to cart. 1. Search bundle product, go to PDP, select option 1 from both dropdowns, add to cart 2. Navigate back, search same product, select option 2 "
+      "docstring": "Test adding multiple variants of a bundle product to cart. 1. Search bundle product, go to PDP, select option 1 from both dropdowns, add to cart 2. Navigate back, search same product, select option 2 from 1st dropdown and option 2 from 2nd dropdown, add to cart 3. Increase quantity for both items 4. Verify cart has 2 products with increased quantity",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
     },
     {
+      "ref": "app::test_uae_cart_configurable_multiple_variants",
       "name": "test_uae_cart_configurable_multiple_variants",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
       "file": "test_app_cart.py",
       "title": "Cart: Add multiple variants of configurable product and verify quantity update",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "Cart",
         "Configurable",
         "Variant"
       ],
-      "feature": "Cart",
-      "docstring": "Test adding multiple variants of a configurable product to cart. 1. Search configurable product, go to PDP, select '0 to 3 Months', add to cart 2. Navigate back, search same product, select '6 Months'"
+      "docstring": "Test adding two distinct in-stock variants of a configurable product to cart. Variant selection is catalog-agnostic — picks 1st in-stock, then 2nd in-stock — so the test stays stable when the backend rotates option labels/stock.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
     },
     {
+      "ref": "app::test_app_uae_cart_remove_item_with_applied_coupon",
       "name": "test_app_uae_cart_remove_item_with_applied_coupon",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
       "file": "test_app_cart.py",
       "title": "Remove item from cart with applied coupon and verify totals recalculate",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "Cart",
         "Coupon"
       ],
-      "feature": "Cart",
-      "docstring": "Verify that user can remove an item when coupon is applied and totals recalculate correctly."
+      "docstring": "Verify that user can remove an item when coupon is applied and totals recalculate correctly.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
     },
     {
+      "ref": "app::test_app_cart_apply_gift_wrap_and_place_order",
       "name": "test_app_cart_apply_gift_wrap_and_place_order",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
       "file": "test_app_cart.py",
       "title": "UAE - Apply gift wrap to product and place order",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "Cart",
         "Gift Wrap"
       ],
-      "feature": "Cart",
-      "docstring": "1. Login using automation+uae+041@mumzworld.com / Test@123 2. Go to home screen (Explore) 3. Search product: Hape - Wooden Bunny Stacking Ring 4. Add to cart the first product on PDP page 5. Go to car"
+      "docstring": "1. Login using automation+uae+041@mumzworld.com / Test@123 2. Go to home screen (Explore) 3. Search product: Hape - Wooden Bunny Stacking Ring 4. Add to cart the first product on PDP page 5. Go to cart page 6. Add Gift Wrap to the product 7. Proceed to checkout 8. Place order using CC",
+      "parametrized": false,
+      "skip": {
+        "type": "hard",
+        "reason": "Moving this test to the checkout suite"
+      },
+      "locales": [
+        "en",
+        "ar"
+      ]
     },
     {
+      "ref": "app::test_app_uae_cart_order_summary_updates_after_item_removal",
       "name": "test_app_uae_cart_order_summary_updates_after_item_removal",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
       "file": "test_app_cart.py",
       "title": "Order summary updates correctly after item removal",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "Cart",
         "OrderSummary"
       ],
-      "feature": "Cart",
-      "docstring": "Steps: 1. Add two products to cart 2. Proceed to checkout 3. Go back to cart 4. Capture initial cart order summary (subtotal, discount, VAT, total) 5. Remove one item 6. Verify remaining item count is"
+      "docstring": "Steps: 1. Add two products to cart 2. Proceed to checkout 3. Go back to cart 4. Capture initial cart order summary (subtotal, discount, VAT, total) 5. Remove one item 6. Verify remaining item count is 1 7. Scroll to order summary and verify values",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
     },
     {
+      "ref": "app::test_app_add_all_product_types_from_srp",
       "name": "test_app_add_all_product_types_from_srp",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
       "file": "test_app_cart.py",
       "title": "Add all product types to cart from Search Result Page",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "Cart",
         "SRP",
         "ProductTypes"
       ],
-      "feature": "Cart",
-      "docstring": "Test adding all product types to cart from Search Result Page. Flow for each product type: - Simple: Click \"+\" \u2192 goes to cart \u2192 verify product in cart - Custom/Configurable/Bundle: Click \"+\" \u2192 popup o"
+      "docstring": "Test adding all product types to cart from Search Result Page. Flow for each product type: - Simple: Click \"+\" → goes to cart → verify product in cart - Custom/Configurable/Bundle: Click \"+\" → popup opens → validate → select/fill → Add to Cart → tap cart icon → verify Product types: simple, custom, configurable, bundle",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
     },
     {
+      "ref": "app::test_app_bank_discount_percentage_of_product_price_rule",
       "name": "test_app_bank_discount_percentage_of_product_price_rule",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
       "file": "test_app_cart.py",
       "title": "Bank discount percentage of product price rule",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "Cart",
         "Coupon",
         "Bank Discount"
       ],
-      "feature": "Cart",
-      "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Procee"
+      "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Proceed to checkout 7. Verify order summary calculation 8. Select the credit card 9. Place order",
+      "parametrized": false,
+      "skip": {
+        "type": "hard",
+        "reason": "Test is broken"
+      },
+      "locales": [
+        "en",
+        "ar"
+      ]
     },
     {
+      "ref": "app::test_app_cart_guest_login_no_coupon_sc",
+      "name": "test_app_cart_guest_login_no_coupon_sc",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
+      "file": "test_app_cart.py",
+      "title": "Checkout with cart items as guest & login to existing user and pay with SC",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Guest",
+        "StoreCredit"
+      ],
+      "docstring": "1. Precondition: Login, clear cart, sign out 2. As guest, search and add product to cart 3. Navigate to cart and verify item present 4. Tap checkout → login bottom sheet is displayed 5. Login with existing user 6. Verify user is redirected to cart page with item retained 7. Proceed to checkout 8. Pay with CC and SC",
+      "parametrized": false,
+      "skip": {
+        "type": "hard",
+        "reason": "Broken test"
+      },
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_app_wishlist_all_product_types",
+      "name": "test_app_wishlist_all_product_types",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
+      "file": "test_app_cart.py",
+      "title": "",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [],
+      "docstring": "Wishlist Flow for Guest and Logged-in Users: 1. Setup user (guest: logout after login, logged_in: stay logged in) 2. Add all product types to cart 3. Move first item to wishlist (guest: login prompt, logged_in: toast) 4. Move remaining items to wishlist 5. Verify cart is empty 6. Navigate to wishlist and verify all products 7. Navigate back to cart and verify still empty",
+      "parametrized": true,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_app_cart_partial_sc_and_checkout_with_cc",
+      "name": "test_app_cart_partial_sc_and_checkout_with_cc",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
+      "file": "test_app_cart.py",
+      "title": "Apply partial SC on cart, remove, re-apply then checkout with CC",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "StoreCredit",
+        "CC"
+      ],
+      "docstring": "FALCONS-268: Validate partial store credit apply/remove flow on cart page, then checkout. 1. Add product to cart 2. On cart: apply partial SC (AED 10), verify applied + validate order summary 3. On cart: scroll up, remove SC, verify removed + validate order summary 4. On cart: re-apply partial SC, verify applied 5. Proceed to checkout 6. On checkout: verify SC still applied, validate order summary",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_app_cart_full_sc_and_checkout",
+      "name": "test_app_cart_full_sc_and_checkout",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
+      "file": "test_app_cart.py",
+      "title": "UAE - Apply full SC on cart, remove, re-apply then place order with SC only",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "StoreCredit",
+        "FullSC"
+      ],
+      "docstring": "FALCONS-268: Validate full store credit apply/remove flow on cart page, then checkout. 1. Add product to cart 2. On cart: apply full SC (single-click Apply, balance must be ≥ AED 800), verify applied + validate order summary 3. On cart: scroll up to SC remove button, remove SC, verify removed + validate order summary 4. On cart: re-apply full SC, verify applied 5. Proceed to checkout 6. On checkou",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_app_cart_existing_user_orders_no_coupon_yalla",
+      "name": "test_app_cart_existing_user_orders_no_coupon_yalla",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
+      "file": "test_app_cart.py",
+      "title": "App - Existing user with orders and Yalla free shipping on Cart",
+      "feature": "Cart",
+      "story": "",
+      "severity": "normal",
+      "tags": [
+        "Yalla"
+      ],
+      "docstring": "",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_app_cart_uf5_checkout_cod_no_coupon",
+      "name": "test_app_cart_uf5_checkout_cod_no_coupon",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
+      "file": "test_app_cart.py",
+      "title": "App - UF5 Cart flow: add items, logout/login, modify qty, checkout with COD",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "COD",
+        "UF5"
+      ],
+      "docstring": "1. Go to homepage as signed-in user. 2. Search for a simple B2B product and add it to cart. 3. Search for a product by brand name and add it to cart. 4. Sign out from account page. 5. Sign back in with the same credentials. 6. Go to cart and verify both products are present. 7. Decrease the qty of the first item by 1. 8. Increase the qty of the second item by 1. 9. Proceed to checkout. 10. Place o",
+      "parametrized": false,
+      "skip": {
+        "type": "conditional",
+        "reason": "OS.lower() == \"android\""
+      },
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_app_uf2_cart_gift_wrap_wishlist",
+      "name": "test_app_uf2_cart_gift_wrap_wishlist",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
+      "file": "test_app_cart.py",
+      "title": "App - Cart: Guest user, Gift Wrap, Sign up, Wishlist",
+      "feature": "Cart",
+      "story": "",
+      "severity": "normal",
+      "tags": [
+        "Cart",
+        "Gift Wrap",
+        "New User",
+        "Wishlist"
+      ],
+      "docstring": "1. Precondition: Login, clear cart, sign out to become guest 2. Search for an item by category and add it to cart 3. Search for an item by brand (simple product) and add it to cart 4. Go to cart page and add Gift Wrap to item 5. Increase qty of items by 1 6. Click \"Proceed to Checkout\" as guest 7. Sign up as a new user, add shipping address 8. Compare item names between Cart and Checkout page 9. G",
+      "parametrized": false,
+      "skip": {
+        "type": "conditional",
+        "reason": "OS.lower() == \"android\""
+      },
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_app_cart_add_all_product_type_variants_and_verify",
+      "name": "test_app_cart_add_all_product_type_variants_and_verify",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
+      "file": "test_app_cart.py",
+      "title": "Add all product-type variants to cart via PLP popup and verify each in cart",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "ProductTypes",
+        "Popup"
+      ],
+      "docstring": "Validate the \"Select an option\" popup is handled correctly for every non-simple product type, and that each product lands in the cart. Flow: 1. Login (precondition) and clear cart. 2. For each product type (simple, bundle, configurable, custom): a. Search the product from Home. b. From PLP, tap the action (ATC) button. c. For non-simple variants the \"Select an option\" popup appears: d. Confirm; na",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_uae_checkout_cc_no_coupon",
       "name": "test_uae_checkout_cc_no_coupon",
+      "platform": "app",
+      "path": "tests/app/test_app_checkout.py",
       "file": "test_app_checkout.py",
       "title": "Successful user checkout in uae with CC no coupon",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "CC"
       ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using CC w/no coupon"
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using CC w/no coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
     },
     {
-      "name": "test_uae_checkout_cc_and_partial_sc_no_coupon",
+      "ref": "app::test_uae_checkout_cc_and__no_coupon",
+      "name": "test_uae_checkout_cc_and__no_coupon",
+      "platform": "app",
+      "path": "tests/app/test_app_checkout.py",
       "file": "test_app_checkout.py",
       "title": "Successful user checkout in uae with CC and SC no coupon",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "CC",
         "SC"
       ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Apply Store Credit 7. Pay using C"
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Apply Store Credit 7. Pay using CC w/no coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
     },
     {
+      "ref": "app::test_app_checkout_full_sc_no_coupon",
+      "name": "test_app_checkout_full_sc_no_coupon",
+      "platform": "app",
+      "path": "tests/app/test_app_checkout.py",
+      "file": "test_app_checkout.py",
+      "title": "Successful user checkout in UAE with full Store Credit no coupon",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Store Credit"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using full store credit w/no coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "app::test_uae_checkout_cod_no_coupon",
       "name": "test_uae_checkout_cod_no_coupon",
+      "platform": "app",
+      "path": "tests/app/test_app_checkout.py",
       "file": "test_app_checkout.py",
       "title": "Successful user checkout in UAE with COD no coupon",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "COD"
       ],
-      "feature": "Checkout",
-      "docstring": "1. Login to App 2. Click on Explore 3. Click on Search and enter: Search > Category 11 - Fashion > press enter 4. Add first product on plp page 5. Click on cart 6. Click on Checkout button 7. Find pay"
+      "docstring": "1. Login to App 2. Click on Explore 3. Click on Search and enter: Search > Category 11 - Fashion > press enter 4. Add first product on plp page 5. Click on cart 6. Click on Checkout button 7. Find payment option \"Cash On Delivery\" 8. Click Cash On Delivery 9. Click on Place Order button 10. Wait for Order placed successfully! page to load and verify",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
     },
     {
+      "ref": "app::test_uae_checkout_apply_gift_wrap_place_order",
       "name": "test_uae_checkout_apply_gift_wrap_place_order",
+      "platform": "app",
+      "path": "tests/app/test_app_checkout.py",
       "file": "test_app_checkout.py",
       "title": "UAE - Apply gift wrap to product and place order (App)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "Gift Wrap",
         "CC"
       ],
-      "feature": "Checkout",
-      "docstring": "1. Login to App 2. Click on Explore 3. Click on Search and enter: Search > Category 11 - Fashion > press enter 4. Add first product on plp page 5. Click on cart 6. Add Gift Wrap to the product 7. Clic"
+      "docstring": "1. Login to App 2. Click on Explore 3. Click on Search and enter: Search > Category 11 - Fashion > press enter 4. Add first product on plp page 5. Click on cart 6. Add Gift Wrap to the product 7. Click on Checkout and place order with CC",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
     },
     {
+      "ref": "app::test_uae_checkout_tabby_no_coupon",
       "name": "test_uae_checkout_tabby_no_coupon",
+      "platform": "app",
+      "path": "tests/app/test_app_checkout.py",
       "file": "test_app_checkout.py",
       "title": "",
-      "tags": [],
-      "feature": "",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Add product to bag (handles product type variants) 4. Go to cart 5. Proceed to checkout 6. Pay using Tab"
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Tabby"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Add product to bag (handles product type variants) 4. Go to cart 5. Proceed to checkout 6. Pay using Tabby w/no coupon",
+      "parametrized": true,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
     },
     {
+      "ref": "app::test_uae_checkout_invalid_cc_no_coupon",
       "name": "test_uae_checkout_invalid_cc_no_coupon",
+      "platform": "app",
+      "path": "tests/app/test_app_checkout.py",
       "file": "test_app_checkout.py",
       "title": "UAE - Checkout CC with invalid card (App)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "CC",
         "Invalid CC"
       ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using invalid CC w/no coupon "
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using invalid CC w/no coupon 7. Verify invalid card error message is displayed",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
     },
     {
+      "ref": "app::test_app_checkout_tabby_cashback_coupon",
       "name": "test_app_checkout_tabby_cashback_coupon",
+      "platform": "app",
+      "path": "tests/app/test_app_checkout.py",
       "file": "test_app_checkout.py",
       "title": "Checkout Tabby + Cashback Coupon (App)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "Tabby",
         "Cashback Coupon"
       ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Apply cashback coupon on checkout"
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Apply cashback coupon on checkout 7. Continue with full Tabby flow",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
     },
     {
+      "ref": "app::test_app_checkout_tabby_normal_coupon",
+      "name": "test_app_checkout_tabby_normal_coupon",
+      "platform": "app",
+      "path": "tests/app/test_app_checkout.py",
+      "file": "test_app_checkout.py",
+      "title": "Checkout Tabby + Normal Coupon (App)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Tabby",
+        "Coupon"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Apply normal coupon on checkout 7. Continue with full Tabby flow",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "app::test_app_uae_checkout_tamara_no_coupon",
       "name": "test_app_uae_checkout_tamara_no_coupon",
+      "platform": "app",
+      "path": "tests/app/test_app_checkout.py",
       "file": "test_app_checkout.py",
       "title": "Successful user checkout in UAE with Tamara no coupon App",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "Tamara"
       ],
-      "feature": "Checkout",
-      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/no coupon"
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/no coupon",
+      "parametrized": false,
+      "skip": {
+        "type": "hard",
+        "reason": "Skiping this test as it is falky"
+      },
+      "locales": [
+        "en"
+      ]
     },
     {
+      "ref": "app::test_app_checkout_tamara_normal_coupon",
+      "name": "test_app_checkout_tamara_normal_coupon",
+      "platform": "app",
+      "path": "tests/app/test_app_checkout.py",
+      "file": "test_app_checkout.py",
+      "title": "Checkout Tamara + Normal Coupon (App)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Tamara",
+        "Coupon"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Apply normal coupon on checkout 7. Continue with Tamara payment flow",
+      "parametrized": false,
+      "skip": {
+        "type": "hard",
+        "reason": "Skiping this test as it is falky"
+      },
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "app::test_uae_guest_checkout_login_bottom_sheet_and_place_order",
       "name": "test_uae_guest_checkout_login_bottom_sheet_and_place_order",
+      "platform": "app",
+      "path": "tests/app/test_app_checkout.py",
       "file": "test_app_checkout.py",
       "title": "",
-      "tags": [],
-      "feature": "",
-      "docstring": "Guest checkout flow (parametrized by product type): 1. Precondition: Login, clear cart, sign out 2. As guest, search and add product to cart 3. Navigate to cart and verify item present 4. Tap checkout"
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Guest",
+        "CC",
+        "BottomSheet"
+      ],
+      "docstring": "Guest checkout flow (parametrized by product type): 1. Precondition: Login, clear cart, sign out 2. As guest, search and add product to cart 3. Navigate to cart and verify item present 4. Tap checkout → login bottom sheet is displayed 5. Login with user email 6. Verify user is redirected to cart page with item retained 7. Proceed to checkout, handle address 8. Validate order summary and place orde",
+      "parametrized": true,
+      "skip": {
+        "type": "conditional",
+        "reason": "OS.lower() == \"ios\""
+      },
+      "locales": [
+        "en"
+      ]
     },
     {
+      "ref": "app::test_app_gift_registry_create_from_my_registries",
+      "name": "test_app_gift_registry_create_from_my_registries",
+      "platform": "app",
+      "path": "tests/app/test_app_gift_registry.py",
+      "file": "test_app_gift_registry.py",
+      "title": "Create Gift Registry from My account > My registries (Baby Shower)",
+      "feature": "Gift Registry",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Gift Registry",
+        "Baby Shower"
+      ],
+      "docstring": "Scenario 1: Creation of a Gift Registry from My account > My registries. 1. Sign in (no cart clear — cart state is irrelevant to gift registry flow) 2. Tap 'Gift Registry' shortcut on Account page 3. Tap 'Create registry' 4. Choose 'Baby Shower' event 5. Enter registry name and tap 'Create & Continue' 6. Assert the newly created registry detail screen is displayed 7. Navigate back and assert the r",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_app_gift_registry_create_from_pdp",
+      "name": "test_app_gift_registry_create_from_pdp",
+      "platform": "app",
+      "path": "tests/app/test_app_gift_registry.py",
+      "file": "test_app_gift_registry.py",
+      "title": "Create Gift Registry from PDP (Birthday)",
+      "feature": "Gift Registry",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Gift Registry",
+        "Birthday",
+        "PDP"
+      ],
+      "docstring": "Scenario 2: Creation of a Gift Registry from PDP → 'Add to Registry' button. 1. Sign in 2. Precondition — cleanup any pre-existing registries 3. Search for CATEGORY_4 (Diapers) and open the first search result 4. If the 'Add to Registry' button is missing on the first product, go back and try the second. If both are missing → fail with a clear Allure message so the reader knows the product catalog",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_app_gift_registry_create_from_pdp_all_product_types",
+      "name": "test_app_gift_registry_create_from_pdp_all_product_types",
+      "platform": "app",
+      "path": "tests/app/test_app_gift_registry.py",
+      "file": "test_app_gift_registry.py",
+      "title": "Create Gift Registry from PDP for every product type",
+      "feature": "Gift Registry",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Gift Registry",
+        "PDP",
+        "Parameterised"
+      ],
+      "docstring": "Scenario 3: Create one Gift Registry from PDP for each product type (simple / bundle / configurable / custom / custom_configurable / installation), then verify all appear on My registries, verify each registry's detail (event name, product name, quantity), and delete them in the same loop. First iteration opens the fresh 'Choose an event' sheet; subsequent iterations open the 'Add to gift registry",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_app_gift_registry_scenario_4_add_to_cart_via_deeplink",
+      "name": "test_app_gift_registry_scenario_4_add_to_cart_via_deeplink",
+      "platform": "app",
+      "path": "tests/app/test_app_gift_registry.py",
+      "file": "test_app_gift_registry.py",
+      "title": "Scenario 4 — Deep-link Add to Cart for all product types [{user_type}]",
+      "feature": "Gift Registry",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Gift Registry",
+        "Deep Link",
+        "Scenario 4",
+        "FALCONS-282"
+      ],
+      "docstring": "Scenario 4: Deep-link into six public registries (one per product type), tap Add to Cart on each, assert 'Gift items in cart' bar appears per registry, then open Cart and validate each registry-owner switch holds the expected item (name / qty / discounted price). Same flow for both user_types; the guest variant only adds a sign-out step at the very start so the test begins from an unauthenticated ",
+      "parametrized": true,
+      "skip": {
+        "type": "hard",
+        "reason": "Issue on the app side this needs to be fixed from dev"
+      },
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_customer_can_search_brand",
       "name": "test_customer_can_search_brand",
+      "platform": "app",
+      "path": "tests/app/test_app_home.py",
       "file": "test_app_home.py",
       "title": "Customer user can open brand page from search suggestions",
+      "feature": "Search",
+      "story": "",
+      "severity": "normal",
       "tags": [
         "Brand Search"
       ],
-      "feature": "Search",
-      "docstring": "1. Ensure the home page is visible 2. Type a brand name in the search bar 3. Select the matching brand suggestion 4. Confirm the brand page opens"
+      "docstring": "1. Ensure the home page is visible 2. Type a brand name in the search bar 3. Select the matching brand suggestion 4. Confirm the brand page opens",
+      "parametrized": false,
+      "skip": {
+        "type": "hard",
+        "reason": "Brand page doesn"
+      },
+      "locales": [
+        "en"
+      ]
     },
     {
+      "ref": "app::test_customer_can_search_product_in_specific_category",
       "name": "test_customer_can_search_product_in_specific_category",
+      "platform": "app",
+      "path": "tests/app/test_app_home.py",
       "file": "test_app_home.py",
       "title": "Customer user can open category page from search suggestions",
+      "feature": "Search",
+      "story": "",
+      "severity": "normal",
       "tags": [
         "Category Search"
       ],
-      "feature": "Search",
-      "docstring": "Test that customer can search for products in a specific category using category suggestions. Steps: 1. Navigate to the home page 2. Search for a term and select category suggestion 3. Verify category"
+      "docstring": "Test that customer can search for products in a specific category using category suggestions. Steps: 1. Navigate to the home page 2. Search for a term and select category suggestion 3. Verify category filter is displayed on PLP",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
     },
     {
+      "ref": "app::test_app_explore_screen_elements_and_navigate_to_account",
       "name": "test_app_explore_screen_elements_and_navigate_to_account",
+      "platform": "app",
+      "path": "tests/app/test_app_home.py",
       "file": "test_app_home.py",
       "title": "Explore screen shows key elements and navigates to Account",
+      "feature": "Home",
+      "story": "",
+      "severity": "critical",
       "tags": [
         "smoke",
         "navigation"
       ],
-      "feature": "Home",
-      "docstring": "1. Close all popups and select country 2. Verify explore screen key elements (feed, search header, bottom nav tabs) 3. Tap the Account tab in bottom navigation 4. Verify the Account screen loads"
+      "docstring": "1. Close all popups and select country 2. Verify explore screen key elements (feed, search header, bottom nav tabs) 3. Tap the Account tab in bottom navigation 4. Verify the Account screen loads",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    }
+  ],
+  "web_uae": [
+    {
+      "ref": "web_uae::test_uae_cart_existing_user_orders_no_coupon_yalla",
+      "name": "test_uae_cart_existing_user_orders_no_coupon_yalla",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Existing user with orders and Yalla free shipping on Cart",
+      "feature": "Cart",
+      "story": "",
+      "severity": "normal",
+      "tags": [
+        "Yalla"
+      ],
+      "docstring": "1. Search specific product through search 2. Filter for Yalla items on the PLP 3. Navigate to the PDP of the 1st Yalla product from PLP 4. Verify the 'Yalla' icon on the PDP 5. Click add to bag for this item 6. Go to cart 7. Verify if the cart shows Yalla free shipping on the 1st item",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_cart_guest_login_no_coupon_sc",
+      "name": "test_uae_cart_guest_login_no_coupon_sc",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Checkout with cart items as guest & login to existing user and pay with SC",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Guest"
+      ],
+      "docstring": "1. Go to homepage as Guest user 2. Search specific product through search 3. Navigate to the PDP of the 1st product from PLP 4. Click add to bag for this item 5. Go to cart and click 'Proceed to Checkout' 6. Signin to an existing user 7. Make sure the item exists in the cart for the existing user on Checkout page 8. Pay with full SC",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_cart_add_items_to_cart_as_a_newly_registered_user_and_apply_cashback_coupon",
+      "name": "test_uae_cart_add_items_to_cart_as_a_newly_registered_user_and_apply_cashback_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Cart UF4 (through product search)",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cashback"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Apply cashback coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_with_cart_items_register_a_new_user_and_coupon",
+      "name": "test_uae_checkout_with_cart_items_register_a_new_user_and_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Checkout with cart items as a guest. Register a new user and use a coupon",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Guest"
+      ],
+      "docstring": "1. Go to homepage as Guest user 2. Search specific product through search 3. Navigate to the PDP of the 1st product from PLP 4. Click add to bag for this item 5. Go to cart and click 'Proceed to Checkout' 6. Sign up new user 7. Add address 8. Apply coupon 9. Make sure the item exists in the cart for the existing user on Checkout page 10. Place order",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_uf2_cart_gift_wrap_wishlist",
+      "name": "test_uae_uf2_cart_gift_wrap_wishlist",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Cart: Guest user, Gift Wrap, Sign up, Wishlist",
+      "feature": "Cart",
+      "story": "",
+      "severity": "normal",
+      "tags": [
+        "Gift Wrap",
+        "New User",
+        "Wishlist"
+      ],
+      "docstring": "1. Go to homepage as Guest user 2. Search for an item in category page and add it to cart 3. Search for an item by brand page (simple product) and add it to cart 4. Go to cart page 5. Add GW to all items 6. Increase qty of all items by 1 7. Click \"Proceed to Checkout\" 8. Sign up as a new user - add shipping address 9. Compare the item name(s) between the cart page and checkout page 10. Go back to ",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_cart_uf5_checkout_cod_no_coupon",
+      "name": "test_uae_cart_uf5_checkout_cod_no_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Cart UF5 scenarios - Checkout COD (through product search)",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "COD"
+      ],
+      "docstring": "1. Go to homepage as Guest user. 2. Search for an item in category page and add it to cart. 3. Search for an item by brand page (simple product) and add it to cart. 4. Click on my account and select Sign out. 5. User stays on cart page. 6. Login again with the same customer credentials 7. Click on the shopping bag. 8. On the cart page, check for all the item details. 9. Find Bundle item. 10. Decre",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_percentage_of_product_price_discount_rules_without_max_amount",
+      "name": "test_uae_percentage_of_product_price_discount_rules_without_max_amount",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Percentage of product price discount rules without max amount (through product search)",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "AUTO_MAX_0"
+      ],
+      "docstring": "1. Go to homepage as Guest user. 2. Search for product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_percentage_of_product_price_discount_rules_with_max_amount",
+      "name": "test_uae_percentage_of_product_price_discount_rules_with_max_amount",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Percentage of product price discount rules with max amount (through product search)",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "COD",
+        "AUTO_MAX_50"
+      ],
+      "docstring": "1. Go to homepage as Guest user. 2. Search for product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select COD 7. Place order",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_percentage_of_product_variant_price_discount_rules_with_max_amount",
+      "name": "test_uae_percentage_of_product_variant_price_discount_rules_with_max_amount",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Percentage of Product variant price discount with max amount (through product search) and Place (COD) order",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "COD",
+        "AUTO_V_MAX_0"
+      ],
+      "docstring": "1. Go to homepage. 2. Add sales and none-salse product 3. Proceed to checkout. 4. Apply coupon. 5. Verify order summary calculation. 6. Select COD 7. Place order",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_percentage_of_product_variant_price_discount_rules_without_max_amount",
+      "name": "test_uae_percentage_of_product_variant_price_discount_rules_without_max_amount",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Percentage of Product variant price discount without max amount (through product search) and Place (CC) order",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "AUTO_V_MAX_60"
+      ],
+      "docstring": "1. Go to homepage. 2. Add sales and none-salse product. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_bank_discount_percentage_of_product_price_rule",
+      "name": "test_uae_bank_discount_percentage_of_product_price_rule",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Bank discount - percentage of product price discount rules (through product search)",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "AUTO_BANK_10"
+      ],
+      "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Proceed to checkout 7. Verify order summary calculation 8. Select the credit card 9. Place order",
+      "parametrized": false,
+      "skip": {
+        "type": "conditional",
+        "reason": "OS.lower() == \"ios\""
+      },
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_cart_apply_gift_wrap_and_place_order@test_cart",
+      "name": "test_uae_cart_apply_gift_wrap_and_place_order",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Apply gift wrap to product and place order",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Gift Wrap"
+      ],
+      "docstring": "1. Login using automation+1004@mumzworld.com / Test@123 2. Go to home screen explore 3. In mweb, from explore screen search product: Hape - Wooden Bunny Stacking Ring 4. Add to cart the first product on PDP page 5. Go to cart page & click on Checkout 6. On Checkout page, Add Gift Wrap to the product 7. Checkout using CC",
+      "parametrized": false,
+      "skip": {
+        "type": "hard",
+        "reason": "Duplicate — the live copy runs in test_checkout.py::test_uae_cart_apply_gift_wrap_and_place_order"
+      },
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_cart_remove_item",
+      "name": "test_uae_cart_remove_item",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Remove item from cart",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart"
+      ],
+      "docstring": "1. Sign in and clear the cart through the API 2. Search for a product and add it to the cart from the PDP 3. Go to the cart and remove the item 4. Verify the cart is empty",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_cart_remaining_items_unaffected_after_partial_removal",
+      "name": "test_uae_cart_remaining_items_unaffected_after_partial_removal",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Remaining cart items are unaffected after a partial removal",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart"
+      ],
+      "docstring": "1. Sign in and clear the cart through the API 2. Add two different products to the cart 3. Verify the cart holds 2 items 4. Remove the first product 5. Verify only the second product is left and it is untouched",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_cart_increase_and_decrease_quantity",
+      "name": "test_uae_cart_increase_and_decrease_quantity",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Quantity"
+      ],
+      "docstring": "1. Sign in and clear the cart through the API 2. Add one product of the given type to the cart 3. Increase the quantity twice (1 -> 3) 4. Decrease the quantity twice (3 -> 1) :param search_term: The product search term to use :param product_type: Type of product (simple, bundle, configurable, custom) :param email: Email ID to use for login",
+      "parametrized": true,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_cart_item_integrity_after_quantity_change",
+      "name": "test_uae_cart_item_integrity_after_quantity_change",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Cart item stays intact after a quantity change",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Quantity"
+      ],
+      "docstring": "1. Sign in and clear the cart through the API 2. Add one product to the cart and note its name and line total 3. Increase the quantity to 2 4. Verify the cart still holds a single row, with the same product and a line total that scaled",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_cart_bundle_multiple_variants",
+      "name": "test_uae_cart_bundle_multiple_variants",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Two bundle variants stay as separate cart rows",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Bundle",
+        "Variant"
+      ],
+      "docstring": "1. Sign in and clear the cart through the API 2. Add the same bundle twice, each with a different frame and bassinet combination 3. Verify the cart holds 2 separate rows rather than merging them 4. Increase the quantity on both rows 5. Verify the rows still have not merged",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_cart_configurable_multiple_variants",
+      "name": "test_uae_cart_configurable_multiple_variants",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Two configurable variants stay as separate cart rows",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Configurable",
+        "Variant"
+      ],
+      "docstring": "1. Sign in and clear the cart through the API 2. Add the same configurable product twice, each with a different size 3. Verify the cart holds 2 separate rows rather than merging them 4. Increase the quantity on both rows 5. Verify the rows still have not merged",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_cart_remove_item_with_applied_coupon",
+      "name": "test_uae_cart_remove_item_with_applied_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Order summary recalculates when an item is removed with a coupon applied",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Coupon"
+      ],
+      "docstring": "1. Sign in and clear the cart through the API 2. Add two different products to the cart 3. Apply a coupon on the cart and note the order summary 4. Remove the first product 5. Verify one item is left and the subtotal and order total both dropped",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_cart_order_summary_updates_after_item_removal",
+      "name": "test_uae_cart_order_summary_updates_after_item_removal",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Order summary updates after an item is removed",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "OrderSummary"
+      ],
+      "docstring": "1. Sign in and clear the cart through the API 2. Add two different products to the cart and note the order summary 3. Remove the first product 4. Verify one item is left and the subtotal and order total both dropped",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_cart_add_all_product_types_and_verify",
+      "name": "test_uae_cart_add_all_product_types_and_verify",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Every product type can be added to the cart and is listed",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "ProductTypes"
+      ],
+      "docstring": "1. Sign in and clear the cart through the API 2. Add one product of every supported type through its PDP 3. Verify the cart lists all of them and nothing else",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_cart_partial_sc_and_checkout_with_cc",
+      "name": "test_uae_cart_partial_sc_and_checkout_with_cc",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Partial store credit applied on the cart then checkout with CC",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "StoreCredit",
+        "CC"
+      ],
+      "docstring": "1. Sign in as a user holding store credit and clear the cart through the API 2. Add a product and note the cart order summary 3. Apply part of the store credit on the cart 4. Verify the order total dropped by exactly that amount and the subtotal did not move 5. Check out and pay the remainder with a credit card",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_cart_full_sc_and_checkout",
+      "name": "test_uae_cart_full_sc_and_checkout",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_cart.py",
+      "file": "test_cart.py",
+      "title": "UAE - Full store credit applied on the cart covers the whole order",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "StoreCredit",
+        "FullSC"
+      ],
+      "docstring": "1. Sign in as a user holding store credit and clear the cart through the API 2. Add a product to the cart 3. Apply the full store credit on the cart 4. Verify the order total is brought to zero 5. Place the order without a card",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_cc_no_coupon",
+      "name": "test_uae_checkout_cc_no_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC"
+      ],
+      "docstring": "Parameterized test for different product types: 1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item (method varies by product type) 4. Go to cart 5. Proceed to checkout 6. Pay using CC w/no coupon :param search_term: The product search term to use :param product_type: Type of product (simple, bundle, configurable, custom) :",
+      "parametrized": true,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_cod_no_coupon",
+      "name": "test_uae_checkout_cod_no_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "COD"
+      ],
+      "docstring": "Parameterized test for different product types: 1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item (method varies by product type) 4. Go to cart 5. Proceed to checkout 6. Pay using COD w/no coupon :param search_term: The product search term to use :param product_type: Type of product (simple, bundle, configurable, custom)",
+      "parametrized": true,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_tabby_no_coupon",
+      "name": "test_uae_checkout_tabby_no_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Tabby"
+      ],
+      "docstring": "Parameterized test for different product types: 1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item (method varies by product type) 4. Go to cart 5. Proceed to checkout 6. Pay using Tabby w/no coupon :param search_term: The product search term to use :param product_type: Type of product (simple, bundle, configurable, custom",
+      "parametrized": true,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_tabby_cashback_coupon",
+      "name": "test_uae_checkout_tabby_cashback_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "UAE - Checkout Tabby + Cashback Coupon (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Tabby",
+        "Cashback Coupon"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Apply cashback coupon on checkout 7. Continue with full Tabby flow",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_cc_normal_coupon",
+      "name": "test_uae_checkout_cc_normal_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "UAE - Checkout CC + Normal Coupon (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "Coupon"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using CC w/normal coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_cod_normal_coupon",
+      "name": "test_uae_checkout_cod_normal_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "UAE - Checkout COD + Normal Coupon (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "COD",
+        "Coupon"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using COD w/normal coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_tabby_normal_coupon",
+      "name": "test_uae_checkout_tabby_normal_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "UAE - Checkout Tabby + Normal Coupon (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Tabby",
+        "Coupon"
+      ],
+      "docstring": "",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_full_sc_no_coupon",
+      "name": "test_uae_checkout_full_sc_no_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "UAE - Checkout full Store Credit (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Store Credit"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using full store credit w/no coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_cc_and_partial_sc_no_coupon",
+      "name": "test_uae_checkout_cc_and_partial_sc_no_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "UAE - Checkout CC and partial Store Credit (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "Store Credit"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card and partial store credit w/no coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_tamara_no_coupon",
+      "name": "test_uae_checkout_tamara_no_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Tamara"
+      ],
+      "docstring": "Parameterized test for different product types: 1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item (method varies by product type) 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/no coupon :param search_term: The product search term to use :param product_type: Type of product (simple, bundle, configurable, custo",
+      "parametrized": true,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_tamara_normal_coupon",
+      "name": "test_uae_checkout_tamara_normal_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "UAE - Checkout Tamara + Normal Coupon (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Tamara",
+        "Coupon"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/normal coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_tamara_cashback_coupon",
+      "name": "test_uae_checkout_tamara_cashback_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "UAE - Checkout Tamara + Cashback Coupon (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Tamara",
+        "Cashback Coupon"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/cashback coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_invalid_cc_no_coupon",
+      "name": "test_uae_checkout_invalid_cc_no_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "UAE - Checkout CC and invalid card (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "Invalid CC"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using cc invalid cc w/no coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_full_sc_and_normal_coupon",
+      "name": "test_uae_checkout_full_sc_and_normal_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "UAE - Checkout with coupon and full Store Credit(through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Full SC",
+        "Normal Coupon"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Apply normal coupon on cart 6. Apply wallet balance on cart 7. Proceed to checkout 8. Click Place Order",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_cc_partial_sc_and_normal_coupon",
+      "name": "test_uae_checkout_cc_partial_sc_and_normal_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "UAE - Checkout CC, partial Store Credit and coupon(through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "SC",
+        "Coupon"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card and partial store credit w/normal coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_cc_wrong_otp_no_coupon",
+      "name": "test_uae_checkout_cc_wrong_otp_no_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "UAE - Checkout CC with wrong otp (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "Wrong OTP"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card with wrong otp w/no coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_cc_coupon_modal_sheet",
+      "name": "test_uae_checkout_cc_coupon_modal_sheet",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "UAE - Checkout CC + Coupon (through coupon modal sheet)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "Coupon Modal Sheet"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Add a coupon from the coupon modal sheet 6. Proceed to checkout 7. Pay using CC w/coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_full_sc_and_verify_sc_balance",
+      "name": "test_uae_checkout_full_sc_and_verify_sc_balance",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "UAE - Checkout full Store Credit + verifying SC balance",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Store Credit"
+      ],
+      "docstring": "1. Go to the wallet and see the initial balance 2. Search specific product through search 3. Navigate to the PDP of the 1st product from PLP 4. Click add to bag for this item 5. Go to cart 6. Proceed to checkout 7. Pay using full store credit w/no coupon 8. Go to the wallet and verify the balance after purchase",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_cc_and_verify_odp",
+      "name": "test_uae_checkout_cc_and_verify_odp",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "UAE - Checkout CC + verifying ODP",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "Verify ODP"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using CC w/no coupon 7. Go to the ODP and verify the details after purchase",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_cart_apply_gift_wrap_and_place_order@test_checkout",
+      "name": "test_uae_cart_apply_gift_wrap_and_place_order",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "UAE - Apply gift wrap to product and place order",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Gift Wrap"
+      ],
+      "docstring": "1. Login using automation+1004@mumzworld.com / Test@123 2. Go to home screen explore 3. In mweb, from explore screen search product: Hape - Wooden Bunny Stacking Ring 4. Add to cart the first product on PDP page 5. Go to cart page & click on Checkout 6. On Checkout page, Add Gift Wrap to the product 7. Checkout using CC",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_checkout_save_card_remember_me",
+      "name": "test_uae_checkout_save_card_remember_me",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_checkout.py",
+      "file": "test_checkout.py",
+      "title": "UAE - Save Card new-flow happy path: new user -> returning user -> RM OTP user",
+      "feature": "Checkout - FALCONS-286 Save Card / Remember Me",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "SaveCard",
+        "RememberMe",
+        "FALCONS-286"
+      ],
+      "docstring": "FALCONS-286 happy path — three scenarios sharing state on one session: S1: Fresh signup → CC → no tick → order (auto-dispatched via place_order('cc')). S2: Same user returns → saved-card visible → untick → order. S3: Sign in as `returning.user@checkout.com` → WhatsApp OTP → select 4242 → order.",
+      "parametrized": false,
+      "skip": {
+        "type": "hard",
+        "reason": "This is applicale only when the checkout flow is new"
+      },
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_user_register_from_account_page",
+      "name": "test_uae_user_register_from_account_page",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_user.py",
+      "file": "test_user.py",
+      "title": "UAE: Guest user, Register from account page",
+      "feature": "User",
+      "story": "",
+      "severity": "normal",
+      "tags": [
+        "New User"
+      ],
+      "docstring": "1. Go to homepage as Guest user 2. Navigate to Account page 3. Click on Sign in. 4. Click on create account 5. Fill in all fields 6. Click on register 7. Verify customer account name",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_user_register_from_cart_page",
+      "name": "test_uae_user_register_from_cart_page",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_user.py",
+      "file": "test_user.py",
+      "title": "UAE: Guest user, Register from cart page",
+      "feature": "User",
+      "story": "",
+      "severity": "normal",
+      "tags": [
+        "New User"
+      ],
+      "docstring": "1. Go to homepage as Guest user 2. Search for product. 3. Add simple product to cart. 4. Proceed to checkout. 5. Click on create account 6. Fill in all fields 7. Click on register.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_user_logs_in_from_account_page",
+      "name": "test_uae_user_logs_in_from_account_page",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_user.py",
+      "file": "test_user.py",
+      "title": "UAE - User: Guest user login from account page",
+      "feature": "User",
+      "story": "",
+      "severity": "normal",
+      "tags": [
+        "Existing User"
+      ],
+      "docstring": "1. Go to homepage as Guest user 2. Navigate to account page 3. Click on sign button 4. Enter email and password 5. Click on login 6. Sign out",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_user_logs_in_from_cart_page",
+      "name": "test_uae_user_logs_in_from_cart_page",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_user.py",
+      "file": "test_user.py",
+      "title": "UAE - User: Guest user login from cart page",
+      "feature": "User",
+      "story": "",
+      "severity": "normal",
+      "tags": [
+        "Existing User"
+      ],
+      "docstring": "1. Go to homepage as Guest user 2. Search for an item in category page and add it to cart 3. Go to cart page 4. Click \"Proceed to Checkout\" 5. Sign in with existing user account 6. Sign out",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_wishlist_add_all_product_types_new_user",
+      "name": "test_uae_wishlist_add_all_product_types_new_user",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_wishlist.py",
+      "file": "test_wishlist.py",
+      "title": "UAE - New user adds all product types to wishlist from PDP",
+      "feature": "Wishlist",
+      "story": "FALCONS-313 - Add products from PDP",
+      "severity": "critical",
+      "tags": [
+        "Wishlist"
+      ],
+      "docstring": "New (freshly registered) user adds every product type to the wishlist from the PDP. 1. Go to the homepage as a guest 2. Register a brand-new user (clean, empty wishlist) 3. For each product type: search -> open PDP -> Add-to-Wishlist 4. Open the Wishlist page and verify every product type is present",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_wishlist_add_all_product_types_existing_user",
+      "name": "test_uae_wishlist_add_all_product_types_existing_user",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_wishlist.py",
+      "file": "test_wishlist.py",
+      "title": "UAE - Existing user adds all product types to wishlist from PDP",
+      "feature": "Wishlist",
+      "story": "FALCONS-313 - Add products from PDP",
+      "severity": "critical",
+      "tags": [
+        "Wishlist"
+      ],
+      "docstring": "Existing user adds every product type to the wishlist from the PDP. 1. Sign in as an existing user (cart cleared via the GraphQL API) 2. Clear the wishlist (the PDP Add-to-Wishlist button only appears when the item is not already wishlisted; there is no wishlist-clear API) 3. For each product type: search -> open PDP -> Add-to-Wishlist 4. Open the Wishlist page and verify every product type is pre",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    }
+  ],
+  "web_ksa": [
+    {
+      "ref": "web_ksa::test_ksa_cart_existing_user_orders_no_coupon_yalla",
+      "name": "test_ksa_cart_existing_user_orders_no_coupon_yalla",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_cart_ksa.py",
+      "file": "test_cart_ksa.py",
+      "title": "KSA - Existing user with orders and Yalla free shipping on Cart",
+      "feature": "Cart",
+      "story": "",
+      "severity": "normal",
+      "tags": [
+        "Yalla"
+      ],
+      "docstring": "1. Search specific product through search 2. Filter for Yalla items on the PLP 3. Navigate to the PDP of the 1st Yalla product from PLP 4. Verify the 'Yalla' icon on the PDP 5. Click add to bag for this item 6. Go to cart 7. Verify if the cart shows Yalla free shipping on the 1st item",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_cart_guest_login_no_coupon_sc",
+      "name": "test_ksa_cart_guest_login_no_coupon_sc",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_cart_ksa.py",
+      "file": "test_cart_ksa.py",
+      "title": "KSA - Checkout with cart items as guest & login to existing user and pay with SC",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Guest"
+      ],
+      "docstring": "1. Go to homepage as Guest user 2. Search specific product through search 3. Navigate to the PDP of the 1st product from PLP 4. Click add to bag for this item 5. Go to cart and click 'Proceed to Checkout' 6. Signin to an existing user 7. Make sure the item exists in the cart for the existing user on Checkout page 8. Pay with full SC",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_cart_add_items_to_cart_as_a_newly_registered_user_and_apply_cashback_coupon",
+      "name": "test_ksa_cart_add_items_to_cart_as_a_newly_registered_user_and_apply_cashback_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_cart_ksa.py",
+      "file": "test_cart_ksa.py",
+      "title": "KSA - Cart UF4 (through product search)",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cashback"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Apply cashback coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_checkout_with_cart_items_register_a_new_user_and_coupon",
+      "name": "test_ksa_checkout_with_cart_items_register_a_new_user_and_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_cart_ksa.py",
+      "file": "test_cart_ksa.py",
+      "title": "KSA - Checkout with cart items as a guest. Register a new user and use a coupon",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Guest"
+      ],
+      "docstring": "1. Go to homepage as Guest user 2. Search specific product through search 3. Navigate to the PDP of the 1st product from PLP 4. Click add to bag for this item 5. Go to cart and click 'Proceed to Checkout' 6. Sign up new user 7. Add address 8. Apply coupon 9. Make sure the item exists in the cart for the existing user on Checkout page 10. Place order",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_uf2_cart_gift_wrap_wishlist",
+      "name": "test_ksa_uf2_cart_gift_wrap_wishlist",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_cart_ksa.py",
+      "file": "test_cart_ksa.py",
+      "title": "KSA - Cart: Guest user, Gift Wrap, Sign up, Wishlist",
+      "feature": "Cart",
+      "story": "",
+      "severity": "normal",
+      "tags": [
+        "Gift Wrap",
+        "New User",
+        "Wishlist"
+      ],
+      "docstring": "1. Go to homepage as Guest user 2. Search for an item in category page and add it to cart 3. Search for an item by brand page (simple product) and add it to cart 4. Go to cart page 5. Add GW to all items 6. Increase qty of all items by 1 7. Click \"Proceed to Checkout\" 8. Sign up as a new user - add shipping address 9. Compare the item name(s) between the cart page and checkout page 10. Go back to ",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_cart_uf5_checkout_cod_no_coupon",
+      "name": "test_ksa_cart_uf5_checkout_cod_no_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_cart_ksa.py",
+      "file": "test_cart_ksa.py",
+      "title": "KSA - Cart UF5 scenarios - Checkout COD (through product search)",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "COD"
+      ],
+      "docstring": "1. Go to homepage as Guest user. 2. Search for an item in category page and add it to cart. 3. Search for an item by brand page (simple product) and add it to cart. 4. Click on my account and select Sign out. 5. User stays on cart page. 6. Login again with the same customer credentials 7. Click on the shopping bag. 8. On the cart page, check for all the item details. 9. Find Bundle item. 10. Decre",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_percentage_of_product_price_discount_rules_without_max_amount",
+      "name": "test_ksa_percentage_of_product_price_discount_rules_without_max_amount",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_cart_ksa.py",
+      "file": "test_cart_ksa.py",
+      "title": "KSA - Percentage of product price discount rules without max amount (through product search)",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "AUTO_MAX_0"
+      ],
+      "docstring": "1. Go to homepage as Guest user. 2. Search for bundle product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_percentage_of_product_price_discount_rules_with_max_amount",
+      "name": "test_ksa_percentage_of_product_price_discount_rules_with_max_amount",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_cart_ksa.py",
+      "file": "test_cart_ksa.py",
+      "title": "KSA - Percentage of product price discount rules with max amount (through product search)",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "COD",
+        "AUTO_MAX_50"
+      ],
+      "docstring": "1. Go to homepage as Guest user. 2. Search for bundle product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select COD 7. Place order",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_percentage_of_product_variant_price_discount_rules_with_max_amount",
+      "name": "test_ksa_percentage_of_product_variant_price_discount_rules_with_max_amount",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_cart_ksa.py",
+      "file": "test_cart_ksa.py",
+      "title": "KSA - Percentage of Product variant price discount with max amount (through product search) and Place (COD) order",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "COD",
+        "AUTO_V_MAX_0"
+      ],
+      "docstring": "1. Go to homepage. 2. Add sales and none-sale product 3. Proceed to checkout. 4. Apply coupon. 5. Verify order summary calculation. 6. Select COD 7. Place order",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_percentage_of_product_variant_price_discount_rules_without_max_amount",
+      "name": "test_ksa_percentage_of_product_variant_price_discount_rules_without_max_amount",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_cart_ksa.py",
+      "file": "test_cart_ksa.py",
+      "title": "KSA - Percentage of Product variant price discount without max amount (through product search) and Place (CC) order",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "AUTO_V_MAX_60"
+      ],
+      "docstring": "1. Go to homepage. 2. Add sales and none-salse product. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_bank_discount_percentage_of_product_price_rule",
+      "name": "test_ksa_bank_discount_percentage_of_product_price_rule",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_cart_ksa.py",
+      "file": "test_cart_ksa.py",
+      "title": "KSA - Bank discount - percentage of product price discount rules (through product search)",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "AUTO_BANk_10"
+      ],
+      "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Proceed to checkout 7. Verify order summary calculation 8. Select the credit card 9. Place order",
+      "parametrized": false,
+      "skip": {
+        "type": "conditional",
+        "reason": "OS.lower() == \"ios\""
+      },
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_cart_apply_gift_wrap_and_place_order",
+      "name": "test_ksa_cart_apply_gift_wrap_and_place_order",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_cart_ksa.py",
+      "file": "test_cart_ksa.py",
+      "title": "KSA - Apply gift wrap to product and place order",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Gift Wrap"
+      ],
+      "docstring": "1. Login using auto+ksa+041@mumzworld.com / Test@123 2. Go to home screen explore 3. In mweb, from explore screen search product: Hape - Wooden Bunny Stacking Ring 4. Add to cart the first product on PDP page 5. Go to cart page & click on Checkout 6. On Checkout page, Add Gift Wrap to the product 7. Checkout using CC",
+      "parametrized": false,
+      "skip": {
+        "type": "hard",
+        "reason": "Gift wrap is deferred — the UAE counterpart is skipped as a duplicate of"
+      },
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_checkout_cc_no_coupon",
+      "name": "test_ksa_checkout_cc_no_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_checkout_ksa.py",
+      "file": "test_checkout_ksa.py",
+      "title": "",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC"
+      ],
+      "docstring": "Parameterized test for different product types: 1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item (method varies by product type) 4. Go to cart 5. Proceed to checkout 6. Pay using CC w/no coupon :param search_term: The product search term to use :param product_type: Type of product (simple, bundle, configurable, custom) :",
+      "parametrized": true,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_checkout_cod_no_coupon",
+      "name": "test_ksa_checkout_cod_no_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_checkout_ksa.py",
+      "file": "test_checkout_ksa.py",
+      "title": "KSA - Checkout COD (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "COD"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using COD w/no coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_checkout_tabby_no_coupon",
+      "name": "test_ksa_checkout_tabby_no_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_checkout_ksa.py",
+      "file": "test_checkout_ksa.py",
+      "title": "KSA - Checkout Tabby (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Tabby"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tabby w/no coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_checkout_tabby_cashback_coupon",
+      "name": "test_ksa_checkout_tabby_cashback_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_checkout_ksa.py",
+      "file": "test_checkout_ksa.py",
+      "title": "KSA - Checkout Tabby + Cashback Coupon (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Tabby",
+        "Cashback Coupon"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tabby w/cashback coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_checkout_cc_normal_coupon",
+      "name": "test_ksa_checkout_cc_normal_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_checkout_ksa.py",
+      "file": "test_checkout_ksa.py",
+      "title": "KSA - Checkout CC + Normal Coupon (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "Coupon"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using CC w/normal coupon",
+      "parametrized": false,
+      "skip": {
+        "type": "hard",
+        "reason": "Skiping this test as it is falky"
+      },
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_checkout_cod_normal_coupon",
+      "name": "test_ksa_checkout_cod_normal_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_checkout_ksa.py",
+      "file": "test_checkout_ksa.py",
+      "title": "KSA - Checkout COD + Normal Coupon (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "COD",
+        "Coupon"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using COD w/normal coupon",
+      "parametrized": false,
+      "skip": {
+        "type": "hard",
+        "reason": "Skiping this test as it is falky"
+      },
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_checkout_tabby_normal_coupon",
+      "name": "test_ksa_checkout_tabby_normal_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_checkout_ksa.py",
+      "file": "test_checkout_ksa.py",
+      "title": "KSA - Checkout Tabby + Normal Coupon (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Tabby",
+        "Coupon"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tabby w/normal coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_checkout_full_sc_no_coupon",
+      "name": "test_ksa_checkout_full_sc_no_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_checkout_ksa.py",
+      "file": "test_checkout_ksa.py",
+      "title": "KSA - Checkout full Store Credit (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Store Credit"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using full store credit w/no coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_checkout_cc_and_partial_sc_no_coupon",
+      "name": "test_ksa_checkout_cc_and_partial_sc_no_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_checkout_ksa.py",
+      "file": "test_checkout_ksa.py",
+      "title": "KSA - Checkout CC and partial Store Credit (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "Store Credit"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card and partial store credit w/no coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_checkout_tamara_no_coupon",
+      "name": "test_ksa_checkout_tamara_no_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_checkout_ksa.py",
+      "file": "test_checkout_ksa.py",
+      "title": "KSA - Checkout Tamara (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Tamara"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/no coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_checkout_tamara_normal_coupon",
+      "name": "test_ksa_checkout_tamara_normal_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_checkout_ksa.py",
+      "file": "test_checkout_ksa.py",
+      "title": "KSA - Checkout Tamara + Normal Coupon (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Tamara",
+        "Coupon"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/normal coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_checkout_tamara_cashback_coupon",
+      "name": "test_ksa_checkout_tamara_cashback_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_checkout_ksa.py",
+      "file": "test_checkout_ksa.py",
+      "title": "KSA - Checkout Tamara + Cashback Coupon (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Tamara",
+        "Cashback Coupon"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using Tamara w/cashback coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_checkout_invalid_cc_no_coupon",
+      "name": "test_ksa_checkout_invalid_cc_no_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_checkout_ksa.py",
+      "file": "test_checkout_ksa.py",
+      "title": "KSA - Checkout CC and invalid card (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "Invalid CC"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using cc invalid cc w/no coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_checkout_full_sc_and_normal_coupon",
+      "name": "test_ksa_checkout_full_sc_and_normal_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_checkout_ksa.py",
+      "file": "test_checkout_ksa.py",
+      "title": "KSA - Checkout with coupon and full Store Credit(through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Full SC",
+        "Normal Coupon"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card and full store credit w/normal coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_checkout_cc_partial_sc_and_normal_coupon",
+      "name": "test_ksa_checkout_cc_partial_sc_and_normal_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_checkout_ksa.py",
+      "file": "test_checkout_ksa.py",
+      "title": "KSA - Checkout CC, partial Store Credit and coupon(through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "SC",
+        "Coupon"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card and partial store credit w/normal coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_checkout_cc_wrong_otp_no_coupon",
+      "name": "test_ksa_checkout_cc_wrong_otp_no_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_checkout_ksa.py",
+      "file": "test_checkout_ksa.py",
+      "title": "KSA - Checkout CC with wrong otp (through product search)",
+      "feature": "Checkout",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "Wrong OTP"
+      ],
+      "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using credit card with wrong otp w/no coupon",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_user_register_from_account_page",
+      "name": "test_ksa_user_register_from_account_page",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_user_ksa.py",
+      "file": "test_user_ksa.py",
+      "title": "KSA: Guest user, Register from account page",
+      "feature": "User",
+      "story": "",
+      "severity": "normal",
+      "tags": [
+        "New User"
+      ],
+      "docstring": "1. Go to homepage as Guest user 2. Navigate to Account page 3. Click on Sign in. 4. Click on create account 5. Fill in all fields 6. Click on register 7. Verify customer account name",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_user_register_from_cart_page",
+      "name": "test_ksa_user_register_from_cart_page",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_user_ksa.py",
+      "file": "test_user_ksa.py",
+      "title": "KSA: Guest user, Register from cart page",
+      "feature": "User",
+      "story": "",
+      "severity": "normal",
+      "tags": [
+        "New User"
+      ],
+      "docstring": "1. Go to homepage as Guest user 2. Search for product. 3. Add simple product to cart. 4. Proceed to checkout. 5. Click on create account 6. Fill in all fields 7. Click on register.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_user_logs_in_from_account_page",
+      "name": "test_ksa_user_logs_in_from_account_page",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_user_ksa.py",
+      "file": "test_user_ksa.py",
+      "title": "KSA - User: Guest user login from account page",
+      "feature": "User",
+      "story": "",
+      "severity": "normal",
+      "tags": [
+        "Existing User"
+      ],
+      "docstring": "1. Go to homepage as Guest user 2. Navigate to account page 3. Click on sign button 4. Enter email and password 5. Click on login 6. Sign out",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_user_logs_in_from_cart_page",
+      "name": "test_ksa_user_logs_in_from_cart_page",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_user_ksa.py",
+      "file": "test_user_ksa.py",
+      "title": "KSA - User: Guest user login from cart page",
+      "feature": "User",
+      "story": "",
+      "severity": "normal",
+      "tags": [
+        "Existing User"
+      ],
+      "docstring": "1. Go to homepage as Guest user 2. Search for an item in category page and add it to cart 3. Go to cart page 4. Click \"Proceed to Checkout\" 5. Sign in with existing user account 6. Sign out",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_wishlist_add_all_product_types_new_user",
+      "name": "test_ksa_wishlist_add_all_product_types_new_user",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_wishlist_ksa.py",
+      "file": "test_wishlist_ksa.py",
+      "title": "KSA - New user adds all product types to wishlist from PDP",
+      "feature": "Wishlist",
+      "story": "FALCONS-313 - Add products from PDP",
+      "severity": "critical",
+      "tags": [
+        "Wishlist"
+      ],
+      "docstring": "New (freshly registered) KSA user adds every product type to the wishlist from the PDP. 1. Go to the homepage as a guest 2. Register a brand-new user (clean, empty wishlist) 3. For each product type: search -> open PDP -> Add-to-Wishlist 4. Open the Wishlist page and verify every product type is present",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_wishlist_add_all_product_types_existing_user",
+      "name": "test_ksa_wishlist_add_all_product_types_existing_user",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_wishlist_ksa.py",
+      "file": "test_wishlist_ksa.py",
+      "title": "KSA - Existing user adds all product types to wishlist from PDP",
+      "feature": "Wishlist",
+      "story": "FALCONS-313 - Add products from PDP",
+      "severity": "critical",
+      "tags": [
+        "Wishlist"
+      ],
+      "docstring": "Existing KSA user adds every product type to the wishlist from the PDP. 1. Sign in as an existing user (cart cleared via the GraphQL API) 2. Clear the wishlist (the PDP Add-to-Wishlist button only appears when the item is not already wishlisted; there is no wishlist-clear API) 3. For each product type: search -> open PDP -> Add-to-Wishlist 4. Open the Wishlist page and verify every product type is",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    }
+  ],
+  "web_commons": [
+    {
+      "ref": "web_commons::test_gift_registry_create_from_my_account",
+      "name": "test_gift_registry_create_from_my_account",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_gift_registry.py",
+      "file": "test_gift_registry.py",
+      "title": "",
+      "feature": "Gift Registry",
+      "story": "FALCONS-339 - Create a gift registry from My Account",
+      "severity": "critical",
+      "tags": [
+        "Gift Registry"
+      ],
+      "docstring": "Existing user creates a gift registry from My Account and finds it listed. 1. Sign in as an existing user for the current country 2. My Account -> Gift registry 3. Clear any registry left behind by an earlier run 4. Create a registry: pick an occasion, name it, submit 5. Verify the registry detail page 6. Go back to My Registries and verify the registry is listed",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
     }
   ]
 }

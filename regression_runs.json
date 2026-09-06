@@ -7,7 +7,9 @@
     "passed": 26,
     "failed": 3,
     "skipped": 2,
-    "total": 31
+    "total": 31,
+    "suite": "app",
+    "source": "manual"
   },
   {
     "date": "2026-05-21",
@@ -17,7 +19,9 @@
     "passed": 13,
     "failed": 2,
     "skipped": 16,
-    "total": 31
+    "total": 31,
+    "suite": "app",
+    "source": "manual"
   },
   {
     "date": "2026-05-21",
@@ -27,7 +31,9 @@
     "passed": 12,
     "failed": 1,
     "skipped": 6,
-    "total": 19
+    "total": 19,
+    "suite": "app",
+    "source": "manual"
   },
   {
     "date": "2026-05-21",
@@ -37,16 +43,86 @@
     "passed": 1,
     "failed": 4,
     "skipped": 14,
-    "total": 19
+    "total": 19,
+    "suite": "app",
+    "source": "manual"
   },
   {
-    "date": "2026-05-21",
+    "date": "2026-08-24",
+    "environment": "PREPROD",
+    "country": "AE",
+    "platform": "Android",
+    "passed": 46,
+    "failed": 3,
+    "skipped": 15,
+    "total": 64,
+    "suite": "app",
+    "project": "814155b7-9765-41f3-a24f-16bde33ed5b6-ae-android",
+    "source": "allure"
+  },
+  {
+    "date": "2026-08-24",
+    "environment": "PREPROD",
+    "country": "AE",
+    "platform": "iOS",
+    "passed": 45,
+    "failed": 2,
+    "skipped": 17,
+    "total": 64,
+    "suite": "app",
+    "project": "9da90dc2-2e72-42c7-bbc5-469d62c47aab-ae-ios",
+    "source": "allure"
+  },
+  {
+    "date": "2026-08-24",
+    "environment": "PREPROD",
+    "country": "SA",
+    "platform": "Android",
+    "passed": 35,
+    "failed": 10,
+    "skipped": 19,
+    "total": 64,
+    "suite": "app",
+    "project": "3d325e6c-1a45-4f43-8c4d-192b803b87ef-sa-android",
+    "source": "allure"
+  },
+  {
+    "date": "2026-08-24",
     "environment": "PREPROD",
     "country": "SA",
     "platform": "iOS",
-    "passed": 1,
-    "failed": 4,
-    "skipped": 14,
-    "total": 19
+    "passed": 42,
+    "failed": 1,
+    "skipped": 21,
+    "total": 64,
+    "suite": "app",
+    "project": "50dfca9d-e539-4c99-919c-d93c41ce2fd6-sa-ios",
+    "source": "allure"
+  },
+  {
+    "date": "2026-08-29",
+    "environment": "PREPROD",
+    "country": "AE",
+    "platform": "Android",
+    "passed": 10,
+    "failed": 0,
+    "skipped": 2,
+    "total": 12,
+    "suite": "mWeb cart",
+    "project": "cart-preprod-2026-08-29-ae-android",
+    "source": "allure"
+  },
+  {
+    "date": "2026-08-29",
+    "environment": "PREPROD",
+    "country": "SA",
+    "platform": "iOS",
+    "passed": 9,
+    "failed": 0,
+    "skipped": 3,
+    "total": 12,
+    "suite": "mWeb cart",
+    "project": "cart-preprod-2026-08-29-sa-ios",
+    "source": "allure"
   }
 ]
