@@ -24,6 +24,10 @@ PLATFORMS = {
     "web_commons": "tests/web/commons",
 }
 
+# Preferred ref, with fallbacks. A CI checkout is a detached HEAD and may not
+# carry refs/remotes/origin/*, so falling back to a local `main` and finally to
+# HEAD keeps the workflow working instead of silently reading the wrong tree.
+REF_CANDIDATES = ("origin/main", "main", "HEAD")
 REF = "origin/main"
 
 # Tickets that delivered / hardened Arabic locale support. Files they touched
@@ -39,6 +43,16 @@ def git(repo, *args):
     if out.returncode:
         raise SystemExit(f"git {' '.join(args)} failed: {out.stderr.strip()}")
     return out.stdout
+
+
+def resolve_ref(repo):
+    """First candidate ref that exists in this clone."""
+    for ref in REF_CANDIDATES:
+        out = subprocess.run(["git", "rev-parse", "--verify", "--quiet", ref],
+                             cwd=repo, capture_output=True, text=True)
+        if out.returncode == 0:
+            return ref
+    raise SystemExit(f"none of {REF_CANDIDATES} exist in {repo}")
 
 
 def list_test_files(repo, rel_dir):
@@ -156,8 +170,11 @@ def disambiguate(tests):
 
 def main():
     repo = Path(sys.argv[1]) if len(sys.argv) > 1 else Path.home() / "automation_web_2.0"
+    globals()["REF"] = resolve_ref(repo)
     head = git(repo, "rev-parse", "--short", REF).strip()
     print(f"Reading {repo} @ {REF} ({head}) -- working copy untouched")
+    if REF != REF_CANDIDATES[0]:
+        print(f"  note: {REF_CANDIDATES[0]} not present; used {REF}")
 
     ar_files = arabic_ticket_files(repo)
     result = {}

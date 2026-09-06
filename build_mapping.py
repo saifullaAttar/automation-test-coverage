@@ -547,9 +547,12 @@ def _source_sha():
     try:
         inv = json.loads((HERE / "automated_tests.json").read_text())
         repo = (HERE / ".." / "automation_web_2.0").resolve()
-        out = subprocess.run(["git", "rev-parse", "--short", "origin/main"],
-                             cwd=repo, capture_output=True, text=True)
-        return out.stdout.strip() or ""
+        for ref in ("origin/main", "main", "HEAD"):
+            out = subprocess.run(["git", "rev-parse", "--short", ref],
+                                 cwd=repo, capture_output=True, text=True)
+            if out.returncode == 0 and out.stdout.strip():
+                return out.stdout.strip()
+        return ""
     except Exception:
         return ""
 

@@ -31,6 +31,16 @@ jobs:
       - name: Check out the report
         uses: actions/checkout@v4
 
+      - name: Fail clearly if the secret is missing
+        run: |
+          if [ -z "${{ secrets.AUTOMATION_REPO_TOKEN }}" ]; then
+            echo "::error::AUTOMATION_REPO_TOKEN is not set."
+            echo "Create a fine-grained PAT with read-only Contents on"
+            echo "mumzworld-tech/automation_web_2.0, then:"
+            echo "  gh secret set AUTOMATION_REPO_TOKEN --repo saifullaattar/automation-test-coverage"
+            exit 1
+          fi
+
       - name: Check out the automation repo (read-only token)
         uses: actions/checkout@v4
         with:
