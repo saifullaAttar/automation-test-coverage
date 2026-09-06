@@ -116,9 +116,24 @@ and "Update from Main" ask for a token.
 The edit password is a speed bump against accidental edits, not access control: it is in the page
 source. Treat the whole report as public, and keep anything genuinely sensitive out of it.
 
-`.github/workflows/refresh-coverage.yml` keeps the report current without any browser credential:
-CI checks out the automation repo with a read-only `AUTOMATION_REPO_TOKEN` secret, reruns
-`extract_tests.py` + `build_mapping.py` + `verify_mapping.py`, and commits the result.
+### Keeping it current
+
+`ci/automation-repo-workflow.yml` is the one to use. Copy it into `automation_web_2.0` as
+`.github/workflows/publish-coverage.yml`. On every push to `main` that touches `tests/`, it
+regenerates the inventory and mapping and pushes them here.
+
+It runs *there* rather than here because fine-grained PATs can only reach `mumzworld-tech`
+repos if the organisation opts into them, and it has not — `automation_web_2.0` does not
+appear in the token UI at all. Running inside that repo means reading the tests needs no
+token (the built-in `GITHUB_TOKEN` covers it), and the only credential is a PAT on a repo
+owned personally, which no org policy gates:
+
+* Fine-grained PAT, resource owner **yourself**, repository `automation-test-coverage`,
+  permission **Contents: Read and write**.
+* `gh secret set COVERAGE_REPO_TOKEN --repo mumzworld-tech/automation_web_2.0`
+
+`.github/workflows/refresh-coverage.yml` is the reverse arrangement — this repo pulling from
+the automation repo. It is kept, manual-only, for if the org ever enables fine-grained PATs.
 
 Structural changes (new cases, re-mapping a whole area) belong in `build_mapping.py`, not
 in the browser — that file is the record of *why* each link exists.

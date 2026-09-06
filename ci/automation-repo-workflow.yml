@@ -1,0 +1,65 @@
+# Copy this to automation_web_2.0 as .github/workflows/publish-coverage.yml
+#
+# Why it lives in the automation repo rather than the coverage repo:
+# fine-grained PATs can only reach mumzworld-tech repos if the ORG opts into
+# them, and it has not. So instead of the public coverage repo pulling from the
+# private automation repo, the automation repo pushes to it. Reading the tests
+# then needs no token at all -- the built-in GITHUB_TOKEN already has it -- and
+# the only credential is a PAT on a repo you own personally, which no org policy
+# gates.
+#
+# Setup:
+#   1. Fine-grained PAT, resource owner = saifullaAttar (yourself, NOT the org):
+#        Repository access : Only select repositories -> automation-test-coverage
+#        Permissions       : Contents -> Read and write
+#   2. Add it here as a secret on automation_web_2.0:
+#        gh secret set COVERAGE_REPO_TOKEN --repo mumzworld-tech/automation_web_2.0
+#
+# The token can write to one public repo of yours and nothing else.
+name: Publish coverage report
+
+on:
+  push:
+    branches: [main]
+    paths: ['tests/**']
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out this repo (built-in token — no PAT needed)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # extract_tests.py reads origin/main and the AR ticket history
+
+      - name: Check out the coverage report (public — no auth to read)
+        uses: actions/checkout@v4
+        with:
+          repository: saifullaattar/automation-test-coverage
+          token: ${{ secrets.COVERAGE_REPO_TOKEN }}
+          path: coverage
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Rebuild the inventory and mapping
+        working-directory: coverage
+        run: |
+          python3 extract_tests.py "$GITHUB_WORKSPACE"
+          python3 build_mapping.py
+          python3 verify_mapping.py
+
+      - name: Push the refreshed report
+        working-directory: coverage
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add automated_tests.json mapping.json
+          if git diff --cached --quiet; then
+            echo "No change — the test suite did not move."
+          else
+            git commit -m "chore: refresh coverage from automation_web_2.0 @ ${GITHUB_SHA:0:7}"
+            git push
+          fi

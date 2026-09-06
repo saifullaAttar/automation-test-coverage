@@ -14,12 +14,16 @@
 # app_testmo_tests.json / web_regression_tests.json stay as committed; only the
 # automated-test inventory and the mapping are rebuilt. Re-run `make generate`
 # locally after a fresh TestMO export.
+# NOTE: this pull-based workflow needs a PAT that can read
+# mumzworld-tech/automation_web_2.0. Fine-grained PATs only reach org repos if
+# the ORG enables them, and mumzworld-tech has not — the repo does not appear in
+# the token UI at all. Until an org owner turns that on, use the push-based
+# workflow in ci/automation-repo-workflow.yml instead, which needs no org
+# permission. This file is kept for the day the org policy changes.
 name: Refresh coverage from main
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 6 * * 1'   # Mondays 06:00 UTC
+  workflow_dispatch:          # manual only — see the note above
 
 permissions:
   contents: write
