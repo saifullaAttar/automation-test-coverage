@@ -1,63 +1,90 @@
 #!/usr/bin/env python3
-"""Generate coverage_trend.json from automation_web_2.0 git commit history."""
+"""Build coverage_trend.json: test functions added and changed per month.
+
+Two things this deliberately does NOT do, both of which it used to:
+
+* Read the automation repo's current branch. It reads `origin/main`, the same
+  ref the rest of the report is generated from. Reading HEAD meant the chart
+  described whatever feature branch happened to be checked out -- and silently
+  lost the newest month whenever that branch was behind main.
+* Guess from commit messages. "add|new|feat" in a subject line is not evidence a
+  test was added. Every commit's diff is read and `def test_...` lines are
+  counted, so the numbers are what actually happened to the suite.
+
+The window always ends on the current month, even when that month has no
+commits yet, so the chart runs up to today rather than stopping at the last
+burst of activity.
+"""
 import json
-import subprocess
 import re
-from collections import defaultdict
+import subprocess
+import sys
+from collections import OrderedDict
+from datetime import date
 from pathlib import Path
-from datetime import datetime
 
 REPO = Path.home() / "automation_web_2.0"
+REF = "origin/main"
+MONTHS_BACK = 12
 
-def get_monthly_stats():
-    """Analyze git log for test-related commits grouped by month."""
-    # Get commits touching test files in the last 12 months
-    result = subprocess.run(
-        ["git", "log", "--since=12 months ago", "--pretty=format:%H|%ai|%s",
-         "--diff-filter=ACMR", "--", "tests/"],
-        capture_output=True, text=True, cwd=REPO
-    )
+ADDED = re.compile(r"^\+def (test_\w+)", re.M)
+REMOVED = re.compile(r"^-def (test_\w+)", re.M)
 
-    months = defaultdict(lambda: {"tests_added": 0, "tests_fixed": 0, "total_commits": 0})
 
-    for line in result.stdout.strip().split("\n"):
-        if not line:
+def git(*args):
+    out = subprocess.run(["git", *args], cwd=REPO, capture_output=True, text=True)
+    if out.returncode:
+        raise SystemExit(f"git {' '.join(args)} failed: {out.stderr.strip()}")
+    return out.stdout
+
+
+def month_window():
+    """Every month from MONTHS_BACK ago to the current one, in order."""
+    today = date.today()
+    y, m = today.year, today.month
+    months = []
+    for back in range(MONTHS_BACK - 1, -1, -1):
+        total = (y * 12 + (m - 1)) - back
+        months.append(date(total // 12, total % 12 + 1, 1))
+    return months
+
+
+def main():
+    repo = Path(sys.argv[1]) if len(sys.argv) > 1 else REPO
+    globals()["REPO"] = repo
+
+    window = month_window()
+    since = window[0].isoformat()
+    buckets = OrderedDict((d.strftime("%b %Y"), {"month": d.strftime("%b %Y"),
+                                                "tests_added": 0, "tests_fixed": 0,
+                                                "total_commits": 0}) for d in window)
+
+    log = git("log", REF, f"--since={since}", "--no-merges",
+              "--format=%x00%H|%ad", "--date=short", "-p", "--unified=0", "--", "tests/")
+
+    for chunk in log.split("\x00"):
+        if not chunk.strip():
             continue
-        parts = line.split("|", 2)
-        if len(parts) < 3:
+        header, _, diff = chunk.partition("\n")
+        _, _, when = header.partition("|")
+        key = date.fromisoformat(when.strip()).strftime("%b %Y")
+        if key not in buckets:
             continue
-        commit_hash, date_str, message = parts
-        month_key = datetime.fromisoformat(date_str.strip()).strftime("%b %Y")
-        msg_lower = message.lower()
+        added = len(ADDED.findall(diff))
+        removed = len(REMOVED.findall(diff))
+        buckets[key]["total_commits"] += 1
+        buckets[key]["tests_added"] += added
+        # A commit that touched tests without adding one changed existing tests.
+        if added == 0 and removed == 0:
+            buckets[key]["tests_fixed"] += 1
 
-        months[month_key]["total_commits"] += 1
-
-        # Classify commit
-        if any(kw in msg_lower for kw in ["add", "new", "feat", "create", "implement"]):
-            months[month_key]["tests_added"] += 1
-        elif any(kw in msg_lower for kw in ["fix", "update", "refactor", "improve", "adjust", "stable"]):
-            months[month_key]["tests_fixed"] += 1
-        else:
-            # Count files added vs modified in this commit
-            diff_result = subprocess.run(
-                ["git", "diff-tree", "--no-commit-id", "--name-status", "-r", commit_hash, "--", "tests/"],
-                capture_output=True, text=True, cwd=REPO
-            )
-            added = sum(1 for l in diff_result.stdout.strip().split("\n") if l.startswith("A"))
-            if added > 0:
-                months[month_key]["tests_added"] += 1
-            else:
-                months[month_key]["tests_fixed"] += 1
-
-    # Sort by date and convert to list
-    sorted_months = sorted(months.items(), key=lambda x: datetime.strptime(x[0], "%b %Y"))
-    return [{"month": k, **v} for k, v in sorted_months]
+    out = list(buckets.values())
+    Path(__file__).parent.joinpath("coverage_trend.json").write_text(json.dumps(out, indent=2))
+    head = git("rev-parse", "--short", REF).strip()
+    print(f"Trend from {REF} ({head}) — {len(out)} months to {out[-1]['month']}")
+    for d in out:
+        print(f"  {d['month']:9s} +{d['tests_added']:3d} tests, {d['tests_fixed']:3d} change-only commits, {d['total_commits']:3d} commits")
 
 
 if __name__ == "__main__":
-    trend = get_monthly_stats()
-    output = Path(__file__).parent / "coverage_trend.json"
-    output.write_text(json.dumps(trend, indent=2))
-    print(f"✅ Generated coverage_trend.json with {len(trend)} months of data")
-    for entry in trend:
-        print(f"   {entry['month']}: +{entry['tests_added']} added, {entry['tests_fixed']} fixed, {entry['total_commits']} commits")
+    main()

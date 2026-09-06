@@ -195,7 +195,8 @@ tr:hover{background:#f8f9ff;transition:background .2s}
 
   <!-- Coverage Trend -->
   <div class="section" style="margin-bottom:20px">
-    <h2>📈 Coverage Trend — Tests Added & Modified Per Month</h2>
+    <h2>📈 Coverage Trend — Tests Added &amp; Modified Per Month</h2>
+    <p style="color:#666;font-size:.85em;margin:8px 0 0">Counted from the diffs on <code>origin/main</code>: green is <code>def test_</code> functions actually added, blue is commits that changed existing tests without adding one. Rolling 12 months to the current month.</p>
     <canvas id="trendChart" height="280"></canvas>
   </div>
 
@@ -1106,28 +1107,13 @@ function renderRiskSection() {
 let COVERAGE_TREND = [];
 
 async function loadTrend() {
+  // Always the committed file. generate_trend.py counts real `def test_` lines
+  // from origin/main; the old in-browser version guessed from commit subjects
+  // and disagreed with it whenever a token was present.
   try {
-    // Auto-fetch latest commits from automation_web_2.0 main
-    const since = '2026-04-01T00:00:00Z';
-    if (!_gt()) throw new Error('no token — use the committed trend');
-    const resp = await fetch(`https://api.github.com/repos/mumzworld-tech/automation_web_2.0/commits?path=tests/&since=${since}&per_page=100`, {headers:{'Authorization':`token ${_gt()}`}});
-    if (!resp.ok) throw new Error('API failed');
-    const commits = await resp.json();
-    const months = {};
-    commits.forEach(c => {
-      const d = new Date(c.commit.author.date);
-      const key = d.toLocaleString('en-US', {month:'short', year:'numeric'});
-      if (!months[key]) months[key] = {month:key, tests_added:0, tests_fixed:0, total_commits:0, _date:d};
-      months[key].total_commits++;
-      const msg = c.commit.message.toLowerCase();
-      if (/add|new|feat|create|implement/.test(msg)) months[key].tests_added++;
-      else months[key].tests_fixed++;
-    });
-    COVERAGE_TREND = Object.values(months).sort((a,b) => a._date - b._date).map(({_date,...rest}) => rest);
-  } catch(e) {
-    // Fallback to static file
-    try { const resp = await fetch('coverage_trend.json?t=' + Date.now()); COVERAGE_TREND = await resp.json(); } catch { COVERAGE_TREND = []; }
-  }
+    const resp = await fetch('coverage_trend.json?t=' + Date.now());
+    COVERAGE_TREND = resp.ok ? await resp.json() : [];
+  } catch { COVERAGE_TREND = []; }
   renderTrendChart();
 }
 
@@ -1190,9 +1176,9 @@ function renderTrendChart() {
   // Legend
   ctx.font = '12px sans-serif'; ctx.textAlign = 'left';
   ctx.fillStyle = '#28a745'; ctx.fillRect(pad.left, 8, 14, 14);
-  ctx.fillStyle = '#333'; ctx.fillText('New Tests Added (commits with add/new/feat)', pad.left + 20, 19);
+  ctx.fillStyle = '#333'; ctx.fillText('New test functions added', pad.left + 20, 19);
   ctx.fillStyle = '#667eea'; ctx.fillRect(pad.left + 320, 8, 14, 14);
-  ctx.fillStyle = '#333'; ctx.fillText('Tests Fixed / Updated', pad.left + 340, 19);
+  ctx.fillStyle = '#333'; ctx.fillText('Commits changing existing tests', pad.left + 340, 19);
 
   // Coverage target annotation
   const totalCases = DATA ? scoped(DATA.testmo_tests).length + scoped(DATA.app_testmo_tests).length : 84;
