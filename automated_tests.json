@@ -3127,6 +3127,26 @@
       ]
     },
     {
+      "ref": "web_commons::test_gift_registry_order_from_share_link",
+      "name": "test_gift_registry_order_from_share_link",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_gift_registry.py",
+      "file": "test_gift_registry.py",
+      "title": "",
+      "feature": "Gift Registry",
+      "story": "FALCONS-341 - Order a gift registry from its public link",
+      "severity": "critical",
+      "tags": [
+        "Gift Registry"
+      ],
+      "docstring": "A guest orders every product on someone else's published gift registry. 1. The owner signs in, builds a registry with every product type and publishes it (delivery address, event date, location, public) 2. Capture the registry's share link 3. The buyer signs in with an empty cart and adds a product of their own 4. The buyer opens the share link and adds every registry product to cart 5. The cart s",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "web_commons::test_home_screen_elements_and_navigate_to_account",
       "name": "test_home_screen_elements_and_navigate_to_account",
       "platform": "web_commons",
@@ -3171,7 +3191,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "8382fec",
+    "sha": "94b30e3",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }
