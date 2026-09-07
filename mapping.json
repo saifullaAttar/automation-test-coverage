@@ -7526,8 +7526,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-07",
-    "generated_at": "2026-09-07T06:31:29+00:00",
-    "source_sha": "22ffbdb",
+    "generated_at": "2026-09-07T06:45:04+00:00",
+    "source_sha": "3bcdbb5",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
