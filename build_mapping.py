@@ -389,9 +389,17 @@ APP_MAPPING = {
         "Gift wrap added on the cart and the order placed with CC. Dropped "
         "test_app_cart_apply_gift_wrap_and_place_order, hard-skipped because it moved to the "
         "checkout suite. TestMO flags this NO -- it should be YES."),
-    "1435409": ("partial", ["app::test_app_uae_cart_remove_item_with_applied_coupon"],
-        "Applies a coupon on the cart and re-verifies the totals after an item is removed. "
-        "Removing the coupon is not automated."),
+    "1435409": ("full", ["app::test_app_uae_cart_remove_item_with_applied_coupon",
+                         "app::test_app_percentage_of_product_price_discount_rules_with_max_amount",
+                         "app::test_app_percentage_of_product_price_discount_rules_without_max_amount",
+                         "app::test_app_percentage_of_product_variant_price_discount_rules_with_max_amount",
+                         "app::test_app_percentage_of_product_variant_price_discount_rules_without_max_amount"],
+        "FALCONS-342 closed the gap. Apply on the cart was already covered; the capped "
+        "percentage test now applies a coupon on the cart, REMOVES it there, verifies the "
+        "checkout summary loses the discount, then re-applies it on checkout -- so apply and "
+        "remove are both proven. Four cart-price-rule variants are covered (percentage and "
+        "variant-percentage, each with and without a max amount), with the order summary "
+        "verified at each step."),
     "1435393": ("full", ["app::test_existing_user_profile"],
         "Signs in and verifies every detail on the My Profile screen. TestMO flags this NO -- it should be YES."),
     "1435394": ("none", [], "There is no app order-list / order-details test."),

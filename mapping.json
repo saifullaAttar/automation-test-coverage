@@ -3555,10 +3555,14 @@
       "source": "release_check",
       "page": 1,
       "automated_tests": [
-        "app::test_app_uae_cart_remove_item_with_applied_coupon"
+        "app::test_app_uae_cart_remove_item_with_applied_coupon",
+        "app::test_app_percentage_of_product_price_discount_rules_with_max_amount",
+        "app::test_app_percentage_of_product_price_discount_rules_without_max_amount",
+        "app::test_app_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "app::test_app_percentage_of_product_variant_price_discount_rules_without_max_amount"
       ],
-      "coverage_status": "partial",
-      "notes": "Applies a coupon on the cart and re-verifies the totals after an item is removed. Removing the coupon is not automated.",
+      "coverage_status": "full",
+      "notes": "FALCONS-342 closed the gap. Apply on the cart was already covered; the capped percentage test now applies a coupon on the cart, REMOVES it there, verifies the checkout summary loses the discount, then re-applies it on checkout -- so apply and remove are both proven. Four cart-price-rule variants are covered (percentage and variant-percentage, each with and without a max amount), with the order summary verified at each step.",
       "skipped_only": false,
       "locales": [
         "en",
@@ -7397,11 +7401,6 @@
           "status": "partial"
         },
         {
-          "case_id": "1435409",
-          "name": "Verify user can apply and remove coupon on cart",
-          "status": "partial"
-        },
-        {
           "case_id": "1543907",
           "name": "Place Tamara, Tabby, Apple pay and CC orders - check ODP, Admin and invoice",
           "status": "partial"
@@ -7437,10 +7436,6 @@
     "app::test_app_cart_existing_user_orders_no_coupon_yalla",
     "app::test_app_cart_guest_login_no_coupon_sc",
     "app::test_app_gift_registry_create_from_my_registries",
-    "app::test_app_percentage_of_product_price_discount_rules_with_max_amount",
-    "app::test_app_percentage_of_product_price_discount_rules_without_max_amount",
-    "app::test_app_percentage_of_product_variant_price_discount_rules_with_max_amount",
-    "app::test_app_percentage_of_product_variant_price_discount_rules_without_max_amount",
     "app::test_uae_cart_move_to_wishlist",
     "app::test_uae_cart_quantity_workflow",
     "app::test_uae_checkout_invalid_cc_no_coupon",
@@ -7531,7 +7526,7 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-07",
-    "generated_at": "2026-09-07T04:44:20+00:00",
+    "generated_at": "2026-09-07T05:53:18+00:00",
     "source_sha": "22ffbdb",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
@@ -7559,20 +7554,20 @@
         "total": 48,
         "in_scope": 29,
         "out_of_scope": 19,
-        "full": 9,
-        "partial": 14,
+        "full": 10,
+        "partial": 13,
         "covered": 23,
         "none": 6,
         "pct": 79,
-        "pct_full": 31
+        "pct_full": 34
       },
       "combined": {
         "in_scope": 84,
-        "full": 36,
-        "partial": 18,
+        "full": 37,
+        "partial": 17,
         "covered": 54,
         "pct": 64,
-        "pct_full": 43
+        "pct_full": 44
       },
       "web_by_source": {
         "other_group": {
@@ -7652,7 +7647,7 @@
     "active_tests": 117,
     "skipped_hard": 15,
     "skipped_conditional": 3,
-    "unmapped_count": 23,
+    "unmapped_count": 19,
     "plan_gap_count": 10,
     "unmapped_and_skipped": 8,
     "arabic_ready_tests": 107
