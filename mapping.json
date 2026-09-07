@@ -6874,10 +6874,7 @@
         ],
         "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using CC w/normal coupon",
         "parametrized": false,
-        "skip": {
-          "type": "hard",
-          "reason": "Skiping this test as it is falky"
-        },
+        "skip": null,
         "locales": [
           "en",
           "ar"
@@ -6899,10 +6896,7 @@
         ],
         "docstring": "1. Search specific product through search 2. Navigate to the PDP of the 1st product from PLP 3. Click add to bag for this item 4. Go to cart 5. Proceed to checkout 6. Pay using COD w/normal coupon",
         "parametrized": false,
-        "skip": {
-          "type": "hard",
-          "reason": "Skiping this test as it is falky"
-        },
+        "skip": null,
         "locales": [
           "en",
           "ar"
@@ -7272,6 +7266,94 @@
     ],
     "web_commons": [
       {
+        "ref": "web_commons::test_account_existing_user_profile",
+        "name": "test_account_existing_user_profile",
+        "platform": "web_commons",
+        "path": "tests/web/commons/test_account.py",
+        "file": "test_account.py",
+        "title": "Profile: Existing user can view their My Profile details",
+        "feature": "User Profile",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "My Profile",
+          "Existing User"
+        ],
+        "docstring": "1. Sign in as an existing user 2. Navigate to the Account page 3. Open My Profile 4. Verify the first name, last name and email on the My Profile page",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
+        "ref": "web_commons::test_account_delivery_addresses",
+        "name": "test_account_delivery_addresses",
+        "platform": "web_commons",
+        "path": "tests/web/commons/test_account.py",
+        "file": "test_account.py",
+        "title": "Profile: Existing user can view their saved delivery addresses",
+        "feature": "User Profile",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Delivery Address",
+          "Existing User"
+        ],
+        "docstring": "1. Sign in as an existing user who already has a saved default address 2. Navigate to the Account page 3. Open Delivery Addresses 4. Verify a saved address is listed and exactly one is marked as the default",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
+        "ref": "web_commons::test_account_add_new_address_and_set_default",
+        "name": "test_account_add_new_address_and_set_default",
+        "platform": "web_commons",
+        "path": "tests/web/commons/test_account.py",
+        "file": "test_account.py",
+        "title": "Profile: Existing user can add an address, make it default and delete the old one",
+        "feature": "User Profile",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Delivery Address",
+          "Existing User"
+        ],
+        "docstring": "1. Sign in as an existing user 2. Navigate to the Account page and open Delivery Addresses 3. Make sure the account already holds an address, so the set-as-default control renders 4. Click 'Add New Address' and fill the form for the configured country and locale 5. Mark the new address as the default and save it 6. Verify one more address is listed and exactly one is marked as the default 7. Delet",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
+        "ref": "web_commons::test_account_invalid_login_combinations",
+        "name": "test_account_invalid_login_combinations",
+        "platform": "web_commons",
+        "path": "tests/web/commons/test_account.py",
+        "file": "test_account.py",
+        "title": "",
+        "feature": "User Sign In",
+        "story": "",
+        "severity": "normal",
+        "tags": [
+          "Sign In",
+          "Negative"
+        ],
+        "docstring": "1. Open the Sign In page as a guest user 2. Enter the parametrized email and password (blank values stay empty) 3. Submit without asserting the form closed 4. Assert the expected error - main banner and/or per-field message",
+        "parametrized": true,
+        "skip": null,
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
         "ref": "web_commons::test_gift_registry_create_from_my_account",
         "name": "test_gift_registry_create_from_my_account",
         "platform": "web_commons",
@@ -7285,6 +7367,48 @@
           "Gift Registry"
         ],
         "docstring": "Existing user creates a gift registry from My Account and finds it listed. 1. Sign in as an existing user for the current country 2. My Account -> Gift registry 3. Clear any registry left behind by an earlier run 4. Create a registry: pick an occasion, name it, submit 5. Verify the registry detail page 6. Go back to My Registries and verify the registry is listed",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_commons::test_home_screen_elements_and_navigate_to_account",
+        "name": "test_home_screen_elements_and_navigate_to_account",
+        "platform": "web_commons",
+        "path": "tests/web/commons/test_home.py",
+        "file": "test_home.py",
+        "title": "Home: Explore screen shows key elements and navigates to Account",
+        "feature": "Home",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Home",
+          "Navigation"
+        ],
+        "docstring": "1. Go to the homepage as a guest user 2. Verify the search box and the bottom-navigation tabs render 3. Tap the Account tab in the bottom navigation 4. Verify the Account page is loaded",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_commons::test_home_search_product_in_specific_category",
+        "name": "test_home_search_product_in_specific_category",
+        "platform": "web_commons",
+        "path": "tests/web/commons/test_home.py",
+        "file": "test_home.py",
+        "title": "Home: Customer can open a category listing from the search suggestions",
+        "feature": "Search",
+        "story": "",
+        "severity": "normal",
+        "tags": [
+          "Home",
+          "Category Search"
+        ],
+        "docstring": "1. Go to the homepage as a guest user 2. Type a keyword in the search box 3. Open the first category suggestion 4. Verify the category facet is applied on the listing and products render",
         "parametrized": false,
         "skip": null,
         "locales": [
@@ -7488,6 +7612,12 @@
     "app::test_uae_cart_move_to_wishlist",
     "app::test_uae_cart_quantity_workflow",
     "app::test_uae_checkout_invalid_cc_no_coupon",
+    "web_commons::test_account_add_new_address_and_set_default",
+    "web_commons::test_account_delivery_addresses",
+    "web_commons::test_account_existing_user_profile",
+    "web_commons::test_account_invalid_login_combinations",
+    "web_commons::test_home_screen_elements_and_navigate_to_account",
+    "web_commons::test_home_search_product_in_specific_category",
     "web_ksa::test_ksa_cart_apply_gift_wrap_and_place_order",
     "web_ksa::test_ksa_wishlist_guest_add_prompts_login",
     "web_uae::test_uae_cart_add_all_product_types_and_verify",
@@ -7577,8 +7707,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-07",
-    "generated_at": "2026-09-07T07:17:14+00:00",
-    "source_sha": "c5c222a",
+    "generated_at": "2026-09-07T12:56:31+00:00",
+    "source_sha": "76aaab8",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -7692,15 +7822,15 @@
       "app": 50,
       "web_uae": 51,
       "web_ksa": 35,
-      "web_commons": 1
+      "web_commons": 7
     },
-    "total_automated_tests": 137,
-    "active_tests": 119,
-    "skipped_hard": 15,
+    "total_automated_tests": 143,
+    "active_tests": 127,
+    "skipped_hard": 13,
     "skipped_conditional": 3,
-    "unmapped_count": 21,
+    "unmapped_count": 27,
     "plan_gap_count": 10,
     "unmapped_and_skipped": 8,
-    "arabic_ready_tests": 111
+    "arabic_ready_tests": 115
   }
 }
