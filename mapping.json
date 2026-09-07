@@ -7374,6 +7374,26 @@
         ]
       },
       {
+        "ref": "web_commons::test_gift_registry_create_from_pdp",
+        "name": "test_gift_registry_create_from_pdp",
+        "platform": "web_commons",
+        "path": "tests/web/commons/test_gift_registry.py",
+        "file": "test_gift_registry.py",
+        "title": "",
+        "feature": "Gift Registry",
+        "story": "FALCONS-340 - Create a gift registry from the PDP",
+        "severity": "critical",
+        "tags": [
+          "Gift Registry"
+        ],
+        "docstring": "Guest hits Add to Registry, signs in, then builds one registry from the PDP. 1. Open the store and search the simple product 2. Open its PDP and click Add to Registry as a guest -> sign-in 3. Sign in and clear any registry left by an earlier run 4. Back on the same PDP, create the registry from the Add to Registry sheet 5. Add every other product type to that same registry from its PDP 6. Verify t",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
         "ref": "web_commons::test_home_screen_elements_and_navigate_to_account",
         "name": "test_home_screen_elements_and_navigate_to_account",
         "platform": "web_commons",
@@ -7616,6 +7636,7 @@
     "web_commons::test_account_delivery_addresses",
     "web_commons::test_account_existing_user_profile",
     "web_commons::test_account_invalid_login_combinations",
+    "web_commons::test_gift_registry_create_from_pdp",
     "web_commons::test_home_screen_elements_and_navigate_to_account",
     "web_commons::test_home_search_product_in_specific_category",
     "web_ksa::test_ksa_cart_apply_gift_wrap_and_place_order",
@@ -7707,8 +7728,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-07",
-    "generated_at": "2026-09-07T12:56:31+00:00",
-    "source_sha": "76aaab8",
+    "generated_at": "2026-09-07T12:56:53+00:00",
+    "source_sha": "8382fec",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -7822,13 +7843,13 @@
       "app": 50,
       "web_uae": 51,
       "web_ksa": 35,
-      "web_commons": 7
+      "web_commons": 8
     },
-    "total_automated_tests": 143,
-    "active_tests": 127,
+    "total_automated_tests": 144,
+    "active_tests": 128,
     "skipped_hard": 13,
     "skipped_conditional": 3,
-    "unmapped_count": 27,
+    "unmapped_count": 28,
     "plan_gap_count": 10,
     "unmapped_and_skipped": 8,
     "arabic_ready_tests": 115

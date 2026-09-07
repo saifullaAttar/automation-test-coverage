@@ -3107,6 +3107,26 @@
       ]
     },
     {
+      "ref": "web_commons::test_gift_registry_create_from_pdp",
+      "name": "test_gift_registry_create_from_pdp",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_gift_registry.py",
+      "file": "test_gift_registry.py",
+      "title": "",
+      "feature": "Gift Registry",
+      "story": "FALCONS-340 - Create a gift registry from the PDP",
+      "severity": "critical",
+      "tags": [
+        "Gift Registry"
+      ],
+      "docstring": "Guest hits Add to Registry, signs in, then builds one registry from the PDP. 1. Open the store and search the simple product 2. Open its PDP and click Add to Registry as a guest -> sign-in 3. Sign in and clear any registry left by an earlier run 4. Back on the same PDP, create the registry from the Add to Registry sheet 5. Add every other product type to that same registry from its PDP 6. Verify t",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "web_commons::test_home_screen_elements_and_navigate_to_account",
       "name": "test_home_screen_elements_and_navigate_to_account",
       "platform": "web_commons",
@@ -3151,7 +3171,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "76aaab8",
+    "sha": "8382fec",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }
