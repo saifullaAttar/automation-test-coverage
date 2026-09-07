@@ -404,6 +404,102 @@
       ]
     },
     {
+      "ref": "app::test_app_percentage_of_product_variant_price_discount_rules_with_max_amount",
+      "name": "test_app_percentage_of_product_variant_price_discount_rules_with_max_amount",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
+      "file": "test_app_cart.py",
+      "title": "Percentage of product variant price discount with max amount",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Coupon",
+        "COD",
+        "AUTO_V_MAX_0"
+      ],
+      "docstring": "1. Add an on-sale product and one sold at list price. 2. Proceed to checkout and select COD. 3. Verify the summary, then apply the capped variant coupon on checkout. 4. Verify the summary again and place a COD order.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_app_percentage_of_product_variant_price_discount_rules_without_max_amount",
+      "name": "test_app_percentage_of_product_variant_price_discount_rules_without_max_amount",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
+      "file": "test_app_cart.py",
+      "title": "Percentage of product variant price discount without max amount",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Coupon",
+        "CC",
+        "AUTO_V_MAX_60"
+      ],
+      "docstring": "1. Add one on-sale product from Deals and one regular product from search. 2. Apply the uncapped variant-price coupon on the cart. 3. Proceed to checkout and verify the order summary. 4. Place a CC order.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_app_percentage_of_product_price_discount_rules_with_max_amount",
+      "name": "test_app_percentage_of_product_price_discount_rules_with_max_amount",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
+      "file": "test_app_cart.py",
+      "title": "Percentage of product price discount rules with max amount",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Coupon",
+        "COD",
+        "AUTO_MAX_50"
+      ],
+      "docstring": "1. Add a product to cart and apply the capped percentage coupon. 2. Remove it on the cart, then verify the checkout summary without a discount. 3. Re-apply it on checkout and verify the summary again, now discounted. 4. Place a COD order.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_app_percentage_of_product_price_discount_rules_without_max_amount",
+      "name": "test_app_percentage_of_product_price_discount_rules_without_max_amount",
+      "platform": "app",
+      "path": "tests/app/test_app_cart.py",
+      "file": "test_app_cart.py",
+      "title": "Percentage of product price discount rules without max amount",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Coupon",
+        "CC",
+        "AUTO_MAX_0"
+      ],
+      "docstring": "1. Search for a product and add it to cart. 2. Apply the no-max percentage coupon on cart. 3. Proceed to checkout. 4. Verify the order summary calculation. 5. Place a CC order.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
       "ref": "app::test_app_bank_discount_percentage_of_product_price_rule",
       "name": "test_app_bank_discount_percentage_of_product_price_rule",
       "platform": "app",
@@ -422,7 +518,7 @@
       "parametrized": false,
       "skip": {
         "type": "hard",
-        "reason": "Test is broken"
+        "reason": "auto_bank allows one use per customer, but the journey needs two applies:"
       },
       "locales": [
         "en",
@@ -558,10 +654,7 @@
       ],
       "docstring": "1. Go to homepage as signed-in user. 2. Search for a simple B2B product and add it to cart. 3. Search for a product by brand name and add it to cart. 4. Sign out from account page. 5. Sign back in with the same credentials. 6. Go to cart and verify both products are present. 7. Decrease the qty of the first item by 1. 8. Increase the qty of the second item by 1. 9. Proceed to checkout. 10. Place o",
       "parametrized": false,
-      "skip": {
-        "type": "conditional",
-        "reason": "OS.lower() == \"android\""
-      },
+      "skip": null,
       "locales": [
         "en",
         "ar"
@@ -585,10 +678,7 @@
       ],
       "docstring": "1. Precondition: Login, clear cart, sign out to become guest 2. Search for an item by category and add it to cart 3. Search for an item by brand (simple product) and add it to cart 4. Go to cart page and add Gift Wrap to item 5. Increase qty of items by 1 6. Click \"Proceed to Checkout\" as guest 7. Sign up as a new user, add shipping address 8. Compare item names between Cart and Checkout page 9. G",
       "parametrized": false,
-      "skip": {
-        "type": "conditional",
-        "reason": "OS.lower() == \"android\""
-      },
+      "skip": null,
       "locales": [
         "en",
         "ar"
@@ -2891,7 +2981,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "e6db1a0",
+    "sha": "22ffbdb",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }
