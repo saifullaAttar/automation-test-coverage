@@ -67,8 +67,10 @@ WEB_MAPPING = {
 
     # --- Log in / Logged out -------------------------------------------------
     "2337055": ("full", ["web_uae::test_uae_user_logs_in_from_account_page",
-                         "web_ksa::test_ksa_user_logs_in_from_account_page"],
-        "Login from the account-page sign-in popup, UAE and KSA."),
+                         "web_ksa::test_ksa_user_logs_in_from_account_page",
+                         "web_commons::test_account_invalid_login_combinations"],
+        "Login from the account-page sign-in popup, UAE and KSA, plus a parametrised negative test "
+        "(FALCONS-338) asserting the banner and per-field errors for each invalid combination."),
     "2337057": ("full", ["web_uae::test_uae_user_logs_in_from_cart_page",
                          "web_ksa::test_ksa_user_logs_in_from_cart_page",
                          "web_uae::test_uae_cart_guest_login_no_coupon_sc",
@@ -88,9 +90,10 @@ WEB_MAPPING = {
     "2337058": ("none", [], "Forgot-password flow is not automated."),
 
     # --- My profile ------------------------------------------------------------
-    "1018709": ("none", [],
-        "Removed the previous link to test_existing_user_profile: that is an APP test, credited on "
-        "app case 1435393. There is no mWeb profile-page test."),
+    "1018709": ("full", ["web_commons::test_account_existing_user_profile"],
+        "FALCONS-338. Signs in, opens Account > My Profile and verifies first name, last name and "
+        "email. This is the first mWeb profile test -- the case previously had only an app test "
+        "wrongly credited to it."),
     "1018710": ("none", [], "Editing account info is not automated."),
     "1230430": ("none", [], "Delete Account is not automated."),
 
@@ -133,11 +136,15 @@ WEB_MAPPING = {
                             "web_uae::test_uae_uf2_cart_gift_wrap_wishlist",
                             "web_ksa::test_ksa_uf2_cart_gift_wrap_wishlist"],
         "Scenario 2 (a new user adds an address on the checkout page) is covered by the "
-        "guest-to-registered flows. Scenario 1 (adding an address from the Address Book page) is not. "
-        "Dropped the app address test, which is credited on app case 1435400."),
-    "1018712": ("none", [],
-        "Removed the previous link to the APP test test_add_new_address_and_make_default_and_delete, "
-        "credited on app case 1435400. Editing an address from the mWeb Address Book is not automated."),
+        "guest-to-registered flows. FALCONS-338 also covers adding from the Address Book page, but "
+        "with an existing user -- the test needs a pre-existing address so the set-as-default control "
+        "renders, so a genuinely new user with no addresses is still not the path taken."),
+    "1018712": ("partial", ["web_commons::test_account_add_new_address_and_set_default",
+                            "web_commons::test_account_delivery_addresses"],
+        "FALCONS-338. Adds an address from Delivery Addresses, marks it default and verifies exactly "
+        "one default remains, then deletes the address it replaced and confirms it is gone from the "
+        "Address Book. Not covered: re-verifying every field after creation, and the rule that the "
+        "default toggle is inert while editing the default address."),
     "1018713": ("none", [],
         "Removed the previous link to test_uae_checkout_cc_coupon_modal_sheet, which is unrelated. "
         "Setting a default address or editing address fields from checkout is not automated."),
@@ -283,23 +290,28 @@ WEB_MAPPING = {
         "(tierednomax / tieredmax) are not automated."),
 
     # --- Gift Registry (FALCONS-339) -----------------------------------------------------------------------
-    "2337059": ("partial", ["web_commons::test_gift_registry_create_from_my_account"],
-        "Scenario 1 is fully automated: sign in, My Account > Gift registry, pick an occasion, name "
-        "the registry, submit, verify the detail page and that it is listed under My Registries. "
-        "Scenario 2 (creating a registry from the PDP) is not automated on mWeb -- it is on the app "
-        "(test_app_gift_registry_create_from_pdp)."),
-    "2337061": ("none", [],
-        "Filling in the registry details (event, location, date picker, gift delivery address, "
-        "share link) is not automated."),
-    "2337060": ("none", [],
-        "Adding products to an existing registry from the PDP is automated on the app only "
-        "(app case 1435418), not on mWeb."),
-    "2337062": ("none", [],
-        "Buyer adding registry products to the cart is not automated on mWeb. The app script exists "
-        "but is hard-skipped pending an app-side fix."),
-    "2337063": ("none", [],
-        "Removed the previous link to test_ksa_checkout_cc_normal_coupon, which is unrelated (and "
-        "hard-skipped). Checkout from a gift-registry cart is not automated."),
+    "2337059": ("full", ["web_commons::test_gift_registry_create_from_my_account",
+                         "web_commons::test_gift_registry_create_from_pdp"],
+        "Both scenarios now covered. Scenario 1: My Account > Gift registry, pick an occasion, name "
+        "it, submit, verify the detail page and the listing. Scenario 2 (FALCONS-340): a guest taps "
+        "Add to Registry on a PDP, is sent to sign-in, signs in and creates the registry from the "
+        "Add to Registry sheet on the same PDP."),
+    "2337061": ("full", ["web_commons::test_gift_registry_order_from_share_link"],
+        "FALCONS-341. The owner builds a registry with every product type and publishes it -- event "
+        "date, location, gift delivery address, visibility -- then the share link is captured and "
+        "proven to work by a second user opening it. That is the whole setup flow this case describes."),
+    "2337060": ("partial", ["web_commons::test_gift_registry_create_from_pdp"],
+        "FALCONS-340. Adds every product type to one registry from its PDP and verifies each landed. "
+        "Not covered: changing an item's desired quantity, deleting an item from the registry, or the "
+        "brand-search entry point this case also lists."),
+    "2337062": ("full", ["web_commons::test_gift_registry_order_from_share_link"],
+        "FALCONS-341 covers scenario 1 exactly: the buyer signs in with an empty cart, adds an item "
+        "of their own, opens the owner's share link and adds every registry product. The cart then "
+        "shows two groups and the registry group is asserted to hold all of them."),
+    "2337063": ("full", ["web_commons::test_gift_registry_order_from_share_link"],
+        "FALCONS-341. The buyer switches the cart to the registry group, checks out that group alone "
+        "and pays by credit card. Replaces the old link to test_ksa_checkout_cc_normal_coupon, which "
+        "was unrelated and hard-skipped."),
     "1018774": ("none", [], "The purchased tab and desired-quantity checks after an order are not automated."),
 }
 
@@ -508,6 +520,14 @@ PLAN_GAPS = {
         ("2337029", "UF1 - Yalla free shipping on the cart (mWEB case; no app equivalent)"),
     "app::test_app_gift_registry_create_from_my_registries":
         ("2337059", "Gift Registry creation from My account (mWEB case; no app equivalent)"),
+    "web_commons::test_home_screen_elements_and_navigate_to_account":
+        ("1435389", "Verify home page is loading (app case; the mWEB set has no home-page case)"),
+    "web_commons::test_home_search_product_in_specific_category":
+        ("1435425", "Categories from home page (app case; the mWEB set has no equivalent)"),
+    "web_uae::test_uae_wishlist_guest_add_prompts_login":
+        ("1018714", "Wishlist cases cover new/existing users; none covers the guest login prompt"),
+    "web_ksa::test_ksa_wishlist_guest_add_prompts_login":
+        ("1018714", "Wishlist cases cover new/existing users; none covers the guest login prompt"),
 }
 
 ARABIC = {
