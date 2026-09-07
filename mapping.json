@@ -646,7 +646,8 @@
       "notes": "Registers a brand-new user (guaranteed empty wishlist), adds all seven product types from the PDP and verifies each one. Replaces the previous link to the hard-skipped app test test_uae_cart_move_to_wishlist. TestMO flags this case NO -- it should be YES.",
       "skipped_only": false,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -674,7 +675,8 @@
       "notes": "wishlist.clear_wishlist() deletes every item from the Wishlist page, but it runs as a precondition so the deletion itself is exercised rather than asserted. Removing an item from the PDP heart icon (scenario 2) is not covered.",
       "skipped_only": false,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -702,7 +704,8 @@
       "notes": "Existing user adds simple, configurable, colour-variant, custom, personalised, bundle and installation products to the wishlist from the PDP and verifies all of them -- covers the configurable / custom / bundle types this case names. TestMO flags this case NO -- it should be YES.",
       "skipped_only": false,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -6440,6 +6443,28 @@
         ]
       },
       {
+        "ref": "web_uae::test_uae_wishlist_guest_add_prompts_login",
+        "name": "test_uae_wishlist_guest_add_prompts_login",
+        "platform": "web_uae",
+        "path": "tests/web/UAE/test_wishlist.py",
+        "file": "test_wishlist.py",
+        "title": "",
+        "feature": "Wishlist",
+        "story": "FALCONS-314 - Guest Add-to-Wishlist prompts login",
+        "severity": "critical",
+        "tags": [
+          "Wishlist",
+          "Guest"
+        ],
+        "docstring": "Guest add-to-wishlist prompts login, then item is added after auth. 1. As a guest, navigate to the entry page (Category / SRP / Brand / PDP). 2. Tap the Add-to-Wishlist icon. 3. Verify the guest is prompted to log in (redirected to /sign-in). 4. Sign in (existing user) OR register (new user). 5. Verify the user is returned to the same page. 6. (signin only) Clear the existing user's wishlist so th",
+        "parametrized": true,
+        "skip": null,
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
         "ref": "web_uae::test_uae_wishlist_add_all_product_types_new_user",
         "name": "test_uae_wishlist_add_all_product_types_new_user",
         "platform": "web_uae",
@@ -6456,7 +6481,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -6476,7 +6502,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       }
     ],
@@ -7181,6 +7208,28 @@
         ]
       },
       {
+        "ref": "web_ksa::test_ksa_wishlist_guest_add_prompts_login",
+        "name": "test_ksa_wishlist_guest_add_prompts_login",
+        "platform": "web_ksa",
+        "path": "tests/web/KSA/test_wishlist_guest_ksa.py",
+        "file": "test_wishlist_guest_ksa.py",
+        "title": "",
+        "feature": "Wishlist",
+        "story": "FALCONS-314 - Guest Add-to-Wishlist prompts login",
+        "severity": "critical",
+        "tags": [
+          "Wishlist",
+          "Guest"
+        ],
+        "docstring": "Guest add-to-wishlist prompts login, then item is added after auth (KSA). 1. As a guest, navigate to the entry page (Category / SRP / Brand / PDP). 2. Tap the Add-to-Wishlist icon. 3. Verify the guest is prompted to log in (redirected to /sign-in). 4. Sign in (existing user) OR register (new user). 5. Verify the user is returned to the same page. 6. Tap the wishlist icon again and verify the item ",
+        "parametrized": true,
+        "skip": null,
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
         "ref": "web_ksa::test_ksa_wishlist_add_all_product_types_new_user",
         "name": "test_ksa_wishlist_add_all_product_types_new_user",
         "platform": "web_ksa",
@@ -7440,6 +7489,7 @@
     "app::test_uae_cart_quantity_workflow",
     "app::test_uae_checkout_invalid_cc_no_coupon",
     "web_ksa::test_ksa_cart_apply_gift_wrap_and_place_order",
+    "web_ksa::test_ksa_wishlist_guest_add_prompts_login",
     "web_uae::test_uae_cart_add_all_product_types_and_verify",
     "web_uae::test_uae_cart_apply_gift_wrap_and_place_order@test_cart",
     "web_uae::test_uae_cart_bundle_multiple_variants",
@@ -7449,7 +7499,8 @@
     "web_uae::test_uae_cart_order_summary_updates_after_item_removal",
     "web_uae::test_uae_cart_remaining_items_unaffected_after_partial_removal",
     "web_uae::test_uae_cart_remove_item",
-    "web_uae::test_uae_checkout_save_card_remember_me"
+    "web_uae::test_uae_checkout_save_card_remember_me",
+    "web_uae::test_uae_wishlist_guest_add_prompts_login"
   ],
   "plan_gaps": [
     {
@@ -7526,8 +7577,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-07",
-    "generated_at": "2026-09-07T06:45:04+00:00",
-    "source_sha": "3bcdbb5",
+    "generated_at": "2026-09-07T07:17:14+00:00",
+    "source_sha": "c5c222a",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -7639,17 +7690,17 @@
     },
     "platforms": {
       "app": 50,
-      "web_uae": 50,
-      "web_ksa": 34,
+      "web_uae": 51,
+      "web_ksa": 35,
       "web_commons": 1
     },
-    "total_automated_tests": 135,
-    "active_tests": 117,
+    "total_automated_tests": 137,
+    "active_tests": 119,
     "skipped_hard": 15,
     "skipped_conditional": 3,
-    "unmapped_count": 19,
+    "unmapped_count": 21,
     "plan_gap_count": 10,
     "unmapped_and_skipped": 8,
-    "arabic_ready_tests": 107
+    "arabic_ready_tests": 111
   }
 }

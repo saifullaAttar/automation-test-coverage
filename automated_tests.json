@@ -2176,6 +2176,28 @@
       ]
     },
     {
+      "ref": "web_uae::test_uae_wishlist_guest_add_prompts_login",
+      "name": "test_uae_wishlist_guest_add_prompts_login",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_wishlist.py",
+      "file": "test_wishlist.py",
+      "title": "",
+      "feature": "Wishlist",
+      "story": "FALCONS-314 - Guest Add-to-Wishlist prompts login",
+      "severity": "critical",
+      "tags": [
+        "Wishlist",
+        "Guest"
+      ],
+      "docstring": "Guest add-to-wishlist prompts login, then item is added after auth. 1. As a guest, navigate to the entry page (Category / SRP / Brand / PDP). 2. Tap the Add-to-Wishlist icon. 3. Verify the guest is prompted to log in (redirected to /sign-in). 4. Sign in (existing user) OR register (new user). 5. Verify the user is returned to the same page. 6. (signin only) Clear the existing user's wishlist so th",
+      "parametrized": true,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
       "ref": "web_uae::test_uae_wishlist_add_all_product_types_new_user",
       "name": "test_uae_wishlist_add_all_product_types_new_user",
       "platform": "web_uae",
@@ -2192,7 +2214,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -2212,7 +2235,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     }
   ],
@@ -2917,6 +2941,28 @@
       ]
     },
     {
+      "ref": "web_ksa::test_ksa_wishlist_guest_add_prompts_login",
+      "name": "test_ksa_wishlist_guest_add_prompts_login",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_wishlist_guest_ksa.py",
+      "file": "test_wishlist_guest_ksa.py",
+      "title": "",
+      "feature": "Wishlist",
+      "story": "FALCONS-314 - Guest Add-to-Wishlist prompts login",
+      "severity": "critical",
+      "tags": [
+        "Wishlist",
+        "Guest"
+      ],
+      "docstring": "Guest add-to-wishlist prompts login, then item is added after auth (KSA). 1. As a guest, navigate to the entry page (Category / SRP / Brand / PDP). 2. Tap the Add-to-Wishlist icon. 3. Verify the guest is prompted to log in (redirected to /sign-in). 4. Sign in (existing user) OR register (new user). 5. Verify the user is returned to the same page. 6. Tap the wishlist icon again and verify the item ",
+      "parametrized": true,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
       "ref": "web_ksa::test_ksa_wishlist_add_all_product_types_new_user",
       "name": "test_ksa_wishlist_add_all_product_types_new_user",
       "platform": "web_ksa",
@@ -2981,7 +3027,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "3bcdbb5",
+    "sha": "c5c222a",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }
