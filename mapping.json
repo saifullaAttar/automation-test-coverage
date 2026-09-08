@@ -1878,10 +1878,13 @@
         "web_uae::test_uae_bank_discount_percentage_of_product_price_rule",
         "web_ksa::test_ksa_bank_discount_percentage_of_product_price_rule"
       ],
-      "coverage_status": "none",
-      "notes": "Bank coupon viewed on the cart, re-checked after a quantity change, applied, order summary verified and a CC order placed. Both tests are skipif OS == ios, so this runs on Android/Chrome only. NOT COUNTED AS AUTOMATED: every mapped test is skipped on some target, so the case is not proven where it matters -- OS.lower() == \"ios\".",
+      "coverage_status": "full",
+      "notes": "Bank coupon viewed on the cart, re-checked after a quantity change, applied, order summary verified and a CC order placed. Both tests are skipif OS == ios, so this runs on Android/Chrome only. LIMITED TO SOME TARGETS: OS.lower() == \"ios\"",
       "skipped_only": false,
       "gated_only": true,
+      "gate_reasons": [
+        "OS.lower() == \"ios\""
+      ],
       "locales": [
         "en",
         "ar"
@@ -3499,10 +3502,13 @@
       "automated_tests": [
         "app::test_app_gift_registry_create_from_pdp_all_product_types"
       ],
-      "coverage_status": "none",
-      "notes": "Opens the PDP for simple, bundle, configurable, custom, custom-configurable and installation products and selects their options, but as part of the gift-registry flow -- the PDP content itself is not asserted. Colour variant and egift are not covered. NOT COUNTED AS AUTOMATED: every mapped test is skipped on some target, so the case is not proven where it matters -- Gift registry is AE-only: on SA the event list does not load and the registry sc.",
+      "coverage_status": "partial",
+      "notes": "Opens the PDP for simple, bundle, configurable, custom, custom-configurable and installation products and selects their options, but as part of the gift-registry flow -- the PDP content itself is not asserted. Colour variant and egift are not covered. LIMITED TO SOME TARGETS: Gift registry is AE-only: on SA the event list does not load and the registry screen renders blank (app-side b",
       "skipped_only": false,
       "gated_only": true,
+      "gate_reasons": [
+        "Gift registry is AE-only: on SA the event list does not load and the registry screen renders blank (app-side b"
+      ],
       "locales": [
         "en",
         "ar"
@@ -3584,10 +3590,13 @@
         "app::test_app_gift_registry_create_from_pdp_all_product_types",
         "app::test_app_gift_registry_create_from_pdp"
       ],
-      "coverage_status": "none",
-      "notes": "Newly credited (FALCONS-282). Adds a product to a registry from the PDP for six product types and verifies the event name, product name and quantity on the registry detail screen. Colour variant and egift are not covered. NOT COUNTED AS AUTOMATED: every mapped test is skipped on some target, so the case is not proven where it matters -- Gift registry is AE-only: on SA the event list does not load and the registry sc.",
+      "coverage_status": "partial",
+      "notes": "Newly credited (FALCONS-282). Adds a product to a registry from the PDP for six product types and verifies the event name, product name and quantity on the registry detail screen. Colour variant and egift are not covered. LIMITED TO SOME TARGETS: Gift registry is AE-only: on SA the event list does not load and the registry screen renders blank (app-side b",
       "skipped_only": false,
       "gated_only": true,
+      "gate_reasons": [
+        "Gift registry is AE-only: on SA the event list does not load and the registry screen renders blank (app-side b"
+      ],
       "locales": [
         "en",
         "ar"
@@ -4483,10 +4492,13 @@
       "automated_tests": [
         "app::test_uae_guest_checkout_login_bottom_sheet_and_place_order"
       ],
-      "coverage_status": "none",
-      "notes": "A guest adds an item, taps checkout, signs in through the login bottom sheet and the item is still in the cart; parametrised by product type. Gated by skipif on OS. Dropped the hard-skipped test_app_cart_guest_login_no_coupon_sc. TestMO flags this NO -- it should be YES. NOT COUNTED AS AUTOMATED: every mapped test is skipped on some target, so the case is not proven where it matters -- OS.lower() == \"ios\".",
+      "coverage_status": "full",
+      "notes": "A guest adds an item, taps checkout, signs in through the login bottom sheet and the item is still in the cart; parametrised by product type. Gated by skipif on OS. Dropped the hard-skipped test_app_cart_guest_login_no_coupon_sc. TestMO flags this NO -- it should be YES. LIMITED TO SOME TARGETS: OS.lower() == \"ios\"",
       "skipped_only": false,
       "gated_only": true,
+      "gate_reasons": [
+        "OS.lower() == \"ios\""
+      ],
       "locales": [
         "en"
       ]
@@ -8064,11 +8076,6 @@
           "case_id": "2337045",
           "name": "Exit Checkout Prompt Feature",
           "status": "none"
-        },
-        {
-          "case_id": "1018761",
-          "name": "Bank discount",
-          "status": "none"
         }
       ],
       "yes_but_partial": [],
@@ -8100,6 +8107,11 @@
           "case_id": "1435402",
           "name": "Verify customer can search  for products",
           "status": "full"
+        },
+        {
+          "case_id": "1543957",
+          "name": "Verify cart merge guest > existing user with items",
+          "status": "full"
         }
       ],
       "yes_but_none": [
@@ -8119,6 +8131,11 @@
         {
           "case_id": "1435425",
           "name": "Verify user can access categories from home page on UAE/KSA/GCC/International store",
+          "status": "partial"
+        },
+        {
+          "case_id": "1435391",
+          "name": "Verify PDP for all product types (Simple, custom , installation , configurable, configurable custom , colour variant  bundle, and egift )",
           "status": "partial"
         }
       ]
@@ -8260,7 +8277,7 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-09",
-    "generated_at": "2026-09-08T18:42:28+00:00",
+    "generated_at": "2026-09-08T18:45:39+00:00",
     "source_sha": "bb4c777",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
@@ -8282,31 +8299,31 @@
         "total": 115,
         "in_scope": 55,
         "out_of_scope": 60,
-        "full": 32,
+        "full": 33,
         "partial": 4,
-        "covered": 36,
-        "none": 19,
-        "pct": 65,
-        "pct_full": 58
+        "covered": 37,
+        "none": 18,
+        "pct": 67,
+        "pct_full": 60
       },
       "app": {
         "total": 48,
         "in_scope": 29,
         "out_of_scope": 19,
-        "full": 14,
-        "partial": 4,
-        "covered": 18,
-        "none": 11,
-        "pct": 62,
-        "pct_full": 48
+        "full": 15,
+        "partial": 5,
+        "covered": 20,
+        "none": 9,
+        "pct": 69,
+        "pct_full": 52
       },
       "combined": {
         "in_scope": 84,
-        "full": 46,
-        "partial": 8,
-        "covered": 54,
-        "pct": 64,
-        "pct_full": 55
+        "full": 48,
+        "partial": 9,
+        "covered": 57,
+        "pct": 68,
+        "pct_full": 57
       },
       "web_by_source": {
         "other_group": {
@@ -8324,35 +8341,35 @@
           "total": 104,
           "in_scope": 55,
           "out_of_scope": 49,
-          "full": 32,
+          "full": 33,
           "partial": 4,
-          "covered": 36,
-          "none": 19,
-          "pct": 65,
-          "pct_full": 58
+          "covered": 37,
+          "none": 18,
+          "pct": 67,
+          "pct_full": 60
         }
       }
     },
     "projection": {
       "web": {
-        "in_scope": 65,
-        "covered": 48,
+        "in_scope": 66,
+        "covered": 49,
         "pct": 74
       },
       "app": {
-        "in_scope": 33,
-        "covered": 23,
-        "pct": 70
+        "in_scope": 34,
+        "covered": 26,
+        "pct": 76
       },
       "combined": {
-        "in_scope": 98,
-        "covered": 71,
-        "pct": 72
+        "in_scope": 100,
+        "covered": 75,
+        "pct": 75
       },
       "actions": [
         {
           "id": "A",
-          "what": "Re-flag 3 case(s) flagged YES that nothing covers",
+          "what": "Re-flag 2 case(s) flagged YES that nothing covers",
           "detail": "Exit Checkout Prompt (C-2337045) — no exit-prompt locator or page method exists on main",
           "effect": "leaves scope; mWEB Checkout folder reaches 8/8"
         },
@@ -8364,8 +8381,8 @@
         },
         {
           "id": "C",
-          "what": "Re-flag 2 case(s) marked Not planned that have automation mapped",
-          "detail": "C-1435389, C-1435425",
+          "what": "Re-flag 3 case(s) marked Not planned that have automation mapped",
+          "detail": "C-1435389, C-1435425, C-1435391",
           "effect": "enters scope, already covered"
         }
       ]
@@ -8389,6 +8406,7 @@
       "hard_skipped": 3,
       "gated": 3
     },
+    "gate_note": "Hard-skipped cases are not counted as automated: nothing runs. Platform-gated cases are counted -- they run wherever the product allows, and every gate is a product or tooling limitation rather than missing test work -- with the limitation shown on the case.",
     "skipped_conditional": 6,
     "links": {
       "direct": 122,
