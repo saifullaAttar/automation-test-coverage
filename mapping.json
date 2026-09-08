@@ -3663,7 +3663,7 @@
         "app::test_app_wishlist_all_product_types"
       ],
       "coverage_status": "full",
-      "notes": "Newly credited. Opens the wishlist and verifies every product, parametrised for guest and logged-in users. TestMO flags this NO -- it should be YES.",
+      "notes": "Opens the wishlist and verifies every product, parametrised for guest and logged-in users. The guest variant is a known Android failure -- the guest multi-product add does not land every product -- which is a run failure rather than a coverage gap, so it belongs in the run history, not here. TestMO flags this NO -- it should be YES.",
       "skipped_only": false,
       "locales": [
         "en",
@@ -3717,7 +3717,7 @@
       "page": 1,
       "automated_tests": [],
       "coverage_status": "none",
-      "notes": "Removing products from the wishlist is not automated on the app.",
+      "notes": "Removing products from the wishlist is not automated on the app. This is the one app wishlist case with nothing on it; 1435396 is partial (cart path only). Closing both is what completes app Wishlist.",
       "skipped_only": false,
       "locales": [
         "en"
@@ -5265,7 +5265,11 @@
         ],
         "docstring": "Scenario 1: Creation of a Gift Registry from My account > My registries. 1. Sign in (no cart clear — cart state is irrelevant to gift registry flow) 2. Tap 'Gift Registry' shortcut on Account page 3. Tap 'Create registry' 4. Choose 'Baby Shower' event 5. Enter registry name and tap 'Create & Continue' 6. Assert the newly created registry detail screen is displayed 7. Navigate back and assert the r",
         "parametrized": false,
-        "skip": null,
+        "skip": {
+          "type": "conditional",
+          "reason": "Gift registry is AE-only: on SA the event list does not load and the registry screen renders blank (app-side bug).",
+          "scope": "module"
+        },
         "locales": [
           "en",
           "ar"
@@ -5288,7 +5292,11 @@
         ],
         "docstring": "Scenario 2: Creation of a Gift Registry from PDP → 'Add to Registry' button. 1. Sign in 2. Precondition — cleanup any pre-existing registries 3. Search for CATEGORY_4 (Diapers) and open the first search result 4. If the 'Add to Registry' button is missing on the first product, go back and try the second. If both are missing → fail with a clear Allure message so the reader knows the product catalog",
         "parametrized": false,
-        "skip": null,
+        "skip": {
+          "type": "conditional",
+          "reason": "Gift registry is AE-only: on SA the event list does not load and the registry screen renders blank (app-side bug).",
+          "scope": "module"
+        },
         "locales": [
           "en",
           "ar"
@@ -5311,7 +5319,11 @@
         ],
         "docstring": "Scenario 3: Create one Gift Registry from PDP for each product type (simple / bundle / configurable / custom / custom_configurable / installation), then verify all appear on My registries, verify each registry's detail (event name, product name, quantity), and delete them in the same loop. First iteration opens the fresh 'Choose an event' sheet; subsequent iterations open the 'Add to gift registry",
         "parametrized": false,
-        "skip": null,
+        "skip": {
+          "type": "conditional",
+          "reason": "Gift registry is AE-only: on SA the event list does not load and the registry screen renders blank (app-side bug).",
+          "scope": "module"
+        },
         "locales": [
           "en",
           "ar"
@@ -7814,7 +7826,7 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-08",
-    "generated_at": "2026-09-08T05:27:46+00:00",
+    "generated_at": "2026-09-08T05:48:54+00:00",
     "source_sha": "bb4c777",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
@@ -7932,9 +7944,9 @@
       "web_commons": 9
     },
     "total_automated_tests": 145,
-    "active_tests": 129,
+    "active_tests": 126,
     "skipped_hard": 13,
-    "skipped_conditional": 3,
+    "skipped_conditional": 6,
     "unmapped_count": 23,
     "plan_gap_count": 14,
     "unmapped_and_skipped": 8,

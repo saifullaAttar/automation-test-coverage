@@ -111,8 +111,33 @@ def parse_skip(block):
     return None
 
 
+MODULE_MARK = re.compile(
+    r"^pytestmark\s*=\s*pytest\.mark\.(skipif|skip)\((.*?)^\)", re.M | re.S)
+
+
+def module_skip(source):
+    """A module-level `pytestmark` applies to every test in the file.
+
+    Missed entirely until now, because only the decorators directly above each
+    `def` were read. tests/app/test_app_gift_registry.py carries
+    `pytestmark = pytest.mark.skipif(COUNTRY == "SA", ...)`, so the whole app
+    Gift Registry suite is AE-only -- and the report was showing it as running
+    everywhere.
+    """
+    m = MODULE_MARK.search(source)
+    if not m:
+        return None
+    body = re.sub(r"\s+", " ", m.group(2)).strip()
+    reason = re.search(r'reason\s*=\s*"(.*?)"(?:\s*"(.*?)")*', m.group(2), re.S)
+    text = " ".join(x for x in (reason.groups() if reason else ()) if x) if reason else body
+    return {"type": "conditional" if m.group(1) == "skipif" else "hard",
+            "reason": re.sub(r"\s+", " ", text).strip()[:200],
+            "scope": "module"}
+
+
 def parse_file(source, path, platform, ar_verified):
     lines = source.split("\n")
+    mod_skip = module_skip(source)
     tests = []
     for i, line in enumerate(lines):
         m = DEF_RE.match(line)
@@ -143,7 +168,8 @@ def parse_file(source, path, platform, ar_verified):
             "tags": tags,
             "docstring": docstring_after(lines, i)[:400],
             "parametrized": "@pytest.mark.parametrize" in block,
-            "skip": parse_skip(block),
+            # A per-test marker wins; otherwise the module-level one applies.
+            "skip": parse_skip(block) or mod_skip,
             "locales": ["en", "ar"] if ar_verified else ["en"],
         })
     return tests

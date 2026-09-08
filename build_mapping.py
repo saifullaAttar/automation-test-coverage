@@ -417,13 +417,18 @@ APP_MAPPING = {
         "Signs in and verifies every detail on the My Profile screen. TestMO flags this NO -- it should be YES."),
     "1435394": ("none", [], "There is no app order-list / order-details test."),
     "1435395": ("full", ["app::test_app_wishlist_all_product_types"],
-        "Newly credited. Opens the wishlist and verifies every product, parametrised for guest and "
-        "logged-in users. TestMO flags this NO -- it should be YES."),
+        "Opens the wishlist and verifies every product, parametrised for guest and logged-in users. "
+        "The guest variant is a known Android failure -- the guest multi-product add does not land "
+        "every product -- which is a run failure rather than a coverage gap, so it belongs in the run "
+        "history, not here. TestMO flags this NO -- it should be YES."),
     "1435396": ("partial", ["app::test_app_wishlist_all_product_types"],
         "Covers moving all product types to the wishlist from the cart, including the guest "
         "login-prompt branch, and verifies the cart is left empty. Adding to the wishlist from the "
         "PLP or PDP is not covered. Dropped the hard-skipped test_uae_cart_move_to_wishlist."),
-    "1435397": ("none", [], "Removing products from the wishlist is not automated on the app."),
+    "1435397": ("none", [],
+        "Removing products from the wishlist is not automated on the app. This is the one app "
+        "wishlist case with nothing on it; 1435396 is partial (cart path only). Closing both is "
+        "what completes app Wishlist."),
     "1435398": ("none", [], "The app wallet page is not automated."),
     "1435400": ("partial", ["app::test_add_new_address_and_make_default_and_delete",
                             "app::test_existing_user_delivery_address"],
