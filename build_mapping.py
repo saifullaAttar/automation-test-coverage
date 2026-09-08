@@ -563,16 +563,23 @@ ARABIC = {
 }
 
 
-def _case_pages():
-    """case_id -> the page it sits on in the TestMO UI.
+def _case_links():
+    """case_id -> how to open that case in TestMO.
 
-    TestMO paginates the repository view, so a link without the page number
-    lands on page 1 and the case is not visible. The page depends on a case's
-    position in the *unfiltered* listing, which no export gives us -- so these
-    values are carried in testmo_case_pages.json rather than recomputed. Cases
-    with no entry link to page 1, which is harmless.
+    Two forms, in order of preference:
+
+    * `run` + `test_id` -> /runs/view/{run}?test_id={id} opens the case
+      directly, no pagination involved. Test ids come from the run exports
+      (2154 for mWEB, 2192 for app); a repository export has no Test ID column.
+    * `page` -> the repository listing paginates, so a link without the page
+      number lands on page 1 with the case nowhere in sight. The page depends on
+      a case's position in the unfiltered listing, which no export gives us, so
+      these values are carried rather than computed.
+
+    A case with neither still links to its repository group -- correct place,
+    wrong page -- and the report says so on the link.
     """
-    path = HERE / "testmo_case_pages.json"
+    path = HERE / "testmo_case_links.json"
     return json.loads(path.read_text()) if path.exists() else {}
 
 
@@ -648,12 +655,17 @@ def apply_mapping(cases, mapping, inventory, label, previous, source=None):
         raise SystemExit(f"{label}: mapping refers to case ids not in the export: {unknown}")
 
     prev_ids = {c["case_id"]: c for c in previous}
-    pages = _case_pages()
+    links = _case_links()
     for case in cases:
         if source:
             case["source"] = source
-        if case["case_id"] in pages:
-            case["page"] = pages[case["case_id"]]
+        link = links.get(case["case_id"], {})
+        if link.get("page"):
+            case["page"] = link["page"]
+        # The run export is the authority on test_id; a repository export has none.
+        if link.get("test_id"):
+            case["test_id"] = link["test_id"]
+            case["run_id"] = link["run"]
         status, refs, notes = mapping.get(case["case_id"], ("none", [], ""))
         bad = [r for r in refs if r not in inventory]
         if bad:
@@ -843,6 +855,11 @@ def main():
             "active_tests": len(flat) - len(hard) - len(cond),
             "skipped_hard": len(hard),
             "skipped_conditional": len(cond),
+            "links": {
+                "direct": sum(1 for c in web + app if c.get("run_id")),
+                "listing_with_page": sum(1 for c in web + app if not c.get("run_id") and c.get("page")),
+                "listing_no_page": sum(1 for c in web + app if not c.get("run_id") and not c.get("page")),
+            },
             "unmapped_count": len(inventory) - len(mapped),
             "plan_gap_count": sum(1 for r in PLAN_GAPS if r in inventory and r not in mapped),
             "unmapped_and_skipped": sum(

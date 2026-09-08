@@ -16,6 +16,7 @@
       "preconditions": "User with one default address : https://docs.google.com/spreadsheets/d/1zXtNF188CbrXuuBF6f-KtGEUE_EKzdkCRvz8oBOWX-M/edit#gid=0 testuser+4@gmail.com Test@123 UAE Mobile Web testuser+5@gmail.com Test@123 KSA Mobile Web testuser+10@gmail.com Test@123 UAE Desktop Web testuser+15@gmail.com Test@123 KSA Desktop Web",
       "tags": "",
       "source": "regression",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Geo-IP country and city detection is not automated.",
@@ -40,6 +41,7 @@
       "preconditions": "User's with multiple saved address : https://docs.google.com/spreadsheets/d/1zXtNF188CbrXuuBF6f-KtGEUE_EKzdkCRvz8oBOWX-M/edit#gid=0 testuser+7@gmail.com Test@123 UAE Mobile testuser+8@gmail.com Test@123 KSA Mobile testuser+20@gmail.com Test@123 UAE Desktop testuser+12@gmail.com Test@123 KSA Desktop",
       "tags": "",
       "source": "regression",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Geo-IP detection with multiple saved addresses is not automated.",
@@ -64,6 +66,7 @@
       "preconditions": "No Saved address user : https://docs.google.com/spreadsheets/d/1zXtNF188CbrXuuBF6f-KtGEUE_EKzdkCRvz8oBOWX-M/edit#gid=0 Guest User SivaMumztest+5@gmail.com Test@123 UAE Mobile testuser+1@gmail.com Test@123 KSA Mobile SivaMumztest3@gmail.com Test@123 UAE Desktop SivaMumztest4@gmail.com Test@123 KSA Desktop",
       "tags": "",
       "source": "regression",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Geo-IP detection for guests is not automated.",
@@ -88,6 +91,7 @@
       "preconditions": "Guest User Logged in User with multiple saved address : https://docs.google.com/spreadsheets/d/1zXtNF188CbrXuuBF6f-KtGEUE_EKzdkCRvz8oBOWX-M/edit#gid=0 nivethasundar.01@gmail.com Test@123 UAE Mobile testuser+8@gmail.com Test@123 KSA Mobile sivakami@mumzworld.com Test@123 UAE Desktop testuser+12@gmail.com Test@123 KSA Desktop",
       "tags": "",
       "source": "regression",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Switching country / website is not automated.",
@@ -112,6 +116,7 @@
       "preconditions": "Guest User Logged in user with single saved address : https://docs.google.com/spreadsheets/d/1zXtNF188CbrXuuBF6f-KtGEUE_EKzdkCRvz8oBOWX-M/edit#gid=0 testuser+31@gmail.com Test@123 UAE Mobile testuser+30@gmail.com Test@123 KSA Mobile testuser+32@gmail.com Test@123 UAE Desktop testuser+27@gmail.com Test@123 KSA Desktop",
       "tags": "",
       "source": "regression",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Arabic IS exercised end to end: every suite runs a second time with LOCALE=ar, which routes to /ar, /sa-ar, /bh-ar, /kw-ar and /global-ar (FALCONS-330). What this case asks for -- using the in-page language switcher to move between stores -- is not automated; the locale is chosen when the session starts.",
@@ -136,6 +141,7 @@
       "preconditions": "Guest User Logged in UAE/KSA user Users : https://docs.google.com/spreadsheets/d/1zXtNF188CbrXuuBF6f-KtGEUE_EKzdkCRvz8oBOWX-M/edit#gid=0 SivaMumztest+5@gmail.com Test@123 UAE Mobile testuser+17@gmail.com Test@123 KSA Mobile testuser+16@gmail.com Test@123 UAE Desktop testuser+28@gmail.com Test@123 KSA Desktop",
       "tags": "",
       "source": "regression",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Switching currency is not automated.",
@@ -160,6 +166,7 @@
       "preconditions": "",
       "tags": "",
       "source": "regression",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Sale-page filters are not automated.",
@@ -184,6 +191,7 @@
       "preconditions": "",
       "tags": "",
       "source": "regression",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Category-page filters are not automated.",
@@ -208,6 +216,7 @@
       "preconditions": "",
       "tags": "",
       "source": "regression",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Removed the previous link to test_customer_can_search_brand: that is an APP test and it is hard-skipped (brand page does not exist on the app). No mWeb brand-page filter test exists.",
@@ -233,6 +242,7 @@
       "tags": "",
       "source": "regression",
       "page": 2,
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Price and tax display on PLP/PDP/search is never asserted.",
@@ -258,6 +268,7 @@
       "tags": "",
       "source": "regression",
       "page": 2,
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Removed the previous link to a KSA cart-coupon test. This case is about special-price display on PLP/PDP/search, which no test asserts.",
@@ -283,6 +294,7 @@
       "tags": "",
       "source": "regression",
       "page": 3,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_user_register_from_account_page",
         "web_ksa::test_ksa_user_register_from_account_page"
@@ -311,6 +323,7 @@
       "tags": "",
       "source": "regression",
       "page": 4,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_user_register_from_cart_page",
         "web_ksa::test_ksa_user_register_from_cart_page",
@@ -344,6 +357,7 @@
       "tags": "",
       "source": "regression",
       "page": 4,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_user_logs_in_from_account_page",
         "web_ksa::test_ksa_user_logs_in_from_account_page",
@@ -374,6 +388,7 @@
       "tags": "",
       "source": "regression",
       "page": 4,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_user_logs_in_from_cart_page",
         "web_ksa::test_ksa_user_logs_in_from_cart_page",
@@ -405,6 +420,7 @@
       "tags": "",
       "source": "regression",
       "page": 4,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_user_logs_in_from_account_page",
         "web_ksa::test_ksa_user_logs_in_from_account_page",
@@ -438,6 +454,7 @@
       "tags": "",
       "source": "regression",
       "page": 1,
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Cross-platform login is not automated.",
@@ -463,6 +480,7 @@
       "tags": "",
       "source": "regression",
       "page": 4,
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Forgot-password flow is not automated.",
@@ -488,6 +506,7 @@
       "tags": "",
       "source": "regression",
       "page": 1,
+      "run_id": 2154,
       "automated_tests": [
         "web_commons::test_account_existing_user_profile"
       ],
@@ -516,6 +535,7 @@
       "tags": "",
       "source": "regression",
       "page": 1,
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Editing account info is not automated.",
@@ -540,6 +560,7 @@
       "preconditions": "Account created and logged in.",
       "tags": "",
       "source": "regression",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Delete Account is not automated.",
@@ -565,6 +586,7 @@
       "tags": "",
       "source": "regression",
       "page": 1,
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Empty order list is not automated.",
@@ -590,6 +612,7 @@
       "tags": "",
       "source": "regression",
       "page": 1,
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Order list for a user with orders is not automated.",
@@ -615,6 +638,7 @@
       "tags": "",
       "source": "regression",
       "page": 1,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_checkout_cc_and_verify_odp"
       ],
@@ -643,6 +667,7 @@
       "tags": "",
       "source": "regression",
       "page": 1,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_wishlist_add_all_product_types_new_user",
         "web_ksa::test_ksa_wishlist_add_all_product_types_new_user"
@@ -672,6 +697,7 @@
       "tags": "",
       "source": "regression",
       "page": 1,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_wishlist_add_all_product_types_existing_user",
         "web_ksa::test_ksa_wishlist_add_all_product_types_existing_user"
@@ -701,6 +727,7 @@
       "tags": "",
       "source": "regression",
       "page": 1,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_wishlist_add_all_product_types_existing_user",
         "web_ksa::test_ksa_wishlist_add_all_product_types_existing_user"
@@ -730,6 +757,7 @@
       "tags": "",
       "source": "regression",
       "page": 1,
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Empty wallet is not automated.",
@@ -755,6 +783,7 @@
       "tags": "",
       "source": "regression",
       "page": 1,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_checkout_full_sc_and_verify_sc_balance",
         "web_uae::test_uae_checkout_cc_and_partial_sc_no_coupon",
@@ -785,6 +814,7 @@
       "tags": "",
       "source": "regression",
       "page": 1,
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Wallet currency conversion across stores is not automated.",
@@ -810,6 +840,7 @@
       "tags": "",
       "source": "regression",
       "page": 1,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_checkout_with_cart_items_register_a_new_user_and_coupon",
         "web_ksa::test_ksa_checkout_with_cart_items_register_a_new_user_and_coupon",
@@ -841,6 +872,7 @@
       "tags": "",
       "source": "regression",
       "page": 1,
+      "run_id": 2154,
       "automated_tests": [
         "web_commons::test_account_add_new_address_and_set_default",
         "web_commons::test_account_delivery_addresses"
@@ -870,6 +902,7 @@
       "tags": "",
       "source": "regression",
       "page": 1,
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Removed the previous link to test_uae_checkout_cc_coupon_modal_sheet, which is unrelated. Setting a default address or editing address fields from checkout is not automated.",
@@ -894,6 +927,7 @@
       "preconditions": "GoTo Store> Config> Mumzworld> SMS> OTP Phone number verification/COD Profile >Local testing - Disable Enabled OTP Phone number verification for COD/Profile",
       "tags": "",
       "source": "regression",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Profile phone-number OTP is not automated. test_uae_checkout_cc_wrong_otp_no_coupon is the 3-D Secure card OTP, a different flow.",
@@ -919,6 +953,7 @@
       "tags": "international,ksa,uae",
       "source": "regression",
       "page": 3,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_cart_existing_user_orders_no_coupon_yalla",
         "web_ksa::test_ksa_cart_existing_user_orders_no_coupon_yalla"
@@ -948,6 +983,7 @@
       "tags": "international,ksa,uae",
       "source": "regression",
       "page": 3,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_uf2_cart_gift_wrap_wishlist",
         "web_ksa::test_ksa_uf2_cart_gift_wrap_wishlist",
@@ -978,6 +1014,7 @@
       "tags": "international,ksa,uae",
       "source": "regression",
       "page": 2,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_cart_guest_login_no_coupon_sc",
         "web_ksa::test_ksa_cart_guest_login_no_coupon_sc"
@@ -1007,6 +1044,7 @@
       "tags": "ksa,uae",
       "source": "regression",
       "page": 3,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_cart_add_items_to_cart_as_a_newly_registered_user_and_apply_cashback_coupon",
         "web_ksa::test_ksa_cart_add_items_to_cart_as_a_newly_registered_user_and_apply_cashback_coupon"
@@ -1036,6 +1074,7 @@
       "tags": "ksa,uae",
       "source": "regression",
       "page": 3,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_cart_uf5_checkout_cod_no_coupon",
         "web_ksa::test_ksa_cart_uf5_checkout_cod_no_coupon"
@@ -1065,6 +1104,7 @@
       "tags": "international",
       "source": "regression",
       "page": 3,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_checkout_with_cart_items_register_a_new_user_and_coupon",
         "web_ksa::test_ksa_checkout_with_cart_items_register_a_new_user_and_coupon"
@@ -1094,6 +1134,7 @@
       "tags": "ksa,uae",
       "source": "regression",
       "page": 3,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_cart_guest_login_no_coupon_sc",
         "web_ksa::test_ksa_cart_guest_login_no_coupon_sc"
@@ -1123,6 +1164,7 @@
       "tags": "",
       "source": "regression",
       "page": 2,
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Removed the previous link to an app partial-removal test. UF-8 needs a product to be set out of stock in Admin mid-run, which the storefront suite cannot do.",
@@ -1148,6 +1190,7 @@
       "tags": "",
       "source": "regression",
       "page": 3,
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Removed the previous link to test_ksa_checkout_cod_normal_coupon. UF-9 needs the BE low-stock threshold configured; the low-stock alert is not automated.",
@@ -1173,6 +1216,7 @@
       "tags": "",
       "source": "regression",
       "page": 3,
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Removed the previous link to a gift-wrap test -- a free gift is not gift wrap. UF-10 needs the Free Gift Rule Wizard configured in Admin.",
@@ -1197,6 +1241,7 @@
       "preconditions": "",
       "tags": "",
       "source": "regression",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Removed the previous link to test_ksa_cart_apply_gift_wrap_and_place_order. Apple Pay is not automated on any platform.",
@@ -1221,6 +1266,7 @@
       "preconditions": "",
       "tags": "",
       "source": "regression",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Apple Pay is not automated.",
@@ -1246,6 +1292,7 @@
       "tags": "",
       "source": "regression",
       "page": 3,
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Free gift UI needs the Free Gift Rule Wizard configured; not automated.",
@@ -1270,6 +1317,7 @@
       "preconditions": "Customer : Existing user with multiple address and has orders Products : Simple, custom, configurable, bundle Products - Yalla & B2B products Configuration : Store > Configuration> Sale> Payment Methods> Checkout.com > Platforms : Mweb, APP ( App check is the must on checkout webview) Apple pay App payments Enable Apple Pay - YES Payment from Applicable Countries : Select Specific countries : select UAE/KSA and Kuwait ( for ex.) 2. Apple pay Web payments Enable Apple Pay - YES ,keys added Payment from Applicable Countries : Select Specific countries : select UAE/KSA and Bahrain( for ex.) Coupon : kk_max_50 ( 10% of product price with max 50 ) Credit card available to add to the wallet : VISA 4761 2099 8001 1439 Expiration Date: 12/2025 CVV: 090",
       "tags": "international,ksa,uae",
       "source": "regression",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Removed the previous link to test_uae_checkout_cod_normal_coupon. Apple Pay is not automated.",
@@ -1295,6 +1343,7 @@
       "tags": "international,ksa,uae",
       "source": "regression",
       "page": 3,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_checkout_cc_no_coupon",
         "web_ksa::test_ksa_checkout_cc_no_coupon",
@@ -1327,6 +1376,7 @@
       "tags": "",
       "source": "regression",
       "page": 3,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_checkout_cc_and_partial_sc_no_coupon",
         "web_ksa::test_ksa_checkout_cc_and_partial_sc_no_coupon",
@@ -1357,6 +1407,7 @@
       "tags": "",
       "source": "regression",
       "page": 3,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_checkout_cod_no_coupon",
         "web_ksa::test_ksa_checkout_cod_no_coupon",
@@ -1390,6 +1441,7 @@
       "tags": "",
       "source": "regression",
       "page": 3,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_checkout_full_sc_no_coupon",
         "web_ksa::test_ksa_checkout_full_sc_no_coupon",
@@ -1420,6 +1472,7 @@
       "tags": "",
       "source": "regression",
       "page": 3,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_checkout_invalid_cc_no_coupon",
         "web_ksa::test_ksa_checkout_invalid_cc_no_coupon",
@@ -1451,6 +1504,7 @@
       "tags": "",
       "source": "regression",
       "page": 3,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_checkout_full_sc_and_normal_coupon",
         "web_uae::test_uae_checkout_cc_partial_sc_and_normal_coupon",
@@ -1482,6 +1536,7 @@
       "tags": "",
       "source": "regression",
       "page": 3,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_checkout_tamara_no_coupon",
         "web_uae::test_uae_checkout_tamara_normal_coupon",
@@ -1515,6 +1570,7 @@
       "tags": "",
       "source": "regression",
       "page": 3,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_checkout_tabby_no_coupon",
         "web_uae::test_uae_checkout_tabby_normal_coupon",
@@ -1548,6 +1604,7 @@
       "tags": "",
       "source": "regression",
       "page": 3,
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Removed the previous link to test_ksa_checkout_invalid_cc_no_coupon, which has nothing to do with the exit prompt. TestMO flags this case YES -- the flag is wrong, nothing covers it.",
@@ -1572,6 +1629,7 @@
       "preconditions": "",
       "tags": "",
       "source": "regression",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "This case starts from an order created in Admin. The storefront ODP verification we do have (test_uae_checkout_cc_and_verify_odp) is credited on case 1018708; Admin and invoice checks are not automated.",
@@ -1597,6 +1655,7 @@
       "tags": "",
       "source": "regression",
       "page": 2,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_checkout_cc_normal_coupon",
         "web_uae::test_uae_checkout_cc_coupon_modal_sheet",
@@ -1627,6 +1686,7 @@
       "tags": "international,ksa,uae",
       "source": "regression",
       "page": 2,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_percentage_of_product_price_discount_rules_without_max_amount",
         "web_uae::test_uae_percentage_of_product_price_discount_rules_with_max_amount",
@@ -1658,6 +1718,7 @@
       "tags": "international,ksa,uae",
       "source": "regression",
       "page": 2,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_percentage_of_product_variant_price_discount_rules_with_max_amount",
         "web_uae::test_uae_percentage_of_product_variant_price_discount_rules_without_max_amount",
@@ -1689,6 +1750,7 @@
       "tags": "",
       "source": "regression",
       "page": 2,
+      "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_bank_discount_percentage_of_product_price_rule",
         "web_ksa::test_ksa_bank_discount_percentage_of_product_price_rule"
@@ -1718,6 +1780,7 @@
       "tags": "",
       "source": "regression",
       "page": 2,
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Removed the previous link to a KSA percentage test -- wrong rule type. The fixed-amount coupons (FF_15 / FW_20) this case is about are not automated.",
@@ -1743,6 +1806,7 @@
       "tags": "",
       "source": "regression",
       "page": 2,
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Removed the previous link to a KSA variant-percentage test. The tiered rules (tierednomax / tieredmax) are not automated.",
@@ -1768,6 +1832,7 @@
       "tags": "",
       "source": "regression",
       "page": 4,
+      "run_id": 2154,
       "automated_tests": [
         "web_commons::test_gift_registry_create_from_my_account",
         "web_commons::test_gift_registry_create_from_pdp"
@@ -1796,6 +1861,7 @@
       "tags": "",
       "source": "regression",
       "page": 4,
+      "run_id": 2154,
       "automated_tests": [
         "web_commons::test_gift_registry_order_from_share_link"
       ],
@@ -1823,6 +1889,7 @@
       "tags": "",
       "source": "regression",
       "page": 4,
+      "run_id": 2154,
       "automated_tests": [
         "web_commons::test_gift_registry_create_from_pdp"
       ],
@@ -1850,6 +1917,7 @@
       "tags": "",
       "source": "regression",
       "page": 4,
+      "run_id": 2154,
       "automated_tests": [
         "web_commons::test_gift_registry_order_from_share_link"
       ],
@@ -1877,6 +1945,7 @@
       "tags": "",
       "source": "regression",
       "page": 4,
+      "run_id": 2154,
       "automated_tests": [
         "web_commons::test_gift_registry_order_from_share_link"
       ],
@@ -1904,6 +1973,7 @@
       "tags": "",
       "source": "regression",
       "page": 2,
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "The purchased tab and desired-quantity checks after an order are not automated.",
@@ -1928,6 +1998,7 @@
       "preconditions": "Reindexing SKU: Admin-> Store-> Reindex SKU-> Put SKU and click on reindex sku button Revalidate PDP caching: Admin-> System -> Revalidate Nextjs Cache -> Select other from tag list -> Type cat_p_[Product id] in identifier field -> Click on submit button",
       "tags": "",
       "source": "other_group",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
@@ -1952,6 +2023,7 @@
       "preconditions": "Reindexing SKU: Admin-> Store-> Reindex SKU-> Put SKU and click on reindex sku button Revalidate PDP caching: Admin-> System -> Revalidate Nextjs Cache -> Select other from tag list -> Type cat_p_[Product id] in identifier field -> Click on submit button",
       "tags": "",
       "source": "other_group",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
@@ -1976,6 +2048,7 @@
       "preconditions": "Reindexing SKU: Admin-> Store-> Reindex SKU-> Put SKU and click on reindex sku button Revalidate PDP caching: Admin-> System -> Revalidate Nextjs Cache -> Select other from tag list -> Type cat_p_[Product id] in identifier field -> Click on submit button",
       "tags": "",
       "source": "other_group",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
@@ -2000,6 +2073,7 @@
       "preconditions": "Reindexing SKU: Admin-> Store-> Reindex SKU-> Put SKU and click on reindex sku button Revalidate PDP caching: Admin-> System -> Revalidate Nextjs Cache -> Select other from tag list -> Type cat_p_[Product id] in identifier field -> Click on submit button",
       "tags": "",
       "source": "other_group",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
@@ -2024,6 +2098,7 @@
       "preconditions": "Reindexing SKU: Admin-> Store-> Reindex SKU-> Put SKU and click on reindex sku button Revalidate PDP caching: Admin-> System -> Revalidate Nextjs Cache -> Select other from tag list -> Type cat_p_[Product id] in identifier field -> Click on submit button",
       "tags": "",
       "source": "other_group",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
@@ -2048,6 +2123,7 @@
       "preconditions": "Reindexing SKU: Admin-> Store-> Reindex SKU-> Put SKU and click on reindex sku button Revalidate PDP caching: Admin-> System -> Revalidate Nextjs Cache -> Select other from tag list -> Type cat_p_[Product id] in identifier field -> Click on submit button",
       "tags": "",
       "source": "other_group",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
@@ -2072,6 +2148,7 @@
       "preconditions": "Reindexing SKU: Admin-> Store-> Reindex SKU-> Put SKU and click on reindex sku button Revalidate PDP caching: Admin-> System -> Revalidate Nextjs Cache -> Select other from tag list -> Type cat_p_[Product id] in identifier field -> Click on submit button",
       "tags": "",
       "source": "other_group",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
@@ -2096,6 +2173,7 @@
       "preconditions": "Reindexing SKU: Admin-> Store-> Reindex SKU-> Put SKU and click on reindex sku button Revalidate PDP caching: Admin-> System -> Revalidate Nextjs Cache -> Select other from tag list -> Type cat_p_[Product id] in identifier field -> Click on submit button",
       "tags": "",
       "source": "other_group",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
@@ -2120,6 +2198,7 @@
       "preconditions": "Reindexing SKU: Admin-> Store-> Reindex SKU-> Put SKU and click on reindex sku button Revalidate PDP caching: Admin-> System -> Revalidate Nextjs Cache -> Select other from tag list -> Type cat_p_[Product id] in identifier field -> Click on submit button",
       "tags": "",
       "source": "other_group",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
@@ -2144,6 +2223,7 @@
       "preconditions": "Reindexing SKU: Admin-> Store-> Reindex SKU-> Put SKU and click on reindex sku button Revalidate PDP caching: Admin-> System -> Revalidate Nextjs Cache -> Select other from tag list -> Type cat_p_[Product id] in identifier field -> Click on submit button",
       "tags": "",
       "source": "other_group",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
@@ -2168,6 +2248,7 @@
       "preconditions": "Reindexing SKU: Admin-> Store-> Reindex SKU-> Put SKU and click on reindex sku button Revalidate PDP caching: Admin-> System -> Revalidate Nextjs Cache -> Select other from tag list -> Type cat_p_[Product id] in identifier field -> Click on submit button",
       "tags": "",
       "source": "other_group",
+      "run_id": 2154,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
@@ -2996,7 +3077,7 @@
   "app_testmo_tests": [
     {
       "case_id": "1435389",
-      "test_id": "",
+      "test_id": "14772234",
       "name": "Verify home page is loading",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3010,6 +3091,7 @@
       "preconditions": "",
       "tags": "",
       "source": "release_check",
+      "run_id": 2192,
       "automated_tests": [
         "app::test_app_explore_screen_elements_and_navigate_to_account"
       ],
@@ -3022,7 +3104,7 @@
     },
     {
       "case_id": "1435417",
-      "test_id": "",
+      "test_id": "14772256",
       "name": "Verify home page  banners are loading",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3036,6 +3118,7 @@
       "preconditions": "",
       "tags": "",
       "source": "release_check",
+      "run_id": 2192,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Home-page banners are not asserted.",
@@ -3046,7 +3129,7 @@
     },
     {
       "case_id": "1435425",
-      "test_id": "",
+      "test_id": "14772260",
       "name": "Verify user can access categories from home page on UAE/KSA/GCC/International store",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3060,6 +3143,7 @@
       "preconditions": "",
       "tags": "",
       "source": "release_check",
+      "run_id": 2192,
       "automated_tests": [
         "app::test_customer_can_search_product_in_specific_category"
       ],
@@ -3072,7 +3156,7 @@
     },
     {
       "case_id": "1435426",
-      "test_id": "",
+      "test_id": "14772261",
       "name": "Verify user can access collections from home page on UAE/KSA/GCC/International store",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3086,6 +3170,7 @@
       "preconditions": "",
       "tags": "",
       "source": "release_check",
+      "run_id": 2192,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Collections from the home page are not automated.",
@@ -3096,7 +3181,7 @@
     },
     {
       "case_id": "1435390",
-      "test_id": "",
+      "test_id": "14772235",
       "name": "Categories tab - Verify categories L1,L2 and L3 are loading",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3111,6 +3196,7 @@
       "tags": "",
       "source": "release_check",
       "page": 1,
+      "run_id": 2192,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Category levels L1/L2/L3 are not automated.",
@@ -3121,7 +3207,7 @@
     },
     {
       "case_id": "1435404",
-      "test_id": "",
+      "test_id": "14772248",
       "name": "Verify customer can apply filter and sort on PLP",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3136,6 +3222,7 @@
       "tags": "",
       "source": "release_check",
       "page": 1,
+      "run_id": 2192,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Filter and sort on the PLP are not automated on the app.",
@@ -3146,7 +3233,7 @@
     },
     {
       "case_id": "1435391",
-      "test_id": "",
+      "test_id": "14772236",
       "name": "Verify PDP for all product types (Simple, custom , installation , configurable, configurable custom , colour variant  bundle, and egift )",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3160,6 +3247,7 @@
       "preconditions": "",
       "tags": "",
       "source": "release_check",
+      "run_id": 2192,
       "automated_tests": [
         "app::test_app_gift_registry_create_from_pdp_all_product_types"
       ],
@@ -3222,7 +3310,7 @@
     },
     {
       "case_id": "1435418",
-      "test_id": "",
+      "test_id": "14772257",
       "name": "Verify user can add items to GR - All product types (Simple, custom , installation , configurable, configurable custom, colour variant  bundle, and egift )",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3237,6 +3325,7 @@
       "tags": "",
       "source": "release_check",
       "page": 2,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_app_gift_registry_create_from_pdp_all_product_types",
         "app::test_app_gift_registry_create_from_pdp"
@@ -3251,7 +3340,7 @@
     },
     {
       "case_id": "1435416",
-      "test_id": "",
+      "test_id": "14772255",
       "name": "Verify brand name and logo in brand page",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3265,6 +3354,7 @@
       "preconditions": "",
       "tags": "",
       "source": "release_check",
+      "run_id": 2192,
       "automated_tests": [
         "app::test_customer_can_search_brand"
       ],
@@ -3359,7 +3449,7 @@
     },
     {
       "case_id": "1435392",
-      "test_id": "",
+      "test_id": "14772237",
       "name": "Verify new user registration",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3374,6 +3464,7 @@
       "tags": "",
       "source": "release_check",
       "page": 1,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_user_signup",
         "app::test_app_uf2_cart_gift_wrap_wishlist"
@@ -3412,7 +3503,7 @@
     },
     {
       "case_id": "1435401",
-      "test_id": "",
+      "test_id": "14772245",
       "name": "Verify user can add all product types from PLP, search, brand, PDP (Simple, custom , installation , configurable, configurable custom, colour variant  bundle, and egift )",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3427,6 +3518,7 @@
       "tags": "",
       "source": "release_check",
       "page": 1,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_app_add_all_product_types_from_srp",
         "app::test_app_cart_add_all_product_type_variants_and_verify",
@@ -3443,7 +3535,7 @@
     },
     {
       "case_id": "1435405",
-      "test_id": "",
+      "test_id": "14772249",
       "name": "Verify product list in cart - All product types",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3458,6 +3550,7 @@
       "tags": "",
       "source": "release_check",
       "page": 1,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_app_cart_add_all_product_type_variants_and_verify",
         "app::test_app_add_all_product_types_from_srp"
@@ -3472,7 +3565,7 @@
     },
     {
       "case_id": "1435406",
-      "test_id": "",
+      "test_id": "14772250",
       "name": "Verify user can update product qty  on cart-All product types",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3487,6 +3580,7 @@
       "tags": "",
       "source": "release_check",
       "page": 1,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_uae_cart_increase_and_decrease_quantity",
         "app::test_uae_cart_item_integrity_after_quantity_change"
@@ -3501,7 +3595,7 @@
     },
     {
       "case_id": "1435407",
-      "test_id": "",
+      "test_id": "14772251",
       "name": "Verify user can remove products from cart -All product types",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3516,6 +3610,7 @@
       "tags": "",
       "source": "release_check",
       "page": 1,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_uae_cart_remove_item",
         "app::test_app_uae_cart_remaining_items_unaffected_after_partial_removal",
@@ -3531,7 +3626,7 @@
     },
     {
       "case_id": "1435408",
-      "test_id": "",
+      "test_id": "14772252",
       "name": "Verify user can apply GW to products",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3546,6 +3641,7 @@
       "tags": "",
       "source": "release_check",
       "page": 1,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_uae_checkout_apply_gift_wrap_place_order",
         "app::test_app_uf2_cart_gift_wrap_wishlist"
@@ -3560,7 +3656,7 @@
     },
     {
       "case_id": "1435409",
-      "test_id": "",
+      "test_id": "14772253",
       "name": "Verify user can apply and remove coupon on cart",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3575,6 +3671,7 @@
       "tags": "",
       "source": "release_check",
       "page": 1,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_app_uae_cart_remove_item_with_applied_coupon",
         "app::test_app_percentage_of_product_price_discount_rules_with_max_amount",
@@ -3592,7 +3689,7 @@
     },
     {
       "case_id": "1435393",
-      "test_id": "",
+      "test_id": "14772238",
       "name": "Verify existing user can access their profile",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3607,6 +3704,7 @@
       "tags": "",
       "source": "release_check",
       "page": 1,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_existing_user_profile"
       ],
@@ -3620,7 +3718,7 @@
     },
     {
       "case_id": "1435394",
-      "test_id": "",
+      "test_id": "14772239",
       "name": "Verify existing user can access order list and order details page",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3634,6 +3732,7 @@
       "preconditions": "",
       "tags": "",
       "source": "release_check",
+      "run_id": 2192,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "There is no app order-list / order-details test.",
@@ -3644,7 +3743,7 @@
     },
     {
       "case_id": "1435395",
-      "test_id": "",
+      "test_id": "14772240",
       "name": "Verify wishlist loading for existing customer",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3659,6 +3758,7 @@
       "tags": "",
       "source": "release_check",
       "page": 1,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_app_wishlist_all_product_types"
       ],
@@ -3672,7 +3772,7 @@
     },
     {
       "case_id": "1435396",
-      "test_id": "",
+      "test_id": "14772241",
       "name": "Verify user can add all product types to wishlist from cart, PLP and PDP",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3687,6 +3787,7 @@
       "tags": "",
       "source": "release_check",
       "page": 1,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_app_wishlist_all_product_types"
       ],
@@ -3700,7 +3801,7 @@
     },
     {
       "case_id": "1435397",
-      "test_id": "",
+      "test_id": "14772242",
       "name": "Verify user can remove all product types from wishlist",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3715,6 +3816,7 @@
       "tags": "",
       "source": "release_check",
       "page": 1,
+      "run_id": 2192,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Removing products from the wishlist is not automated on the app. This is the one app wishlist case with nothing on it; 1435396 is partial (cart path only). Closing both is what completes app Wishlist.",
@@ -3725,7 +3827,7 @@
     },
     {
       "case_id": "1435398",
-      "test_id": "",
+      "test_id": "14772243",
       "name": "Verify user can access wallet page",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3739,6 +3841,7 @@
       "preconditions": "",
       "tags": "",
       "source": "release_check",
+      "run_id": 2192,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "The app wallet page is not automated.",
@@ -3749,7 +3852,7 @@
     },
     {
       "case_id": "1435400",
-      "test_id": "",
+      "test_id": "14772244",
       "name": "Verify user can add, update and delete address",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3764,6 +3867,7 @@
       "tags": "",
       "source": "release_check",
       "page": 1,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_add_new_address_and_make_default_and_delete",
         "app::test_existing_user_delivery_address"
@@ -3778,7 +3882,7 @@
     },
     {
       "case_id": "1435402",
-      "test_id": "",
+      "test_id": "14772246",
       "name": "Verify customer can search  for products",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3793,6 +3897,7 @@
       "tags": "",
       "source": "release_check",
       "page": 1,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_customer_can_search_product_in_specific_category",
         "app::test_app_add_all_product_types_from_srp"
@@ -3807,7 +3912,7 @@
     },
     {
       "case_id": "1435403",
-      "test_id": "",
+      "test_id": "14772247",
       "name": "Verify customer can apply filter and sort on search page",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3822,6 +3927,7 @@
       "tags": "",
       "source": "release_check",
       "page": 1,
+      "run_id": 2192,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Filter and sort on the search page are not automated.",
@@ -3832,7 +3938,7 @@
     },
     {
       "case_id": "1543903",
-      "test_id": "",
+      "test_id": "14772262",
       "name": "Verify user can apply and remove SC",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3847,6 +3953,7 @@
       "tags": "",
       "source": "release_check",
       "page": 2,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_app_cart_partial_sc_and_checkout_with_cc",
         "app::test_app_cart_full_sc_and_checkout"
@@ -3861,7 +3968,7 @@
     },
     {
       "case_id": "1543904",
-      "test_id": "",
+      "test_id": "14772263",
       "name": "Verify order summary in cart",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3876,6 +3983,7 @@
       "tags": "",
       "source": "release_check",
       "page": 2,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_app_uae_cart_order_summary_updates_after_item_removal",
         "app::test_app_cart_partial_sc_and_checkout_with_cc",
@@ -3891,7 +3999,7 @@
     },
     {
       "case_id": "1543905",
-      "test_id": "",
+      "test_id": "14772264",
       "name": "Verify shipping address on checkout page",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3906,6 +4014,7 @@
       "tags": "",
       "source": "release_check",
       "page": 2,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_uae_guest_checkout_login_bottom_sheet_and_place_order",
         "app::test_app_uf2_cart_gift_wrap_wishlist"
@@ -3920,7 +4029,7 @@
     },
     {
       "case_id": "1543906",
-      "test_id": "",
+      "test_id": "14772265",
       "name": "Verify payment methods on checkout page",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3935,6 +4044,7 @@
       "tags": "",
       "source": "release_check",
       "page": 2,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_uae_checkout_cc_no_coupon",
         "app::test_uae_checkout_cod_no_coupon",
@@ -3953,7 +4063,7 @@
     },
     {
       "case_id": "1543907",
-      "test_id": "",
+      "test_id": "14772266",
       "name": "Place Tamara, Tabby, Apple pay and CC orders - check ODP, Admin and invoice",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -3968,6 +4078,7 @@
       "tags": "",
       "source": "release_check",
       "page": 2,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_uae_checkout_cc_no_coupon",
         "app::test_uae_checkout_tabby_no_coupon",
@@ -3985,7 +4096,7 @@
     },
     {
       "case_id": "1435419",
-      "test_id": "",
+      "test_id": "14772258",
       "name": "Verify GR cart and proceed to checkout",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -4000,6 +4111,7 @@
       "tags": "",
       "source": "release_check",
       "page": 2,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_app_gift_registry_scenario_4_add_to_cart_via_deeplink"
       ],
@@ -4013,7 +4125,7 @@
     },
     {
       "case_id": "1435420",
-      "test_id": "",
+      "test_id": "14772259",
       "name": "Verify multiple carts and proceed to checkout",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -4028,6 +4140,7 @@
       "tags": "",
       "source": "release_check",
       "page": 2,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_app_gift_registry_scenario_4_add_to_cart_via_deeplink"
       ],
@@ -4041,7 +4154,7 @@
     },
     {
       "case_id": "1543957",
-      "test_id": "",
+      "test_id": "14772270",
       "name": "Verify cart merge guest > existing user with items",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -4056,6 +4169,7 @@
       "tags": "",
       "source": "release_check",
       "page": 2,
+      "run_id": 2192,
       "automated_tests": [
         "app::test_uae_guest_checkout_login_bottom_sheet_and_place_order"
       ],
@@ -4068,7 +4182,7 @@
     },
     {
       "case_id": "1543908",
-      "test_id": "",
+      "test_id": "14772267",
       "name": "Verify Algolia recommendations across all screens",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -4082,6 +4196,7 @@
       "preconditions": "",
       "tags": "",
       "source": "release_check",
+      "run_id": 2192,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Algolia recommendations across screens are not automated.",
@@ -4092,7 +4207,7 @@
     },
     {
       "case_id": "1435415",
-      "test_id": "",
+      "test_id": "14772254",
       "name": "Close / reopen the app",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -4106,6 +4221,7 @@
       "preconditions": "",
       "tags": "",
       "source": "release_check",
+      "run_id": 2192,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "App close / reopen is not automated.",
@@ -4116,7 +4232,7 @@
     },
     {
       "case_id": "1543946",
-      "test_id": "",
+      "test_id": "14772268",
       "name": "Verify deeplinks external/email/banners",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -4130,6 +4246,7 @@
       "preconditions": "",
       "tags": "",
       "source": "release_check",
+      "run_id": 2192,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "External, email and banner deep links are not automated. The only deep-link script is the gift-registry one, which is registry-specific and hard-skipped.",
@@ -4140,7 +4257,7 @@
     },
     {
       "case_id": "1543948",
-      "test_id": "",
+      "test_id": "14772269",
       "name": "Verify PN and in-app notifications with app open",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -4154,6 +4271,7 @@
       "preconditions": "",
       "tags": "",
       "source": "release_check",
+      "run_id": 2192,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Push and in-app notifications are not automated.",
@@ -4164,7 +4282,7 @@
     },
     {
       "case_id": "2282943",
-      "test_id": "",
+      "test_id": "14772271",
       "name": "Verify PN and in-app notifications with app killed",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -4178,6 +4296,7 @@
       "preconditions": "",
       "tags": "",
       "source": "release_check",
+      "run_id": 2192,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Push notifications with the app killed are not automated.",
@@ -4188,7 +4307,7 @@
     },
     {
       "case_id": "2282944",
-      "test_id": "",
+      "test_id": "14772272",
       "name": "Verify PN and in-app notifications with app in the background",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -4202,6 +4321,7 @@
       "preconditions": "",
       "tags": "",
       "source": "release_check",
+      "run_id": 2192,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Push notifications with the app backgrounded are not automated.",
@@ -4212,7 +4332,7 @@
     },
     {
       "case_id": "2673949",
-      "test_id": "",
+      "test_id": "14772274",
       "name": "Verify Maya is loading and user can navigate to PDP - All product types",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -4226,6 +4346,7 @@
       "preconditions": "",
       "tags": "",
       "source": "release_check",
+      "run_id": 2192,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Maya navigation to the PDP is not automated.",
@@ -4236,7 +4357,7 @@
     },
     {
       "case_id": "2673950",
-      "test_id": "",
+      "test_id": "14772275",
       "name": "Verify Maya is loading and user can add items to cart - All product types",
       "name_source": "testmo",
       "folder": "Release checklist",
@@ -4250,6 +4371,7 @@
       "preconditions": "",
       "tags": "",
       "source": "release_check",
+      "run_id": 2192,
       "automated_tests": [],
       "coverage_status": "none",
       "notes": "Maya add-to-cart is not automated.",
@@ -7826,7 +7948,7 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-08",
-    "generated_at": "2026-09-08T05:48:54+00:00",
+    "generated_at": "2026-09-08T05:57:43+00:00",
     "source_sha": "bb4c777",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
@@ -7947,6 +8069,11 @@
     "active_tests": 126,
     "skipped_hard": 13,
     "skipped_conditional": 6,
+    "links": {
+      "direct": 122,
+      "listing_with_page": 4,
+      "listing_no_page": 37
+    },
     "unmapped_count": 23,
     "plan_gap_count": 14,
     "unmapped_and_skipped": 8,

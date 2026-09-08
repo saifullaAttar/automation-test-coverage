@@ -517,6 +517,41 @@ function testTag(caseId, ref, remover) {
       isEditing() ? `<span class="remove-tag" onclick="${remover}('${caseId}','${ref}')">×</span>` : ''}</span>`;
 }
 
+// One place that decides how a case links to TestMO, for both tables.
+//
+// Preferred: /runs/view/{run}?test_id={id} — opens the case directly, no
+// pagination. Falls back to the repository group listing plus the page number
+// when we have one. When we have neither, the link still lands in the right
+// repository but on page 1, and the tooltip says so rather than pretending.
+const TESTMO = 'https://mumzworld.testmo.net';
+const CASE_HOME = {
+  app:        {path: '/repositories/9?group_id=110524',  label: 'app release checklist (repository 9 / group 110524)'},
+  regression: {path: '/repositories/3?group_id=73697',   label: 'regression repository 3 / group 73697'},
+  other_group:{path: '/repositories/3',                  label: 'outside group 73697 — Admin “Product types” group'},
+};
+
+function caseLink(c, platform) {
+  const home = CASE_HOME[platform === 'app' ? 'app' : (c.source || 'regression')] || CASE_HOME.regression;
+  if (c.run_id && c.test_id) {
+    return {href: `${TESTMO}/runs/view/${c.run_id}?test_id=${c.test_id}`,
+            title: `Opens C-${c.case_id} directly in TestMO run ${c.run_id}`, exact: true};
+  }
+  const page = c.page && c.page > 1 ? `&pagination_current=${c.page}` : '';
+  return {
+    href: `${TESTMO}${home.path}${page}&case_id=${c.case_id}`,
+    title: c.page
+      ? `Opens the ${home.label} at page ${c.page}, where C-${c.case_id} sits`
+      : `Opens the ${home.label}. This case is not in a recorded TestMO run and its page is unknown, so you may need to search for C-${c.case_id}`,
+    exact: Boolean(c.page),
+  };
+}
+
+function caseIdCell(c, platform) {
+  const l = caseLink(c, platform);
+  return `<a href="${l.href}" target="_blank" title="${l.title.replace(/"/g, '&quot;')}" style="color:#667eea;font-weight:600">C-${c.case_id}</a>${
+    l.exact ? '' : '<span title="Link opens the listing, not the case — page unknown" style="color:#c9a227;font-size:.8em;margin-left:3px">◇</span>'}`;
+}
+
 function flagBadge(t) {
   const flag = (t.automated_flag || '').toUpperCase();
   const style = {YES: '#28a745', NO: '#6c757d'}[flag] || '#bbb';
@@ -585,7 +620,7 @@ function renderTable() {
     const tags = t.automated_tests.map(ref => testTag(t.case_id, ref, 'removeTest')).join('');
     const dim = isScoped(t) ? '' : 'background:#fafafa;color:#999';
     return `<tr style="${dim}">
-      <td><a href="https://mumzworld.testmo.net/runs/view/2154?test_id=${t.test_id}${t.page && t.page > 1 ? '&pagination_current=' + t.page : ''}" target="_blank" title="${t.source === 'other_group' ? 'Outside group 73697 — Admin “Product types” group' : 'Regression repository 3 / group 73697'}" style="color:#667eea;font-weight:600">C-${t.case_id}</a></td>
+      <td>${caseIdCell(t, 'web')}</td>
       <td>${t.name_source === 'summary'
             ? `<em style="color:#555" title="The repository export has no case-name column — this is TestMO's own Summary text">${t.name}</em> <span style="font-size:.7em;color:#b58900" title="Label taken from the TestMO Summary, not a case name">◦</span>`
             : `<strong>${t.name}</strong>`}${t.summary && t.name_source !== 'summary' ? '<br><small style="color:#888">' + t.summary.substring(0,120) + '</small>' : ''}</td>
@@ -620,7 +655,7 @@ function renderAppSection() {
     const tags = c.automated_tests.map(ref => testTag(c.case_id, ref, 'removeAppTest')).join('');
     const dim = isScoped(c) ? '' : 'background:#fafafa;color:#999';
     return `<tr style="${dim}">
-      <td><a href="https://mumzworld.testmo.net/repositories/9?group_id=110524${c.page && c.page > 1 ? '&pagination_current=' + c.page : ''}&case_id=${c.case_id}" target="_blank" style="color:#667eea;font-weight:600">C-${c.case_id}</a></td>
+      <td>${caseIdCell(c, 'app')}</td>
       <td><strong>${c.name}</strong></td>
       <td>${flagBadge(c)}</td>
       <td>${localeBadge(c)}</td>

@@ -40,7 +40,7 @@ web_regression_tests.json: parse_testmo_csv.py
 automated_tests.json: extract_tests.py
 	python3 extract_tests.py "$(REPO)"
 
-mapping.json: build_mapping.py testmo_tests.json app_testmo_tests.json web_regression_tests.json automated_tests.json
+mapping.json: build_mapping.py testmo_tests.json app_testmo_tests.json web_regression_tests.json automated_tests.json testmo_case_links.json
 	python3 build_mapping.py
 
 
