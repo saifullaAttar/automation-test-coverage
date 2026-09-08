@@ -153,22 +153,10 @@ tr:hover{background:#f8f9ff;transition:background .2s}
   </div>
 
   <div class="stats-grid" id="statsGrid"></div>
-  <div id="scopeNote" style="background:#fff;border:1px solid #e2e1dc;border-left:4px solid #667eea;border-radius:8px;padding:14px 16px;margin-bottom:20px;font-size:.85em;color:#444">
-    <div id="testmoAge" style="margin-bottom:12px;font-size:.95em"></div>
-    <strong>What this measures.</strong> Coverage here is <em>TestMO cases that have at least one automated test mapped to them</em>,
-    against <code>automation_web_2.0</code> <span id="scopeCommit">main</span>. Every link was checked by reading the test's docstring
-    against the case's steps; the Evidence column on each row states what is and is not covered.
-    <br><br>
-    <strong>What it does not measure.</strong> It is not a pass rate — it says nothing about whether these tests currently pass.
-    A case counts as automated when at least one test is mapped to it; <span id="scopeGaps"></span> of those still have a scenario
-    within them that is not automated yet, and each says so in its Evidence column. Arabic is AR-ready at the locator level and has
-    not been run on BrowserStack on either platform.
-    <br><br>
-    <strong>Why these differ from the 31 Aug review.</strong> That review put mWeb at 44% (16/36) and app at 55% (16/29).
-    Its mWeb denominator was a different TestMO group whose cases turned out to be empty placeholders; this report measures
-    the regression repository (group 73697) instead. The app denominator is identical — 29 — and the increase there is
-    re-mapping: the store-credit, order-summary, wishlist and gift-registry tests were previously linked to the wrong cases
-    or to none. Neither figure was moved to look better; both are reproducible with <code>make generate</code>.
+  <div id="scopeNote" style="background:#fff;border:1px solid #e2e1dc;border-left:4px solid #667eea;border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:.85em;color:#444">
+    <strong>What this shows.</strong> Release-check cases with at least one automated test mapped to them, read from
+    <code>automation_web_2.0</code> <span id="scopeCommit">main</span>. Each row's Evidence column says what its tests cover.
+    This is coverage, not a pass rate — run results are in <a href="#regressionTable" style="color:#667eea">Regression Run History</a>.
   </div>
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   <div id="coverageSummary" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px"></div>
@@ -184,7 +172,6 @@ tr:hover{background:#f8f9ff;transition:background .2s}
     <div id="unmappedList"></div>
   </div>
 
-  <div id="flagPanel" class="section protected" style="margin-bottom:20px"></div>
   <div class="section" style="margin-bottom:20px">
     <h2>🏁 FALCON Regression Run History</h2>
     <p style="color:#666;font-size:.85em;margin:8px 0 4px">Execution results — separate from the coverage figures above, which measure mapping only.
@@ -377,7 +364,6 @@ function render() {
   renderTable();
   renderAppSection();
   renderArabicPanel();
-  renderFlagPanel();
   renderFolderBreakdown();
   const notPlanned = (DATA.testmo_tests||[]).filter(c => !isScoped(c)).length
                    + (DATA.app_testmo_tests||[]).filter(c => !isScoped(c)).length;
@@ -385,31 +371,6 @@ function render() {
   const badge = document.getElementById('notPlannedCount');
   if (badge) badge.textContent = `(${notPlanned})`;
   document.getElementById('unsavedBadge').classList.toggle('hidden', !hasUnsavedChanges);
-  // Two different ages, and only one of them was ever shown. generated_at is
-  // refreshed by CI daily, so the header stayed green while the TestMO case
-  // list quietly aged. Both are reported now.
-  const asOf = DATA.metadata.testmo_data_as_of || {};
-  const dayss = d => Math.floor((Date.now() - new Date(d).getTime()) / 86400000);
-  const oldest = Object.entries(asOf)
-    .filter(([, d]) => d && d !== 'unknown')
-    .sort((a, b) => new Date(a[1]) - new Date(b[1]))[0];
-  const el = document.getElementById('testmoAge');
-  if (el && oldest) {
-    const [src, when] = oldest, age = dayss(when);
-    const label = {mweb_release_run: 'mWEB run export', app_release_checklist: 'app checklist export',
-                   mweb_regression_repo: 'regression repository export'}[src] || src;
-    const rows = Object.entries(asOf).map(([k, d]) =>
-      `${({mweb_release_run: 'mWEB run', app_release_checklist: 'app checklist',
-           mweb_regression_repo: 'regression repo'}[k] || k)}: ${d} (${dayss(d)}d)`).join(' · ');
-    el.innerHTML = age > 30
-      ? `<span style="background:#fff8e1;border-left:4px solid #f0ad4e;border-radius:4px;padding:8px 10px;display:block;color:#5d4037">
-           <strong>TestMO case data is ${age} days old.</strong> The oldest source is the ${label} (${when}).
-           Cases added, renamed or re-flagged in TestMO since then are not reflected — re-export and run
-           <code>make generate</code>. CI refreshes the test side daily but cannot see TestMO.<br>
-           <span style="font-size:.9em;color:#795548">${rows}</span></span>`
-      : `<span style="color:#666">TestMO case data — ${rows}</span>`;
-  }
-
   const gen = DATA.metadata.generated_at || DATA.metadata.last_updated;
   const ageDays = Math.floor((Date.now() - new Date(gen).getTime()) / 86400000);
   const stale = ageDays > 14;
@@ -476,7 +437,6 @@ function renderStats() {
   const note = document.getElementById('scopeNote');
   if (note) {
     document.getElementById('scopeCommit').textContent = `main (${DATA.metadata.source_branch || 'origin/main'}, generated ${DATA.metadata.last_updated})`;
-    document.getElementById('scopeGaps').textContent = `${all.partial}`;
   }
 
   const fill = document.getElementById('progressFill');
@@ -734,167 +694,6 @@ function renderArabicPanel() {
         <div style="font-size:.82em;color:#555;margin-top:10px">Translated data: ${ar.language_data_keys.map(k => `<code>${k}</code>`).join(', ')}</div>
       </div>
     </div>`;
-}
-
-// === TestMO Automated flag vs what the code actually does ===
-function renderFlagPanel() {
-  const rec = DATA.flag_reconciliation;
-  const panel = document.getElementById('flagPanel');
-  if (!rec) { panel.style.display = 'none'; return; }
-  // Two different things were listed under one "corrections to make" heading.
-  // Only the first two groups are flag errors. A case flagged YES that is
-  // automated but carries a documented gap is correctly flagged — listing it as
-  // a correction implied the flag was wrong. And "already automated" overstated
-  // the last group, where some cases are automated with gaps rather than fully.
-  const CORRECTIONS = [
-    ['no_but_automated', 'Flagged NO, but fully automated — should be YES', '#28a745',
-     'The case is automated end to end, so the flag understates it.'],
-    ['yes_but_none', 'Flagged YES, but nothing covers it — should be NO', '#dc3545',
-     'No automated test maps to this case, so the flag overstates it. It is counted in the denominator today.'],
-  ];
-  const CONTEXT = [
-    ['not_planned_but_automated', 'Marked Not planned, but has automation mapped', '#667eea',
-     'Excluded from every percentage by the scope rule, yet automation exists. Re-flagging these to YES or NO brings them into scope.'],
-    ['yes_but_partial', 'Flagged YES and automated, with a documented gap', '#f0ad4e',
-     'The flag is right — these are automated. Listed only so the gap is visible; each case states it in its Evidence column.'],
-  ];
-  const render = defs => defs.map(([key, title, colour, why]) => {
-    const items = [...(rec.web?.[key] || []).map(e => ({...e, plat: 'mWEB'})),
-                   ...(rec.app?.[key] || []).map(e => ({...e, plat: 'App'}))];
-    if (!items.length) return '';
-    return `<div style="margin-bottom:14px">
-      <h3 style="font-size:.9em;color:${colour};margin-bottom:2px">${title} <span style="color:#888;font-weight:400">(${items.length})</span></h3>
-      <p style="font-size:.8em;color:#777;margin:0 0 6px">${why}</p>
-      ${items.map(e => `<div style="padding:5px 10px;margin:3px 0;background:#fff;border-left:3px solid ${colour};border-radius:3px;font-size:.82em">
-        <span style="color:#888">${e.plat}</span> <strong>C-${e.case_id}</strong> ${e.name}
-        <span style="color:#999">— ${({full:'automated', partial:'automated, with a noted gap', none:'not automated'})[e.status] || e.status}</span></div>`).join('')}
-    </div>`;
-  }).join('');
-  const corrections = render(CORRECTIONS);
-  const context = render(CONTEXT);
-  const nCorrections = CORRECTIONS.reduce((n, [k]) => n + (rec.web?.[k] || []).length + (rec.app?.[k] || []).length, 0);
-  panel.style.display = '';
-  const pj = DATA.metadata.projection;
-  const now = DATA.metadata.coverage;
-  const banner = pj ? `
-    <div style="background:#f0f7ff;border:1px solid #b6d4fe;border-left:4px solid #2a78d6;border-radius:6px;padding:12px 14px;margin-bottom:14px">
-      <div style="font-size:.85em;color:#0a4a8f;font-weight:600;margin-bottom:6px">If TestMO is corrected — projection, not a measurement</div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;font-size:.85em">
-        ${[['mWeb','web'],['App','app'],['Overall','combined']].map(([lab,k]) => `
-          <div><span style="color:#666">${lab}</span><br>
-            <span style="color:#999">${now[k].covered}/${now[k].in_scope} = ${now[k].pct}%</span>
-            <span style="color:#0a4a8f;font-weight:700"> → ${pj[k].covered}/${pj[k].in_scope} = ${pj[k].pct}%</span>
-          </div>`).join('')}
-      </div>
-      <ul style="margin:10px 0 0;padding-inline-start:18px;font-size:.82em;color:#333">
-        ${pj.actions.map(a => `<li><strong>${a.id}.</strong> ${a.what} — <span style="color:#666">${a.detail}</span></li>`).join('')}
-      </ul>
-      <p style="margin:8px 0 0;font-size:.78em;color:#666">The figures above the fold stay at
-        <strong>${now.combined.covered}/${now.combined.in_scope} = ${now.combined.pct}%</strong> until TestMO actually changes.
-        Nothing here is applied to them: A and C are TestMO flag decisions, and B would mean inventing case ids.</p>
-    </div>` : '';
-
-  panel.innerHTML = `<h2>🏷️ TestMO “Automated” flag vs the code</h2>
-    <p style="color:#666;font-size:.85em;margin:8px 0 14px">
-      The flag decides which cases count towards coverage: <code>YES</code> and <code>NO</code> are in scope,
-      <code>Not planned</code> is excluded. So a wrong flag moves the percentage.
-      <strong>${nCorrections} flag${nCorrections === 1 ? '' : 's'} disagree with the code</strong> and are worth changing in TestMO;
-      the rest of this panel is context, not a correction.
-    </p>
-    ${banner}
-    <h3 style="font-size:.95em;margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid #e2e1dc">Corrections — the flag is wrong</h3>
-    ${corrections || '<p style="font-size:.85em;color:#777">None — every flag matches the code.</p>'}
-    <h3 style="font-size:.95em;margin:20px 0 8px;padding-bottom:4px;border-bottom:1px solid #e2e1dc">Context — the flag is defensible</h3>
-    ${context || '<p style="font-size:.85em;color:#777">Nothing to note.</p>'}`;
-}
-
-// Shared autocomplete over the real test inventory. It inserts platform-qualified
-// refs -- 10 test names exist in two files at once, so a bare name is ambiguous.
-function buildAutocomplete(cell, existing, candidates, onPick) {
-  const div = document.createElement('div');
-  div.className = 'autocomplete';
-  div.id = 'autocomplete-active';
-  const input = document.createElement('input');
-  input.type = 'text';
-  input.placeholder = 'Type a test name…';
-  input.style.cssText = 'width:100%;padding:8px;border:none;border-bottom:1px solid #eee;font-size:.85em';
-  div.appendChild(input);
-  const list = document.createElement('div');
-  div.appendChild(list);
-
-  function renderList(filter) {
-    const f = (filter || '').toLowerCase();
-    const filtered = f ? candidates.filter(t => (t.ref || t.name).toLowerCase().includes(f)) : candidates;
-    list.innerHTML = filtered.slice(0, 25).map(t => {
-      const ref = t.ref || t.name;
-      const skip = t.skip ? ` · ⚠️ ${t.skip.type === 'hard' ? 'skipped' : 'OS-gated'}` : '';
-      return `<div class="autocomplete-item" onclick="${onPick}('${t._caseId}','${ref}')">${refName(ref)}
-        <small>${PLATFORM_LABEL[t.platform] || t.platform} — ${t.path || t.file || ''}${skip}</small></div>`;
-    }).join('') || '<div class="autocomplete-item" style="color:#999">No matching test on main</div>';
-  }
-  input.oninput = () => renderList(input.value);
-  renderList('');
-  cell.appendChild(div);
-  input.focus();
-  setTimeout(() => document.addEventListener('click', closeOnOutside), 100);
-}
-
-function showAppAutocomplete(caseId) {
-  closeAutocomplete();
-  const test = DATA.app_testmo_tests.find(t => t.case_id === caseId);
-  const existing = new Set(test.automated_tests);
-  const candidates = (DATA.automated_tests.app || [])
-    .filter(t => !existing.has(t.ref || t.name))
-    .map(t => ({...t, _caseId: caseId}));
-  buildAutocomplete(document.getElementById('appcell-' + caseId), existing, candidates, 'addAppTest');
-}
-
-function addAppTest(caseId, ref) {
-  const test = DATA.app_testmo_tests.find(t => t.case_id === caseId);
-  if (!test.automated_tests.includes(ref)) {
-    test.automated_tests.push(ref);
-    // Deliberately 'partial', not 'full': a link is evidence that something is
-    // covered, not proof the whole case is. Promote it by hand once you have
-    // read the test and written the note.
-    if (test.coverage_status === 'none') test.coverage_status = 'partial';
-    recomputeCase(test);
-    saveEdits();
-    closeAutocomplete();
-    render();
-    refreshUnmapped();
-  }
-}
-
-function removeAppTest(caseId, ref) {
-  const test = DATA.app_testmo_tests.find(t => t.case_id === caseId);
-  test.automated_tests = test.automated_tests.filter(r => r !== ref);
-  if (!test.automated_tests.length) test.coverage_status = 'none';
-  recomputeCase(test);
-  saveEdits();
-  render();
-  refreshUnmapped();
-}
-
-function updateAppNotes(caseId, value) {
-  const test = DATA.app_testmo_tests.find(t => t.case_id === caseId);
-  test.notes = value;
-  saveEdits();
-}
-
-function updateAppCoverage(caseId, value) {
-  const test = DATA.app_testmo_tests.find(t => t.case_id === caseId);
-  test.coverage_status = value;
-  saveEdits();
-  render();
-}
-
-// Keep the derived fields (locales, skipped-only flag) honest after an edit.
-function recomputeCase(c) {
-  const metas = c.automated_tests.map(testByRef).filter(Boolean);
-  const locales = new Set();
-  metas.forEach(m => (m.locales || ['en']).forEach(l => locales.add(l)));
-  c.locales = locales.size ? [...locales].sort().reverse() : ['en'];
-  c.skipped_only = metas.length > 0 && metas.every(m => m.skip && m.skip.type === 'hard');
 }
 
 function renderFolderBreakdown() {
