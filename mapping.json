@@ -3906,7 +3906,7 @@
         "app::test_app_wishlist_all_product_types"
       ],
       "coverage_status": "full",
-      "notes": "Opens the wishlist and verifies every product, parametrised for guest and logged-in users. The guest variant is a known Android failure -- the guest multi-product add does not land every product -- which is a run failure rather than a coverage gap, so it belongs in the run history, not here. TestMO flags this NO -- it should be YES.",
+      "notes": "Opens the wishlist and verifies all seven product types are listed, parametrised for guest and logged-in users. The guest variant is a known Android failure -- the guest multi-product add does not land every product -- which is a run failure rather than a coverage gap, so it belongs in the run history, not here. TestMO flags this NO -- it should be YES.",
       "skipped_only": false,
       "locales": [
         "en",
@@ -3936,7 +3936,7 @@
         "app::test_app_wishlist_all_product_types"
       ],
       "coverage_status": "partial",
-      "notes": "Covers moving all product types to the wishlist from the cart, including the guest login-prompt branch, and verifies the cart is left empty. Adding to the wishlist from the PLP or PDP is not covered. Dropped the hard-skipped test_uae_cart_move_to_wishlist.",
+      "notes": "Moves all seven product types to the wishlist from the cart -- simple, custom, configurable, bundle, custom_configurable, colour variant and installation -- including the guest login-prompt branch, and verifies the cart is left empty. The PLP and PDP entry points this case also names are not covered: the app page objects have no add-to-wishlist method on either screen. Dropped the hard-skipped test_uae_cart_move_to_wishlist.",
       "skipped_only": false,
       "locales": [
         "en",
@@ -3962,12 +3962,15 @@
       "source": "release_check",
       "page": 1,
       "run_id": 2192,
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": "Removing products from the wishlist is not automated on the app. This is the one app wishlist case with nothing on it; 1435396 is partial (cart path only). Closing both is what completes app Wishlist.",
+      "automated_tests": [
+        "app::test_app_wishlist_all_product_types"
+      ],
+      "coverage_status": "full",
+      "notes": "Covered by the closing steps of the wishlist test, which I had missed: after verifying all products are present it calls wishlist_app.delete_all_wishlist_items() -- clicking the delete icon on each card in turn -- then wishlist_app.verify_wishlist_is_empty(), which asserts the empty state is shown or that zero cards remain. The test carries seven product types (simple, custom, configurable, bundle, custom_configurable, colour variant, installation), so removal is proven across all of them. clear_wishlist_bulk() exercises the select-all path as a precondition too.",
       "skipped_only": false,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -7929,6 +7932,11 @@
           "status": "full"
         },
         {
+          "case_id": "1435397",
+          "name": "Verify user can remove all product types from wishlist",
+          "status": "full"
+        },
+        {
           "case_id": "1435402",
           "name": "Verify customer can search  for products",
           "status": "full"
@@ -8102,7 +8110,7 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-08",
-    "generated_at": "2026-09-08T18:05:24+00:00",
+    "generated_at": "2026-09-08T18:20:43+00:00",
     "source_sha": "bb4c777",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
@@ -8135,20 +8143,20 @@
         "total": 48,
         "in_scope": 29,
         "out_of_scope": 19,
-        "full": 15,
+        "full": 16,
         "partial": 8,
-        "covered": 23,
-        "none": 6,
-        "pct": 79,
-        "pct_full": 52
+        "covered": 24,
+        "none": 5,
+        "pct": 83,
+        "pct_full": 55
       },
       "combined": {
         "in_scope": 84,
-        "full": 48,
+        "full": 49,
         "partial": 12,
-        "covered": 60,
-        "pct": 71,
-        "pct_full": 57
+        "covered": 61,
+        "pct": 73,
+        "pct_full": 58
       },
       "web_by_source": {
         "other_group": {
@@ -8183,13 +8191,13 @@
       },
       "app": {
         "in_scope": 35,
-        "covered": 29,
-        "pct": 83
+        "covered": 30,
+        "pct": 86
       },
       "combined": {
         "in_scope": 101,
-        "covered": 78,
-        "pct": 77
+        "covered": 79,
+        "pct": 78
       },
       "actions": [
         {
