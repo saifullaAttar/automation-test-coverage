@@ -420,12 +420,11 @@ APP_MAPPING = {
     "1435393": ("full", ["app::test_existing_user_profile"],
         "Signs in and verifies every detail on the My Profile screen. TestMO flags this NO -- it should be YES."),
     "1435394": ("none", [], "There is no app order-list / order-details test."),
-    "1435395": ("full", ["app::test_app_wishlist_all_product_types"],
-        "Opens the wishlist and verifies all seven product types are listed, parametrised for guest "
-        "and logged-in users. "
-        "The guest variant is a known Android failure -- the guest multi-product add does not land "
-        "every product -- which is a run failure rather than a coverage gap, so it belongs in the run "
-        "history, not here. TestMO flags this NO -- it should be YES."),
+    "1435395": ("none", [],
+        "Not automated. This case is a standalone check that the wishlist screen loads for an "
+        "existing customer. test_app_wishlist_all_product_types does open the wishlist, but only as "
+        "a step inside a cart-to-wishlist flow, so it does not stand in for this case (QA owner, "
+        "8 Sep 2026). That test is credited on 1435396 and 1435397 instead."),
     "1435396": ("partial", ["app::test_app_wishlist_all_product_types"],
         "Moves all seven product types to the wishlist from the cart -- simple, custom, "
         "configurable, bundle, custom_configurable, colour variant and installation -- including the "
@@ -717,6 +716,15 @@ def apply_mapping(cases, mapping, inventory, label, previous, source=None):
         case["notes"] = notes
         case["skipped_only"] = bool(refs) and all(
             (inventory[r]["skip"] or {}).get("type") == "hard" for r in refs)
+        # A case whose only mapped scripts are hard-skipped does not count as
+        # automated: nothing runs, so nothing guards it. The report already
+        # called these out under "Covered on Paper Only" while still counting
+        # them as covered, which was the report disagreeing with itself.
+        if case["skipped_only"]:
+            case["coverage_status"] = "none"
+            case["notes"] = (case["notes"] + " NOT COUNTED AS AUTOMATED: every mapped script is "
+                             "hard-skipped, so nothing runs. Closing this is an unskip, not new "
+                             "test work.").strip()
         locales = set()
         for r in refs:
             locales.update(inventory[r]["locales"])

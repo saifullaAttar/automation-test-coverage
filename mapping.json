@@ -3571,8 +3571,8 @@
       "automated_tests": [
         "app::test_sign_in_with_google"
       ],
-      "coverage_status": "partial",
-      "notes": "Script exists but is hard-skipped: Google sign-in requires 2-factor authentication.",
+      "coverage_status": "none",
+      "notes": "Script exists but is hard-skipped: Google sign-in requires 2-factor authentication. NOT COUNTED AS AUTOMATED: every mapped script is hard-skipped, so nothing runs. Closing this is an unskip, not new test work.",
       "skipped_only": true,
       "locales": [
         "en",
@@ -3902,15 +3902,12 @@
       "source": "release_check",
       "page": 1,
       "run_id": 2192,
-      "automated_tests": [
-        "app::test_app_wishlist_all_product_types"
-      ],
-      "coverage_status": "full",
-      "notes": "Opens the wishlist and verifies all seven product types are listed, parametrised for guest and logged-in users. The guest variant is a known Android failure -- the guest multi-product add does not land every product -- which is a run failure rather than a coverage gap, so it belongs in the run history, not here. TestMO flags this NO -- it should be YES.",
+      "automated_tests": [],
+      "coverage_status": "none",
+      "notes": "Not automated. This case is a standalone check that the wishlist screen loads for an existing customer. test_app_wishlist_all_product_types does open the wishlist, but only as a step inside a cart-to-wishlist flow, so it does not stand in for this case (QA owner, 8 Sep 2026). That test is credited on 1435396 and 1435397 instead.",
       "skipped_only": false,
       "locales": [
-        "en",
-        "ar"
+        "en"
       ]
     },
     {
@@ -4273,8 +4270,8 @@
       "automated_tests": [
         "app::test_app_gift_registry_scenario_4_add_to_cart_via_deeplink"
       ],
-      "coverage_status": "partial",
-      "notes": "Script exists and covers deep-linking into registries, adding to cart and validating the cart contents, but it is hard-skipped pending an app-side fix.",
+      "coverage_status": "none",
+      "notes": "Script exists and covers deep-linking into registries, adding to cart and validating the cart contents, but it is hard-skipped pending an app-side fix. NOT COUNTED AS AUTOMATED: every mapped script is hard-skipped, so nothing runs. Closing this is an unskip, not new test work.",
       "skipped_only": true,
       "locales": [
         "en",
@@ -4303,8 +4300,8 @@
       "automated_tests": [
         "app::test_app_gift_registry_scenario_4_add_to_cart_via_deeplink"
       ],
-      "coverage_status": "partial",
-      "notes": "The same script validates that each registry-owner cart switch holds the expected item, quantity and discounted price -- but it is hard-skipped pending an app-side fix.",
+      "coverage_status": "none",
+      "notes": "The same script validates that each registry-owner cart switch holds the expected item, quantity and discounted price -- but it is hard-skipped pending an app-side fix. NOT COUNTED AS AUTOMATED: every mapped script is hard-skipped, so nothing runs. Closing this is an unskip, not new test work.",
       "skipped_only": true,
       "locales": [
         "en",
@@ -7927,11 +7924,6 @@
           "status": "full"
         },
         {
-          "case_id": "1435395",
-          "name": "Verify wishlist loading for existing customer",
-          "status": "full"
-        },
-        {
           "case_id": "1435397",
           "name": "Verify user can remove all product types from wishlist",
           "status": "full"
@@ -7947,14 +7939,14 @@
           "status": "full"
         }
       ],
-      "yes_but_none": [],
-      "yes_but_partial": [
+      "yes_but_none": [
         {
           "case_id": "2885053",
           "name": "Verify user can login from gmail",
-          "status": "partial"
+          "status": "none"
         }
       ],
+      "yes_but_partial": [],
       "not_planned_but_automated": [
         {
           "case_id": "1435389",
@@ -8110,7 +8102,7 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-08",
-    "generated_at": "2026-09-08T18:20:43+00:00",
+    "generated_at": "2026-09-08T18:24:52+00:00",
     "source_sha": "bb4c777",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
@@ -8143,20 +8135,20 @@
         "total": 48,
         "in_scope": 29,
         "out_of_scope": 19,
-        "full": 16,
-        "partial": 8,
-        "covered": 24,
-        "none": 5,
-        "pct": 83,
-        "pct_full": 55
+        "full": 15,
+        "partial": 5,
+        "covered": 20,
+        "none": 9,
+        "pct": 69,
+        "pct_full": 52
       },
       "combined": {
         "in_scope": 84,
-        "full": 49,
-        "partial": 12,
-        "covered": 61,
-        "pct": 73,
-        "pct_full": 58
+        "full": 48,
+        "partial": 9,
+        "covered": 57,
+        "pct": 68,
+        "pct_full": 57
       },
       "web_by_source": {
         "other_group": {
@@ -8190,19 +8182,19 @@
         "pct": 74
       },
       "app": {
-        "in_scope": 35,
-        "covered": 30,
-        "pct": 86
+        "in_scope": 34,
+        "covered": 26,
+        "pct": 76
       },
       "combined": {
-        "in_scope": 101,
-        "covered": 79,
-        "pct": 78
+        "in_scope": 100,
+        "covered": 75,
+        "pct": 75
       },
       "actions": [
         {
           "id": "A",
-          "what": "Re-flag 1 case(s) flagged YES that nothing covers",
+          "what": "Re-flag 2 case(s) flagged YES that nothing covers",
           "detail": "Exit Checkout Prompt (C-2337045) — no exit-prompt locator or page method exists on main",
           "effect": "leaves scope; mWEB Checkout folder reaches 8/8"
         },

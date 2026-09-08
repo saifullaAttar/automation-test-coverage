@@ -24,8 +24,12 @@ for key, label in (("testmo_tests", "mWEB"), ("app_testmo_tests", "App")):
             if ref not in inventory:
                 problems.append(f"{cid}: ref '{ref}' does not exist on main")
         # Status and evidence must agree, in both directions.
-        if (c["coverage_status"] == "none") != (not c["automated_tests"]):
-            problems.append(f"{cid}: status '{c['coverage_status']}' with {len(c['automated_tests'])} refs")
+        # "none" with refs is legitimate for a skipped-only case: scripts exist
+        # but none of them run, so the case is not automated.
+        if c["coverage_status"] == "none" and c["automated_tests"] and not c.get("skipped_only"):
+            problems.append(f"{cid}: status 'none' with {len(c['automated_tests'])} live refs")
+        if c["coverage_status"] != "none" and not c["automated_tests"]:
+            problems.append(f"{cid}: status '{c['coverage_status']}' with no refs")
         if c["coverage_status"] != "none" and not (c.get("notes") or "").strip():
             problems.append(f"{cid}: '{c['coverage_status']}' with no note saying what is covered")
         if c["in_scope"] != (c["automated_flag"].upper() in ("YES", "NO")):
