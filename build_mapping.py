@@ -136,9 +136,10 @@ WEB_MAPPING = {
                             "web_uae::test_uae_uf2_cart_gift_wrap_wishlist",
                             "web_ksa::test_ksa_uf2_cart_gift_wrap_wishlist"],
         "Scenario 2 (a new user adds an address on the checkout page) is covered by the "
-        "guest-to-registered flows. FALCONS-338 also covers adding from the Address Book page, but "
-        "with an existing user -- the test needs a pre-existing address so the set-as-default control "
-        "renders, so a genuinely new user with no addresses is still not the path taken."),
+        "guest-to-registered flows. Scenario 1 (adding from the Address Book page) is not: the closest "
+        "test, web_commons::test_account_add_new_address_and_set_default from FALCONS-338, needs a "
+        "pre-existing address so the set-as-default control renders, so it runs as an existing user "
+        "rather than a new one. It is credited on case 1018712 instead."),
     "1018712": ("partial", ["web_commons::test_account_add_new_address_and_set_default",
                             "web_commons::test_account_delivery_addresses"],
         "FALCONS-338. Adds an address from Delivery Addresses, marks it default and verifies exactly "

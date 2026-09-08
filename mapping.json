@@ -817,7 +817,7 @@
         "web_ksa::test_ksa_uf2_cart_gift_wrap_wishlist"
       ],
       "coverage_status": "partial",
-      "notes": "Scenario 2 (a new user adds an address on the checkout page) is covered by the guest-to-registered flows. FALCONS-338 also covers adding from the Address Book page, but with an existing user -- the test needs a pre-existing address so the set-as-default control renders, so a genuinely new user with no addresses is still not the path taken.",
+      "notes": "Scenario 2 (a new user adds an address on the checkout page) is covered by the guest-to-registered flows. Scenario 1 (adding from the Address Book page) is not: the closest test, web_commons::test_account_add_new_address_and_set_default from FALCONS-338, needs a pre-existing address so the set-as-default control renders, so it runs as an existing user rather than a new one. It is credited on case 1018712 instead.",
       "skipped_only": false,
       "locales": [
         "en",
@@ -7814,7 +7814,7 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-08",
-    "generated_at": "2026-09-08T05:05:33+00:00",
+    "generated_at": "2026-09-08T05:27:46+00:00",
     "source_sha": "bb4c777",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
