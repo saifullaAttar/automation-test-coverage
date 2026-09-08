@@ -246,6 +246,8 @@ tr:hover{background:#f8f9ff;transition:background .2s}
   <div id="webSection" class="protected">
   <div class="section" style="padding:20px;margin-bottom:0">
     <h2>🌐 Web Tests</h2>
+    <div class="stats-grid" id="webStatsGrid" style="margin-top:15px"></div>
+    <div class="progress-bar"><div class="progress-fill" id="webProgressFill"></div></div>
   </div>
   <div style="overflow-x:auto">
     <table>
@@ -553,6 +555,21 @@ function coverageSelect(t, handler) {
 }
 
 function renderTable() {
+  const t = tally(DATA.testmo_tests);
+  const grid = document.getElementById('webStatsGrid');
+  if (grid) {
+    grid.innerHTML = `
+      <div class="stat-card"><div class="stat-number">${t.inScope}</div><div class="stat-label">mWeb cases in scope<br><small style="color:#999">${t.outOfScope} “Not planned” excluded</small></div></div>
+      <div class="stat-card"><div class="stat-number" style="color:#28a745">${t.full}</div><div class="stat-label">Fully covered</div></div>
+      <div class="stat-card"><div class="stat-number" style="color:#f0ad4e">${t.partial}</div><div class="stat-label">Partially covered</div></div>
+      <div class="stat-card"><div class="stat-number" style="color:#dc3545">${t.none}</div><div class="stat-label">Not covered</div></div>
+      <div class="stat-card"><div class="stat-number">${t.pct}%</div><div class="stat-label">mWeb coverage — ${t.covered}/${t.inScope}</div></div>
+    `;
+    const fill = document.getElementById('webProgressFill');
+    fill.style.width = t.pct + '%';
+    fill.textContent = `${t.pct}% — ${t.full} full + ${t.partial} partial of ${t.inScope}`;
+  }
+
   const tests = getFilteredTests();
   const tbody = document.getElementById('tableBody');
   tbody.innerHTML = tests.map(t => {
