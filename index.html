@@ -542,7 +542,7 @@ function flagBadge(t) {
 function localeBadge(t) {
   const ar = (t.locales || ['en']).includes('ar');
   return ar
-    ? '<span title="Mapped tests are AR-ready — locale-aware locators and data; not a passing Arabic run" style="background:#0e9f6e;color:#fff;padding:2px 6px;border-radius:4px;font-size:.75em;font-weight:600">EN·AR</span>'
+    ? '<span title="Mapped tests are AR-safe — either locale-aware, or locale-agnostic by design; not a passing Arabic run" style="background:#0e9f6e;color:#fff;padding:2px 6px;border-radius:4px;font-size:.75em;font-weight:600">EN·AR</span>'
     : '<span title="Mapped tests are only verified in English" style="background:#e9ecef;color:#666;padding:2px 6px;border-radius:4px;font-size:.75em">EN</span>';
 }
 
@@ -668,7 +668,7 @@ function renderArabicPanel() {
     <p style="color:#555;font-size:.9em;margin:10px 0 10px">${ar.summary}</p>
     ${ar.caveat ? `<div style="background:#fff8e1;border-left:4px solid #f0ad4e;border-radius:4px;padding:10px 12px;margin-bottom:16px;font-size:.85em;color:#5d4037"><strong>Read this before quoting the number.</strong> ${ar.caveat}</div>` : ''}
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px">
-      <div class="stat-card" style="animation:none"><div class="stat-number" style="color:#0e9f6e">${arTests.length}/${auto.length}</div><div class="stat-label">Tests AR-ready<br><small style="color:#999">locator level, not a run</small></div></div>
+      <div class="stat-card" style="animation:none"><div class="stat-number" style="color:#0e9f6e">${arTests.length}/${auto.length}</div><div class="stat-label">Tests AR-safe<br><small style="color:#999">by design, not yet run in AR</small></div></div>
       <div class="stat-card" style="animation:none"><div class="stat-number" style="color:#0e9f6e">${ar.stores.length}</div><div class="stat-label">Arabic storefronts</div></div>
       <div class="stat-card" style="animation:none"><div class="stat-number" style="color:#0e9f6e">${ar.app_locale_selectors}</div><div class="stat-label">Locale-nested app selectors</div></div>
       <div class="stat-card" style="animation:none"><div class="stat-number" style="color:#0e9f6e">${ar.tickets.length}</div><div class="stat-label">Delivery tickets</div></div>
@@ -680,7 +680,7 @@ function renderArabicPanel() {
           <strong>${t.id}</strong>${t.pr ? ` <span style="color:#888">(PR #${t.pr})</span>` : ''}<br><span style="color:#555">${t.what}</span></div>`).join('')}
       </div>
       <div>
-        <h3 style="font-size:.95em;margin-bottom:8px">AR-verified tests per suite</h3>
+        <h3 style="font-size:.95em;margin-bottom:8px">AR-safe tests per suite</h3>
         ${Object.entries(byPlatform).map(([k, v]) => `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #eee;font-size:.85em">
           <span><span style="background:${PLATFORM_COLOR[k]||'#888'};color:#fff;padding:1px 6px;border-radius:3px;font-size:.85em">${PLATFORM_LABEL[k]||k}</span> ${k}</span><strong>${v}</strong></div>`).join('')}
         <h3 style="font-size:.95em;margin:16px 0 8px">Arabic storefronts covered</h3>

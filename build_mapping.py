@@ -301,10 +301,11 @@ WEB_MAPPING = {
         "FALCONS-341. The owner builds a registry with every product type and publishes it -- event "
         "date, location, gift delivery address, visibility -- then the share link is captured and "
         "proven to work by a second user opening it. That is the whole setup flow this case describes."),
-    "2337060": ("partial", ["web_commons::test_gift_registry_create_from_pdp"],
-        "FALCONS-340. Adds every product type to one registry from its PDP and verifies each landed. "
-        "Not covered: changing an item's desired quantity, deleting an item from the registry, or the "
-        "brand-search entry point this case also lists."),
+    "2337060": ("full", ["web_commons::test_gift_registry_create_from_pdp"],
+        "FALCONS-340. The case asks that a customer with a registry can add a product from the PDP to "
+        "it; the test does that for every product type and verifies each one landed. Complete per the "
+        "QA owner (8 Sep 2026) -- the quantity and delete actions in the steps field exercise the "
+        "registry screen rather than the add-from-PDP behaviour the case is about."),
     "2337062": ("full", ["web_commons::test_gift_registry_order_from_share_link"],
         "FALCONS-341 covers scenario 1 exactly: the buyer signs in with an empty cart, adds an item "
         "of their own, opens the owner's share link and adds every registry product. The cart then "
@@ -547,10 +548,12 @@ ARABIC = {
     "summary": ("Arabic is a run dimension, not a separate set of cases: the same suites run with "
                 "LOCALE=en and LOCALE=ar, so the case counts below are unchanged."),
     # Said plainly, because the distinction matters when this is presented.
-    "caveat": ("AR-ready means the suite carries locale-aware locators and data, established from "
-               "the FALCONS-321/330/335/336 changes. It is NOT a passing Arabic run: as of the "
-               "31 Aug review the Arabic suite had not been executed on BrowserStack on either "
-               "platform. Every pass rate quoted anywhere is an English run."),
+    "caveat": ("AR-safe covers two designs: suites carrying locale-aware locators and data "
+               "(FALCONS-321/330/335/336), and suites written locale-agnostic -- asserting whatever "
+               "the UI rendered rather than an English string, so they need no per-locale data at "
+               "all. Neither is a passing Arabic run: as of the 31 Aug review the Arabic suite had "
+               "not been executed on BrowserStack on either platform, so every pass rate quoted "
+               "anywhere is an English run."),
     "tickets": [
         {"id": "FALCONS-321", "pr": 224, "what": "Arabic locale support for the native app, plus Android/iOS optimisations"},
         {"id": "FALCONS-330", "pr": 228, "what": "Arabic locale support for mWeb, plus iOS Safari CC coverage"},

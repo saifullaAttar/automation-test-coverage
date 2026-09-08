@@ -1906,7 +1906,8 @@
       "notes": "Both scenarios now covered. Scenario 1: My Account > Gift registry, pick an occasion, name it, submit, verify the detail page and the listing. Scenario 2 (FALCONS-340): a guest taps Add to Registry on a PDP, is sent to sign-in, signs in and creates the registry from the Add to Registry sheet on the same PDP.",
       "skipped_only": false,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -1935,7 +1936,8 @@
       "notes": "FALCONS-341. The owner builds a registry with every product type and publishes it -- event date, location, gift delivery address, visibility -- then the share link is captured and proven to work by a second user opening it. That is the whole setup flow this case describes.",
       "skipped_only": false,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -1960,11 +1962,12 @@
       "automated_tests": [
         "web_commons::test_gift_registry_create_from_pdp"
       ],
-      "coverage_status": "partial",
-      "notes": "FALCONS-340. Adds every product type to one registry from its PDP and verifies each landed. Not covered: changing an item's desired quantity, deleting an item from the registry, or the brand-search entry point this case also lists.",
+      "coverage_status": "full",
+      "notes": "FALCONS-340. The case asks that a customer with a registry can add a product from the PDP to it; the test does that for every product type and verifies each one landed. Complete per the QA owner (8 Sep 2026) -- the quantity and delete actions in the steps field exercise the registry screen rather than the add-from-PDP behaviour the case is about.",
       "skipped_only": false,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -1993,7 +1996,8 @@
       "notes": "FALCONS-341 covers scenario 1 exactly: the buyer signs in with an empty cart, adds an item of their own, opens the owner's share link and adds every registry product. The cart then shows two groups and the registry group is asserted to hold all of them.",
       "skipped_only": false,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -2022,7 +2026,8 @@
       "notes": "FALCONS-341. The buyer switches the cart to the registry group, checks out that group alone and pays by credit card. Replaces the old link to test_ksa_checkout_cc_normal_coupon, which was unrelated and hard-skipped.",
       "skipped_only": false,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -7683,7 +7688,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -7703,7 +7709,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -7723,7 +7730,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -7744,7 +7752,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -7765,14 +7774,15 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       }
     ]
   },
   "arabic": {
     "summary": "Arabic is a run dimension, not a separate set of cases: the same suites run with LOCALE=en and LOCALE=ar, so the case counts below are unchanged.",
-    "caveat": "AR-ready means the suite carries locale-aware locators and data, established from the FALCONS-321/330/335/336 changes. It is NOT a passing Arabic run: as of the 31 Aug review the Arabic suite had not been executed on BrowserStack on either platform. Every pass rate quoted anywhere is an English run.",
+    "caveat": "AR-safe covers two designs: suites carrying locale-aware locators and data (FALCONS-321/330/335/336), and suites written locale-agnostic -- asserting whatever the UI rendered rather than an English string, so they need no per-locale data at all. Neither is a passing Arabic run: as of the 31 Aug review the Arabic suite had not been executed on BrowserStack on either platform, so every pass rate quoted anywhere is an English run.",
     "tickets": [
       {
         "id": "FALCONS-321",
@@ -7868,6 +7878,11 @@
         {
           "case_id": "2337061",
           "name": "Setup the Gift registry",
+          "status": "full"
+        },
+        {
+          "case_id": "2337060",
+          "name": "Adding product  to GR",
           "status": "full"
         },
         {
@@ -8087,7 +8102,7 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-08",
-    "generated_at": "2026-09-08T16:50:27+00:00",
+    "generated_at": "2026-09-08T18:05:24+00:00",
     "source_sha": "bb4c777",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
@@ -8109,12 +8124,12 @@
         "total": 115,
         "in_scope": 55,
         "out_of_scope": 60,
-        "full": 32,
-        "partial": 5,
+        "full": 33,
+        "partial": 4,
         "covered": 37,
         "none": 18,
         "pct": 67,
-        "pct_full": 58
+        "pct_full": 60
       },
       "app": {
         "total": 48,
@@ -8129,11 +8144,11 @@
       },
       "combined": {
         "in_scope": 84,
-        "full": 47,
-        "partial": 13,
+        "full": 48,
+        "partial": 12,
         "covered": 60,
         "pct": 71,
-        "pct_full": 56
+        "pct_full": 57
       },
       "web_by_source": {
         "other_group": {
@@ -8151,12 +8166,12 @@
           "total": 104,
           "in_scope": 55,
           "out_of_scope": 49,
-          "full": 32,
-          "partial": 5,
+          "full": 33,
+          "partial": 4,
           "covered": 37,
           "none": 18,
           "pct": 67,
-          "pct_full": 58
+          "pct_full": 60
         }
       }
     },
@@ -8221,6 +8236,6 @@
     "unmapped_count": 24,
     "plan_gap_count": 15,
     "unmapped_and_skipped": 9,
-    "arabic_ready_tests": 115
+    "arabic_ready_tests": 120
   }
 }

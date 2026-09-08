@@ -33,7 +33,26 @@ REF = "origin/main"
 # Tickets that delivered / hardened Arabic locale support. Files they touched
 # are treated as AR-verified, as are files that carry locale-aware code.
 ARABIC_TICKETS = ["FALCONS-321", "FALCONS-330", "FALCONS-335", "FALCONS-336"]
-LOCALE_MARKER = re.compile(r"LOCALE|locale_|\.locale|lang=")
+
+# A suite is AR-safe by one of two designs, and only the first was detected:
+#
+#   locale-aware     — carries LOCALE / LANGUAGE_DATA / locale-nested locators
+#   locale-agnostic  — asserts against whatever the UI rendered rather than a
+#                      hardcoded English string, so it needs no per-locale data
+#
+# The second is arguably the stronger design and was being marked EN-only,
+# because looking for locale *code* finds nothing in a suite that needs none.
+LOCALE_MARKER = re.compile(
+    r"LOCALE|locale_|\.locale|lang=|locale-agnostic|no locale-specific|no per-locale")
+
+# Locale-agnostic files, verified by reading them. Kept explicit rather than
+# regexed: "asserts the rendered label" is a design, not a token.
+LOCALE_AGNOSTIC = {
+    # reads back the label the chip actually rendered; free-text registry names
+    "tests/web/commons/test_gift_registry.py",
+    # asserts the category name the suggestion returned, not an English constant
+    "tests/web/commons/test_home.py",
+}
 
 DEF_RE = re.compile(r"^def (test_\w+)\(", re.M)
 
@@ -203,14 +222,19 @@ def main():
         print(f"  note: {REF_CANDIDATES[0]} not present; used {REF}")
 
     ar_files = arabic_ticket_files(repo)
+    ar_reasons = []
     result = {}
     for platform, rel_dir in PLATFORMS.items():
         files = list_test_files(repo, rel_dir)
         tests = []
         for path in files:
             src = git(repo, "show", f"{REF}:{path}")
-            ar = path in ar_files or bool(LOCALE_MARKER.search(src))
-            tests += parse_file(src, path, platform, ar)
+            why = ("AR ticket" if path in ar_files else
+                   "locale-agnostic" if path in LOCALE_AGNOSTIC else
+                   "locale-aware" if LOCALE_MARKER.search(src) else None)
+            tests += parse_file(src, path, platform, bool(why))
+            if why:
+                ar_reasons.append((path, why))
         disambiguate(tests)
         result[platform] = tests
         print(f"  {platform:12s} {len(files)} files, {len(tests):3d} tests")
@@ -224,7 +248,9 @@ def main():
     cond = sum(1 for t in flat if t["skip"] and t["skip"]["type"] == "conditional")
     ar = sum(1 for t in flat if "ar" in t["locales"])
     print(f"Total {len(flat)} tests -- {len(flat) - hard - cond} active, "
-          f"{hard} hard-skipped, {cond} OS-gated, {ar} AR-verified -> {out}")
+          f"{hard} hard-skipped, {cond} OS-gated, {ar} AR-safe -> {out}")
+    for path, why in sorted(ar_reasons):
+        print(f"    AR-safe ({why}): {path}")
 
 
 if __name__ == "__main__":

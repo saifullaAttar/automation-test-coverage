@@ -3115,7 +3115,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -3135,7 +3136,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -3155,7 +3157,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -3176,7 +3179,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -3197,7 +3201,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     }
   ],
