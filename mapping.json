@@ -22,6 +22,7 @@
       "coverage_status": "none",
       "notes": "Geo-IP country and city detection is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -48,6 +49,7 @@
       "coverage_status": "none",
       "notes": "Geo-IP detection with multiple saved addresses is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -74,6 +76,7 @@
       "coverage_status": "none",
       "notes": "Geo-IP detection for guests is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -100,6 +103,7 @@
       "coverage_status": "none",
       "notes": "Switching country / website is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -126,6 +130,7 @@
       "coverage_status": "none",
       "notes": "Arabic IS exercised end to end: every suite runs a second time with LOCALE=ar, which routes to /ar, /sa-ar, /bh-ar, /kw-ar and /global-ar (FALCONS-330). What this case asks for -- using the in-page language switcher to move between stores -- is not automated; the locale is chosen when the session starts.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -152,6 +157,7 @@
       "coverage_status": "none",
       "notes": "Switching currency is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -178,6 +184,7 @@
       "coverage_status": "none",
       "notes": "Sale-page filters are not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -204,6 +211,7 @@
       "coverage_status": "none",
       "notes": "Category-page filters are not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -230,6 +238,7 @@
       "coverage_status": "none",
       "notes": "Removed the previous link to test_customer_can_search_brand: that is an APP test and it is hard-skipped (brand page does not exist on the app). No mWeb brand-page filter test exists.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -257,6 +266,7 @@
       "coverage_status": "none",
       "notes": "Price and tax display on PLP/PDP/search is never asserted.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -284,6 +294,7 @@
       "coverage_status": "none",
       "notes": "Removed the previous link to a KSA cart-coupon test. This case is about special-price display on PLP/PDP/search, which no test asserts.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -314,6 +325,7 @@
       "coverage_status": "full",
       "notes": "Registration from the account-page sign-in popup, UAE and KSA. Dropped test_user_signup, which is the app equivalent and is credited on app case 1435392.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -348,6 +360,7 @@
       "coverage_status": "full",
       "notes": "Registration from the cart / proceed-to-checkout path, UAE and KSA, both as a dedicated test and inside the guest-to-registered checkout flows.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -380,6 +393,7 @@
       "coverage_status": "full",
       "notes": "Login from the account-page sign-in popup, UAE and KSA, plus a parametrised negative test (FALCONS-338) asserting the banner and per-field errors for each invalid combination.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -413,6 +427,7 @@
       "coverage_status": "full",
       "notes": "Login from the cart page, UAE and KSA, including the guest-with-items variant.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -448,6 +463,7 @@
       "coverage_status": "full",
       "notes": "Newly credited. account.sign_out() is the final step of all four user tests, and UF5 signs out mid-flow and signs back in. TestMO flags this case NO -- it should be YES.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -476,6 +492,7 @@
       "coverage_status": "none",
       "notes": "Cross-platform login is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -503,6 +520,7 @@
       "coverage_status": "none",
       "notes": "Forgot-password flow is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -532,6 +550,7 @@
       "coverage_status": "full",
       "notes": "FALCONS-338. Signs in, opens Account > My Profile and verifies first name, last name and email. This is the first mWeb profile test -- the case previously had only an app test wrongly credited to it.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -560,6 +579,7 @@
       "coverage_status": "none",
       "notes": "Editing account info is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -586,6 +606,7 @@
       "coverage_status": "none",
       "notes": "Delete Account is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -613,6 +634,7 @@
       "coverage_status": "none",
       "notes": "Empty order list is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -640,6 +662,7 @@
       "coverage_status": "none",
       "notes": "Order list for a user with orders is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -669,6 +692,7 @@
       "coverage_status": "full",
       "notes": "Places a CC order then opens the order details page and verifies the details. TestMO flags this case NO -- it should be YES.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -700,6 +724,7 @@
       "coverage_status": "full",
       "notes": "Registers a brand-new user (guaranteed empty wishlist), adds all seven product types from the PDP and verifies each one. Replaces the previous link to the hard-skipped app test test_uae_cart_move_to_wishlist. TestMO flags this case NO -- it should be YES.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -731,6 +756,7 @@
       "coverage_status": "partial",
       "notes": "wishlist.clear_wishlist() deletes every item from the Wishlist page, but it runs as a precondition so the deletion itself is exercised rather than asserted. Removing an item from the PDP heart icon (scenario 2) is not covered.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -762,6 +788,7 @@
       "coverage_status": "full",
       "notes": "Existing user adds simple, configurable, colour-variant, custom, personalised, bundle and installation products to the wishlist from the PDP and verifies all of them -- covers the configurable / custom / bundle types this case names. TestMO flags this case NO -- it should be YES.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -790,6 +817,7 @@
       "coverage_status": "none",
       "notes": "Empty wallet is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -821,6 +849,7 @@
       "coverage_status": "full",
       "notes": "Reads the wallet balance, pays the whole order with store credit and re-reads the balance. Partial-wallet payment is covered by the CC + partial SC tests.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -849,6 +878,7 @@
       "coverage_status": "none",
       "notes": "Wallet currency conversion across stores is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -881,6 +911,7 @@
       "coverage_status": "partial",
       "notes": "Scenario 2 (a new user adds an address on the checkout page) is covered by the guest-to-registered flows. Scenario 1 (adding from the Address Book page) is not: the closest test, web_commons::test_account_add_new_address_and_set_default from FALCONS-338, needs a pre-existing address so the set-as-default control renders, so it runs as an existing user rather than a new one. It is credited on case 1018712 instead.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -912,6 +943,7 @@
       "coverage_status": "partial",
       "notes": "FALCONS-338. Adds an address from Delivery Addresses, marks it default and verifies exactly one default remains, then deletes the address it replaced and confirms it is gone from the Address Book. Not covered: re-verifying every field after creation, and the rule that the default toggle is inert while editing the default address.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -940,6 +972,7 @@
       "coverage_status": "none",
       "notes": "Removed the previous link to test_uae_checkout_cc_coupon_modal_sheet, which is unrelated. Setting a default address or editing address fields from checkout is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -966,6 +999,7 @@
       "coverage_status": "none",
       "notes": "Profile phone-number OTP is not automated. test_uae_checkout_cc_wrong_otp_no_coupon is the 3-D Secure card OTP, a different flow.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -996,6 +1030,7 @@
       "coverage_status": "full",
       "notes": "UF1: existing user with orders, Yalla filter on the PLP, Yalla badge on the PDP and Yalla free shipping on the cart.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1028,6 +1063,7 @@
       "coverage_status": "full",
       "notes": "UF2: guest adds items, gift wrap on all items, quantity up, signs up at checkout with a new address, places a CC order. The standalone gift-wrap-and-order test in test_checkout.py backs the gift-wrap step (the same-named copy in test_cart.py is hard-skipped as a duplicate). Dropped the app gift-wrap test that was credited here.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1059,6 +1095,7 @@
       "coverage_status": "full",
       "notes": "UF3: guest with items proceeds to checkout, signs in to an existing user with wallet balance, item is retained, order paid with full store credit. TestMO flags this NO -- it should be YES.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1090,6 +1127,7 @@
       "coverage_status": "full",
       "notes": "UF4: newly registered user, no wallet, cashback coupon applied on the cart.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1121,6 +1159,7 @@
       "coverage_status": "full",
       "notes": "UF5: items survive sign-out and sign-in, quantities adjusted per product type, COD order placed.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1152,6 +1191,7 @@
       "coverage_status": "full",
       "notes": "UF6: guest with items registers at checkout, adds an address, applies a coupon and places the order.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1183,6 +1223,7 @@
       "coverage_status": "full",
       "notes": "UF7: guest with items logs into an existing user holding wallet balance and pays with it. TestMO flags this NO -- it should be YES.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1211,6 +1252,7 @@
       "coverage_status": "none",
       "notes": "Removed the previous link to an app partial-removal test. UF-8 needs a product to be set out of stock in Admin mid-run, which the storefront suite cannot do.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -1238,6 +1280,7 @@
       "coverage_status": "none",
       "notes": "Removed the previous link to test_ksa_checkout_cod_normal_coupon. UF-9 needs the BE low-stock threshold configured; the low-stock alert is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -1265,6 +1308,7 @@
       "coverage_status": "none",
       "notes": "Removed the previous link to a gift-wrap test -- a free gift is not gift wrap. UF-10 needs the Free Gift Rule Wizard configured in Admin.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -1291,6 +1335,7 @@
       "coverage_status": "none",
       "notes": "Removed the previous link to test_ksa_cart_apply_gift_wrap_and_place_order. Apple Pay is not automated on any platform.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -1317,6 +1362,7 @@
       "coverage_status": "none",
       "notes": "Apple Pay is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -1344,6 +1390,7 @@
       "coverage_status": "none",
       "notes": "Free gift UI needs the Free Gift Rule Wizard configured; not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -1370,6 +1417,7 @@
       "coverage_status": "none",
       "notes": "Removed the previous link to test_uae_checkout_cod_normal_coupon. Apple Pay is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -1403,6 +1451,7 @@
       "coverage_status": "full",
       "notes": "CC checkout, parametrised across simple / bundle / configurable / custom on UAE, plus KSA and the coupon variants. The KSA + normal coupon test is currently hard-skipped as flaky.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1435,6 +1484,7 @@
       "coverage_status": "full",
       "notes": "CC plus partial store credit, applied both at checkout and on the cart (FALCONS-268).",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1470,6 +1520,7 @@
       "coverage_status": "full",
       "notes": "COD checkout parametrised by product type, plus COD with a coupon and COD with a capped percentage cart rule. The KSA COD + coupon test is currently hard-skipped as flaky.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1502,6 +1553,7 @@
       "coverage_status": "full",
       "notes": "Full store credit brings the order total to zero and the order is placed without a card.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1535,6 +1587,7 @@
       "coverage_status": "full",
       "notes": "Invalid card and wrong 3-D Secure OTP, both stores, error message asserted.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1568,6 +1621,7 @@
       "coverage_status": "full",
       "notes": "Store credit and a coupon applied together, both full-SC and partial-SC + CC, both stores.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1603,6 +1657,7 @@
       "coverage_status": "full",
       "notes": "Tamara with no coupon, a normal coupon and a cashback coupon, both stores. Dropped the app Tamara test that was credited here -- it is app-side and hard-skipped. TestMO flags this NO -- it should be YES.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1638,6 +1693,7 @@
       "coverage_status": "full",
       "notes": "Tabby with no coupon, a normal coupon and a cashback coupon, both stores. TestMO flags this NO -- it should be YES.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1666,6 +1722,7 @@
       "coverage_status": "none",
       "notes": "Removed the previous link to test_ksa_checkout_invalid_cc_no_coupon, which has nothing to do with the exit prompt. TestMO flags this case YES -- the flag is wrong, nothing covers it.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -1692,6 +1749,7 @@
       "coverage_status": "none",
       "notes": "This case starts from an order created in Admin. The storefront ODP verification we do have (test_uae_checkout_cc_and_verify_odp) is credited on case 1018708; Admin and invoice checks are not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -1723,6 +1781,7 @@
       "coverage_status": "partial",
       "notes": "Applying a coupon on the cart and on the checkout page is covered, including through the coupon modal sheet. The point of this case -- that a single-use coupon is rejected on a second use by the same or another customer -- is not asserted.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1756,6 +1815,7 @@
       "coverage_status": "full",
       "notes": "Percentage-of-product-price rule with and without a max discount amount, both stores, order summary verified and order placed.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1789,6 +1849,7 @@
       "coverage_status": "full",
       "notes": "Percentage rule on product variants (sale and non-sale in the same cart), with and without a max amount, both stores.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1817,9 +1878,10 @@
         "web_uae::test_uae_bank_discount_percentage_of_product_price_rule",
         "web_ksa::test_ksa_bank_discount_percentage_of_product_price_rule"
       ],
-      "coverage_status": "full",
-      "notes": "Bank coupon viewed on the cart, re-checked after a quantity change, applied, order summary verified and a CC order placed. Both tests are skipif OS == ios, so this runs on Android/Chrome only.",
+      "coverage_status": "none",
+      "notes": "Bank coupon viewed on the cart, re-checked after a quantity change, applied, order summary verified and a CC order placed. Both tests are skipif OS == ios, so this runs on Android/Chrome only. NOT COUNTED AS AUTOMATED: every mapped test is skipped on some target, so the case is not proven where it matters -- OS.lower() == \"ios\".",
       "skipped_only": false,
+      "gated_only": true,
       "locales": [
         "en",
         "ar"
@@ -1848,6 +1910,7 @@
       "coverage_status": "none",
       "notes": "Removed the previous link to a KSA percentage test -- wrong rule type. The fixed-amount coupons (FF_15 / FW_20) this case is about are not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -1875,6 +1938,7 @@
       "coverage_status": "none",
       "notes": "Removed the previous link to a KSA variant-percentage test. The tiered rules (tierednomax / tieredmax) are not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -1905,6 +1969,7 @@
       "coverage_status": "full",
       "notes": "Both scenarios now covered. Scenario 1: My Account > Gift registry, pick an occasion, name it, submit, verify the detail page and the listing. Scenario 2 (FALCONS-340): a guest taps Add to Registry on a PDP, is sent to sign-in, signs in and creates the registry from the Add to Registry sheet on the same PDP.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1935,6 +2000,7 @@
       "coverage_status": "full",
       "notes": "FALCONS-341. The owner builds a registry with every product type and publishes it -- event date, location, gift delivery address, visibility -- then the share link is captured and proven to work by a second user opening it. That is the whole setup flow this case describes.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1965,6 +2031,7 @@
       "coverage_status": "full",
       "notes": "FALCONS-340. The case asks that a customer with a registry can add a product from the PDP to it; the test does that for every product type and verifies each one landed. Complete per the QA owner (8 Sep 2026) -- the quantity and delete actions in the steps field exercise the registry screen rather than the add-from-PDP behaviour the case is about.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -1995,6 +2062,7 @@
       "coverage_status": "full",
       "notes": "FALCONS-341 covers scenario 1 exactly: the buyer signs in with an empty cart, adds an item of their own, opens the owner's share link and adds every registry product. The cart then shows two groups and the registry group is asserted to hold all of them.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -2025,6 +2093,7 @@
       "coverage_status": "full",
       "notes": "FALCONS-341. The buyer switches the cart to the registry group, checks out that group alone and pays by credit card. Replaces the old link to test_ksa_checkout_cc_normal_coupon, which was unrelated and hard-skipped.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -2053,6 +2122,7 @@
       "coverage_status": "none",
       "notes": "The purchased tab and desired-quantity checks after an order are not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2079,6 +2149,7 @@
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2105,6 +2176,7 @@
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2131,6 +2203,7 @@
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2157,6 +2230,7 @@
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2183,6 +2257,7 @@
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2209,6 +2284,7 @@
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2235,6 +2311,7 @@
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2261,6 +2338,7 @@
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2287,6 +2365,7 @@
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2313,6 +2392,7 @@
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2339,6 +2419,7 @@
       "coverage_status": "none",
       "notes": "Admin-side product creation is out of scope for the storefront E2E suite.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2364,6 +2445,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2389,6 +2471,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2414,6 +2497,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2439,6 +2523,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2464,6 +2549,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2489,6 +2575,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2514,6 +2601,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2539,6 +2627,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2564,6 +2653,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2589,6 +2679,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2614,6 +2705,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2639,6 +2731,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2664,6 +2757,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2689,6 +2783,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2714,6 +2809,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2739,6 +2835,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2764,6 +2861,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2789,6 +2887,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2814,6 +2913,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2839,6 +2939,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2864,6 +2965,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2889,6 +2991,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2914,6 +3017,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2939,6 +3043,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2964,6 +3069,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -2989,6 +3095,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3014,6 +3121,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3039,6 +3147,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3064,6 +3173,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3089,6 +3199,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3114,6 +3225,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3139,6 +3251,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3164,6 +3277,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3189,6 +3303,7 @@
       "coverage_status": "none",
       "notes": "",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3219,6 +3334,7 @@
       "coverage_status": "full",
       "notes": "Verifies the explore feed, search header and bottom navigation load, then navigates to Account. TestMO flags this Not planned even though it is automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3245,6 +3361,7 @@
       "coverage_status": "none",
       "notes": "Home-page banners are not asserted.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3273,6 +3390,7 @@
       "coverage_status": "partial",
       "notes": "Reaches the category PLP through a search suggestion rather than the home-page category entry point, and only on the configured store -- UAE/KSA/GCC/International are not each covered.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3299,6 +3417,7 @@
       "coverage_status": "none",
       "notes": "Collections from the home page are not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3326,6 +3445,7 @@
       "coverage_status": "none",
       "notes": "Category levels L1/L2/L3 are not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3353,6 +3473,7 @@
       "coverage_status": "none",
       "notes": "Filter and sort on the PLP are not automated on the app.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3378,9 +3499,10 @@
       "automated_tests": [
         "app::test_app_gift_registry_create_from_pdp_all_product_types"
       ],
-      "coverage_status": "partial",
-      "notes": "Opens the PDP for simple, bundle, configurable, custom, custom-configurable and installation products and selects their options, but as part of the gift-registry flow -- the PDP content itself is not asserted. Colour variant and egift are not covered.",
+      "coverage_status": "none",
+      "notes": "Opens the PDP for simple, bundle, configurable, custom, custom-configurable and installation products and selects their options, but as part of the gift-registry flow -- the PDP content itself is not asserted. Colour variant and egift are not covered. NOT COUNTED AS AUTOMATED: every mapped test is skipped on some target, so the case is not proven where it matters -- Gift registry is AE-only: on SA the event list does not load and the registry sc.",
       "skipped_only": false,
+      "gated_only": true,
       "locales": [
         "en",
         "ar"
@@ -3408,6 +3530,7 @@
       "coverage_status": "none",
       "notes": "Submitting a review is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3433,6 +3556,7 @@
       "coverage_status": "none",
       "notes": "Reviews and ratings on the PDP are not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3460,9 +3584,10 @@
         "app::test_app_gift_registry_create_from_pdp_all_product_types",
         "app::test_app_gift_registry_create_from_pdp"
       ],
-      "coverage_status": "partial",
-      "notes": "Newly credited (FALCONS-282). Adds a product to a registry from the PDP for six product types and verifies the event name, product name and quantity on the registry detail screen. Colour variant and egift are not covered.",
+      "coverage_status": "none",
+      "notes": "Newly credited (FALCONS-282). Adds a product to a registry from the PDP for six product types and verifies the event name, product name and quantity on the registry detail screen. Colour variant and egift are not covered. NOT COUNTED AS AUTOMATED: every mapped test is skipped on some target, so the case is not proven where it matters -- Gift registry is AE-only: on SA the event list does not load and the registry sc.",
       "skipped_only": false,
+      "gated_only": true,
       "locales": [
         "en",
         "ar"
@@ -3490,6 +3615,7 @@
       "coverage_status": "none",
       "notes": "Script exists but is hard-skipped: \"Brand page doesn't exist on app -- app-side bug, pending dev fix\". Nothing guards this case in a run today.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3516,6 +3642,7 @@
       "coverage_status": "none",
       "notes": "Brand-page product loading with filter and sort is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3545,6 +3672,7 @@
       "coverage_status": "full",
       "notes": "Positive sign-in through the bottom sheet, plus a parametrised negative test asserting the banner and per-field errors for every invalid email / password combination.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -3574,6 +3702,7 @@
       "coverage_status": "none",
       "notes": "Script exists but is hard-skipped: Google sign-in requires 2-factor authentication. NOT COUNTED AS AUTOMATED: every mapped script is hard-skipped, so nothing runs. Closing this is an unskip, not new test work.",
       "skipped_only": true,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -3605,6 +3734,7 @@
       "coverage_status": "full",
       "notes": "Dedicated signup test, plus signup as part of the guest checkout flow. TestMO flags this NO -- it should be YES.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -3631,6 +3761,7 @@
       "coverage_status": "none",
       "notes": "Adding products from Algolia recommendations is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3663,6 +3794,7 @@
       "coverage_status": "full",
       "notes": "Search results page and PLP add-to-cart are covered for simple, custom, configurable and bundle, including the \"Select an option\" popup; PDP option selection is covered for bundle and configurable. Complete per the QA owner (8 Sep 2026): the brand entry point and the remaining product types in the case title are not applicable to app automation. Dropped the hard-skipped test_uae_cart_quantity_workflow.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -3694,6 +3826,7 @@
       "coverage_status": "full",
       "notes": "Every added product is verified by name in the cart, for simple, custom, configurable and bundle. Complete per the QA owner (8 Sep 2026): the remaining product types in the case title are not applicable to app automation. Dropped the hard-skipped test_uae_cart_quantity_workflow.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -3725,6 +3858,7 @@
       "coverage_status": "full",
       "notes": "Quantity up and down with the row re-verified after each step, parametrised over simple, bundle, configurable and custom. Complete per the QA owner (8 Sep 2026): the remaining product types in the case title are not applicable to app automation. Note these are the APP copies; identically-named web tests exist in tests/web/UAE/test_cart.py.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -3757,6 +3891,7 @@
       "coverage_status": "full",
       "notes": "Removal is proven, including that the remaining items and the order summary are correct afterwards. Complete per the QA owner (8 Sep 2026): a per-product-type sweep is not required here.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -3788,6 +3923,7 @@
       "coverage_status": "full",
       "notes": "Gift wrap added on the cart and the order placed with CC. Dropped test_app_cart_apply_gift_wrap_and_place_order, hard-skipped because it moved to the checkout suite. TestMO flags this NO -- it should be YES.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -3822,6 +3958,7 @@
       "coverage_status": "full",
       "notes": "FALCONS-342 closed the gap. Apply on the cart was already covered; the capped percentage test now applies a coupon on the cart, REMOVES it there, verifies the checkout summary loses the discount, then re-applies it on checkout -- so apply and remove are both proven. Four cart-price-rule variants are covered (percentage and variant-percentage, each with and without a max amount), with the order summary verified at each step.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -3852,6 +3989,7 @@
       "coverage_status": "full",
       "notes": "Signs in and verifies every detail on the My Profile screen. TestMO flags this NO -- it should be YES.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -3879,6 +4017,7 @@
       "coverage_status": "none",
       "notes": "There is no app order-list / order-details test.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3906,6 +4045,7 @@
       "coverage_status": "none",
       "notes": "Not automated. This case is a standalone check that the wishlist screen loads for an existing customer. test_app_wishlist_all_product_types does open the wishlist, but only as a step inside a cart-to-wishlist flow, so it does not stand in for this case (QA owner, 8 Sep 2026). That test is credited on 1435396 and 1435397 instead.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -3935,6 +4075,7 @@
       "coverage_status": "partial",
       "notes": "Moves all seven product types to the wishlist from the cart -- simple, custom, configurable, bundle, custom_configurable, colour variant and installation -- including the guest login-prompt branch, and verifies the cart is left empty. The PLP and PDP entry points this case also names are not covered: the app page objects have no add-to-wishlist method on either screen. Dropped the hard-skipped test_uae_cart_move_to_wishlist.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -3965,6 +4106,7 @@
       "coverage_status": "full",
       "notes": "Covered by the closing steps of the wishlist test, which I had missed: after verifying all products are present it calls wishlist_app.delete_all_wishlist_items() -- clicking the delete icon on each card in turn -- then wishlist_app.verify_wishlist_is_empty(), which asserts the empty state is shown or that zero cards remain. The test carries seven product types (simple, custom, configurable, bundle, custom_configurable, colour variant, installation), so removal is proven across all of them. clear_wishlist_bulk() exercises the select-all path as a precondition too.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -3992,6 +4134,7 @@
       "coverage_status": "none",
       "notes": "The app wallet page is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -4022,6 +4165,7 @@
       "coverage_status": "partial",
       "notes": "Adds an address, sets it as default, moves the default to another address, deletes one and verifies the remaining count. Editing an existing address is not covered.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -4053,6 +4197,7 @@
       "coverage_status": "full",
       "notes": "Search from the explore screen through to the suggestion dropdown, the category PLP and the search results page. TestMO flags this NO -- it should be YES.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -4081,6 +4226,7 @@
       "coverage_status": "none",
       "notes": "Filter and sort on the search page are not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -4111,6 +4257,7 @@
       "coverage_status": "full",
       "notes": "FALCONS-268. Both tests apply store credit on the cart, verify it, remove it, verify the totals recover, re-apply it and then check out -- partial SC paid off with CC, and full SC covering the whole order. Replaces the unrelated order-summary test that was credited here.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -4143,6 +4290,7 @@
       "coverage_status": "full",
       "notes": "Captures subtotal, discount, VAT and total on the cart and re-verifies them after an item is removed; the SC tests validate the order summary again after each apply and remove. Replaces the previous link to the hard-skipped test_app_cart_guest_login_no_coupon_sc.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -4174,6 +4322,7 @@
       "coverage_status": "partial",
       "notes": "The address is handled during checkout (selected, or added at signup), but the shipping address block on the checkout screen is never asserted. Dropped test_app_checkout_tabby_normal_coupon, which has nothing to do with addresses.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -4209,6 +4358,7 @@
       "coverage_status": "partial",
       "notes": "CC, COD, full store credit, CC + SC and Tabby are each selected on the checkout screen and paid. Apple Pay is not automated and both Tamara scripts are hard-skipped as flaky, so the full payment-method list is not verified.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -4244,6 +4394,7 @@
       "coverage_status": "full",
       "notes": "CC and Tabby orders are placed end to end. Apple Pay is excluded as not automatable -- it requires device biometric confirmation -- so it does not count against this case (QA owner, 8 Sep 2026). Two residuals tracked separately: both Tamara scripts are hard-skipped as flaky, and the ODP / Admin / invoice checks named in the case title are not verified on the app. Removed the web CC and Tabby tests that were wrongly credited here.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -4273,6 +4424,7 @@
       "coverage_status": "none",
       "notes": "Script exists and covers deep-linking into registries, adding to cart and validating the cart contents, but it is hard-skipped pending an app-side fix. NOT COUNTED AS AUTOMATED: every mapped script is hard-skipped, so nothing runs. Closing this is an unskip, not new test work.",
       "skipped_only": true,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -4303,6 +4455,7 @@
       "coverage_status": "none",
       "notes": "The same script validates that each registry-owner cart switch holds the expected item, quantity and discounted price -- but it is hard-skipped pending an app-side fix. NOT COUNTED AS AUTOMATED: every mapped script is hard-skipped, so nothing runs. Closing this is an unskip, not new test work.",
       "skipped_only": true,
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -4330,9 +4483,10 @@
       "automated_tests": [
         "app::test_uae_guest_checkout_login_bottom_sheet_and_place_order"
       ],
-      "coverage_status": "full",
-      "notes": "A guest adds an item, taps checkout, signs in through the login bottom sheet and the item is still in the cart; parametrised by product type. Gated by skipif on OS. Dropped the hard-skipped test_app_cart_guest_login_no_coupon_sc. TestMO flags this NO -- it should be YES.",
+      "coverage_status": "none",
+      "notes": "A guest adds an item, taps checkout, signs in through the login bottom sheet and the item is still in the cart; parametrised by product type. Gated by skipif on OS. Dropped the hard-skipped test_app_cart_guest_login_no_coupon_sc. TestMO flags this NO -- it should be YES. NOT COUNTED AS AUTOMATED: every mapped test is skipped on some target, so the case is not proven where it matters -- OS.lower() == \"ios\".",
       "skipped_only": false,
+      "gated_only": true,
       "locales": [
         "en"
       ]
@@ -4359,6 +4513,7 @@
       "coverage_status": "none",
       "notes": "Algolia recommendations across screens are not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -4385,6 +4540,7 @@
       "coverage_status": "none",
       "notes": "App close / reopen is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -4411,6 +4567,7 @@
       "coverage_status": "none",
       "notes": "External, email and banner deep links are not automated. The only deep-link script is the gift-registry one, which is registry-specific and hard-skipped.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -4437,6 +4594,7 @@
       "coverage_status": "none",
       "notes": "Push and in-app notifications are not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -4463,6 +4621,7 @@
       "coverage_status": "none",
       "notes": "Push notifications with the app killed are not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -4489,6 +4648,7 @@
       "coverage_status": "none",
       "notes": "Push notifications with the app backgrounded are not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -4515,6 +4675,7 @@
       "coverage_status": "none",
       "notes": "Maya navigation to the PDP is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -4541,6 +4702,7 @@
       "coverage_status": "none",
       "notes": "Maya add-to-cart is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -4566,6 +4728,7 @@
       "coverage_status": "none",
       "notes": "GTM event verification is not automated.",
       "skipped_only": false,
+      "gated_only": false,
       "locales": [
         "en"
       ]
@@ -7901,6 +8064,11 @@
           "case_id": "2337045",
           "name": "Exit Checkout Prompt Feature",
           "status": "none"
+        },
+        {
+          "case_id": "1018761",
+          "name": "Bank discount",
+          "status": "none"
         }
       ],
       "yes_but_partial": [],
@@ -7932,11 +8100,6 @@
           "case_id": "1435402",
           "name": "Verify customer can search  for products",
           "status": "full"
-        },
-        {
-          "case_id": "1543957",
-          "name": "Verify cart merge guest > existing user with items",
-          "status": "full"
         }
       ],
       "yes_but_none": [
@@ -7956,11 +8119,6 @@
         {
           "case_id": "1435425",
           "name": "Verify user can access categories from home page on UAE/KSA/GCC/International store",
-          "status": "partial"
-        },
-        {
-          "case_id": "1435391",
-          "name": "Verify PDP for all product types (Simple, custom , installation , configurable, configurable custom , colour variant  bundle, and egift )",
           "status": "partial"
         }
       ]
@@ -8101,8 +8259,8 @@
   ],
   "metadata": {
     "schema": 2,
-    "last_updated": "2026-09-08",
-    "generated_at": "2026-09-08T18:24:52+00:00",
+    "last_updated": "2026-09-09",
+    "generated_at": "2026-09-08T18:42:28+00:00",
     "source_sha": "bb4c777",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
@@ -8124,31 +8282,31 @@
         "total": 115,
         "in_scope": 55,
         "out_of_scope": 60,
-        "full": 33,
+        "full": 32,
         "partial": 4,
-        "covered": 37,
-        "none": 18,
-        "pct": 67,
-        "pct_full": 60
+        "covered": 36,
+        "none": 19,
+        "pct": 65,
+        "pct_full": 58
       },
       "app": {
         "total": 48,
         "in_scope": 29,
         "out_of_scope": 19,
-        "full": 15,
-        "partial": 5,
-        "covered": 20,
-        "none": 9,
-        "pct": 69,
-        "pct_full": 52
+        "full": 14,
+        "partial": 4,
+        "covered": 18,
+        "none": 11,
+        "pct": 62,
+        "pct_full": 48
       },
       "combined": {
         "in_scope": 84,
-        "full": 48,
-        "partial": 9,
-        "covered": 57,
-        "pct": 68,
-        "pct_full": 57
+        "full": 46,
+        "partial": 8,
+        "covered": 54,
+        "pct": 64,
+        "pct_full": 55
       },
       "web_by_source": {
         "other_group": {
@@ -8166,35 +8324,35 @@
           "total": 104,
           "in_scope": 55,
           "out_of_scope": 49,
-          "full": 33,
+          "full": 32,
           "partial": 4,
-          "covered": 37,
-          "none": 18,
-          "pct": 67,
-          "pct_full": 60
+          "covered": 36,
+          "none": 19,
+          "pct": 65,
+          "pct_full": 58
         }
       }
     },
     "projection": {
       "web": {
-        "in_scope": 66,
-        "covered": 49,
+        "in_scope": 65,
+        "covered": 48,
         "pct": 74
       },
       "app": {
-        "in_scope": 34,
-        "covered": 26,
-        "pct": 76
+        "in_scope": 33,
+        "covered": 23,
+        "pct": 70
       },
       "combined": {
-        "in_scope": 100,
-        "covered": 75,
-        "pct": 75
+        "in_scope": 98,
+        "covered": 71,
+        "pct": 72
       },
       "actions": [
         {
           "id": "A",
-          "what": "Re-flag 2 case(s) flagged YES that nothing covers",
+          "what": "Re-flag 3 case(s) flagged YES that nothing covers",
           "detail": "Exit Checkout Prompt (C-2337045) — no exit-prompt locator or page method exists on main",
           "effect": "leaves scope; mWEB Checkout folder reaches 8/8"
         },
@@ -8206,8 +8364,8 @@
         },
         {
           "id": "C",
-          "what": "Re-flag 3 case(s) marked Not planned that have automation mapped",
-          "detail": "C-1435389, C-1435425, C-1435391",
+          "what": "Re-flag 2 case(s) marked Not planned that have automation mapped",
+          "detail": "C-1435389, C-1435425",
           "effect": "enters scope, already covered"
         }
       ]
@@ -8227,6 +8385,10 @@
     "total_automated_tests": 145,
     "active_tests": 126,
     "skipped_hard": 13,
+    "cases_not_running": {
+      "hard_skipped": 3,
+      "gated": 3
+    },
     "skipped_conditional": 6,
     "links": {
       "direct": 122,

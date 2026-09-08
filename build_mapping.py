@@ -714,17 +714,31 @@ def apply_mapping(cases, mapping, inventory, label, previous, source=None):
         case["automated_tests"] = refs
         case["coverage_status"] = status
         case["notes"] = notes
-        case["skipped_only"] = bool(refs) and all(
-            (inventory[r]["skip"] or {}).get("type") == "hard" for r in refs)
-        # A case whose only mapped scripts are hard-skipped does not count as
-        # automated: nothing runs, so nothing guards it. The report already
-        # called these out under "Covered on Paper Only" while still counting
-        # them as covered, which was the report disagreeing with itself.
+        # A case counts as automated only if something actually runs for it on
+        # the targets we ship to. Two ways that fails, both excluded:
+        #
+        #   hard-skipped  -- @pytest.mark.skip. Nothing runs anywhere.
+        #   gated         -- every mapped test is skipif'd on OS or COUNTRY, so
+        #                    the case is unproven on the platforms it is skipped
+        #                    for. Counting it as automated overstated it.
+        #
+        # They are kept apart because the work to close them differs: an unskip
+        # versus making the test work on the excluded platform.
+        skips = [(inventory[r]["skip"] or {}) for r in refs]
+        case["skipped_only"] = bool(refs) and all(k.get("type") == "hard" for k in skips)
+        case["gated_only"] = bool(refs) and not case["skipped_only"] and all(
+            k.get("type") in ("hard", "conditional") for k in skips)
         if case["skipped_only"]:
             case["coverage_status"] = "none"
             case["notes"] = (case["notes"] + " NOT COUNTED AS AUTOMATED: every mapped script is "
                              "hard-skipped, so nothing runs. Closing this is an unskip, not new "
                              "test work.").strip()
+        elif case["gated_only"]:
+            gates = sorted({k.get("reason", "")[:80] for k in skips if k.get("type") == "conditional"})
+            case["coverage_status"] = "none"
+            case["notes"] = (case["notes"] + " NOT COUNTED AS AUTOMATED: every mapped test is "
+                             "skipped on some target, so the case is not proven where it matters -- "
+                             + "; ".join(gates) + ".").strip()
         locales = set()
         for r in refs:
             locales.update(inventory[r]["locales"])
@@ -902,6 +916,10 @@ def main():
             "total_automated_tests": len(flat),
             "active_tests": len(flat) - len(hard) - len(cond),
             "skipped_hard": len(hard),
+            "cases_not_running": {
+                "hard_skipped": sum(1 for c in web + app if c["in_scope"] and c.get("skipped_only")),
+                "gated": sum(1 for c in web + app if c["in_scope"] and c.get("gated_only")),
+            },
             "skipped_conditional": len(cond),
             "links": {
                 "direct": sum(1 for c in web + app if c.get("run_id")),

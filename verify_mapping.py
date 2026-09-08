@@ -26,7 +26,8 @@ for key, label in (("testmo_tests", "mWEB"), ("app_testmo_tests", "App")):
         # Status and evidence must agree, in both directions.
         # "none" with refs is legitimate for a skipped-only case: scripts exist
         # but none of them run, so the case is not automated.
-        if c["coverage_status"] == "none" and c["automated_tests"] and not c.get("skipped_only"):
+        if (c["coverage_status"] == "none" and c["automated_tests"]
+                and not c.get("skipped_only") and not c.get("gated_only")):
             problems.append(f"{cid}: status 'none' with {len(c['automated_tests'])} live refs")
         if c["coverage_status"] != "none" and not c["automated_tests"]:
             problems.append(f"{cid}: status '{c['coverage_status']}' with no refs")
