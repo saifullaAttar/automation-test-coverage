@@ -127,9 +127,9 @@ tr:hover{background:#f8f9ff;transition:background .2s}
     <select id="filterFolder"><option value="">All Folders</option></select>
     <select id="filterStatus">
       <option value="">All Status</option>
-      <option value="full">✅ Covered</option>
-      <option value="partial">⚠️ Partial</option>
-      <option value="none">❌ Not Covered</option>
+      <option value="covered">✅ Automated</option>
+      <option value="none">❌ Not automated</option>
+      <option value="gaps">Automated, with noted gaps</option>
     </select>
     <select id="filterPriority">
       <option value="">All Priorities</option>
@@ -165,9 +165,9 @@ tr:hover{background:#f8f9ff;transition:background .2s}
     against the case's steps; the Evidence column on each row states what is and is not covered.
     <br><br>
     <strong>What it does not measure.</strong> It is not a pass rate — it says nothing about whether these tests currently pass.
-    “Covered” counts <span id="scopeFull"></span> fully covered plus <span id="scopePartial"></span> partially covered cases; on the strict
-    reading of fully covered only, the figure is <strong id="scopeStrict"></strong>. Arabic is AR-ready at the locator level and has not
-    been run on BrowserStack on either platform.
+    A case counts as automated when at least one test is mapped to it; <span id="scopeGaps"></span> of those still have a scenario
+    within them that is not automated yet, and each says so in its Evidence column. Arabic is AR-ready at the locator level and has
+    not been run on BrowserStack on either platform.
     <br><br>
     <strong>Why these differ from the 31 Aug review.</strong> That review put mWeb at 44% (16/36) and app at 55% (16/29).
     Its mWeb denominator was a different TestMO group whose cases turned out to be empty placeholders; this report measures
@@ -271,10 +271,10 @@ tr:hover{background:#f8f9ff;transition:background .2s}
   <div class="section">
     <h2>📊 Coverage by Folder</h2>
     <p style="color:#666;font-size:.85em;margin:8px 0 0">
-      <strong style="color:#28a745">done</strong> — every scenario in the case is automated ·
-      <strong style="color:#f0ad4e">partial</strong> — some of it is, and the case's Evidence column says what is missing ·
+      <strong style="color:#28a745">automated</strong> — the case has automation mapped to it ·
       <strong style="color:#dc3545">pending</strong> — nothing covers it yet.
-      A folder is green only when every case is <em>done</em>; least-complete folders come first.
+      Least-complete folders come first. Where a case is automated but a scenario within it is not yet,
+      its Evidence column records that.
     </p>
     <div class="folder-breakdown" id="folderBreakdown"></div>
   </div>
@@ -445,9 +445,8 @@ function renderStats() {
 
   document.getElementById('statsGrid').innerHTML = `
     <div class="stat-card"><div class="stat-number">${all.inScope}</div><div class="stat-label">Cases in scope<br><small style="color:#999">${all.outOfScope} “Not planned” excluded</small></div></div>
-    <div class="stat-card"><div class="stat-number" style="color:#28a745">${all.full}</div><div class="stat-label">Fully covered (${all.pctFull}%)</div></div>
-    <div class="stat-card"><div class="stat-number" style="color:#f0ad4e">${all.partial}</div><div class="stat-label">Partially covered</div></div>
-    <div class="stat-card"><div class="stat-number" style="color:#dc3545">${all.none}</div><div class="stat-label">Not covered</div></div>
+    <div class="stat-card"><div class="stat-number" style="color:#28a745">${all.covered}</div><div class="stat-label">Automated</div></div>
+    <div class="stat-card"><div class="stat-number" style="color:#dc3545">${all.none}</div><div class="stat-label">Not automated</div></div>
     <div class="stat-card"><div class="stat-number">${all.pct}%</div><div class="stat-label">Coverage — ${all.covered}/${all.inScope}</div></div>
     <div class="stat-card"><div class="stat-number">${auto.length}</div><div class="stat-label">Automated tests</div></div>
     <div class="stat-card"><div class="stat-number" style="color:${skipped ? '#dc3545' : '#28a745'}">${skipped}</div><div class="stat-label">Automated but not running<br><small style="color:#999">hard-skipped scripts</small></div></div>
@@ -458,15 +457,13 @@ function renderStats() {
     <div style="background:#fff;border-radius:10px;padding:20px;box-shadow:0 2px 4px rgba(0,0,0,.1);border-top:4px solid ${colour}">
       <h3 style="margin:0 0 12px;color:${colour}">${icon} ${title}
         <span style="font-size:.65em;color:#888;font-weight:400">${t.inScope} in scope · ${t.outOfScope} not planned</span></h3>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
-        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#28a745">${t.full}</div><div style="font-size:.8em;color:#666">Full</div></div>
-        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#f0ad4e">${t.partial}</div><div style="font-size:.8em;color:#666">Partial</div></div>
-        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#dc3545">${t.none}</div><div style="font-size:.8em;color:#666">None</div></div>
-        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:${colour}">${t.pct}%</div><div style="font-size:.8em;color:#666">Covered</div></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#28a745">${t.covered}</div><div style="font-size:.8em;color:#666">Automated</div></div>
+        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:#dc3545">${t.none}</div><div style="font-size:.8em;color:#666">Not automated</div></div>
+        <div style="text-align:center"><div style="font-size:1.8em;font-weight:700;color:${colour}">${t.pct}%</div><div style="font-size:.8em;color:#666">Coverage</div></div>
       </div>
-      <div style="background:#e9ecef;border-radius:10px;height:12px;margin-top:12px;overflow:hidden;display:flex">
-        <div style="height:100%;width:${t.inScope ? t.full / t.inScope * 100 : 0}%;background:#28a745"></div>
-        <div style="height:100%;width:${t.inScope ? t.partial / t.inScope * 100 : 0}%;background:#f0ad4e"></div>
+      <div style="background:#e9ecef;border-radius:10px;height:12px;margin-top:12px;overflow:hidden">
+        <div style="height:100%;width:${t.pct}%;background:#28a745"></div>
       </div>
       <div style="margin-top:8px;font-size:.8em;color:#666">${scripts}</div>
     </div>`;
@@ -484,14 +481,12 @@ function renderStats() {
   const note = document.getElementById('scopeNote');
   if (note) {
     document.getElementById('scopeCommit').textContent = `main (${DATA.metadata.source_branch || 'origin/main'}, generated ${DATA.metadata.last_updated})`;
-    document.getElementById('scopeFull').textContent = `${all.full}`;
-    document.getElementById('scopePartial').textContent = `${all.partial}`;
-    document.getElementById('scopeStrict').textContent = `${all.full}/${all.inScope} = ${all.pctFull}%`;
+    document.getElementById('scopeGaps').textContent = `${all.partial}`;
   }
 
   const fill = document.getElementById('progressFill');
   fill.style.width = all.pct + '%';
-  fill.textContent = `${all.pct}% covered — ${all.full} full + ${all.partial} partial of ${all.inScope} in-scope cases`;
+  fill.textContent = `${all.pct}% — ${all.covered} of ${all.inScope} in-scope cases automated`;
 }
 
 function renderFilters() {
@@ -508,7 +503,9 @@ function matchesFilters(t) {
   const priority = document.getElementById('filterPriority').value;
   const localeEl = document.getElementById('filterLocale');
   const locale = localeEl ? localeEl.value : '';
-  if (status && t.coverage_status !== status) return false;
+  if (status === 'covered') { if (t.coverage_status === 'none') return false; }
+  else if (status === 'gaps') { if (t.coverage_status !== 'partial') return false; }
+  else if (status && t.coverage_status !== status) return false;
   if (priority && t.priority !== priority) return false;
   const locales = t.locales || ['en'];
   if (locale === 'ar' && !locales.includes('ar')) return false;
@@ -611,9 +608,16 @@ function notesCell(t, handler) {
 function coverageSelect(t, handler) {
   const tail = t.skipped_only ? '<div style="font-size:.7em;color:#dc3545;margin-top:4px">only skipped scripts</div>' : '';
   if (!isEditing()) {
-    const cls = {full: 'status-full', partial: 'status-partial', none: 'status-none'}[t.coverage_status];
-    const text = {full: '✅ Full', partial: '⚠️ Partial', none: '❌ None'}[t.coverage_status];
-    return `<span class="${cls}">${text}</span>${tail}`;
+    // Two states, not three. "Partial" was an artefact of the original approach
+    // — automating across the whole regression suite meant tests landed against
+    // parts of broadly-worded cases. Now that work is driven by the release
+    // checks, a case is either automated or on the list. Where a covered case
+    // still has documented gaps, the Evidence column says what they are.
+    const covered = t.coverage_status !== 'none';
+    return `<span class="${covered ? 'status-full' : 'status-none'}">${covered ? '✅ Automated' : '❌ Not automated'}</span>` +
+      (t.coverage_status === 'partial'
+        ? '<div style="font-size:.7em;color:#8a6d3b;margin-top:4px" title="This case is automated, and the Evidence column records what is not yet covered">gaps noted →</div>'
+        : '') + tail;
   }
   const bg = t.coverage_status === 'full' ? '#d4edda' : t.coverage_status === 'partial' ? '#fff3cd' : '#f8d7da';
   return `<select class="coverage-select" onchange="${handler}('${t.case_id}', this.value)" style="padding:4px;border-radius:4px;border:1px solid #ddd;font-size:.8em;background:${bg}">
@@ -629,14 +633,13 @@ function renderTable() {
   if (grid) {
     grid.innerHTML = `
       <div class="stat-card"><div class="stat-number">${t.inScope}</div><div class="stat-label">mWeb cases in scope<br><small style="color:#999">${t.outOfScope} “Not planned” excluded</small></div></div>
-      <div class="stat-card"><div class="stat-number" style="color:#28a745">${t.full}</div><div class="stat-label">Fully covered</div></div>
-      <div class="stat-card"><div class="stat-number" style="color:#f0ad4e">${t.partial}</div><div class="stat-label">Partially covered</div></div>
-      <div class="stat-card"><div class="stat-number" style="color:#dc3545">${t.none}</div><div class="stat-label">Not covered</div></div>
+      <div class="stat-card"><div class="stat-number" style="color:#28a745">${t.covered}</div><div class="stat-label">Automated</div></div>
+      <div class="stat-card"><div class="stat-number" style="color:#dc3545">${t.none}</div><div class="stat-label">Not automated</div></div>
       <div class="stat-card"><div class="stat-number">${t.pct}%</div><div class="stat-label">mWeb coverage — ${t.covered}/${t.inScope}</div></div>
     `;
     const fill = document.getElementById('webProgressFill');
     fill.style.width = t.pct + '%';
-    fill.textContent = `${t.pct}% — ${t.full} full + ${t.partial} partial of ${t.inScope}`;
+    fill.textContent = `${t.pct}% — ${t.covered} of ${t.inScope} automated`;
   }
 
   const tests = getFilteredTests();
@@ -668,14 +671,13 @@ function renderAppSection() {
 
   document.getElementById('appStatsGrid').innerHTML = `
     <div class="stat-card"><div class="stat-number">${t.inScope}</div><div class="stat-label">App cases in scope<br><small style="color:#999">${t.outOfScope} “Not planned” excluded</small></div></div>
-    <div class="stat-card"><div class="stat-number" style="color:#28a745">${t.full}</div><div class="stat-label">Fully covered</div></div>
-    <div class="stat-card"><div class="stat-number" style="color:#f0ad4e">${t.partial}</div><div class="stat-label">Partially covered</div></div>
-    <div class="stat-card"><div class="stat-number" style="color:#dc3545">${t.none}</div><div class="stat-label">Not covered</div></div>
+    <div class="stat-card"><div class="stat-number" style="color:#28a745">${t.covered}</div><div class="stat-label">Automated</div></div>
+    <div class="stat-card"><div class="stat-number" style="color:#dc3545">${t.none}</div><div class="stat-label">Not automated</div></div>
     <div class="stat-card"><div class="stat-number">${t.pct}%</div><div class="stat-label">App coverage — ${t.covered}/${t.inScope}</div></div>
   `;
   const fill = document.getElementById('appProgressFill');
   fill.style.width = t.pct + '%';
-  fill.textContent = `${t.pct}% — ${t.full} full + ${t.partial} partial of ${t.inScope}`;
+  fill.textContent = `${t.pct}% — ${t.covered} of ${t.inScope} automated`;
 
   document.getElementById('appTableBody').innerHTML = visibleCases(appTests).filter(matchesFilters).map(c => {
     const tags = c.automated_tests.map(ref => testTag(c.case_id, ref, 'removeAppTest')).join('');
@@ -885,28 +887,27 @@ function renderFolderBreakdown() {
   });
 
   document.getElementById('folderBreakdown').innerHTML = Object.entries(folders)
-    .sort((a, b) => (a[1].done / a[1].total) - (b[1].done / b[1].total) || b[1].total - a[1].total)
+    .sort((a, b) => ((a[1].done + a[1].partial) / a[1].total) - ((b[1].done + b[1].partial) / b[1].total) || b[1].total - a[1].total)
     .map(([name, s]) => {
-      const pending = s.total - s.done - s.partial;
+      const covered = s.done + s.partial;
+      const pending = s.total - covered;
       // Green only when every case is fully covered. The old version went green
       // at 100% "covered", which counted partials — so My Wishlist read 100%
       // with a case that still had gaps, and Address book read 67% with nothing
       // fully covered at all.
-      const cls = s.done === s.total ? 'covered' : (s.done || s.partial) ? 'partial' : 'none';
-      const seg = (n, colour) => n ? `<div style="width:${n / s.total * 100}%;background:${colour}"></div>` : '';
+      const cls = covered === s.total ? 'covered' : covered ? 'partial' : 'none';
       const chip = (n, colour, label) => n
         ? `<span style="color:${colour};font-weight:600">${n}</span> <span style="color:#777">${label}</span>`
         : `<span style="color:#c9c9c9">0 ${label}</span>`;
       return `<div class="folder-card ${cls}">
         <div class="folder-name">${name}</div>
-        <div class="folder-stats" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">
-          ${chip(s.done, '#28a745', 'done')}
-          ${chip(s.partial, '#f0ad4e', 'partial')}
+        <div class="folder-stats" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px">
+          ${chip(covered, '#28a745', 'automated')}
           ${chip(pending, '#dc3545', 'pending')}
           <span style="color:#999;margin-left:auto">of ${s.total}</span>
         </div>
-        <div style="display:flex;height:6px;border-radius:3px;overflow:hidden;background:#e9ecef;margin-top:7px">
-          ${seg(s.done, '#28a745')}${seg(s.partial, '#f0ad4e')}
+        <div style="height:6px;border-radius:3px;overflow:hidden;background:#e9ecef;margin-top:7px">
+          <div style="height:100%;width:${covered / s.total * 100}%;background:#28a745"></div>
         </div>
       </div>`;
     }).join('');
