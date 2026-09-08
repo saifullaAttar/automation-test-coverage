@@ -179,6 +179,11 @@ tr:hover{background:#f8f9ff;transition:background .2s}
     <div id="riskList"></div>
   </div>
   <div id="arabicPanel" class="section" style="margin-bottom:20px"></div>
+  <div id="unmappedNotice" class="protected" style="display:none;background:#fff8e1;border:2px solid #ffc107;border-radius:10px;padding:16px;margin-bottom:20px">
+    <h3 style="margin:0 0 8px;color:#f57c00">🔗 Automated tests not linked to any TestMO case</h3>
+    <div id="unmappedList"></div>
+  </div>
+
   <div id="flagPanel" class="section protected" style="margin-bottom:20px"></div>
   <div class="section" style="margin-bottom:20px">
     <h2>🏁 FALCON Regression Run History</h2>
@@ -272,11 +277,6 @@ tr:hover{background:#f8f9ff;transition:background .2s}
       its Evidence column records that.
     </p>
     <div class="folder-breakdown" id="folderBreakdown"></div>
-  </div>
-
-  <div id="unmappedNotice" class="protected" style="display:none;background:#fff8e1;border:2px solid #ffc107;border-radius:10px;padding:16px;margin-bottom:20px">
-    <h3 style="margin:0 0 8px;color:#f57c00">🔗 Automated tests not linked to any TestMO case</h3>
-    <div id="unmappedList"></div>
   </div>
 
   <div class="footer">
@@ -741,22 +741,38 @@ function renderFlagPanel() {
   const rec = DATA.flag_reconciliation;
   const panel = document.getElementById('flagPanel');
   if (!rec) { panel.style.display = 'none'; return; }
-  const groups = [
-    ['no_but_automated', 'Flagged NO but fully automated — flip to YES', '#28a745'],
-    ['yes_but_none', 'Flagged YES but nothing covers it — flip to NO', '#dc3545'],
-    ['yes_but_partial', 'Flagged YES but only partially automated', '#f0ad4e'],
-    ['not_planned_but_automated', 'Marked Not planned but already automated — re-flag to bring into scope', '#667eea'],
+  // Two different things were listed under one "corrections to make" heading.
+  // Only the first two groups are flag errors. A case flagged YES that is
+  // automated but carries a documented gap is correctly flagged — listing it as
+  // a correction implied the flag was wrong. And "already automated" overstated
+  // the last group, where some cases are automated with gaps rather than fully.
+  const CORRECTIONS = [
+    ['no_but_automated', 'Flagged NO, but fully automated — should be YES', '#28a745',
+     'The case is automated end to end, so the flag understates it.'],
+    ['yes_but_none', 'Flagged YES, but nothing covers it — should be NO', '#dc3545',
+     'No automated test maps to this case, so the flag overstates it. It is counted in the denominator today.'],
   ];
-  const rows = groups.map(([key, title, colour]) => {
+  const CONTEXT = [
+    ['not_planned_but_automated', 'Marked Not planned, but has automation mapped', '#667eea',
+     'Excluded from every percentage by the scope rule, yet automation exists. Re-flagging these to YES or NO brings them into scope.'],
+    ['yes_but_partial', 'Flagged YES and automated, with a documented gap', '#f0ad4e',
+     'The flag is right — these are automated. Listed only so the gap is visible; each case states it in its Evidence column.'],
+  ];
+  const render = defs => defs.map(([key, title, colour, why]) => {
     const items = [...(rec.web?.[key] || []).map(e => ({...e, plat: 'mWEB'})),
                    ...(rec.app?.[key] || []).map(e => ({...e, plat: 'App'}))];
     if (!items.length) return '';
     return `<div style="margin-bottom:14px">
-      <h3 style="font-size:.9em;color:${colour};margin-bottom:6px">${title} <span style="color:#888;font-weight:400">(${items.length})</span></h3>
+      <h3 style="font-size:.9em;color:${colour};margin-bottom:2px">${title} <span style="color:#888;font-weight:400">(${items.length})</span></h3>
+      <p style="font-size:.8em;color:#777;margin:0 0 6px">${why}</p>
       ${items.map(e => `<div style="padding:5px 10px;margin:3px 0;background:#fff;border-left:3px solid ${colour};border-radius:3px;font-size:.82em">
-        <span style="color:#888">${e.plat}</span> <strong>C-${e.case_id}</strong> ${e.name}</div>`).join('')}
+        <span style="color:#888">${e.plat}</span> <strong>C-${e.case_id}</strong> ${e.name}
+        <span style="color:#999">— ${({full:'automated', partial:'automated, with a noted gap', none:'not automated'})[e.status] || e.status}</span></div>`).join('')}
     </div>`;
   }).join('');
+  const corrections = render(CORRECTIONS);
+  const context = render(CONTEXT);
+  const nCorrections = CORRECTIONS.reduce((n, [k]) => n + (rec.web?.[k] || []).length + (rec.app?.[k] || []).length, 0);
   panel.style.display = '';
   const pj = DATA.metadata.projection;
   const now = DATA.metadata.coverage;
@@ -778,9 +794,18 @@ function renderFlagPanel() {
         Nothing here is applied to them: A and C are TestMO flag decisions, and B would mean inventing case ids.</p>
     </div>` : '';
 
-  panel.innerHTML = `<h2>🏷️ TestMO “Automated” flag — corrections to make</h2>
-    <p style="color:#666;font-size:.85em;margin:8px 0 14px">The flag decides which cases count towards coverage, so these disagreements between TestMO and the code are worth fixing in TestMO.</p>
-    ${banner}${rows}`;
+  panel.innerHTML = `<h2>🏷️ TestMO “Automated” flag vs the code</h2>
+    <p style="color:#666;font-size:.85em;margin:8px 0 14px">
+      The flag decides which cases count towards coverage: <code>YES</code> and <code>NO</code> are in scope,
+      <code>Not planned</code> is excluded. So a wrong flag moves the percentage.
+      <strong>${nCorrections} flag${nCorrections === 1 ? '' : 's'} disagree with the code</strong> and are worth changing in TestMO;
+      the rest of this panel is context, not a correction.
+    </p>
+    ${banner}
+    <h3 style="font-size:.95em;margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid #e2e1dc">Corrections — the flag is wrong</h3>
+    ${corrections || '<p style="font-size:.85em;color:#777">None — every flag matches the code.</p>'}
+    <h3 style="font-size:.95em;margin:20px 0 8px;padding-bottom:4px;border-bottom:1px solid #e2e1dc">Context — the flag is defensible</h3>
+    ${context || '<p style="font-size:.85em;color:#777">Nothing to note.</p>'}`;
 }
 
 // Shared autocomplete over the real test inventory. It inserts platform-qualified

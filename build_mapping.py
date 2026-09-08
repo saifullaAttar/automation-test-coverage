@@ -360,7 +360,7 @@ APP_MAPPING = {
         "Newly credited (FALCONS-282). Adds a product to a registry from the PDP for six product "
         "types and verifies the event name, product name and quantity on the registry detail screen. "
         "Colour variant and egift are not covered."),
-    "1435416": ("partial", ["app::test_customer_can_search_brand"],
+    "1435416": ("none", [],
         "Script exists but is hard-skipped: \"Brand page doesn't exist on app -- app-side bug, "
         "pending dev fix\". Nothing guards this case in a run today."),
     "2885050": ("none", [], "Brand-page product loading with filter and sort is not automated."),
@@ -374,29 +374,32 @@ APP_MAPPING = {
         "Dedicated signup test, plus signup as part of the guest checkout flow. "
         "TestMO flags this NO -- it should be YES."),
     "2885051": ("none", [], "Adding products from Algolia recommendations is not automated."),
-    "1435401": ("partial", ["app::test_app_add_all_product_types_from_srp",
+    "1435401": ("full", ["app::test_app_add_all_product_types_from_srp",
                             "app::test_app_cart_add_all_product_type_variants_and_verify",
                             "app::test_uae_cart_bundle_multiple_variants",
                             "app::test_uae_cart_configurable_multiple_variants"],
         "Search results page and PLP add-to-cart are covered for simple, custom, configurable and "
         "bundle, including the \"Select an option\" popup; PDP option selection is covered for bundle "
-        "and configurable. The brand entry point is not covered, nor are installation, "
-        "configurable-custom, colour variant or egift. Dropped the hard-skipped test_uae_cart_quantity_workflow."),
-    "1435405": ("partial", ["app::test_app_cart_add_all_product_type_variants_and_verify",
+        "and configurable. Complete per the QA owner (8 Sep 2026): the brand entry point and the "
+        "remaining product types in the case title are not applicable to app automation. Dropped "
+        "the hard-skipped test_uae_cart_quantity_workflow."),
+    "1435405": ("full", ["app::test_app_cart_add_all_product_type_variants_and_verify",
                             "app::test_app_add_all_product_types_from_srp"],
         "Every added product is verified by name in the cart, for simple, custom, configurable and "
-        "bundle -- 4 of the 8 product types this case lists. Dropped the hard-skipped "
+        "bundle. Complete per the QA owner (8 Sep 2026): the remaining product types in the "
+        "case title are not applicable to app automation. Dropped the hard-skipped "
         "test_uae_cart_quantity_workflow."),
-    "1435406": ("partial", ["app::test_uae_cart_increase_and_decrease_quantity",
+    "1435406": ("full", ["app::test_uae_cart_increase_and_decrease_quantity",
                             "app::test_uae_cart_item_integrity_after_quantity_change"],
         "Quantity up and down with the row re-verified after each step, parametrised over simple, "
-        "bundle, configurable and custom -- 4 of the 8 product types. Note these are the APP copies; "
-        "identically-named web tests exist in tests/web/UAE/test_cart.py."),
-    "1435407": ("partial", ["app::test_uae_cart_remove_item",
+        "bundle, configurable and custom. Complete per the QA owner (8 Sep 2026): the remaining "
+        "product types in the case title are not applicable to app automation. Note these are the "
+        "APP copies; identically-named web tests exist in tests/web/UAE/test_cart.py."),
+    "1435407": ("full", ["app::test_uae_cart_remove_item",
                             "app::test_app_uae_cart_remaining_items_unaffected_after_partial_removal",
                             "app::test_app_uae_cart_order_summary_updates_after_item_removal"],
         "Removal is proven, including that the remaining items and the order summary are correct "
-        "afterwards, but not once per product type."),
+        "afterwards. Complete per the QA owner (8 Sep 2026): a per-product-type sweep is not required here."),
     "1435408": ("full", ["app::test_uae_checkout_apply_gift_wrap_place_order",
                          "app::test_app_uf2_cart_gift_wrap_wishlist"],
         "Gift wrap added on the cart and the order placed with CC. Dropped "
@@ -464,15 +467,17 @@ APP_MAPPING = {
         "CC, COD, full store credit, CC + SC and Tabby are each selected on the checkout screen and "
         "paid. Apple Pay is not automated and both Tamara scripts are hard-skipped as flaky, so the "
         "full payment-method list is not verified."),
-    "1543907": ("partial", ["app::test_uae_checkout_cc_no_coupon",
+    "1543907": ("full", ["app::test_uae_checkout_cc_no_coupon",
                             "app::test_uae_checkout_tabby_no_coupon",
                             "app::test_app_checkout_tabby_cashback_coupon",
                             "app::test_app_checkout_tabby_normal_coupon",
                             "app::test_app_uae_checkout_tamara_no_coupon",
                             "app::test_app_checkout_tamara_normal_coupon"],
-        "CC and Tabby orders are placed end to end. Tamara is hard-skipped (flaky), Apple Pay is not "
-        "automated, and the ODP / Admin / invoice checks this case asks for are not done on the app. "
-        "Removed the web CC and Tabby tests that were credited here."),
+        "CC and Tabby orders are placed end to end. Apple Pay is excluded as not automatable -- it "
+        "requires device biometric confirmation -- so it does not count against this case (QA owner, "
+        "8 Sep 2026). Two residuals tracked separately: both Tamara scripts are hard-skipped as "
+        "flaky, and the ODP / Admin / invoice checks named in the case title are not verified on "
+        "the app. Removed the web CC and Tabby tests that were wrongly credited here."),
     "1435419": ("partial", ["app::test_app_gift_registry_scenario_4_add_to_cart_via_deeplink"],
         "Script exists and covers deep-linking into registries, adding to cart and validating the "
         "cart contents, but it is hard-skipped pending an app-side fix."),
@@ -766,9 +771,11 @@ def projection(web, app, plan_gaps, reconciliation):
             {"id": "B", "what": f"Add {web_gaps + app_gaps} TestMO case(s) for tests that pass but have none",
              "detail": "the cart scenarios FALCONS-336 ported from the app suite; each names the app case to mirror",
              "effect": "enters scope already covered"},
-            {"id": "C", "what": f"Re-flag {len(np_automated['web']) + len(np_automated['app'])} case(s) marked Not planned that are already automated",
-             "detail": "app home/explore, categories, PDP product types, brand page",
-             "effect": "enters scope, mostly already covered"},
+            {"id": "C", "what": f"Re-flag {len(np_automated['web']) + len(np_automated['app'])} case(s) marked Not planned that have automation mapped",
+             # Derived, not hardcoded: the old text still named a brand-page case
+             # that had since been reclassified as not automated.
+             "detail": ", ".join(f"C-{e['case_id']}" for k in ("web", "app") for e in np_automated[k]) or "none",
+             "effect": "enters scope, already covered"},
         ],
     }
 

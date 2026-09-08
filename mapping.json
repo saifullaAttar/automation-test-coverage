@@ -3481,12 +3481,10 @@
       "tags": "",
       "source": "release_check",
       "run_id": 2192,
-      "automated_tests": [
-        "app::test_customer_can_search_brand"
-      ],
-      "coverage_status": "partial",
+      "automated_tests": [],
+      "coverage_status": "none",
       "notes": "Script exists but is hard-skipped: \"Brand page doesn't exist on app -- app-side bug, pending dev fix\". Nothing guards this case in a run today.",
-      "skipped_only": true,
+      "skipped_only": false,
       "locales": [
         "en"
       ]
@@ -3657,8 +3655,8 @@
         "app::test_uae_cart_bundle_multiple_variants",
         "app::test_uae_cart_configurable_multiple_variants"
       ],
-      "coverage_status": "partial",
-      "notes": "Search results page and PLP add-to-cart are covered for simple, custom, configurable and bundle, including the \"Select an option\" popup; PDP option selection is covered for bundle and configurable. The brand entry point is not covered, nor are installation, configurable-custom, colour variant or egift. Dropped the hard-skipped test_uae_cart_quantity_workflow.",
+      "coverage_status": "full",
+      "notes": "Search results page and PLP add-to-cart are covered for simple, custom, configurable and bundle, including the \"Select an option\" popup; PDP option selection is covered for bundle and configurable. Complete per the QA owner (8 Sep 2026): the brand entry point and the remaining product types in the case title are not applicable to app automation. Dropped the hard-skipped test_uae_cart_quantity_workflow.",
       "skipped_only": false,
       "locales": [
         "en",
@@ -3688,8 +3686,8 @@
         "app::test_app_cart_add_all_product_type_variants_and_verify",
         "app::test_app_add_all_product_types_from_srp"
       ],
-      "coverage_status": "partial",
-      "notes": "Every added product is verified by name in the cart, for simple, custom, configurable and bundle -- 4 of the 8 product types this case lists. Dropped the hard-skipped test_uae_cart_quantity_workflow.",
+      "coverage_status": "full",
+      "notes": "Every added product is verified by name in the cart, for simple, custom, configurable and bundle. Complete per the QA owner (8 Sep 2026): the remaining product types in the case title are not applicable to app automation. Dropped the hard-skipped test_uae_cart_quantity_workflow.",
       "skipped_only": false,
       "locales": [
         "en",
@@ -3719,8 +3717,8 @@
         "app::test_uae_cart_increase_and_decrease_quantity",
         "app::test_uae_cart_item_integrity_after_quantity_change"
       ],
-      "coverage_status": "partial",
-      "notes": "Quantity up and down with the row re-verified after each step, parametrised over simple, bundle, configurable and custom -- 4 of the 8 product types. Note these are the APP copies; identically-named web tests exist in tests/web/UAE/test_cart.py.",
+      "coverage_status": "full",
+      "notes": "Quantity up and down with the row re-verified after each step, parametrised over simple, bundle, configurable and custom. Complete per the QA owner (8 Sep 2026): the remaining product types in the case title are not applicable to app automation. Note these are the APP copies; identically-named web tests exist in tests/web/UAE/test_cart.py.",
       "skipped_only": false,
       "locales": [
         "en",
@@ -3751,8 +3749,8 @@
         "app::test_app_uae_cart_remaining_items_unaffected_after_partial_removal",
         "app::test_app_uae_cart_order_summary_updates_after_item_removal"
       ],
-      "coverage_status": "partial",
-      "notes": "Removal is proven, including that the remaining items and the order summary are correct afterwards, but not once per product type.",
+      "coverage_status": "full",
+      "notes": "Removal is proven, including that the remaining items and the order summary are correct afterwards. Complete per the QA owner (8 Sep 2026): a per-product-type sweep is not required here.",
       "skipped_only": false,
       "locales": [
         "en",
@@ -4238,8 +4236,8 @@
         "app::test_app_uae_checkout_tamara_no_coupon",
         "app::test_app_checkout_tamara_normal_coupon"
       ],
-      "coverage_status": "partial",
-      "notes": "CC and Tabby orders are placed end to end. Tamara is hard-skipped (flaky), Apple Pay is not automated, and the ODP / Admin / invoice checks this case asks for are not done on the app. Removed the web CC and Tabby tests that were credited here.",
+      "coverage_status": "full",
+      "notes": "CC and Tabby orders are placed end to end. Apple Pay is excluded as not automatable -- it requires device biometric confirmation -- so it does not count against this case (QA owner, 8 Sep 2026). Two residuals tracked separately: both Tamara scripts are hard-skipped as flaky, and the ODP / Admin / invoice checks named in the case title are not verified on the app. Removed the web CC and Tabby tests that were wrongly credited here.",
       "skipped_only": false,
       "locales": [
         "en"
@@ -7932,31 +7930,6 @@
           "case_id": "2885053",
           "name": "Verify user can login from gmail",
           "status": "partial"
-        },
-        {
-          "case_id": "1435401",
-          "name": "Verify user can add all product types from PLP, search, brand, PDP (Simple, custom , installation , configurable, configurable custom, colour variant  bundle, and egift )",
-          "status": "partial"
-        },
-        {
-          "case_id": "1435405",
-          "name": "Verify product list in cart - All product types",
-          "status": "partial"
-        },
-        {
-          "case_id": "1435406",
-          "name": "Verify user can update product qty  on cart-All product types",
-          "status": "partial"
-        },
-        {
-          "case_id": "1435407",
-          "name": "Verify user can remove products from cart -All product types",
-          "status": "partial"
-        },
-        {
-          "case_id": "1543907",
-          "name": "Place Tamara, Tabby, Apple pay and CC orders - check ODP, Admin and invoice",
-          "status": "partial"
         }
       ],
       "not_planned_but_automated": [
@@ -7974,11 +7947,6 @@
           "case_id": "1435391",
           "name": "Verify PDP for all product types (Simple, custom , installation , configurable, configurable custom , colour variant  bundle, and egift )",
           "status": "partial"
-        },
-        {
-          "case_id": "1435416",
-          "name": "Verify brand name and logo in brand page",
-          "status": "partial"
         }
       ]
     }
@@ -7989,6 +7957,7 @@
     "app::test_app_cart_existing_user_orders_no_coupon_yalla",
     "app::test_app_cart_guest_login_no_coupon_sc",
     "app::test_app_gift_registry_create_from_my_registries",
+    "app::test_customer_can_search_brand",
     "app::test_uae_cart_move_to_wishlist",
     "app::test_uae_cart_quantity_workflow",
     "app::test_uae_checkout_invalid_cc_no_coupon",
@@ -8118,7 +8087,7 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-08",
-    "generated_at": "2026-09-08T14:07:40+00:00",
+    "generated_at": "2026-09-08T16:50:27+00:00",
     "source_sha": "bb4c777",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
@@ -8151,20 +8120,20 @@
         "total": 48,
         "in_scope": 29,
         "out_of_scope": 19,
-        "full": 10,
-        "partial": 13,
+        "full": 15,
+        "partial": 8,
         "covered": 23,
         "none": 6,
         "pct": 79,
-        "pct_full": 34
+        "pct_full": 52
       },
       "combined": {
         "in_scope": 84,
-        "full": 42,
-        "partial": 18,
+        "full": 47,
+        "partial": 13,
         "covered": 60,
         "pct": 71,
-        "pct_full": 50
+        "pct_full": 56
       },
       "web_by_source": {
         "other_group": {
@@ -8198,13 +8167,13 @@
         "pct": 74
       },
       "app": {
-        "in_scope": 36,
-        "covered": 30,
+        "in_scope": 35,
+        "covered": 29,
         "pct": 83
       },
       "combined": {
-        "in_scope": 102,
-        "covered": 79,
+        "in_scope": 101,
+        "covered": 78,
         "pct": 77
       },
       "actions": [
@@ -8222,9 +8191,9 @@
         },
         {
           "id": "C",
-          "what": "Re-flag 4 case(s) marked Not planned that are already automated",
-          "detail": "app home/explore, categories, PDP product types, brand page",
-          "effect": "enters scope, mostly already covered"
+          "what": "Re-flag 3 case(s) marked Not planned that have automation mapped",
+          "detail": "C-1435389, C-1435425, C-1435391",
+          "effect": "enters scope, already covered"
         }
       ]
     },
@@ -8249,9 +8218,9 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 23,
+    "unmapped_count": 24,
     "plan_gap_count": 15,
-    "unmapped_and_skipped": 8,
+    "unmapped_and_skipped": 9,
     "arabic_ready_tests": 115
   }
 }
