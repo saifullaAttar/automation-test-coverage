@@ -1,5 +1,6 @@
 [
   {
+    "_exported": "2026-08-12",
     "case_id": "1435389",
     "test_id": "",
     "name": "Verify home page is loading",
@@ -16,6 +17,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435417",
     "test_id": "",
     "name": "Verify home page  banners are loading",
@@ -32,6 +34,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435425",
     "test_id": "",
     "name": "Verify user can access categories from home page on UAE/KSA/GCC/International store",
@@ -48,6 +51,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435426",
     "test_id": "",
     "name": "Verify user can access collections from home page on UAE/KSA/GCC/International store",
@@ -64,6 +68,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435390",
     "test_id": "",
     "name": "Categories tab - Verify categories L1,L2 and L3 are loading",
@@ -80,6 +85,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435404",
     "test_id": "",
     "name": "Verify customer can apply filter and sort on PLP",
@@ -96,6 +102,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435391",
     "test_id": "",
     "name": "Verify PDP for all product types (Simple, custom , installation , configurable, configurable custom , colour variant  bundle, and egift )",
@@ -112,6 +119,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "2884189",
     "test_id": "",
     "name": "Verify the user is able to submit a review",
@@ -128,6 +136,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "2884190",
     "test_id": "",
     "name": "Verify reviews and ratings in PDP",
@@ -144,6 +153,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435418",
     "test_id": "",
     "name": "Verify user can add items to GR - All product types (Simple, custom , installation , configurable, configurable custom, colour variant  bundle, and egift )",
@@ -160,6 +170,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435416",
     "test_id": "",
     "name": "Verify brand name and logo in brand page",
@@ -176,6 +187,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "2885050",
     "test_id": "",
     "name": "Verify products are loading , and applying filter and sort",
@@ -192,6 +204,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "2885052",
     "test_id": "",
     "name": "Verify user can login from login form",
@@ -208,6 +221,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "2885053",
     "test_id": "",
     "name": "Verify user can login from gmail",
@@ -224,6 +238,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435392",
     "test_id": "",
     "name": "Verify new user registration",
@@ -240,6 +255,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "2885051",
     "test_id": "",
     "name": "Verify user can add all product types from algolia recommendations (Simple, custom , installation , configurable, configurable custom, colour variant  bundle, and egift )",
@@ -256,6 +272,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435401",
     "test_id": "",
     "name": "Verify user can add all product types from PLP, search, brand, PDP (Simple, custom , installation , configurable, configurable custom, colour variant  bundle, and egift )",
@@ -272,6 +289,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435405",
     "test_id": "",
     "name": "Verify product list in cart - All product types",
@@ -288,6 +306,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435406",
     "test_id": "",
     "name": "Verify user can update product qty  on cart-All product types",
@@ -304,6 +323,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435407",
     "test_id": "",
     "name": "Verify user can remove products from cart -All product types",
@@ -320,6 +340,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435408",
     "test_id": "",
     "name": "Verify user can apply GW to products",
@@ -336,6 +357,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435409",
     "test_id": "",
     "name": "Verify user can apply and remove coupon on cart",
@@ -352,6 +374,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435393",
     "test_id": "",
     "name": "Verify existing user can access their profile",
@@ -368,6 +391,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435394",
     "test_id": "",
     "name": "Verify existing user can access order list and order details page",
@@ -384,6 +408,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435395",
     "test_id": "",
     "name": "Verify wishlist loading for existing customer",
@@ -400,6 +425,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435396",
     "test_id": "",
     "name": "Verify user can add all product types to wishlist from cart, PLP and PDP",
@@ -416,6 +442,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435397",
     "test_id": "",
     "name": "Verify user can remove all product types from wishlist",
@@ -432,6 +459,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435398",
     "test_id": "",
     "name": "Verify user can access wallet page",
@@ -448,6 +476,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435400",
     "test_id": "",
     "name": "Verify user can add, update and delete address",
@@ -464,6 +493,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435402",
     "test_id": "",
     "name": "Verify customer can search  for products",
@@ -480,6 +510,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435403",
     "test_id": "",
     "name": "Verify customer can apply filter and sort on search page",
@@ -496,6 +527,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1543903",
     "test_id": "",
     "name": "Verify user can apply and remove SC",
@@ -512,6 +544,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1543904",
     "test_id": "",
     "name": "Verify order summary in cart",
@@ -528,6 +561,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1543905",
     "test_id": "",
     "name": "Verify shipping address on checkout page",
@@ -544,6 +578,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1543906",
     "test_id": "",
     "name": "Verify payment methods on checkout page",
@@ -560,6 +595,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1543907",
     "test_id": "",
     "name": "Place Tamara, Tabby, Apple pay and CC orders - check ODP, Admin and invoice",
@@ -576,6 +612,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435419",
     "test_id": "",
     "name": "Verify GR cart and proceed to checkout",
@@ -592,6 +629,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435420",
     "test_id": "",
     "name": "Verify multiple carts and proceed to checkout",
@@ -608,6 +646,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1543957",
     "test_id": "",
     "name": "Verify cart merge guest > existing user with items",
@@ -624,6 +663,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1543908",
     "test_id": "",
     "name": "Verify Algolia recommendations across all screens",
@@ -640,6 +680,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1435415",
     "test_id": "",
     "name": "Close / reopen the app",
@@ -656,6 +697,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1543946",
     "test_id": "",
     "name": "Verify deeplinks external/email/banners",
@@ -672,6 +714,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "1543948",
     "test_id": "",
     "name": "Verify PN and in-app notifications with app open",
@@ -688,6 +731,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "2282943",
     "test_id": "",
     "name": "Verify PN and in-app notifications with app killed",
@@ -704,6 +748,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "2282944",
     "test_id": "",
     "name": "Verify PN and in-app notifications with app in the background",
@@ -720,6 +765,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "2673949",
     "test_id": "",
     "name": "Verify Maya is loading and user can navigate to PDP - All product types",
@@ -736,6 +782,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "2673950",
     "test_id": "",
     "name": "Verify Maya is loading and user can add items to cart - All product types",
@@ -752,6 +799,7 @@
     "tags": ""
   },
   {
+    "_exported": "2026-08-12",
     "case_id": "2673956",
     "test_id": "",
     "name": "Verify GTM events is triggered (sign-in, sign-up, ATC, and search)",

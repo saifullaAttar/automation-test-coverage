@@ -1,6 +1,7 @@
 {
   "testmo_tests": [
     {
+      "_exported": "2026-06-25",
       "case_id": "1018731",
       "test_id": "14641247",
       "name": "Country and City detection for logged in user with one default address",
@@ -26,6 +27,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018732",
       "test_id": "14641248",
       "name": "Country and City detection for logged in user with multiple saved address",
@@ -51,6 +53,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018733",
       "test_id": "14641249",
       "name": "Country and City for logged in user with no saved address / Guest User",
@@ -76,6 +79,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018736",
       "test_id": "14641252",
       "name": "Switching Country/Website by logged in/Guest user",
@@ -101,6 +105,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018734",
       "test_id": "14641250",
       "name": "Switching Language store by logged in / guest user",
@@ -126,6 +131,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018735",
       "test_id": "14641251",
       "name": "Switching currency from different pages by logged in and guest user",
@@ -151,6 +157,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1548291",
       "test_id": "14641264",
       "name": "Check Sale Page for correct applying Filters (Category, Brand, Price) and mweb",
@@ -176,6 +183,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1548292",
       "test_id": "14641265",
       "name": "Check Category Page for correct applying Filters (Category, Brand, Price)",
@@ -201,6 +209,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1548293",
       "test_id": "14641266",
       "name": "Check Brand Page for correct applying Filters (Category, Price)",
@@ -226,6 +235,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018743",
       "test_id": "14641253",
       "name": "Product regular price and tax  on PLP,  PDP and search page",
@@ -252,6 +262,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018744",
       "test_id": "14641254",
       "name": "Discount on PLP, PDP and search page",
@@ -278,6 +289,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337052",
       "test_id": "14641291",
       "name": "New registration from registration popup",
@@ -307,6 +319,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337053",
       "test_id": "14641292",
       "name": "New registration from cart page",
@@ -341,6 +354,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337055",
       "test_id": "14641293",
       "name": "Log into using existing customer account from login pop",
@@ -372,6 +386,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337057",
       "test_id": "14641295",
       "name": "Log into using existing customer account from cart page",
@@ -404,6 +419,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337056",
       "test_id": "14641294",
       "name": "Sign out from account",
@@ -438,6 +454,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018723",
       "test_id": "14641246",
       "name": "Login cross different platforms",
@@ -464,6 +481,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337058",
       "test_id": "14641296",
       "name": "Reset an existing user password using Forgot Password",
@@ -490,6 +508,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018709",
       "test_id": "14641235",
       "name": "Accessing My profile page by users",
@@ -519,6 +538,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018710",
       "test_id": "14641236",
       "name": "Editing account info details",
@@ -545,6 +565,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1230430",
       "test_id": "14641263",
       "name": "Delete Account",
@@ -570,6 +591,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018706",
       "test_id": "14641232",
       "name": "My Orders section : New user / user with no orders",
@@ -596,6 +618,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018707",
       "test_id": "14641233",
       "name": "My orders section for user's with existing orders",
@@ -622,6 +645,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018708",
       "test_id": "14641234",
       "name": "Order details and order status in the My orders page",
@@ -651,6 +675,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018714",
       "test_id": "14641240",
       "name": "New user with no items added in the Wishlist",
@@ -681,6 +706,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018717",
       "test_id": "14641243",
       "name": "Delete products from wishlist",
@@ -711,6 +737,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018719",
       "test_id": "14641245",
       "name": "Existing user with orders & address in 1 country added to the Wishlist  Configurable, Custom and Bundle",
@@ -741,6 +768,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018715",
       "test_id": "14641241",
       "name": "Empty wallet without any transactions",
@@ -767,6 +795,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018716",
       "test_id": "14641242",
       "name": "Wallet after placing order with entire/portion Wallet amount",
@@ -798,6 +827,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018718",
       "test_id": "14641244",
       "name": "Wallet - Checking conversion based on currency rate after switching stores/currencies",
@@ -824,6 +854,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018711",
       "test_id": "14641237",
       "name": "New users with no saved addresses",
@@ -856,6 +887,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018712",
       "test_id": "14641238",
       "name": "Users updating saved address from address book",
@@ -886,6 +918,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018713",
       "test_id": "14641239",
       "name": "Users updating saved addresses from checkout page",
@@ -912,6 +945,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1125847",
       "test_id": "14641262",
       "name": "To verify for OTP on the customer profile page for new phone number",
@@ -937,6 +971,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337029",
       "test_id": "14641275",
       "name": "UF1 - Existing user with orders and 1 default address NO wallet/coupon applied and Yalla free shipping on the cart",
@@ -967,6 +1002,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337030",
       "test_id": "14641276",
       "name": "UF2-Newly registered  on Proceed to checkout user with no orders placed , no wallet and no coupons used and GW added",
@@ -998,6 +1034,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337022",
       "test_id": "14641270",
       "name": "UF3 - Guest (and login existing)  with multiple addresses in 1 country and wallet balance.",
@@ -1028,6 +1065,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337031",
       "test_id": "14641277",
       "name": "UF4- Add items in cart as a Newly registered user with No Wallet and Cashback coupon applied",
@@ -1058,6 +1096,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337032",
       "test_id": "14641278",
       "name": "UF5- Existing user retains the previously added items in the cart on login action after logging out for COD eligible items",
@@ -1088,6 +1127,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337033",
       "test_id": "14641279",
       "name": "UF6 - Checkout with cart items as a guest . Register a new user and use a coupon.",
@@ -1118,6 +1158,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337034",
       "test_id": "14641280",
       "name": "UF7- Checkout with cart items as a guest . Log onto an existing user with wallet balance.",
@@ -1148,6 +1189,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337023",
       "test_id": "14641271",
       "name": "UF-8 - Existing user with orders adding product with OOS product in the cart",
@@ -1174,6 +1216,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337024",
       "test_id": "14641272",
       "name": "UF-9 - Guest (and login existing) with low stock products",
@@ -1200,6 +1243,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337025",
       "test_id": "14641273",
       "name": "UF-10 Checkout -  Existing user with orders and Free gift",
@@ -1226,6 +1270,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2114394",
       "test_id": "14641267",
       "name": "UF-11 New user  and place ApplePay order from cart",
@@ -1251,6 +1296,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2114395",
       "test_id": "14641268",
       "name": "UF-12 Existing user with saved address and place ApplePay order from cart",
@@ -1276,6 +1322,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337026",
       "test_id": "14641274",
       "name": "Check free gift UI",
@@ -1302,6 +1349,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337036",
       "test_id": "14641281",
       "name": "Checkout- Apple pay",
@@ -1327,6 +1375,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337037",
       "test_id": "14641282",
       "name": "Checkout -  Credit card payment",
@@ -1360,6 +1409,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337038",
       "test_id": "14641283",
       "name": "Checkout -  Credit card and partial store credit",
@@ -1391,6 +1441,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337039",
       "test_id": "14641284",
       "name": "Checkout -  Cash on delivery and cashback rule",
@@ -1425,6 +1476,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337040",
       "test_id": "14641285",
       "name": "Checkout - No payment required",
@@ -1456,6 +1508,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337041",
       "test_id": "14641286",
       "name": "Checkout - Invalid transactions",
@@ -1488,6 +1541,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337042",
       "test_id": "14641287",
       "name": "Checkout - Applying both SC and coupon",
@@ -1520,6 +1574,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337043",
       "test_id": "14641288",
       "name": "Checkout - Tamara payment",
@@ -1554,6 +1609,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337044",
       "test_id": "14641289",
       "name": "Checkout - TABBY Payment",
@@ -1588,6 +1644,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337045",
       "test_id": "14641290",
       "name": "Exit Checkout Prompt Feature",
@@ -1614,6 +1671,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2283422",
       "test_id": "14641269",
       "name": "Checkout -  CC order from Admin - check ODP, Admin and invoice",
@@ -1639,6 +1697,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018758",
       "test_id": "14641255",
       "name": "Applying single use coupons in cart & checkout",
@@ -1670,6 +1729,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018759",
       "test_id": "14641256",
       "name": "Percentage of Product price discount rule",
@@ -1702,6 +1762,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018760",
       "test_id": "14641257",
       "name": "Percentage of Product price discount with variant",
@@ -1734,6 +1795,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018761",
       "test_id": "14641258",
       "name": "Bank discount",
@@ -1764,6 +1826,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018762",
       "test_id": "14641259",
       "name": "Fixed product price discount rule",
@@ -1790,6 +1853,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1084824",
       "test_id": "14641261",
       "name": "Multiple Tiered Discount rule",
@@ -1816,6 +1880,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337059",
       "test_id": "14641297",
       "name": "Gift Registry creation on My account ( My registries)  and PDP",
@@ -1845,6 +1910,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337061",
       "test_id": "14641299",
       "name": "Setup the Gift registry",
@@ -1873,6 +1939,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337060",
       "test_id": "14641298",
       "name": "Adding product  to GR",
@@ -1901,6 +1968,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337062",
       "test_id": "14641300",
       "name": "Add to cart GR products",
@@ -1929,6 +1997,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2337063",
       "test_id": "14641301",
       "name": "Checkout with GR",
@@ -1957,6 +2026,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "1018774",
       "test_id": "14641260",
       "name": "To check the registry after order placement",
@@ -1983,6 +2053,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2439692",
       "test_id": "14641302",
       "name": "Verify adding simple item from Admin",
@@ -2008,6 +2079,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2439693",
       "test_id": "14641303",
       "name": "Verify adding custom item from Admin",
@@ -2033,6 +2105,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2439697",
       "test_id": "14641307",
       "name": "Verify adding custom/installation item from Admin",
@@ -2058,6 +2131,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2439694",
       "test_id": "14641304",
       "name": "Verify adding configurable item from Admin",
@@ -2083,6 +2157,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2439695",
       "test_id": "14641305",
       "name": "Verify adding colour variant item from Admin",
@@ -2108,6 +2183,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2439696",
       "test_id": "14641306",
       "name": "Verify adding configurable custom item from Admin",
@@ -2133,6 +2209,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2439698",
       "test_id": "14641308",
       "name": "Verify adding bundle item with fix price from Admin",
@@ -2158,6 +2235,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2439699",
       "test_id": "14641309",
       "name": "Verify adding bundle item with dynamic price from Admin",
@@ -2183,6 +2261,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2439821",
       "test_id": "14641310",
       "name": "Verify adding qcom item",
@@ -2208,6 +2287,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2439822",
       "test_id": "14641311",
       "name": "Verify adding global item in KSA store",
@@ -2233,6 +2313,7 @@
       ]
     },
     {
+      "_exported": "2026-06-25",
       "case_id": "2439823",
       "test_id": "14641312",
       "name": "Verify adding cross boarder item in GCC store",
@@ -2258,6 +2339,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1018727",
       "test_id": "",
       "name": "To verify the customer can create return request, refund for a return request is created and refunded amount…",
@@ -2282,6 +2364,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1018728",
       "test_id": "",
       "name": "To verify the customer can create return request, refund for a return request is created and correct amount…",
@@ -2306,6 +2389,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1018729",
       "test_id": "",
       "name": "To verify the customer can create return request, refund for a return request is created and refunded amount…",
@@ -2330,6 +2414,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1018730",
       "test_id": "",
       "name": "To verify the customer can create return request and refund for a return request is created successfully",
@@ -2354,6 +2439,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1018738",
       "test_id": "",
       "name": "To verify the amount paid by SC is refunded correctly to the customer wallet To verify the amount paid by…",
@@ -2378,6 +2464,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1068131",
       "test_id": "",
       "name": "To setup the freshdesk and integrate it with Magento, This is needed every month",
@@ -2402,6 +2489,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1018739",
       "test_id": "",
       "name": "To verify the customer is able to create a return request, a credit memo is created for partial return and…",
@@ -2426,6 +2514,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1018741",
       "test_id": "",
       "name": "To verify the customer is able to create a return request with cashback applied, a credit memo is created for…",
@@ -2450,6 +2539,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1018740",
       "test_id": "",
       "name": "To verify the customer is able to create partial return request, CM for a return request is created and…",
@@ -2474,6 +2564,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1018742",
       "test_id": "",
       "name": "To verify the customer is able to cancel the order and amount is refunded to the customer in case of paid by…",
@@ -2498,6 +2589,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1018753",
       "test_id": "",
       "name": "To verify the customer can create return request and refund for a return request is created successfully",
@@ -2522,6 +2614,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1338010",
       "test_id": "",
       "name": "To verify the amount paid by SC is refunded correctly to the customer wallet To verify the amount paid by…",
@@ -2546,6 +2639,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1018754",
       "test_id": "",
       "name": "To verify the amount paid by SC is refunded correctly to the customer wallet To verify the amount paid by…",
@@ -2570,6 +2664,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1018752",
       "test_id": "",
       "name": "To verify the customer can create return request, refund for a return request is created and refunded amount…",
@@ -2594,6 +2689,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1134058",
       "test_id": "",
       "name": "To verify the customer can create return request and refund for a return request is created successfully",
@@ -2618,6 +2714,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1018737",
       "test_id": "",
       "name": "To check the shipment tracking details in order details page",
@@ -2642,6 +2739,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1134258",
       "test_id": "",
       "name": "Verify that PDP is displayed correctly according to new PDP revamp design",
@@ -2666,6 +2764,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1134263",
       "test_id": "",
       "name": "Verify that PDP is displayed correctly according to new PDP revamp design To verify low stock in PLPs (Brand,…",
@@ -2690,6 +2789,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1189135",
       "test_id": "",
       "name": "To check that the design of the apple pay & checkout button on the cart page are updated & switched the…",
@@ -2714,6 +2814,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1189136",
       "test_id": "",
       "name": "To verify that free gift ui appeared according to the design…",
@@ -2738,6 +2839,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1230096",
       "test_id": "",
       "name": "https://www.figma.com/file/JK5bcuA9mNbkN6tbGxrCD5/E-commerce-(App%2Bweb)?type=design&node-id=727-13074&mode=de…",
@@ -2762,6 +2864,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1230898",
       "test_id": "",
       "name": "Verify that order track revamp is displayed correctly according to new order revamp design check for shipment…",
@@ -2786,6 +2889,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1189112",
       "test_id": "",
       "name": "Check that signing up produces an event in Clevertap",
@@ -2810,6 +2914,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1189108",
       "test_id": "",
       "name": "Check that a user logging in sends an event to Clevertap",
@@ -2834,6 +2939,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1189114",
       "test_id": "",
       "name": "",
@@ -2858,6 +2964,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1189115",
       "test_id": "",
       "name": "Check that the event is sent when adding an item to the shopping cart",
@@ -2882,6 +2989,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1189116",
       "test_id": "",
       "name": "",
@@ -2906,6 +3014,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1189117",
       "test_id": "",
       "name": "",
@@ -2930,6 +3039,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1189118",
       "test_id": "",
       "name": "Check that an order placed shows the Charged Event in Cevertap correctly",
@@ -2954,6 +3064,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1189109",
       "test_id": "",
       "name": "",
@@ -2978,6 +3089,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1189110",
       "test_id": "",
       "name": "",
@@ -3002,6 +3114,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1189134",
       "test_id": "",
       "name": "Check that the push notifications are pushed correctly when the conditions are satisfied",
@@ -3026,6 +3139,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1189111",
       "test_id": "",
       "name": "",
@@ -3050,6 +3164,7 @@
       ]
     },
     {
+      "_exported": "2026-09-06",
       "case_id": "1189113",
       "test_id": "",
       "name": "",
@@ -3076,6 +3191,7 @@
   ],
   "app_testmo_tests": [
     {
+      "_exported": "2026-08-12",
       "case_id": "1435389",
       "test_id": "14772234",
       "name": "Verify home page is loading",
@@ -3103,6 +3219,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435417",
       "test_id": "14772256",
       "name": "Verify home page  banners are loading",
@@ -3128,6 +3245,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435425",
       "test_id": "14772260",
       "name": "Verify user can access categories from home page on UAE/KSA/GCC/International store",
@@ -3155,6 +3273,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435426",
       "test_id": "14772261",
       "name": "Verify user can access collections from home page on UAE/KSA/GCC/International store",
@@ -3180,6 +3299,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435390",
       "test_id": "14772235",
       "name": "Categories tab - Verify categories L1,L2 and L3 are loading",
@@ -3206,6 +3326,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435404",
       "test_id": "14772248",
       "name": "Verify customer can apply filter and sort on PLP",
@@ -3232,6 +3353,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435391",
       "test_id": "14772236",
       "name": "Verify PDP for all product types (Simple, custom , installation , configurable, configurable custom , colour variant  bundle, and egift )",
@@ -3260,6 +3382,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "2884189",
       "test_id": "",
       "name": "Verify the user is able to submit a review",
@@ -3285,6 +3408,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "2884190",
       "test_id": "",
       "name": "Verify reviews and ratings in PDP",
@@ -3309,6 +3433,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435418",
       "test_id": "14772257",
       "name": "Verify user can add items to GR - All product types (Simple, custom , installation , configurable, configurable custom, colour variant  bundle, and egift )",
@@ -3339,6 +3464,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435416",
       "test_id": "14772255",
       "name": "Verify brand name and logo in brand page",
@@ -3366,6 +3492,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "2885050",
       "test_id": "",
       "name": "Verify products are loading , and applying filter and sort",
@@ -3391,6 +3518,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "2885052",
       "test_id": "",
       "name": "Verify user can login from login form",
@@ -3420,6 +3548,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "2885053",
       "test_id": "",
       "name": "Verify user can login from gmail",
@@ -3448,6 +3577,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435392",
       "test_id": "14772237",
       "name": "Verify new user registration",
@@ -3478,6 +3608,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "2885051",
       "test_id": "",
       "name": "Verify user can add all product types from algolia recommendations (Simple, custom , installation , configurable, configurable custom, colour variant  bundle, and egift )",
@@ -3502,6 +3633,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435401",
       "test_id": "14772245",
       "name": "Verify user can add all product types from PLP, search, brand, PDP (Simple, custom , installation , configurable, configurable custom, colour variant  bundle, and egift )",
@@ -3534,6 +3666,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435405",
       "test_id": "14772249",
       "name": "Verify product list in cart - All product types",
@@ -3564,6 +3697,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435406",
       "test_id": "14772250",
       "name": "Verify user can update product qty  on cart-All product types",
@@ -3594,6 +3728,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435407",
       "test_id": "14772251",
       "name": "Verify user can remove products from cart -All product types",
@@ -3625,6 +3760,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435408",
       "test_id": "14772252",
       "name": "Verify user can apply GW to products",
@@ -3655,6 +3791,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435409",
       "test_id": "14772253",
       "name": "Verify user can apply and remove coupon on cart",
@@ -3688,6 +3825,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435393",
       "test_id": "14772238",
       "name": "Verify existing user can access their profile",
@@ -3717,6 +3855,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435394",
       "test_id": "14772239",
       "name": "Verify existing user can access order list and order details page",
@@ -3742,6 +3881,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435395",
       "test_id": "14772240",
       "name": "Verify wishlist loading for existing customer",
@@ -3771,6 +3911,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435396",
       "test_id": "14772241",
       "name": "Verify user can add all product types to wishlist from cart, PLP and PDP",
@@ -3800,6 +3941,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435397",
       "test_id": "14772242",
       "name": "Verify user can remove all product types from wishlist",
@@ -3826,6 +3968,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435398",
       "test_id": "14772243",
       "name": "Verify user can access wallet page",
@@ -3851,6 +3994,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435400",
       "test_id": "14772244",
       "name": "Verify user can add, update and delete address",
@@ -3881,6 +4025,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435402",
       "test_id": "14772246",
       "name": "Verify customer can search  for products",
@@ -3911,6 +4056,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435403",
       "test_id": "14772247",
       "name": "Verify customer can apply filter and sort on search page",
@@ -3937,6 +4083,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1543903",
       "test_id": "14772262",
       "name": "Verify user can apply and remove SC",
@@ -3967,6 +4114,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1543904",
       "test_id": "14772263",
       "name": "Verify order summary in cart",
@@ -3998,6 +4146,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1543905",
       "test_id": "14772264",
       "name": "Verify shipping address on checkout page",
@@ -4028,6 +4177,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1543906",
       "test_id": "14772265",
       "name": "Verify payment methods on checkout page",
@@ -4062,6 +4212,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1543907",
       "test_id": "14772266",
       "name": "Place Tamara, Tabby, Apple pay and CC orders - check ODP, Admin and invoice",
@@ -4095,6 +4246,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435419",
       "test_id": "14772258",
       "name": "Verify GR cart and proceed to checkout",
@@ -4124,6 +4276,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435420",
       "test_id": "14772259",
       "name": "Verify multiple carts and proceed to checkout",
@@ -4153,6 +4306,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1543957",
       "test_id": "14772270",
       "name": "Verify cart merge guest > existing user with items",
@@ -4181,6 +4335,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1543908",
       "test_id": "14772267",
       "name": "Verify Algolia recommendations across all screens",
@@ -4206,6 +4361,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1435415",
       "test_id": "14772254",
       "name": "Close / reopen the app",
@@ -4231,6 +4387,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1543946",
       "test_id": "14772268",
       "name": "Verify deeplinks external/email/banners",
@@ -4256,6 +4413,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "1543948",
       "test_id": "14772269",
       "name": "Verify PN and in-app notifications with app open",
@@ -4281,6 +4439,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "2282943",
       "test_id": "14772271",
       "name": "Verify PN and in-app notifications with app killed",
@@ -4306,6 +4465,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "2282944",
       "test_id": "14772272",
       "name": "Verify PN and in-app notifications with app in the background",
@@ -4331,6 +4491,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "2673949",
       "test_id": "14772274",
       "name": "Verify Maya is loading and user can navigate to PDP - All product types",
@@ -4356,6 +4517,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "2673950",
       "test_id": "14772275",
       "name": "Verify Maya is loading and user can add items to cart - All product types",
@@ -4381,6 +4543,7 @@
       ]
     },
     {
+      "_exported": "2026-08-12",
       "case_id": "2673956",
       "test_id": "",
       "name": "Verify GTM events is triggered (sign-in, sign-up, ATC, and search)",
@@ -7861,6 +8024,13 @@
       "mirrors_name": "Gift Registry creation from My account (mWEB case; no app equivalent)"
     },
     {
+      "ref": "app::test_uae_checkout_invalid_cc_no_coupon",
+      "platform": "app",
+      "path": "tests/app/test_app_checkout.py",
+      "mirrors_case": "2337041",
+      "mirrors_name": "Checkout - Invalid transactions (mWEB case; the app checklist has no equivalent)"
+    },
+    {
       "ref": "web_commons::test_home_screen_elements_and_navigate_to_account",
       "platform": "web_commons",
       "path": "tests/web/commons/test_home.py",
@@ -7948,13 +8118,18 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-08",
-    "generated_at": "2026-09-08T06:24:10+00:00",
+    "generated_at": "2026-09-08T14:07:40+00:00",
     "source_sha": "bb4c777",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
     "testmo_url_app": "https://mumzworld.testmo.net/repositories/9?group_id=110524",
     "testmo_url_web_regression": "https://mumzworld.testmo.net/repositories/3?group_id=73697",
+    "testmo_data_as_of": {
+      "mweb_release_run": "2026-06-25",
+      "app_release_checklist": "2026-08-12",
+      "mweb_regression_repo": "2026-09-06"
+    },
     "sources": {
       "mweb": "TestMO repository 3 / group 73697 (regression repository), read via run 2154 -- the run export is what carries the case names; the repository export has no Case column",
       "mweb_other_group": "11 Admin 'Product types' cases sit outside group 73697; all are Not planned",
@@ -8023,13 +8198,13 @@
         "pct": 74
       },
       "app": {
-        "in_scope": 35,
-        "covered": 29,
+        "in_scope": 36,
+        "covered": 30,
         "pct": 83
       },
       "combined": {
-        "in_scope": 101,
-        "covered": 78,
+        "in_scope": 102,
+        "covered": 79,
         "pct": 77
       },
       "actions": [
@@ -8041,7 +8216,7 @@
         },
         {
           "id": "B",
-          "what": "Add 14 TestMO case(s) for tests that pass but have none",
+          "what": "Add 15 TestMO case(s) for tests that pass but have none",
           "detail": "the cart scenarios FALCONS-336 ported from the app suite; each names the app case to mirror",
           "effect": "enters scope already covered"
         },
@@ -8075,7 +8250,7 @@
       "listing_no_page": 37
     },
     "unmapped_count": 23,
-    "plan_gap_count": 14,
+    "plan_gap_count": 15,
     "unmapped_and_skipped": 8,
     "arabic_ready_tests": 115
   }

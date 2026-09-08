@@ -20,7 +20,9 @@ Usage:
     python3 parse_testmo_csv.py <csv> [output.json] [--allow-unnamed]
 """
 import csv
+import datetime as _dt
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -48,6 +50,9 @@ def first_sentence(text, limit=110):
 
 
 def parse_csv(csv_path, allow_unnamed=False):
+    # The export's own date. Without it the report can only say when it was last
+    # built, which CI refreshes daily regardless of how old the case list is.
+    exported = _dt.datetime.fromtimestamp(os.path.getmtime(csv_path)).date().isoformat()
     with open(csv_path, "r", encoding="utf-8-sig") as fh:
         rows = list(csv.DictReader(fh))
     if not rows:
@@ -72,6 +77,7 @@ def parse_csv(csv_path, allow_unnamed=False):
         else:
             name, name_source = first_sentence(summary), "summary"
         tests.append({
+            "_exported": exported,
             "case_id": row["Case ID"].strip(),
             "test_id": (row.get("Test ID") or "").strip(),
             "name": name,

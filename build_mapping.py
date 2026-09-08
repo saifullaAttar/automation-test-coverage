@@ -534,6 +534,8 @@ PLAN_GAPS = {
         ("1018714", "Wishlist cases cover new/existing users; none covers the guest login prompt"),
     "web_ksa::test_ksa_wishlist_guest_add_prompts_login":
         ("1018714", "Wishlist cases cover new/existing users; none covers the guest login prompt"),
+    "app::test_uae_checkout_invalid_cc_no_coupon":
+        ("2337041", "Checkout - Invalid transactions (mWEB case; the app checklist has no equivalent)"),
 }
 
 ARABIC = {
@@ -561,6 +563,26 @@ ARABIC = {
         "tests/app/test_app_account.py carries AR area names and AR sign-in error strings",
     ],
 }
+
+
+def _source_dates():
+    """When each TestMO export was actually taken.
+
+    generated_at says when the report was last built, and CI rebuilds daily --
+    so it stays green no matter how old the case data is. These are the dates
+    that matter for "is the case list current?".
+    """
+    import datetime
+    out = {}
+    for key, name in (("mweb_release_run", "testmo_tests.json"),
+                      ("app_release_checklist", "app_testmo_tests.json"),
+                      ("mweb_regression_repo", "web_regression_tests.json")):
+        path = HERE / name
+        if path.exists():
+            src = json.loads(path.read_text())
+            d = src[0].get("_exported") if src and isinstance(src[0], dict) else None
+            out[key] = d or "unknown"
+    return out
 
 
 def _case_links():
@@ -840,6 +862,7 @@ def main():
             "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
             "testmo_url_app": "https://mumzworld.testmo.net/repositories/9?group_id=110524",
             "testmo_url_web_regression": "https://mumzworld.testmo.net/repositories/3?group_id=73697",
+            "testmo_data_as_of": _source_dates(),
             "sources": {
                 "mweb": "TestMO repository 3 / group 73697 (regression repository), read via run 2154 -- "
                         "the run export is what carries the case names; the repository export has no Case column",

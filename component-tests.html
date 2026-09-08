@@ -87,6 +87,15 @@ code{background:#e8eaf6;padding:2px 6px;border-radius:3px;font-size:.8em;font-fa
 </style>
 </head>
 <body>
+<div style="max-width:1600px;margin:0 auto;padding:20px 20px 0">
+  <div style="background:#fff8e1;border:1px solid #f0ad4e;border-left:4px solid #f0ad4e;border-radius:8px;padding:14px 16px;font-size:.9em;color:#5d4037">
+    <strong>This page has not been maintained since 15 June 2026.</strong>
+    Its component and unit-test figures are a point-in-time plan, and the E2E numbers it quotes
+    (“67 mWeb E2E cases”, the storefront coverage table) are superseded — the live E2E figures are on the
+    <a href="index.html" style="color:#0a4a8f"><strong>E2E Coverage</strong></a> page, regenerated from
+    <code>automation_web_2.0</code> main on every merge. Do not quote the numbers below as current.
+  </div>
+</div>
 <div class="container">
 
 <!-- HEADER -->
@@ -103,7 +112,7 @@ code{background:#e8eaf6;padding:2px 6px;border-radius:3px;font-size:.8em;font-fa
 <!-- NAV -->
 <div class="nav">
     <a href="index.html">🧪 E2E Coverage</a>
-    <a href="component-tests.html" class="active">⚛️ Component & Unit Tests</a>
+    <a href="component-tests.html" class="active">⚛️ Component &amp; Unit Tests <span style="opacity:.7;font-weight:400">(Jun 2026)</span></a>
     <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
         <input type="text" id="ghToken" placeholder="GitHub Token (optional)" style="padding:6px 10px;border:1px solid #ddd;border-radius:6px;font-size:.8em;width:180px">
         <button class="btn btn-primary" onclick="updateReport()" id="updateBtn" style="padding:8px 16px;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-size:.85em;background:#667eea;color:#fff;transition:all .2s">🔄 Update Report</button>
