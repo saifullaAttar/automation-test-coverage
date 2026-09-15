@@ -8277,8 +8277,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-15",
-    "generated_at": "2026-09-15T06:25:36+00:00",
-    "source_sha": "5fcef35",
+    "generated_at": "2026-09-15T12:21:16+00:00",
+    "source_sha": "3bc1402",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
