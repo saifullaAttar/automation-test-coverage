@@ -516,10 +516,7 @@
       ],
       "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Proceed to checkout 7. Verify order summary calculation 8. Select the credit card 9. Place order",
       "parametrized": false,
-      "skip": {
-        "type": "hard",
-        "reason": "auto_bank allows one use per customer, but the journey needs two applies:"
-      },
+      "skip": null,
       "locales": [
         "en",
         "ar"
@@ -542,10 +539,7 @@
       ],
       "docstring": "1. Precondition: Login, clear cart, sign out 2. As guest, search and add product to cart 3. Navigate to cart and verify item present 4. Tap checkout → login bottom sheet is displayed 5. Login with existing user 6. Verify user is redirected to cart page with item retained 7. Proceed to checkout 8. Pay with CC and SC",
       "parametrized": false,
-      "skip": {
-        "type": "hard",
-        "reason": "Broken test"
-      },
+      "skip": null,
       "locales": [
         "en",
         "ar"
@@ -956,10 +950,7 @@
       ],
       "docstring": "Guest checkout flow (parametrized by product type): 1. Precondition: Login, clear cart, sign out 2. As guest, search and add product to cart 3. Navigate to cart and verify item present 4. Tap checkout → login bottom sheet is displayed 5. Login with user email 6. Verify user is redirected to cart page with item retained 7. Proceed to checkout, handle address 8. Validate order summary and place orde",
       "parametrized": true,
-      "skip": {
-        "type": "conditional",
-        "reason": "OS.lower() == \"ios\""
-      },
+      "skip": null,
       "locales": [
         "en"
       ]
@@ -3208,7 +3199,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "3bc1402",
+    "sha": "d25557d",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }
