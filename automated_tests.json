@@ -1125,6 +1125,52 @@
       "locales": [
         "en"
       ]
+    },
+    {
+      "ref": "app::test_app_wishlist_guest_add_from_plp_prompts_login",
+      "name": "test_app_wishlist_guest_add_from_plp_prompts_login",
+      "platform": "app",
+      "path": "tests/app/test_app_wishlist.py",
+      "file": "test_app_wishlist.py",
+      "title": "Guest add-to-wishlist from PLP prompts login, then registers and adds",
+      "feature": "Wishlist",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Wishlist",
+        "PLP",
+        "Guest",
+        "Registration"
+      ],
+      "docstring": "FALCONS-296 — Scenario 1: A guest user who tries to add an item to the wishlist from a category PLP is prompted to log in. After registering a new account the user stays on the same PLP and can add the product to the wishlist by tapping the product-card heart. Steps: 1. Open the app as a guest (sign out first if a prior session left us signed in) 2. Go to the Gear category PLP 3. As a guest, tap t",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "app::test_app_wishlist_guest_add_from_pdp_prompts_login",
+      "name": "test_app_wishlist_guest_add_from_pdp_prompts_login",
+      "platform": "app",
+      "path": "tests/app/test_app_wishlist.py",
+      "file": "test_app_wishlist.py",
+      "title": "Guest add-to-wishlist from PDP prompts login, then signs in and adds",
+      "feature": "Wishlist",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Wishlist",
+        "PDP",
+        "Guest",
+        "Login"
+      ],
+      "docstring": "FALCONS-296 — Scenario 2: A guest who tries to add an item to the wishlist from a PDP is prompted to log in. After signing in with an existing account the user stays on the same PDP and can add the product to the wishlist via the product wishlist pill. Steps: 1. Open the app as a guest (sign out first if a prior session left us signed in) 2. Go to the Gear category PLP 3. Open the PDP of the first",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
     }
   ],
   "web_uae": [
@@ -3199,7 +3245,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "235e62a",
+    "sha": "133e9bf",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }

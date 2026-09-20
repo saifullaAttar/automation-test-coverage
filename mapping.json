@@ -5870,6 +5870,52 @@
         "locales": [
           "en"
         ]
+      },
+      {
+        "ref": "app::test_app_wishlist_guest_add_from_plp_prompts_login",
+        "name": "test_app_wishlist_guest_add_from_plp_prompts_login",
+        "platform": "app",
+        "path": "tests/app/test_app_wishlist.py",
+        "file": "test_app_wishlist.py",
+        "title": "Guest add-to-wishlist from PLP prompts login, then registers and adds",
+        "feature": "Wishlist",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Wishlist",
+          "PLP",
+          "Guest",
+          "Registration"
+        ],
+        "docstring": "FALCONS-296 — Scenario 1: A guest user who tries to add an item to the wishlist from a category PLP is prompted to log in. After registering a new account the user stays on the same PLP and can add the product to the wishlist by tapping the product-card heart. Steps: 1. Open the app as a guest (sign out first if a prior session left us signed in) 2. Go to the Gear category PLP 3. As a guest, tap t",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_wishlist_guest_add_from_pdp_prompts_login",
+        "name": "test_app_wishlist_guest_add_from_pdp_prompts_login",
+        "platform": "app",
+        "path": "tests/app/test_app_wishlist.py",
+        "file": "test_app_wishlist.py",
+        "title": "Guest add-to-wishlist from PDP prompts login, then signs in and adds",
+        "feature": "Wishlist",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Wishlist",
+          "PDP",
+          "Guest",
+          "Login"
+        ],
+        "docstring": "FALCONS-296 — Scenario 2: A guest who tries to add an item to the wishlist from a PDP is prompted to log in. After signing in with an existing account the user stays on the same PDP and can add the product to the wishlist via the product wishlist pill. Steps: 1. Open the app as a guest (sign out first if a prior session left us signed in) 2. Go to the Gear category PLP 3. Open the PDP of the first",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
       }
     ],
     "web_uae": [
@@ -8135,6 +8181,8 @@
     "app::test_app_cart_existing_user_orders_no_coupon_yalla",
     "app::test_app_cart_guest_login_no_coupon_sc",
     "app::test_app_gift_registry_create_from_my_registries",
+    "app::test_app_wishlist_guest_add_from_pdp_prompts_login",
+    "app::test_app_wishlist_guest_add_from_plp_prompts_login",
     "app::test_customer_can_search_brand",
     "app::test_uae_cart_move_to_wishlist",
     "app::test_uae_cart_quantity_workflow",
@@ -8265,8 +8313,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-20",
-    "generated_at": "2026-09-20T06:22:01+00:00",
-    "source_sha": "235e62a",
+    "generated_at": "2026-09-20T06:40:06+00:00",
+    "source_sha": "133e9bf",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -8382,13 +8430,13 @@
       "other_group": 11
     },
     "platforms": {
-      "app": 50,
+      "app": 52,
       "web_uae": 51,
       "web_ksa": 35,
       "web_commons": 9
     },
-    "total_automated_tests": 145,
-    "active_tests": 129,
+    "total_automated_tests": 147,
+    "active_tests": 131,
     "skipped_hard": 11,
     "cases_not_running": {
       "hard_skipped": 3,
@@ -8401,7 +8449,7 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 24,
+    "unmapped_count": 26,
     "plan_gap_count": 15,
     "unmapped_and_skipped": 7,
     "arabic_ready_tests": 120
