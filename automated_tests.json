@@ -971,11 +971,7 @@
       ],
       "docstring": "Scenario 1: Creation of a Gift Registry from My account > My registries. 1. Sign in (no cart clear — cart state is irrelevant to gift registry flow) 2. Tap 'Gift Registry' shortcut on Account page 3. Tap 'Create registry' 4. Choose 'Baby Shower' event 5. Enter registry name and tap 'Create & Continue' 6. Assert the newly created registry detail screen is displayed 7. Navigate back and assert the r",
       "parametrized": false,
-      "skip": {
-        "type": "conditional",
-        "reason": "Gift registry is AE-only: on SA the event list does not load and the registry screen renders blank (app-side bug).",
-        "scope": "module"
-      },
+      "skip": null,
       "locales": [
         "en",
         "ar"
@@ -998,11 +994,7 @@
       ],
       "docstring": "Scenario 2: Creation of a Gift Registry from PDP → 'Add to Registry' button. 1. Sign in 2. Precondition — cleanup any pre-existing registries 3. Search for CATEGORY_4 (Diapers) and open the first search result 4. If the 'Add to Registry' button is missing on the first product, go back and try the second. If both are missing → fail with a clear Allure message so the reader knows the product catalog",
       "parametrized": false,
-      "skip": {
-        "type": "conditional",
-        "reason": "Gift registry is AE-only: on SA the event list does not load and the registry screen renders blank (app-side bug).",
-        "scope": "module"
-      },
+      "skip": null,
       "locales": [
         "en",
         "ar"
@@ -1025,11 +1017,7 @@
       ],
       "docstring": "Scenario 3: Create one Gift Registry from PDP for each product type (simple / bundle / configurable / custom / custom_configurable / installation), then verify all appear on My registries, verify each registry's detail (event name, product name, quantity), and delete them in the same loop. First iteration opens the fresh 'Choose an event' sheet; subsequent iterations open the 'Add to gift registry",
       "parametrized": false,
-      "skip": {
-        "type": "conditional",
-        "reason": "Gift registry is AE-only: on SA the event list does not load and the registry screen renders blank (app-side bug).",
-        "scope": "module"
-      },
+      "skip": null,
       "locales": [
         "en",
         "ar"
@@ -1057,6 +1045,29 @@
         "type": "hard",
         "reason": "Issue on the app side this needs to be fixed from dev"
       },
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_app_gift_registry_order_from_share_link",
+      "name": "test_app_gift_registry_order_from_share_link",
+      "platform": "app",
+      "path": "tests/app/test_app_gift_registry.py",
+      "file": "test_app_gift_registry.py",
+      "title": "Order a shared gift registry as a new user [{product_type}]",
+      "feature": "Gift Registry",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Gift Registry",
+        "Share Link",
+        "FALCONS-355"
+      ],
+      "docstring": "A new user orders one product from someone else's shared gift registry. 1. The owner builds a registry holding this product type, from the PDP 2. Copy the registry's guest link off the share sheet 3. Sign out and create a brand-new account 4. Add a product of the buyer's own to their cart 5. Open the guest link and add the registry's product to the cart 6. Verify the item under its registry switch",
+      "parametrized": true,
+      "skip": null,
       "locales": [
         "en",
         "ar"
@@ -3308,7 +3319,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "87cfff7",
+    "sha": "f4a5edf",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }

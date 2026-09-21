@@ -3503,12 +3503,9 @@
         "app::test_app_gift_registry_create_from_pdp_all_product_types"
       ],
       "coverage_status": "partial",
-      "notes": "Opens the PDP for simple, bundle, configurable, custom, custom-configurable and installation products and selects their options, but as part of the gift-registry flow -- the PDP content itself is not asserted. Colour variant and egift are not covered. LIMITED TO SOME TARGETS: Gift registry is AE-only: on SA the event list does not load and the registry screen renders blank (app-side b",
+      "notes": "Opens the PDP for simple, bundle, configurable, custom, custom-configurable and installation products and selects their options, but as part of the gift-registry flow -- the PDP content itself is not asserted. Colour variant and egift are not covered.",
       "skipped_only": false,
-      "gated_only": true,
-      "gate_reasons": [
-        "Gift registry is AE-only: on SA the event list does not load and the registry screen renders blank (app-side b"
-      ],
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -3591,12 +3588,9 @@
         "app::test_app_gift_registry_create_from_pdp"
       ],
       "coverage_status": "partial",
-      "notes": "Newly credited (FALCONS-282). Adds a product to a registry from the PDP for six product types and verifies the event name, product name and quantity on the registry detail screen. Colour variant and egift are not covered. LIMITED TO SOME TARGETS: Gift registry is AE-only: on SA the event list does not load and the registry screen renders blank (app-side b",
+      "notes": "Newly credited (FALCONS-282). Adds a product to a registry from the PDP for six product types and verifies the event name, product name and quantity on the registry detail screen. Colour variant and egift are not covered.",
       "skipped_only": false,
-      "gated_only": true,
-      "gate_reasons": [
-        "Gift registry is AE-only: on SA the event list does not load and the registry screen renders blank (app-side b"
-      ],
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -5716,11 +5710,7 @@
         ],
         "docstring": "Scenario 1: Creation of a Gift Registry from My account > My registries. 1. Sign in (no cart clear — cart state is irrelevant to gift registry flow) 2. Tap 'Gift Registry' shortcut on Account page 3. Tap 'Create registry' 4. Choose 'Baby Shower' event 5. Enter registry name and tap 'Create & Continue' 6. Assert the newly created registry detail screen is displayed 7. Navigate back and assert the r",
         "parametrized": false,
-        "skip": {
-          "type": "conditional",
-          "reason": "Gift registry is AE-only: on SA the event list does not load and the registry screen renders blank (app-side bug).",
-          "scope": "module"
-        },
+        "skip": null,
         "locales": [
           "en",
           "ar"
@@ -5743,11 +5733,7 @@
         ],
         "docstring": "Scenario 2: Creation of a Gift Registry from PDP → 'Add to Registry' button. 1. Sign in 2. Precondition — cleanup any pre-existing registries 3. Search for CATEGORY_4 (Diapers) and open the first search result 4. If the 'Add to Registry' button is missing on the first product, go back and try the second. If both are missing → fail with a clear Allure message so the reader knows the product catalog",
         "parametrized": false,
-        "skip": {
-          "type": "conditional",
-          "reason": "Gift registry is AE-only: on SA the event list does not load and the registry screen renders blank (app-side bug).",
-          "scope": "module"
-        },
+        "skip": null,
         "locales": [
           "en",
           "ar"
@@ -5770,11 +5756,7 @@
         ],
         "docstring": "Scenario 3: Create one Gift Registry from PDP for each product type (simple / bundle / configurable / custom / custom_configurable / installation), then verify all appear on My registries, verify each registry's detail (event name, product name, quantity), and delete them in the same loop. First iteration opens the fresh 'Choose an event' sheet; subsequent iterations open the 'Add to gift registry",
         "parametrized": false,
-        "skip": {
-          "type": "conditional",
-          "reason": "Gift registry is AE-only: on SA the event list does not load and the registry screen renders blank (app-side bug).",
-          "scope": "module"
-        },
+        "skip": null,
         "locales": [
           "en",
           "ar"
@@ -5802,6 +5784,29 @@
           "type": "hard",
           "reason": "Issue on the app side this needs to be fixed from dev"
         },
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
+        "ref": "app::test_app_gift_registry_order_from_share_link",
+        "name": "test_app_gift_registry_order_from_share_link",
+        "platform": "app",
+        "path": "tests/app/test_app_gift_registry.py",
+        "file": "test_app_gift_registry.py",
+        "title": "Order a shared gift registry as a new user [{product_type}]",
+        "feature": "Gift Registry",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Gift Registry",
+          "Share Link",
+          "FALCONS-355"
+        ],
+        "docstring": "A new user orders one product from someone else's shared gift registry. 1. The owner builds a registry holding this product type, from the PDP 2. Copy the registry's guest link off the share sheet 3. Sign out and create a brand-new account 4. Add a product of the buyer's own to their cart 5. Open the guest link and add the registry's product to the cart 6. Verify the item under its registry switch",
+        "parametrized": true,
+        "skip": null,
         "locales": [
           "en",
           "ar"
@@ -8244,6 +8249,7 @@
     "app::test_app_cart_existing_user_orders_no_coupon_yalla",
     "app::test_app_cart_guest_login_no_coupon_sc",
     "app::test_app_gift_registry_create_from_my_registries",
+    "app::test_app_gift_registry_order_from_share_link",
     "app::test_app_wishlist_guest_add_from_pdp_prompts_login",
     "app::test_app_wishlist_guest_add_from_plp_prompts_login",
     "app::test_customer_can_search_brand",
@@ -8379,8 +8385,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-21",
-    "generated_at": "2026-09-21T06:41:37+00:00",
-    "source_sha": "87cfff7",
+    "generated_at": "2026-09-21T06:41:56+00:00",
+    "source_sha": "f4a5edf",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -8496,28 +8502,28 @@
       "other_group": 11
     },
     "platforms": {
-      "app": 52,
+      "app": 53,
       "web_uae": 51,
       "web_ksa": 35,
       "web_commons": 12
     },
-    "total_automated_tests": 150,
-    "active_tests": 134,
+    "total_automated_tests": 151,
+    "active_tests": 138,
     "skipped_hard": 11,
     "cases_not_running": {
       "hard_skipped": 3,
-      "gated": 2
+      "gated": 1
     },
     "gate_note": "Hard-skipped cases are not counted as automated: nothing runs. Platform-gated cases are counted -- they run wherever the product allows, and every gate is a product or tooling limitation rather than missing test work -- with the limitation shown on the case.",
-    "skipped_conditional": 5,
+    "skipped_conditional": 2,
     "links": {
       "direct": 122,
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 29,
+    "unmapped_count": 30,
     "plan_gap_count": 15,
     "unmapped_and_skipped": 7,
-    "arabic_ready_tests": 121
+    "arabic_ready_tests": 122
   }
 }
