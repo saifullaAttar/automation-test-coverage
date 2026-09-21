@@ -3262,11 +3262,53 @@
         "en",
         "ar"
       ]
+    },
+    {
+      "ref": "web_commons::test_wishlist_add_products_from_plps_existing_user",
+      "name": "test_wishlist_add_products_from_plps_existing_user",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_wishlist_plp.py",
+      "file": "test_wishlist_plp.py",
+      "title": "Wishlist: existing user adds products to the wishlist from every PLP",
+      "feature": "Wishlist",
+      "story": "FALCONS-312 - Add products to the wishlist from PLPs",
+      "severity": "critical",
+      "tags": [
+        "Wishlist",
+        "Existing User"
+      ],
+      "docstring": "1. Sign in as an existing user and clear the wishlist 2. Add the first product to the wishlist from a Category listing 3. Add the first product from an SRP, once per product type 4. Add the first product from a Brand listing and from the Sale listing 5. Verify every product added is on the Wishlist page",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_commons::test_wishlist_add_products_from_plps_new_user",
+      "name": "test_wishlist_add_products_from_plps_new_user",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_wishlist_plp.py",
+      "file": "test_wishlist_plp.py",
+      "title": "Wishlist: new user adds products to the wishlist from every PLP",
+      "feature": "Wishlist",
+      "story": "FALCONS-312 - Add products to the wishlist from PLPs",
+      "severity": "critical",
+      "tags": [
+        "Wishlist",
+        "New User"
+      ],
+      "docstring": "1. Register a brand-new user, whose wishlist starts empty 2. Add the first product to the wishlist from a Category listing 3. Add the first product from an SRP, once per product type 4. Add the first product from a Brand listing and from the Sale listing 5. Verify every product added is on the Wishlist page",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
     }
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "b77c4c5",
+    "sha": "87cfff7",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }

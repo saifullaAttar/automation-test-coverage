@@ -8007,6 +8007,48 @@
           "en",
           "ar"
         ]
+      },
+      {
+        "ref": "web_commons::test_wishlist_add_products_from_plps_existing_user",
+        "name": "test_wishlist_add_products_from_plps_existing_user",
+        "platform": "web_commons",
+        "path": "tests/web/commons/test_wishlist_plp.py",
+        "file": "test_wishlist_plp.py",
+        "title": "Wishlist: existing user adds products to the wishlist from every PLP",
+        "feature": "Wishlist",
+        "story": "FALCONS-312 - Add products to the wishlist from PLPs",
+        "severity": "critical",
+        "tags": [
+          "Wishlist",
+          "Existing User"
+        ],
+        "docstring": "1. Sign in as an existing user and clear the wishlist 2. Add the first product to the wishlist from a Category listing 3. Add the first product from an SRP, once per product type 4. Add the first product from a Brand listing and from the Sale listing 5. Verify every product added is on the Wishlist page",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_commons::test_wishlist_add_products_from_plps_new_user",
+        "name": "test_wishlist_add_products_from_plps_new_user",
+        "platform": "web_commons",
+        "path": "tests/web/commons/test_wishlist_plp.py",
+        "file": "test_wishlist_plp.py",
+        "title": "Wishlist: new user adds products to the wishlist from every PLP",
+        "feature": "Wishlist",
+        "story": "FALCONS-312 - Add products to the wishlist from PLPs",
+        "severity": "critical",
+        "tags": [
+          "Wishlist",
+          "New User"
+        ],
+        "docstring": "1. Register a brand-new user, whose wishlist starts empty 2. Add the first product to the wishlist from a Category listing 3. Add the first product from an SRP, once per product type 4. Add the first product from a Brand listing and from the Sale listing 5. Verify every product added is on the Wishlist page",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
       }
     ]
   },
@@ -8211,6 +8253,8 @@
     "web_commons::test_gift_registry_purchase_shows_for_owner",
     "web_commons::test_home_screen_elements_and_navigate_to_account",
     "web_commons::test_home_search_product_in_specific_category",
+    "web_commons::test_wishlist_add_products_from_plps_existing_user",
+    "web_commons::test_wishlist_add_products_from_plps_new_user",
     "web_ksa::test_ksa_cart_apply_gift_wrap_and_place_order",
     "web_ksa::test_ksa_wishlist_guest_add_prompts_login",
     "web_uae::test_uae_cart_add_all_product_types_and_verify",
@@ -8335,8 +8379,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-21",
-    "generated_at": "2026-09-21T06:32:30+00:00",
-    "source_sha": "b77c4c5",
+    "generated_at": "2026-09-21T06:41:37+00:00",
+    "source_sha": "87cfff7",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -8455,10 +8499,10 @@
       "app": 52,
       "web_uae": 51,
       "web_ksa": 35,
-      "web_commons": 10
+      "web_commons": 12
     },
-    "total_automated_tests": 148,
-    "active_tests": 132,
+    "total_automated_tests": 150,
+    "active_tests": 134,
     "skipped_hard": 11,
     "cases_not_running": {
       "hard_skipped": 3,
@@ -8471,7 +8515,7 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 27,
+    "unmapped_count": 29,
     "plan_gap_count": 15,
     "unmapped_and_skipped": 7,
     "arabic_ready_tests": 121
