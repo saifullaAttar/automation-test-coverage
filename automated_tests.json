@@ -1,6 +1,74 @@
 {
   "app": [
     {
+      "ref": "app::test_super_app_now_non_serviceable_address_validation",
+      "name": "test_super_app_now_non_serviceable_address_validation",
+      "platform": "app",
+      "path": "tests/app/superApp/test_super_app_logged_in_user_flow.py",
+      "file": "test_super_app_logged_in_user_flow.py",
+      "title": "Now vertical rejects a non-serviceable address across home, categories and listing",
+      "feature": "SuperApp",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "SuperApp",
+        "Now",
+        "Serviceability"
+      ],
+      "docstring": "1. Sign in with a user whose default address is outside the Now delivery range 2. Open the Now vertical — the sheet must raise itself; validate and close it 3. Tap a category in the Now vertical — the sheet must raise again; validate and close 4. Tap Categories in the Now bottom nav — the sheet must raise again; validate and close 5. Scroll to a Now product and tap it — the sheet must raise again;",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_super_app_now_serviceable_address_restores_availability",
+      "name": "test_super_app_now_serviceable_address_restores_availability",
+      "platform": "app",
+      "path": "tests/app/superApp/test_super_app_logged_in_user_flow.py",
+      "file": "test_super_app_logged_in_user_flow.py",
+      "title": "Serviceable address restores Now availability, and reverting restores the block",
+      "feature": "SuperApp",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "SuperApp",
+        "Now",
+        "Serviceability"
+      ],
+      "docstring": "1. Sign in and open the Now vertical 2. Select a serviceable delivery address, verified by the resulting state 3. Assert availability is restored: no notice, products addable 4. Change back to an out-of-range address and assert the sheet and the blocked add-to-cart are back Covers both acceptance criteria about changing the delivery address: to a serviceable address and back again. The switch is m",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_super_app_vertical_switcher_only_in_uae",
+      "name": "test_super_app_vertical_switcher_only_in_uae",
+      "platform": "app",
+      "path": "tests/app/superApp/test_super_app_vertical_availability.py",
+      "file": "test_super_app_vertical_availability.py",
+      "title": "Now vertical is offered in UAE only",
+      "feature": "SuperApp",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "SuperApp",
+        "Now",
+        "Vertical"
+      ],
+      "docstring": "The Now (2-hour) vertical is fulfilled from the single UAE-DS-01 dark store, so the 'now within 2 hrs' tab must appear for AE and must not appear anywhere else. Runs on every country as a logged-in user — it is the only SuperApp test a KSA regression executes.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "app::test_user_signup",
       "name": "test_user_signup",
       "platform": "app",
@@ -3363,7 +3431,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "827978b",
+    "sha": "c1aab89",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }

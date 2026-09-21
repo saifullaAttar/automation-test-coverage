@@ -4740,6 +4740,74 @@
   "automated_tests": {
     "app": [
       {
+        "ref": "app::test_super_app_now_non_serviceable_address_validation",
+        "name": "test_super_app_now_non_serviceable_address_validation",
+        "platform": "app",
+        "path": "tests/app/superApp/test_super_app_logged_in_user_flow.py",
+        "file": "test_super_app_logged_in_user_flow.py",
+        "title": "Now vertical rejects a non-serviceable address across home, categories and listing",
+        "feature": "SuperApp",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "SuperApp",
+          "Now",
+          "Serviceability"
+        ],
+        "docstring": "1. Sign in with a user whose default address is outside the Now delivery range 2. Open the Now vertical — the sheet must raise itself; validate and close it 3. Tap a category in the Now vertical — the sheet must raise again; validate and close 4. Tap Categories in the Now bottom nav — the sheet must raise again; validate and close 5. Scroll to a Now product and tap it — the sheet must raise again;",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
+        "ref": "app::test_super_app_now_serviceable_address_restores_availability",
+        "name": "test_super_app_now_serviceable_address_restores_availability",
+        "platform": "app",
+        "path": "tests/app/superApp/test_super_app_logged_in_user_flow.py",
+        "file": "test_super_app_logged_in_user_flow.py",
+        "title": "Serviceable address restores Now availability, and reverting restores the block",
+        "feature": "SuperApp",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "SuperApp",
+          "Now",
+          "Serviceability"
+        ],
+        "docstring": "1. Sign in and open the Now vertical 2. Select a serviceable delivery address, verified by the resulting state 3. Assert availability is restored: no notice, products addable 4. Change back to an out-of-range address and assert the sheet and the blocked add-to-cart are back Covers both acceptance criteria about changing the delivery address: to a serviceable address and back again. The switch is m",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
+        "ref": "app::test_super_app_vertical_switcher_only_in_uae",
+        "name": "test_super_app_vertical_switcher_only_in_uae",
+        "platform": "app",
+        "path": "tests/app/superApp/test_super_app_vertical_availability.py",
+        "file": "test_super_app_vertical_availability.py",
+        "title": "Now vertical is offered in UAE only",
+        "feature": "SuperApp",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "SuperApp",
+          "Now",
+          "Vertical"
+        ],
+        "docstring": "The Now (2-hour) vertical is fulfilled from the single UAE-DS-01 dark store, so the 'now within 2 hrs' tab must appear for AE and must not appear anywhere else. Runs on every country as a logged-in user — it is the only SuperApp test a KSA regression executes.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
         "ref": "app::test_user_signup",
         "name": "test_user_signup",
         "platform": "app",
@@ -8297,6 +8365,9 @@
     "app::test_app_wishlist_guest_add_from_pdp_prompts_login",
     "app::test_app_wishlist_guest_add_from_plp_prompts_login",
     "app::test_customer_can_search_brand",
+    "app::test_super_app_now_non_serviceable_address_validation",
+    "app::test_super_app_now_serviceable_address_restores_availability",
+    "app::test_super_app_vertical_switcher_only_in_uae",
     "app::test_uae_cart_move_to_wishlist",
     "app::test_uae_cart_quantity_workflow",
     "app::test_uae_checkout_invalid_cc_no_coupon",
@@ -8431,8 +8502,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-21",
-    "generated_at": "2026-09-21T09:45:07+00:00",
-    "source_sha": "827978b",
+    "generated_at": "2026-09-21T10:10:42+00:00",
+    "source_sha": "c1aab89",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -8548,13 +8619,13 @@
       "other_group": 11
     },
     "platforms": {
-      "app": 53,
+      "app": 56,
       "web_uae": 51,
       "web_ksa": 35,
       "web_commons": 14
     },
-    "total_automated_tests": 153,
-    "active_tests": 140,
+    "total_automated_tests": 156,
+    "active_tests": 143,
     "skipped_hard": 11,
     "cases_not_running": {
       "hard_skipped": 3,
@@ -8567,9 +8638,9 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 32,
+    "unmapped_count": 35,
     "plan_gap_count": 15,
     "unmapped_and_skipped": 7,
-    "arabic_ready_tests": 122
+    "arabic_ready_tests": 124
   }
 }
