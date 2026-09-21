@@ -1181,7 +1181,7 @@
         "Share Link",
         "FALCONS-355"
       ],
-      "docstring": "A new user orders one product from someone else's shared gift registry. 1. The owner builds a registry holding this product type, from the PDP 2. Copy the registry's guest link off the share sheet 3. Sign out and create a brand-new account 4. Add a product of the buyer's own to their cart 5. Open the guest link and add the registry's product to the cart 6. Verify the item under its registry switch",
+      "docstring": "A new user orders one product from someone else's shared gift registry. 1. This product type's own owner builds a registry holding it, from the PDP 2. Copy the registry's guest link off the share sheet 3. Sign out and create a brand-new account 4. Add a product of the buyer's own to their cart 5. Open the guest link and add the registry's product to the cart 6. Verify the item under its registry s",
       "parametrized": true,
       "skip": null,
       "locales": [
@@ -3476,7 +3476,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "8fd93fa",
+    "sha": "4387461",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }

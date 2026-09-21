@@ -5920,7 +5920,7 @@
           "Share Link",
           "FALCONS-355"
         ],
-        "docstring": "A new user orders one product from someone else's shared gift registry. 1. The owner builds a registry holding this product type, from the PDP 2. Copy the registry's guest link off the share sheet 3. Sign out and create a brand-new account 4. Add a product of the buyer's own to their cart 5. Open the guest link and add the registry's product to the cart 6. Verify the item under its registry switch",
+        "docstring": "A new user orders one product from someone else's shared gift registry. 1. This product type's own owner builds a registry holding it, from the PDP 2. Copy the registry's guest link off the share sheet 3. Sign out and create a brand-new account 4. Add a product of the buyer's own to their cart 5. Open the guest link and add the registry's product to the cart 6. Verify the item under its registry s",
         "parametrized": true,
         "skip": null,
         "locales": [
@@ -8549,8 +8549,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-21",
-    "generated_at": "2026-09-21T10:11:22+00:00",
-    "source_sha": "8fd93fa",
+    "generated_at": "2026-09-21T17:19:47+00:00",
+    "source_sha": "4387461",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
