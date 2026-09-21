@@ -93,6 +93,30 @@
       ]
     },
     {
+      "ref": "app::test_superapp_new_user_end_to_end_journey",
+      "name": "test_superapp_new_user_end_to_end_journey",
+      "platform": "app",
+      "path": "tests/app/superApp/test_superapp_new_user_end_to_end_journey.py",
+      "file": "test_superapp_new_user_end_to_end_journey.py",
+      "title": "Now vertical: browse by category, sort, filter, then a new user pays by Tabby",
+      "feature": "SuperApp",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "SuperApp",
+        "Now",
+        "Discovery",
+        "Signup",
+        "Tabby"
+      ],
+      "docstring": "The discovery half of the Now vertical — categories, sort, filter, Now labelling — followed by a shopper who creates their account at checkout rather than signing in to an existing one.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "app::test_user_signup",
       "name": "test_user_signup",
       "platform": "app",
@@ -3455,7 +3479,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "bf7903b",
+    "sha": "0561714",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }

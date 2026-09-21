@@ -4832,6 +4832,30 @@
         ]
       },
       {
+        "ref": "app::test_superapp_new_user_end_to_end_journey",
+        "name": "test_superapp_new_user_end_to_end_journey",
+        "platform": "app",
+        "path": "tests/app/superApp/test_superapp_new_user_end_to_end_journey.py",
+        "file": "test_superapp_new_user_end_to_end_journey.py",
+        "title": "Now vertical: browse by category, sort, filter, then a new user pays by Tabby",
+        "feature": "SuperApp",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "SuperApp",
+          "Now",
+          "Discovery",
+          "Signup",
+          "Tabby"
+        ],
+        "docstring": "The discovery half of the Now vertical — categories, sort, filter, Now labelling — followed by a shopper who creates their account at checkout rather than signing in to an existing one.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
         "ref": "app::test_user_signup",
         "name": "test_user_signup",
         "platform": "app",
@@ -8393,6 +8417,7 @@
     "app::test_super_app_now_non_serviceable_address_validation",
     "app::test_super_app_now_serviceable_address_restores_availability",
     "app::test_super_app_vertical_switcher_only_in_uae",
+    "app::test_superapp_new_user_end_to_end_journey",
     "app::test_uae_cart_move_to_wishlist",
     "app::test_uae_cart_quantity_workflow",
     "app::test_uae_checkout_invalid_cc_no_coupon",
@@ -8527,8 +8552,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-21",
-    "generated_at": "2026-09-21T10:10:59+00:00",
-    "source_sha": "bf7903b",
+    "generated_at": "2026-09-21T10:11:08+00:00",
+    "source_sha": "0561714",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -8644,13 +8669,13 @@
       "other_group": 11
     },
     "platforms": {
-      "app": 57,
+      "app": 58,
       "web_uae": 51,
       "web_ksa": 35,
       "web_commons": 14
     },
-    "total_automated_tests": 157,
-    "active_tests": 144,
+    "total_automated_tests": 158,
+    "active_tests": 145,
     "skipped_hard": 11,
     "cases_not_running": {
       "hard_skipped": 3,
@@ -8663,7 +8688,7 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 36,
+    "unmapped_count": 37,
     "plan_gap_count": 15,
     "unmapped_and_skipped": 7,
     "arabic_ready_tests": 124
