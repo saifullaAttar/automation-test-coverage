@@ -7944,6 +7944,27 @@
         ]
       },
       {
+        "ref": "web_commons::test_gift_registry_purchase_shows_for_owner",
+        "name": "test_gift_registry_purchase_shows_for_owner",
+        "platform": "web_commons",
+        "path": "tests/web/commons/test_gift_registry.py",
+        "file": "test_gift_registry.py",
+        "title": "",
+        "feature": "Gift Registry",
+        "story": "Gift Registry - the owner sees a guest's order under Purchased",
+        "severity": "critical",
+        "tags": [
+          "Gift Registry"
+        ],
+        "docstring": "A guest buys from a published registry and the owner finds that order. 1. The owner builds a registry and publishes it 2. Capture the registry's share link 3. The buyer signs in with an empty cart and adds every registry product 4. Check out the registry group and pay by credit card 5. The owner signs back in, opens the registry and switches to Purchased 6. The buyer's order is listed there",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
         "ref": "web_commons::test_home_screen_elements_and_navigate_to_account",
         "name": "test_home_screen_elements_and_navigate_to_account",
         "platform": "web_commons",
@@ -8187,6 +8208,7 @@
     "app::test_uae_cart_move_to_wishlist",
     "app::test_uae_cart_quantity_workflow",
     "app::test_uae_checkout_invalid_cc_no_coupon",
+    "web_commons::test_gift_registry_purchase_shows_for_owner",
     "web_commons::test_home_screen_elements_and_navigate_to_account",
     "web_commons::test_home_search_product_in_specific_category",
     "web_ksa::test_ksa_cart_apply_gift_wrap_and_place_order",
@@ -8312,9 +8334,9 @@
   ],
   "metadata": {
     "schema": 2,
-    "last_updated": "2026-09-20",
-    "generated_at": "2026-09-20T06:40:06+00:00",
-    "source_sha": "133e9bf",
+    "last_updated": "2026-09-21",
+    "generated_at": "2026-09-21T05:21:16+00:00",
+    "source_sha": "b77c4c5",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -8433,10 +8455,10 @@
       "app": 52,
       "web_uae": 51,
       "web_ksa": 35,
-      "web_commons": 9
+      "web_commons": 10
     },
-    "total_automated_tests": 147,
-    "active_tests": 131,
+    "total_automated_tests": 148,
+    "active_tests": 132,
     "skipped_hard": 11,
     "cases_not_running": {
       "hard_skipped": 3,
@@ -8449,9 +8471,9 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 26,
+    "unmapped_count": 27,
     "plan_gap_count": 15,
     "unmapped_and_skipped": 7,
-    "arabic_ready_tests": 120
+    "arabic_ready_tests": 121
   }
 }
