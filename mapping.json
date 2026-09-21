@@ -8054,6 +8054,50 @@
         "locales": [
           "en"
         ]
+      },
+      {
+        "ref": "web_commons::test_wishlist_move_all_product_types_to_cart_existing_user",
+        "name": "test_wishlist_move_all_product_types_to_cart_existing_user",
+        "platform": "web_commons",
+        "path": "tests/web/commons/test_wishlist_to_cart.py",
+        "file": "test_wishlist_to_cart.py",
+        "title": "Wishlist: existing user moves every product type from the wishlist to the cart",
+        "feature": "Wishlist",
+        "story": "FALCONS-316 - Move products from the wishlist to the cart",
+        "severity": "critical",
+        "tags": [
+          "Wishlist",
+          "Cart",
+          "Existing User"
+        ],
+        "docstring": "1. Sign in as an existing user, with the cart cleared through the API 2. Empty the wishlist, then add every product type to it from its PDP 3. Move each wishlist item to the cart, choosing a value when the options sheet opens 4. Verify every moved item leaves the wishlist and the cart holds one row per move 5. Verify the wishlist shows its empty state once the last item has moved 6. Empty the cart",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_commons::test_wishlist_move_all_product_types_to_cart_new_user",
+        "name": "test_wishlist_move_all_product_types_to_cart_new_user",
+        "platform": "web_commons",
+        "path": "tests/web/commons/test_wishlist_to_cart.py",
+        "file": "test_wishlist_to_cart.py",
+        "title": "Wishlist: new user moves every product type from the wishlist to the cart",
+        "feature": "Wishlist",
+        "story": "FALCONS-316 - Move products from the wishlist to the cart",
+        "severity": "critical",
+        "tags": [
+          "Wishlist",
+          "Cart",
+          "New User"
+        ],
+        "docstring": "1. Register a brand-new user, whose wishlist and cart both start empty 2. Add every product type to the wishlist from its PDP 3. Move each wishlist item to the cart, choosing a value when the options sheet opens 4. Verify every moved item leaves the wishlist and the cart holds one row per move 5. Verify the wishlist shows its empty state once the last item has moved",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
       }
     ]
   },
@@ -8261,6 +8305,8 @@
     "web_commons::test_home_search_product_in_specific_category",
     "web_commons::test_wishlist_add_products_from_plps_existing_user",
     "web_commons::test_wishlist_add_products_from_plps_new_user",
+    "web_commons::test_wishlist_move_all_product_types_to_cart_existing_user",
+    "web_commons::test_wishlist_move_all_product_types_to_cart_new_user",
     "web_ksa::test_ksa_cart_apply_gift_wrap_and_place_order",
     "web_ksa::test_ksa_wishlist_guest_add_prompts_login",
     "web_uae::test_uae_cart_add_all_product_types_and_verify",
@@ -8385,8 +8431,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-21",
-    "generated_at": "2026-09-21T06:41:56+00:00",
-    "source_sha": "f4a5edf",
+    "generated_at": "2026-09-21T09:45:07+00:00",
+    "source_sha": "827978b",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -8505,10 +8551,10 @@
       "app": 53,
       "web_uae": 51,
       "web_ksa": 35,
-      "web_commons": 12
+      "web_commons": 14
     },
-    "total_automated_tests": 151,
-    "active_tests": 138,
+    "total_automated_tests": 153,
+    "active_tests": 140,
     "skipped_hard": 11,
     "cases_not_running": {
       "hard_skipped": 3,
@@ -8521,7 +8567,7 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 30,
+    "unmapped_count": 32,
     "plan_gap_count": 15,
     "unmapped_and_skipped": 7,
     "arabic_ready_tests": 122

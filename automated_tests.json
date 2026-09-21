@@ -3315,11 +3315,55 @@
       "locales": [
         "en"
       ]
+    },
+    {
+      "ref": "web_commons::test_wishlist_move_all_product_types_to_cart_existing_user",
+      "name": "test_wishlist_move_all_product_types_to_cart_existing_user",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_wishlist_to_cart.py",
+      "file": "test_wishlist_to_cart.py",
+      "title": "Wishlist: existing user moves every product type from the wishlist to the cart",
+      "feature": "Wishlist",
+      "story": "FALCONS-316 - Move products from the wishlist to the cart",
+      "severity": "critical",
+      "tags": [
+        "Wishlist",
+        "Cart",
+        "Existing User"
+      ],
+      "docstring": "1. Sign in as an existing user, with the cart cleared through the API 2. Empty the wishlist, then add every product type to it from its PDP 3. Move each wishlist item to the cart, choosing a value when the options sheet opens 4. Verify every moved item leaves the wishlist and the cart holds one row per move 5. Verify the wishlist shows its empty state once the last item has moved 6. Empty the cart",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_commons::test_wishlist_move_all_product_types_to_cart_new_user",
+      "name": "test_wishlist_move_all_product_types_to_cart_new_user",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_wishlist_to_cart.py",
+      "file": "test_wishlist_to_cart.py",
+      "title": "Wishlist: new user moves every product type from the wishlist to the cart",
+      "feature": "Wishlist",
+      "story": "FALCONS-316 - Move products from the wishlist to the cart",
+      "severity": "critical",
+      "tags": [
+        "Wishlist",
+        "Cart",
+        "New User"
+      ],
+      "docstring": "1. Register a brand-new user, whose wishlist and cart both start empty 2. Add every product type to the wishlist from its PDP 3. Move each wishlist item to the cart, choosing a value when the options sheet opens 4. Verify every moved item leaves the wishlist and the cart holds one row per move 5. Verify the wishlist shows its empty state once the last item has moved",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
     }
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "f4a5edf",
+    "sha": "827978b",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }
