@@ -5943,10 +5943,7 @@
         ],
         "docstring": "1. Ensure the home page is visible 2. Type a brand name in the search bar 3. Select the matching brand suggestion 4. Confirm the brand page opens",
         "parametrized": false,
-        "skip": {
-          "type": "hard",
-          "reason": "Brand page doesn"
-        },
+        "skip": null,
         "locales": [
           "en"
         ]
@@ -8552,8 +8549,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-21",
-    "generated_at": "2026-09-21T10:11:08+00:00",
-    "source_sha": "0561714",
+    "generated_at": "2026-09-21T10:11:22+00:00",
+    "source_sha": "8fd93fa",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -8675,8 +8672,8 @@
       "web_commons": 14
     },
     "total_automated_tests": 158,
-    "active_tests": 145,
-    "skipped_hard": 11,
+    "active_tests": 146,
+    "skipped_hard": 10,
     "cases_not_running": {
       "hard_skipped": 3,
       "gated": 1
@@ -8690,7 +8687,7 @@
     },
     "unmapped_count": 37,
     "plan_gap_count": 15,
-    "unmapped_and_skipped": 7,
+    "unmapped_and_skipped": 6,
     "arabic_ready_tests": 124
   }
 }

@@ -1204,10 +1204,7 @@
       ],
       "docstring": "1. Ensure the home page is visible 2. Type a brand name in the search bar 3. Select the matching brand suggestion 4. Confirm the brand page opens",
       "parametrized": false,
-      "skip": {
-        "type": "hard",
-        "reason": "Brand page doesn"
-      },
+      "skip": null,
       "locales": [
         "en"
       ]
@@ -3479,7 +3476,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "0561714",
+    "sha": "8fd93fa",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }
