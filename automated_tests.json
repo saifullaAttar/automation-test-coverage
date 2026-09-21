@@ -47,6 +47,30 @@
       ]
     },
     {
+      "ref": "app::test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
+      "name": "test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
+      "platform": "app",
+      "path": "tests/app/superApp/test_super_app_now_guest_order_journey.py",
+      "file": "test_super_app_now_guest_order_journey.py",
+      "title": "Now vertical: guest shops, coupons, logs in from the cart and pays by card",
+      "feature": "SuperApp",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "SuperApp",
+        "Now",
+        "Guest",
+        "Coupon",
+        "CC"
+      ],
+      "docstring": "The guest journey the shop already covers, run inside the Now vertical: only the search starts from Now, so the shop's own search, PDP, cart, coupon and checkout methods drive every step.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "app::test_super_app_vertical_switcher_only_in_uae",
       "name": "test_super_app_vertical_switcher_only_in_uae",
       "platform": "app",
@@ -3431,7 +3455,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "c1aab89",
+    "sha": "bf7903b",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }

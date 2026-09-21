@@ -4786,6 +4786,30 @@
         ]
       },
       {
+        "ref": "app::test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
+        "name": "test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
+        "platform": "app",
+        "path": "tests/app/superApp/test_super_app_now_guest_order_journey.py",
+        "file": "test_super_app_now_guest_order_journey.py",
+        "title": "Now vertical: guest shops, coupons, logs in from the cart and pays by card",
+        "feature": "SuperApp",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "SuperApp",
+          "Now",
+          "Guest",
+          "Coupon",
+          "CC"
+        ],
+        "docstring": "The guest journey the shop already covers, run inside the Now vertical: only the search starts from Now, so the shop's own search, PDP, cart, coupon and checkout methods drive every step.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
         "ref": "app::test_super_app_vertical_switcher_only_in_uae",
         "name": "test_super_app_vertical_switcher_only_in_uae",
         "platform": "app",
@@ -8365,6 +8389,7 @@
     "app::test_app_wishlist_guest_add_from_pdp_prompts_login",
     "app::test_app_wishlist_guest_add_from_plp_prompts_login",
     "app::test_customer_can_search_brand",
+    "app::test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
     "app::test_super_app_now_non_serviceable_address_validation",
     "app::test_super_app_now_serviceable_address_restores_availability",
     "app::test_super_app_vertical_switcher_only_in_uae",
@@ -8502,8 +8527,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-21",
-    "generated_at": "2026-09-21T10:10:42+00:00",
-    "source_sha": "c1aab89",
+    "generated_at": "2026-09-21T10:10:59+00:00",
+    "source_sha": "bf7903b",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -8619,13 +8644,13 @@
       "other_group": 11
     },
     "platforms": {
-      "app": 56,
+      "app": 57,
       "web_uae": 51,
       "web_ksa": 35,
       "web_commons": 14
     },
-    "total_automated_tests": 156,
-    "active_tests": 143,
+    "total_automated_tests": 157,
+    "active_tests": 144,
     "skipped_hard": 11,
     "cases_not_running": {
       "hard_skipped": 3,
@@ -8638,7 +8663,7 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 35,
+    "unmapped_count": 36,
     "plan_gap_count": 15,
     "unmapped_and_skipped": 7,
     "arabic_ready_tests": 124
