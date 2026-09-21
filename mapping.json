@@ -8549,8 +8549,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-21",
-    "generated_at": "2026-09-21T17:19:47+00:00",
-    "source_sha": "4387461",
+    "generated_at": "2026-09-21T17:24:14+00:00",
+    "source_sha": "bf08b17",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
