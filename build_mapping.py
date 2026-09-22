@@ -505,17 +505,19 @@ APP_MAPPING = {
         "FALCONS-355. A per-product-type owner builds a registry from the PDP, the share link is "
         "copied, a brand-new buyer adds the registry product to their cart alongside one of their "
         "own, and pays by card. The older deep-link script is still hard-skipped pending an app- "
-        "side fix. The app Gift Registry file is AE-only."),
+        "side fix and carries the AE-only marker; the new share-link test does not, so this case "
+        "runs on SA too."),
     "1435420": ("full", ["app::test_app_gift_registry_order_from_share_link",
                          "app::test_app_gift_registry_scenario_4_add_to_cart_via_deeplink"],
         "FALCONS-355 covers the multiple-cart case directly: the buyer holds their own product and "
         "the registry's, the registry item is verified under its own cart switch, the registry "
         "group is paid for, and the buyer's own product is then checked to be untouched by that "
-        "order. The owner's Purchased tab is verified too. The app Gift Registry file is AE-only."),
+        "order. The owner's Purchased tab is verified too. The new share-link test is not AE-gated, unlike the rest of that file, so this case runs on SA as well."),
     "1543957": ("full", ["app::test_uae_guest_checkout_login_bottom_sheet_and_place_order",
                          "app::test_app_cart_guest_login_no_coupon_sc"],
         "A guest adds an item, taps checkout, signs in through the login bottom sheet and the item "
-        "is still in the cart; parametrised by product type, gated by skipif on OS. The store- "
+        "is still in the cart; parametrised by product type. The iOS gate this case used to carry "
+        "has been removed on main. The store- "
         "credit variant of the same flow is unskipped on main again."),
     "1543908": ("none", [], "Algolia recommendations across screens are not automated."),
     "1435415": ("none", [], "App close / reopen is not automated."),

@@ -126,37 +126,64 @@ def parse_skip(block):
     if "@pytest.mark.skipif" in block:
         m = re.search(r"@pytest\.mark\.skipif\(\s*(.+?)(?:,\s*reason|\n)", block, re.S)
         cond = re.sub(r"\s+", " ", m.group(1)).strip() if m else ""
-        return {"type": "conditional", "reason": cond}
+        # Prefer the human reason over the condition. Storing only `OS.lower() ==
+        # "ios"` told a reader what was skipped but never why -- and the why is
+        # the part that decides whether it is a gap or a platform limitation.
+        rm = re.search(r'reason\s*=\s*((?:"[^"]*"\s*)+)', block, re.S)
+        why = " ".join(re.findall(r'"([^"]*)"', rm.group(1))).strip() if rm else ""
+        return {"type": "conditional",
+                "reason": (f"{why} [{cond}]" if why else cond)[:220],
+                "condition": cond}
     return None
 
 
-MODULE_MARK = re.compile(
-    r"^pytestmark\s*=\s*pytest\.mark\.(skipif|skip)\((.*?)^\)", re.M | re.S)
+def _mark_from_call(kind, args, scope):
+    """Turn a captured pytest.mark.skip/skipif call into a skip record."""
+    cond = re.sub(r"\s+", " ", args.split(",")[0]).strip()
+    rm = re.search(r'reason\s*=\s*((?:"[^"]*"\s*)+)', args, re.S)
+    why = " ".join(re.findall(r'"([^"]*)"', rm.group(1))).strip() if rm else ""
+    return {"type": "conditional" if kind == "skipif" else "hard",
+            "reason": (f"{why} [{cond}]" if why else cond)[:220],
+            "condition": cond, "scope": scope}
+
+
+def marker_aliases(source):
+    """Module-level `NAME = pytest.mark.skipif(...)` applied later as `@NAME`.
+
+    tests/app/test_app_gift_registry.py moved from a blanket `pytestmark` to
+    `GIFT_REGISTRY_AE_ONLY = pytest.mark.skipif(COUNTRY == "SA", ...)` decorated
+    onto four of its five tests -- deliberately leaving the newest one ungated.
+    Looking only for `pytestmark` lost that entirely and showed the suite as
+    running on SA.
+    """
+    out = {}
+    for m in re.finditer(r"^([A-Z_][A-Z0-9_]*)\s*=\s*pytest\.mark\.(skipif|skip)\((.*?)\n\)",
+                         source, re.M | re.S):
+        out[m.group(1)] = _mark_from_call(m.group(2), m.group(3), "alias")
+    return out
 
 
 def module_skip(source):
     """A module-level `pytestmark` applies to every test in the file.
 
-    Missed entirely until now, because only the decorators directly above each
-    `def` were read. tests/app/test_app_gift_registry.py carries
-    `pytestmark = pytest.mark.skipif(COUNTRY == "SA", ...)`, so the whole app
-    Gift Registry suite is AE-only -- and the report was showing it as running
-    everywhere.
+    Handles both shapes: a bare `pytestmark = pytest.mark.skipif(...)` and the
+    list form `pytestmark = [pytest.mark.skipif(...), ...]` the superApp suites
+    use. Only the first was recognised, so the Now-vertical suites read as
+    running everywhere when they are UAE-only.
     """
-    m = MODULE_MARK.search(source)
+    m = re.search(r"^pytestmark\s*=\s*(.*?)\n(?:\]|\))\n", source, re.M | re.S)
     if not m:
         return None
-    body = re.sub(r"\s+", " ", m.group(2)).strip()
-    reason = re.search(r'reason\s*=\s*"(.*?)"(?:\s*"(.*?)")*', m.group(2), re.S)
-    text = " ".join(x for x in (reason.groups() if reason else ()) if x) if reason else body
-    return {"type": "conditional" if m.group(1) == "skipif" else "hard",
-            "reason": re.sub(r"\s+", " ", text).strip()[:200],
-            "scope": "module"}
+    call = re.search(r"pytest\.mark\.(skipif|skip)\((.*)", m.group(1), re.S)
+    if not call:
+        return None
+    return _mark_from_call(call.group(1), call.group(2), "module")
 
 
 def parse_file(source, path, platform, ar_verified):
     lines = source.split("\n")
     mod_skip = module_skip(source)
+    aliases = marker_aliases(source)
     tests = []
     for i, line in enumerate(lines):
         m = DEF_RE.match(line)
@@ -187,8 +214,11 @@ def parse_file(source, path, platform, ar_verified):
             "tags": tags,
             "docstring": docstring_after(lines, i)[:400],
             "parametrized": "@pytest.mark.parametrize" in block,
-            # A per-test marker wins; otherwise the module-level one applies.
-            "skip": parse_skip(block) or mod_skip,
+            # Precedence: a marker on the test, then an alias marker decorated
+            # onto it, then a module-wide pytestmark.
+            "skip": (parse_skip(block)
+                     or next((aliases[a] for a in aliases if f"@{a}" in block), None)
+                     or mod_skip),
             "locales": ["en", "ar"] if ar_verified else ["en"],
         })
     return tests

@@ -17,7 +17,12 @@
       ],
       "docstring": "1. Sign in with a user whose default address is outside the Now delivery range 2. Open the Now vertical — the sheet must raise itself; validate and close it 3. Tap a category in the Now vertical — the sheet must raise again; validate and close 4. Tap Categories in the Now bottom nav — the sheet must raise again; validate and close 5. Scroll to a Now product and tap it — the sheet must raise again;",
       "parametrized": false,
-      "skip": null,
+      "skip": {
+        "type": "conditional",
+        "reason": "Now vertical is UAE-only; the only dark store is UAE-DS-01, so no other  country can place a 2-hour order. Coverage for those countries lives in  test_super_app_vertical_availability.py, which asserts the tab is absent. ",
+        "condition": "(COUNTRY or \"AE\").upper() != \"AE\"",
+        "scope": "module"
+      },
       "locales": [
         "en",
         "ar"
@@ -40,7 +45,12 @@
       ],
       "docstring": "1. Sign in and open the Now vertical 2. Select a serviceable delivery address, verified by the resulting state 3. Assert availability is restored: no notice, products addable 4. Change back to an out-of-range address and assert the sheet and the blocked add-to-cart are back Covers both acceptance criteria about changing the delivery address: to a serviceable address and back again. The switch is m",
       "parametrized": false,
-      "skip": null,
+      "skip": {
+        "type": "conditional",
+        "reason": "Now vertical is UAE-only; the only dark store is UAE-DS-01, so no other  country can place a 2-hour order. Coverage for those countries lives in  test_super_app_vertical_availability.py, which asserts the tab is absent. ",
+        "condition": "(COUNTRY or \"AE\").upper() != \"AE\"",
+        "scope": "module"
+      },
       "locales": [
         "en",
         "ar"
@@ -65,7 +75,12 @@
       ],
       "docstring": "The guest journey the shop already covers, run inside the Now vertical: only the search starts from Now, so the shop's own search, PDP, cart, coupon and checkout methods drive every step.",
       "parametrized": false,
-      "skip": null,
+      "skip": {
+        "type": "conditional",
+        "reason": "The Now vertical is served by the single UAE-DS-01 dark store, so an order  journey through it only exists on AE [(COUNTRY or \"AE\").upper() != \"AE\"]",
+        "condition": "(COUNTRY or \"AE\").upper() != \"AE\"",
+        "scope": "module"
+      },
       "locales": [
         "en"
       ]
@@ -111,7 +126,12 @@
       ],
       "docstring": "The discovery half of the Now vertical — categories, sort, filter, Now labelling — followed by a shopper who creates their account at checkout rather than signing in to an existing one.",
       "parametrized": false,
-      "skip": null,
+      "skip": {
+        "type": "conditional",
+        "reason": "The Now vertical is served by the single UAE-DS-01 dark store, so an order  journey through it only exists on AE [(COUNTRY or \"AE\").upper() != \"AE\"]",
+        "condition": "(COUNTRY or \"AE\").upper() != \"AE\"",
+        "scope": "module"
+      },
       "locales": [
         "en"
       ]
@@ -1087,7 +1107,12 @@
       ],
       "docstring": "Scenario 1: Creation of a Gift Registry from My account > My registries. 1. Sign in (no cart clear — cart state is irrelevant to gift registry flow) 2. Tap 'Gift Registry' shortcut on Account page 3. Tap 'Create registry' 4. Choose 'Baby Shower' event 5. Enter registry name and tap 'Create & Continue' 6. Assert the newly created registry detail screen is displayed 7. Navigate back and assert the r",
       "parametrized": false,
-      "skip": null,
+      "skip": {
+        "type": "conditional",
+        "reason": "Gift registry is AE-only: on SA the event list does not load and the registry  screen renders blank (app-side bug). [COUNTRY.upper() == \"SA\"]",
+        "condition": "COUNTRY.upper() == \"SA\"",
+        "scope": "alias"
+      },
       "locales": [
         "en",
         "ar"
@@ -1110,7 +1135,12 @@
       ],
       "docstring": "Scenario 2: Creation of a Gift Registry from PDP → 'Add to Registry' button. 1. Sign in 2. Precondition — cleanup any pre-existing registries 3. Search for CATEGORY_4 (Diapers) and open the first search result 4. If the 'Add to Registry' button is missing on the first product, go back and try the second. If both are missing → fail with a clear Allure message so the reader knows the product catalog",
       "parametrized": false,
-      "skip": null,
+      "skip": {
+        "type": "conditional",
+        "reason": "Gift registry is AE-only: on SA the event list does not load and the registry  screen renders blank (app-side bug). [COUNTRY.upper() == \"SA\"]",
+        "condition": "COUNTRY.upper() == \"SA\"",
+        "scope": "alias"
+      },
       "locales": [
         "en",
         "ar"
@@ -1133,7 +1163,12 @@
       ],
       "docstring": "Scenario 3: Create one Gift Registry from PDP for each product type (simple / bundle / configurable / custom / custom_configurable / installation), then verify all appear on My registries, verify each registry's detail (event name, product name, quantity), and delete them in the same loop. First iteration opens the fresh 'Choose an event' sheet; subsequent iterations open the 'Add to gift registry",
       "parametrized": false,
-      "skip": null,
+      "skip": {
+        "type": "conditional",
+        "reason": "Gift registry is AE-only: on SA the event list does not load and the registry  screen renders blank (app-side bug). [COUNTRY.upper() == \"SA\"]",
+        "condition": "COUNTRY.upper() == \"SA\"",
+        "scope": "alias"
+      },
       "locales": [
         "en",
         "ar"
@@ -1532,7 +1567,8 @@
       "parametrized": false,
       "skip": {
         "type": "conditional",
-        "reason": "OS.lower() == \"ios\""
+        "reason": "Safari cannot type into the Checkout.com card iframes, so the Visa card this  bank coupon requires can never be entered and no discount reaches the order [OS.lower() == \"ios\"]",
+        "condition": "OS.lower() == \"ios\""
       },
       "locales": [
         "en",
@@ -2648,7 +2684,8 @@
       "parametrized": false,
       "skip": {
         "type": "conditional",
-        "reason": "OS.lower() == \"ios\""
+        "reason": "Safari cannot type into the Checkout.com card iframes, so the Visa card this  bank coupon requires can never be entered and no discount reaches the order [OS.lower() == \"ios\"]",
+        "condition": "OS.lower() == \"ios\""
       },
       "locales": [
         "en",
