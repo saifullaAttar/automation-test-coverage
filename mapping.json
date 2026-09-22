@@ -719,10 +719,12 @@
       "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_wishlist_add_all_product_types_new_user",
-        "web_ksa::test_ksa_wishlist_add_all_product_types_new_user"
+        "web_ksa::test_ksa_wishlist_add_all_product_types_new_user",
+        "web_commons::test_wishlist_add_products_from_plps_new_user",
+        "web_commons::test_wishlist_move_all_product_types_to_cart_new_user"
       ],
       "coverage_status": "full",
-      "notes": "Registers a brand-new user (guaranteed empty wishlist), adds all seven product types from the PDP and verifies each one. Replaces the previous link to the hard-skipped app test test_uae_cart_move_to_wishlist. TestMO flags this case NO -- it should be YES.",
+      "notes": "A brand-new user starts with an empty wishlist and adds every product type from the PDP (FALCONS-313), from every listing -- Category, SRP, Brand and Sale (FALCONS-312) -- then moves them all to the cart (FALCONS-296). TestMO flags this NO; it should be YES.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -750,11 +752,13 @@
       "page": 1,
       "run_id": 2154,
       "automated_tests": [
+        "web_commons::test_wishlist_move_all_product_types_to_cart_existing_user",
+        "web_commons::test_wishlist_move_all_product_types_to_cart_new_user",
         "web_uae::test_uae_wishlist_add_all_product_types_existing_user",
         "web_ksa::test_ksa_wishlist_add_all_product_types_existing_user"
       ],
       "coverage_status": "partial",
-      "notes": "wishlist.clear_wishlist() deletes every item from the Wishlist page, but it runs as a precondition so the deletion itself is exercised rather than asserted. Removing an item from the PDP heart icon (scenario 2) is not covered.",
+      "notes": "FALCONS-296. Moving every product type from the wishlist to the cart is asserted to remove each item from the wishlist, and the empty state is checked once the last one has gone; clear_wishlist() exercises bulk removal as a precondition. Scenario 2 -- removing an item by tapping the heart on its PDP -- is still not covered.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -783,10 +787,11 @@
       "run_id": 2154,
       "automated_tests": [
         "web_uae::test_uae_wishlist_add_all_product_types_existing_user",
-        "web_ksa::test_ksa_wishlist_add_all_product_types_existing_user"
+        "web_ksa::test_ksa_wishlist_add_all_product_types_existing_user",
+        "web_commons::test_wishlist_add_products_from_plps_existing_user"
       ],
       "coverage_status": "full",
-      "notes": "Existing user adds simple, configurable, colour-variant, custom, personalised, bundle and installation products to the wishlist from the PDP and verifies all of them -- covers the configurable / custom / bundle types this case names. TestMO flags this case NO -- it should be YES.",
+      "notes": "An existing user adds simple, configurable, colour-variant, custom, personalised, bundle and installation products to the wishlist from the PDP, and FALCONS-312 adds them from every listing as well -- Category, SRP once per product type, Brand and Sale. Covers the configurable, custom and bundle types this case names. TestMO flags this NO; it should be YES.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -2121,13 +2126,16 @@
       "source": "regression",
       "page": 2,
       "run_id": 2154,
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": "The purchased tab and desired-quantity checks after an order are not automated.",
+      "automated_tests": [
+        "web_commons::test_gift_registry_purchase_shows_for_owner"
+      ],
+      "coverage_status": "partial",
+      "notes": "The owner builds and publishes a registry, a buyer orders from the share link and pays by card, then the owner signs back in and the order is found under the registry's Purchased tab. Scenario 2 of this case -- that an item's desired quantity drops once purchased -- is not asserted.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -3614,9 +3622,11 @@
       "tags": "",
       "source": "release_check",
       "run_id": 2192,
-      "automated_tests": [],
-      "coverage_status": "none",
-      "notes": "Script exists but is hard-skipped: \"Brand page doesn't exist on app -- app-side bug, pending dev fix\". Nothing guards this case in a run today.",
+      "automated_tests": [
+        "app::test_customer_can_search_brand"
+      ],
+      "coverage_status": "full",
+      "notes": "Now automated: the script that was hard-skipped because the app had no brand page is live again on main, opening the brand page from a search suggestion. Still flagged Not planned in TestMO, so it sits outside the percentages until that changes.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -3956,10 +3966,11 @@
         "app::test_app_percentage_of_product_price_discount_rules_with_max_amount",
         "app::test_app_percentage_of_product_price_discount_rules_without_max_amount",
         "app::test_app_percentage_of_product_variant_price_discount_rules_with_max_amount",
-        "app::test_app_percentage_of_product_variant_price_discount_rules_without_max_amount"
+        "app::test_app_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "app::test_app_bank_discount_percentage_of_product_price_rule"
       ],
       "coverage_status": "full",
-      "notes": "FALCONS-342 closed the gap. Apply on the cart was already covered; the capped percentage test now applies a coupon on the cart, REMOVES it there, verifies the checkout summary loses the discount, then re-applies it on checkout -- so apply and remove are both proven. Four cart-price-rule variants are covered (percentage and variant-percentage, each with and without a max amount), with the order summary verified at each step.",
+      "notes": "FALCONS-342 closed the gap: the capped percentage test applies a coupon on the cart, REMOVES it there, verifies the checkout summary loses the discount, then re-applies it on checkout -- so apply and remove are both proven. Four cart-price-rule variants are covered, and the bank-coupon test is unskipped on main again, adding view-then-apply on the cart.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -4073,10 +4084,12 @@
       "page": 1,
       "run_id": 2192,
       "automated_tests": [
-        "app::test_app_wishlist_all_product_types"
+        "app::test_app_wishlist_all_product_types",
+        "app::test_app_wishlist_guest_add_from_plp_prompts_login",
+        "app::test_app_wishlist_guest_add_from_pdp_prompts_login"
       ],
-      "coverage_status": "partial",
-      "notes": "Moves all seven product types to the wishlist from the cart -- simple, custom, configurable, bundle, custom_configurable, colour variant and installation -- including the guest login-prompt branch, and verifies the cart is left empty. The PLP and PDP entry points this case also names are not covered: the app page objects have no add-to-wishlist method on either screen. Dropped the hard-skipped test_uae_cart_move_to_wishlist.",
+      "coverage_status": "full",
+      "notes": "All three entry points the case names are now covered. Cart: all seven product types moved to the wishlist, including the guest login-prompt branch. PLP and PDP (FALCONS-312): a guest taps the wishlist heart, the sign-in sheet opens, the user registers or signs in, and the product is then added and verified on the wishlist. The PLP and PDP paths take the first product on the listing rather than sweeping every type; the cart path covers all seven.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -4422,11 +4435,12 @@
       "page": 2,
       "run_id": 2192,
       "automated_tests": [
+        "app::test_app_gift_registry_order_from_share_link",
         "app::test_app_gift_registry_scenario_4_add_to_cart_via_deeplink"
       ],
-      "coverage_status": "none",
-      "notes": "Script exists and covers deep-linking into registries, adding to cart and validating the cart contents, but it is hard-skipped pending an app-side fix. NOT COUNTED AS AUTOMATED: every mapped script is hard-skipped, so nothing runs. Closing this is an unskip, not new test work.",
-      "skipped_only": true,
+      "coverage_status": "full",
+      "notes": "FALCONS-355. A per-product-type owner builds a registry from the PDP, the share link is copied, a brand-new buyer adds the registry product to their cart alongside one of their own, and pays by card. The older deep-link script is still hard-skipped pending an app- side fix. The app Gift Registry file is AE-only.",
+      "skipped_only": false,
       "gated_only": false,
       "locales": [
         "en",
@@ -4453,11 +4467,12 @@
       "page": 2,
       "run_id": 2192,
       "automated_tests": [
+        "app::test_app_gift_registry_order_from_share_link",
         "app::test_app_gift_registry_scenario_4_add_to_cart_via_deeplink"
       ],
-      "coverage_status": "none",
-      "notes": "The same script validates that each registry-owner cart switch holds the expected item, quantity and discounted price -- but it is hard-skipped pending an app-side fix. NOT COUNTED AS AUTOMATED: every mapped script is hard-skipped, so nothing runs. Closing this is an unskip, not new test work.",
-      "skipped_only": true,
+      "coverage_status": "full",
+      "notes": "FALCONS-355 covers the multiple-cart case directly: the buyer holds their own product and the registry's, the registry item is verified under its own cart switch, the registry group is paid for, and the buyer's own product is then checked to be untouched by that order. The owner's Purchased tab is verified too. The app Gift Registry file is AE-only.",
+      "skipped_only": false,
       "gated_only": false,
       "locales": [
         "en",
@@ -4484,14 +4499,16 @@
       "page": 2,
       "run_id": 2192,
       "automated_tests": [
-        "app::test_uae_guest_checkout_login_bottom_sheet_and_place_order"
+        "app::test_uae_guest_checkout_login_bottom_sheet_and_place_order",
+        "app::test_app_cart_guest_login_no_coupon_sc"
       ],
       "coverage_status": "full",
-      "notes": "A guest adds an item, taps checkout, signs in through the login bottom sheet and the item is still in the cart; parametrised by product type. Gated by skipif on OS. Dropped the hard-skipped test_app_cart_guest_login_no_coupon_sc. TestMO flags this NO -- it should be YES.",
+      "notes": "A guest adds an item, taps checkout, signs in through the login bottom sheet and the item is still in the cart; parametrised by product type, gated by skipif on OS. The store- credit variant of the same flow is unskipped on main again.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -8358,6 +8375,11 @@
           "status": "full"
         },
         {
+          "case_id": "1435396",
+          "name": "Verify user can add all product types to wishlist from cart, PLP and PDP",
+          "status": "full"
+        },
+        {
           "case_id": "1435397",
           "name": "Verify user can remove all product types from wishlist",
           "status": "full"
@@ -8365,6 +8387,16 @@
         {
           "case_id": "1435402",
           "name": "Verify customer can search  for products",
+          "status": "full"
+        },
+        {
+          "case_id": "1435419",
+          "name": "Verify GR cart and proceed to checkout",
+          "status": "full"
+        },
+        {
+          "case_id": "1435420",
+          "name": "Verify multiple carts and proceed to checkout",
           "status": "full"
         },
         {
@@ -8396,20 +8428,19 @@
           "case_id": "1435391",
           "name": "Verify PDP for all product types (Simple, custom , installation , configurable, configurable custom , colour variant  bundle, and egift )",
           "status": "partial"
+        },
+        {
+          "case_id": "1435416",
+          "name": "Verify brand name and logo in brand page",
+          "status": "full"
         }
       ]
     }
   },
   "unmapped_tests": [
-    "app::test_app_bank_discount_percentage_of_product_price_rule",
     "app::test_app_cart_apply_gift_wrap_and_place_order",
     "app::test_app_cart_existing_user_orders_no_coupon_yalla",
-    "app::test_app_cart_guest_login_no_coupon_sc",
     "app::test_app_gift_registry_create_from_my_registries",
-    "app::test_app_gift_registry_order_from_share_link",
-    "app::test_app_wishlist_guest_add_from_pdp_prompts_login",
-    "app::test_app_wishlist_guest_add_from_plp_prompts_login",
-    "app::test_customer_can_search_brand",
     "app::test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
     "app::test_super_app_now_non_serviceable_address_validation",
     "app::test_super_app_now_serviceable_address_restores_availability",
@@ -8418,13 +8449,8 @@
     "app::test_uae_cart_move_to_wishlist",
     "app::test_uae_cart_quantity_workflow",
     "app::test_uae_checkout_invalid_cc_no_coupon",
-    "web_commons::test_gift_registry_purchase_shows_for_owner",
     "web_commons::test_home_screen_elements_and_navigate_to_account",
     "web_commons::test_home_search_product_in_specific_category",
-    "web_commons::test_wishlist_add_products_from_plps_existing_user",
-    "web_commons::test_wishlist_add_products_from_plps_new_user",
-    "web_commons::test_wishlist_move_all_product_types_to_cart_existing_user",
-    "web_commons::test_wishlist_move_all_product_types_to_cart_new_user",
     "web_ksa::test_ksa_cart_apply_gift_wrap_and_place_order",
     "web_ksa::test_ksa_wishlist_guest_add_prompts_login",
     "web_uae::test_uae_cart_add_all_product_types_and_verify",
@@ -8453,6 +8479,41 @@
       "path": "tests/app/test_app_gift_registry.py",
       "mirrors_case": "2337059",
       "mirrors_name": "Gift Registry creation from My account (mWEB case; no app equivalent)"
+    },
+    {
+      "ref": "app::test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
+      "platform": "app",
+      "path": "tests/app/superApp/test_super_app_now_guest_order_journey.py",
+      "mirrors_case": "",
+      "mirrors_name": "Now vertical guest order journey -- no TestMO case exists for the Now vertical"
+    },
+    {
+      "ref": "app::test_super_app_now_non_serviceable_address_validation",
+      "platform": "app",
+      "path": "tests/app/superApp/test_super_app_logged_in_user_flow.py",
+      "mirrors_case": "",
+      "mirrors_name": "Now vertical serviceability -- no TestMO case exists for the Now vertical"
+    },
+    {
+      "ref": "app::test_super_app_now_serviceable_address_restores_availability",
+      "platform": "app",
+      "path": "tests/app/superApp/test_super_app_logged_in_user_flow.py",
+      "mirrors_case": "",
+      "mirrors_name": "Now vertical serviceability -- no TestMO case exists for the Now vertical"
+    },
+    {
+      "ref": "app::test_super_app_vertical_switcher_only_in_uae",
+      "platform": "app",
+      "path": "tests/app/superApp/test_super_app_vertical_availability.py",
+      "mirrors_case": "",
+      "mirrors_name": "Now vertical availability -- no TestMO case exists for the Now vertical"
+    },
+    {
+      "ref": "app::test_superapp_new_user_end_to_end_journey",
+      "platform": "app",
+      "path": "tests/app/superApp/test_superapp_new_user_end_to_end_journey.py",
+      "mirrors_case": "",
+      "mirrors_name": "Now vertical new-user journey -- no TestMO case exists for the Now vertical"
     },
     {
       "ref": "app::test_uae_checkout_invalid_cc_no_coupon",
@@ -8548,8 +8609,8 @@
   ],
   "metadata": {
     "schema": 2,
-    "last_updated": "2026-09-21",
-    "generated_at": "2026-09-21T17:24:14+00:00",
+    "last_updated": "2026-09-22",
+    "generated_at": "2026-09-22T05:26:21+00:00",
     "source_sha": "bf08b17",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
@@ -8572,30 +8633,30 @@
         "in_scope": 55,
         "out_of_scope": 60,
         "full": 33,
-        "partial": 4,
-        "covered": 37,
-        "none": 18,
-        "pct": 67,
+        "partial": 5,
+        "covered": 38,
+        "none": 17,
+        "pct": 69,
         "pct_full": 60
       },
       "app": {
         "total": 48,
         "in_scope": 29,
         "out_of_scope": 19,
-        "full": 15,
-        "partial": 5,
-        "covered": 20,
-        "none": 9,
-        "pct": 69,
-        "pct_full": 52
+        "full": 18,
+        "partial": 4,
+        "covered": 22,
+        "none": 7,
+        "pct": 76,
+        "pct_full": 62
       },
       "combined": {
         "in_scope": 84,
-        "full": 48,
+        "full": 51,
         "partial": 9,
-        "covered": 57,
-        "pct": 68,
-        "pct_full": 57
+        "covered": 60,
+        "pct": 71,
+        "pct_full": 61
       },
       "web_by_source": {
         "other_group": {
@@ -8614,10 +8675,10 @@
           "in_scope": 55,
           "out_of_scope": 49,
           "full": 33,
-          "partial": 4,
-          "covered": 37,
-          "none": 18,
-          "pct": 67,
+          "partial": 5,
+          "covered": 38,
+          "none": 17,
+          "pct": 69,
           "pct_full": 60
         }
       }
@@ -8625,18 +8686,18 @@
     "projection": {
       "web": {
         "in_scope": 66,
-        "covered": 49,
-        "pct": 74
-      },
-      "app": {
-        "in_scope": 34,
-        "covered": 26,
+        "covered": 50,
         "pct": 76
       },
+      "app": {
+        "in_scope": 40,
+        "covered": 34,
+        "pct": 85
+      },
       "combined": {
-        "in_scope": 100,
-        "covered": 75,
-        "pct": 75
+        "in_scope": 106,
+        "covered": 84,
+        "pct": 79
       },
       "actions": [
         {
@@ -8647,14 +8708,14 @@
         },
         {
           "id": "B",
-          "what": "Add 15 TestMO case(s) for tests that pass but have none",
+          "what": "Add 20 TestMO case(s) for tests that pass but have none",
           "detail": "the cart scenarios FALCONS-336 ported from the app suite; each names the app case to mirror",
           "effect": "enters scope already covered"
         },
         {
           "id": "C",
-          "what": "Re-flag 3 case(s) marked Not planned that have automation mapped",
-          "detail": "C-1435389, C-1435425, C-1435391",
+          "what": "Re-flag 4 case(s) marked Not planned that have automation mapped",
+          "detail": "C-1435389, C-1435425, C-1435391, C-1435416",
           "effect": "enters scope, already covered"
         }
       ]
@@ -8675,7 +8736,7 @@
     "active_tests": 146,
     "skipped_hard": 10,
     "cases_not_running": {
-      "hard_skipped": 3,
+      "hard_skipped": 1,
       "gated": 1
     },
     "gate_note": "Hard-skipped cases are not counted as automated: nothing runs. Platform-gated cases are counted -- they run wherever the product allows, and every gate is a product or tooling limitation rather than missing test work -- with the limitation shown on the case.",
@@ -8685,8 +8746,8 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 37,
-    "plan_gap_count": 15,
+    "unmapped_count": 26,
+    "plan_gap_count": 20,
     "unmapped_and_skipped": 6,
     "arabic_ready_tests": 124
   }

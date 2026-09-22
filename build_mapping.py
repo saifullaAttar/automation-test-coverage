@@ -106,21 +106,28 @@ WEB_MAPPING = {
 
     # --- My Wishlist (FALCONS-313) --------------------------------------------------
     "1018714": ("full", ["web_uae::test_uae_wishlist_add_all_product_types_new_user",
-                         "web_ksa::test_ksa_wishlist_add_all_product_types_new_user"],
-        "Registers a brand-new user (guaranteed empty wishlist), adds all seven product types from "
-        "the PDP and verifies each one. Replaces the previous link to the hard-skipped app test "
-        "test_uae_cart_move_to_wishlist. TestMO flags this case NO -- it should be YES."),
-    "1018717": ("partial", ["web_uae::test_uae_wishlist_add_all_product_types_existing_user",
+                         "web_ksa::test_ksa_wishlist_add_all_product_types_new_user",
+                         "web_commons::test_wishlist_add_products_from_plps_new_user",
+                         "web_commons::test_wishlist_move_all_product_types_to_cart_new_user"],
+        "A brand-new user starts with an empty wishlist and adds every product type from the PDP "
+        "(FALCONS-313), from every listing -- Category, SRP, Brand and Sale (FALCONS-312) -- then "
+        "moves them all to the cart (FALCONS-296). TestMO flags this NO; it should be YES."),
+    "1018717": ("partial", ["web_commons::test_wishlist_move_all_product_types_to_cart_existing_user",
+                            "web_commons::test_wishlist_move_all_product_types_to_cart_new_user",
+                            "web_uae::test_uae_wishlist_add_all_product_types_existing_user",
                             "web_ksa::test_ksa_wishlist_add_all_product_types_existing_user"],
-        "wishlist.clear_wishlist() deletes every item from the Wishlist page, but it runs as a "
-        "precondition so the deletion itself is exercised rather than asserted. Removing an item "
-        "from the PDP heart icon (scenario 2) is not covered."),
+        "FALCONS-296. Moving every product type from the wishlist to the cart is asserted to remove "
+        "each item from the wishlist, and the empty state is checked once the last one has gone; "
+        "clear_wishlist() exercises bulk removal as a precondition. Scenario 2 -- removing an item "
+        "by tapping the heart on its PDP -- is still not covered."),
     "1018719": ("full", ["web_uae::test_uae_wishlist_add_all_product_types_existing_user",
-                         "web_ksa::test_ksa_wishlist_add_all_product_types_existing_user"],
-        "Existing user adds simple, configurable, colour-variant, custom, personalised, bundle and "
-        "installation products to the wishlist from the PDP and verifies all of them -- covers the "
-        "configurable / custom / bundle types this case names. TestMO flags this case NO -- it should be YES."),
-
+                         "web_ksa::test_ksa_wishlist_add_all_product_types_existing_user",
+                         "web_commons::test_wishlist_add_products_from_plps_existing_user"],
+        "An existing user adds simple, configurable, colour-variant, custom, personalised, bundle "
+        "and installation products to the wishlist from the PDP, and FALCONS-312 adds them from "
+        "every listing as well -- Category, SRP once per product type, Brand and Sale. Covers the "
+        "configurable, custom and bundle types this case names. TestMO flags this NO; it should be "
+        "YES."),
     # --- Wallet ---------------------------------------------------------------------
     "1018715": ("none", [], "Empty wallet is not automated."),
     "1018716": ("full", ["web_uae::test_uae_checkout_full_sc_and_verify_sc_balance",
@@ -314,7 +321,11 @@ WEB_MAPPING = {
         "FALCONS-341. The buyer switches the cart to the registry group, checks out that group alone "
         "and pays by credit card. Replaces the old link to test_ksa_checkout_cc_normal_coupon, which "
         "was unrelated and hard-skipped."),
-    "1018774": ("none", [], "The purchased tab and desired-quantity checks after an order are not automated."),
+    "1018774": ("partial", ["web_commons::test_gift_registry_purchase_shows_for_owner"],
+        "The owner builds and publishes a registry, a buyer orders from the share link and pays by "
+        "card, then the owner signs back in and the order is found under the registry's Purchased "
+        "tab. Scenario 2 of this case -- that an item's desired quantity drops once purchased -- is "
+        "not asserted."),
 }
 
 # Every "Verify adding X item from Admin" case -- Admin-side product creation is
@@ -361,9 +372,10 @@ APP_MAPPING = {
         "Newly credited (FALCONS-282). Adds a product to a registry from the PDP for six product "
         "types and verifies the event name, product name and quantity on the registry detail screen. "
         "Colour variant and egift are not covered."),
-    "1435416": ("none", [],
-        "Script exists but is hard-skipped: \"Brand page doesn't exist on app -- app-side bug, "
-        "pending dev fix\". Nothing guards this case in a run today."),
+    "1435416": ("full", ["app::test_customer_can_search_brand"],
+        "Now automated: the script that was hard-skipped because the app had no brand page is live "
+        "again on main, opening the brand page from a search suggestion. Still flagged Not planned "
+        "in TestMO, so it sits outside the percentages until that changes."),
     "2885050": ("none", [], "Brand-page product loading with filter and sort is not automated."),
     "2885052": ("full", ["app::test_existing_user_profile",
                          "app::test_app_invalid_login_combinations"],
@@ -410,13 +422,13 @@ APP_MAPPING = {
                          "app::test_app_percentage_of_product_price_discount_rules_with_max_amount",
                          "app::test_app_percentage_of_product_price_discount_rules_without_max_amount",
                          "app::test_app_percentage_of_product_variant_price_discount_rules_with_max_amount",
-                         "app::test_app_percentage_of_product_variant_price_discount_rules_without_max_amount"],
-        "FALCONS-342 closed the gap. Apply on the cart was already covered; the capped "
-        "percentage test now applies a coupon on the cart, REMOVES it there, verifies the "
-        "checkout summary loses the discount, then re-applies it on checkout -- so apply and "
-        "remove are both proven. Four cart-price-rule variants are covered (percentage and "
-        "variant-percentage, each with and without a max amount), with the order summary "
-        "verified at each step."),
+                         "app::test_app_percentage_of_product_variant_price_discount_rules_without_max_amount",
+                         "app::test_app_bank_discount_percentage_of_product_price_rule"],
+        "FALCONS-342 closed the gap: the capped percentage test applies a coupon on the cart, "
+        "REMOVES it there, verifies the checkout summary loses the discount, then re-applies it on "
+        "checkout -- so apply and remove are both proven. Four cart-price-rule variants are "
+        "covered, and the bank-coupon test is unskipped on main again, adding view-then-apply on "
+        "the cart."),
     "1435393": ("full", ["app::test_existing_user_profile"],
         "Signs in and verifies every detail on the My Profile screen. TestMO flags this NO -- it should be YES."),
     "1435394": ("none", [], "There is no app order-list / order-details test."),
@@ -425,12 +437,15 @@ APP_MAPPING = {
         "existing customer. test_app_wishlist_all_product_types does open the wishlist, but only as "
         "a step inside a cart-to-wishlist flow, so it does not stand in for this case (QA owner, "
         "8 Sep 2026). That test is credited on 1435396 and 1435397 instead."),
-    "1435396": ("partial", ["app::test_app_wishlist_all_product_types"],
-        "Moves all seven product types to the wishlist from the cart -- simple, custom, "
-        "configurable, bundle, custom_configurable, colour variant and installation -- including the "
-        "guest login-prompt branch, and verifies the cart is left empty. The PLP and PDP entry points "
-        "this case also names are not covered: the app page objects have no add-to-wishlist method on "
-        "either screen. Dropped the hard-skipped test_uae_cart_move_to_wishlist."),
+    "1435396": ("full", ["app::test_app_wishlist_all_product_types",
+                         "app::test_app_wishlist_guest_add_from_plp_prompts_login",
+                         "app::test_app_wishlist_guest_add_from_pdp_prompts_login"],
+        "All three entry points the case names are now covered. Cart: all seven product types moved "
+        "to the wishlist, including the guest login-prompt branch. PLP and PDP (FALCONS-312): a "
+        "guest taps the wishlist heart, the sign-in sheet opens, the user registers or signs in, "
+        "and the product is then added and verified on the wishlist. The PLP and PDP paths take the "
+        "first product on the listing rather than sweeping every type; the cart path covers all "
+        "seven."),
     "1435397": ("full", ["app::test_app_wishlist_all_product_types"],
         "Covered by the closing steps of the wishlist test, which I had missed: after verifying all "
         "products are present it calls wishlist_app.delete_all_wishlist_items() -- clicking the "
@@ -485,16 +500,23 @@ APP_MAPPING = {
         "8 Sep 2026). Two residuals tracked separately: both Tamara scripts are hard-skipped as "
         "flaky, and the ODP / Admin / invoice checks named in the case title are not verified on "
         "the app. Removed the web CC and Tabby tests that were wrongly credited here."),
-    "1435419": ("partial", ["app::test_app_gift_registry_scenario_4_add_to_cart_via_deeplink"],
-        "Script exists and covers deep-linking into registries, adding to cart and validating the "
-        "cart contents, but it is hard-skipped pending an app-side fix."),
-    "1435420": ("partial", ["app::test_app_gift_registry_scenario_4_add_to_cart_via_deeplink"],
-        "The same script validates that each registry-owner cart switch holds the expected item, "
-        "quantity and discounted price -- but it is hard-skipped pending an app-side fix."),
-    "1543957": ("full", ["app::test_uae_guest_checkout_login_bottom_sheet_and_place_order"],
-        "A guest adds an item, taps checkout, signs in through the login bottom sheet and the item is "
-        "still in the cart; parametrised by product type. Gated by skipif on OS. Dropped the "
-        "hard-skipped test_app_cart_guest_login_no_coupon_sc. TestMO flags this NO -- it should be YES."),
+    "1435419": ("full", ["app::test_app_gift_registry_order_from_share_link",
+                         "app::test_app_gift_registry_scenario_4_add_to_cart_via_deeplink"],
+        "FALCONS-355. A per-product-type owner builds a registry from the PDP, the share link is "
+        "copied, a brand-new buyer adds the registry product to their cart alongside one of their "
+        "own, and pays by card. The older deep-link script is still hard-skipped pending an app- "
+        "side fix. The app Gift Registry file is AE-only."),
+    "1435420": ("full", ["app::test_app_gift_registry_order_from_share_link",
+                         "app::test_app_gift_registry_scenario_4_add_to_cart_via_deeplink"],
+        "FALCONS-355 covers the multiple-cart case directly: the buyer holds their own product and "
+        "the registry's, the registry item is verified under its own cart switch, the registry "
+        "group is paid for, and the buyer's own product is then checked to be untouched by that "
+        "order. The owner's Purchased tab is verified too. The app Gift Registry file is AE-only."),
+    "1543957": ("full", ["app::test_uae_guest_checkout_login_bottom_sheet_and_place_order",
+                         "app::test_app_cart_guest_login_no_coupon_sc"],
+        "A guest adds an item, taps checkout, signs in through the login bottom sheet and the item "
+        "is still in the cart; parametrised by product type, gated by skipif on OS. The store- "
+        "credit variant of the same flow is unskipped on main again."),
     "1543908": ("none", [], "Algolia recommendations across screens are not automated."),
     "1435415": ("none", [], "App close / reopen is not automated."),
     "1543946": ("none", [],
@@ -546,6 +568,18 @@ PLAN_GAPS = {
         ("1018714", "Wishlist cases cover new/existing users; none covers the guest login prompt"),
     "web_ksa::test_ksa_wishlist_guest_add_prompts_login":
         ("1018714", "Wishlist cases cover new/existing users; none covers the guest login prompt"),
+    # FALCONS-347/348/349 -- the Now vertical. A new product area; neither TestMO
+    # export carries cases for it, so none of this can raise a percentage yet.
+    "app::test_super_app_vertical_switcher_only_in_uae":
+        ("", "Now vertical availability -- no TestMO case exists for the Now vertical"),
+    "app::test_super_app_now_serviceable_address_restores_availability":
+        ("", "Now vertical serviceability -- no TestMO case exists for the Now vertical"),
+    "app::test_super_app_now_non_serviceable_address_validation":
+        ("", "Now vertical serviceability -- no TestMO case exists for the Now vertical"),
+    "app::test_super_app_now_guest_shop_coupon_login_and_place_cc_order":
+        ("", "Now vertical guest order journey -- no TestMO case exists for the Now vertical"),
+    "app::test_superapp_new_user_end_to_end_journey":
+        ("", "Now vertical new-user journey -- no TestMO case exists for the Now vertical"),
     "app::test_uae_checkout_invalid_cc_no_coupon":
         ("2337041", "Checkout - Invalid transactions (mWEB case; the app checklist has no equivalent)"),
 }

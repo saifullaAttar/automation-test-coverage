@@ -1083,7 +1083,7 @@ function refreshUnmapped() {
       <strong>${DATA.metadata.coverage.web.covered + (DATA.plan_gaps||[]).filter(g=>g.platform.startsWith('web')).length}/${DATA.metadata.coverage.web.in_scope + (DATA.plan_gaps||[]).filter(g=>g.platform.startsWith('web')).length}</strong>.</p>`;
     html += surplus.map(t => {
       const g = gaps.get(t.ref || t.name);
-      return row(t, g ? `<span style="font-size:.8em;color:#0e6b3d">↳ mirror TestMO case <strong>C-${g.mirrors_case}</strong> — ${g.mirrors_name}</span>` : '');
+      return row(t, g ? `<span style="font-size:.8em;color:#0e6b3d">↳ ${g.mirrors_case ? `mirror TestMO case <strong>C-${g.mirrors_case}</strong> — ` : ''}${g.mirrors_name}</span>` : '');
     }).join('');
   }
   if (skipped.length) {
