@@ -8653,8 +8653,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-24",
-    "generated_at": "2026-09-24T06:25:00+00:00",
-    "source_sha": "bf08b17",
+    "generated_at": "2026-09-24T13:13:22+00:00",
+    "source_sha": "37fceef",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
