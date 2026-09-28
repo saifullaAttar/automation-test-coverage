@@ -6117,6 +6117,28 @@
           "en",
           "ar"
         ]
+      },
+      {
+        "ref": "app::test_app_wishlist_delete_all_product_types",
+        "name": "test_app_wishlist_delete_all_product_types",
+        "platform": "app",
+        "path": "tests/app/test_app_wishlist_delete.py",
+        "file": "test_app_wishlist_delete.py",
+        "title": "Wishlist: delete every product type using all three deletion options",
+        "feature": "Wishlist",
+        "story": "FALCONS-297 - Delete products from the wishlist",
+        "severity": "critical",
+        "tags": [
+          "Wishlist",
+          "Delete",
+          "FALCONS-297"
+        ],
+        "docstring": "A new user deletes every product type from the wishlist using all three delete options. 1. Register a new account, whose wishlist starts empty 2. Add every product type to the wishlist from its PDP 3. Delete items one at a time with the per-item remove icon 4. Delete specific items via Select, verifying the unselected ones remain 5. Delete whatever is left via Select then Select All 6. Verify the ",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
       }
     ],
     "web_uae": [
@@ -8531,6 +8553,7 @@
     "app::test_app_cart_existing_user_orders_no_coupon_yalla",
     "app::test_app_gift_registry_create_from_my_registries",
     "app::test_app_wishlist_add_products_from_plps",
+    "app::test_app_wishlist_delete_all_product_types",
     "app::test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
     "app::test_super_app_now_non_serviceable_address_validation",
     "app::test_super_app_now_serviceable_address_restores_availability",
@@ -8701,8 +8724,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-28",
-    "generated_at": "2026-09-28T05:46:15+00:00",
-    "source_sha": "584cc10",
+    "generated_at": "2026-09-28T05:46:33+00:00",
+    "source_sha": "4de4dd9",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -8818,13 +8841,13 @@
       "other_group": 11
     },
     "platforms": {
-      "app": 59,
+      "app": 60,
       "web_uae": 51,
       "web_ksa": 35,
       "web_commons": 15
     },
-    "total_automated_tests": 160,
-    "active_tests": 141,
+    "total_automated_tests": 161,
+    "active_tests": 142,
     "skipped_hard": 10,
     "cases_not_running": {
       "hard_skipped": 1,
@@ -8837,7 +8860,7 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 28,
+    "unmapped_count": 29,
     "plan_gap_count": 20,
     "unmapped_and_skipped": 6,
     "arabic_ready_tests": 127

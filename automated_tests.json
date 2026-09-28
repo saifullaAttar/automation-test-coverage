@@ -1355,6 +1355,28 @@
         "en",
         "ar"
       ]
+    },
+    {
+      "ref": "app::test_app_wishlist_delete_all_product_types",
+      "name": "test_app_wishlist_delete_all_product_types",
+      "platform": "app",
+      "path": "tests/app/test_app_wishlist_delete.py",
+      "file": "test_app_wishlist_delete.py",
+      "title": "Wishlist: delete every product type using all three deletion options",
+      "feature": "Wishlist",
+      "story": "FALCONS-297 - Delete products from the wishlist",
+      "severity": "critical",
+      "tags": [
+        "Wishlist",
+        "Delete",
+        "FALCONS-297"
+      ],
+      "docstring": "A new user deletes every product type from the wishlist using all three delete options. 1. Register a new account, whose wishlist starts empty 2. Add every product type to the wishlist from its PDP 3. Delete items one at a time with the per-item remove icon 4. Delete specific items via Select, verifying the unselected ones remain 5. Delete whatever is left via Select then Select All 6. Verify the ",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
     }
   ],
   "web_uae": [
@@ -3559,7 +3581,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "584cc10",
+    "sha": "4de4dd9",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }
