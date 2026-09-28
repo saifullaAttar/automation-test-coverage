@@ -3450,6 +3450,27 @@
       ]
     },
     {
+      "ref": "web_commons::test_wishlist_delete_all_product_types",
+      "name": "test_wishlist_delete_all_product_types",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_wishlist_delete.py",
+      "file": "test_wishlist_delete.py",
+      "title": "Wishlist: delete every product type using all three deletion options",
+      "feature": "Wishlist",
+      "story": "FALCONS-315 - Delete products from the wishlist",
+      "severity": "critical",
+      "tags": [
+        "Wishlist",
+        "Delete"
+      ],
+      "docstring": "1. Sign in as an existing user and empty the wishlist 2. Add every product type to the wishlist from its PDP 3. Delete items one at a time with the per-item remove icon 4. Delete specific items via Select, verifying the unselected ones remain 5. Delete whatever is left via Select then Select All 6. Verify the wishlist shows its empty state",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "web_commons::test_wishlist_add_products_from_plps_existing_user",
       "name": "test_wishlist_add_products_from_plps_existing_user",
       "platform": "web_commons",
@@ -3538,7 +3559,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "50dcf5b",
+    "sha": "584cc10",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }
