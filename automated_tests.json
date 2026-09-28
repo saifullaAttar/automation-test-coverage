@@ -682,25 +682,6 @@
       ]
     },
     {
-      "ref": "app::test_app_wishlist_all_product_types",
-      "name": "test_app_wishlist_all_product_types",
-      "platform": "app",
-      "path": "tests/app/test_app_cart.py",
-      "file": "test_app_cart.py",
-      "title": "",
-      "feature": "Cart",
-      "story": "",
-      "severity": "critical",
-      "tags": [],
-      "docstring": "Wishlist Flow for Guest and Logged-in Users: 1. Setup user (guest: logout after login, logged_in: stay logged in) 2. Add all product types to cart 3. Move first item to wishlist (guest: login prompt, logged_in: toast) 4. Move remaining items to wishlist 5. Verify cart is empty 6. Navigate to wishlist and verify all products 7. Navigate back to cart and verify still empty",
-      "parametrized": true,
-      "skip": null,
-      "locales": [
-        "en",
-        "ar"
-      ]
-    },
-    {
       "ref": "app::test_app_cart_partial_sc_and_checkout_with_cc",
       "name": "test_app_cart_partial_sc_and_checkout_with_cc",
       "platform": "app",
@@ -1305,7 +1286,8 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
       ]
     },
     {
@@ -1328,7 +1310,50 @@
       "parametrized": false,
       "skip": null,
       "locales": [
-        "en"
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_app_wishlist_add_products_from_plps",
+      "name": "test_app_wishlist_add_products_from_plps",
+      "platform": "app",
+      "path": "tests/app/test_app_wishlist.py",
+      "file": "test_app_wishlist.py",
+      "title": "Add products to the wishlist from every PLP",
+      "feature": "Wishlist",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Wishlist",
+        "PLP",
+        "FALCONS-294"
+      ],
+      "docstring": "A newly registered user adds every product type to the wishlist from every PLP. 1. Register a new account, whose wishlist starts empty 2. Search each product type on the SRP and heart the first result 3. Heart the first result on the Brand and Sale PLPs 4. Verify every hearted product is listed in the wishlist 5. Delete them all and verify the wishlist is empty",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_app_wishlist_all_product_types",
+      "name": "test_app_wishlist_all_product_types",
+      "platform": "app",
+      "path": "tests/app/test_app_wishlist.py",
+      "file": "test_app_wishlist.py",
+      "title": "",
+      "feature": "Wishlist",
+      "story": "",
+      "severity": "critical",
+      "tags": [],
+      "docstring": "Wishlist Flow for Guest and Logged-in Users: 1. Setup user (guest: logout after login, logged_in: stay logged in) 2. Add all product types to cart 3. Move first item to wishlist (guest: login prompt, logged_in: toast) 4. Move remaining items to wishlist 5. Verify cart is empty 6. Navigate to wishlist and verify all products 7. Navigate back to cart and verify still empty",
+      "parametrized": true,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
       ]
     }
   ],
@@ -3513,7 +3538,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "10ac97f",
+    "sha": "50dcf5b",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }

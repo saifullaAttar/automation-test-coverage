@@ -5444,25 +5444,6 @@
         ]
       },
       {
-        "ref": "app::test_app_wishlist_all_product_types",
-        "name": "test_app_wishlist_all_product_types",
-        "platform": "app",
-        "path": "tests/app/test_app_cart.py",
-        "file": "test_app_cart.py",
-        "title": "",
-        "feature": "Cart",
-        "story": "",
-        "severity": "critical",
-        "tags": [],
-        "docstring": "Wishlist Flow for Guest and Logged-in Users: 1. Setup user (guest: logout after login, logged_in: stay logged in) 2. Add all product types to cart 3. Move first item to wishlist (guest: login prompt, logged_in: toast) 4. Move remaining items to wishlist 5. Verify cart is empty 6. Navigate to wishlist and verify all products 7. Navigate back to cart and verify still empty",
-        "parametrized": true,
-        "skip": null,
-        "locales": [
-          "en",
-          "ar"
-        ]
-      },
-      {
         "ref": "app::test_app_cart_partial_sc_and_checkout_with_cc",
         "name": "test_app_cart_partial_sc_and_checkout_with_cc",
         "platform": "app",
@@ -6067,7 +6048,8 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
         ]
       },
       {
@@ -6090,7 +6072,50 @@
         "parametrized": false,
         "skip": null,
         "locales": [
-          "en"
+          "en",
+          "ar"
+        ]
+      },
+      {
+        "ref": "app::test_app_wishlist_add_products_from_plps",
+        "name": "test_app_wishlist_add_products_from_plps",
+        "platform": "app",
+        "path": "tests/app/test_app_wishlist.py",
+        "file": "test_app_wishlist.py",
+        "title": "Add products to the wishlist from every PLP",
+        "feature": "Wishlist",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Wishlist",
+          "PLP",
+          "FALCONS-294"
+        ],
+        "docstring": "A newly registered user adds every product type to the wishlist from every PLP. 1. Register a new account, whose wishlist starts empty 2. Search each product type on the SRP and heart the first result 3. Heart the first result on the Brand and Sale PLPs 4. Verify every hearted product is listed in the wishlist 5. Delete them all and verify the wishlist is empty",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
+        "ref": "app::test_app_wishlist_all_product_types",
+        "name": "test_app_wishlist_all_product_types",
+        "platform": "app",
+        "path": "tests/app/test_app_wishlist.py",
+        "file": "test_app_wishlist.py",
+        "title": "",
+        "feature": "Wishlist",
+        "story": "",
+        "severity": "critical",
+        "tags": [],
+        "docstring": "Wishlist Flow for Guest and Logged-in Users: 1. Setup user (guest: logout after login, logged_in: stay logged in) 2. Add all product types to cart 3. Move first item to wishlist (guest: login prompt, logged_in: toast) 4. Move remaining items to wishlist 5. Verify cart is empty 6. Navigate to wishlist and verify all products 7. Navigate back to cart and verify still empty",
+        "parametrized": true,
+        "skip": null,
+        "locales": [
+          "en",
+          "ar"
         ]
       }
     ],
@@ -8484,6 +8509,7 @@
     "app::test_app_cart_apply_gift_wrap_and_place_order",
     "app::test_app_cart_existing_user_orders_no_coupon_yalla",
     "app::test_app_gift_registry_create_from_my_registries",
+    "app::test_app_wishlist_add_products_from_plps",
     "app::test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
     "app::test_super_app_now_non_serviceable_address_validation",
     "app::test_super_app_now_serviceable_address_restores_availability",
@@ -8652,9 +8678,9 @@
   ],
   "metadata": {
     "schema": 2,
-    "last_updated": "2026-09-27",
-    "generated_at": "2026-09-27T06:23:55+00:00",
-    "source_sha": "10ac97f",
+    "last_updated": "2026-09-28",
+    "generated_at": "2026-09-28T05:19:45+00:00",
+    "source_sha": "50dcf5b",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -8770,13 +8796,13 @@
       "other_group": 11
     },
     "platforms": {
-      "app": 58,
+      "app": 59,
       "web_uae": 51,
       "web_ksa": 35,
       "web_commons": 14
     },
-    "total_automated_tests": 158,
-    "active_tests": 139,
+    "total_automated_tests": 159,
+    "active_tests": 140,
     "skipped_hard": 10,
     "cases_not_running": {
       "hard_skipped": 1,
@@ -8789,9 +8815,9 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 26,
+    "unmapped_count": 27,
     "plan_gap_count": 20,
     "unmapped_and_skipped": 6,
-    "arabic_ready_tests": 124
+    "arabic_ready_tests": 127
   }
 }
