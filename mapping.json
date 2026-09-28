@@ -9013,8 +9013,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-28",
-    "generated_at": "2026-09-28T09:25:06+00:00",
-    "source_sha": "17a6d7b",
+    "generated_at": "2026-09-28T15:53:50+00:00",
+    "source_sha": "c869975",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
