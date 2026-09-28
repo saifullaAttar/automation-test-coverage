@@ -1357,6 +1357,53 @@
       ]
     },
     {
+      "ref": "app::test_app_wishlist_from_pdp",
+      "name": "test_app_wishlist_from_pdp",
+      "platform": "app",
+      "path": "tests/app/test_app_wishlist.py",
+      "file": "test_app_wishlist.py",
+      "title": "",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Wishlist",
+        "PDP"
+      ],
+      "docstring": "Add a single product type to the wishlist directly from the PDP heart pill. Parameterized per product type (simple, bundle, configurable, custom, installation) so one type can be run in isolation, e.g.:: make local-app-test-one T=\"test_app_wishlist_from_pdp[simple]\" \\\\ OS=Android APK_PATH=mobileApp/Android/Mumz-automation.apk Steps: 1. Search for the product 2. Select the first product from the SR",
+      "parametrized": true,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_app_wishlist_from_pdp_new_user",
+      "name": "test_app_wishlist_from_pdp_new_user",
+      "platform": "app",
+      "path": "tests/app/test_app_wishlist.py",
+      "file": "test_app_wishlist.py",
+      "title": "",
+      "feature": "Cart",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Wishlist",
+        "PDP",
+        "New Account"
+      ],
+      "docstring": "Same wishlist-from-PDP flow as ``test_app_wishlist_from_pdp``, but for a brand-new user: create a fresh account (which signs the user in), then add a product to the wishlist from the PDP heart pill and verify. Parameterized over the same product types as the existing-user run, so the two together cover every type for both user states. A new account starts with an empty wishlist, so no pre-clean is",
+      "parametrized": true,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
       "ref": "app::test_app_wishlist_delete_all_product_types",
       "name": "test_app_wishlist_delete_all_product_types",
       "platform": "app",
@@ -3581,7 +3628,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "4de4dd9",
+    "sha": "3365ea5",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }

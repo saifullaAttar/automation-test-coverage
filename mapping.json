@@ -6119,6 +6119,53 @@
         ]
       },
       {
+        "ref": "app::test_app_wishlist_from_pdp",
+        "name": "test_app_wishlist_from_pdp",
+        "platform": "app",
+        "path": "tests/app/test_app_wishlist.py",
+        "file": "test_app_wishlist.py",
+        "title": "",
+        "feature": "Cart",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Wishlist",
+          "PDP"
+        ],
+        "docstring": "Add a single product type to the wishlist directly from the PDP heart pill. Parameterized per product type (simple, bundle, configurable, custom, installation) so one type can be run in isolation, e.g.:: make local-app-test-one T=\"test_app_wishlist_from_pdp[simple]\" \\\\ OS=Android APK_PATH=mobileApp/Android/Mumz-automation.apk Steps: 1. Search for the product 2. Select the first product from the SR",
+        "parametrized": true,
+        "skip": null,
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
+        "ref": "app::test_app_wishlist_from_pdp_new_user",
+        "name": "test_app_wishlist_from_pdp_new_user",
+        "platform": "app",
+        "path": "tests/app/test_app_wishlist.py",
+        "file": "test_app_wishlist.py",
+        "title": "",
+        "feature": "Cart",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Wishlist",
+          "PDP",
+          "New Account"
+        ],
+        "docstring": "Same wishlist-from-PDP flow as ``test_app_wishlist_from_pdp``, but for a brand-new user: create a fresh account (which signs the user in), then add a product to the wishlist from the PDP heart pill and verify. Parameterized over the same product types as the existing-user run, so the two together cover every type for both user states. A new account starts with an empty wishlist, so no pre-clean is",
+        "parametrized": true,
+        "skip": null,
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
         "ref": "app::test_app_wishlist_delete_all_product_types",
         "name": "test_app_wishlist_delete_all_product_types",
         "platform": "app",
@@ -8554,6 +8601,8 @@
     "app::test_app_gift_registry_create_from_my_registries",
     "app::test_app_wishlist_add_products_from_plps",
     "app::test_app_wishlist_delete_all_product_types",
+    "app::test_app_wishlist_from_pdp",
+    "app::test_app_wishlist_from_pdp_new_user",
     "app::test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
     "app::test_super_app_now_non_serviceable_address_validation",
     "app::test_super_app_now_serviceable_address_restores_availability",
@@ -8724,8 +8773,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-28",
-    "generated_at": "2026-09-28T05:46:33+00:00",
-    "source_sha": "4de4dd9",
+    "generated_at": "2026-09-28T05:55:34+00:00",
+    "source_sha": "3365ea5",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -8841,13 +8890,13 @@
       "other_group": 11
     },
     "platforms": {
-      "app": 60,
+      "app": 62,
       "web_uae": 51,
       "web_ksa": 35,
       "web_commons": 15
     },
-    "total_automated_tests": 161,
-    "active_tests": 142,
+    "total_automated_tests": 163,
+    "active_tests": 144,
     "skipped_hard": 10,
     "cases_not_running": {
       "hard_skipped": 1,
@@ -8860,9 +8909,9 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 29,
+    "unmapped_count": 31,
     "plan_gap_count": 20,
     "unmapped_and_skipped": 6,
-    "arabic_ready_tests": 127
+    "arabic_ready_tests": 129
   }
 }
