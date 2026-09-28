@@ -1822,8 +1822,7 @@
       "skipped_only": false,
       "gated_only": false,
       "locales": [
-        "en",
-        "ar"
+        "en"
       ]
     },
     {
@@ -1856,8 +1855,7 @@
       "skipped_only": false,
       "gated_only": false,
       "locales": [
-        "en",
-        "ar"
+        "en"
       ]
     },
     {
@@ -1891,8 +1889,7 @@
         "Safari cannot type into the Checkout.com card iframes, so the Visa card this  bank coupon requires can never b"
       ],
       "locales": [
-        "en",
-        "ar"
+        "en"
       ]
     },
     {
@@ -3980,8 +3977,7 @@
       "skipped_only": false,
       "gated_only": false,
       "locales": [
-        "en",
-        "ar"
+        "en"
       ]
     },
     {
@@ -5210,28 +5206,6 @@
         ]
       },
       {
-        "ref": "app::test_app_uae_cart_remove_item_with_applied_coupon",
-        "name": "test_app_uae_cart_remove_item_with_applied_coupon",
-        "platform": "app",
-        "path": "tests/app/test_app_cart.py",
-        "file": "test_app_cart.py",
-        "title": "Remove item from cart with applied coupon and verify totals recalculate",
-        "feature": "Cart",
-        "story": "",
-        "severity": "critical",
-        "tags": [
-          "Cart",
-          "Coupon"
-        ],
-        "docstring": "Verify that user can remove an item when coupon is applied and totals recalculate correctly.",
-        "parametrized": false,
-        "skip": null,
-        "locales": [
-          "en",
-          "ar"
-        ]
-      },
-      {
         "ref": "app::test_app_cart_apply_gift_wrap_and_place_order",
         "name": "test_app_cart_apply_gift_wrap_and_place_order",
         "platform": "app",
@@ -5294,125 +5268,6 @@
           "ProductTypes"
         ],
         "docstring": "Test adding all product types to cart from Search Result Page. Flow for each product type: - Simple: Click \"+\" → goes to cart → verify product in cart - Custom/Configurable/Bundle: Click \"+\" → popup opens → validate → select/fill → Add to Cart → tap cart icon → verify Product types: simple, custom, configurable, bundle",
-        "parametrized": false,
-        "skip": null,
-        "locales": [
-          "en",
-          "ar"
-        ]
-      },
-      {
-        "ref": "app::test_app_percentage_of_product_variant_price_discount_rules_with_max_amount",
-        "name": "test_app_percentage_of_product_variant_price_discount_rules_with_max_amount",
-        "platform": "app",
-        "path": "tests/app/test_app_cart.py",
-        "file": "test_app_cart.py",
-        "title": "Percentage of product variant price discount with max amount",
-        "feature": "Coupon",
-        "story": "",
-        "severity": "critical",
-        "tags": [
-          "Cart",
-          "Coupon",
-          "COD",
-          "AUTO_V_MAX_0"
-        ],
-        "docstring": "1. Add an on-sale product and one sold at list price. 2. Proceed to checkout and select COD. 3. Verify the summary, then apply the capped variant coupon on checkout. 4. Verify the summary again and place a COD order.",
-        "parametrized": false,
-        "skip": null,
-        "locales": [
-          "en",
-          "ar"
-        ]
-      },
-      {
-        "ref": "app::test_app_percentage_of_product_variant_price_discount_rules_without_max_amount",
-        "name": "test_app_percentage_of_product_variant_price_discount_rules_without_max_amount",
-        "platform": "app",
-        "path": "tests/app/test_app_cart.py",
-        "file": "test_app_cart.py",
-        "title": "Percentage of product variant price discount without max amount",
-        "feature": "Coupon",
-        "story": "",
-        "severity": "critical",
-        "tags": [
-          "Cart",
-          "Coupon",
-          "CC",
-          "AUTO_V_MAX_60"
-        ],
-        "docstring": "1. Add one on-sale product from Deals and one regular product from search. 2. Apply the uncapped variant-price coupon on the cart. 3. Proceed to checkout and verify the order summary. 4. Place a CC order.",
-        "parametrized": false,
-        "skip": null,
-        "locales": [
-          "en",
-          "ar"
-        ]
-      },
-      {
-        "ref": "app::test_app_percentage_of_product_price_discount_rules_with_max_amount",
-        "name": "test_app_percentage_of_product_price_discount_rules_with_max_amount",
-        "platform": "app",
-        "path": "tests/app/test_app_cart.py",
-        "file": "test_app_cart.py",
-        "title": "Percentage of product price discount rules with max amount",
-        "feature": "Coupon",
-        "story": "",
-        "severity": "critical",
-        "tags": [
-          "Cart",
-          "Coupon",
-          "COD",
-          "AUTO_MAX_50"
-        ],
-        "docstring": "1. Add a product to cart and apply the capped percentage coupon. 2. Remove it on the cart, then verify the checkout summary without a discount. 3. Re-apply it on checkout and verify the summary again, now discounted. 4. Place a COD order.",
-        "parametrized": false,
-        "skip": null,
-        "locales": [
-          "en",
-          "ar"
-        ]
-      },
-      {
-        "ref": "app::test_app_percentage_of_product_price_discount_rules_without_max_amount",
-        "name": "test_app_percentage_of_product_price_discount_rules_without_max_amount",
-        "platform": "app",
-        "path": "tests/app/test_app_cart.py",
-        "file": "test_app_cart.py",
-        "title": "Percentage of product price discount rules without max amount",
-        "feature": "Coupon",
-        "story": "",
-        "severity": "critical",
-        "tags": [
-          "Cart",
-          "Coupon",
-          "CC",
-          "AUTO_MAX_0"
-        ],
-        "docstring": "1. Search for a product and add it to cart. 2. Apply the no-max percentage coupon on cart. 3. Proceed to checkout. 4. Verify the order summary calculation. 5. Place a CC order.",
-        "parametrized": false,
-        "skip": null,
-        "locales": [
-          "en",
-          "ar"
-        ]
-      },
-      {
-        "ref": "app::test_app_bank_discount_percentage_of_product_price_rule",
-        "name": "test_app_bank_discount_percentage_of_product_price_rule",
-        "platform": "app",
-        "path": "tests/app/test_app_cart.py",
-        "file": "test_app_cart.py",
-        "title": "Bank discount percentage of product price rule",
-        "feature": "Cart",
-        "story": "",
-        "severity": "critical",
-        "tags": [
-          "Cart",
-          "Coupon",
-          "Bank Discount"
-        ],
-        "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Proceed to checkout 7. Verify order summary calculation 8. Select the credit card 9. Place order",
         "parametrized": false,
         "skip": null,
         "locales": [
@@ -5829,6 +5684,237 @@
         ],
         "docstring": "Guest checkout flow (parametrized by product type): 1. Precondition: Login, clear cart, sign out 2. As guest, search and add product to cart 3. Navigate to cart and verify item present 4. Tap checkout → login bottom sheet is displayed 5. Login with user email 6. Verify user is redirected to cart page with item retained 7. Proceed to checkout, handle address 8. Validate order summary and place orde",
         "parametrized": true,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "name": "test_app_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "platform": "app",
+        "path": "tests/app/test_app_coupon.py",
+        "file": "test_app_coupon.py",
+        "title": "Percentage of product variant price discount with max amount",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Coupon",
+          "COD",
+          "AUTO_V_MAX_0"
+        ],
+        "docstring": "1. Add an on-sale product and one sold at list price. 2. Proceed to checkout and select COD. 3. Verify the summary, then apply the capped variant coupon on checkout. 4. Verify the summary again and place a COD order.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "name": "test_app_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "platform": "app",
+        "path": "tests/app/test_app_coupon.py",
+        "file": "test_app_coupon.py",
+        "title": "New user - percentage of product variant price discount with max amount",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Coupon",
+          "COD",
+          "AUTO_V_MAX_0",
+          "NewUser"
+        ],
+        "docstring": "A first-time customer buys a sale and a non-sale item and applies the capped variant coupon. Same journey as the existing-user test; only the account differs, so the address form and the COD mobile verification a new account gets are exercised on the way.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "name": "test_app_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "platform": "app",
+        "path": "tests/app/test_app_coupon.py",
+        "file": "test_app_coupon.py",
+        "title": "Percentage of product variant price discount without max amount",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Coupon",
+          "CC",
+          "AUTO_V_MAX_60"
+        ],
+        "docstring": "1. Add one on-sale product from Deals and one regular product from search. 2. Apply the uncapped variant-price coupon on the cart. 3. Proceed to checkout and verify the order summary. 4. Place a CC order.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "name": "test_app_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "platform": "app",
+        "path": "tests/app/test_app_coupon.py",
+        "file": "test_app_coupon.py",
+        "title": "New user - percentage of product variant price discount without max amount",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Coupon",
+          "CC",
+          "AUTO_V_MAX_60",
+          "NewUser"
+        ],
+        "docstring": "A first-time customer buys a sale and a non-sale item and applies the uncapped coupon. Same journey as the existing-user test; only the account differs, so the address form and the full card entry a new account gets are exercised on the way.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_percentage_of_product_price_discount_rules_with_max_amount",
+        "name": "test_app_percentage_of_product_price_discount_rules_with_max_amount",
+        "platform": "app",
+        "path": "tests/app/test_app_coupon.py",
+        "file": "test_app_coupon.py",
+        "title": "Percentage of product price discount rules with max amount",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Coupon",
+          "COD",
+          "AUTO_MAX_50"
+        ],
+        "docstring": "1. Add a product to cart and apply the capped percentage coupon. 2. Remove it on the cart, then verify the checkout summary without a discount. 3. Re-apply it on checkout and verify the summary again, now discounted. 4. Place a COD order.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_percentage_of_product_price_discount_rules_without_max_amount",
+        "name": "test_app_percentage_of_product_price_discount_rules_without_max_amount",
+        "platform": "app",
+        "path": "tests/app/test_app_coupon.py",
+        "file": "test_app_coupon.py",
+        "title": "Percentage of product price discount rules without max amount",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Coupon",
+          "CC",
+          "AUTO_MAX_0"
+        ],
+        "docstring": "1. Search for a product and add it to cart. 2. Apply the no-max percentage coupon on cart. 3. Proceed to checkout. 4. Verify the order summary calculation. 5. Place a CC order.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_new_user_percentage_of_product_price_discount_rules_without_max_amount",
+        "name": "test_app_new_user_percentage_of_product_price_discount_rules_without_max_amount",
+        "platform": "app",
+        "path": "tests/app/test_app_coupon.py",
+        "file": "test_app_coupon.py",
+        "title": "New user - percentage of product price discount without max amount",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Coupon",
+          "CC",
+          "AUTO_MAX_0",
+          "NewUser"
+        ],
+        "docstring": "A first-time customer applies the uncapped percentage coupon and pays by card. Same journey as the existing-user test; only the account differs, so the address form and the full card entry a new account gets are exercised on the way.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_bank_discount_percentage_of_product_price_rule",
+        "name": "test_app_bank_discount_percentage_of_product_price_rule",
+        "platform": "app",
+        "path": "tests/app/test_app_coupon.py",
+        "file": "test_app_coupon.py",
+        "title": "Bank discount percentage of product price rule",
+        "feature": "Cart",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Coupon",
+          "Bank Discount"
+        ],
+        "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Proceed to checkout 7. Verify order summary calculation 8. Select the credit card 9. Place order",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_uae_cart_remove_item_with_applied_coupon",
+        "name": "test_app_uae_cart_remove_item_with_applied_coupon",
+        "platform": "app",
+        "path": "tests/app/test_app_coupon.py",
+        "file": "test_app_coupon.py",
+        "title": "Remove item from cart with applied coupon and verify totals recalculate",
+        "feature": "Cart",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Coupon",
+          "FIXED15"
+        ],
+        "docstring": "Removing an item with a coupon applied leaves a summary that still reconciles.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_new_user_cart_remove_item_with_applied_coupon",
+        "name": "test_app_new_user_cart_remove_item_with_applied_coupon",
+        "platform": "app",
+        "path": "tests/app/test_app_coupon.py",
+        "file": "test_app_coupon.py",
+        "title": "New user - Remove item from cart with applied coupon and verify totals recalculate",
+        "feature": "Cart",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Coupon",
+          "FIXED15",
+          "New User"
+        ],
+        "docstring": "Same journey as the existing-user test, on a first-time customer.",
+        "parametrized": false,
         "skip": null,
         "locales": [
           "en"
@@ -6318,120 +6404,6 @@
         ]
       },
       {
-        "ref": "web_uae::test_uae_percentage_of_product_price_discount_rules_without_max_amount",
-        "name": "test_uae_percentage_of_product_price_discount_rules_without_max_amount",
-        "platform": "web_uae",
-        "path": "tests/web/UAE/test_cart.py",
-        "file": "test_cart.py",
-        "title": "UAE - Percentage of product price discount rules without max amount (through product search)",
-        "feature": "Coupon",
-        "story": "",
-        "severity": "critical",
-        "tags": [
-          "CC",
-          "AUTO_MAX_0"
-        ],
-        "docstring": "1. Go to homepage as Guest user. 2. Search for product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order",
-        "parametrized": false,
-        "skip": null,
-        "locales": [
-          "en",
-          "ar"
-        ]
-      },
-      {
-        "ref": "web_uae::test_uae_percentage_of_product_price_discount_rules_with_max_amount",
-        "name": "test_uae_percentage_of_product_price_discount_rules_with_max_amount",
-        "platform": "web_uae",
-        "path": "tests/web/UAE/test_cart.py",
-        "file": "test_cart.py",
-        "title": "UAE - Percentage of product price discount rules with max amount (through product search)",
-        "feature": "Coupon",
-        "story": "",
-        "severity": "critical",
-        "tags": [
-          "COD",
-          "AUTO_MAX_50"
-        ],
-        "docstring": "1. Go to homepage as Guest user. 2. Search for product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select COD 7. Place order",
-        "parametrized": false,
-        "skip": null,
-        "locales": [
-          "en",
-          "ar"
-        ]
-      },
-      {
-        "ref": "web_uae::test_uae_percentage_of_product_variant_price_discount_rules_with_max_amount",
-        "name": "test_uae_percentage_of_product_variant_price_discount_rules_with_max_amount",
-        "platform": "web_uae",
-        "path": "tests/web/UAE/test_cart.py",
-        "file": "test_cart.py",
-        "title": "UAE - Percentage of Product variant price discount with max amount (through product search) and Place (COD) order",
-        "feature": "Coupon",
-        "story": "",
-        "severity": "critical",
-        "tags": [
-          "COD",
-          "AUTO_V_MAX_0"
-        ],
-        "docstring": "1. Go to homepage. 2. Add sales and none-salse product 3. Proceed to checkout. 4. Apply coupon. 5. Verify order summary calculation. 6. Select COD 7. Place order",
-        "parametrized": false,
-        "skip": null,
-        "locales": [
-          "en",
-          "ar"
-        ]
-      },
-      {
-        "ref": "web_uae::test_uae_percentage_of_product_variant_price_discount_rules_without_max_amount",
-        "name": "test_uae_percentage_of_product_variant_price_discount_rules_without_max_amount",
-        "platform": "web_uae",
-        "path": "tests/web/UAE/test_cart.py",
-        "file": "test_cart.py",
-        "title": "UAE - Percentage of Product variant price discount without max amount (through product search) and Place (CC) order",
-        "feature": "Coupon",
-        "story": "",
-        "severity": "critical",
-        "tags": [
-          "CC",
-          "AUTO_V_MAX_60"
-        ],
-        "docstring": "1. Go to homepage. 2. Add sales and none-salse product. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order",
-        "parametrized": false,
-        "skip": null,
-        "locales": [
-          "en",
-          "ar"
-        ]
-      },
-      {
-        "ref": "web_uae::test_uae_bank_discount_percentage_of_product_price_rule",
-        "name": "test_uae_bank_discount_percentage_of_product_price_rule",
-        "platform": "web_uae",
-        "path": "tests/web/UAE/test_cart.py",
-        "file": "test_cart.py",
-        "title": "UAE - Bank discount - percentage of product price discount rules (through product search)",
-        "feature": "Coupon",
-        "story": "",
-        "severity": "critical",
-        "tags": [
-          "CC",
-          "AUTO_BANK_10"
-        ],
-        "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Proceed to checkout 7. Verify order summary calculation 8. Select the credit card 9. Place order",
-        "parametrized": false,
-        "skip": {
-          "type": "conditional",
-          "reason": "Safari cannot type into the Checkout.com card iframes, so the Visa card this  bank coupon requires can never be entered and no discount reaches the order [OS.lower() == \"ios\"]",
-          "condition": "OS.lower() == \"ios\""
-        },
-        "locales": [
-          "en",
-          "ar"
-        ]
-      },
-      {
         "ref": "web_uae::test_uae_cart_apply_gift_wrap_and_place_order@test_cart",
         "name": "test_uae_cart_apply_gift_wrap_and_place_order",
         "platform": "web_uae",
@@ -6580,28 +6552,6 @@
           "Variant"
         ],
         "docstring": "1. Sign in and clear the cart through the API 2. Add the same configurable product twice, each with a different size 3. Verify the cart holds 2 separate rows rather than merging them 4. Increase the quantity on both rows 5. Verify the rows still have not merged",
-        "parametrized": false,
-        "skip": null,
-        "locales": [
-          "en",
-          "ar"
-        ]
-      },
-      {
-        "ref": "web_uae::test_uae_cart_remove_item_with_applied_coupon",
-        "name": "test_uae_cart_remove_item_with_applied_coupon",
-        "platform": "web_uae",
-        "path": "tests/web/UAE/test_cart.py",
-        "file": "test_cart.py",
-        "title": "UAE - Order summary recalculates when an item is removed with a coupon applied",
-        "feature": "Cart",
-        "story": "",
-        "severity": "critical",
-        "tags": [
-          "Cart",
-          "Coupon"
-        ],
-        "docstring": "1. Sign in and clear the cart through the API 2. Add two different products to the cart 3. Apply a coupon on the cart and note the order summary 4. Remove the first product 5. Verify one item is left and the subtotal and order total both dropped",
         "parametrized": false,
         "skip": null,
         "locales": [
@@ -7161,6 +7111,224 @@
         ]
       },
       {
+        "ref": "web_uae::test_uae_percentage_of_product_price_discount_rules_without_max_amount",
+        "name": "test_uae_percentage_of_product_price_discount_rules_without_max_amount",
+        "platform": "web_uae",
+        "path": "tests/web/UAE/test_coupon.py",
+        "file": "test_coupon.py",
+        "title": "UAE - Percentage of product price discount rules without max amount (through product search)",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "CC",
+          "AUTO_MAX_0"
+        ],
+        "docstring": "1. Go to homepage as Guest user. 2. Search for product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_uae::test_uae_percentage_of_product_price_discount_rules_with_max_amount",
+        "name": "test_uae_percentage_of_product_price_discount_rules_with_max_amount",
+        "platform": "web_uae",
+        "path": "tests/web/UAE/test_coupon.py",
+        "file": "test_coupon.py",
+        "title": "UAE - Percentage of product price discount rules with max amount (through product search)",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "COD",
+          "AUTO_MAX_50"
+        ],
+        "docstring": "1. Go to homepage as Guest user. 2. Search for product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select COD 7. Place order",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_uae::test_uae_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "name": "test_uae_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "platform": "web_uae",
+        "path": "tests/web/UAE/test_coupon.py",
+        "file": "test_coupon.py",
+        "title": "UAE - Percentage of Product variant price discount with max amount (through product search) and Place (COD) order",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "COD",
+          "AUTO_V_MAX_0"
+        ],
+        "docstring": "1. Go to homepage. 2. Add sales and none-salse product 3. Proceed to checkout. 4. Apply coupon. 5. Verify order summary calculation. 6. Select COD 7. Place order",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_uae::test_uae_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "name": "test_uae_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "platform": "web_uae",
+        "path": "tests/web/UAE/test_coupon.py",
+        "file": "test_coupon.py",
+        "title": "UAE - Percentage of Product variant price discount without max amount (through product search) and Place (CC) order",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "CC",
+          "AUTO_V_MAX_60"
+        ],
+        "docstring": "1. Go to homepage. 2. Add sales and none-salse product. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_uae::test_uae_bank_discount_percentage_of_product_price_rule",
+        "name": "test_uae_bank_discount_percentage_of_product_price_rule",
+        "platform": "web_uae",
+        "path": "tests/web/UAE/test_coupon.py",
+        "file": "test_coupon.py",
+        "title": "UAE - Bank discount - percentage of product price discount rules (through product search)",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "CC",
+          "AUTO_BANK_10"
+        ],
+        "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Proceed to checkout 7. Verify order summary calculation 8. Select the credit card 9. Place order",
+        "parametrized": false,
+        "skip": {
+          "type": "conditional",
+          "reason": "Safari cannot type into the Checkout.com card iframes, so the Visa card this  bank coupon requires can never be entered and no discount reaches the order [OS.lower() == \"ios\"]",
+          "condition": "OS.lower() == \"ios\""
+        },
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_uae::test_uae_new_user_percentage_of_product_price_discount_rules_without_max_amount",
+        "name": "test_uae_new_user_percentage_of_product_price_discount_rules_without_max_amount",
+        "platform": "web_uae",
+        "path": "tests/web/UAE/test_coupon.py",
+        "file": "test_coupon.py",
+        "title": "UAE - New user - Percentage of product price discount rules without max amount",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "CC",
+          "AUTO_MAX_0",
+          "New User"
+        ],
+        "docstring": "The existing-user journey on an account registered during the test.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_uae::test_uae_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "name": "test_uae_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "platform": "web_uae",
+        "path": "tests/web/UAE/test_coupon.py",
+        "file": "test_coupon.py",
+        "title": "UAE - New user - Percentage of Product variant price discount with max amount and Place (COD) order",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "COD",
+          "AUTO_V_MAX_0",
+          "New User"
+        ],
+        "docstring": "The existing-user journey on an account registered during the test.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_uae::test_uae_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "name": "test_uae_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "platform": "web_uae",
+        "path": "tests/web/UAE/test_coupon.py",
+        "file": "test_coupon.py",
+        "title": "UAE - New user - Percentage of Product variant price discount without max amount and Place (CC) order",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "CC",
+          "AUTO_V_MAX_60",
+          "New User"
+        ],
+        "docstring": "The existing-user journey on an account registered during the test.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_uae::test_uae_cart_remove_item_with_applied_coupon",
+        "name": "test_uae_cart_remove_item_with_applied_coupon",
+        "platform": "web_uae",
+        "path": "tests/web/UAE/test_coupon.py",
+        "file": "test_coupon.py",
+        "title": "UAE - Order summary recalculates when an item is removed with a coupon applied",
+        "feature": "Cart",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Coupon"
+        ],
+        "docstring": "1. Sign in and clear the cart through the API 2. Add two different products to the cart 3. Apply a coupon on the cart and note the order summary 4. Remove the first product 5. Verify one item is left and the subtotal and order total both dropped",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_uae::test_uae_new_user_cart_remove_item_with_applied_coupon",
+        "name": "test_uae_new_user_cart_remove_item_with_applied_coupon",
+        "platform": "web_uae",
+        "path": "tests/web/UAE/test_coupon.py",
+        "file": "test_coupon.py",
+        "title": "UAE - New user - Order summary recalculates when an item is removed with a coupon applied",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Coupon",
+          "New User"
+        ],
+        "docstring": "The existing-user journey on an account registered during the test.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
         "ref": "web_uae::test_uae_user_register_from_account_page",
         "name": "test_uae_user_register_from_account_page",
         "platform": "web_uae",
@@ -7429,120 +7597,6 @@
         "docstring": "1. Go to homepage as Guest user. 2. Search for an item in category page and add it to cart. 3. Search for an item by brand page (simple product) and add it to cart. 4. Click on my account and select Sign out. 5. User stays on cart page. 6. Login again with the same customer credentials 7. Click on the shopping bag. 8. On the cart page, check for all the item details. 9. Find Bundle item. 10. Decre",
         "parametrized": false,
         "skip": null,
-        "locales": [
-          "en",
-          "ar"
-        ]
-      },
-      {
-        "ref": "web_ksa::test_ksa_percentage_of_product_price_discount_rules_without_max_amount",
-        "name": "test_ksa_percentage_of_product_price_discount_rules_without_max_amount",
-        "platform": "web_ksa",
-        "path": "tests/web/KSA/test_cart_ksa.py",
-        "file": "test_cart_ksa.py",
-        "title": "KSA - Percentage of product price discount rules without max amount (through product search)",
-        "feature": "Coupon",
-        "story": "",
-        "severity": "critical",
-        "tags": [
-          "CC",
-          "AUTO_MAX_0"
-        ],
-        "docstring": "1. Go to homepage as Guest user. 2. Search for bundle product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order",
-        "parametrized": false,
-        "skip": null,
-        "locales": [
-          "en",
-          "ar"
-        ]
-      },
-      {
-        "ref": "web_ksa::test_ksa_percentage_of_product_price_discount_rules_with_max_amount",
-        "name": "test_ksa_percentage_of_product_price_discount_rules_with_max_amount",
-        "platform": "web_ksa",
-        "path": "tests/web/KSA/test_cart_ksa.py",
-        "file": "test_cart_ksa.py",
-        "title": "KSA - Percentage of product price discount rules with max amount (through product search)",
-        "feature": "Coupon",
-        "story": "",
-        "severity": "critical",
-        "tags": [
-          "COD",
-          "AUTO_MAX_50"
-        ],
-        "docstring": "1. Go to homepage as Guest user. 2. Search for bundle product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select COD 7. Place order",
-        "parametrized": false,
-        "skip": null,
-        "locales": [
-          "en",
-          "ar"
-        ]
-      },
-      {
-        "ref": "web_ksa::test_ksa_percentage_of_product_variant_price_discount_rules_with_max_amount",
-        "name": "test_ksa_percentage_of_product_variant_price_discount_rules_with_max_amount",
-        "platform": "web_ksa",
-        "path": "tests/web/KSA/test_cart_ksa.py",
-        "file": "test_cart_ksa.py",
-        "title": "KSA - Percentage of Product variant price discount with max amount (through product search) and Place (COD) order",
-        "feature": "Coupon",
-        "story": "",
-        "severity": "critical",
-        "tags": [
-          "COD",
-          "AUTO_V_MAX_0"
-        ],
-        "docstring": "1. Go to homepage. 2. Add sales and none-sale product 3. Proceed to checkout. 4. Apply coupon. 5. Verify order summary calculation. 6. Select COD 7. Place order",
-        "parametrized": false,
-        "skip": null,
-        "locales": [
-          "en",
-          "ar"
-        ]
-      },
-      {
-        "ref": "web_ksa::test_ksa_percentage_of_product_variant_price_discount_rules_without_max_amount",
-        "name": "test_ksa_percentage_of_product_variant_price_discount_rules_without_max_amount",
-        "platform": "web_ksa",
-        "path": "tests/web/KSA/test_cart_ksa.py",
-        "file": "test_cart_ksa.py",
-        "title": "KSA - Percentage of Product variant price discount without max amount (through product search) and Place (CC) order",
-        "feature": "Coupon",
-        "story": "",
-        "severity": "critical",
-        "tags": [
-          "CC",
-          "AUTO_V_MAX_60"
-        ],
-        "docstring": "1. Go to homepage. 2. Add sales and none-salse product. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order",
-        "parametrized": false,
-        "skip": null,
-        "locales": [
-          "en",
-          "ar"
-        ]
-      },
-      {
-        "ref": "web_ksa::test_ksa_bank_discount_percentage_of_product_price_rule",
-        "name": "test_ksa_bank_discount_percentage_of_product_price_rule",
-        "platform": "web_ksa",
-        "path": "tests/web/KSA/test_cart_ksa.py",
-        "file": "test_cart_ksa.py",
-        "title": "KSA - Bank discount - percentage of product price discount rules (through product search)",
-        "feature": "Coupon",
-        "story": "",
-        "severity": "critical",
-        "tags": [
-          "CC",
-          "AUTO_BANk_10"
-        ],
-        "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Proceed to checkout 7. Verify order summary calculation 8. Select the credit card 9. Place order",
-        "parametrized": false,
-        "skip": {
-          "type": "conditional",
-          "reason": "Safari cannot type into the Checkout.com card iframes, so the Visa card this  bank coupon requires can never be entered and no discount reaches the order [OS.lower() == \"ios\"]",
-          "condition": "OS.lower() == \"ios\""
-        },
         "locales": [
           "en",
           "ar"
@@ -7918,6 +7972,181 @@
         "locales": [
           "en",
           "ar"
+        ]
+      },
+      {
+        "ref": "web_ksa::test_ksa_percentage_of_product_price_discount_rules_without_max_amount",
+        "name": "test_ksa_percentage_of_product_price_discount_rules_without_max_amount",
+        "platform": "web_ksa",
+        "path": "tests/web/KSA/test_coupon_ksa.py",
+        "file": "test_coupon_ksa.py",
+        "title": "KSA - Percentage of product price discount rules without max amount (through product search)",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "CC",
+          "AUTO_MAX_0"
+        ],
+        "docstring": "1. Go to homepage as Guest user. 2. Search for bundle product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_ksa::test_ksa_percentage_of_product_price_discount_rules_with_max_amount",
+        "name": "test_ksa_percentage_of_product_price_discount_rules_with_max_amount",
+        "platform": "web_ksa",
+        "path": "tests/web/KSA/test_coupon_ksa.py",
+        "file": "test_coupon_ksa.py",
+        "title": "KSA - Percentage of product price discount rules with max amount (through product search)",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "COD",
+          "AUTO_MAX_50"
+        ],
+        "docstring": "1. Go to homepage as Guest user. 2. Search for bundle product and add it to cart. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select COD 7. Place order",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_ksa::test_ksa_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "name": "test_ksa_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "platform": "web_ksa",
+        "path": "tests/web/KSA/test_coupon_ksa.py",
+        "file": "test_coupon_ksa.py",
+        "title": "KSA - Percentage of Product variant price discount with max amount (through product search) and Place (COD) order",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "COD",
+          "AUTO_V_MAX_0"
+        ],
+        "docstring": "1. Go to homepage. 2. Add sales and none-sale product 3. Proceed to checkout. 4. Apply coupon. 5. Verify order summary calculation. 6. Select COD 7. Place order",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_ksa::test_ksa_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "name": "test_ksa_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "platform": "web_ksa",
+        "path": "tests/web/KSA/test_coupon_ksa.py",
+        "file": "test_coupon_ksa.py",
+        "title": "KSA - Percentage of Product variant price discount without max amount (through product search) and Place (CC) order",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "CC",
+          "AUTO_V_MAX_60"
+        ],
+        "docstring": "1. Go to homepage. 2. Add sales and none-salse product. 3. Apply coupon on cart. 4. Proceed to checkout 5. Verify order summary calculation. 6. Select CC 7. Place order",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_ksa::test_ksa_bank_discount_percentage_of_product_price_rule",
+        "name": "test_ksa_bank_discount_percentage_of_product_price_rule",
+        "platform": "web_ksa",
+        "path": "tests/web/KSA/test_coupon_ksa.py",
+        "file": "test_coupon_ksa.py",
+        "title": "KSA - Bank discount - percentage of product price discount rules (through product search)",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "CC",
+          "AUTO_BANk_10"
+        ],
+        "docstring": "1. Go to homepage as user. 2. Search for a product and add it to cart. 3. View coupon on cart. 4. Increase the qty of items and view the coupon codes again. 5. Apply Bank coupon on cart page 6. Proceed to checkout 7. Verify order summary calculation 8. Select the credit card 9. Place order",
+        "parametrized": false,
+        "skip": {
+          "type": "conditional",
+          "reason": "Safari cannot type into the Checkout.com card iframes, so the Visa card this  bank coupon requires can never be entered and no discount reaches the order [OS.lower() == \"ios\"]",
+          "condition": "OS.lower() == \"ios\""
+        },
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_ksa::test_ksa_new_user_percentage_of_product_price_discount_rules_without_max_amount",
+        "name": "test_ksa_new_user_percentage_of_product_price_discount_rules_without_max_amount",
+        "platform": "web_ksa",
+        "path": "tests/web/KSA/test_coupon_ksa.py",
+        "file": "test_coupon_ksa.py",
+        "title": "KSA - New user - Percentage of product price discount rules without max amount",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "CC",
+          "AUTO_MAX_0",
+          "New User"
+        ],
+        "docstring": "The existing-user journey on an account registered during the test.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_ksa::test_ksa_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "name": "test_ksa_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "platform": "web_ksa",
+        "path": "tests/web/KSA/test_coupon_ksa.py",
+        "file": "test_coupon_ksa.py",
+        "title": "KSA - New user - Percentage of Product variant price discount with max amount and Place (COD) order",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "COD",
+          "AUTO_V_MAX_0",
+          "New User"
+        ],
+        "docstring": "The existing-user journey on an account registered during the test.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_ksa::test_ksa_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "name": "test_ksa_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "platform": "web_ksa",
+        "path": "tests/web/KSA/test_coupon_ksa.py",
+        "file": "test_coupon_ksa.py",
+        "title": "KSA - New user - Percentage of Product variant price discount without max amount and Place (CC) order",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "CC",
+          "AUTO_V_MAX_60",
+          "New User"
+        ],
+        "docstring": "The existing-user journey on an account registered during the test.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
         ]
       },
       {
@@ -8599,6 +8828,10 @@
     "app::test_app_cart_apply_gift_wrap_and_place_order",
     "app::test_app_cart_existing_user_orders_no_coupon_yalla",
     "app::test_app_gift_registry_create_from_my_registries",
+    "app::test_app_new_user_cart_remove_item_with_applied_coupon",
+    "app::test_app_new_user_percentage_of_product_price_discount_rules_without_max_amount",
+    "app::test_app_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
+    "app::test_app_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
     "app::test_app_wishlist_add_products_from_plps",
     "app::test_app_wishlist_delete_all_product_types",
     "app::test_app_wishlist_from_pdp",
@@ -8615,6 +8848,9 @@
     "web_commons::test_home_search_product_in_specific_category",
     "web_commons::test_wishlist_delete_all_product_types",
     "web_ksa::test_ksa_cart_apply_gift_wrap_and_place_order",
+    "web_ksa::test_ksa_new_user_percentage_of_product_price_discount_rules_without_max_amount",
+    "web_ksa::test_ksa_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
+    "web_ksa::test_ksa_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
     "web_ksa::test_ksa_wishlist_guest_add_prompts_login",
     "web_uae::test_uae_cart_add_all_product_types_and_verify",
     "web_uae::test_uae_cart_apply_gift_wrap_and_place_order@test_cart",
@@ -8626,6 +8862,10 @@
     "web_uae::test_uae_cart_remaining_items_unaffected_after_partial_removal",
     "web_uae::test_uae_cart_remove_item",
     "web_uae::test_uae_checkout_save_card_remember_me",
+    "web_uae::test_uae_new_user_cart_remove_item_with_applied_coupon",
+    "web_uae::test_uae_new_user_percentage_of_product_price_discount_rules_without_max_amount",
+    "web_uae::test_uae_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
+    "web_uae::test_uae_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
     "web_uae::test_uae_wishlist_guest_add_prompts_login"
   ],
   "plan_gaps": [
@@ -8773,8 +9013,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-28",
-    "generated_at": "2026-09-28T06:35:08+00:00",
-    "source_sha": "3365ea5",
+    "generated_at": "2026-09-28T09:25:06+00:00",
+    "source_sha": "17a6d7b",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -8890,13 +9130,13 @@
       "other_group": 11
     },
     "platforms": {
-      "app": 62,
-      "web_uae": 51,
-      "web_ksa": 35,
+      "app": 66,
+      "web_uae": 55,
+      "web_ksa": 38,
       "web_commons": 15
     },
-    "total_automated_tests": 163,
-    "active_tests": 144,
+    "total_automated_tests": 174,
+    "active_tests": 155,
     "skipped_hard": 10,
     "cases_not_running": {
       "hard_skipped": 1,
@@ -8909,9 +9149,9 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 31,
+    "unmapped_count": 42,
     "plan_gap_count": 20,
     "unmapped_and_skipped": 6,
-    "arabic_ready_tests": 129
+    "arabic_ready_tests": 112
   }
 }
