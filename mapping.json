@@ -8150,6 +8150,49 @@
         ]
       },
       {
+        "ref": "web_ksa::test_ksa_cart_remove_item_with_applied_coupon",
+        "name": "test_ksa_cart_remove_item_with_applied_coupon",
+        "platform": "web_ksa",
+        "path": "tests/web/KSA/test_coupon_ksa.py",
+        "file": "test_coupon_ksa.py",
+        "title": "KSA - Order summary recalculates when an item is removed with a coupon applied",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Coupon"
+        ],
+        "docstring": "1. Sign in and clear the cart through the API 2. Add two different products to the cart 3. Apply a coupon on the cart and note the order summary 4. Remove the first product 5. Verify one item is left, the totals dropped, and the summary still reconciles",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_ksa::test_ksa_new_user_cart_remove_item_with_applied_coupon",
+        "name": "test_ksa_new_user_cart_remove_item_with_applied_coupon",
+        "platform": "web_ksa",
+        "path": "tests/web/KSA/test_coupon_ksa.py",
+        "file": "test_coupon_ksa.py",
+        "title": "KSA - New user - Order summary recalculates when an item is removed with a coupon applied",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Coupon",
+          "New User"
+        ],
+        "docstring": "The existing-user journey on an account registered during the test.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
         "ref": "web_ksa::test_ksa_user_register_from_account_page",
         "name": "test_ksa_user_register_from_account_page",
         "platform": "web_ksa",
@@ -8848,6 +8891,8 @@
     "web_commons::test_home_search_product_in_specific_category",
     "web_commons::test_wishlist_delete_all_product_types",
     "web_ksa::test_ksa_cart_apply_gift_wrap_and_place_order",
+    "web_ksa::test_ksa_cart_remove_item_with_applied_coupon",
+    "web_ksa::test_ksa_new_user_cart_remove_item_with_applied_coupon",
     "web_ksa::test_ksa_new_user_percentage_of_product_price_discount_rules_without_max_amount",
     "web_ksa::test_ksa_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
     "web_ksa::test_ksa_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
@@ -9013,8 +9058,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-09-28",
-    "generated_at": "2026-09-28T15:53:50+00:00",
-    "source_sha": "c869975",
+    "generated_at": "2026-09-28T15:54:03+00:00",
+    "source_sha": "54e23c3",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -9132,11 +9177,11 @@
     "platforms": {
       "app": 66,
       "web_uae": 55,
-      "web_ksa": 38,
+      "web_ksa": 40,
       "web_commons": 15
     },
-    "total_automated_tests": 174,
-    "active_tests": 155,
+    "total_automated_tests": 176,
+    "active_tests": 157,
     "skipped_hard": 10,
     "cases_not_running": {
       "hard_skipped": 1,
@@ -9149,7 +9194,7 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 42,
+    "unmapped_count": 44,
     "plan_gap_count": 20,
     "unmapped_and_skipped": 6,
     "arabic_ready_tests": 112

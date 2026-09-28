@@ -3392,6 +3392,49 @@
       ]
     },
     {
+      "ref": "web_ksa::test_ksa_cart_remove_item_with_applied_coupon",
+      "name": "test_ksa_cart_remove_item_with_applied_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_coupon_ksa.py",
+      "file": "test_coupon_ksa.py",
+      "title": "KSA - Order summary recalculates when an item is removed with a coupon applied",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Coupon"
+      ],
+      "docstring": "1. Sign in and clear the cart through the API 2. Add two different products to the cart 3. Apply a coupon on the cart and note the order summary 4. Remove the first product 5. Verify one item is left, the totals dropped, and the summary still reconciles",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_new_user_cart_remove_item_with_applied_coupon",
+      "name": "test_ksa_new_user_cart_remove_item_with_applied_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_coupon_ksa.py",
+      "file": "test_coupon_ksa.py",
+      "title": "KSA - New user - Order summary recalculates when an item is removed with a coupon applied",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Coupon",
+        "New User"
+      ],
+      "docstring": "The existing-user journey on an account registered during the test.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "web_ksa::test_ksa_user_register_from_account_page",
       "name": "test_ksa_user_register_from_account_page",
       "platform": "web_ksa",
@@ -3861,7 +3904,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "c869975",
+    "sha": "54e23c3",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }
