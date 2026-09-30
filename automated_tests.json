@@ -1330,7 +1330,10 @@
       ],
       "docstring": "Test that customer can search for products in a specific category using category suggestions. Steps: 1. Navigate to the home page 2. Search for a term and select category suggestion 3. Verify category filter is displayed on PLP",
       "parametrized": false,
-      "skip": null,
+      "skip": {
+        "type": "hard",
+        "reason": "Not applicable after the new Algolia search implementation: search no longer"
+      },
       "locales": [
         "en"
       ]
@@ -3788,7 +3791,10 @@
       ],
       "docstring": "1. Go to the homepage as a guest user 2. Type a keyword in the search box 3. Open the first category suggestion 4. Verify the category facet is applied on the listing and products render",
       "parametrized": false,
-      "skip": null,
+      "skip": {
+        "type": "hard",
+        "reason": "Not applicable after the new Algolia search implementation: the search box no"
+      },
       "locales": [
         "en",
         "ar"
@@ -3904,7 +3910,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "54e23c3",
+    "sha": "8d5aeb3",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }
