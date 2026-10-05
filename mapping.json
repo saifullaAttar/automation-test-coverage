@@ -752,13 +752,14 @@
       "page": 1,
       "run_id": 2154,
       "automated_tests": [
+        "web_commons::test_wishlist_delete_all_product_types",
         "web_commons::test_wishlist_move_all_product_types_to_cart_existing_user",
         "web_commons::test_wishlist_move_all_product_types_to_cart_new_user",
         "web_uae::test_uae_wishlist_add_all_product_types_existing_user",
         "web_ksa::test_ksa_wishlist_add_all_product_types_existing_user"
       ],
       "coverage_status": "partial",
-      "notes": "FALCONS-296. Moving every product type from the wishlist to the cart is asserted to remove each item from the wishlist, and the empty state is checked once the last one has gone; clear_wishlist() exercises bulk removal as a precondition. Scenario 2 -- removing an item by tapping the heart on its PDP -- is still not covered.",
+      "notes": "FALCONS-315 deletes every product type from the Wishlist page by all three routes -- the per-item remove icon, Select for specific items with the unselected ones verified to remain, and Select All for the rest -- ending on the empty state. FALCONS-296 also removes items by moving them to the cart. Scenario 2 of this case, removing an item by tapping the heart on its PDP, is still not covered.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -1781,10 +1782,13 @@
       "automated_tests": [
         "web_uae::test_uae_checkout_cc_normal_coupon",
         "web_uae::test_uae_checkout_cc_coupon_modal_sheet",
-        "web_uae::test_uae_cart_remove_item_with_applied_coupon"
+        "web_uae::test_uae_cart_remove_item_with_applied_coupon",
+        "web_ksa::test_ksa_cart_remove_item_with_applied_coupon",
+        "web_uae::test_uae_new_user_cart_remove_item_with_applied_coupon",
+        "web_ksa::test_ksa_new_user_cart_remove_item_with_applied_coupon"
       ],
       "coverage_status": "partial",
-      "notes": "Applying a coupon on the cart and on the checkout page is covered, including through the coupon modal sheet. The point of this case -- that a single-use coupon is rejected on a second use by the same or another customer -- is not asserted.",
+      "notes": "Applying a coupon on the cart and at checkout is covered, through the coupon modal sheet too, and FALCONS-294 added KSA and new-user twins of the remove-item-with-coupon recalculation. The point of this case -- that a single-use coupon is refused on a second use by the same or another customer -- is still not asserted.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -1815,10 +1819,12 @@
         "web_uae::test_uae_percentage_of_product_price_discount_rules_without_max_amount",
         "web_uae::test_uae_percentage_of_product_price_discount_rules_with_max_amount",
         "web_ksa::test_ksa_percentage_of_product_price_discount_rules_without_max_amount",
-        "web_ksa::test_ksa_percentage_of_product_price_discount_rules_with_max_amount"
+        "web_ksa::test_ksa_percentage_of_product_price_discount_rules_with_max_amount",
+        "web_uae::test_uae_new_user_percentage_of_product_price_discount_rules_without_max_amount",
+        "web_ksa::test_ksa_new_user_percentage_of_product_price_discount_rules_without_max_amount"
       ],
       "coverage_status": "full",
-      "notes": "Percentage-of-product-price rule with and without a max discount amount, both stores, order summary verified and order placed.",
+      "notes": "Percentage-of-product-price rule with and without a max discount amount, both storefronts, order summary verified and the order placed. FALCONS-294 added new-user twins, so the rule is proven for a first-time customer as well as an existing one.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -1848,10 +1854,14 @@
         "web_uae::test_uae_percentage_of_product_variant_price_discount_rules_with_max_amount",
         "web_uae::test_uae_percentage_of_product_variant_price_discount_rules_without_max_amount",
         "web_ksa::test_ksa_percentage_of_product_variant_price_discount_rules_with_max_amount",
-        "web_ksa::test_ksa_percentage_of_product_variant_price_discount_rules_without_max_amount"
+        "web_ksa::test_ksa_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "web_uae::test_uae_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "web_uae::test_uae_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "web_ksa::test_ksa_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "web_ksa::test_ksa_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount"
       ],
       "coverage_status": "full",
-      "notes": "Percentage rule on product variants (sale and non-sale in the same cart), with and without a max amount, both stores.",
+      "notes": "Percentage rule on product variants, sale and non-sale in the same cart, with and without a max amount, both storefronts, paid by COD and by card. FALCONS-294 added a new-user twin of each.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -3966,14 +3976,18 @@
       "run_id": 2192,
       "automated_tests": [
         "app::test_app_uae_cart_remove_item_with_applied_coupon",
+        "app::test_app_new_user_cart_remove_item_with_applied_coupon",
         "app::test_app_percentage_of_product_price_discount_rules_with_max_amount",
         "app::test_app_percentage_of_product_price_discount_rules_without_max_amount",
+        "app::test_app_new_user_percentage_of_product_price_discount_rules_without_max_amount",
         "app::test_app_percentage_of_product_variant_price_discount_rules_with_max_amount",
         "app::test_app_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "app::test_app_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "app::test_app_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
         "app::test_app_bank_discount_percentage_of_product_price_rule"
       ],
       "coverage_status": "full",
-      "notes": "FALCONS-342 closed the gap: the capped percentage test applies a coupon on the cart, REMOVES it there, verifies the checkout summary loses the discount, then re-applies it on checkout -- so apply and remove are both proven. Four cart-price-rule variants are covered, and the bank-coupon test is unskipped on main again, adding view-then-apply on the cart.",
+      "notes": "FALCONS-342 closed the gap: the capped percentage test applies a coupon on the cart, REMOVES it there, verifies the checkout summary loses the discount, then re-applies it on checkout -- so apply and remove are both proven. Every cart-price-rule variant is covered, FALCONS-294 added new-user twins of each, and the bank-coupon test is live on main again.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -4087,11 +4101,14 @@
       "run_id": 2192,
       "automated_tests": [
         "app::test_app_wishlist_all_product_types",
+        "app::test_app_wishlist_from_pdp",
+        "app::test_app_wishlist_from_pdp_new_user",
+        "app::test_app_wishlist_add_products_from_plps",
         "app::test_app_wishlist_guest_add_from_plp_prompts_login",
         "app::test_app_wishlist_guest_add_from_pdp_prompts_login"
       ],
       "coverage_status": "full",
-      "notes": "All three entry points the case names are now covered. Cart: all seven product types moved to the wishlist, including the guest login-prompt branch. PLP and PDP (FALCONS-312): a guest taps the wishlist heart, the sign-in sheet opens, the user registers or signs in, and the product is then added and verified on the wishlist. The PLP and PDP paths take the first product on the listing rather than sweeping every type; the cart path covers all seven.",
+      "notes": "All three entry points are covered, now for every product type rather than a single product. Cart: all seven types moved to the wishlist, including the guest login-prompt branch. PDP (FALCONS-295): adds from the PDP for an existing user and a new one. PLP (FALCONS-312): adds from every listing, plus the guest flows where the heart opens the sign-in sheet first.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -4119,10 +4136,11 @@
       "page": 1,
       "run_id": 2192,
       "automated_tests": [
-        "app::test_app_wishlist_all_product_types"
+        "app::test_app_wishlist_all_product_types",
+        "app::test_app_wishlist_delete_all_product_types"
       ],
       "coverage_status": "full",
-      "notes": "Covered by the closing steps of the wishlist test, which I had missed: after verifying all products are present it calls wishlist_app.delete_all_wishlist_items() -- clicking the delete icon on each card in turn -- then wishlist_app.verify_wishlist_is_empty(), which asserts the empty state is shown or that zero cards remain. The test carries seven product types (simple, custom, configurable, bundle, custom_configurable, colour variant, installation), so removal is proven across all of them. clear_wishlist_bulk() exercises the select-all path as a precondition too.",
+      "notes": "FALCONS-315 deletes every product type by all three routes the app offers -- the per-item trash icon, Select for specific items, and Select All -- finishing on the empty state. The wishlist flow test also clears the list by bulk selection as a precondition and asserts it empties.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -9009,14 +9027,6 @@
     "app::test_app_cart_existing_user_orders_no_coupon_yalla",
     "app::test_app_gift_registry_create_from_my_registries",
     "app::test_app_new_user_auto_discount_applied_without_coupon",
-    "app::test_app_new_user_cart_remove_item_with_applied_coupon",
-    "app::test_app_new_user_percentage_of_product_price_discount_rules_without_max_amount",
-    "app::test_app_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
-    "app::test_app_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
-    "app::test_app_wishlist_add_products_from_plps",
-    "app::test_app_wishlist_delete_all_product_types",
-    "app::test_app_wishlist_from_pdp",
-    "app::test_app_wishlist_from_pdp_new_user",
     "app::test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
     "app::test_super_app_now_non_serviceable_address_validation",
     "app::test_super_app_now_serviceable_address_restores_availability",
@@ -9027,15 +9037,9 @@
     "app::test_uae_checkout_invalid_cc_no_coupon",
     "web_commons::test_home_screen_elements_and_navigate_to_account",
     "web_commons::test_home_search_product_in_specific_category",
-    "web_commons::test_wishlist_delete_all_product_types",
     "web_ksa::test_ksa_auto_discount_applied_without_coupon",
     "web_ksa::test_ksa_cart_apply_gift_wrap_and_place_order",
-    "web_ksa::test_ksa_cart_remove_item_with_applied_coupon",
     "web_ksa::test_ksa_new_user_auto_discount_applied_without_coupon",
-    "web_ksa::test_ksa_new_user_cart_remove_item_with_applied_coupon",
-    "web_ksa::test_ksa_new_user_percentage_of_product_price_discount_rules_without_max_amount",
-    "web_ksa::test_ksa_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
-    "web_ksa::test_ksa_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
     "web_ksa::test_ksa_wishlist_guest_add_prompts_login",
     "web_uae::test_uae_auto_discount_applied_without_coupon",
     "web_uae::test_uae_cart_add_all_product_types_and_verify",
@@ -9049,13 +9053,16 @@
     "web_uae::test_uae_cart_remove_item",
     "web_uae::test_uae_checkout_save_card_remember_me",
     "web_uae::test_uae_new_user_auto_discount_applied_without_coupon",
-    "web_uae::test_uae_new_user_cart_remove_item_with_applied_coupon",
-    "web_uae::test_uae_new_user_percentage_of_product_price_discount_rules_without_max_amount",
-    "web_uae::test_uae_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
-    "web_uae::test_uae_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
     "web_uae::test_uae_wishlist_guest_add_prompts_login"
   ],
   "plan_gaps": [
+    {
+      "ref": "app::test_app_auto_discount_applied_without_coupon",
+      "platform": "app",
+      "path": "tests/app/test_app_coupon.py",
+      "mirrors_case": "",
+      "mirrors_name": "Automatic cart discount with no coupon entered -- no app case describes it"
+    },
     {
       "ref": "app::test_app_cart_existing_user_orders_no_coupon_yalla",
       "platform": "app",
@@ -9069,6 +9076,13 @@
       "path": "tests/app/test_app_gift_registry.py",
       "mirrors_case": "2337059",
       "mirrors_name": "Gift Registry creation from My account (mWEB case; no app equivalent)"
+    },
+    {
+      "ref": "app::test_app_new_user_auto_discount_applied_without_coupon",
+      "platform": "app",
+      "path": "tests/app/test_app_coupon.py",
+      "mirrors_case": "",
+      "mirrors_name": "Automatic cart discount, new user -- no app case describes it"
     },
     {
       "ref": "app::test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
@@ -9127,11 +9141,32 @@
       "mirrors_name": "Categories from home page (app case; the mWEB set has no equivalent)"
     },
     {
+      "ref": "web_ksa::test_ksa_auto_discount_applied_without_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_coupon_ksa.py",
+      "mirrors_case": "",
+      "mirrors_name": "Automatic cart discount with no coupon entered -- the Coupon cases all assume a code"
+    },
+    {
+      "ref": "web_ksa::test_ksa_new_user_auto_discount_applied_without_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_coupon_ksa.py",
+      "mirrors_case": "",
+      "mirrors_name": "Automatic cart discount, new user -- the Coupon cases all assume a code"
+    },
+    {
       "ref": "web_ksa::test_ksa_wishlist_guest_add_prompts_login",
       "platform": "web_ksa",
       "path": "tests/web/KSA/test_wishlist_guest_ksa.py",
       "mirrors_case": "1018714",
       "mirrors_name": "Wishlist cases cover new/existing users; none covers the guest login prompt"
+    },
+    {
+      "ref": "web_uae::test_uae_auto_discount_applied_without_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_coupon.py",
+      "mirrors_case": "",
+      "mirrors_name": "Automatic cart discount with no coupon entered -- the Coupon cases all assume a code"
     },
     {
       "ref": "web_uae::test_uae_cart_add_all_product_types_and_verify",
@@ -9190,6 +9225,13 @@
       "mirrors_name": "Verify user can remove products from cart - All product types"
     },
     {
+      "ref": "web_uae::test_uae_new_user_auto_discount_applied_without_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_coupon.py",
+      "mirrors_case": "",
+      "mirrors_name": "Automatic cart discount, new user -- the Coupon cases all assume a code"
+    },
+    {
       "ref": "web_uae::test_uae_wishlist_guest_add_prompts_login",
       "platform": "web_uae",
       "path": "tests/web/UAE/test_wishlist.py",
@@ -9200,7 +9242,7 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-10-05",
-    "generated_at": "2026-10-05T07:39:10+00:00",
+    "generated_at": "2026-10-05T10:41:35+00:00",
     "source_sha": "0a78a10",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
@@ -9275,19 +9317,19 @@
     },
     "projection": {
       "web": {
-        "in_scope": 66,
-        "covered": 50,
-        "pct": 76
+        "in_scope": 70,
+        "covered": 54,
+        "pct": 77
       },
       "app": {
-        "in_scope": 39,
-        "covered": 33,
+        "in_scope": 41,
+        "covered": 35,
         "pct": 85
       },
       "combined": {
-        "in_scope": 105,
-        "covered": 83,
-        "pct": 79
+        "in_scope": 111,
+        "covered": 89,
+        "pct": 80
       },
       "actions": [
         {
@@ -9298,7 +9340,7 @@
         },
         {
           "id": "B",
-          "what": "Add 20 TestMO case(s) for tests that pass but have none",
+          "what": "Add 26 TestMO case(s) for tests that pass but have none",
           "detail": "the cart scenarios FALCONS-336 ported from the app suite; each names the app case to mirror",
           "effect": "enters scope already covered"
         },
@@ -9336,8 +9378,8 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 50,
-    "plan_gap_count": 20,
+    "unmapped_count": 32,
+    "plan_gap_count": 26,
     "unmapped_and_skipped": 7,
     "arabic_ready_tests": 112
   }

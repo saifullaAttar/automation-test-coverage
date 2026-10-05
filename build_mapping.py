@@ -112,14 +112,17 @@ WEB_MAPPING = {
         "A brand-new user starts with an empty wishlist and adds every product type from the PDP "
         "(FALCONS-313), from every listing -- Category, SRP, Brand and Sale (FALCONS-312) -- then "
         "moves them all to the cart (FALCONS-296). TestMO flags this NO; it should be YES."),
-    "1018717": ("partial", ["web_commons::test_wishlist_move_all_product_types_to_cart_existing_user",
-                            "web_commons::test_wishlist_move_all_product_types_to_cart_new_user",
-                            "web_uae::test_uae_wishlist_add_all_product_types_existing_user",
-                            "web_ksa::test_ksa_wishlist_add_all_product_types_existing_user"],
-        "FALCONS-296. Moving every product type from the wishlist to the cart is asserted to remove "
-        "each item from the wishlist, and the empty state is checked once the last one has gone; "
-        "clear_wishlist() exercises bulk removal as a precondition. Scenario 2 -- removing an item "
-        "by tapping the heart on its PDP -- is still not covered."),
+    "1018717": ("partial", [
+        "web_commons::test_wishlist_delete_all_product_types",
+        "web_commons::test_wishlist_move_all_product_types_to_cart_existing_user",
+        "web_commons::test_wishlist_move_all_product_types_to_cart_new_user",
+        "web_uae::test_uae_wishlist_add_all_product_types_existing_user",
+        "web_ksa::test_ksa_wishlist_add_all_product_types_existing_user"],
+        "FALCONS-315 deletes every product type from the Wishlist page by all three routes -- the "
+        "per-item remove icon, Select for specific items with the unselected ones verified to "
+        "remain, and Select All for the rest -- ending on the empty state. FALCONS-296 also removes "
+        "items by moving them to the cart. Scenario 2 of this case, removing an item by tapping the "
+        "heart on its PDP, is still not covered."),
     "1018719": ("full", ["web_uae::test_uae_wishlist_add_all_product_types_existing_user",
                          "web_ksa::test_ksa_wishlist_add_all_product_types_existing_user",
                          "web_commons::test_wishlist_add_products_from_plps_existing_user"],
@@ -268,24 +271,39 @@ WEB_MAPPING = {
         "are not automated."),
 
     # --- Coupon -----------------------------------------------------------------------------------------
-    "1018758": ("partial", ["web_uae::test_uae_checkout_cc_normal_coupon",
-                            "web_uae::test_uae_checkout_cc_coupon_modal_sheet",
-                            "web_uae::test_uae_cart_remove_item_with_applied_coupon"],
-        "Applying a coupon on the cart and on the checkout page is covered, including through the "
-        "coupon modal sheet. The point of this case -- that a single-use coupon is rejected on a "
-        "second use by the same or another customer -- is not asserted."),
-    "1018759": ("full", ["web_uae::test_uae_percentage_of_product_price_discount_rules_without_max_amount",
-                         "web_uae::test_uae_percentage_of_product_price_discount_rules_with_max_amount",
-                         "web_ksa::test_ksa_percentage_of_product_price_discount_rules_without_max_amount",
-                         "web_ksa::test_ksa_percentage_of_product_price_discount_rules_with_max_amount"],
-        "Percentage-of-product-price rule with and without a max discount amount, both stores, order "
-        "summary verified and order placed."),
-    "1018760": ("full", ["web_uae::test_uae_percentage_of_product_variant_price_discount_rules_with_max_amount",
-                         "web_uae::test_uae_percentage_of_product_variant_price_discount_rules_without_max_amount",
-                         "web_ksa::test_ksa_percentage_of_product_variant_price_discount_rules_with_max_amount",
-                         "web_ksa::test_ksa_percentage_of_product_variant_price_discount_rules_without_max_amount"],
-        "Percentage rule on product variants (sale and non-sale in the same cart), with and without a "
-        "max amount, both stores."),
+    "1018758": ("partial", [
+        "web_uae::test_uae_checkout_cc_normal_coupon",
+        "web_uae::test_uae_checkout_cc_coupon_modal_sheet",
+        "web_uae::test_uae_cart_remove_item_with_applied_coupon",
+        "web_ksa::test_ksa_cart_remove_item_with_applied_coupon",
+        "web_uae::test_uae_new_user_cart_remove_item_with_applied_coupon",
+        "web_ksa::test_ksa_new_user_cart_remove_item_with_applied_coupon"],
+        "Applying a coupon on the cart and at checkout is covered, through the coupon modal sheet "
+        "too, and FALCONS-294 added KSA and new-user twins of the remove-item-with-coupon "
+        "recalculation. The point of this case -- that a single-use coupon is refused on a second "
+        "use by the same or another customer -- is still not asserted."),
+    "1018759": ("full", [
+        "web_uae::test_uae_percentage_of_product_price_discount_rules_without_max_amount",
+        "web_uae::test_uae_percentage_of_product_price_discount_rules_with_max_amount",
+        "web_ksa::test_ksa_percentage_of_product_price_discount_rules_without_max_amount",
+        "web_ksa::test_ksa_percentage_of_product_price_discount_rules_with_max_amount",
+        "web_uae::test_uae_new_user_percentage_of_product_price_discount_rules_without_max_amount",
+        "web_ksa::test_ksa_new_user_percentage_of_product_price_discount_rules_without_max_amount"],
+        "Percentage-of-product-price rule with and without a max discount amount, both storefronts, "
+        "order summary verified and the order placed. FALCONS-294 added new-user twins, so the rule "
+        "is proven for a first-time customer as well as an existing one."),
+    "1018760": ("full", [
+        "web_uae::test_uae_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "web_uae::test_uae_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "web_ksa::test_ksa_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "web_ksa::test_ksa_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "web_uae::test_uae_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "web_uae::test_uae_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "web_ksa::test_ksa_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "web_ksa::test_ksa_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount"],
+        "Percentage rule on product variants, sale and non-sale in the same cart, with and without "
+        "a max amount, both storefronts, paid by COD and by card. FALCONS-294 added a new-user twin "
+        "of each."),
     "1018761": ("full", ["web_uae::test_uae_bank_discount_percentage_of_product_price_rule",
                          "web_ksa::test_ksa_bank_discount_percentage_of_product_price_rule"],
         "Bank coupon viewed on the cart, re-checked after a quantity change, applied, order summary "
@@ -418,17 +436,21 @@ APP_MAPPING = {
         "Gift wrap added on the cart and the order placed with CC. Dropped "
         "test_app_cart_apply_gift_wrap_and_place_order, hard-skipped because it moved to the "
         "checkout suite. TestMO flags this NO -- it should be YES."),
-    "1435409": ("full", ["app::test_app_uae_cart_remove_item_with_applied_coupon",
-                         "app::test_app_percentage_of_product_price_discount_rules_with_max_amount",
-                         "app::test_app_percentage_of_product_price_discount_rules_without_max_amount",
-                         "app::test_app_percentage_of_product_variant_price_discount_rules_with_max_amount",
-                         "app::test_app_percentage_of_product_variant_price_discount_rules_without_max_amount",
-                         "app::test_app_bank_discount_percentage_of_product_price_rule"],
+    "1435409": ("full", [
+        "app::test_app_uae_cart_remove_item_with_applied_coupon",
+        "app::test_app_new_user_cart_remove_item_with_applied_coupon",
+        "app::test_app_percentage_of_product_price_discount_rules_with_max_amount",
+        "app::test_app_percentage_of_product_price_discount_rules_without_max_amount",
+        "app::test_app_new_user_percentage_of_product_price_discount_rules_without_max_amount",
+        "app::test_app_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "app::test_app_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "app::test_app_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "app::test_app_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "app::test_app_bank_discount_percentage_of_product_price_rule"],
         "FALCONS-342 closed the gap: the capped percentage test applies a coupon on the cart, "
         "REMOVES it there, verifies the checkout summary loses the discount, then re-applies it on "
-        "checkout -- so apply and remove are both proven. Four cart-price-rule variants are "
-        "covered, and the bank-coupon test is unskipped on main again, adding view-then-apply on "
-        "the cart."),
+        "checkout -- so apply and remove are both proven. Every cart-price-rule variant is covered, "
+        "FALCONS-294 added new-user twins of each, and the bank-coupon test is live on main again."),
     "1435393": ("full", ["app::test_existing_user_profile"],
         "Signs in and verifies every detail on the My Profile screen. TestMO flags this NO -- it should be YES."),
     "1435394": ("none", [], "There is no app order-list / order-details test."),
@@ -437,23 +459,25 @@ APP_MAPPING = {
         "existing customer. test_app_wishlist_all_product_types does open the wishlist, but only as "
         "a step inside a cart-to-wishlist flow, so it does not stand in for this case (QA owner, "
         "8 Sep 2026). That test is credited on 1435396 and 1435397 instead."),
-    "1435396": ("full", ["app::test_app_wishlist_all_product_types",
-                         "app::test_app_wishlist_guest_add_from_plp_prompts_login",
-                         "app::test_app_wishlist_guest_add_from_pdp_prompts_login"],
-        "All three entry points the case names are now covered. Cart: all seven product types moved "
-        "to the wishlist, including the guest login-prompt branch. PLP and PDP (FALCONS-312): a "
-        "guest taps the wishlist heart, the sign-in sheet opens, the user registers or signs in, "
-        "and the product is then added and verified on the wishlist. The PLP and PDP paths take the "
-        "first product on the listing rather than sweeping every type; the cart path covers all "
-        "seven."),
-    "1435397": ("full", ["app::test_app_wishlist_all_product_types"],
-        "Covered by the closing steps of the wishlist test, which I had missed: after verifying all "
-        "products are present it calls wishlist_app.delete_all_wishlist_items() -- clicking the "
-        "delete icon on each card in turn -- then wishlist_app.verify_wishlist_is_empty(), which "
-        "asserts the empty state is shown or that zero cards remain. The test carries seven product "
-        "types (simple, custom, configurable, bundle, custom_configurable, colour variant, "
-        "installation), so removal is proven across all of them. clear_wishlist_bulk() exercises the "
-        "select-all path as a precondition too."),
+    "1435396": ("full", [
+        "app::test_app_wishlist_all_product_types",
+        "app::test_app_wishlist_from_pdp",
+        "app::test_app_wishlist_from_pdp_new_user",
+        "app::test_app_wishlist_add_products_from_plps",
+        "app::test_app_wishlist_guest_add_from_plp_prompts_login",
+        "app::test_app_wishlist_guest_add_from_pdp_prompts_login"],
+        "All three entry points are covered, now for every product type rather than a single "
+        "product. Cart: all seven types moved to the wishlist, including the guest login-prompt "
+        "branch. PDP (FALCONS-295): adds from the PDP for an existing user and a new one. PLP "
+        "(FALCONS-312): adds from every listing, plus the guest flows where the heart opens the "
+        "sign-in sheet first."),
+    "1435397": ("full", [
+        "app::test_app_wishlist_all_product_types",
+        "app::test_app_wishlist_delete_all_product_types"],
+        "FALCONS-315 deletes every product type by all three routes the app offers -- the per-item "
+        "trash icon, Select for specific items, and Select All -- finishing on the empty state. The "
+        "wishlist flow test also clears the list by bulk selection as a precondition and asserts it "
+        "empties."),
     "1435398": ("none", [], "The app wallet page is not automated."),
     "1435400": ("partial", ["app::test_add_new_address_and_make_default_and_delete",
                             "app::test_existing_user_delivery_address"],
@@ -570,6 +594,21 @@ PLAN_GAPS = {
         ("1018714", "Wishlist cases cover new/existing users; none covers the guest login prompt"),
     "web_ksa::test_ksa_wishlist_guest_add_prompts_login":
         ("1018714", "Wishlist cases cover new/existing users; none covers the guest login prompt"),
+    # An automatic promotion that discounts the cart with no coupon entered.
+    # Every Coupon case in the plan starts with "apply coupon on cart", so none
+    # of them describes a rule that needs no code at all.
+    "web_uae::test_uae_auto_discount_applied_without_coupon":
+        ("", "Automatic cart discount with no coupon entered -- the Coupon cases all assume a code"),
+    "web_uae::test_uae_new_user_auto_discount_applied_without_coupon":
+        ("", "Automatic cart discount, new user -- the Coupon cases all assume a code"),
+    "web_ksa::test_ksa_auto_discount_applied_without_coupon":
+        ("", "Automatic cart discount with no coupon entered -- the Coupon cases all assume a code"),
+    "web_ksa::test_ksa_new_user_auto_discount_applied_without_coupon":
+        ("", "Automatic cart discount, new user -- the Coupon cases all assume a code"),
+    "app::test_app_auto_discount_applied_without_coupon":
+        ("", "Automatic cart discount with no coupon entered -- no app case describes it"),
+    "app::test_app_new_user_auto_discount_applied_without_coupon":
+        ("", "Automatic cart discount, new user -- no app case describes it"),
     # FALCONS-347/348/349 -- the Now vertical. A new product area; neither TestMO
     # export carries cases for it, so none of this can raise a percentage yet.
     "app::test_super_app_vertical_switcher_only_in_uae":
