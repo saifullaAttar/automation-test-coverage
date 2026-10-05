@@ -1163,6 +1163,51 @@
       ]
     },
     {
+      "ref": "app::test_app_auto_discount_applied_without_coupon",
+      "name": "test_app_auto_discount_applied_without_coupon",
+      "platform": "app",
+      "path": "tests/app/test_app_coupon.py",
+      "file": "test_app_coupon.py",
+      "title": "Automatic discount applies with no coupon code entered",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Coupon",
+        "Auto Discount"
+      ],
+      "docstring": "An automatic promotion must discount the cart with no coupon entered. USER_EMAIL_0 is referenced by no other test, so clearing its cart here cannot disturb a suite running in parallel.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "app::test_app_new_user_auto_discount_applied_without_coupon",
+      "name": "test_app_new_user_auto_discount_applied_without_coupon",
+      "platform": "app",
+      "path": "tests/app/test_app_coupon.py",
+      "file": "test_app_coupon.py",
+      "title": "New user - Automatic discount applies with no coupon code entered",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Coupon",
+        "Auto Discount",
+        "NewUser"
+      ],
+      "docstring": "The same journey on a first-time customer. A new account also proves a per-customer usage limit on the rule is not what makes the discount appear.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "app::test_app_gift_registry_create_from_my_registries",
       "name": "test_app_gift_registry_create_from_my_registries",
       "platform": "app",
@@ -2574,6 +2619,51 @@
       ]
     },
     {
+      "ref": "web_uae::test_uae_auto_discount_applied_without_coupon",
+      "name": "test_uae_auto_discount_applied_without_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_coupon.py",
+      "file": "test_coupon.py",
+      "title": "UAE - Automatic discount applies with no coupon code entered",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Coupon",
+        "Auto Discount"
+      ],
+      "docstring": "An automatic promotion must discount the cart with no coupon entered.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_new_user_auto_discount_applied_without_coupon",
+      "name": "test_uae_new_user_auto_discount_applied_without_coupon",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_coupon.py",
+      "file": "test_coupon.py",
+      "title": "UAE - New user - Automatic discount applies with no coupon code entered",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Coupon",
+        "Auto Discount",
+        "New User"
+      ],
+      "docstring": "The same journey on an account registered during the test. A first-time customer also proves a per-customer usage limit on the rule is not what makes the discount appear.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "web_uae::test_uae_user_register_from_account_page",
       "name": "test_uae_user_register_from_account_page",
       "platform": "web_uae",
@@ -3438,6 +3528,51 @@
       ]
     },
     {
+      "ref": "web_ksa::test_ksa_auto_discount_applied_without_coupon",
+      "name": "test_ksa_auto_discount_applied_without_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_coupon_ksa.py",
+      "file": "test_coupon_ksa.py",
+      "title": "KSA - Automatic discount applies with no coupon code entered",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Coupon",
+        "Auto Discount"
+      ],
+      "docstring": "An automatic promotion must discount the cart with no coupon entered.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_new_user_auto_discount_applied_without_coupon",
+      "name": "test_ksa_new_user_auto_discount_applied_without_coupon",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_coupon_ksa.py",
+      "file": "test_coupon_ksa.py",
+      "title": "KSA - New user - Automatic discount applies with no coupon code entered",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Coupon",
+        "Auto Discount",
+        "New User"
+      ],
+      "docstring": "The same journey on an account registered during the test. A first-time customer also proves a per-customer usage limit on the rule is not what makes the discount appear.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "web_ksa::test_ksa_user_register_from_account_page",
       "name": "test_ksa_user_register_from_account_page",
       "platform": "web_ksa",
@@ -3910,7 +4045,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "8d5aeb3",
+    "sha": "0a78a10",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }
