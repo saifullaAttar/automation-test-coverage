@@ -9242,7 +9242,7 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-10-05",
-    "generated_at": "2026-10-05T11:26:43+00:00",
+    "generated_at": "2026-10-05T13:19:43+00:00",
     "source_sha": "0a78a10",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",

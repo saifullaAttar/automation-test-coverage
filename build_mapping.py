@@ -758,6 +758,70 @@ def load(name, required=True):
     return json.loads(path.read_text())
 
 
+# --- Mappings staged against a PR that has not merged yet --------------------
+#
+# A ref that is not on main is normally a hard build failure: a mapping has to be
+# provable against the shipped suite, always. But a reviewed PR whose tests are
+# already written should not need a human to come back and re-run anything on
+# merge day. An entry here is inert until EVERY one of its refs is on main, then
+# applies itself -- so the first CI build after the merge flips the case with the
+# evidence note already written. Keyed by (scope, case_id).
+PENDING = {
+    # PR #310, FALCONS-364 -- App and mWeb multi-tiered coupon discount.
+    ("web", "1084824"): ("full", [
+        "web_uae::test_uae_tiered_coupon_steps_up_and_caps",
+        "web_uae::test_uae_uncapped_tiered_coupon_keeps_increasing",
+        "web_uae::test_uae_new_user_tiered_coupon_steps_up_and_caps",
+        "web_uae::test_uae_new_user_uncapped_tiered_coupon_keeps_increasing",
+        "web_ksa::test_ksa_tiered_coupon_steps_up_and_caps",
+        "web_ksa::test_ksa_uncapped_tiered_coupon_keeps_increasing",
+        "web_ksa::test_ksa_new_user_tiered_coupon_steps_up_and_caps",
+        "web_ksa::test_ksa_new_user_uncapped_tiered_coupon_keeps_increasing"],
+        "Both scenarios of the rule, on both storefronts. Scenario 1 (tierednomax): the uncapped "
+        "test proves the coupon is refused below the cost step, then that the discount keeps growing "
+        "as the quantity rises. Scenario 2 (tieredmax): the capped test walks the subtotal up through "
+        "the steps and verifies the discount stops at its cap and holds there. Both reconcile VAT and "
+        "the order total and place a credit-card order; each has a new-user twin."),
+    # PR #310 again -- the app half. C-1435409 already counts, so this adds no
+    # coverage; it keeps the four app tiered tests out of the "no TestMO case" panel.
+    ("app", "1435409"): ("full", [
+        "app::test_app_uae_cart_remove_item_with_applied_coupon",
+        "app::test_app_new_user_cart_remove_item_with_applied_coupon",
+        "app::test_app_percentage_of_product_price_discount_rules_with_max_amount",
+        "app::test_app_percentage_of_product_price_discount_rules_without_max_amount",
+        "app::test_app_new_user_percentage_of_product_price_discount_rules_without_max_amount",
+        "app::test_app_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "app::test_app_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "app::test_app_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
+        "app::test_app_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
+        "app::test_app_bank_discount_percentage_of_product_price_rule",
+        "app::test_app_tiered_coupon_steps_up_and_caps",
+        "app::test_app_uncapped_tiered_coupon_keeps_increasing",
+        "app::test_app_new_user_tiered_coupon_steps_up_and_caps",
+        "app::test_app_new_user_uncapped_tiered_coupon_keeps_increasing"],
+        "FALCONS-342 closed the gap: the capped percentage test applies a coupon on the cart, "
+        "REMOVES it there, verifies the checkout summary loses the discount, then re-applies it on "
+        "checkout -- so apply and remove are both proven. Every cart-price-rule variant is covered, "
+        "FALCONS-294 added new-user twins of each, the bank-coupon test is live on main again, and "
+        "FALCONS-364 added the tiered rule, capped and uncapped, with its own new-user twins."),
+}
+
+
+def resolve_pending(mapping, inventory, scope):
+    """Fold in any staged mapping whose tests have now reached main."""
+    for (entry_scope, case_id), value in PENDING.items():
+        if entry_scope != scope:
+            continue
+        refs = value[1]
+        missing = [r for r in refs if r not in inventory]
+        if not missing:
+            mapping[case_id] = value
+            print(f"  pending -> landed: case {case_id} ({len(refs)} tests now on main)")
+        else:
+            print(f"  pending: case {case_id} still waiting on {len(missing)}/{len(refs)} tests")
+    return mapping
+
+
 def apply_mapping(cases, mapping, inventory, label, previous, source=None):
     """Attach refs / status / notes to each case; validate as we go."""
     by_id = {c["case_id"]: c for c in cases}
@@ -933,8 +997,10 @@ def main():
         for c in web:
             c.setdefault("source", "regression")
 
-    web = apply_mapping(web, WEB_MAPPING, inventory, "mWEB", prev.get("testmo_tests", []))
-    app = apply_mapping(app, APP_MAPPING, inventory, "App", prev.get("app_testmo_tests", []),
+    web = apply_mapping(web, resolve_pending(WEB_MAPPING, inventory, "web"),
+                        inventory, "mWEB", prev.get("testmo_tests", []))
+    app = apply_mapping(app, resolve_pending(APP_MAPPING, inventory, "app"),
+                        inventory, "App", prev.get("app_testmo_tests", []),
                         source="release_check")
 
     mapped = {r for c in web + app for r in c["automated_tests"]}
