@@ -1018,6 +1018,11 @@ def main():
                 1 for r in inventory
                 if r not in mapped and (inventory[r]["skip"] or {}).get("type") == "hard"),
             "arabic_ready_tests": sum(1 for t in flat if "ar" in t["locales"]),
+            # The headline percentage can sit still while real work lands: a new test
+            # that deepens a case TestMO already counts changes no case's status. The
+            # suite size is the honest companion number, so record where it started.
+            "baseline": {"tests": 131, "date": "2026-09-02", "sha": "8a95571",
+                         "what": "the re-map against main"},
         },
     }
     (HERE / "mapping.json").write_text(json.dumps(out, indent=2, ensure_ascii=False))

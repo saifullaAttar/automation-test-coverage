@@ -406,7 +406,11 @@ function renderStats() {
     <div class="stat-card"><div class="stat-number" style="color:#28a745">${all.covered}</div><div class="stat-label">Automated</div></div>
     <div class="stat-card"><div class="stat-number" style="color:#dc3545">${all.none}</div><div class="stat-label">Not automated</div></div>
     <div class="stat-card"><div class="stat-number">${all.pct}%</div><div class="stat-label">Coverage — ${all.covered}/${all.inScope}</div></div>
-    <div class="stat-card"><div class="stat-number">${auto.length}</div><div class="stat-label">Automated tests</div></div>
+    <div class="stat-card"><div class="stat-number">${auto.length}</div><div class="stat-label">Automated tests${(() => {
+      const b = DATA.metadata.baseline; if (!b || !b.tests) return '';
+      const d = auto.length - b.tests;
+      return d > 0 ? `<br><small style="color:#28a745">+${d} since ${b.date}</small>` : '';
+    })()}</div></div>
     <div class="stat-card"><div class="stat-number" style="color:${skipped ? '#dc3545' : '#28a745'}">${skipped}</div><div class="stat-label">Automated but not running<br><small style="color:#999">hard-skipped scripts</small></div></div>
     <div class="stat-card"><div class="stat-number" style="color:#0e6b3d">${(DATA.metadata.unmapped_count || 0) - (DATA.metadata.unmapped_and_skipped || 0)}</div><div class="stat-label">Passing, but no TestMO case<br><small style="color:#999">coverage the plan does not describe</small></div></div>
   `;
