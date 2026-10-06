@@ -311,10 +311,21 @@ WEB_MAPPING = {
     "1018762": ("none", [],
         "Removed the previous link to a KSA percentage test -- wrong rule type. The fixed-amount "
         "coupons (FF_15 / FW_20) this case is about are not automated."),
-    "1084824": ("none", [],
-        "Removed the previous link to a KSA variant-percentage test. The tiered rules "
-        "(tierednomax / tieredmax) are not automated."),
-
+    "1084824": ("full", [
+        "web_uae::test_uae_tiered_coupon_steps_up_and_caps",
+        "web_uae::test_uae_uncapped_tiered_coupon_keeps_increasing",
+        "web_uae::test_uae_new_user_tiered_coupon_steps_up_and_caps",
+        "web_uae::test_uae_new_user_uncapped_tiered_coupon_keeps_increasing",
+        "web_ksa::test_ksa_tiered_coupon_steps_up_and_caps",
+        "web_ksa::test_ksa_uncapped_tiered_coupon_keeps_increasing",
+        "web_ksa::test_ksa_new_user_tiered_coupon_steps_up_and_caps",
+        "web_ksa::test_ksa_new_user_uncapped_tiered_coupon_keeps_increasing"],
+        "FALCONS-364 covers both scenarios of the rule, on both storefronts. Scenario 1 "
+        "(tierednomax): the uncapped test proves the coupon is refused below the cost step, then that "
+        "the discount keeps growing as the quantity rises. Scenario 2 (tieredmax): the capped test "
+        "walks the subtotal up through the steps and verifies the discount stops at its cap and holds "
+        "there. Both reconcile VAT and the order total and place a credit-card order; each has a new- "
+        "user twin."),
     # --- Gift Registry (FALCONS-339) -----------------------------------------------------------------------
     "2337059": ("full", ["web_commons::test_gift_registry_create_from_my_account",
                          "web_commons::test_gift_registry_create_from_pdp"],
@@ -446,11 +457,16 @@ APP_MAPPING = {
         "app::test_app_percentage_of_product_variant_price_discount_rules_without_max_amount",
         "app::test_app_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
         "app::test_app_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
-        "app::test_app_bank_discount_percentage_of_product_price_rule"],
-        "FALCONS-342 closed the gap: the capped percentage test applies a coupon on the cart, "
-        "REMOVES it there, verifies the checkout summary loses the discount, then re-applies it on "
-        "checkout -- so apply and remove are both proven. Every cart-price-rule variant is covered, "
-        "FALCONS-294 added new-user twins of each, and the bank-coupon test is live on main again."),
+        "app::test_app_bank_discount_percentage_of_product_price_rule",
+        "app::test_app_tiered_coupon_steps_up_and_caps",
+        "app::test_app_uncapped_tiered_coupon_keeps_increasing",
+        "app::test_app_new_user_tiered_coupon_steps_up_and_caps",
+        "app::test_app_new_user_uncapped_tiered_coupon_keeps_increasing"],
+        "FALCONS-342 closed the gap: the capped percentage test applies a coupon on the cart, REMOVES "
+        "it there, verifies the checkout summary loses the discount, then re-applies it on checkout "
+        "-- so apply and remove are both proven. Every cart-price-rule variant is covered, "
+        "FALCONS-294 added new-user twins of each, the bank-coupon test is live on main again, and "
+        "FALCONS-364 added the tiered rule, capped and uncapped, with its own new-user twins."),
     "1435393": ("full", ["app::test_existing_user_profile"],
         "Signs in and verifies every detail on the My Profile screen. TestMO flags this NO -- it should be YES."),
     "1435394": ("none", [], "There is no app order-list / order-details test."),
@@ -767,43 +783,7 @@ def load(name, required=True):
 # applies itself -- so the first CI build after the merge flips the case with the
 # evidence note already written. Keyed by (scope, case_id).
 PENDING = {
-    # PR #310, FALCONS-364 -- App and mWeb multi-tiered coupon discount.
-    ("web", "1084824"): ("full", [
-        "web_uae::test_uae_tiered_coupon_steps_up_and_caps",
-        "web_uae::test_uae_uncapped_tiered_coupon_keeps_increasing",
-        "web_uae::test_uae_new_user_tiered_coupon_steps_up_and_caps",
-        "web_uae::test_uae_new_user_uncapped_tiered_coupon_keeps_increasing",
-        "web_ksa::test_ksa_tiered_coupon_steps_up_and_caps",
-        "web_ksa::test_ksa_uncapped_tiered_coupon_keeps_increasing",
-        "web_ksa::test_ksa_new_user_tiered_coupon_steps_up_and_caps",
-        "web_ksa::test_ksa_new_user_uncapped_tiered_coupon_keeps_increasing"],
-        "Both scenarios of the rule, on both storefronts. Scenario 1 (tierednomax): the uncapped "
-        "test proves the coupon is refused below the cost step, then that the discount keeps growing "
-        "as the quantity rises. Scenario 2 (tieredmax): the capped test walks the subtotal up through "
-        "the steps and verifies the discount stops at its cap and holds there. Both reconcile VAT and "
-        "the order total and place a credit-card order; each has a new-user twin."),
-    # PR #310 again -- the app half. C-1435409 already counts, so this adds no
-    # coverage; it keeps the four app tiered tests out of the "no TestMO case" panel.
-    ("app", "1435409"): ("full", [
-        "app::test_app_uae_cart_remove_item_with_applied_coupon",
-        "app::test_app_new_user_cart_remove_item_with_applied_coupon",
-        "app::test_app_percentage_of_product_price_discount_rules_with_max_amount",
-        "app::test_app_percentage_of_product_price_discount_rules_without_max_amount",
-        "app::test_app_new_user_percentage_of_product_price_discount_rules_without_max_amount",
-        "app::test_app_percentage_of_product_variant_price_discount_rules_with_max_amount",
-        "app::test_app_percentage_of_product_variant_price_discount_rules_without_max_amount",
-        "app::test_app_new_user_percentage_of_product_variant_price_discount_rules_with_max_amount",
-        "app::test_app_new_user_percentage_of_product_variant_price_discount_rules_without_max_amount",
-        "app::test_app_bank_discount_percentage_of_product_price_rule",
-        "app::test_app_tiered_coupon_steps_up_and_caps",
-        "app::test_app_uncapped_tiered_coupon_keeps_increasing",
-        "app::test_app_new_user_tiered_coupon_steps_up_and_caps",
-        "app::test_app_new_user_uncapped_tiered_coupon_keeps_increasing"],
-        "FALCONS-342 closed the gap: the capped percentage test applies a coupon on the cart, "
-        "REMOVES it there, verifies the checkout summary loses the discount, then re-applies it on "
-        "checkout -- so apply and remove are both proven. Every cart-price-rule variant is covered, "
-        "FALCONS-294 added new-user twins of each, the bank-coupon test is live on main again, and "
-        "FALCONS-364 added the tiered rule, capped and uncapped, with its own new-user twins."),
+    # (empty -- FALCONS-364 landed in #310 and now lives in the dicts above)
 }
 
 

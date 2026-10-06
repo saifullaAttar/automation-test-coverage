@@ -1960,7 +1960,7 @@
         "web_ksa::test_ksa_new_user_uncapped_tiered_coupon_keeps_increasing"
       ],
       "coverage_status": "full",
-      "notes": "Both scenarios of the rule, on both storefronts. Scenario 1 (tierednomax): the uncapped test proves the coupon is refused below the cost step, then that the discount keeps growing as the quantity rises. Scenario 2 (tieredmax): the capped test walks the subtotal up through the steps and verifies the discount stops at its cap and holds there. Both reconcile VAT and the order total and place a credit-card order; each has a new-user twin.",
+      "notes": "FALCONS-364 covers both scenarios of the rule, on both storefronts. Scenario 1 (tierednomax): the uncapped test proves the coupon is refused below the cost step, then that the discount keeps growing as the quantity rises. Scenario 2 (tieredmax): the capped test walks the subtotal up through the steps and verifies the discount stops at its cap and holds there. Both reconcile VAT and the order total and place a credit-card order; each has a new- user twin.",
       "skipped_only": false,
       "gated_only": false,
       "locales": [
@@ -9542,7 +9542,7 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-10-06",
-    "generated_at": "2026-10-06T09:55:29+00:00",
+    "generated_at": "2026-10-06T09:58:46+00:00",
     "source_sha": "1ac6bb3",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
