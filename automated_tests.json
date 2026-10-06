@@ -1163,6 +1163,100 @@
       ]
     },
     {
+      "ref": "app::test_app_tiered_coupon_steps_up_and_caps",
+      "name": "test_app_tiered_coupon_steps_up_and_caps",
+      "platform": "app",
+      "path": "tests/app/test_app_coupon.py",
+      "file": "test_app_coupon.py",
+      "title": "Tiered coupon steps up with the subtotal and stops at its cap",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Coupon",
+        "CC",
+        "TIEREDMAX"
+      ],
+      "docstring": "1. Add a product below the rule's cost step and verify the coupon is refused 2. Add a second product to clear one step, apply the coupon and verify the 10 % discount 3. Raise the quantity past the second step and verify the discount stops at its cap 4. Raise the quantity again and verify the cap holds 5. Verify VAT and order total, then place a CC order",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "app::test_app_uncapped_tiered_coupon_keeps_increasing",
+      "name": "test_app_uncapped_tiered_coupon_keeps_increasing",
+      "platform": "app",
+      "path": "tests/app/test_app_coupon.py",
+      "file": "test_app_coupon.py",
+      "title": "Uncapped tiered coupon keeps discounting as the quantity rises",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Coupon",
+        "CC",
+        "NOMAX2"
+      ],
+      "docstring": "1. Add a product below the rule's cost step and verify the coupon is refused 2. Add a second product to clear one step, apply the coupon and verify the discount 3. Raise the quantity to 2, then to 3, verifying the discount grows each time 4. Verify VAT and order total, then place a CC order",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "app::test_app_new_user_tiered_coupon_steps_up_and_caps",
+      "name": "test_app_new_user_tiered_coupon_steps_up_and_caps",
+      "platform": "app",
+      "path": "tests/app/test_app_coupon.py",
+      "file": "test_app_coupon.py",
+      "title": "New user - Tiered coupon steps up with the subtotal and stops at its cap",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Coupon",
+        "CC",
+        "TIEREDMAX",
+        "NewUser"
+      ],
+      "docstring": "The existing-user journey on an account registered during the test.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "app::test_app_new_user_uncapped_tiered_coupon_keeps_increasing",
+      "name": "test_app_new_user_uncapped_tiered_coupon_keeps_increasing",
+      "platform": "app",
+      "path": "tests/app/test_app_coupon.py",
+      "file": "test_app_coupon.py",
+      "title": "New user - Uncapped tiered coupon keeps discounting as the quantity rises",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Coupon",
+        "CC",
+        "NOMAX2",
+        "NewUser"
+      ],
+      "docstring": "The existing-user journey on an account registered during the test.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "app::test_app_auto_discount_applied_without_coupon",
       "name": "test_app_auto_discount_applied_without_coupon",
       "platform": "app",
@@ -2619,6 +2713,100 @@
       ]
     },
     {
+      "ref": "web_uae::test_uae_tiered_coupon_steps_up_and_caps",
+      "name": "test_uae_tiered_coupon_steps_up_and_caps",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_coupon.py",
+      "file": "test_coupon.py",
+      "title": "UAE - Tiered coupon steps up with the subtotal and stops at its cap",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "Cart",
+        "Coupon",
+        "TIEREDMAX"
+      ],
+      "docstring": "1. Sign in and clear the cart through the API 2. Add a product below the rule's cost step and verify the coupon is refused 3. Add a second product to clear one step, apply the coupon and verify the 10 % discount 4. Raise the quantity past the second step and verify the discount stops at its cap 5. Raise the quantity again, verify the cap holds and the summary reconciles 6. Place the order with a c",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_uncapped_tiered_coupon_keeps_increasing",
+      "name": "test_uae_uncapped_tiered_coupon_keeps_increasing",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_coupon.py",
+      "file": "test_coupon.py",
+      "title": "UAE - Uncapped tiered coupon keeps discounting as the quantity rises",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "Cart",
+        "Coupon",
+        "NOMAX2"
+      ],
+      "docstring": "1. Sign in and clear the cart through the API 2. Add a product below the rule's cost step and verify the coupon is refused 3. Add a second product to clear one step, apply the coupon and verify the discount 4. Raise the quantity to 2, then to 3, verifying the discount grows each time 5. Verify VAT and order total, then place a CC order",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_new_user_tiered_coupon_steps_up_and_caps",
+      "name": "test_uae_new_user_tiered_coupon_steps_up_and_caps",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_coupon.py",
+      "file": "test_coupon.py",
+      "title": "UAE - New user - Tiered coupon steps up with the subtotal and stops at its cap",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "Cart",
+        "Coupon",
+        "TIEREDMAX",
+        "New User"
+      ],
+      "docstring": "The existing-user journey on an account registered during the test.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_new_user_uncapped_tiered_coupon_keeps_increasing",
+      "name": "test_uae_new_user_uncapped_tiered_coupon_keeps_increasing",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_coupon.py",
+      "file": "test_coupon.py",
+      "title": "UAE - New user - Uncapped tiered coupon keeps discounting as the quantity rises",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "Cart",
+        "Coupon",
+        "NOMAX2",
+        "New User"
+      ],
+      "docstring": "The existing-user journey on an account registered during the test.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "web_uae::test_uae_auto_discount_applied_without_coupon",
       "name": "test_uae_auto_discount_applied_without_coupon",
       "platform": "web_uae",
@@ -3528,6 +3716,100 @@
       ]
     },
     {
+      "ref": "web_ksa::test_ksa_tiered_coupon_steps_up_and_caps",
+      "name": "test_ksa_tiered_coupon_steps_up_and_caps",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_coupon_ksa.py",
+      "file": "test_coupon_ksa.py",
+      "title": "KSA - Tiered coupon steps up with the subtotal and stops at its cap",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "Cart",
+        "Coupon",
+        "TIEREDMAX"
+      ],
+      "docstring": "1. Sign in and clear the cart through the API 2. Add a product below the rule's cost step and verify the coupon is refused 3. Add a second product to clear one step, apply the coupon and verify the 10 % discount 4. Raise the quantity past the second step and verify the discount stops at its cap 5. Raise the quantity again, verify the cap holds and the summary reconciles 6. Place the order with a c",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_uncapped_tiered_coupon_keeps_increasing",
+      "name": "test_ksa_uncapped_tiered_coupon_keeps_increasing",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_coupon_ksa.py",
+      "file": "test_coupon_ksa.py",
+      "title": "KSA - Uncapped tiered coupon keeps discounting as the quantity rises",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "Cart",
+        "Coupon",
+        "NOMAX2"
+      ],
+      "docstring": "1. Sign in and clear the cart through the API 2. Add a product below the rule's cost step and verify the coupon is refused 3. Add a second product to clear one step, apply the coupon and verify the discount 4. Raise the quantity to 2, then to 3, verifying the discount grows each time 5. Verify VAT and order total, then place a CC order",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_new_user_tiered_coupon_steps_up_and_caps",
+      "name": "test_ksa_new_user_tiered_coupon_steps_up_and_caps",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_coupon_ksa.py",
+      "file": "test_coupon_ksa.py",
+      "title": "KSA - New user - Tiered coupon steps up with the subtotal and stops at its cap",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "Cart",
+        "Coupon",
+        "TIEREDMAX",
+        "New User"
+      ],
+      "docstring": "The existing-user journey on an account registered during the test.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_new_user_uncapped_tiered_coupon_keeps_increasing",
+      "name": "test_ksa_new_user_uncapped_tiered_coupon_keeps_increasing",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_coupon_ksa.py",
+      "file": "test_coupon_ksa.py",
+      "title": "KSA - New user - Uncapped tiered coupon keeps discounting as the quantity rises",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "Cart",
+        "Coupon",
+        "NOMAX2",
+        "New User"
+      ],
+      "docstring": "The existing-user journey on an account registered during the test.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "web_ksa::test_ksa_auto_discount_applied_without_coupon",
       "name": "test_ksa_auto_discount_applied_without_coupon",
       "platform": "web_ksa",
@@ -4045,7 +4327,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "b513860",
+    "sha": "f614b33",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }
