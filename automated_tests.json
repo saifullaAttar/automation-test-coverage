@@ -1273,7 +1273,10 @@
       ],
       "docstring": "An automatic promotion must discount the cart with no coupon entered. USER_EMAIL_0 is referenced by no other test, so clearing its cart here cannot disturb a suite running in parallel.",
       "parametrized": false,
-      "skip": null,
+      "skip": {
+        "type": "hard",
+        "reason": ""
+      },
       "locales": [
         "en"
       ]
@@ -1296,7 +1299,10 @@
       ],
       "docstring": "The same journey on a first-time customer. A new account also proves a per-customer usage limit on the rule is not what makes the discount appear.",
       "parametrized": false,
-      "skip": null,
+      "skip": {
+        "type": "hard",
+        "reason": ""
+      },
       "locales": [
         "en"
       ]
@@ -1317,12 +1323,7 @@
       ],
       "docstring": "Scenario 1: Creation of a Gift Registry from My account > My registries. 1. Sign in (no cart clear — cart state is irrelevant to gift registry flow) 2. Tap 'Gift Registry' shortcut on Account page 3. Tap 'Create registry' 4. Choose 'Baby Shower' event 5. Enter registry name and tap 'Create & Continue' 6. Assert the newly created registry detail screen is displayed 7. Navigate back and assert the r",
       "parametrized": false,
-      "skip": {
-        "type": "conditional",
-        "reason": "Gift registry is AE-only: on SA the event list does not load and the registry  screen renders blank (app-side bug). [COUNTRY.upper() == \"SA\"]",
-        "condition": "COUNTRY.upper() == \"SA\"",
-        "scope": "alias"
-      },
+      "skip": null,
       "locales": [
         "en",
         "ar"
@@ -1345,12 +1346,7 @@
       ],
       "docstring": "Scenario 2: Creation of a Gift Registry from PDP → 'Add to Registry' button. 1. Sign in 2. Precondition — cleanup any pre-existing registries 3. Search for CATEGORY_4 (Diapers) and open the first search result 4. If the 'Add to Registry' button is missing on the first product, go back and try the second. If both are missing → fail with a clear Allure message so the reader knows the product catalog",
       "parametrized": false,
-      "skip": {
-        "type": "conditional",
-        "reason": "Gift registry is AE-only: on SA the event list does not load and the registry  screen renders blank (app-side bug). [COUNTRY.upper() == \"SA\"]",
-        "condition": "COUNTRY.upper() == \"SA\"",
-        "scope": "alias"
-      },
+      "skip": null,
       "locales": [
         "en",
         "ar"
@@ -1373,12 +1369,7 @@
       ],
       "docstring": "Scenario 3: Create one Gift Registry from PDP for each product type (simple / bundle / configurable / custom / custom_configurable / installation), then verify all appear on My registries, verify each registry's detail (event name, product name, quantity), and delete them in the same loop. First iteration opens the fresh 'Choose an event' sheet; subsequent iterations open the 'Add to gift registry",
       "parametrized": false,
-      "skip": {
-        "type": "conditional",
-        "reason": "Gift registry is AE-only: on SA the event list does not load and the registry  screen renders blank (app-side bug). [COUNTRY.upper() == \"SA\"]",
-        "condition": "COUNTRY.upper() == \"SA\"",
-        "scope": "alias"
-      },
+      "skip": null,
       "locales": [
         "en",
         "ar"
@@ -2823,7 +2814,10 @@
       ],
       "docstring": "An automatic promotion must discount the cart with no coupon entered.",
       "parametrized": false,
-      "skip": null,
+      "skip": {
+        "type": "hard",
+        "reason": ""
+      },
       "locales": [
         "en"
       ]
@@ -2846,7 +2840,10 @@
       ],
       "docstring": "The same journey on an account registered during the test. A first-time customer also proves a per-customer usage limit on the rule is not what makes the discount appear.",
       "parametrized": false,
-      "skip": null,
+      "skip": {
+        "type": "hard",
+        "reason": ""
+      },
       "locales": [
         "en"
       ]
@@ -3826,7 +3823,10 @@
       ],
       "docstring": "An automatic promotion must discount the cart with no coupon entered.",
       "parametrized": false,
-      "skip": null,
+      "skip": {
+        "type": "hard",
+        "reason": ""
+      },
       "locales": [
         "en"
       ]
@@ -3849,7 +3849,10 @@
       ],
       "docstring": "The same journey on an account registered during the test. A first-time customer also proves a per-customer usage limit on the rule is not what makes the discount appear.",
       "parametrized": false,
-      "skip": null,
+      "skip": {
+        "type": "hard",
+        "reason": ""
+      },
       "locales": [
         "en"
       ]
@@ -4327,7 +4330,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "1ac6bb3",
+    "sha": "e453815",
     "repo": "/Users/user/automation_web_2.0"
   }
 }

@@ -3527,12 +3527,9 @@
         "app::test_app_gift_registry_create_from_pdp_all_product_types"
       ],
       "coverage_status": "partial",
-      "notes": "Opens the PDP for simple, bundle, configurable, custom, custom-configurable and installation products and selects their options, but as part of the gift-registry flow -- the PDP content itself is not asserted. Colour variant and egift are not covered. LIMITED TO SOME TARGETS: Gift registry is AE-only: on SA the event list does not load and the registry  screen renders blank (app-side",
+      "notes": "Opens the PDP for simple, bundle, configurable, custom, custom-configurable and installation products and selects their options, but as part of the gift-registry flow -- the PDP content itself is not asserted. Colour variant and egift are not covered.",
       "skipped_only": false,
-      "gated_only": true,
-      "gate_reasons": [
-        "Gift registry is AE-only: on SA the event list does not load and the registry  screen renders blank (app-side "
-      ],
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -3615,12 +3612,9 @@
         "app::test_app_gift_registry_create_from_pdp"
       ],
       "coverage_status": "partial",
-      "notes": "Newly credited (FALCONS-282). Adds a product to a registry from the PDP for six product types and verifies the event name, product name and quantity on the registry detail screen. Colour variant and egift are not covered. LIMITED TO SOME TARGETS: Gift registry is AE-only: on SA the event list does not load and the registry  screen renders blank (app-side",
+      "notes": "Newly credited (FALCONS-282). Adds a product to a registry from the PDP for six product types and verifies the event name, product name and quantity on the registry detail screen. Colour variant and egift are not covered.",
       "skipped_only": false,
-      "gated_only": true,
-      "gate_reasons": [
-        "Gift registry is AE-only: on SA the event list does not load and the registry  screen renders blank (app-side "
-      ],
+      "gated_only": false,
       "locales": [
         "en",
         "ar"
@@ -6062,7 +6056,10 @@
         ],
         "docstring": "An automatic promotion must discount the cart with no coupon entered. USER_EMAIL_0 is referenced by no other test, so clearing its cart here cannot disturb a suite running in parallel.",
         "parametrized": false,
-        "skip": null,
+        "skip": {
+          "type": "hard",
+          "reason": ""
+        },
         "locales": [
           "en"
         ]
@@ -6085,7 +6082,10 @@
         ],
         "docstring": "The same journey on a first-time customer. A new account also proves a per-customer usage limit on the rule is not what makes the discount appear.",
         "parametrized": false,
-        "skip": null,
+        "skip": {
+          "type": "hard",
+          "reason": ""
+        },
         "locales": [
           "en"
         ]
@@ -6106,12 +6106,7 @@
         ],
         "docstring": "Scenario 1: Creation of a Gift Registry from My account > My registries. 1. Sign in (no cart clear — cart state is irrelevant to gift registry flow) 2. Tap 'Gift Registry' shortcut on Account page 3. Tap 'Create registry' 4. Choose 'Baby Shower' event 5. Enter registry name and tap 'Create & Continue' 6. Assert the newly created registry detail screen is displayed 7. Navigate back and assert the r",
         "parametrized": false,
-        "skip": {
-          "type": "conditional",
-          "reason": "Gift registry is AE-only: on SA the event list does not load and the registry  screen renders blank (app-side bug). [COUNTRY.upper() == \"SA\"]",
-          "condition": "COUNTRY.upper() == \"SA\"",
-          "scope": "alias"
-        },
+        "skip": null,
         "locales": [
           "en",
           "ar"
@@ -6134,12 +6129,7 @@
         ],
         "docstring": "Scenario 2: Creation of a Gift Registry from PDP → 'Add to Registry' button. 1. Sign in 2. Precondition — cleanup any pre-existing registries 3. Search for CATEGORY_4 (Diapers) and open the first search result 4. If the 'Add to Registry' button is missing on the first product, go back and try the second. If both are missing → fail with a clear Allure message so the reader knows the product catalog",
         "parametrized": false,
-        "skip": {
-          "type": "conditional",
-          "reason": "Gift registry is AE-only: on SA the event list does not load and the registry  screen renders blank (app-side bug). [COUNTRY.upper() == \"SA\"]",
-          "condition": "COUNTRY.upper() == \"SA\"",
-          "scope": "alias"
-        },
+        "skip": null,
         "locales": [
           "en",
           "ar"
@@ -6162,12 +6152,7 @@
         ],
         "docstring": "Scenario 3: Create one Gift Registry from PDP for each product type (simple / bundle / configurable / custom / custom_configurable / installation), then verify all appear on My registries, verify each registry's detail (event name, product name, quantity), and delete them in the same loop. First iteration opens the fresh 'Choose an event' sheet; subsequent iterations open the 'Add to gift registry",
         "parametrized": false,
-        "skip": {
-          "type": "conditional",
-          "reason": "Gift registry is AE-only: on SA the event list does not load and the registry  screen renders blank (app-side bug). [COUNTRY.upper() == \"SA\"]",
-          "condition": "COUNTRY.upper() == \"SA\"",
-          "scope": "alias"
-        },
+        "skip": null,
         "locales": [
           "en",
           "ar"
@@ -7612,7 +7597,10 @@
         ],
         "docstring": "An automatic promotion must discount the cart with no coupon entered.",
         "parametrized": false,
-        "skip": null,
+        "skip": {
+          "type": "hard",
+          "reason": ""
+        },
         "locales": [
           "en"
         ]
@@ -7635,7 +7623,10 @@
         ],
         "docstring": "The same journey on an account registered during the test. A first-time customer also proves a per-customer usage limit on the rule is not what makes the discount appear.",
         "parametrized": false,
-        "skip": null,
+        "skip": {
+          "type": "hard",
+          "reason": ""
+        },
         "locales": [
           "en"
         ]
@@ -8615,7 +8606,10 @@
         ],
         "docstring": "An automatic promotion must discount the cart with no coupon entered.",
         "parametrized": false,
-        "skip": null,
+        "skip": {
+          "type": "hard",
+          "reason": ""
+        },
         "locales": [
           "en"
         ]
@@ -8638,7 +8632,10 @@
         ],
         "docstring": "The same journey on an account registered during the test. A first-time customer also proves a per-customer usage limit on the rule is not what makes the discount appear.",
         "parametrized": false,
-        "skip": null,
+        "skip": {
+          "type": "hard",
+          "reason": ""
+        },
         "locales": [
           "en"
         ]
@@ -9541,9 +9538,9 @@
   ],
   "metadata": {
     "schema": 2,
-    "last_updated": "2026-10-06",
-    "generated_at": "2026-10-06T09:58:46+00:00",
-    "source_sha": "1ac6bb3",
+    "last_updated": "2026-10-13",
+    "generated_at": "2026-10-13T04:19:55+00:00",
+    "source_sha": "e453815",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -9665,14 +9662,14 @@
       "web_commons": 15
     },
     "total_automated_tests": 194,
-    "active_tests": 173,
-    "skipped_hard": 12,
+    "active_tests": 170,
+    "skipped_hard": 18,
     "cases_not_running": {
       "hard_skipped": 1,
-      "gated": 2
+      "gated": 1
     },
     "gate_note": "Hard-skipped cases are not counted as automated: nothing runs. Platform-gated cases are counted -- they run wherever the product allows, and every gate is a product or tooling limitation rather than missing test work -- with the limitation shown on the case.",
-    "skipped_conditional": 9,
+    "skipped_conditional": 6,
     "links": {
       "direct": 122,
       "listing_with_page": 4,
@@ -9680,7 +9677,7 @@
     },
     "unmapped_count": 32,
     "plan_gap_count": 26,
-    "unmapped_and_skipped": 7,
+    "unmapped_and_skipped": 13,
     "arabic_ready_tests": 112,
     "baseline": {
       "tests": 131,
