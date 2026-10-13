@@ -789,19 +789,53 @@ def load(name, required=True):
 # it stops being checkable. This exists so the wider team can see what is coming
 # without the number quietly borrowing against it.
 IN_REVIEW = [
+    # Coupon rules -------------------------------------------------------------
     {"pr": 317, "title": "FALCONS-383: BRAND001 brand restricted coupon, mWeb and app",
-     "tests": 6, "case": None,
-     "note": "No TestMO case describes a brand-restricted coupon rule, so this adds "
-             "no case coverage on merge. Worth a case: the rule has real revenue impact."},
+     "tests": 6, "case": None, "status": "ready",
+     "note": "No TestMO case describes a brand-restricted coupon rule, so this adds no case "
+             "coverage on merge. Worth writing the case: the rule carries real revenue."},
     {"pr": 321, "title": "FALCONS-384: CAT001 category restricted coupon, mWeb and app",
-     "tests": 6, "case": None,
-     "note": "Stacked on #317. Same position: no TestMO case for a category-restricted "
-             "rule, so no case coverage on merge. Has a merge conflict in "
-             "resources/test_data.json to resolve first."},
+     "tests": 6, "case": None, "status": "conflict",
+     "note": "Stacked on #317, so its diff shows 12 tests; 6 are new beyond #317. Same position "
+             "on coverage -- no TestMO case for a category-restricted rule. Conflicts in "
+             "resources/test_data.json and needs a rebase before it can merge."},
+    {"pr": 311, "title": "App coupons: no-max rules must keep discounting as the quantity rises",
+     "tests": 0, "case": None, "status": "ready",
+     "note": "Adds no test functions -- it strengthens assertions inside existing app coupon "
+             "tests. Good for confidence in C-1435409, no effect on the count."},
+
+    # Now / super-app vertical on mWeb -- one stack, not three independent PRs ---
+    {"pr": 304, "title": "FALCONS-373: Now serviceability for a logged-in user (mWeb)",
+     "tests": 3, "case": None, "status": "stacked",
+     "note": "Bottom of the Now mWeb stack. Its 3 tests also appear in #305 and #306."},
+    {"pr": 305, "title": "FALCONS-375: Now guest end-to-end order journey (mWeb)",
+     "tests": 4, "case": None, "status": "stacked",
+     "note": "Contains #304 plus the guest order journey. Merge the stack head instead."},
+    {"pr": 306, "title": "FALCONS-380: Now new-user category, sort, filter and Tabby (mWeb)",
+     "tests": 5, "case": None, "status": "stacked",
+     "note": "Head of the stack -- contains #304 and #305, so merging this one lands all 5 mWeb "
+             "Now tests. They carry the same function names as the app Now tests already on main, "
+             "which is why every link in this report is platform-qualified (web_uae:: vs app::). "
+             "TestMO has no case for the Now vertical at all, so the stack adds no case coverage."},
+
+    # Everything else ----------------------------------------------------------
     {"pr": 280, "title": "FALCONS-358: app PLP price filter covers the full price range",
-     "tests": 1, "case": "1435404",
-     "note": "This one DOES move the number: C-1435404 'apply filter and sort on PLP' "
-             "goes none -> partial, the only in-flight PR that closes a case."},
+     "tests": 1, "case": "1435404", "status": "ready",
+     "note": "The only open PR that moves the headline: C-1435404 'apply filter and sort on PLP' "
+             "goes none -> partial (filter proven, sort still not). One test, open since 21 Sep."},
+    {"pr": 235, "title": "FALCONS-323: bottom-sheet checkout support (app)",
+     "tests": 5, "case": None, "status": "ready",
+     "note": "Five bottom-sheet payment journeys. They deepen C-1543906 and C-1543907, which "
+             "already count, so no change to the percentage. Untouched since 10 Aug."},
+    {"pr": 221, "title": "FALCONS-295: wishlist from PDP",
+     "tests": 2, "case": None, "status": "superseded",
+     "note": "Both tests are already on main in tests/app/test_app_wishlist.py and are mapped to "
+             "C-1435396. This PR would re-add them to test_app_cart.py. Safe to close."},
+    {"pr": 127, "title": "Gift registry creation for UAE and KSA",
+     "tests": 4, "case": None, "status": "superseded",
+     "note": "Main already covers this with the locale-agnostic commons tests "
+             "(test_gift_registry_create_from_my_account / _from_pdp), which serve both stores. "
+             "This would add per-store duplicates. Open since 20 May. Safe to close."},
 ]
 
 
