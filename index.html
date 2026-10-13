@@ -169,6 +169,13 @@ tr:hover{background:#f8f9ff;transition:background .2s}
     <div id="riskList"></div>
   </div>
   <div id="arabicPanel" class="section" style="margin-bottom:20px"></div>
+  <div id="inReviewNotice" style="display:none;background:#f3f4f6;border:1px solid #d1d5db;border-radius:10px;padding:16px;margin-bottom:20px">
+    <h3 style="margin:0 0 4px;color:#4b5563;font-size:1em">🔭 In review — not merged, not counted</h3>
+    <p style="margin:0 0 10px;font-size:.85em;color:#6b7280">Open pull requests in <code>automation_web_2.0</code>.
+      The coverage figures above are measured against <strong>main</strong> only, so nothing here is included in them.</p>
+    <div id="inReviewList"></div>
+  </div>
+
   <div id="unmappedNotice" class="protected" style="display:none;background:#fff8e1;border:2px solid #ffc107;border-radius:10px;padding:16px;margin-bottom:20px">
     <h3 style="margin:0 0 8px;color:#f57c00">🔗 Automated tests not linked to any TestMO case</h3>
     <div id="unmappedList"></div>
@@ -788,6 +795,7 @@ function addTest(caseId, ref) {
     closeAutocomplete();
     render();
     refreshUnmapped();
+  renderInReview();
   }
 }
 
@@ -799,6 +807,7 @@ function removeTest(caseId, ref) {
   saveEdits();
   render();
   refreshUnmapped();
+  renderInReview();
 }
 
 function updateNotes(caseId, value) {
@@ -915,6 +924,7 @@ document.getElementById('importFile').addEventListener('change', function(e) {
       render();
       renderRiskSection();
       refreshUnmapped();
+  renderInReview();
       alert('✅ Mapping imported successfully!');
     } catch(err) { alert('❌ Invalid JSON file'); }
   };
@@ -1048,6 +1058,31 @@ async function loadRegressionRuns() {
   } catch(e) { /* Allure unavailable, use historical only */ }
 
   renderRegressionChart();
+}
+
+function renderInReview() {
+  const rows = (DATA.metadata && DATA.metadata.in_review) || [];
+  const box = document.getElementById('inReviewNotice');
+  const list = document.getElementById('inReviewList');
+  if (!box || !rows.length) { if (box) box.style.display = 'none'; return; }
+  box.style.display = 'block';
+  list.innerHTML = rows.map(r => {
+    // A PR that closes a case is the only kind that will move the headline, so
+    // say which one. The rest are honest about adding nothing the plan measures.
+    const moves = r.case
+      ? `<span style="background:#0e6b3d;color:#fff;padding:2px 8px;border-radius:4px;font-size:.75em">closes C-${r.case}</span>`
+      : `<span style="background:#9ca3af;color:#fff;padding:2px 8px;border-radius:4px;font-size:.75em">no TestMO case</span>`;
+    return `<div style="padding:8px 0;border-bottom:1px solid #e5e7eb">
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <a href="https://github.com/mumzworld-tech/automation_web_2.0/pull/${r.pr}"
+           target="_blank" rel="noopener" style="font-weight:600;color:#1f6feb">#${r.pr}</a>
+        <span style="font-size:.9em">${r.title}</span>
+        <span style="color:#6b7280;font-size:.8em">${r.tests} test${r.tests === 1 ? '' : 's'}</span>
+        ${moves}
+      </div>
+      <div style="font-size:.82em;color:#6b7280;margin-top:3px">${r.note}</div>
+    </div>`;
+  }).join('');
 }
 
 function refreshUnmapped() {
@@ -1563,6 +1598,7 @@ async function init() {
   render();
   renderRiskSection();
   refreshUnmapped();
+  renderInReview();
   loadRegressionRuns();
   refreshTestsFromMain();
 }
@@ -1629,6 +1665,7 @@ async function refreshTestsFromMain() {
     render();
     renderRiskSection();
     refreshUnmapped();
+  renderInReview();
   } catch(e) { /* silent -- keep the generated data */ }
 }
 

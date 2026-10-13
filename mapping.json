@@ -9539,7 +9539,7 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-10-13",
-    "generated_at": "2026-10-13T04:19:55+00:00",
+    "generated_at": "2026-10-13T04:31:28+00:00",
     "source_sha": "e453815",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
@@ -9679,6 +9679,29 @@
     "plan_gap_count": 26,
     "unmapped_and_skipped": 13,
     "arabic_ready_tests": 112,
+    "in_review": [
+      {
+        "pr": 317,
+        "title": "FALCONS-383: BRAND001 brand restricted coupon, mWeb and app",
+        "tests": 6,
+        "case": null,
+        "note": "No TestMO case describes a brand-restricted coupon rule, so this adds no case coverage on merge. Worth a case: the rule has real revenue impact."
+      },
+      {
+        "pr": 321,
+        "title": "FALCONS-384: CAT001 category restricted coupon, mWeb and app",
+        "tests": 6,
+        "case": null,
+        "note": "Stacked on #317. Same position: no TestMO case for a category-restricted rule, so no case coverage on merge. Has a merge conflict in resources/test_data.json to resolve first."
+      },
+      {
+        "pr": 280,
+        "title": "FALCONS-358: app PLP price filter covers the full price range",
+        "tests": 1,
+        "case": "1435404",
+        "note": "This one DOES move the number: C-1435404 'apply filter and sort on PLP' goes none -> partial, the only in-flight PR that closes a case."
+      }
+    ],
     "baseline": {
       "tests": 131,
       "date": "2026-09-02",

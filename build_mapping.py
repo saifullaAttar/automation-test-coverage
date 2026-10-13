@@ -782,6 +782,29 @@ def load(name, required=True):
 # merge day. An entry here is inert until EVERY one of its refs is on main, then
 # applies itself -- so the first CI build after the merge flips the case with the
 # evidence note already written. Keyed by (scope, case_id).
+# --- Work in flight -----------------------------------------------------------
+#
+# Shown on the report as a muted "in review" strip, deliberately OUTSIDE every
+# percentage: the headline is measured against origin/main and nothing else, or
+# it stops being checkable. This exists so the wider team can see what is coming
+# without the number quietly borrowing against it.
+IN_REVIEW = [
+    {"pr": 317, "title": "FALCONS-383: BRAND001 brand restricted coupon, mWeb and app",
+     "tests": 6, "case": None,
+     "note": "No TestMO case describes a brand-restricted coupon rule, so this adds "
+             "no case coverage on merge. Worth a case: the rule has real revenue impact."},
+    {"pr": 321, "title": "FALCONS-384: CAT001 category restricted coupon, mWeb and app",
+     "tests": 6, "case": None,
+     "note": "Stacked on #317. Same position: no TestMO case for a category-restricted "
+             "rule, so no case coverage on merge. Has a merge conflict in "
+             "resources/test_data.json to resolve first."},
+    {"pr": 280, "title": "FALCONS-358: app PLP price filter covers the full price range",
+     "tests": 1, "case": "1435404",
+     "note": "This one DOES move the number: C-1435404 'apply filter and sort on PLP' "
+             "goes none -> partial, the only in-flight PR that closes a case."},
+]
+
+
 PENDING = {
     # (empty -- FALCONS-364 landed in #310 and now lives in the dicts above)
 }
@@ -1064,6 +1087,7 @@ def main():
                 1 for r in inventory
                 if r not in mapped and (inventory[r]["skip"] or {}).get("type") == "hard"),
             "arabic_ready_tests": sum(1 for t in flat if "ar" in t["locales"]),
+            "in_review": IN_REVIEW,
             # The headline percentage can sit still while real work lands: a new test
             # that deepens a case TestMO already counts changes no case's status. The
             # suite size is the honest companion number, so record where it started.
