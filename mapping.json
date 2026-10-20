@@ -6091,6 +6091,53 @@
         ]
       },
       {
+        "ref": "app::test_app_brand_restricted_coupon_discount",
+        "name": "test_app_brand_restricted_coupon_discount",
+        "platform": "app",
+        "path": "tests/app/test_app_coupon.py",
+        "file": "test_app_coupon.py",
+        "title": "Brand restricted coupon - refused off-brand and under subtotal, capped discount",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Coupon",
+          "CC",
+          "BRAND001"
+        ],
+        "docstring": "1. Apply the coupon with only an off-brand product in the cart - it must be refused. 2. Apply it to an eligible product under the subtotal floor - it must be refused. 3. Clear the floor and apply it - the discount is the plain percentage. 4. Add the second eligible brand - the discount reaches its cap. 5. Raise the quantity again - the discount stays at the cap. 6. Verify the summary and place a c",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_new_user_brand_restricted_coupon_discount",
+        "name": "test_app_new_user_brand_restricted_coupon_discount",
+        "platform": "app",
+        "path": "tests/app/test_app_coupon.py",
+        "file": "test_app_coupon.py",
+        "title": "New user - brand restricted coupon - refused off-brand and under subtotal, capped",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Coupon",
+          "CC",
+          "BRAND001",
+          "NewUser"
+        ],
+        "docstring": "The same journey on an account registered during the test.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
         "ref": "app::test_app_gift_registry_create_from_my_registries",
         "name": "test_app_gift_registry_create_from_my_registries",
         "platform": "app",
@@ -7632,6 +7679,49 @@
         ]
       },
       {
+        "ref": "web_uae::test_uae_brand_restricted_coupon_discount",
+        "name": "test_uae_brand_restricted_coupon_discount",
+        "platform": "web_uae",
+        "path": "tests/web/UAE/test_coupon.py",
+        "file": "test_coupon.py",
+        "title": "UAE - Brand restricted coupon - refused off-brand and under subtotal, capped discount",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "CC",
+          "BRAND001"
+        ],
+        "docstring": "1. Apply the coupon with only an off-brand product in the cart - it must be refused. 2. Apply it to an eligible product under the subtotal floor - it must be refused. 3. Clear the floor and apply it - the discount is the plain percentage. 4. Add the second eligible brand - the discount reaches its cap. 5. Raise the quantity again - the discount stays at the cap. 6. Verify the order summary and pla",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_uae::test_uae_new_user_brand_restricted_coupon_discount",
+        "name": "test_uae_new_user_brand_restricted_coupon_discount",
+        "platform": "web_uae",
+        "path": "tests/web/UAE/test_coupon.py",
+        "file": "test_coupon.py",
+        "title": "UAE - New user - Brand restricted coupon - refused off-brand and under subtotal, capped",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "CC",
+          "BRAND001",
+          "New User"
+        ],
+        "docstring": "The same journey on an account registered during the test.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
         "ref": "web_uae::test_uae_user_register_from_account_page",
         "name": "test_uae_user_register_from_account_page",
         "platform": "web_uae",
@@ -8641,6 +8731,49 @@
         ]
       },
       {
+        "ref": "web_ksa::test_ksa_brand_restricted_coupon_discount",
+        "name": "test_ksa_brand_restricted_coupon_discount",
+        "platform": "web_ksa",
+        "path": "tests/web/KSA/test_coupon_ksa.py",
+        "file": "test_coupon_ksa.py",
+        "title": "KSA - Brand restricted coupon - refused off-brand and under subtotal, capped discount",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "CC",
+          "BRAND001"
+        ],
+        "docstring": "1. Apply the coupon with only an off-brand product in the cart - it must be refused. 2. Apply it to an eligible product under the subtotal floor - it must be refused. 3. Clear the floor and apply it - the discount is the plain percentage. 4. Add the second eligible brand - the discount reaches its cap. 5. Raise the quantity again - the discount stays at the cap. 6. Verify the order summary and pla",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_ksa::test_ksa_new_user_brand_restricted_coupon_discount",
+        "name": "test_ksa_new_user_brand_restricted_coupon_discount",
+        "platform": "web_ksa",
+        "path": "tests/web/KSA/test_coupon_ksa.py",
+        "file": "test_coupon_ksa.py",
+        "title": "KSA - New user - Brand restricted coupon - refused off-brand and under subtotal, capped",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "CC",
+          "BRAND001",
+          "New User"
+        ],
+        "docstring": "The same journey on an account registered during the test.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
         "ref": "web_ksa::test_ksa_user_register_from_account_page",
         "name": "test_ksa_user_register_from_account_page",
         "platform": "web_ksa",
@@ -9320,10 +9453,12 @@
   },
   "unmapped_tests": [
     "app::test_app_auto_discount_applied_without_coupon",
+    "app::test_app_brand_restricted_coupon_discount",
     "app::test_app_cart_apply_gift_wrap_and_place_order",
     "app::test_app_cart_existing_user_orders_no_coupon_yalla",
     "app::test_app_gift_registry_create_from_my_registries",
     "app::test_app_new_user_auto_discount_applied_without_coupon",
+    "app::test_app_new_user_brand_restricted_coupon_discount",
     "app::test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
     "app::test_super_app_now_non_serviceable_address_validation",
     "app::test_super_app_now_serviceable_address_restores_availability",
@@ -9335,10 +9470,13 @@
     "web_commons::test_home_screen_elements_and_navigate_to_account",
     "web_commons::test_home_search_product_in_specific_category",
     "web_ksa::test_ksa_auto_discount_applied_without_coupon",
+    "web_ksa::test_ksa_brand_restricted_coupon_discount",
     "web_ksa::test_ksa_cart_apply_gift_wrap_and_place_order",
     "web_ksa::test_ksa_new_user_auto_discount_applied_without_coupon",
+    "web_ksa::test_ksa_new_user_brand_restricted_coupon_discount",
     "web_ksa::test_ksa_wishlist_guest_add_prompts_login",
     "web_uae::test_uae_auto_discount_applied_without_coupon",
+    "web_uae::test_uae_brand_restricted_coupon_discount",
     "web_uae::test_uae_cart_add_all_product_types_and_verify",
     "web_uae::test_uae_cart_apply_gift_wrap_and_place_order@test_cart",
     "web_uae::test_uae_cart_bundle_multiple_variants",
@@ -9350,6 +9488,7 @@
     "web_uae::test_uae_cart_remove_item",
     "web_uae::test_uae_checkout_save_card_remember_me",
     "web_uae::test_uae_new_user_auto_discount_applied_without_coupon",
+    "web_uae::test_uae_new_user_brand_restricted_coupon_discount",
     "web_uae::test_uae_wishlist_guest_add_prompts_login"
   ],
   "plan_gaps": [
@@ -9539,8 +9678,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-10-20",
-    "generated_at": "2026-10-20T06:23:41+00:00",
-    "source_sha": "c2b3840",
+    "generated_at": "2026-10-20T09:08:57+00:00",
+    "source_sha": "8d40307",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -9656,13 +9795,13 @@
       "other_group": 11
     },
     "platforms": {
-      "app": 72,
-      "web_uae": 61,
-      "web_ksa": 46,
+      "app": 74,
+      "web_uae": 63,
+      "web_ksa": 48,
       "web_commons": 15
     },
-    "total_automated_tests": 194,
-    "active_tests": 170,
+    "total_automated_tests": 200,
+    "active_tests": 176,
     "skipped_hard": 18,
     "cases_not_running": {
       "hard_skipped": 1,
@@ -9675,7 +9814,7 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 32,
+    "unmapped_count": 38,
     "plan_gap_count": 26,
     "unmapped_and_skipped": 13,
     "arabic_ready_tests": 112,

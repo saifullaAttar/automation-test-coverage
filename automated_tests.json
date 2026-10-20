@@ -1308,6 +1308,53 @@
       ]
     },
     {
+      "ref": "app::test_app_brand_restricted_coupon_discount",
+      "name": "test_app_brand_restricted_coupon_discount",
+      "platform": "app",
+      "path": "tests/app/test_app_coupon.py",
+      "file": "test_app_coupon.py",
+      "title": "Brand restricted coupon - refused off-brand and under subtotal, capped discount",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Coupon",
+        "CC",
+        "BRAND001"
+      ],
+      "docstring": "1. Apply the coupon with only an off-brand product in the cart - it must be refused. 2. Apply it to an eligible product under the subtotal floor - it must be refused. 3. Clear the floor and apply it - the discount is the plain percentage. 4. Add the second eligible brand - the discount reaches its cap. 5. Raise the quantity again - the discount stays at the cap. 6. Verify the summary and place a c",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "app::test_app_new_user_brand_restricted_coupon_discount",
+      "name": "test_app_new_user_brand_restricted_coupon_discount",
+      "platform": "app",
+      "path": "tests/app/test_app_coupon.py",
+      "file": "test_app_coupon.py",
+      "title": "New user - brand restricted coupon - refused off-brand and under subtotal, capped",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "Cart",
+        "Coupon",
+        "CC",
+        "BRAND001",
+        "NewUser"
+      ],
+      "docstring": "The same journey on an account registered during the test.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "app::test_app_gift_registry_create_from_my_registries",
       "name": "test_app_gift_registry_create_from_my_registries",
       "platform": "app",
@@ -2849,6 +2896,49 @@
       ]
     },
     {
+      "ref": "web_uae::test_uae_brand_restricted_coupon_discount",
+      "name": "test_uae_brand_restricted_coupon_discount",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_coupon.py",
+      "file": "test_coupon.py",
+      "title": "UAE - Brand restricted coupon - refused off-brand and under subtotal, capped discount",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "BRAND001"
+      ],
+      "docstring": "1. Apply the coupon with only an off-brand product in the cart - it must be refused. 2. Apply it to an eligible product under the subtotal floor - it must be refused. 3. Clear the floor and apply it - the discount is the plain percentage. 4. Add the second eligible brand - the discount reaches its cap. 5. Raise the quantity again - the discount stays at the cap. 6. Verify the order summary and pla",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_uae::test_uae_new_user_brand_restricted_coupon_discount",
+      "name": "test_uae_new_user_brand_restricted_coupon_discount",
+      "platform": "web_uae",
+      "path": "tests/web/UAE/test_coupon.py",
+      "file": "test_coupon.py",
+      "title": "UAE - New user - Brand restricted coupon - refused off-brand and under subtotal, capped",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "BRAND001",
+        "New User"
+      ],
+      "docstring": "The same journey on an account registered during the test.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "web_uae::test_uae_user_register_from_account_page",
       "name": "test_uae_user_register_from_account_page",
       "platform": "web_uae",
@@ -3858,6 +3948,49 @@
       ]
     },
     {
+      "ref": "web_ksa::test_ksa_brand_restricted_coupon_discount",
+      "name": "test_ksa_brand_restricted_coupon_discount",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_coupon_ksa.py",
+      "file": "test_coupon_ksa.py",
+      "title": "KSA - Brand restricted coupon - refused off-brand and under subtotal, capped discount",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "BRAND001"
+      ],
+      "docstring": "1. Apply the coupon with only an off-brand product in the cart - it must be refused. 2. Apply it to an eligible product under the subtotal floor - it must be refused. 3. Clear the floor and apply it - the discount is the plain percentage. 4. Add the second eligible brand - the discount reaches its cap. 5. Raise the quantity again - the discount stays at the cap. 6. Verify the order summary and pla",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "ref": "web_ksa::test_ksa_new_user_brand_restricted_coupon_discount",
+      "name": "test_ksa_new_user_brand_restricted_coupon_discount",
+      "platform": "web_ksa",
+      "path": "tests/web/KSA/test_coupon_ksa.py",
+      "file": "test_coupon_ksa.py",
+      "title": "KSA - New user - Brand restricted coupon - refused off-brand and under subtotal, capped",
+      "feature": "Coupon",
+      "story": "",
+      "severity": "critical",
+      "tags": [
+        "CC",
+        "BRAND001",
+        "New User"
+      ],
+      "docstring": "The same journey on an account registered during the test.",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "web_ksa::test_ksa_user_register_from_account_page",
       "name": "test_ksa_user_register_from_account_page",
       "platform": "web_ksa",
@@ -4330,7 +4463,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "c2b3840",
+    "sha": "8d40307",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }
