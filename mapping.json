@@ -9678,8 +9678,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-10-20",
-    "generated_at": "2026-10-20T09:08:57+00:00",
-    "source_sha": "8d40307",
+    "generated_at": "2026-10-20T11:54:51+00:00",
+    "source_sha": "64b9a5e",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
