@@ -1599,7 +1599,7 @@
         "PLP",
         "FALCONS-294"
       ],
-      "docstring": "A newly registered user adds every product type to the wishlist from every PLP. 1. Register a new account, whose wishlist starts empty 2. Search each product type on the SRP and heart the first result 3. Heart the first result on the Brand and Sale PLPs 4. Verify every hearted product is listed in the wishlist 5. Delete them all and verify the wishlist is empty",
+      "docstring": "A newly registered user adds every product type to the wishlist from every PLP. 1. Register a new account, whose wishlist starts empty 2. Search each product type on the SRP and heart the first result 3. Heart the first result on the Brand PLP 4. Verify every hearted product is listed in the wishlist 5. Delete them all and verify the wishlist is empty",
       "parametrized": false,
       "skip": null,
       "locales": [
@@ -4463,7 +4463,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "64b9a5e",
+    "sha": "d4010dc",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }
