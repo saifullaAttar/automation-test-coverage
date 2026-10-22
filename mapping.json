@@ -6138,6 +6138,53 @@
         ]
       },
       {
+        "ref": "app::test_app_category_restricted_coupon_discount",
+        "name": "test_app_category_restricted_coupon_discount",
+        "platform": "app",
+        "path": "tests/app/test_app_coupon.py",
+        "file": "test_app_coupon.py",
+        "title": "Category restricted coupon - refused off-category and under subtotal, capped discount",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Coupon",
+          "CC",
+          "CAT001"
+        ],
+        "docstring": "1. Apply the coupon with only an off-category product in the cart - it must be refused. 2. Apply it to a Toys product under the subtotal floor - it must be refused. 3. Clear the floor and apply it - the discount is the plain percentage. 4. Add a Gear product - the discount reaches its cap. 5. Raise the quantity again - the discount stays at the cap. 6. Verify the summary and place a card order.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "app::test_app_new_user_category_restricted_coupon_discount",
+        "name": "test_app_new_user_category_restricted_coupon_discount",
+        "platform": "app",
+        "path": "tests/app/test_app_coupon.py",
+        "file": "test_app_coupon.py",
+        "title": "New user - category restricted coupon - refused off-category and under subtotal, capped",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "Cart",
+          "Coupon",
+          "CC",
+          "CAT001",
+          "NewUser"
+        ],
+        "docstring": "The same journey on an account registered during the test.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
         "ref": "app::test_app_gift_registry_create_from_my_registries",
         "name": "test_app_gift_registry_create_from_my_registries",
         "platform": "app",
@@ -7722,6 +7769,49 @@
         ]
       },
       {
+        "ref": "web_uae::test_uae_category_restricted_coupon_discount",
+        "name": "test_uae_category_restricted_coupon_discount",
+        "platform": "web_uae",
+        "path": "tests/web/UAE/test_coupon.py",
+        "file": "test_coupon.py",
+        "title": "UAE - Category restricted coupon - refused off-category and under subtotal, capped discount",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "CC",
+          "CAT001"
+        ],
+        "docstring": "1. Apply the coupon with only an off-category product in the cart - it must be refused. 2. Apply it to a Toys product under the subtotal floor - it must be refused. 3. Clear the floor and apply it - the discount is the plain percentage. 4. Add a Gear product - the discount reaches its cap. 5. Raise the quantity again - the discount stays at the cap. 6. Verify the order summary and place a card ord",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_uae::test_uae_new_user_category_restricted_coupon_discount",
+        "name": "test_uae_new_user_category_restricted_coupon_discount",
+        "platform": "web_uae",
+        "path": "tests/web/UAE/test_coupon.py",
+        "file": "test_coupon.py",
+        "title": "UAE - New user - Category restricted coupon - refused off-category and under subtotal, capped",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "CC",
+          "CAT001",
+          "New User"
+        ],
+        "docstring": "The same journey on an account registered during the test.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
         "ref": "web_uae::test_uae_user_register_from_account_page",
         "name": "test_uae_user_register_from_account_page",
         "platform": "web_uae",
@@ -8774,6 +8864,49 @@
         ]
       },
       {
+        "ref": "web_ksa::test_ksa_category_restricted_coupon_discount",
+        "name": "test_ksa_category_restricted_coupon_discount",
+        "platform": "web_ksa",
+        "path": "tests/web/KSA/test_coupon_ksa.py",
+        "file": "test_coupon_ksa.py",
+        "title": "KSA - Category restricted coupon - refused off-category and under subtotal, capped discount",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "CC",
+          "CAT001"
+        ],
+        "docstring": "1. Apply the coupon with only an off-category product in the cart - it must be refused. 2. Apply it to a Toys product under the subtotal floor - it must be refused. 3. Clear the floor and apply it - the discount is the plain percentage. 4. Add a Gear product - the discount reaches its cap. 5. Raise the quantity again - the discount stays at the cap. 6. Verify the order summary and place a card ord",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
+        "ref": "web_ksa::test_ksa_new_user_category_restricted_coupon_discount",
+        "name": "test_ksa_new_user_category_restricted_coupon_discount",
+        "platform": "web_ksa",
+        "path": "tests/web/KSA/test_coupon_ksa.py",
+        "file": "test_coupon_ksa.py",
+        "title": "KSA - New user - Category restricted coupon - refused off-category and under subtotal, capped",
+        "feature": "Coupon",
+        "story": "",
+        "severity": "critical",
+        "tags": [
+          "CC",
+          "CAT001",
+          "New User"
+        ],
+        "docstring": "The same journey on an account registered during the test.",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
         "ref": "web_ksa::test_ksa_user_register_from_account_page",
         "name": "test_ksa_user_register_from_account_page",
         "platform": "web_ksa",
@@ -9456,9 +9589,11 @@
     "app::test_app_brand_restricted_coupon_discount",
     "app::test_app_cart_apply_gift_wrap_and_place_order",
     "app::test_app_cart_existing_user_orders_no_coupon_yalla",
+    "app::test_app_category_restricted_coupon_discount",
     "app::test_app_gift_registry_create_from_my_registries",
     "app::test_app_new_user_auto_discount_applied_without_coupon",
     "app::test_app_new_user_brand_restricted_coupon_discount",
+    "app::test_app_new_user_category_restricted_coupon_discount",
     "app::test_super_app_now_guest_shop_coupon_login_and_place_cc_order",
     "app::test_super_app_now_non_serviceable_address_validation",
     "app::test_super_app_now_serviceable_address_restores_availability",
@@ -9472,8 +9607,10 @@
     "web_ksa::test_ksa_auto_discount_applied_without_coupon",
     "web_ksa::test_ksa_brand_restricted_coupon_discount",
     "web_ksa::test_ksa_cart_apply_gift_wrap_and_place_order",
+    "web_ksa::test_ksa_category_restricted_coupon_discount",
     "web_ksa::test_ksa_new_user_auto_discount_applied_without_coupon",
     "web_ksa::test_ksa_new_user_brand_restricted_coupon_discount",
+    "web_ksa::test_ksa_new_user_category_restricted_coupon_discount",
     "web_ksa::test_ksa_wishlist_guest_add_prompts_login",
     "web_uae::test_uae_auto_discount_applied_without_coupon",
     "web_uae::test_uae_brand_restricted_coupon_discount",
@@ -9486,9 +9623,11 @@
     "web_uae::test_uae_cart_order_summary_updates_after_item_removal",
     "web_uae::test_uae_cart_remaining_items_unaffected_after_partial_removal",
     "web_uae::test_uae_cart_remove_item",
+    "web_uae::test_uae_category_restricted_coupon_discount",
     "web_uae::test_uae_checkout_save_card_remember_me",
     "web_uae::test_uae_new_user_auto_discount_applied_without_coupon",
     "web_uae::test_uae_new_user_brand_restricted_coupon_discount",
+    "web_uae::test_uae_new_user_category_restricted_coupon_discount",
     "web_uae::test_uae_wishlist_guest_add_prompts_login"
   ],
   "plan_gaps": [
@@ -9678,8 +9817,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-10-22",
-    "generated_at": "2026-10-22T05:03:30+00:00",
-    "source_sha": "d4010dc",
+    "generated_at": "2026-10-22T05:05:16+00:00",
+    "source_sha": "21ba590",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -9795,13 +9934,13 @@
       "other_group": 11
     },
     "platforms": {
-      "app": 74,
-      "web_uae": 63,
-      "web_ksa": 48,
+      "app": 76,
+      "web_uae": 65,
+      "web_ksa": 50,
       "web_commons": 15
     },
-    "total_automated_tests": 200,
-    "active_tests": 176,
+    "total_automated_tests": 206,
+    "active_tests": 182,
     "skipped_hard": 18,
     "cases_not_running": {
       "hard_skipped": 1,
@@ -9814,7 +9953,7 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 38,
+    "unmapped_count": 44,
     "plan_gap_count": 26,
     "unmapped_and_skipped": 13,
     "arabic_ready_tests": 112,
