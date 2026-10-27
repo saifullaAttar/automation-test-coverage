@@ -5461,6 +5461,52 @@
         ]
       },
       {
+        "ref": "app::test_app_category_levels_as_guest",
+        "name": "test_app_category_levels_as_guest",
+        "platform": "app",
+        "path": "tests/app/test_app_category_levels.py",
+        "file": "test_app_category_levels.py",
+        "title": "Categories: a guest loads every sub-category level from the Categories tab",
+        "feature": "Categories",
+        "story": "FALCONS-361 - Category levels load on the app",
+        "severity": "critical",
+        "tags": [
+          "Categories",
+          "Navigation",
+          "Guest User"
+        ],
+        "docstring": "1. Open the Categories tab as a guest and verify the L1 category list loads 2. Open the Toys category and verify its L2 sub-category list loads 3. Open a sub-category that has children and verify its PLP loads with chips 4. Select each chip in turn and verify the listing reloads filtered 5. Descend into that chip's own children until the listing stops narrowing A chip that fails to filter fails th",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
+        "ref": "app::test_app_category_levels_as_signed_in_user",
+        "name": "test_app_category_levels_as_signed_in_user",
+        "platform": "app",
+        "path": "tests/app/test_app_category_levels.py",
+        "file": "test_app_category_levels.py",
+        "title": "Categories: a signed-in user loads every sub-category level from the Categories tab",
+        "feature": "Categories",
+        "story": "FALCONS-361 - Category levels load on the app",
+        "severity": "critical",
+        "tags": [
+          "Categories",
+          "Navigation",
+          "Existing User"
+        ],
+        "docstring": "1. Sign in, open the Categories tab and verify the L1 category list loads 2. Open the Toys category and verify its L2 sub-category list loads 3. Open a sub-category that has children and verify its PLP loads with chips 4. Select each chip in turn and verify the listing reloads filtered 5. Descend into that chip's own children until the listing stops narrowing The levels should match the guest run ",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en",
+          "ar"
+        ]
+      },
+      {
         "ref": "app::test_uae_checkout_cc_no_coupon",
         "name": "test_uae_checkout_cc_no_coupon",
         "platform": "app",
@@ -9139,6 +9185,27 @@
         ]
       },
       {
+        "ref": "web_commons::test_categories_levels_load",
+        "name": "test_categories_levels_load",
+        "platform": "web_commons",
+        "path": "tests/web/commons/test_categories.py",
+        "file": "test_categories.py",
+        "title": "Categories: signed-in user loads every L1, L2 and L3 category level",
+        "feature": "Categories",
+        "story": "FALCONS-361 - Category levels L1, L2 and L3 load",
+        "severity": "critical",
+        "tags": [
+          "Categories",
+          "Navigation"
+        ],
+        "docstring": "1. Sign in, then open the Categories tab and verify the L1 categories load 2. Open the Toys L1 category and verify its L2 sub-categories load 3. Open 'Explore All' to land on the whole category listing 4. Walk every branch of its sub-category filter, descending a level at a time until the filter offers no more, then clearing the chips and starting the next branch 5. At every level verify the chips",
+        "parametrized": false,
+        "skip": null,
+        "locales": [
+          "en"
+        ]
+      },
+      {
         "ref": "web_commons::test_gift_registry_create_from_my_account",
         "name": "test_gift_registry_create_from_my_account",
         "platform": "web_commons",
@@ -9589,6 +9656,8 @@
     "app::test_app_brand_restricted_coupon_discount",
     "app::test_app_cart_apply_gift_wrap_and_place_order",
     "app::test_app_cart_existing_user_orders_no_coupon_yalla",
+    "app::test_app_category_levels_as_guest",
+    "app::test_app_category_levels_as_signed_in_user",
     "app::test_app_category_restricted_coupon_discount",
     "app::test_app_gift_registry_create_from_my_registries",
     "app::test_app_new_user_auto_discount_applied_without_coupon",
@@ -9602,6 +9671,7 @@
     "app::test_uae_cart_move_to_wishlist",
     "app::test_uae_cart_quantity_workflow",
     "app::test_uae_checkout_invalid_cc_no_coupon",
+    "web_commons::test_categories_levels_load",
     "web_commons::test_home_screen_elements_and_navigate_to_account",
     "web_commons::test_home_search_product_in_specific_category",
     "web_ksa::test_ksa_auto_discount_applied_without_coupon",
@@ -9817,8 +9887,8 @@
   "metadata": {
     "schema": 2,
     "last_updated": "2026-10-27",
-    "generated_at": "2026-10-27T06:24:19+00:00",
-    "source_sha": "21ba590",
+    "generated_at": "2026-10-27T09:45:16+00:00",
+    "source_sha": "24723df",
     "source_branch": "origin/main",
     "scope_rule": "Automated in [YES, NO]; 'Not planned' cases are kept but excluded from every percentage",
     "testmo_url_web": "https://mumzworld.testmo.net/runs/view/2154",
@@ -9934,13 +10004,13 @@
       "other_group": 11
     },
     "platforms": {
-      "app": 76,
+      "app": 78,
       "web_uae": 65,
       "web_ksa": 50,
-      "web_commons": 15
+      "web_commons": 16
     },
-    "total_automated_tests": 206,
-    "active_tests": 182,
+    "total_automated_tests": 209,
+    "active_tests": 185,
     "skipped_hard": 18,
     "cases_not_running": {
       "hard_skipped": 1,
@@ -9953,10 +10023,10 @@
       "listing_with_page": 4,
       "listing_no_page": 37
     },
-    "unmapped_count": 44,
+    "unmapped_count": 47,
     "plan_gap_count": 26,
     "unmapped_and_skipped": 13,
-    "arabic_ready_tests": 112,
+    "arabic_ready_tests": 114,
     "in_review": [
       {
         "pr": 317,

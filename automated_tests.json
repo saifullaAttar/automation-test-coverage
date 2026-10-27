@@ -678,6 +678,52 @@
       ]
     },
     {
+      "ref": "app::test_app_category_levels_as_guest",
+      "name": "test_app_category_levels_as_guest",
+      "platform": "app",
+      "path": "tests/app/test_app_category_levels.py",
+      "file": "test_app_category_levels.py",
+      "title": "Categories: a guest loads every sub-category level from the Categories tab",
+      "feature": "Categories",
+      "story": "FALCONS-361 - Category levels load on the app",
+      "severity": "critical",
+      "tags": [
+        "Categories",
+        "Navigation",
+        "Guest User"
+      ],
+      "docstring": "1. Open the Categories tab as a guest and verify the L1 category list loads 2. Open the Toys category and verify its L2 sub-category list loads 3. Open a sub-category that has children and verify its PLP loads with chips 4. Select each chip in turn and verify the listing reloads filtered 5. Descend into that chip's own children until the listing stops narrowing A chip that fails to filter fails th",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
+      "ref": "app::test_app_category_levels_as_signed_in_user",
+      "name": "test_app_category_levels_as_signed_in_user",
+      "platform": "app",
+      "path": "tests/app/test_app_category_levels.py",
+      "file": "test_app_category_levels.py",
+      "title": "Categories: a signed-in user loads every sub-category level from the Categories tab",
+      "feature": "Categories",
+      "story": "FALCONS-361 - Category levels load on the app",
+      "severity": "critical",
+      "tags": [
+        "Categories",
+        "Navigation",
+        "Existing User"
+      ],
+      "docstring": "1. Sign in, open the Categories tab and verify the L1 category list loads 2. Open the Toys category and verify its L2 sub-category list loads 3. Open a sub-category that has children and verify its PLP loads with chips 4. Select each chip in turn and verify the listing reloads filtered 5. Descend into that chip's own children until the listing stops narrowing The levels should match the guest run ",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en",
+        "ar"
+      ]
+    },
+    {
       "ref": "app::test_uae_checkout_cc_no_coupon",
       "name": "test_uae_checkout_cc_no_coupon",
       "platform": "app",
@@ -4356,6 +4402,27 @@
       ]
     },
     {
+      "ref": "web_commons::test_categories_levels_load",
+      "name": "test_categories_levels_load",
+      "platform": "web_commons",
+      "path": "tests/web/commons/test_categories.py",
+      "file": "test_categories.py",
+      "title": "Categories: signed-in user loads every L1, L2 and L3 category level",
+      "feature": "Categories",
+      "story": "FALCONS-361 - Category levels L1, L2 and L3 load",
+      "severity": "critical",
+      "tags": [
+        "Categories",
+        "Navigation"
+      ],
+      "docstring": "1. Sign in, then open the Categories tab and verify the L1 categories load 2. Open the Toys L1 category and verify its L2 sub-categories load 3. Open 'Explore All' to land on the whole category listing 4. Walk every branch of its sub-category filter, descending a level at a time until the filter offers no more, then clearing the chips and starting the next branch 5. At every level verify the chips",
+      "parametrized": false,
+      "skip": null,
+      "locales": [
+        "en"
+      ]
+    },
+    {
       "ref": "web_commons::test_gift_registry_create_from_my_account",
       "name": "test_gift_registry_create_from_my_account",
       "platform": "web_commons",
@@ -4596,7 +4663,7 @@
   ],
   "_meta": {
     "ref": "origin/main",
-    "sha": "21ba590",
+    "sha": "24723df",
     "repo": "/home/runner/work/automation_web_2.0/automation_web_2.0"
   }
 }
